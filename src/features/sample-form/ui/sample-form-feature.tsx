@@ -15,9 +15,8 @@ import { IconCheck, IconPlus, IconX } from "@tabler/icons-react";
 import { initialFormValues, validateSampleForm } from "../model/validation";
 import { FormValues } from "../model/types";
 import { FormField } from "@/shared/ui";
-import { useFormMutation } from "@/shared/lib";
+import { useFormMutation, queryClient } from "@/shared/lib";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient } from "@/shared/lib";
 
 export function SampleFormFeature() {
   const [opened, { open, close }] = useDisclosure(false);
