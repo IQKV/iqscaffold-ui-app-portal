@@ -80,18 +80,18 @@ src/
 │   ├── ui/                # App-level UI components
 │   └── router.ts          # Router configuration
 ├── processes/              # Cross-feature business processes
-│   ├── auth-session/      # Authentication session management
+
 │   └── user-onboarding/   # User registration workflow
 ├── pages/                  # Route components
 │   ├── __root.tsx         # Root layout
 │   ├── index.tsx          # Home page
 │   └── [feature]/         # Feature-specific pages
 ├── features/              # Business features
-│   ├── auth/              # Authentication
+
 │   └── user-management/   # User CRUD operations
 ├── entities/              # Business entities
 │   ├── user/              # User entity
-│   └── auth/              # Auth entity
+
 ├── widgets/               # Composite UI blocks
 └── shared/                # Reusable utilities
     ├── lib/               # Utilities, helpers, and API clients
@@ -101,11 +101,6 @@ src/
 
 ## 🎯 Key Features
 
-### Authentication & Authorization
-
-- Complete auth flow (login, register, password reset)
-- Role-based access control (RBAC)
-- Session management with automatic refresh
 - Protected routes and components
 
 ### User Management

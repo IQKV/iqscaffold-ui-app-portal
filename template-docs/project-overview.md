@@ -67,7 +67,7 @@ src/
 │   └── index.ts           # Public API exports
 │
 ├── processes/              # 🟠 Processes Layer
-│   ├── auth-session/      # Authentication session management
+
 │   │   ├── model/         # Cross-entity session logic
 │   │   └── index.ts       # Public API
 │   └── user-onboarding/   # User registration workflow
@@ -86,14 +86,6 @@ src/
 │       └── index.ts       # Public API
 │
 ├── features/              # 🟢 Features Layer
-│   ├── auth/              # Authentication feature
-│   │   ├── model/         # Business logic & validation
-│   │   │   ├── queries.ts # Feature-specific queries
-│   │   │   └── validation.ts # Zod schemas
-│   │   ├── ui/            # Feature UI components
-│   │   │   ├── login-form.tsx
-│   │   │   └── register-form.tsx
-│   │   └── index.ts       # Public API
 │   └── user-management/   # User management feature
 │       ├── model/         # Business logic & validation
 │       ├── ui/            # Feature UI components
@@ -109,10 +101,7 @@ src/
 │   │   │   ├── user-card.tsx
 │   │   │   └── user-list.tsx
 │   │   └── index.ts       # Public API
-│   └── auth/              # Auth business entity
-│       ├── model/         # Pure data models
-│       ├── api/           # API methods
-│       └── index.ts       # Public API
+
 │
 └── shared/                # ⚪ Shared Layer
     ├── api/               # Base API configuration
@@ -133,9 +122,8 @@ src/
 ┌──────────────────────────┐    ┌──────────────────────────┐    ┌──────────────────────┐
 │   Process (Orchestration)│    │   Feature (Business)     │    │   Entity (Data)       │
 │                          │    │                          │    │                        │
-│ Session refresh, logout  │───▶│ Form logic + validation  │───▶│ Pure API calls         │
-│ via useAuthSession       │    │ useLoginForm,            │    │ authApi.login/register │
-│                          │    │ useRegisterForm          │    │                        │
+│ Cross-feature workflows  │───▶│ Form logic + validation  │───▶│ Pure API calls         │
+│                          │    │                          │    │                        │
 └──────────────────────────┘    └──────────────────────────┘    └──────────────────────┘
 ```
 

@@ -14,7 +14,7 @@ import { i18n } from "@lingui/core";
 import { routeTree } from "@/routeTree.gen";
 import { theme } from "./theme";
 import { queryClient } from "@/shared/lib";
-import { AuthSessionProvider } from "@/processes/auth-session";
+
 import { ErrorBoundary } from "@/shared/ui";
 import { dynamicActivateLocale, getClientLocale } from "@/shared/locales";
 import { ConfirmContextModal } from "@/shared/ui/confirmation-modal";
@@ -55,10 +55,8 @@ export function App() {
               <ModalsProvider modals={{ confirmation: ConfirmContextModal }}>
                 <Notifications />
                 <QueryClientProvider client={queryClient}>
-                  <AuthSessionProvider>
-                    <RouterProvider router={router} />
-                    <ReactQueryDevtools initialIsOpen={false} />
-                  </AuthSessionProvider>
+                  <RouterProvider router={router} />
+                  <ReactQueryDevtools initialIsOpen={false} />
                 </QueryClientProvider>
               </ModalsProvider>
             </MantineProvider>

@@ -9,35 +9,11 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from "./pages/__root"
-import { Route as SettingsRouteImport } from "./pages/settings"
-import { Route as RegisterRouteImport } from "./pages/register"
-import { Route as ProfileRouteImport } from "./pages/profile"
-import { Route as LoginRouteImport } from "./pages/login"
 import { Route as ExamplesRouteImport } from "./pages/examples"
 import { Route as AboutRouteImport } from "./pages/about"
 import { Route as R404RouteImport } from "./pages/404"
 import { Route as IndexRouteImport } from "./pages/index"
 
-const SettingsRoute = SettingsRouteImport.update({
-  id: "/settings",
-  path: "/settings",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RegisterRoute = RegisterRouteImport.update({
-  id: "/register",
-  path: "/register",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProfileRoute = ProfileRouteImport.update({
-  id: "/profile",
-  path: "/profile",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: "/login",
-  path: "/login",
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ExamplesRoute = ExamplesRouteImport.update({
   id: "/examples",
   path: "/examples",
@@ -64,20 +40,12 @@ export interface FileRoutesByFullPath {
   "/404": typeof R404Route
   "/about": typeof AboutRoute
   "/examples": typeof ExamplesRoute
-  "/login": typeof LoginRoute
-  "/profile": typeof ProfileRoute
-  "/register": typeof RegisterRoute
-  "/settings": typeof SettingsRoute
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
   "/404": typeof R404Route
   "/about": typeof AboutRoute
   "/examples": typeof ExamplesRoute
-  "/login": typeof LoginRoute
-  "/profile": typeof ProfileRoute
-  "/register": typeof RegisterRoute
-  "/settings": typeof SettingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -85,42 +53,13 @@ export interface FileRoutesById {
   "/404": typeof R404Route
   "/about": typeof AboutRoute
   "/examples": typeof ExamplesRoute
-  "/login": typeof LoginRoute
-  "/profile": typeof ProfileRoute
-  "/register": typeof RegisterRoute
-  "/settings": typeof SettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | "/"
-    | "/404"
-    | "/about"
-    | "/examples"
-    | "/login"
-    | "/profile"
-    | "/register"
-    | "/settings"
+  fullPaths: "/" | "/404" | "/about" | "/examples"
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | "/"
-    | "/404"
-    | "/about"
-    | "/examples"
-    | "/login"
-    | "/profile"
-    | "/register"
-    | "/settings"
-  id:
-    | "__root__"
-    | "/"
-    | "/404"
-    | "/about"
-    | "/examples"
-    | "/login"
-    | "/profile"
-    | "/register"
-    | "/settings"
+  to: "/" | "/404" | "/about" | "/examples"
+  id: "__root__" | "/" | "/404" | "/about" | "/examples"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -128,42 +67,10 @@ export interface RootRouteChildren {
   R404Route: typeof R404Route
   AboutRoute: typeof AboutRoute
   ExamplesRoute: typeof ExamplesRoute
-  LoginRoute: typeof LoginRoute
-  ProfileRoute: typeof ProfileRoute
-  RegisterRoute: typeof RegisterRoute
-  SettingsRoute: typeof SettingsRoute
 }
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    "/settings": {
-      id: "/settings"
-      path: "/settings"
-      fullPath: "/settings"
-      preLoaderRoute: typeof SettingsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/register": {
-      id: "/register"
-      path: "/register"
-      fullPath: "/register"
-      preLoaderRoute: typeof RegisterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/profile": {
-      id: "/profile"
-      path: "/profile"
-      fullPath: "/profile"
-      preLoaderRoute: typeof ProfileRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/login": {
-      id: "/login"
-      path: "/login"
-      fullPath: "/login"
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     "/examples": {
       id: "/examples"
       path: "/examples"
@@ -200,10 +107,6 @@ const rootRouteChildren: RootRouteChildren = {
   R404Route: R404Route,
   AboutRoute: AboutRoute,
   ExamplesRoute: ExamplesRoute,
-  LoginRoute: LoginRoute,
-  ProfileRoute: ProfileRoute,
-  RegisterRoute: RegisterRoute,
-  SettingsRoute: SettingsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
