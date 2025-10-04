@@ -324,7 +324,7 @@ describe("HTTP Error Utilities", () => {
           data: { message: "Server error" },
           headers: { "x-request-id": "req-456" },
         },
-      } as AxiosError;
+      } as unknown as AxiosError;
 
       (axios.isAxiosError as any).mockReturnValue(true);
 

@@ -100,7 +100,7 @@ describe("Date Utilities", () => {
     });
 
     it("returns undefined for null input", () => {
-      const result = utcToTz(null, "UTC");
+      const result = utcToTz(undefined, "UTC");
       expect(result).toBeUndefined();
     });
 
