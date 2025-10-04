@@ -44,7 +44,7 @@ describe("HTTP Error Utilities", () => {
       const networkError = {
         code: "ECONNREFUSED",
         message: "Network Error",
-      } as AxiosError;
+      } as unknown as AxiosError;
 
       (axios.isAxiosError as any).mockReturnValue(true);
       (axios.isCancel as any).mockReturnValue(false);
@@ -62,7 +62,7 @@ describe("HTTP Error Utilities", () => {
       const timeoutError = {
         code: "ECONNABORTED",
         message: "timeout of 5000ms exceeded",
-      } as AxiosError;
+      } as unknown as AxiosError;
 
       (axios.isAxiosError as any).mockReturnValue(true);
       (axios.isCancel as any).mockReturnValue(false);
@@ -80,7 +80,7 @@ describe("HTTP Error Utilities", () => {
           status: 401,
           data: { message: "Unauthorized" },
         },
-      } as AxiosError;
+      } as unknown as AxiosError;
 
       (axios.isAxiosError as any).mockReturnValue(true);
       (axios.isCancel as any).mockReturnValue(false);
@@ -105,7 +105,7 @@ describe("HTTP Error Utilities", () => {
             },
           },
         },
-      } as AxiosError;
+      } as unknown as AxiosError;
 
       (axios.isAxiosError as any).mockReturnValue(true);
       (axios.isCancel as any).mockReturnValue(false);
@@ -126,7 +126,7 @@ describe("HTTP Error Utilities", () => {
           data: { message: "Internal Server Error" },
           headers: { "x-request-id": "req-123" },
         },
-      } as AxiosError;
+      } as unknown as AxiosError;
 
       (axios.isAxiosError as any).mockReturnValue(true);
       (axios.isCancel as any).mockReturnValue(false);
@@ -146,7 +146,7 @@ describe("HTTP Error Utilities", () => {
           status: 400,
           data: "Bad Request",
         },
-      } as AxiosError;
+      } as unknown as AxiosError;
 
       (axios.isAxiosError as any).mockReturnValue(true);
       (axios.isCancel as any).mockReturnValue(false);
@@ -340,7 +340,7 @@ describe("HTTP Error Utilities", () => {
           data: {},
         },
         message: undefined,
-      } as AxiosError;
+      } as unknown as AxiosError;
 
       (axios.isAxiosError as any).mockReturnValue(true);
 
@@ -356,7 +356,7 @@ describe("HTTP Error Utilities", () => {
           data: {},
         },
         message: undefined,
-      } as AxiosError;
+      } as unknown as AxiosError;
 
       (axios.isAxiosError as any).mockReturnValue(true);
 
