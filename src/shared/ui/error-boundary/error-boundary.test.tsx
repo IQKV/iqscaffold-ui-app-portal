@@ -63,7 +63,7 @@ describe("ErrorBoundary", () => {
     render(
       <TestWrapper>
         <ErrorBoundary>
-          <ThrowError shouldThrow={true} />
+          <ThrowError shouldThrow />
         </ErrorBoundary>
       </TestWrapper>
     );
@@ -82,7 +82,7 @@ describe("ErrorBoundary", () => {
     render(
       <TestWrapper>
         <ErrorBoundary fallback={customFallback}>
-          <ThrowError shouldThrow={true} />
+          <ThrowError shouldThrow />
         </ErrorBoundary>
       </TestWrapper>
     );
@@ -115,7 +115,7 @@ describe("ErrorBoundary", () => {
     render(
       <TestWrapper>
         <ErrorBoundary>
-          <ThrowError shouldThrow={true} />
+          <ThrowError shouldThrow />
         </ErrorBoundary>
       </TestWrapper>
     );
@@ -130,7 +130,7 @@ describe("ErrorBoundary", () => {
     render(
       <TestWrapper>
         <ErrorBoundary>
-          <ThrowError shouldThrow={true} />
+          <ThrowError shouldThrow />
         </ErrorBoundary>
       </TestWrapper>
     );

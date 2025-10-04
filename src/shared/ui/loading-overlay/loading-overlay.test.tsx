@@ -21,7 +21,7 @@ describe("LoadingOverlay", () => {
   it("renders loading overlay when visible", () => {
     render(
       <TestWrapper>
-        <LoadingOverlay visible={true} />
+        <LoadingOverlay visible />
       </TestWrapper>
     );
 
@@ -31,7 +31,7 @@ describe("LoadingOverlay", () => {
   it("displays custom message when provided", () => {
     render(
       <TestWrapper>
-        <LoadingOverlay visible={true} message="Please wait..." />
+        <LoadingOverlay visible message="Please wait..." />
       </TestWrapper>
     );
 
@@ -42,7 +42,7 @@ describe("LoadingOverlay", () => {
   it("displays default message when no message provided", () => {
     render(
       <TestWrapper>
-        <LoadingOverlay visible={true} />
+        <LoadingOverlay visible />
       </TestWrapper>
     );
 
@@ -52,7 +52,7 @@ describe("LoadingOverlay", () => {
   it("renders loader component when visible", () => {
     render(
       <TestWrapper>
-        <LoadingOverlay visible={true} />
+        <LoadingOverlay visible />
       </TestWrapper>
     );
 
