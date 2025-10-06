@@ -1,0 +1,155 @@
+---
+description: Enforces Feature-Sliced Design (FSD) architecture rules with strict layer boundaries and public API patterns.
+globs: *.ts,*.tsx,*.js,*.jsx
+---
+
+# Feature-Sliced Design Architecture Rules
+
+## CRITICAL ARCHITECTURE RULES - NEVER VIOLATE
+
+### Layer Import Hierarchy
+
+**STRICT RULE**: Higher layers can ONLY import from lower layers.
+
+```typescript
+// ✅ ALLOWED - Higher to lower layer imports
+import { Button } from "@/shared/ui";           // features → shared
+import { User } from "@/entities/user";         // features → entities
+import { UserForm } from "@/features/user";     // pages → features
+
+// ❌ FORBIDDEN - Lower to higher layer imports
+import { UserForm } from "@/features/user";     // shared → features
+import { Dashboard } from "@/pages/dashboard";  // features → pages
+import { Header } from "@/widgets/header";      // entities → widgets
+```
+
+### Public API Enforcement
+
+**RULE**: All imports MUST go through index.ts public APIs.
+
+```typescript
+// ✅ CORRECT - Using public API
+import { UserCard, useUserQuery } from "@/entities/user";
+
+// ❌ WRONG - Bypassing public API
+import { UserCard } from "@/entities/user/ui/user-card";
+import { useUserQuery } from "@/entities/user/api/user-queries";
+```
+
+### Cross-Feature Isolation
+
+**RULE**: Features cannot import from each other directly.
+
+```typescript
+// ❌ FORBIDDEN - Direct feature-to-feature imports
+import { AuthForm } from "@/features/auth";     // from features/user
+
+// ✅ ALLOWED - Use shared layer or app layer
+import { useAuthStore } from "@/shared/stores";
+import { api } from "@/shared/lib/client";
+```
+
+## Slice Structure Requirements
+
+### Standard Segment Organization
+
+```
+feature-name/
+├── ui/           # React components (.tsx files)
+│   ├── component-name.tsx
+│   ├── component-name.stories.tsx
+│   └── component-name.test.tsx
+├── model/        # Business logic and state
+│   ├── types.ts
+│   ├── validation.ts
+│   ├── store.ts (if needed)
+│   └── constants.ts
+├── api/          # Data fetching and mutations
+│   ├── queries.ts
+│   ├── mutations.ts
+│   └── contracts.ts
+├── lib/          # Feature-specific utilities
+│   └── utils.ts
+├── config/       # Configuration
+│   └── constants.ts
+└── index.ts      # Public API exports
+```
+
+### Public API Design Pattern
+
+```typescript
+// features/user-profile/index.ts
+// ONLY export what other layers need
+export { UserProfileWidget } from "./ui/user-profile-widget";
+export { useUserProfile } from "./api/queries";
+export type { UserProfile, UserProfileFormData } from "./model/types";
+
+// DO NOT export internal implementation details
+// ❌ export { UserProfileForm } from "./ui/user-profile-form";
+// ❌ export { userProfileStore } from "./model/store";
+```
+
+## Layer-Specific Rules
+
+### App Layer
+- Global providers (QueryClient, Router, Theme)
+- Global error boundaries
+- Application-wide configuration
+- Can import from ALL layers
+
+### Pages Layer  
+- Route components only
+- Page-specific layouts
+- Can import: widgets, features, entities, shared
+
+### Widgets Layer
+- Complex UI blocks combining multiple features
+- Reusable across pages
+- Can import: features, entities, shared
+
+### Features Layer
+- User scenarios and business logic
+- Self-contained functionality
+- Can import: entities, shared
+- CANNOT import other features
+
+### Entities Layer
+- Business entities and data models
+- Domain-specific logic
+- Can import: shared only
+
+### Shared Layer
+- Reusable utilities, UI kit, libraries
+- No business logic
+- Cannot import from any other layer
+
+## Naming Conventions
+
+### File Naming
+- Components: `PascalCase.tsx` (e.g., `UserCard.tsx`)
+- Hooks: `camelCase.ts` (e.g., `useUserQuery.ts`)
+- Types: `camelCase.ts` (e.g., `userTypes.ts`)
+- Utils: `camelCase.ts` (e.g., `formatUtils.ts`)
+
+### Directory Naming
+- Use `kebab-case` for directories (e.g., `user-profile/`)
+- Match feature/entity names exactly
+
+### Import Aliases
+- Always use `@/` prefix for absolute imports
+- Follow layer structure: `@/features/auth`, `@/shared/ui`
+
+## Validation Rules
+
+### Pre-commit Checks
+1. No cross-layer violations in imports
+2. All exports go through public APIs
+3. No circular dependencies
+4. Proper segment structure maintained
+
+### Code Review Requirements
+- [ ] Follows FSD layer boundaries
+- [ ] Uses public APIs only  
+- [ ] No feature-to-feature dependencies
+- [ ] Proper segment organization
+- [ ] Clear separation of concerns

@@ -1,0 +1,485 @@
+---
+description: Enforces React 19 modern patterns including concurrent features, Suspense, automatic batching, and performance optimizations.
+globs: *.tsx,*.ts
+---
+
+# React 19 Modern Development Patterns
+
+## Concurrent Features
+
+### Suspense for Data Fetching
+
+**RULE**: Use Suspense boundaries for loading states with data fetching.
+
+```typescript
+// ✅ CORRECT - Suspense with data fetching
+import { Suspense } from "react";
+import { LoadingOverlay, Skeleton } from "@mantine/core";
+
+function UserProfilePage({ userId }: { userId: string }) {
+  return (
+    <Suspense fallback={<UserProfileSkeleton />}>
+      <UserProfile userId={userId} />
+    </Suspense>
+  );
+}
+
+function UserProfileSkeleton() {
+  return (
+    <div>
+      <Skeleton height={50} circle mb="xl" />
+      <Skeleton height={8} radius="xl" />
+      <Skeleton height={8} mt={6} radius="xl" />
+      <Skeleton height={8} mt={6} width="70%" radius="xl" />
+    </div>
+  );
+}
+
+// ❌ WRONG - Manual loading states everywhere
+function UserProfileOld({ userId }: { userId: string }) {
+  const { data: user, isLoading } = useUserQuery(userId);
+  
+  if (isLoading) return <div>Loading...</div>; // Avoid this pattern
+  
+  return <div>{user?.name}</div>;
+}
+```
+
+### Error Boundaries with Suspense
+
+```typescript
+// ✅ CORRECT - Error boundary with Suspense
+import { ErrorBoundary } from "react-error-boundary";
+import { Alert, Button } from "@mantine/core";
+import { IconAlertCircle, IconRefresh } from "@tabler/icons-react";
+
+function ErrorFallback({ error, resetErrorBoundary }: {
+  error: Error;
+  resetErrorBoundary: () => void;
+}) {
+  return (
+    <Alert
+      icon={<IconAlertCircle size="1rem" />}
+      title="Something went wrong"
+      color="red"
+      variant="light"
+    >
+      <p>{error.message}</p>
+      <Button
+        leftSection={<IconRefresh size="1rem" />}
+        onClick={resetErrorBoundary}
+        mt="md"
+      >
+        Try again
+      </Button>
+    </Alert>
+  );
+}
+
+function App() {
+  return (
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <Suspense fallback={<AppSkeleton />}>
+        <Router />
+      </Suspense>
+    </ErrorBoundary>
+  );
+}
+```
+
+## Automatic Batching
+
+### State Updates Batching
+
+**RULE**: Leverage React 19's automatic batching for better performance.
+
+```typescript
+// ✅ CORRECT - Automatic batching works out of the box
+function UserActions({ userId }: { userId: string }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [status, setStatus] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
+  
+  const handleAction = async () => {
+    // These state updates are automatically batched in React 19
+    setIsLoading(true);
+    setStatus("Processing...");
+    setError(null);
+    
+    try {
+      await performUserAction(userId);
+      setStatus("Success!");
+      setError(null);
+    } catch (err) {
+      setStatus("Failed");
+      setError(err instanceof Error ? err.message : "Unknown error");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
+  return (
+    <div>
+      <Button onClick={handleAction} loading={isLoading}>
+        {status || "Perform Action"}
+      </Button>
+      {error && <Alert color="red">{error}</Alert>}
+    </div>
+  );
+}
+
+// ❌ AVOID - Manual batching (no longer needed)
+import { unstable_batchedUpdates } from "react-dom";
+
+function handleActionOld() {
+  unstable_batchedUpdates(() => {
+    setIsLoading(true);
+    setStatus("Processing...");
+  });
+}
+```
+
+## Modern Hook Patterns
+
+### useTransition for Non-Urgent Updates
+
+```typescript
+// ✅ CORRECT - useTransition for search filtering
+import { useTransition, useDeferredValue } from "react";
+
+function UserSearch({ users }: { users: User[] }) {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isPending, startTransition] = useTransition();
+  const deferredQuery = useDeferredValue(searchQuery);
+  
+  const filteredUsers = useMemo(() => {
+    if (!deferredQuery) return users;
+    
+    return users.filter(user =>
+      user.name.toLowerCase().includes(deferredQuery.toLowerCase()) ||
+      user.email.toLowerCase().includes(deferredQuery.toLowerCase())
+    );
+  }, [users, deferredQuery]);
+  
+  const handleSearch = (value: string) => {
+    startTransition(() => {
+      setSearchQuery(value);
+    });
+  };
+  
+  return (
+    <div>
+      <TextInput
+        placeholder="Search users..."
+        value={searchQuery}
+        onChange={(e) => handleSearch(e.target.value)}
+        rightSection={isPending ? <Loader size="xs" /> : null}
+      />
+      
+      <UserList users={filteredUsers} />
+    </div>
+  );
+}
+```
+
+### useDeferredValue for Performance
+
+```typescript
+// ✅ CORRECT - Defer expensive computations
+function ExpensiveUserAnalytics({ users }: { users: User[] }) {
+  const [filter, setFilter] = useState("");
+  const deferredFilter = useDeferredValue(filter);
+  
+  // Expensive computation is deferred
+  const analytics = useMemo(() => {
+    return computeExpensiveAnalytics(users, deferredFilter);
+  }, [users, deferredFilter]);
+  
+  return (
+    <div>
+      <TextInput
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+        placeholder="Filter analytics..."
+      />
+      
+      {/* Show stale data while computing */}
+      <div style={{ opacity: filter !== deferredFilter ? 0.5 : 1 }}>
+        <AnalyticsChart data={analytics} />
+      </div>
+    </div>
+  );
+}
+```
+
+## Component Optimization Patterns
+
+### React.memo with Proper Dependencies
+
+```typescript
+// ✅ CORRECT - Optimized component with memo
+interface UserCardProps {
+  user: User;
+  onEdit: (user: User) => void;
+  onDelete: (userId: string) => void;
+}
+
+export const UserCard = memo<UserCardProps>(
+  ({ user, onEdit, onDelete }) => {
+    const handleEdit = useCallback(() => {
+      onEdit(user);
+    }, [user, onEdit]);
+    
+    const handleDelete = useCallback(() => {
+      onDelete(user.id);
+    }, [user.id, onDelete]);
+    
+    return (
+      <Card>
+        <Text>{user.name}</Text>
+        <Group>
+          <Button onClick={handleEdit}>Edit</Button>
+          <Button color="red" onClick={handleDelete}>Delete</Button>
+        </Group>
+      </Card>
+    );
+  },
+  // Custom comparison function
+  (prevProps, nextProps) => {
+    return (
+      prevProps.user.id === nextProps.user.id &&
+      prevProps.user.updatedAt === nextProps.user.updatedAt &&
+      prevProps.onEdit === nextProps.onEdit &&
+      prevProps.onDelete === nextProps.onDelete
+    );
+  }
+);
+
+UserCard.displayName = "UserCard";
+```
+
+### useMemo for Expensive Calculations
+
+```typescript
+// ✅ CORRECT - Memoize expensive computations
+function UserStatistics({ users }: { users: User[] }) {
+  const statistics = useMemo(() => {
+    const activeUsers = users.filter(u => u.status === "active").length;
+    const adminUsers = users.filter(u => u.role === "admin").length;
+    const averageAge = users.reduce((sum, u) => sum + u.age, 0) / users.length;
+    
+    return {
+      total: users.length,
+      active: activeUsers,
+      admins: adminUsers,
+      averageAge: Math.round(averageAge),
+    };
+  }, [users]);
+  
+  return (
+    <SimpleGrid cols={4}>
+      <Stat label="Total Users" value={statistics.total} />
+      <Stat label="Active Users" value={statistics.active} />
+      <Stat label="Administrators" value={statistics.admins} />
+      <Stat label="Average Age" value={statistics.averageAge} />
+    </SimpleGrid>
+  );
+}
+
+// ❌ WRONG - Recalculating on every render
+function UserStatisticsBad({ users }: { users: User[] }) {
+  const activeUsers = users.filter(u => u.status === "active").length; // Recalculated every render
+  const adminUsers = users.filter(u => u.role === "admin").length;     // Recalculated every render
+  
+  return <div>{/* ... */}</div>;
+}
+```
+
+## Event Handler Patterns
+
+### useCallback for Stable References
+
+```typescript
+// ✅ CORRECT - Stable event handlers
+function UserManagement() {
+  const [users, setUsers] = useState<User[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<Set<string>>(new Set());
+  
+  const handleUserEdit = useCallback((user: User) => {
+    // Edit logic
+    setUsers(prev => prev.map(u => u.id === user.id ? user : u));
+  }, []);
+  
+  const handleUserDelete = useCallback((userId: string) => {
+    setUsers(prev => prev.filter(u => u.id !== userId));
+    setSelectedUsers(prev => {
+      const newSet = new Set(prev);
+      newSet.delete(userId);
+      return newSet;
+    });
+  }, []);
+  
+  const handleUserSelect = useCallback((userId: string, selected: boolean) => {
+    setSelectedUsers(prev => {
+      const newSet = new Set(prev);
+      if (selected) {
+        newSet.add(userId);
+      } else {
+        newSet.delete(userId);
+      }
+      return newSet;
+    });
+  }, []);
+  
+  return (
+    <div>
+      {users.map(user => (
+        <UserCard
+          key={user.id}
+          user={user}
+          selected={selectedUsers.has(user.id)}
+          onEdit={handleUserEdit}
+          onDelete={handleUserDelete}
+          onSelect={handleUserSelect}
+        />
+      ))}
+    </div>
+  );
+}
+```
+
+## Concurrent Rendering Patterns
+
+### Streaming with Suspense
+
+```typescript
+// ✅ CORRECT - Streaming data with Suspense
+function DashboardPage() {
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      
+      {/* Critical data loads first */}
+      <Suspense fallback={<UserStatsSkeleton />}>
+        <UserStatistics />
+      </Suspense>
+      
+      {/* Secondary data can load later */}
+      <Suspense fallback={<RecentActivitySkeleton />}>
+        <RecentActivity />
+      </Suspense>
+      
+      {/* Non-critical data loads last */}
+      <Suspense fallback={<AnalyticsSkeleton />}>
+        <AnalyticsCharts />
+      </Suspense>
+    </div>
+  );
+}
+```
+
+### Progressive Enhancement
+
+```typescript
+// ✅ CORRECT - Progressive enhancement pattern
+function EnhancedUserList({ users }: { users: User[] }) {
+  const [enhancedView, setEnhancedView] = useState(false);
+  
+  return (
+    <div>
+      <Switch
+        label="Enhanced view"
+        checked={enhancedView}
+        onChange={(e) => setEnhancedView(e.currentTarget.checked)}
+      />
+      
+      {enhancedView ? (
+        <Suspense fallback={<BasicUserList users={users} />}>
+          <EnhancedUserListWithAnalytics users={users} />
+        </Suspense>
+      ) : (
+        <BasicUserList users={users} />
+      )}
+    </div>
+  );
+}
+```
+
+## Performance Anti-Patterns to Avoid
+
+### Avoid Inline Objects and Functions
+
+```typescript
+// ❌ WRONG - Inline objects cause re-renders
+function UserList({ users }: { users: User[] }) {
+  return (
+    <div>
+      {users.map(user => (
+        <UserCard
+          key={user.id}
+          user={user}
+          style={{ margin: "8px" }}  // New object every render
+          onClick={() => console.log(user.id)}  // New function every render
+        />
+      ))}
+    </div>
+  );
+}
+
+// ✅ CORRECT - Stable references
+const cardStyle = { margin: "8px" };
+
+function UserList({ users, onUserClick }: { 
+  users: User[]; 
+  onUserClick: (userId: string) => void;
+}) {
+  return (
+    <div>
+      {users.map(user => (
+        <UserCard
+          key={user.id}
+          user={user}
+          style={cardStyle}
+          onClick={onUserClick}
+        />
+      ))}
+    </div>
+  );
+}
+```
+
+### Avoid Unnecessary Re-renders
+
+```typescript
+// ❌ WRONG - Component re-renders unnecessarily
+function App() {
+  const [count, setCount] = useState(0);
+  
+  return (
+    <div>
+      <button onClick={() => setCount(c => c + 1)}>Count: {count}</button>
+      <ExpensiveComponent data={someData} />  {/* Re-renders when count changes */}
+    </div>
+  );
+}
+
+// ✅ CORRECT - Isolate state changes
+function App() {
+  return (
+    <div>
+      <Counter />
+      <ExpensiveComponent data={someData} />  {/* Doesn't re-render */}
+    </div>
+  );
+}
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  
+  return (
+    <button onClick={() => setCount(c => c + 1)}>
+      Count: {count}
+    </button>
+  );
+}
+```

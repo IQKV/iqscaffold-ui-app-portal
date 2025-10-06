@@ -1,42 +1,70 @@
 ---
-description: This rule enforces best practices for using react-query in React applications, covering code organization, performance, security, and testing.
+description: Comprehensive TypeScript React development rules for Feature-Sliced Design architecture with TanStack Query, Mantine UI, and modern React 19 patterns.
 globs: *.js,*.jsx,*.ts,*.tsx
 ---
 
-# react-query Best Practices
+# Modern React TypeScript Development Rules
 
-This document outlines the best practices for using react-query in React applications, covering various aspects such as code organization, performance considerations, security, and testing.
+This document enforces comprehensive development rules for modern React applications using Feature-Sliced Design architecture, React 19, TypeScript strict mode, TanStack Query v5, Mantine UI v8, and related technologies.
 
-## 1. Code Organization and Structure
+## 1. Feature-Sliced Design Architecture (CRITICAL)
 
-### 1.1 Directory Structure Best Practices
+### 1.1 Strict Layer Hierarchy - NEVER VIOLATE
 
-- **Feature-based Organization:** Group react-query hooks and related components within feature-specific directories. This improves modularity and maintainability.
+```
+src/
+├── app/          # Application layer - providers, routing, global config
+├── pages/        # Page layer - route components and page logic  
+├── widgets/      # Widget layer - complex UI blocks combining features
+├── features/     # Feature layer - user scenarios and business logic
+├── entities/     # Entity layer - business entities and data models
+└── shared/       # Shared layer - reusable utilities, UI kit, libraries
+```
 
-  src/
-  ├── features/
-  │ ├── users/
-  │ │ ├── components/
-  │ │ │ ├── UserList.tsx
-  │ │ │ └── UserDetails.tsx
-  │ │ ├── hooks/
-  │ │ │ ├── useUsersQuery.ts
-  │ │ │ └── useCreateUserMutation.ts
-  │ │ ├── api/
-  │ │ │ └── usersApi.ts
-  │ │ └── types/
-  │ │ └── user.ts
-  │ ├── products/
-  │ └── ...
-  ├── ...
+**FORBIDDEN IMPORTS:**
+- ❌ `shared` → `features` (lower layer importing higher)
+- ❌ `entities` → `features` (cross-layer violation)
+- ❌ `features/auth` → `features/user` (cross-feature dependency)
 
-- **Dedicated API Service Layer:** Abstract API interaction logic into separate modules. This allows for easier testing and decoupling of components from specific API implementations. Consider using a dedicated `api` directory within each feature.
+**ALLOWED IMPORTS:**
+- ✅ `features` → `shared`, `entities`
+- ✅ `pages` → `widgets`, `features`, `entities`, `shared`
+- ✅ `app` → all layers
+
+### 1.2 Slice Structure Standard
+
+Each slice MUST follow this segment structure:
+
+```
+feature-name/
+├── ui/           # React components and UI logic
+├── model/        # Business logic, stores, types, validation schemas
+├── api/          # TanStack Query hooks, API calls, contracts
+├── lib/          # Feature-specific utilities and helpers
+├── config/       # Feature configuration and constants
+└── index.ts      # Public API - ONLY exports for other layers
+```
+
+### 1.3 Public API Enforcement
+
+**CRITICAL**: All imports must go through public APIs (index.ts files).
+
+```typescript
+// ✅ CORRECT - Using public API
+import { UserCard, useUserQuery } from "@/entities/user";
+
+// ❌ WRONG - Bypassing public API  
+import { UserCard } from "@/entities/user/ui/user-card";
+```
+
+- **Dedicated API Service Layer:** Abstract API interaction logic into separate modules within the `api/` segment of each slice. This allows for easier testing and decoupling of components from specific API implementations.
 
 ### 1.2 File Naming Conventions
 
-- **Consistent Naming:** Follow a consistent naming convention for react-query hooks. Prefix hooks with `use` and postfix with `Query` or `Mutation` to clearly indicate their purpose (e.g., `usePostsQuery`, `useUpdatePostMutation`).
-
-- **Descriptive Names:** Use descriptive names for files and variables to improve code readability. For example, `useFetchUsersQuery.ts` is more informative than `useUsers.ts`.
+- **TanStack Query Hooks:** Use `use` prefix with descriptive names (e.g., `useUsersQuery`, `useCreateUserMutation`)
+- **Components:** PascalCase matching component name (e.g., `UserCard.tsx`)
+- **Types:** camelCase with descriptive suffix (e.g., `userTypes.ts`)
+- **API Services:** Descriptive names in `api/` segment (e.g., `userQueries.ts`, `userMutations.ts`)
 
 ### 1.3 Module Organization
 

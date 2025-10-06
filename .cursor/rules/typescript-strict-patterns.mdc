@@ -1,0 +1,308 @@
+---
+description: Enforces TypeScript strict mode patterns with Zod runtime validation and type-first development.
+globs: *.ts,*.tsx
+---
+
+# TypeScript Strict Mode Development Rules
+
+## Type-First Development
+
+### Schema-First with Zod
+
+**RULE**: Define Zod schemas before TypeScript types for runtime validation.
+
+```typescript
+// ✅ CORRECT - Schema first, then infer types
+import { z } from "zod";
+
+export const userSchema = z.object({
+  id: z.string().uuid(),
+  name: z.string().min(1).max(100),
+  email: z.string().email(),
+  role: z.enum(["admin", "user", "manager"]),
+  status: z.enum(["active", "inactive", "pending"]),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
+});
+
+export type User = z.infer<typeof userSchema>;
+
+// ❌ WRONG - Defining types without runtime validation
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  // ... no runtime validation
+}
+```
+
+### Strict Type Configuration
+
+**REQUIRED**: Use these TypeScript compiler options:
+
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true
+  }
+}
+```
+
+## Component Type Patterns
+
+### Props Interface Design
+
+```typescript
+// ✅ CORRECT - Comprehensive prop types
+interface UserCardProps {
+  user: User;
+  variant?: "compact" | "detailed" | "minimal";
+  showActions?: boolean;
+  onEdit?: (user: User) => void;
+  onDelete?: (userId: string) => void;
+  className?: string;
+  "data-testid"?: string;
+}
+
+// Use forwardRef for ref forwarding
+export const UserCard = forwardRef<HTMLDivElement, UserCardProps>(
+  ({ user, variant = "detailed", ...props }, ref) => {
+    // Implementation
+  }
+);
+
+UserCard.displayName = "UserCard";
+```
+
+### Generic Component Patterns
+
+```typescript
+// ✅ CORRECT - Generic data table
+interface DataTableProps<T extends { id: string }> {
+  data: T[];
+  columns: Array<{
+    key: keyof T;
+    header: string;
+    render?: (item: T) => ReactNode;
+  }>;
+  onRowClick?: (item: T) => void;
+  loading?: boolean;
+  error?: Error | null;
+}
+
+function DataTable<T extends { id: string }>({
+  data,
+  columns,
+  onRowClick,
+  loading,
+  error
+}: DataTableProps<T>) {
+  // Implementation with proper type safety
+}
+```
+
+## API Type Safety
+
+### TanStack Query with Zod
+
+```typescript
+// ✅ CORRECT - Type-safe API with validation
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { z } from "zod";
+
+// API response schema
+const usersResponseSchema = z.object({
+  users: z.array(userSchema),
+  pagination: z.object({
+    page: z.number(),
+    limit: z.number(),
+    total: z.number(),
+    totalPages: z.number(),
+  }),
+});
+
+type UsersResponse = z.infer<typeof usersResponseSchema>;
+
+// Type-safe query hook
+export function useUsersQuery(params?: { page?: number; search?: string }) {
+  return useQuery({
+    queryKey: ["users", params],
+    queryFn: async (): Promise<UsersResponse> => {
+      const response = await api.get("/users", { params });
+      return usersResponseSchema.parse(response); // Runtime validation
+    },
+    staleTime: 5 * 60 * 1000,
+  });
+}
+```
+
+### Form Validation Patterns
+
+```typescript
+// ✅ CORRECT - Zod + Mantine Form integration
+import { useForm, zodResolver } from "@mantine/form";
+
+const userFormSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  role: z.enum(["admin", "user", "manager"]),
+});
+
+type UserFormData = z.infer<typeof userFormSchema>;
+
+export function UserForm() {
+  const form = useForm<UserFormData>({
+    initialValues: {
+      name: "",
+      email: "",
+      role: "user",
+    },
+    validate: zodResolver(userFormSchema),
+  });
+
+  // Type-safe form handling
+}
+```
+
+## Error Handling Types
+
+### Discriminated Union for Errors
+
+```typescript
+// ✅ CORRECT - Type-safe error handling
+type ApiError = 
+  | { type: "validation"; errors: Record<string, string[]> }
+  | { type: "auth"; message: string }
+  | { type: "network"; message: string }
+  | { type: "server"; message: string; code?: number };
+
+function handleApiError(error: ApiError) {
+  switch (error.type) {
+    case "validation":
+      // TypeScript knows error.errors exists
+      return error.errors;
+    case "auth":
+      // TypeScript knows error.message exists
+      return error.message;
+    // ... other cases
+  }
+}
+```
+
+### Result Pattern for Operations
+
+```typescript
+// ✅ CORRECT - Result pattern for error handling
+type Result<T, E = Error> = 
+  | { success: true; data: T }
+  | { success: false; error: E };
+
+async function fetchUser(id: string): Promise<Result<User, ApiError>> {
+  try {
+    const response = await api.get(`/users/${id}`);
+    const user = userSchema.parse(response);
+    return { success: true, data: user };
+  } catch (error) {
+    return { 
+      success: false, 
+      error: { type: "server", message: "Failed to fetch user" }
+    };
+  }
+}
+```
+
+## Utility Type Patterns
+
+### Common Utility Types
+
+```typescript
+// ✅ CORRECT - Useful utility types
+type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+type RequiredFields<T, K extends keyof T> = T & Required<Pick<T, K>>;
+
+// Form data types
+type UserCreateData = Omit<User, "id" | "createdAt" | "updatedAt">;
+type UserUpdateData = Optional<UserCreateData, "name" | "email">;
+
+// API response types
+type PaginatedResponse<T> = {
+  data: T[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
+};
+```
+
+## Strict Mode Compliance
+
+### Array Access Safety
+
+```typescript
+// ✅ CORRECT - Safe array access with noUncheckedIndexedAccess
+function getFirstUser(users: User[]): User | undefined {
+  const firstUser = users[0]; // Type is User | undefined
+  if (firstUser) {
+    return firstUser; // Type narrowed to User
+  }
+  return undefined;
+}
+
+// ❌ WRONG - Assuming array has elements
+function getFirstUserUnsafe(users: User[]): User {
+  return users[0]; // Type error with noUncheckedIndexedAccess
+}
+```
+
+### Null Safety Patterns
+
+```typescript
+// ✅ CORRECT - Proper null checking
+function processUser(user: User | null | undefined) {
+  if (!user) {
+    return null;
+  }
+  
+  // TypeScript knows user is defined here
+  return {
+    displayName: user.name,
+    isActive: user.status === "active",
+  };
+}
+```
+
+## Type Guard Patterns
+
+```typescript
+// ✅ CORRECT - Type guards for runtime checking
+function isUser(value: unknown): value is User {
+  return userSchema.safeParse(value).success;
+}
+
+function isApiError(error: unknown): error is ApiError {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "type" in error &&
+    typeof (error as any).type === "string"
+  );
+}
+
+// Usage with type narrowing
+function handleUnknownError(error: unknown) {
+  if (isApiError(error)) {
+    // TypeScript knows error is ApiError
+    handleApiError(error);
+  } else {
+    // Handle unknown error
+    console.error("Unknown error:", error);
+  }
+}
+```

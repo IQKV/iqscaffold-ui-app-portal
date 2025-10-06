@@ -1,0 +1,542 @@
+---
+description: Enforces Mantine UI v8 component patterns, theming, responsive design, and accessibility best practices.
+globs: *.tsx,*.ts
+---
+
+# Mantine UI Development Patterns
+
+## Theme Integration
+
+### Theme Configuration
+
+**RULE**: Always use theme tokens instead of hardcoded values.
+
+```typescript
+// ✅ CORRECT - Using theme tokens
+import { createTheme, MantineColorsTuple } from "@mantine/core";
+
+const brandBlue: MantineColorsTuple = [
+  "#e7f5ff", "#d0ebff", "#a5d8ff", "#74c0fc", 
+  "#339af0", "#228be6", "#1c7ed6", "#1971c2", 
+  "#1864ab", "#0b5394"
+];
+
+export const theme = createTheme({
+  primaryColor: "brandBlue",
+  colors: { brandBlue },
+  fontFamily: "Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+  defaultRadius: "md",
+  spacing: {
+    xs: "0.5rem",
+    sm: "0.75rem", 
+    md: "1rem",
+    lg: "1.5rem",
+    xl: "2rem",
+  },
+});
+
+// ❌ WRONG - Hardcoded values
+const styles = {
+  padding: "16px",        // Use theme.spacing.md
+  color: "#228be6",       // Use theme.colors.brandBlue[5]
+  borderRadius: "8px",    // Use theme.radius.md
+};
+```
+
+### Component Styling Patterns
+
+```typescript
+// ✅ CORRECT - Theme-aware component styling
+import { Box, Card, Text } from "@mantine/core";
+import classes from "./user-card.module.css";
+
+function UserCard({ user }: { user: User }) {
+  return (
+    <Card
+      shadow="sm"
+      padding="lg"
+      radius="md"
+      withBorder
+      className={classes.card}
+    >
+      <Text fw={500} size="lg" mb="xs">
+        {user.name}
+      </Text>
+      
+      <Text c="dimmed" size="sm">
+        {user.email}
+      </Text>
+      
+      {/* Use theme spacing */}
+      <Box mt="md" p="sm" bg="gray.0">
+        Role: {user.role}
+      </Box>
+    </Card>
+  );
+}
+```
+
+## Responsive Design Patterns
+
+### Responsive Props
+
+```typescript
+// ✅ CORRECT - Responsive component design
+import { Container, SimpleGrid, Title, Text } from "@mantine/core";
+
+function ResponsiveLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <Container size="xl">
+      <Title 
+        order={{ base: 2, sm: 1 }}
+        size={{ base: "h3", sm: "h2", lg: "h1" }}
+        mb={{ base: "sm", sm: "md", lg: "lg" }}
+      >
+        Dashboard
+      </Title>
+      
+      <SimpleGrid
+        cols={{ base: 1, sm: 2, lg: 3 }}
+        spacing={{ base: "sm", sm: "md", lg: "lg" }}
+        verticalSpacing={{ base: "sm", sm: "md", lg: "lg" }}
+      >
+        {children}
+      </SimpleGrid>
+    </Container>
+  );
+}
+```
+
+### CSS Modules with Theme
+
+```css
+/* user-card.module.css */
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--mantine-shadow-md);
+  }
+}
+
+.compactCard {
+  padding: var(--mantine-spacing-sm);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .card {
+    padding: var(--mantine-spacing-sm);
+  }
+}
+```
+
+## Component Composition Patterns
+
+### Compound Components
+
+```typescript
+// ✅ CORRECT - Compound component pattern
+import { Card, Group, Text, Badge, ActionIcon } from "@mantine/core";
+import { IconEdit, IconTrash } from "@tabler/icons-react";
+
+interface UserCardProps {
+  user: User;
+  children?: React.ReactNode;
+}
+
+function UserCard({ user, children }: UserCardProps) {
+  return (
+    <Card shadow="sm" padding="lg" radius="md" withBorder>
+      {children}
+    </Card>
+  );
+}
+
+function UserCardHeader({ user, onEdit, onDelete }: {
+  user: User;
+  onEdit?: (user: User) => void;
+  onDelete?: (userId: string) => void;
+}) {
+  return (
+    <Group justify="space-between" mb="md">
+      <div>
+        <Text fw={500}>{user.name}</Text>
+        <Text c="dimmed" size="sm">{user.email}</Text>
+      </div>
+      
+      <Group gap="xs">
+        <Badge color={user.status === "active" ? "green" : "gray"}>
+          {user.status}
+        </Badge>
+        
+        {onEdit && (
+          <ActionIcon 
+            variant="subtle" 
+            onClick={() => onEdit(user)}
+            aria-label={`Edit ${user.name}`}
+          >
+            <IconEdit size="1rem" />
+          </ActionIcon>
+        )}
+        
+        {onDelete && (
+          <ActionIcon 
+            variant="subtle" 
+            color="red"
+            onClick={() => onDelete(user.id)}
+            aria-label={`Delete ${user.name}`}
+          >
+            <IconTrash size="1rem" />
+          </ActionIcon>
+        )}
+      </Group>
+    </Group>
+  );
+}
+
+// Usage
+<UserCard user={user}>
+  <UserCard.Header user={user} onEdit={handleEdit} onDelete={handleDelete} />
+  <UserCard.Body>
+    <Text size="sm">Additional content...</Text>
+  </UserCard.Body>
+</UserCard>
+```
+
+## Form Patterns with Mantine
+
+### Form Component Structure
+
+```typescript
+// ✅ CORRECT - Mantine form with validation
+import { useForm, zodResolver } from "@mantine/form";
+import { 
+  TextInput, 
+  Select, 
+  Button, 
+  Stack, 
+  Group,
+  LoadingOverlay 
+} from "@mantine/core";
+import { notifications } from "@mantine/notifications";
+
+interface UserFormProps {
+  user?: User;
+  onSuccess?: (user: User) => void;
+  onCancel?: () => void;
+}
+
+export function UserForm({ user, onSuccess, onCancel }: UserFormProps) {
+  const form = useForm<UserFormData>({
+    initialValues: {
+      name: user?.name || "",
+      email: user?.email || "",
+      role: user?.role || "user",
+    },
+    validate: zodResolver(userFormSchema),
+  });
+
+  const mutation = useCreateUser({
+    onSuccess: (newUser) => {
+      notifications.show({
+        title: "Success",
+        message: "User created successfully",
+        color: "green",
+      });
+      form.reset();
+      onSuccess?.(newUser);
+    },
+  });
+
+  return (
+    <form onSubmit={form.onSubmit((values) => mutation.mutate(values))}>
+      <LoadingOverlay visible={mutation.isPending} />
+      
+      <Stack gap="md">
+        <TextInput
+          label="Full Name"
+          placeholder="Enter full name"
+          required
+          {...form.getInputProps("name")}
+        />
+        
+        <TextInput
+          label="Email Address"
+          placeholder="user@example.com"
+          type="email"
+          required
+          {...form.getInputProps("email")}
+        />
+        
+        <Select
+          label="Role"
+          placeholder="Select role"
+          required
+          data={[
+            { value: "user", label: "User" },
+            { value: "admin", label: "Administrator" },
+            { value: "manager", label: "Manager" },
+          ]}
+          {...form.getInputProps("role")}
+        />
+
+        <Group justify="flex-end" mt="lg">
+          {onCancel && (
+            <Button variant="subtle" onClick={onCancel}>
+              Cancel
+            </Button>
+          )}
+          <Button type="submit" loading={mutation.isPending}>
+            Create User
+          </Button>
+        </Group>
+      </Stack>
+    </form>
+  );
+}
+```
+
+## Data Display Patterns
+
+### DataTable with Mantine
+
+```typescript
+// ✅ CORRECT - Mantine DataTable integration
+import { DataTable } from "mantine-datatable";
+import { Badge, Group, ActionIcon, Text } from "@mantine/core";
+import { IconEdit, IconTrash } from "@tabler/icons-react";
+
+interface UsersTableProps {
+  users: User[];
+  onEdit: (user: User) => void;
+  onDelete: (userId: string) => void;
+  loading?: boolean;
+}
+
+export function UsersTable({ users, onEdit, onDelete, loading }: UsersTableProps) {
+  return (
+    <DataTable
+      records={users}
+      columns={[
+        {
+          accessor: "name",
+          title: "Name",
+          render: ({ name, email }) => (
+            <div>
+              <Text fw={500}>{name}</Text>
+              <Text c="dimmed" size="sm">{email}</Text>
+            </div>
+          ),
+        },
+        {
+          accessor: "role",
+          title: "Role",
+          render: ({ role }) => (
+            <Badge variant="light">
+              {role}
+            </Badge>
+          ),
+        },
+        {
+          accessor: "status",
+          title: "Status",
+          render: ({ status }) => (
+            <Badge color={status === "active" ? "green" : "gray"}>
+              {status}
+            </Badge>
+          ),
+        },
+        {
+          accessor: "actions",
+          title: "Actions",
+          textAlign: "right",
+          render: (user) => (
+            <Group gap="xs" justify="flex-end">
+              <ActionIcon
+                variant="subtle"
+                onClick={() => onEdit(user)}
+                aria-label={`Edit ${user.name}`}
+              >
+                <IconEdit size="1rem" />
+              </ActionIcon>
+              <ActionIcon
+                variant="subtle"
+                color="red"
+                onClick={() => onDelete(user.id)}
+                aria-label={`Delete ${user.name}`}
+              >
+                <IconTrash size="1rem" />
+              </ActionIcon>
+            </Group>
+          ),
+        },
+      ]}
+      fetching={loading}
+      highlightOnHover
+      striped
+      verticalSpacing="sm"
+      minHeight={200}
+      noRecordsText="No users found"
+    />
+  );
+}
+```
+
+## Accessibility Patterns
+
+### ARIA and Semantic HTML
+
+```typescript
+// ✅ CORRECT - Accessible Mantine components
+import { Modal, Button, TextInput, Alert } from "@mantine/core";
+import { IconAlertCircle } from "@tabler/icons-react";
+
+function AccessibleModal({ opened, onClose, title, children }: {
+  opened: boolean;
+  onClose: () => void;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <Modal
+      opened={opened}
+      onClose={onClose}
+      title={title}
+      aria-labelledby="modal-title"
+      aria-describedby="modal-description"
+    >
+      <div id="modal-description">
+        {children}
+      </div>
+    </Modal>
+  );
+}
+
+function AccessibleForm() {
+  const [error, setError] = useState<string | null>(null);
+  
+  return (
+    <form role="form" aria-labelledby="form-title">
+      <h2 id="form-title">User Registration</h2>
+      
+      {error && (
+        <Alert
+          icon={<IconAlertCircle size="1rem" />}
+          color="red"
+          role="alert"
+          aria-live="assertive"
+          mb="md"
+        >
+          {error}
+        </Alert>
+      )}
+      
+      <TextInput
+        label="Email"
+        required
+        type="email"
+        aria-describedby="email-help"
+        error={error}
+        aria-invalid={Boolean(error)}
+      />
+      
+      <Text id="email-help" size="sm" c="dimmed">
+        We'll never share your email with anyone else.
+      </Text>
+      
+      <Button type="submit" mt="md">
+        Register
+      </Button>
+    </form>
+  );
+}
+```
+
+## Performance Patterns
+
+### Memoization with Mantine
+
+```typescript
+// ✅ CORRECT - Optimized Mantine components
+import { memo, useMemo } from "react";
+import { DataTable } from "mantine-datatable";
+
+interface OptimizedUserTableProps {
+  users: User[];
+  searchQuery?: string;
+  sortBy?: string;
+}
+
+export const OptimizedUserTable = memo<OptimizedUserTableProps>(
+  ({ users, searchQuery, sortBy }) => {
+    const filteredAndSortedUsers = useMemo(() => {
+      let result = [...users];
+      
+      // Filter
+      if (searchQuery) {
+        result = result.filter(user =>
+          user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          user.email.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      }
+      
+      // Sort
+      if (sortBy) {
+        result.sort((a, b) => {
+          const aValue = a[sortBy as keyof User];
+          const bValue = b[sortBy as keyof User];
+          return String(aValue).localeCompare(String(bValue));
+        });
+      }
+      
+      return result;
+    }, [users, searchQuery, sortBy]);
+
+    return (
+      <DataTable
+        records={filteredAndSortedUsers}
+        // ... other props
+      />
+    );
+  }
+);
+
+OptimizedUserTable.displayName = "OptimizedUserTable";
+```
+
+## Icon Usage Patterns
+
+```typescript
+// ✅ CORRECT - Consistent icon usage
+import { 
+  IconUser, 
+  IconSettings, 
+  IconLogout,
+  IconEdit,
+  IconTrash 
+} from "@tabler/icons-react";
+
+// Standard icon size
+const ICON_SIZE = "1rem";
+
+function NavigationMenu() {
+  return (
+    <nav>
+      <Button leftSection={<IconUser size={ICON_SIZE} />}>
+        Profile
+      </Button>
+      <Button leftSection={<IconSettings size={ICON_SIZE} />}>
+        Settings
+      </Button>
+      <Button 
+        leftSection={<IconLogout size={ICON_SIZE} />}
+        color="red"
+      >
+        Logout
+      </Button>
+    </nav>
+  );
+}
+```
