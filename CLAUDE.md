@@ -1,41 +1,195 @@
-# CLAUDE - Coding and Architecture Guidelines
+# CLAUDE AI - Development Guidelines & Best Practices
 
 ## Table of Contents
 - [Overview](#overview)
-- [React Best Practices](#react-best-practices)
-- [TanStack Router](#tanstack-router)
-- [TanStack Query](#tanstack-query)
-- [State Management](#state-management)
-- [Component Design](#component-design)
-- [TypeScript Usage](#typescript-usage)
+- [Feature-Sliced Design Architecture](#feature-sliced-design-architecture)
+- [React 19 Best Practices](#react-19-best-practices)
+- [TypeScript Strict Mode](#typescript-strict-mode)
+- [Mantine UI Integration](#mantine-ui-integration)
+- [TanStack Router Patterns](#tanstack-router-patterns)
+- [TanStack Query & Server State](#tanstack-query--server-state)
+- [State Management Strategy](#state-management-strategy)
+- [Form Handling & Validation](#form-handling--validation)
+- [Internationalization (i18n)](#internationalization-i18n)
+- [Testing Strategy](#testing-strategy)
 - [Performance Optimization](#performance-optimization)
-- [Testing Approach](#testing-approach)
-- [Styling Guidelines](#styling-guidelines)
-- [API Integration](#api-integration)
-- [Project Structure](#project-structure)
-- [Code Reviews](#code-reviews)
+- [Accessibility Guidelines](#accessibility-guidelines)
+- [Code Quality & Tooling](#code-quality--tooling)
+- [Development Workflow](#development-workflow)
 
 ## Overview
 
-This document outlines the coding standards and architectural patterns to be followed while developing the Mantine UI application. These guidelines are designed to ensure code quality, maintainability, and consistency across the project.
+This document provides comprehensive development guidelines for building scalable React applications using modern tools and architectural patterns. The project leverages Feature-Sliced Design (FSD) methodology, React 19, TypeScript strict mode, and a carefully curated tech stack for optimal developer experience and application performance.
 
-## React Best Practices
+### Key Principles
 
-### Functional Components
+1. **Type Safety First**: Strict TypeScript configuration with runtime validation
+2. **Component Composition**: Prefer composition over complex inheritance
+3. **Performance by Default**: Built-in optimizations and best practices
+4. **Accessibility First**: WCAG 2.1 AA compliance as standard
+5. **Developer Experience**: Comprehensive tooling and clear patterns
+6. **Maintainability**: Clear architecture boundaries and public APIs
 
-- Always use functional components with hooks rather than class components.
-- Use React 19's new features like automatic batching and concurrent rendering for better performance.
+### Project Characteristics
+
+- **Modern React**: React 19 with concurrent features and automatic batching
+- **Build Performance**: Vite 6 with SWC for lightning-fast development
+- **Type Safety**: Strict TypeScript with Zod runtime validation
+- **UI Consistency**: Mantine UI v8 with comprehensive theming
+- **Testing Coverage**: Unit, integration, and E2E testing strategies
+- **Production Ready**: Docker, CI/CD, and monitoring integration
+
+## Feature-Sliced Design Architecture
+
+### Architecture Overview
+
+Feature-Sliced Design (FSD) is the core architectural methodology that provides clear boundaries and scalable structure:
+
+```
+src/
+├── app/          # Application layer - providers, routing, global config
+├── pages/        # Page layer - route components and page-specific logic  
+├── widgets/      # Widget layer - complex UI blocks combining features
+├── features/     # Feature layer - user scenarios and business logic
+├── entities/     # Entity layer - business entities and data models
+└── shared/       # Shared layer - reusable utilities, UI kit, libraries
+```
+
+### FSD Rules (CRITICAL - NEVER VIOLATE)
+
+1. **Strict Import Hierarchy**: Higher layers can ONLY import from lower layers
+   ```typescript
+   // ✅ Allowed
+   import { Button } from "@/shared/ui";           // features → shared
+   import { User } from "@/entities/user";         // features → entities
+   
+   // ❌ FORBIDDEN
+   import { UserForm } from "@/features/user";     // shared → features
+   import { Dashboard } from "@/pages/dashboard";  // features → pages
+   ```
+
+2. **Public API Only**: All imports must go through index.ts files
+   ```typescript
+   // ✅ Correct
+   import { UserCard, useUserQuery } from "@/entities/user";
+   
+   // ❌ Wrong - bypassing public API
+   import { UserCard } from "@/entities/user/ui/user-card";
+   ```
+
+3. **Feature Isolation**: Features cannot import from each other
+   ```typescript
+   // ❌ Features cannot depend on each other
+   import { AuthForm } from "@/features/auth";     // from features/user
+   
+   // ✅ Use shared layer or app layer for communication
+   import { useAuthStore } from "@/shared/stores";
+   ```
+
+### Slice Structure Standard
+
+Each slice follows this segment structure:
+
+```
+feature-name/
+├── ui/           # React components and UI logic
+├── model/        # Business logic, stores, types, validation
+├── api/          # API calls, contracts, and data fetching
+├── lib/          # Feature-specific utilities and helpers
+├── config/       # Feature configuration and constants
+└── index.ts      # Public API - ONLY exports what other layers need
+```
+
+### Public API Design
+
+```typescript
+// features/user-profile/index.ts
+export { UserProfileWidget } from "./ui/user-profile-widget";
+export { useUserProfile } from "./model/use-user-profile";
+export type { UserProfile, UserProfileFormData } from "./model/types";
+
+// DO NOT export internal implementation details
+// ❌ export { UserProfileForm } from "./ui/user-profile-form";
+// ❌ export { userProfileStore } from "./model/store";
+```
+
+## React 19 Best Practices
+
+### Modern React Patterns
+
+#### Functional Components with TypeScript
+
+Always use functional components with proper TypeScript interfaces:
+
 ```tsx
-// Good
-function UserProfile({ userId }: { userId: string }) {
-const [user, setUser] = useState<User | null>(null);
-// ...
-return <div>{/* Component JSX */}</div>;
+// ✅ Proper component definition
+interface UserProfileProps {
+  userId: string;
+  variant?: "compact" | "detailed";
+  onEdit?: (user: User) => void;
 }
 
-// Avoid
+function UserProfile({ userId, variant = "detailed", onEdit }: UserProfileProps) {
+  const { data: user, isLoading, error } = useUserQuery(userId);
+  
+  if (isLoading) return <UserProfileSkeleton />;
+  if (error) return <ErrorState error={error} />;
+  if (!user) return <EmptyState />;
+  
+  return (
+    <Card>
+      <UserAvatar user={user} size={variant === "compact" ? "sm" : "lg"} />
+      <UserDetails user={user} variant={variant} />
+      {onEdit && <Button onClick={() => onEdit(user)}>Edit</Button>}
+    </Card>
+  );
+}
+
+// ❌ Avoid class components
 class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
-// ...
+  // Legacy pattern - don't use
+}
+```
+
+#### React 19 Concurrent Features
+
+Leverage React 19's automatic batching and concurrent rendering:
+
+```tsx
+// ✅ Automatic batching works out of the box
+function UserActions({ userId }: { userId: string }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [status, setStatus] = useState<string>("");
+  
+  const handleAction = async () => {
+    // These state updates are automatically batched in React 19
+    setIsLoading(true);
+    setStatus("Processing...");
+    
+    try {
+      await performUserAction(userId);
+      setStatus("Success!");
+    } catch (error) {
+      setStatus("Error occurred");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
+  return (
+    <Button onClick={handleAction} loading={isLoading}>
+      {status || "Perform Action"}
+    </Button>
+  );
+}
+
+// ✅ Use Suspense for data fetching
+function UserProfilePage({ userId }: { userId: string }) {
+  return (
+    <Suspense fallback={<UserProfileSkeleton />}>
+      <UserProfile userId={userId} />
+    </Suspense>
+  );
 }
 ```
 ### Custom Hooks
@@ -304,6 +458,272 @@ return context;
 - Leverage TanStack Query for server state management.
 - For client-only global state, use React Context or a lightweight state management library if needed.
 
+## Form Handling & Validation
+
+### Zod + Mantine Form Integration
+
+Combine Zod schemas with Mantine forms for type-safe validation:
+
+```typescript
+// features/user-form/model/validation.ts
+import { z } from "zod";
+
+export const userFormSchema = z.object({
+  name: z.string()
+    .min(2, "Name must be at least 2 characters")
+    .max(50, "Name must be less than 50 characters"),
+  email: z.string()
+    .email("Please enter a valid email address"),
+  role: z.enum(["admin", "user", "manager"], {
+    errorMap: () => ({ message: "Please select a valid role" })
+  }),
+  bio: z.string()
+    .max(500, "Bio must be less than 500 characters")
+    .optional(),
+  preferences: z.object({
+    notifications: z.boolean().default(true),
+    theme: z.enum(["light", "dark", "auto"]).default("auto"),
+  }).optional(),
+});
+
+export type UserFormData = z.infer<typeof userFormSchema>;
+
+// Transform for API
+export const transformUserFormData = (data: UserFormData) => ({
+  ...data,
+  bio: data.bio?.trim() || undefined,
+  preferences: data.preferences || {
+    notifications: true,
+    theme: "auto" as const,
+  },
+});
+```
+
+### Advanced Form Component
+
+```tsx
+// features/user-form/ui/user-form.tsx
+import { useForm, zodResolver } from "@mantine/form";
+import { 
+  TextInput, 
+  Textarea, 
+  Select, 
+  Switch, 
+  Button, 
+  Stack, 
+  Group,
+  Paper,
+  Title,
+  Divider,
+  LoadingOverlay
+} from "@mantine/core";
+import { notifications } from "@mantine/notifications";
+import { IconCheck, IconX } from "@tabler/icons-react";
+import { Trans, t } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+
+import { userFormSchema, type UserFormData, transformUserFormData } from "../model/validation";
+import { useCreateUser, useUpdateUser } from "../api/user-mutations";
+
+interface UserFormProps {
+  user?: User;
+  onSuccess?: (user: User) => void;
+  onCancel?: () => void;
+}
+
+export function UserForm({ user, onSuccess, onCancel }: UserFormProps) {
+  const { _ } = useLingui();
+  const isEditing = Boolean(user);
+  
+  const form = useForm<UserFormData>({
+    initialValues: {
+      name: user?.name || "",
+      email: user?.email || "",
+      role: user?.role || "user",
+      bio: user?.bio || "",
+      preferences: user?.preferences || {
+        notifications: true,
+        theme: "auto",
+      },
+    },
+    validate: zodResolver(userFormSchema),
+    transformValues: transformUserFormData,
+  });
+
+  const createMutation = useCreateUser({
+    onSuccess: (newUser) => {
+      notifications.show({
+        title: _(t`Success`),
+        message: _(t`User created successfully`),
+        color: "green",
+        icon: <IconCheck size="1rem" />,
+      });
+      form.reset();
+      onSuccess?.(newUser);
+    },
+    onError: (error) => {
+      notifications.show({
+        title: _(t`Error`),
+        message: error.message || _(t`Failed to create user`),
+        color: "red",
+        icon: <IconX size="1rem" />,
+      });
+    },
+  });
+
+  const updateMutation = useUpdateUser({
+    onSuccess: (updatedUser) => {
+      notifications.show({
+        title: _(t`Success`),
+        message: _(t`User updated successfully`),
+        color: "green",
+        icon: <IconCheck size="1rem" />,
+      });
+      onSuccess?.(updatedUser);
+    },
+    onError: (error) => {
+      notifications.show({
+        title: _(t`Error`),
+        message: error.message || _(t`Failed to update user`),
+        color: "red",
+        icon: <IconX size="1rem" />,
+      });
+    },
+  });
+
+  const handleSubmit = form.onSubmit((values) => {
+    if (isEditing && user) {
+      updateMutation.mutate({ id: user.id, data: values });
+    } else {
+      createMutation.mutate(values);
+    }
+  });
+
+  const isLoading = createMutation.isPending || updateMutation.isPending;
+
+  return (
+    <Paper p="lg" radius="md" withBorder>
+      <LoadingOverlay visible={isLoading} />
+      
+      <Title order={3} mb="lg">
+        {isEditing ? <Trans>Edit User</Trans> : <Trans>Create New User</Trans>}
+      </Title>
+
+      <form onSubmit={handleSubmit}>
+        <Stack gap="md">
+          <Group grow>
+            <TextInput
+              label={_(t`Full Name`)}
+              placeholder={_(t`Enter full name`)}
+              required
+              {...form.getInputProps("name")}
+            />
+            
+            <TextInput
+              label={_(t`Email Address`)}
+              placeholder={_(t`user@example.com`)}
+              type="email"
+              required
+              {...form.getInputProps("email")}
+            />
+          </Group>
+
+          <Select
+            label={_(t`Role`)}
+            placeholder={_(t`Select role`)}
+            required
+            data={[
+              { value: "user", label: _(t`User`) },
+              { value: "admin", label: _(t`Administrator`) },
+              { value: "manager", label: _(t`Manager`) },
+            ]}
+            {...form.getInputProps("role")}
+          />
+
+          <Textarea
+            label={_(t`Bio`)}
+            placeholder={_(t`Optional bio...`)}
+            rows={3}
+            {...form.getInputProps("bio")}
+          />
+
+          <Divider label={_(t`Preferences`)} labelPosition="left" />
+
+          <Group>
+            <Switch
+              label={_(t`Enable notifications`)}
+              {...form.getInputProps("preferences.notifications", { type: "checkbox" })}
+            />
+            
+            <Select
+              label={_(t`Theme`)}
+              data={[
+                { value: "light", label: _(t`Light`) },
+                { value: "dark", label: _(t`Dark`) },
+                { value: "auto", label: _(t`Auto`) },
+              ]}
+              {...form.getInputProps("preferences.theme")}
+            />
+          </Group>
+
+          <Group justify="flex-end" mt="lg">
+            {onCancel && (
+              <Button 
+                variant="subtle" 
+                onClick={onCancel}
+                disabled={isLoading}
+              >
+                <Trans>Cancel</Trans>
+              </Button>
+            )}
+            
+            <Button 
+              type="submit" 
+              loading={isLoading}
+            >
+              {isEditing ? <Trans>Update User</Trans> : <Trans>Create User</Trans>}
+            </Button>
+          </Group>
+        </Stack>
+      </form>
+    </Paper>
+  );
+}
+```
+
+### Form Validation Patterns
+
+```typescript
+// Custom validation with async checks
+export const createUserFormSchema = (existingEmails: string[] = []) => 
+  z.object({
+    email: z.string()
+      .email("Invalid email format")
+      .refine(
+        (email) => !existingEmails.includes(email.toLowerCase()),
+        "Email already exists"
+      ),
+    // ... other fields
+  });
+
+// Conditional validation
+export const userFormSchema = z.object({
+  role: z.enum(["admin", "user", "manager"]),
+  permissions: z.array(z.string()).optional(),
+}).refine(
+  (data) => {
+    if (data.role === "admin" && (!data.permissions || data.permissions.length === 0)) {
+      return false;
+    }
+    return true;
+  },
+  {
+    message: "Admin users must have at least one permission",
+    path: ["permissions"],
+  }
+);
+```
+
 ## Component Design
 
 ### Atomic Design Methodology
@@ -382,22 +802,81 @@ return this.props.fallback || <div>Something went wrong.</div>;
 
 export default ErrorBoundary;
 ```
-## TypeScript Usage
+## TypeScript Strict Mode
 
-### Type Definitions
+### Strict Type Configuration
 
-- Define robust interfaces and types for all components, hooks, and functions.
-- Place shared types in a dedicated `types` directory.
-``` tsx
-// src/types/user.ts
-export interface User {
-id: string;
-name: string;
-email: string;
-role: 'Admin' | 'User' | 'Manager';
-status: 'active' | 'inactive' | 'pending';
-createdAt: string;
-updatedAt: string;
+The project uses TypeScript strict mode with enhanced type safety:
+
+```json
+// tsconfig.json (key settings)
+{
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true
+  }
+}
+```
+
+### Type-First Development
+
+Define types before implementation and use Zod for runtime validation:
+
+```typescript
+// entities/user/model/types.ts
+import { z } from "zod";
+
+// Runtime schema with Zod
+export const userSchema = z.object({
+  id: z.string().uuid(),
+  name: z.string().min(1).max(100),
+  email: z.string().email(),
+  role: z.enum(["admin", "user", "manager"]),
+  status: z.enum(["active", "inactive", "pending"]),
+  avatar: z.string().url().optional(),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
+  preferences: z.object({
+    theme: z.enum(["light", "dark", "auto"]),
+    notifications: z.boolean(),
+    locale: z.string(),
+  }).optional(),
+});
+
+// TypeScript type inferred from schema
+export type User = z.infer<typeof userSchema>;
+
+// Partial types for forms and updates
+export type UserCreateData = z.infer<typeof userSchema.omit({ 
+  id: true, 
+  createdAt: true, 
+  updatedAt: true 
+})>;
+
+export type UserUpdateData = Partial<UserCreateData>;
+
+// API response types
+export interface UsersResponse {
+  users: User[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
+}
+
+// Component prop types
+export interface UserCardProps {
+  user: User;
+  variant?: "compact" | "detailed" | "minimal";
+  showActions?: boolean;
+  onEdit?: (user: User) => void;
+  onDelete?: (userId: string) => void;
 }
 ```
 ### Type Safety
@@ -436,6 +915,165 @@ function DataTable<T extends { id: string }>({ data, columns, onRowClick }: Data
 // Component implementation
 }
 ```
+## Internationalization (i18n)
+
+### Lingui Setup and Usage
+
+The project uses Lingui for modern internationalization with macro support:
+
+```typescript
+// app/i18n.ts
+import { i18n } from "@lingui/core";
+import { messages as enMessages } from "../locales/en/messages";
+import { messages as esMessages } from "../locales/es/messages";
+import { messages as frMessages } from "../locales/fr/messages";
+
+i18n.load({
+  en: enMessages,
+  es: esMessages,
+  fr: frMessages,
+});
+
+// Set initial locale
+const savedLocale = localStorage.getItem("locale") || "en";
+i18n.activate(savedLocale);
+
+export { i18n };
+```
+
+### Translation Patterns
+
+```tsx
+// Component with translations
+import { Trans, t, Plural } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+
+function UserNotifications({ user, unreadCount }: { user: User; unreadCount: number }) {
+  const { _ } = useLingui();
+
+  return (
+    <div>
+      {/* Simple text translation */}
+      <h2><Trans>Notifications</Trans></h2>
+      
+      {/* Translation with variables */}
+      <p>
+        <Trans>Welcome back, {user.name}!</Trans>
+      </p>
+      
+      {/* Pluralization */}
+      <p>
+        <Plural
+          value={unreadCount}
+          zero="No new notifications"
+          one="# new notification"
+          other="# new notifications"
+        />
+      </p>
+      
+      {/* Programmatic translation (for attributes, etc.) */}
+      <button 
+        title={_(t`Mark all as read`)}
+        aria-label={_(t`Mark all notifications as read`)}
+      >
+        <Trans>Mark all read</Trans>
+      </button>
+      
+      {/* Conditional translations */}
+      <p>
+        {user.status === "active" ? (
+          <Trans>Your account is active</Trans>
+        ) : (
+          <Trans>Please activate your account</Trans>
+        )}
+      </p>
+    </div>
+  );
+}
+```
+
+### Date and Number Formatting
+
+```tsx
+// Locale-aware formatting
+import { useLingui } from "@lingui/react";
+import dayjs from "dayjs";
+
+function UserActivity({ user, lastLogin }: { user: User; lastLogin: Date }) {
+  const { i18n } = useLingui();
+  
+  // Format dates according to locale
+  const formatDate = (date: Date) => {
+    return dayjs(date).locale(i18n.locale).format("LLL");
+  };
+  
+  // Format numbers according to locale
+  const formatNumber = (num: number) => {
+    return new Intl.NumberFormat(i18n.locale).format(num);
+  };
+  
+  return (
+    <div>
+      <p>
+        <Trans>Last login: {formatDate(lastLogin)}</Trans>
+      </p>
+      <p>
+        <Trans>Total posts: {formatNumber(user.postCount)}</Trans>
+      </p>
+    </div>
+  );
+}
+```
+
+### Locale Switching
+
+```tsx
+// Locale switcher component
+import { Select } from "@mantine/core";
+import { useLingui } from "@lingui/react";
+import { Trans } from "@lingui/macro";
+
+const LOCALES = [
+  { value: "en", label: "English" },
+  { value: "es", label: "Español" },
+  { value: "fr", label: "Français" },
+];
+
+export function LocaleSwitcher() {
+  const { i18n } = useLingui();
+  
+  const handleLocaleChange = (locale: string) => {
+    i18n.activate(locale);
+    localStorage.setItem("locale", locale);
+    // Optionally reload the page or update URL
+  };
+  
+  return (
+    <Select
+      label={<Trans>Language</Trans>}
+      value={i18n.locale}
+      onChange={handleLocaleChange}
+      data={LOCALES}
+    />
+  );
+}
+```
+
+### Message Extraction Workflow
+
+```bash
+# Extract messages from code
+pnpm messages:extract
+
+# Compile messages for production
+pnpm messages:compile
+
+# The workflow creates/updates:
+# - locales/en/messages.po (source messages)
+# - locales/es/messages.po (translations)
+# - locales/*/messages.js (compiled for runtime)
+```
+
 ## Performance Optimization
 
 ### Memoization
@@ -625,6 +1263,239 @@ status: 'active',
 },
 };
 ```
+## Mantine UI Integration
+
+### Theme Configuration
+
+Configure Mantine theme for consistent design system:
+
+```typescript
+// app/theme.ts
+import { createTheme, MantineColorsTuple } from "@mantine/core";
+
+const brandBlue: MantineColorsTuple = [
+  "#e7f5ff",
+  "#d0ebff", 
+  "#a5d8ff",
+  "#74c0fc",
+  "#339af0",
+  "#228be6", // Primary shade
+  "#1c7ed6",
+  "#1971c2",
+  "#1864ab",
+  "#0b5394"
+];
+
+export const theme = createTheme({
+  primaryColor: "brandBlue",
+  colors: {
+    brandBlue,
+  },
+  fontFamily: "Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+  fontFamilyMonospace: "JetBrains Mono, Consolas, monospace",
+  headings: {
+    fontFamily: "Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+    fontWeight: "600",
+  },
+  defaultRadius: "md",
+  cursorType: "pointer",
+  focusRing: "auto",
+  spacing: {
+    xs: "0.5rem",
+    sm: "0.75rem", 
+    md: "1rem",
+    lg: "1.5rem",
+    xl: "2rem",
+  },
+  breakpoints: {
+    xs: "30em",
+    sm: "48em", 
+    md: "64em",
+    lg: "74em",
+    xl: "90em",
+  },
+});
+```
+
+### Component Patterns
+
+#### Consistent Component Structure
+
+```tsx
+// shared/ui/user-card/user-card.tsx
+import { Card, Avatar, Text, Badge, Group, ActionIcon, Tooltip } from "@mantine/core";
+import { IconEdit, IconTrash } from "@tabler/icons-react";
+import { forwardRef } from "react";
+import type { User } from "@/entities/user";
+import classes from "./user-card.module.css";
+
+interface UserCardProps {
+  user: User;
+  variant?: "compact" | "detailed";
+  showActions?: boolean;
+  onEdit?: (user: User) => void;
+  onDelete?: (userId: string) => void;
+}
+
+export const UserCard = forwardRef<HTMLDivElement, UserCardProps>(
+  ({ user, variant = "detailed", showActions = false, onEdit, onDelete }, ref) => {
+    const isCompact = variant === "compact";
+    
+    return (
+      <Card 
+        ref={ref}
+        shadow="sm" 
+        padding={isCompact ? "sm" : "lg"} 
+        radius="md" 
+        withBorder
+        className={classes.card}
+      >
+        <Group justify="space-between" mb={isCompact ? "xs" : "md"}>
+          <Group>
+            <Avatar 
+              src={user.avatar} 
+              alt={user.name}
+              size={isCompact ? "md" : "lg"}
+              radius="xl"
+            />
+            <div>
+              <Text fw={500} size={isCompact ? "sm" : "md"}>
+                {user.name}
+              </Text>
+              <Text c="dimmed" size="xs">
+                {user.email}
+              </Text>
+            </div>
+          </Group>
+          
+          <Group gap="xs">
+            <Badge 
+              color={user.status === "active" ? "green" : "gray"}
+              variant="light"
+              size="sm"
+            >
+              {user.status}
+            </Badge>
+            
+            {showActions && (
+              <Group gap="xs">
+                {onEdit && (
+                  <Tooltip label="Edit user">
+                    <ActionIcon 
+                      variant="subtle" 
+                      onClick={() => onEdit(user)}
+                      aria-label={`Edit ${user.name}`}
+                    >
+                      <IconEdit size="1rem" />
+                    </ActionIcon>
+                  </Tooltip>
+                )}
+                
+                {onDelete && (
+                  <Tooltip label="Delete user">
+                    <ActionIcon 
+                      variant="subtle" 
+                      color="red"
+                      onClick={() => onDelete(user.id)}
+                      aria-label={`Delete ${user.name}`}
+                    >
+                      <IconTrash size="1rem" />
+                    </ActionIcon>
+                  </Tooltip>
+                )}
+              </Group>
+            )}
+          </Group>
+        </Group>
+        
+        {!isCompact && (
+          <>
+            <Text size="sm" c="dimmed" mb="sm">
+              Role: {user.role}
+            </Text>
+            
+            {user.preferences && (
+              <Text size="xs" c="dimmed">
+                Theme: {user.preferences.theme} • 
+                Notifications: {user.preferences.notifications ? "On" : "Off"}
+              </Text>
+            )}
+          </>
+        )}
+      </Card>
+    );
+  }
+);
+
+UserCard.displayName = "UserCard";
+```
+
+#### CSS Modules for Custom Styles
+
+```css
+/* shared/ui/user-card/user-card.module.css */
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--mantine-shadow-md);
+  }
+}
+
+.card[data-variant="compact"] {
+  padding: var(--mantine-spacing-sm);
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: var(--mantine-spacing-sm);
+  }
+}
+```
+
+### Responsive Design
+
+Use Mantine's responsive utilities and breakpoints:
+
+```tsx
+// Responsive component example
+function ResponsiveLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <Container size="xl">
+      <SimpleGrid
+        cols={{ base: 1, sm: 2, lg: 3 }}
+        spacing={{ base: "sm", sm: "md", lg: "lg" }}
+        verticalSpacing={{ base: "sm", sm: "md", lg: "lg" }}
+      >
+        {children}
+      </SimpleGrid>
+    </Container>
+  );
+}
+
+// Responsive text and spacing
+function UserProfile({ user }: { user: User }) {
+  return (
+    <Stack gap={{ base: "sm", sm: "md", lg: "lg" }}>
+      <Title 
+        order={{ base: 2, sm: 1 }}
+        size={{ base: "h3", sm: "h2", lg: "h1" }}
+      >
+        {user.name}
+      </Title>
+      
+      <Text 
+        size={{ base: "sm", sm: "md" }}
+        c="dimmed"
+      >
+        {user.email}
+      </Text>
+    </Stack>
+  );
+}
+```
+
 ## Styling Guidelines
 
 ### Mantine Components
@@ -706,6 +1577,237 @@ Content
 // Avoid: Hardcoded values
 <Box style={{ padding: '16px', margin: '8px', backgroundColor: '#f9f9f9', borderRadius: '8px' }}>
 ```
+## Accessibility Guidelines
+
+### WCAG 2.1 AA Compliance
+
+Ensure all components meet accessibility standards:
+
+```tsx
+// Accessible form component
+function AccessibleUserForm() {
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  
+  return (
+    <form role="form" aria-labelledby="form-title">
+      <h2 id="form-title">User Registration</h2>
+      
+      {/* Proper labeling and error association */}
+      <TextInput
+        label="Full Name"
+        required
+        error={errors.name}
+        aria-describedby={errors.name ? "name-error" : undefined}
+        aria-invalid={Boolean(errors.name)}
+      />
+      {errors.name && (
+        <Text id="name-error" c="red" size="sm" role="alert">
+          {errors.name}
+        </Text>
+      )}
+      
+      {/* Fieldset for grouped inputs */}
+      <fieldset>
+        <legend>Contact Preferences</legend>
+        <Switch
+          label="Email notifications"
+          description="Receive updates via email"
+        />
+        <Switch
+          label="SMS notifications" 
+          description="Receive updates via SMS"
+        />
+      </fieldset>
+      
+      {/* Clear button purposes */}
+      <Button 
+        type="submit"
+        aria-describedby="submit-help"
+      >
+        Create Account
+      </Button>
+      <Text id="submit-help" size="sm" c="dimmed">
+        By creating an account, you agree to our terms of service
+      </Text>
+    </form>
+  );
+}
+```
+
+### Keyboard Navigation
+
+```tsx
+// Accessible data table with keyboard navigation
+function AccessibleDataTable({ data }: { data: User[] }) {
+  const [focusedRow, setFocusedRow] = useState(0);
+  
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    switch (event.key) {
+      case "ArrowDown":
+        event.preventDefault();
+        setFocusedRow(prev => Math.min(prev + 1, data.length - 1));
+        break;
+      case "ArrowUp":
+        event.preventDefault();
+        setFocusedRow(prev => Math.max(prev - 1, 0));
+        break;
+      case "Enter":
+      case " ":
+        event.preventDefault();
+        // Handle selection
+        break;
+    }
+  };
+  
+  return (
+    <Table
+      role="table"
+      aria-label="Users table"
+      onKeyDown={handleKeyDown}
+    >
+      <Table.Thead>
+        <Table.Tr role="row">
+          <Table.Th role="columnheader">Name</Table.Th>
+          <Table.Th role="columnheader">Email</Table.Th>
+          <Table.Th role="columnheader">Actions</Table.Th>
+        </Table.Tr>
+      </Table.Thead>
+      <Table.Tbody>
+        {data.map((user, index) => (
+          <Table.Tr
+            key={user.id}
+            role="row"
+            tabIndex={index === focusedRow ? 0 : -1}
+            aria-selected={index === focusedRow}
+            data-focused={index === focusedRow}
+          >
+            <Table.Td role="cell">{user.name}</Table.Td>
+            <Table.Td role="cell">{user.email}</Table.Td>
+            <Table.Td role="cell">
+              <Group gap="xs">
+                <ActionIcon
+                  aria-label={`Edit ${user.name}`}
+                  title={`Edit ${user.name}`}
+                >
+                  <IconEdit size="1rem" />
+                </ActionIcon>
+                <ActionIcon
+                  aria-label={`Delete ${user.name}`}
+                  title={`Delete ${user.name}`}
+                  color="red"
+                >
+                  <IconTrash size="1rem" />
+                </ActionIcon>
+              </Group>
+            </Table.Td>
+          </Table.Tr>
+        ))}
+      </Table.Tbody>
+    </Table>
+  );
+}
+```
+
+### Screen Reader Support
+
+```tsx
+// Accessible loading and error states
+function AccessibleUserList() {
+  const { data: users, isLoading, error } = useUsersQuery();
+  
+  if (isLoading) {
+    return (
+      <div role="status" aria-live="polite">
+        <LoadingOverlay visible />
+        <span className="sr-only">Loading users...</span>
+      </div>
+    );
+  }
+  
+  if (error) {
+    return (
+      <Alert
+        color="red"
+        role="alert"
+        aria-live="assertive"
+        title="Error loading users"
+      >
+        {error.message}
+      </Alert>
+    );
+  }
+  
+  return (
+    <div>
+      <h2 id="users-heading">Users ({users?.length || 0})</h2>
+      <div 
+        role="region" 
+        aria-labelledby="users-heading"
+        aria-live="polite"
+      >
+        {users?.map(user => (
+          <UserCard key={user.id} user={user} />
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+### Focus Management
+
+```tsx
+// Modal with proper focus management
+function AccessibleModal({ opened, onClose, children }: ModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+  
+  useEffect(() => {
+    if (opened) {
+      // Store previous focus
+      previousFocusRef.current = document.activeElement as HTMLElement;
+      
+      // Focus modal
+      modalRef.current?.focus();
+      
+      // Trap focus within modal
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === "Escape") {
+          onClose();
+        }
+        
+        if (event.key === "Tab") {
+          // Focus trap logic here
+        }
+      };
+      
+      document.addEventListener("keydown", handleKeyDown);
+      
+      return () => {
+        document.removeEventListener("keydown", handleKeyDown);
+        
+        // Restore previous focus
+        previousFocusRef.current?.focus();
+      };
+    }
+  }, [opened, onClose]);
+  
+  return (
+    <Modal
+      opened={opened}
+      onClose={onClose}
+      ref={modalRef}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      tabIndex={-1}
+    >
+      {children}
+    </Modal>
+  );
+}
+```
+
 ## API Integration
 
 ### API Client Setup
@@ -870,7 +1972,233 @@ src/
 - **Context**: Suffix with `Context` (e.g., `AuthContext`).
 - **Types/Interfaces**: Use PascalCase (e.g., `UserProfile`).
 
-## Code Reviews
+## Code Quality & Tooling
+
+### ESLint Configuration
+
+The project uses ESLint 9 with flat config and comprehensive rules:
+
+```javascript
+// eslint.config.js
+import { defineConfig } from "eslint-define-config";
+import mantineConfig from "eslint-config-mantine";
+
+export default defineConfig([
+  ...mantineConfig,
+  {
+    rules: {
+      // React 19 specific rules
+      "react/react-in-jsx-scope": "off",
+      "react-hooks/exhaustive-deps": "error",
+      
+      // TypeScript strict rules
+      "@typescript-eslint/no-unused-vars": "error",
+      "@typescript-eslint/explicit-function-return-type": "warn",
+      
+      // Import organization
+      "simple-import-sort/imports": "error",
+      "simple-import-sort/exports": "error",
+      
+      // Accessibility
+      "jsx-a11y/alt-text": "error",
+      "jsx-a11y/aria-role": "error",
+      
+      // Performance
+      "react/jsx-no-bind": "warn",
+      "react/jsx-no-leaked-render": "error",
+    },
+  },
+]);
+```
+
+### Pre-commit Hooks
+
+```json
+// .husky/pre-commit
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Type checking
+pnpm type-check
+
+# Linting
+pnpm lint
+
+# Testing
+pnpm test --run
+
+# Format check
+pnpm prettier:check
+```
+
+### Commit Message Standards
+
+```javascript
+// commitlint.config.js
+module.exports = {
+  extends: ["@commitlint/config-conventional"],
+  rules: {
+    "type-enum": [
+      2,
+      "always",
+      [
+        "feat",     // New feature
+        "fix",      // Bug fix
+        "docs",     // Documentation
+        "style",    // Formatting
+        "refactor", // Code refactoring
+        "test",     // Adding tests
+        "chore",    // Maintenance
+        "perf",     // Performance improvements
+        "ci",       // CI/CD changes
+      ],
+    ],
+    "scope-enum": [
+      2,
+      "always",
+      [
+        "ui",       // UI components
+        "api",      // API changes
+        "auth",     // Authentication
+        "forms",    // Form handling
+        "routing",  // Routing changes
+        "i18n",     // Internationalization
+        "tests",    // Test changes
+        "deps",     // Dependencies
+      ],
+    ],
+  },
+};
+```
+
+## Development Workflow
+
+### Feature Development Process
+
+1. **Create Feature Branch**
+   ```bash
+   git checkout -b feat/user-management
+   ```
+
+2. **Follow FSD Architecture**
+   ```
+   features/user-management/
+   ├── ui/
+   │   ├── user-list.tsx
+   │   ├── user-form.tsx
+   │   └── user-card.tsx
+   ├── model/
+   │   ├── types.ts
+   │   ├── validation.ts
+   │   └── store.ts
+   ├── api/
+   │   ├── user-queries.ts
+   │   └── user-mutations.ts
+   └── index.ts
+   ```
+
+3. **Write Tests First (TDD)**
+   ```typescript
+   // features/user-management/ui/user-list.test.tsx
+   describe("UserList", () => {
+     it("displays users correctly", () => {
+       // Test implementation
+     });
+   });
+   ```
+
+4. **Implement Component**
+   ```typescript
+   // features/user-management/ui/user-list.tsx
+   export function UserList() {
+     // Implementation
+   }
+   ```
+
+5. **Create Storybook Story**
+   ```typescript
+   // features/user-management/ui/user-list.stories.tsx
+   export default {
+     component: UserList,
+     title: "Features/UserManagement/UserList",
+   };
+   ```
+
+6. **Update Public API**
+   ```typescript
+   // features/user-management/index.ts
+   export { UserList } from "./ui/user-list";
+   export type { User } from "./model/types";
+   ```
+
+### Quality Gates
+
+Before merging, ensure:
+
+- [ ] All tests pass (`pnpm test`)
+- [ ] Type checking passes (`pnpm type-check`)
+- [ ] Linting passes (`pnpm lint`)
+- [ ] Build succeeds (`pnpm build`)
+- [ ] Storybook stories created
+- [ ] Accessibility tested
+- [ ] Performance optimized
+- [ ] Documentation updated
+
+### Code Review Checklist
+
+#### Architecture & Design
+- [ ] Follows FSD layer boundaries
+- [ ] Uses public APIs only
+- [ ] Proper separation of concerns
+- [ ] No circular dependencies
+
+#### Code Quality
+- [ ] TypeScript strict mode compliance
+- [ ] Proper error handling
+- [ ] Performance optimizations applied
+- [ ] Accessibility requirements met
+
+#### Testing
+- [ ] Unit tests cover main functionality
+- [ ] Integration tests for complex flows
+- [ ] Storybook stories for UI components
+- [ ] E2E tests for critical paths
+
+#### Documentation
+- [ ] Code is self-documenting
+- [ ] Complex logic has comments
+- [ ] Public APIs are documented
+- [ ] README updated if needed
+
+### Deployment Pipeline
+
+```yaml
+# .github/workflows/ci.yml
+name: CI/CD Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm type-check
+      - run: pnpm lint
+      - run: pnpm test --coverage
+      - run: pnpm build
+      
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+```
+
+This comprehensive guide ensures consistent, high-quality development practices across the entire project lifecycle.
 
 ### Review Checklist
 

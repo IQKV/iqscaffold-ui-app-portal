@@ -1,27 +1,65 @@
-# Mantine UI Project Development Guide
+# AI Agent Development Guide
 
 ## Project Overview
 
-This is a modern React application built with Feature-Sliced Design (FSD) architecture, focusing on maintainability, scalability, and developer experience. The project uses React 19, TypeScript, Mantine UI, and a comprehensive toolchain for building high-performance Single Page Applications.
+This is a modern React application built with Feature-Sliced Design (FSD) architecture, focusing on maintainability, scalability, and developer experience. The project uses React 19, TypeScript, Mantine UI v8, and a comprehensive toolchain for building high-performance Single Page Applications.
+
+**Key Characteristics:**
+
+- Type-safe development with strict TypeScript configuration
+- Component-driven development with Storybook integration
+- Comprehensive testing strategy (Unit, Integration, E2E)
+- Modern build tooling with Vite 6 and SWC
+- Internationalization ready with Lingui
+- Production-ready with Docker and CI/CD workflows
 
 ## Tech Stack
 
-- **Frontend Framework**: React 19 + TypeScript
-- **Build Tool**: Vite with SWC
-- **Architecture**: Feature-Sliced Design (FSD)
-- **UI Library**: Mantine UI v8 + Tabler Icons
-- **Routing**: TanStack Router v1
-- **State Management**: Zustand + TanStack Query v5
-- **HTTP Client**: Axios with interceptors
-- **Forms**: Mantine Form + React Hook Form
-- **Internationalization**: Lingui
-- **Testing**: Vitest + React Testing Library + Playwright
-- **Code Quality**: ESLint (Mantine config) + Prettier + Husky
-- **Package Manager**: pnpm
+### Core Framework
+
+- **React 19** - Latest React with concurrent features and improved performance
+- **TypeScript** - Strict type safety with latest language features
+- **Vite 6** - Lightning-fast development with SWC compiler
+- **PNPM** - Fast, disk space efficient package manager
+
+### UI & Styling
+
+- **Mantine UI v8** - Complete component library with theming system
+- **Mantine Extensions** - Carousel, Charts, Dates, Dropzone, Modals, Notifications, DataTable
+- **Tabler Icons** - 4000+ SVG icons optimized for React
+- **Tiptap Editor** - Rich text editor with extensions
+
+### Routing & State
+
+- **TanStack Router v1** - Type-safe routing with code splitting
+- **TanStack Query v5** - Server state management and caching
+- **Zustand** - Lightweight client state management
+- **nuqs** - Type-safe URL search params state management
+
+### Data & API
+
+- **Axios** - HTTP client with interceptors and error handling
+- **GraphQL Request** - Lightweight GraphQL client
+- **Zod** - Runtime type validation and schema parsing
+- **React Hook Form** - Performant forms with validation
+
+### Development & Quality
+
+- **Vitest** - Fast unit testing with coverage and UI
+- **Playwright** - Reliable end-to-end testing
+- **Storybook 8** - Component development in isolation
+- **ESLint 9** - Modern linting with flat config
+- **Prettier** - Code formatting with package.json plugin
+- **Husky** - Git hooks for quality gates
+
+### Internationalization & Accessibility
+
+- **Lingui** - Modern i18n with macro support and pluralization
+- **Built-in A11y** - Accessibility features and testing
 
 ## Architecture: Feature-Sliced Design (FSD)
 
-The project follows Feature-Sliced Design methodology with the following layers:
+The project follows Feature-Sliced Design methodology with strict layer hierarchy:
 
 ```
 src/
@@ -33,11 +71,70 @@ src/
 └── shared/       # Shared layer (reusable code, UI kit, utilities)
 ```
 
-### Layer Rules
+### FSD Layer Rules (CRITICAL)
 
-1. **Import Rule**: Higher layers can import from lower layers only
-2. **Public API**: Each layer exposes functionality through `index.ts`
-3. **Isolation**: Features should not depend on each other directly
+1. **Import Rule**: Higher layers can ONLY import from lower layers
+   - ❌ `shared` cannot import from `features`
+   - ✅ `features` can import from `shared` and `entities`
+2. **Public API**: Each slice exposes functionality through `index.ts`
+   - All imports must go through public API: `from "@/features/auth"`
+   - Never import internal files: `from "@/features/auth/model/store"`
+
+3. **Cross-Feature Isolation**: Features cannot depend on each other
+   - Use `shared` layer for common functionality
+   - Communicate through `app` layer or events
+
+4. **Segment Structure**: Each slice contains standardized segments
+   ```
+   feature-name/
+   ├── ui/           # React components
+   ├── model/        # Business logic, stores, types
+   ├── api/          # API calls and contracts
+   ├── lib/          # Utilities specific to this feature
+   └── index.ts      # Public API exports
+   ```
+
+## AI Agent Development Guidelines
+
+### Code Generation Principles
+
+1. **Always Follow FSD Architecture**: Respect layer boundaries and public APIs
+2. **Type-First Development**: Define TypeScript interfaces before implementation
+3. **Component Composition**: Prefer composition over complex prop drilling
+4. **Performance by Default**: Use React.memo, useMemo, useCallback appropriately
+5. **Accessibility First**: Include ARIA attributes and semantic HTML
+6. **Test-Driven Approach**: Generate tests alongside components
+
+### AI-Assisted Development Workflow
+
+```typescript
+// 1. Define types first
+interface UserProfileProps {
+  userId: string;
+  onEdit?: (user: User) => void;
+  variant?: "compact" | "detailed";
+}
+
+// 2. Create component with proper FSD location
+// features/user-profile/ui/user-profile.tsx
+
+// 3. Implement with Mantine components
+// 4. Add Storybook story
+// 5. Write unit tests
+// 6. Export through public API
+```
+
+### Code Quality Checklist for AI
+
+- [ ] TypeScript strict mode compliance
+- [ ] Proper error boundaries and loading states
+- [ ] Mantine theme integration
+- [ ] Responsive design with Mantine breakpoints
+- [ ] Internationalization with Lingui macros
+- [ ] Accessibility attributes (ARIA, semantic HTML)
+- [ ] Performance optimizations (memoization)
+- [ ] Unit tests with React Testing Library
+- [ ] Storybook story with variants
 
 ## Development Guidelines
 
@@ -50,42 +147,88 @@ src/
 
 ```tsx
 // shared/ui/form-field/form-field.tsx
-import { TextInput, Select, Textarea } from "@mantine/core";
-import { UseFormReturnType } from "@mantine/form";
+import {
+  TextInput,
+  Select,
+  Textarea,
+  type TextInputProps,
+} from "@mantine/core";
+import { type UseFormReturnType } from "@mantine/form";
+import { forwardRef } from "react";
 
-interface FormFieldProps {
+interface BaseFormFieldProps {
   name: string;
   label: string;
-  type: "text" | "email" | "select" | "textarea";
   form: UseFormReturnType<any>;
-  data?: Array<{ value: string; label: string }>;
-  placeholder?: string;
   required?: boolean;
+  description?: string;
 }
 
-export function FormField({
-  name,
-  label,
-  type,
-  form,
-  data,
-  ...props
-}: FormFieldProps) {
-  const baseProps = {
-    label,
-    ...form.getInputProps(name),
-    ...props,
-  };
+interface TextFormFieldProps extends BaseFormFieldProps {
+  type: "text" | "email" | "password" | "number";
+  placeholder?: string;
+}
 
-  switch (type) {
-    case "select":
-      return <Select {...baseProps} data={data} />;
-    case "textarea":
-      return <Textarea {...baseProps} />;
-    default:
-      return <TextInput {...baseProps} type={type} />;
+interface SelectFormFieldProps extends BaseFormFieldProps {
+  type: "select";
+  data: Array<{ value: string; label: string }>;
+  placeholder?: string;
+  searchable?: boolean;
+}
+
+interface TextareaFormFieldProps extends BaseFormFieldProps {
+  type: "textarea";
+  placeholder?: string;
+  rows?: number;
+}
+
+type FormFieldProps =
+  | TextFormFieldProps
+  | SelectFormFieldProps
+  | TextareaFormFieldProps;
+
+export const FormField = forwardRef<HTMLInputElement, FormFieldProps>(
+  ({ name, label, type, form, ...props }, ref) => {
+    const baseProps = {
+      label,
+      ...form.getInputProps(name),
+      error: form.errors[name],
+      required: props.required,
+      description: props.description,
+    };
+
+    switch (type) {
+      case "select":
+        return (
+          <Select
+            {...baseProps}
+            data={props.data}
+            placeholder={props.placeholder}
+            searchable={props.searchable}
+          />
+        );
+      case "textarea":
+        return (
+          <Textarea
+            {...baseProps}
+            placeholder={props.placeholder}
+            rows={props.rows}
+          />
+        );
+      default:
+        return (
+          <TextInput
+            {...baseProps}
+            ref={ref}
+            type={type}
+            placeholder={props.placeholder}
+          />
+        );
+    }
   }
-}
+);
+
+FormField.displayName = "FormField";
 ```
 
 ### State Management Standards
@@ -94,32 +237,71 @@ export function FormField({
 
 ```tsx
 // shared/lib/use-form-mutation.ts
-import { useMutation } from "@tanstack/react-query";
-import { UseFormReturnType } from "@mantine/form";
-import { notificationService } from "./notifications";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { type UseFormReturnType } from "@mantine/form";
+import { notifications } from "@mantine/notifications";
+import { IconCheck, IconX } from "@tabler/icons-react";
+
+interface FormMutationOptions<TData, TVariables> {
+  onSuccess?: (data: TData, variables: TVariables) => void;
+  invalidateQueries?: string[][];
+  successNotification?: {
+    title: string;
+    message: string;
+  };
+  errorNotification?: {
+    title: string;
+    fallback: string;
+  };
+}
 
 export function useFormMutation<TData, TVariables>(
   form: UseFormReturnType<any>,
   mutationFn: (variables: TVariables) => Promise<TData>,
-  options?: {
-    notifySuccess?: { title: string; message: string };
-    notifyError?: { title: string; fallback: string };
-  }
+  options?: FormMutationOptions<TData, TVariables>
 ) {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn,
     onSuccess: (data, variables) => {
+      // Clear form errors
       form.setErrors({});
-      if (options?.notifySuccess) {
-        notificationService.success(options.notifySuccess);
+
+      // Invalidate related queries
+      if (options?.invalidateQueries) {
+        options.invalidateQueries.forEach((queryKey) => {
+          queryClient.invalidateQueries({ queryKey });
+        });
       }
+
+      // Show success notification
+      if (options?.successNotification) {
+        notifications.show({
+          title: options.successNotification.title,
+          message: options.successNotification.message,
+          color: "green",
+          icon: <IconCheck size="1rem" />,
+        });
+      }
+
+      // Custom success handler
+      options?.onSuccess?.(data, variables);
     },
-    onError: (error) => {
-      // Handle field errors and notifications
-      if (options?.notifyError) {
-        notificationService.error({
-          title: options.notifyError.title,
-          message: getErrorMessage(error, options.notifyError.fallback),
+    onError: (error: any) => {
+      // Handle validation errors
+      if (error.response?.data?.errors) {
+        form.setErrors(error.response.data.errors);
+      }
+
+      // Show error notification
+      if (options?.errorNotification) {
+        notifications.show({
+          title: options.errorNotification.title,
+          message:
+            error.response?.data?.message || options.errorNotification.fallback,
+          color: "red",
+          icon: <IconX size="1rem" />,
         });
       }
     },
@@ -132,30 +314,101 @@ export function useFormMutation<TData, TVariables>(
 ```tsx
 // shared/lib/stores/ui-store.ts
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { immer } from "zustand/middleware/immer";
 
 interface UIState {
   sidebarOpened: boolean;
-  theme: "light" | "dark";
-  toggleSidebar: () => void;
-  setTheme: (theme: "light" | "dark") => void;
+  colorScheme: "light" | "dark" | "auto";
+  locale: string;
+  notifications: {
+    enabled: boolean;
+    position: "top-right" | "top-left" | "bottom-right" | "bottom-left";
+  };
 }
 
-export const useUIStore = create<UIState>((set) => ({
+interface UIActions {
+  toggleSidebar: () => void;
+  setColorScheme: (scheme: UIState["colorScheme"]) => void;
+  setLocale: (locale: string) => void;
+  updateNotificationSettings: (
+    settings: Partial<UIState["notifications"]>
+  ) => void;
+  reset: () => void;
+}
+
+const initialState: UIState = {
   sidebarOpened: false,
-  theme: "light",
-  toggleSidebar: () =>
-    set((state) => ({ sidebarOpened: !state.sidebarOpened })),
-  setTheme: (theme) => set({ theme }),
-}));
+  colorScheme: "auto",
+  locale: "en",
+  notifications: {
+    enabled: true,
+    position: "top-right",
+  },
+};
+
+export const useUIStore = create<UIState & UIActions>()(
+  persist(
+    immer((set) => ({
+      ...initialState,
+
+      toggleSidebar: () =>
+        set((state) => {
+          state.sidebarOpened = !state.sidebarOpened;
+        }),
+
+      setColorScheme: (scheme) =>
+        set((state) => {
+          state.colorScheme = scheme;
+        }),
+
+      setLocale: (locale) =>
+        set((state) => {
+          state.locale = locale;
+        }),
+
+      updateNotificationSettings: (settings) =>
+        set((state) => {
+          Object.assign(state.notifications, settings);
+        }),
+
+      reset: () => set(initialState),
+    })),
+    {
+      name: "ui-store",
+      partialize: (state) => ({
+        colorScheme: state.colorScheme,
+        locale: state.locale,
+        notifications: state.notifications,
+      }),
+    }
+  )
+);
+
+// Selectors for better performance
+export const useSidebarOpened = () =>
+  useUIStore((state) => state.sidebarOpened);
+export const useColorScheme = () => useUIStore((state) => state.colorScheme);
+export const useLocale = () => useUIStore((state) => state.locale);
 ```
 
 ### API Service Standards
 
 ```tsx
 // shared/lib/client.ts
-import axios from "axios";
-import { normalizeAxiosError } from "./http-error";
+import axios, { type AxiosError, type AxiosResponse } from "axios";
+import { notifications } from "@mantine/notifications";
+import { IconX } from "@tabler/icons-react";
 
+// API Error Types
+export interface ApiError {
+  message: string;
+  code?: string;
+  status?: number;
+  errors?: Record<string, string[]>;
+}
+
+// Create axios instance
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || "/api",
   timeout: 10000,
@@ -167,101 +420,236 @@ export const api = axios.create({
 // Request interceptor
 api.interceptors.request.use(
   (config) => {
+    // Add auth token
     const token = localStorage.getItem("auth_token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+
+    // Add request ID for tracking
+    config.headers["X-Request-ID"] = crypto.randomUUID();
+
     return config;
   },
-  (error) => Promise.reject(normalizeAxiosError(error))
+  (error) => Promise.reject(error)
 );
 
 // Response interceptor
 api.interceptors.response.use(
-  (response) => response.data,
-  (error) => {
-    const normalizedError = normalizeAxiosError(error);
+  (response: AxiosResponse) => response.data,
+  (error: AxiosError<ApiError>) => {
+    const status = error.response?.status;
+    const data = error.response?.data;
 
-    // Handle auth errors globally
-    if (normalizedError.type === "auth") {
-      localStorage.removeItem("auth_token");
-      window.location.href = "/login";
+    // Handle different error types
+    switch (status) {
+      case 401:
+        // Unauthorized - redirect to login
+        localStorage.removeItem("auth_token");
+        window.location.href = "/login";
+        break;
+
+      case 403:
+        // Forbidden - show notification
+        notifications.show({
+          title: "Access Denied",
+          message:
+            data?.message || "You don't have permission to perform this action",
+          color: "red",
+          icon: <IconX size="1rem" />,
+        });
+        break;
+
+      case 422:
+        // Validation errors - let components handle
+        break;
+
+      case 500:
+        // Server error - show generic message
+        notifications.show({
+          title: "Server Error",
+          message: "Something went wrong on our end. Please try again later.",
+          color: "red",
+          icon: <IconX size="1rem" />,
+        });
+        break;
+
+      default:
+        // Network or other errors
+        if (!error.response) {
+          notifications.show({
+            title: "Network Error",
+            message: "Please check your internet connection and try again.",
+            color: "red",
+            icon: <IconX size="1rem" />,
+          });
+        }
     }
 
-    return Promise.reject(normalizedError);
+    return Promise.reject({
+      message: data?.message || error.message,
+      code: data?.code,
+      status,
+      errors: data?.errors,
+    } as ApiError);
   }
 );
+
+// Utility functions
+export const isApiError = (error: unknown): error is ApiError => {
+  return typeof error === "object" && error !== null && "message" in error;
+};
+
+export const getErrorMessage = (
+  error: unknown,
+  fallback = "An error occurred"
+): string => {
+  if (isApiError(error)) {
+    return error.message;
+  }
+  return fallback;
+};
 ```
 
 ### Form Handling Standards
 
 ```tsx
-// features/sample-form/ui/sample-form-feature.tsx
-import { useForm } from "@mantine/form";
-import { Modal, Stack, Button, Group } from "@mantine/core";
+// features/user-form/model/validation.ts
+import { z } from "zod";
+
+export const userFormSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  role: z.enum(["admin", "user", "manager"]),
+  bio: z.string().max(500, "Bio must be less than 500 characters").optional(),
+});
+
+export type UserFormData = z.infer<typeof userFormSchema>;
+
+export const initialFormValues: UserFormData = {
+  name: "",
+  email: "",
+  role: "user",
+  bio: "",
+};
+
+// features/user-form/ui/user-form-feature.tsx
+import { useForm, zodResolver } from "@mantine/form";
+import { Modal, Stack, Button, Group, LoadingOverlay } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { Trans } from "@lingui/macro";
 import { useFormMutation } from "@/shared/lib";
 import { FormField } from "@/shared/ui";
-import { validateSampleForm, initialFormValues } from "../model/validation";
+import {
+  userFormSchema,
+  initialFormValues,
+  type UserFormData,
+} from "../model/validation";
+import { createUser } from "../api/user-api";
 
-export function SampleFormFeature() {
+interface UserFormFeatureProps {
+  onSuccess?: (user: User) => void;
+}
+
+export function UserFormFeature({ onSuccess }: UserFormFeatureProps) {
   const [opened, { open, close }] = useDisclosure(false);
 
-  const form = useForm({
+  const form = useForm<UserFormData>({
     initialValues: initialFormValues,
-    validate: validateSampleForm,
+    validate: zodResolver(userFormSchema),
+    transformValues: (values) => ({
+      ...values,
+      bio: values.bio || undefined, // Convert empty string to undefined
+    }),
   });
 
-  const mutation = useFormMutation(
-    form,
-    async (values) => {
-      return api.post("/forms", values);
+  const mutation = useFormMutation(form, createUser, {
+    successNotification: {
+      title: "Success!",
+      message: "User created successfully",
     },
-    {
-      notifySuccess: {
-        title: "Success!",
-        message: "Form submitted successfully",
-      },
-      notifyError: {
-        title: "Error",
-        fallback: "Failed to submit form",
-      },
-      onSuccess: () => {
-        form.reset();
-        close();
-      },
-    }
-  );
+    errorNotification: {
+      title: "Error",
+      fallback: "Failed to create user",
+    },
+    invalidateQueries: [["users"]],
+    onSuccess: (user) => {
+      form.reset();
+      close();
+      onSuccess?.(user);
+    },
+  });
+
+  const handleSubmit = form.onSubmit((values) => {
+    mutation.mutate(values);
+  });
 
   return (
     <>
-      <Button onClick={open}>Open Form</Button>
+      <Button onClick={open}>
+        <Trans>Create User</Trans>
+      </Button>
 
-      <Modal opened={opened} onClose={close} title="Sample Form">
-        <form
-          onSubmit={form.onSubmit((values) => mutation.mutateAsync(values))}
-        >
-          <Stack>
+      <Modal
+        opened={opened}
+        onClose={close}
+        title={<Trans>Create New User</Trans>}
+        size="md"
+      >
+        <LoadingOverlay visible={mutation.isPending} />
+
+        <form onSubmit={handleSubmit}>
+          <Stack gap="md">
             <FormField
               type="text"
               name="name"
-              label="Name"
+              label="Full Name"
               form={form}
               required
+              placeholder="Enter full name"
             />
+
             <FormField
               type="email"
               name="email"
-              label="Email"
+              label="Email Address"
               form={form}
               required
+              placeholder="user@example.com"
             />
 
-            <Group justify="flex-end">
-              <Button variant="subtle" onClick={close}>
-                Cancel
+            <FormField
+              type="select"
+              name="role"
+              label="Role"
+              form={form}
+              required
+              data={[
+                { value: "user", label: "User" },
+                { value: "admin", label: "Administrator" },
+                { value: "manager", label: "Manager" },
+              ]}
+            />
+
+            <FormField
+              type="textarea"
+              name="bio"
+              label="Bio"
+              form={form}
+              placeholder="Optional bio..."
+              rows={3}
+            />
+
+            <Group justify="flex-end" mt="md">
+              <Button
+                variant="subtle"
+                onClick={close}
+                disabled={mutation.isPending}
+              >
+                <Trans>Cancel</Trans>
               </Button>
               <Button type="submit" loading={mutation.isPending}>
-                Submit
+                <Trans>Create User</Trans>
               </Button>
             </Group>
           </Stack>
@@ -270,6 +658,29 @@ export function SampleFormFeature() {
     </>
   );
 }
+
+// features/user-form/api/user-api.ts
+import { api } from "@/shared/lib/client";
+import type { UserFormData } from "../model/validation";
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  bio?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export async function createUser(data: UserFormData): Promise<User> {
+  return api.post("/users", data);
+}
+
+// features/user-form/index.ts (Public API)
+export { UserFormFeature } from "./ui/user-form-feature";
+export type { UserFormData } from "./model/validation";
+export type { User } from "./api/user-api";
 ```
 
 ## Environment Setup
