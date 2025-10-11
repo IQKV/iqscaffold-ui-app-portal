@@ -307,14 +307,11 @@ const userUpdateSchema = z
   );
 ```
 
-## 🧠 **State Management (Zustand)**
+## 🧠 **State Management**
 
-- Use `createStore(name, initializer)` from `src/shared/lib/store.ts`.
-  - `immer` and `subscribeWithSelector` are always enabled; DevTools is enabled only in development.
-  - Safe for SSR/tests: DevTools disabled in prod/SSR; persistence is skipped if no storage.
-- For persistence, wrap with `persist(config, { name, partialize, version, ... })` from `src/shared/lib/store-persistence.ts`.
-  - Storage auto-detection: uses `localStorage`/`sessionStorage` in browser, falls back to in-memory elsewhere.
-- Prefer narrow selectors for components. You can expose helpers like `pickFromStore(useStore, picker)` for focused slices.
+- Use **Tanstack Query** for server state management and caching
+- Leverage React's built-in state management (useState, useReducer, useContext) for local component state
+- For complex client-side state, consider using React Context with useReducer
 
 ## 🧪 **Testing Patterns**
 
@@ -549,16 +546,17 @@ Guidelines:
   - Needs invalidation, retries, background updates, pagination
   - Derives from HTTP/gRPC and can be refetched
 
-- Use **Zustand** when:
+- Use **React State** (useState, useReducer, useContext) when:
   - **Client-only UI state** (toggles, modals, ephemeral forms)
-  - Cross-component client state not suited for URL/query cache
-  - Requires persistence (local/session) or imperative updates
+  - Local component state that doesn't need to be shared
+  - Simple state management within component boundaries
 
-- Mixed cases:
-  - Query for server data + store only minimal UI state in Zustand
-  - Avoid duplicating server data in Zustand; keep source of truth in Query
+- Use **URL State** (nuqs, search params) when:
+  - State that should be shareable via URL
+  - Filters, pagination, search terms
+  - Navigation state that should persist across page reloads
 
-Rule of thumb: if it comes from the server, use Query; if it’s purely UI/process coordination, use Zustand.
+Rule of thumb: if it comes from the server, use Query; if it’s purely UI state, use React's built-in state management; if it should be shareable/bookmarkable, use URL state.
 
 ## 🧩 **Component Composition Guidelines**
 
@@ -567,7 +565,7 @@ Rule of thumb: if it comes from the server, use Query; if it’s purely UI/proce
   - Prefer co-located hooks inside containers; keep presentational components framework-agnostic.
 
 - **Selectors to minimize re-renders**:
-  - For Zustand stores, expose narrow selectors, e.g., `useNotifications()` rather than full store.
+  - For React state, use specific selectors and avoid passing entire objects as props.
   - For Query, select small data slices in components if needed.
 
 - **Composition over inheritance**:

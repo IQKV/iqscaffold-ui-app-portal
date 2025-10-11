@@ -12,7 +12,6 @@ This document serves as the main navigation point for all project documentation 
 
 - [Feature-Sliced Design (FSD) Architecture](./fsd-architecture.md) - Detailed explanation of our FSD implementation
 - [Public API Enforcement](./public-api-enforcement.md) - Guidelines for maintaining proper layer boundaries
-- [Zustand State Management Integration](./zustand-integration.md) - Guide to Zustand implementation within FSD
 
 ## Development Guidelines
 

@@ -29,14 +29,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Form validation integration with React Hook Form
   - Entity-level and feature-level validation patterns
 
-- **Zustand State Management Integration**
-  - Hybrid state management: Tanstack Query for server state, Zustand for client state
-  - FSD-compliant store organization across layers
-  - Automatic persistence for important state (auth session, user preferences)
-  - Integration hooks connecting Zustand stores with Tanstack Query
-  - UI state management (theme, modals, notifications, loading)
-  - Form state management with auto-save and validation
-  - Development tools and debugging utilities
+- **State Management Architecture**
+  - Tanstack Query for server state management and caching
+  - React built-in state management for local UI state
+  - URL state management with nuqs for shareable state
+  - FSD-compliant state organization across layers
 
 - **Routing Architecture**
   - Consolidated routing in pages layer

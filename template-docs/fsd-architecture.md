@@ -52,12 +52,7 @@ src/
 │   └── index.ts           # Widgets barrel
 ├── shared/                # Shared layer
 │   ├── lib/               # Utilities, helpers, and API clients
-│   │   ├── store.ts       # Zustand store utilities
-│   │   ├── store-persistence.ts  # Store persistence middleware
-│   │   └── store-devtools.ts     # Development utilities
-│   ├── model/             # Global state management
-│   │   ├── ui-store.ts    # Global UI state (theme, modals, notifications)
-│   │   └── app-settings-store.ts # App settings and preferences
+
 │   ├── types/             # Common types
 │   ├── ui/                # Reusable UI components
 │   ├── locales/           # Internationalization files
@@ -463,7 +458,7 @@ This routing architecture properly follows FSD principles by giving the pages la
 
 ## State Management Architecture
 
-This project uses a hybrid approach for state management:
+This project uses Tanstack Query for state management:
 
 ### Server State (Tanstack Query)
 
@@ -471,75 +466,9 @@ This project uses a hybrid approach for state management:
 - **Location**: Query hooks in entity and feature layers
 - **Examples**: User data, authentication tokens, API responses
 
-### Client State (Zustand)
-
-- **Purpose**: UI state, user preferences, form state, and session management
-- **Location**: Store files in appropriate FSD layers
-- **Examples**: Theme, sidebar state, modal management, form drafts
-
-### Store Organization by Layer
-
-#### Shared Layer Stores
-
-- `ui-store.ts`: Global UI state (theme, modals, notifications, loading)
-- `app-settings-store.ts`: User preferences and app configuration
-
-#### Entity Layer Stores
-
-- `auth/model/auth-store.ts`: Authentication session state and token management
-
-#### Feature Layer Stores
-
-- `auth/model/form-store.ts`: Form-specific state with validation and auto-save
-
-#### Process Layer Integration
-
-- `auth-session/model/auth-integration.ts`: Hooks that connect Zustand with Tanstack Query
-
 ### State Management Best Practices
 
-1. **Separation of Concerns**: Keep server state in Tanstack Query, client state in Zustand
-2. **Layer Compliance**: Store placement follows FSD layer rules
+1. **Server State Focus**: Use Tanstack Query for all server-related state management
+2. **Layer Compliance**: Query placement follows FSD layer rules
 3. **Selective Subscriptions**: Use specific selectors to avoid unnecessary re-renders
-4. **Persistence**: Important state is automatically persisted to localStorage
-5. **Integration**: Process layer provides hooks that coordinate between stores and queries
-
-### Example Usage
-
-```typescript
-// UI State Management
-import { useTheme, useNotifications } from '@/shared';
-
-function MyComponent() {
-  const theme = useTheme();
-  const { add: addNotification } = useNotifications();
-
-  return (
-    <div className={theme === 'dark' ? 'dark' : ''}>
-      <button onClick={() => addNotification({
-        type: 'success',
-        title: 'Success!',
-        message: 'Operation completed'
-      })}>
-        Show Notification
-      </button>
-    </div>
-  );
-}
-
-// Auth State Management
-import { useAuthSessionContext } from '@/processes/auth-session';
-import { LoginForm } from '@/features/authentication';
-
-function LoginComponent() {
-  const { isAuthenticated, user } = useAuthSessionContext();
-
-  if (isAuthenticated) {
-    return <div>Welcome, {user?.first_name}!</div>;
-  }
-
-  return <LoginForm />;
-}
-```
-
-For detailed information about Zustand integration, see [zusand-integration.md](./zusand-integration.md).
+4. **Caching Strategy**: Leverage Tanstack Query's built-in caching mechanisms
