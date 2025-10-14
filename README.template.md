@@ -92,7 +92,7 @@ Write about setting up the working environment for your project.
 - [Development Guide](template-docs/development-guide.md)
 - [Public API Enforcement](template-docs/public-api-enforcement.md)
 - [Template Features](template-docs/template-features.md)
-
+- [Zustand Integration](template-docs/zustand-integration.md)
 - [Deployment](template-docs/deployment.md)
 
 ## 🧩 Boilerplate Architecture

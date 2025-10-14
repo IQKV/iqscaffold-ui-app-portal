@@ -1,6 +1,7 @@
 # CLAUDE AI - Development Guidelines & Best Practices
 
 ## Table of Contents
+
 - [Overview](#overview)
 - [Feature-Sliced Design Architecture](#feature-sliced-design-architecture)
 - [React 19 Best Practices](#react-19-best-practices)
@@ -19,7 +20,8 @@
 
 ## Overview
 
-This document provides comprehensive development guidelines for building scalable React applications using modern tools and architectural patterns. The project leverages Feature-Sliced Design (FSD) methodology, React 19, TypeScript strict mode, and a carefully curated tech stack for optimal developer experience and application performance.
+This document provides comprehensive development guidelines for building scalable React applications using modern tools and architectural patterns. The project leverages Feature-Sliced
+Design (FSD) methodology, React 19, TypeScript strict mode, and a carefully curated tech stack for optimal developer experience and application performance.
 
 ### Key Principles
 
@@ -192,10 +194,12 @@ function UserProfilePage({ userId }: { userId: string }) {
   );
 }
 ```
+
 ### Custom Hooks
 
 - Extract complex logic into custom hooks for reusability and testability.
 - Name custom hooks with the `use` prefix according to React conventions.
+
 ```tsx
 // Custom hook example
 function useUserData(userId: string) {
@@ -210,6 +214,7 @@ useEffect(() => {
 return { user, loading, error };
 }
 ```
+
 ### Component Organization
 
 - Keep components focused on a single responsibility.
@@ -221,6 +226,7 @@ return { user, loading, error };
 - Use TypeScript interfaces for props instead of PropTypes.
 - Provide meaningful names for props and interfaces.
 - Use default props when applicable.
+
 ```tsx
 interface UserCardProps {
 name: string;
@@ -233,10 +239,12 @@ function UserCard({ name, email, role = 'User', onEdit }: UserCardProps) {
 // Component implementation
 }
 ```
+
 ### Event Handling
 
 - Use callbacks passed as props for component communication.
 - Name handler props with the `on` prefix and handler functions with `handle` prefix.
+
 ```tsx
 function ParentComponent() {
 const handleUserUpdate = (userData: UserData) => {
@@ -246,12 +254,14 @@ const handleUserUpdate = (userData: UserData) => {
 return <UserForm onSubmit={handleUserUpdate} />;
 }
 ```
+
 ## TanStack Router
 
 ### File-Based Routing
 
 - Use the file-based routing system of TanStack Router for organized route definition.
 - Place route files in the `src/routes` directory following the TanStack Router conventions.
+
 ```tsx
 // src/routes/users.tsx
 import { createFileRoute } from "@tanstack/react-router";
@@ -264,10 +274,12 @@ function Users() {
 // Component implementation
 }
 ```
+
 ### Route Parameters
 
 - Define route parameters using TanStack Router's parameter syntax.
 - Validate and type parameters using TypeScript and TanStack Router's validation features.
+
 ```tsx
 // src/routes/users/$userId.tsx
 import { createFileRoute } from "@tanstack/react-router";
@@ -285,10 +297,12 @@ const { userId } = Route.useParams();
 // Component implementation using userId
 }
 ```
+
 ### Route Loaders
 
 - Use route loaders to prefetch data needed for a route.
 - Handle loading states and errors gracefully.
+
 ```tsx
 export const Route = createFileRoute("/users/$userId")({
 loader: ({ params }) => {
@@ -300,10 +314,12 @@ queryFn: () => fetchUser(params.userId),
 component: UserDetail,
 });
 ```
+
 ### Nested Routing
 
 - Use nested routes for hierarchical UI structures.
 - Share layouts between related routes using parent routes.
+
 ```tsx
 // src/routes/users/__layout.tsx
 import { createFileRoute, Outlet } from "@tanstack/react-router";
@@ -323,12 +339,14 @@ return (
 );
 }
 ```
+
 ## TanStack Query
 
 ### Query Keys
 
 - Use structured and consistent query keys for caching and invalidation.
 - Organize query keys hierarchically for related data.
+
 ```tsx
 // Good query key structure
 const userKey = ["users", userId];
@@ -340,10 +358,12 @@ queryKey: userKey,
 queryFn: () => fetchUser(userId),
 });
 ```
+
 ### Query Functions
 
 - Isolate API calls in separate functions outside of the query hook.
 - Handle errors and edge cases in query functions.
+
 ```tsx
 // API function
 async function fetchUser(userId: string): Promise<User> {
@@ -360,10 +380,12 @@ queryKey: ["users", userId],
 queryFn: () => fetchUser(userId),
 });
 ```
+
 ### Data Mutations
 
 - Use mutations for data modification operations.
 - Update the cache after mutations using `invalidateQueries` or `setQueryData`.
+
 ```tsx
 const updateUserMutation = useMutation({
 mutationFn: updateUser,
@@ -376,10 +398,12 @@ queryClient.invalidateQueries({ queryKey: ["users", variables.id] });
 },
 });
 ```
+
 ### Query Options
 
 - Configure appropriate staleTime and cacheTime based on data volatility.
 - Use retry and retryDelay options for transient failures.
+
 ```tsx
 const { data } = useQuery({
 queryKey: ["users"],
@@ -390,10 +414,12 @@ retry: 3,
 retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
 });
 ```
+
 ### Global Query Configuration
 
 - Set up sensible global defaults in the QueryClient configuration.
 - Configure global error handling and retry logic.
+
 ```tsx
 // src/lib/query-client.ts
 import { QueryClient } from "@tanstack/react-query";
@@ -412,12 +438,14 @@ retry: 1,
 },
 });
 ```
+
 ## State Management
 
 ### Component State
 
 - Use `useState` for simple component-level state.
 - Consider using `useReducer` for complex state logic within a component.
+
 ```tsx
 // Using useState
 const [users, setUsers] = useState<User[]>([]);
@@ -425,10 +453,12 @@ const [users, setUsers] = useState<User[]>([]);
 // Using useReducer for complex state
 const [state, dispatch] = useReducer(userReducer, initialState);
 ```
+
 ### Context API
 
 - Use React Context for state that needs to be accessed by multiple components.
 - Keep context providers focused on specific concerns.
+
 ```tsx
 // src/contexts/AuthContext.tsx
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -453,6 +483,7 @@ throw new Error("useAuth must be used within an AuthProvider");
 return context;
 }
 ```
+
 ### Global State
 
 - Leverage TanStack Query for server state management.
@@ -729,16 +760,17 @@ export const userFormSchema = z.object({
 ### Atomic Design Methodology
 
 - Organize components following atomic design principles:
-  - **Atoms**: Basic building blocks (buttons, inputs, icons)
-  - **Molecules**: Groups of atoms (form fields, card headers)
-  - **Organisms**: Complex UI sections (forms, data tables)
-  - **Templates**: Page layouts
-  - **Pages**: Specific instances of templates with real data
+    - **Atoms**: Basic building blocks (buttons, inputs, icons)
+    - **Molecules**: Groups of atoms (form fields, card headers)
+    - **Organisms**: Complex UI sections (forms, data tables)
+    - **Templates**: Page layouts
+    - **Pages**: Specific instances of templates with real data
 
 ### Component API Design
 
 - Keep component APIs intuitive and consistent.
 - Use composition over complex prop APIs.
+
 ```tsx
 // Good: Using composition
 <Card>
@@ -758,10 +790,12 @@ footerButtons={[{ label: 'Edit', onClick: handleEdit }]}
 user={user}
 />
 ```
+
 ### Error Boundaries
 
 - Implement error boundaries to prevent UI crashes.
 - Provide meaningful fallback UIs.
+
 ```tsx
 // src/components/ErrorBoundary.tsx
 import { Component, ErrorInfo, ReactNode } from 'react';
@@ -802,6 +836,7 @@ return this.props.fallback || <div>Something went wrong.</div>;
 
 export default ErrorBoundary;
 ```
+
 ## TypeScript Strict Mode
 
 ### Strict Type Configuration
@@ -879,10 +914,12 @@ export interface UserCardProps {
   onDelete?: (userId: string) => void;
 }
 ```
+
 ### Type Safety
 
 - Avoid using `any` type, use proper typing or `unknown` when necessary.
 - Use type narrowing and type guards for runtime type checking.
+
 ```tsx
 // Type narrowing example
 function processData(data: unknown): string {
@@ -897,9 +934,11 @@ return data.join(', ').toUpperCase();
 throw new Error('Invalid data format');
 }
 ```
+
 ### Generic Components
 
 - Use generics for components that work with different data types.
+
 ```tsx
 interface DataTableProps<T> {
 data: T[];
@@ -915,6 +954,7 @@ function DataTable<T extends { id: string }>({ data, columns, onRowClick }: Data
 // Component implementation
 }
 ```
+
 ## Internationalization (i18n)
 
 ### Lingui Setup and Usage
@@ -1080,6 +1120,7 @@ pnpm messages:compile
 
 - Use `useMemo` for expensive calculations.
 - Use `useCallback` for function references passed to child components.
+
 ```tsx
 // Memoize expensive calculations
 const sortedUsers = useMemo(() => {
@@ -1091,10 +1132,12 @@ const handleUserEdit = useCallback((userId: string) => {
 // Edit user logic
 }, [/* dependencies */]);
 ```
+
 ### React.memo
 
 - Use `React.memo` for components that render often but with the same props.
 - Implement custom equality functions for complex prop objects.
+
 ```tsx
 const UserCard = React.memo(function UserCard({ user, onEdit }: UserCardProps) {
 // Component implementation
@@ -1111,10 +1154,12 @@ prevProps.user.lastUpdated === nextProps.user.lastUpdated;
 }
 );
 ```
+
 ### Code Splitting
 
 - Use dynamic imports for route-based code splitting.
 - Lazy load components that are not immediately needed.
+
 ```tsx
 // Dynamic import with React.lazy
 const Settings = React.lazy(() => import('./pages/Settings'));
@@ -1124,10 +1169,12 @@ const Settings = React.lazy(() => import('./pages/Settings'));
 <Settings />
 </Suspense>
 ```
+
 ### Virtual Lists
 
 - Use virtualization for long lists to improve performance.
 - Consider libraries like `react-virtual` or `react-window`.
+
 ```tsx
 // Example with react-virtual
 function UserList({ users }: { users: User[] }) {
@@ -1160,12 +1207,14 @@ transform: `translateY(${row.start}px)`,
 );
 }
 ```
+
 ## Testing Approach
 
 ### Unit Testing
 
 - Test individual components, hooks, and utility functions.
 - Focus on behavior rather than implementation details.
+
 ```tsx
 // Button component test
 test('Button triggers onClick when clicked', () => {
@@ -1177,10 +1226,12 @@ userEvent.click(screen.getByText('Click Me'));
 expect(handleClick).toHaveBeenCalledTimes(1);
 });
 ```
+
 ### Integration Testing
 
 - Test component integration and interactions.
 - Mock external dependencies using tools like MSW.
+
 ```tsx
 // User list integration test
 test('User list displays users from API', async () => {
@@ -1203,10 +1254,12 @@ expect(screen.getByText('John Doe')).toBeInTheDocument();
 expect(screen.getByText('Jane Smith')).toBeInTheDocument();
 });
 ```
+
 ### End-to-End Testing
 
 - Use Playwright for critical user flows.
 - Focus on key user journeys rather than exhaustive testing.
+
 ```typescript
 // Playwright E2E test example
 test('User can log in and access dashboard', async ({ page }) => {
@@ -1221,10 +1274,12 @@ await expect(page).toHaveURL('/dashboard');
 await expect(page.getByText('Welcome back')).toBeVisible();
 });
 ```
+
 ### Component Stories
 
 - Create Storybook stories for component variations.
 - Use stories for visual testing and documentation.
+
 ```tsx
 // UserCard.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react';
@@ -1263,6 +1318,7 @@ status: 'active',
 },
 };
 ```
+
 ## Mantine UI Integration
 
 ### Theme Configuration
@@ -1502,6 +1558,7 @@ function UserProfile({ user }: { user: User }) {
 
 - Use Mantine components for consistent UI.
 - Follow Mantine's theming and customization approach.
+
 ```tsx
 // Configure Mantine theme
 const theme = createTheme({
@@ -1545,10 +1602,12 @@ Role: <Badge color={user.role === 'Admin' ? 'blue' : 'gray'}>{user.role}</Badge>
 );
 }
 ```
+
 ### CSS Approach
 
 - Use Mantine's styling system for component-specific styles.
 - Use global CSS variables for design tokens.
+
 ```tsx
 // Using Mantine's styling
 function CustomComponent() {
@@ -1566,10 +1625,12 @@ Content
 );
 }
 ```
+
 ### Theme Consistency
 
 - Maintain consistent spacing, colors, and typography using theme tokens.
 - Avoid hardcoded values for colors, spacing, and other design properties.
+
 ```tsx
 // Good: Using theme tokens
 <Box p="md" m="sm" bg="gray.1" style={{ borderRadius: theme.radius.md }}>
@@ -1577,6 +1638,7 @@ Content
 // Avoid: Hardcoded values
 <Box style={{ padding: '16px', margin: '8px', backgroundColor: '#f9f9f9', borderRadius: '8px' }}>
 ```
+
 ## Accessibility Guidelines
 
 ### WCAG 2.1 AA Compliance
@@ -1853,7 +1915,6 @@ apiClient.interceptors.response.use(
 export default apiClient;
 ```
 
-
 ### API Services
 
 - Create service modules for different API domains.
@@ -1888,7 +1949,6 @@ export async function deleteUser(id: string): Promise<void> {
   await apiClient.delete(`/users/${id}`);
 }
 ```
-
 
 ### Error Handling
 
@@ -1937,7 +1997,6 @@ function useApiError() {
 }
 ```
 
-
 ## Project Structure
 
 ### Directory Organization
@@ -1960,7 +2019,6 @@ src/
 ├── types/              # TypeScript type definitions
 └── utils/              # Utility functions
 ```
-
 
 ### Naming Conventions
 
@@ -2147,24 +2205,28 @@ Before merging, ensure:
 ### Code Review Checklist
 
 #### Architecture & Design
+
 - [ ] Follows FSD layer boundaries
 - [ ] Uses public APIs only
 - [ ] Proper separation of concerns
 - [ ] No circular dependencies
 
 #### Code Quality
+
 - [ ] TypeScript strict mode compliance
 - [ ] Proper error handling
 - [ ] Performance optimizations applied
 - [ ] Accessibility requirements met
 
 #### Testing
+
 - [ ] Unit tests cover main functionality
 - [ ] Integration tests for complex flows
 - [ ] Storybook stories for UI components
 - [ ] E2E tests for critical paths
 
 #### Documentation
+
 - [ ] Code is self-documenting
 - [ ] Complex logic has comments
 - [ ] Public APIs are documented
@@ -2205,31 +2267,37 @@ This comprehensive guide ensures consistent, high-quality development practices 
 Before submitting code for review, ensure the following:
 
 1. **Code Quality**
-  - Code follows the patterns and practices outlined in this document
-  - No TypeScript errors or warnings
-  - ESLint and Prettier rules are satisfied
-  - No unnecessary console logs or comments
+
+- Code follows the patterns and practices outlined in this document
+- No TypeScript errors or warnings
+- ESLint and Prettier rules are satisfied
+- No unnecessary console logs or comments
 
 2. **Testing**
-  - New components have appropriate tests
-  - Test coverage is maintained or improved
-  - All tests pass
+
+- New components have appropriate tests
+- Test coverage is maintained or improved
+- All tests pass
 
 3. **Performance**
-  - No obvious performance issues (unnecessary re-renders, etc.)
-  - Heavy operations are memoized where appropriate
+
+- No obvious performance issues (unnecessary re-renders, etc.)
+- Heavy operations are memoized where appropriate
 
 4. **Accessibility**
-  - Components use semantic HTML
-  - Interactive elements are keyboard accessible
-  - Proper ARIA attributes are used where needed
+
+- Components use semantic HTML
+- Interactive elements are keyboard accessible
+- Proper ARIA attributes are used where needed
 
 5. **Security**
-  - No sensitive data exposed in client code
-  - User inputs are properly validated
-  - Authentication and authorization checks are in place
+
+- No sensitive data exposed in client code
+- User inputs are properly validated
+- Authentication and authorization checks are in place
 
 6. **Documentation**
-  - Code is self-documenting where possible
-  - Complex logic has explanatory comments
-  - New components have Storybook stories
+
+- Code is self-documenting where possible
+- Complex logic has explanatory comments
+- New components have Storybook stories

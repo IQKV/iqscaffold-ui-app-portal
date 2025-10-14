@@ -2,7 +2,8 @@
 
 ## Project Overview
 
-This is a modern React application built with Feature-Sliced Design (FSD) architecture, focusing on maintainability, scalability, and developer experience. The project uses React 19, TypeScript, Mantine UI v8, and a comprehensive toolchain for building high-performance Single Page Applications.
+This is a modern React application built with Feature-Sliced Design (FSD) architecture, focusing on maintainability, scalability, and developer experience. The project uses React 19,
+TypeScript, Mantine UI v8, and a comprehensive toolchain for building high-performance Single Page Applications.
 
 **Key Characteristics:**
 
@@ -33,6 +34,7 @@ This is a modern React application built with Feature-Sliced Design (FSD) archit
 
 - **TanStack Router v1** - Type-safe routing with code splitting
 - **TanStack Query v5** - Server state management and caching
+- **Zustand** - Lightweight client state management
 - **nuqs** - Type-safe URL search params state management
 
 ### Data & API
@@ -308,11 +310,13 @@ export function useFormMutation<TData, TVariables>(
 }
 ```
 
-#### React Context for Client State
+#### Zustand for Client State
 
 ```tsx
-// shared/lib/contexts/ui-context.tsx
-import { createContext, useContext, useReducer, ReactNode } from "react";
+// shared/lib/stores/ui-store.ts
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { immer } from "zustand/middleware/immer";
 
 interface UIState {
   sidebarOpened: boolean;
@@ -324,12 +328,15 @@ interface UIState {
   };
 }
 
-type UIAction =
-  | { type: "TOGGLE_SIDEBAR" }
-  | { type: "SET_COLOR_SCHEME"; payload: UIState["colorScheme"] }
-  | { type: "SET_LOCALE"; payload: string }
-  | { type: "UPDATE_NOTIFICATIONS"; payload: Partial<UIState["notifications"]> }
-  | { type: "RESET" };
+interface UIActions {
+  toggleSidebar: () => void;
+  setColorScheme: (scheme: UIState["colorScheme"]) => void;
+  setLocale: (locale: string) => void;
+  updateNotificationSettings: (
+    settings: Partial<UIState["notifications"]>
+  ) => void;
+  reset: () => void;
+}
 
 const initialState: UIState = {
   sidebarOpened: false,
@@ -341,52 +348,48 @@ const initialState: UIState = {
   },
 };
 
-function uiReducer(state: UIState, action: UIAction): UIState {
-  switch (action.type) {
-    case "TOGGLE_SIDEBAR":
-      return { ...state, sidebarOpened: !state.sidebarOpened };
-    case "SET_COLOR_SCHEME":
-      return { ...state, colorScheme: action.payload };
-    case "SET_LOCALE":
-      return { ...state, locale: action.payload };
-    case "UPDATE_NOTIFICATIONS":
-      return {
-        ...state,
-        notifications: { ...state.notifications, ...action.payload },
-      };
-    case "RESET":
-      return initialState;
-    default:
-      return state;
-  }
-}
+export const useUIStore = create<UIState & UIActions>()(
+  persist(
+    immer((set) => ({
+      ...initialState,
 
-const UIContext = createContext<{
-  state: UIState;
-  dispatch: React.Dispatch<UIAction>;
-} | null>(null);
+      toggleSidebar: () =>
+        set((state) => {
+          state.sidebarOpened = !state.sidebarOpened;
+        }),
 
-export function UIProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(uiReducer, initialState);
+      setColorScheme: (scheme) =>
+        set((state) => {
+          state.colorScheme = scheme;
+        }),
 
-  return (
-    <UIContext.Provider value={{ state, dispatch }}>
-      {children}
-    </UIContext.Provider>
-  );
-}
+      setLocale: (locale) =>
+        set((state) => {
+          state.locale = locale;
+        }),
 
-export function useUI() {
-  const context = useContext(UIContext);
-  if (!context) {
-    throw new Error("useUI must be used within UIProvider");
-  }
-  return context;
-}
+      updateNotificationSettings: (settings) =>
+        set((state) => {
+          Object.assign(state.notifications, settings);
+        }),
 
-// Convenience hooks
-export const useSidebarOpened = () => useUI().state.sidebarOpened;
-export const useColorScheme = () => useUI().state.colorScheme;
+      reset: () => set(initialState),
+    })),
+    {
+      name: "ui-store",
+      partialize: (state) => ({
+        colorScheme: state.colorScheme,
+        locale: state.locale,
+        notifications: state.notifications,
+      }),
+    }
+  )
+);
+
+// Selectors for better performance
+export const useSidebarOpened = () =>
+  useUIStore((state) => state.sidebarOpened);
+export const useColorScheme = () => useUIStore((state) => state.colorScheme);
 export const useLocale = () => useUIStore((state) => state.locale);
 ```
 
