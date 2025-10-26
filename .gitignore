@@ -33,3 +33,7 @@ dist-ssr
 
 CLAUDE.local.md
 .release-it.json
+
+/.playwright/
+/playwright-report/
+/test-results/

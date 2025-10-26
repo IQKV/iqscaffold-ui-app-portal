@@ -58,6 +58,17 @@ src/
 | `pnpm lint`       | Lint code                |
 | `pnpm type-check` | Check TypeScript types   |
 
+## 🧪 E2E Testing (Playwright)
+
+- Install browsers (first time): `pnpm playwright:install`
+- Run tests: `pnpm e2e`
+- UI mode: `pnpm e2e:ui`
+- Headed: `pnpm e2e:headed`
+- Report: `pnpm e2e:report`
+
+The dev server starts automatically via `webServer` in `playwright.config.ts`.
+CI runs E2E on PRs/pushes via `.github/workflows/e2e-playwright.yml`.
+
 ## 📚 Key Technologies
 
 - **React 19** - Latest React with concurrent features

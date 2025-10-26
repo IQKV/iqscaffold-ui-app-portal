@@ -5,10 +5,7 @@
 > - Quick-start documentation with an extraordinary README structure.
 > - Manage issues with **20 issue labels**.
 > - Make _community healthier_ with all the guides like code of conduct, contributing, support, security...
-> - Learn more with
-
-    the [official GitHub guide on creating repositories from a template](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
-
+> - Learn more with the [official GitHub guide on creating repositories from a template](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
 > - To start using it, click **[Use this template](https://github.com/IQKV/standard-mantine-ui-project-layout/generate)** to create your new repository.
 
 ---
@@ -42,8 +39,8 @@ React + TypeScript + Vite + TanStack Router + Mantine UI Template
 
 - 🔄 **TanStack Router** - Type-safe routing with code splitting and search params
 - 🔄 **TanStack Query** - Powerful data synchronization and caching
-- 🔄 **Axiosb** - Promise-based HTTP client for API calls
-- 🔍 **GDraphQL Request** - Lightweight GraphQL client
+- 🔄 **Axios** - Promise-based HTTP client for API calls
+- 🔍 **GraphQL Request** - Lightweight GraphQL client
 - ✅ **React Hook Form + Zod** - Type-safe form validation and management
 - 🍪 **JS Cookie** - Simple cookie management
 - 🔗 **nuqs** - Type-safe URL search params state management
@@ -161,7 +158,7 @@ After creating your project from this template, you'll want to customize it:
 #### 2. Customize Branding
 
 - [ ] Update the app title in `src/pages/__root.tsx`
-- [ ] Modify the theme in `src/theme.ts` with your brand colors
+- [ ] Modify the theme in `src/app/theme.ts` with your brand colors
 - [ ] Replace favicon and other icons in `public/` directory
 - [ ] Update meta tags in `index.html`
 
@@ -173,7 +170,7 @@ After creating your project from this template, you'll want to customize it:
 
 #### 4. Remove Template Examples (Optional)
 
-- [ ] Remove or modify `src/components/SampleComponents.tsx`
+- [ ] Remove or modify `src/features/sample-form`
 - [ ] Update the home page content in `src/routes/index.tsx`
 - [ ] Customize the about page in `src/routes/about.tsx`
 - [ ] Remove template-specific Storybook stories
@@ -186,27 +183,32 @@ After creating your project from this template, you'll want to customize it:
 
 ### 📃 Available Scripts
 
-| Command                 | Description                                |
-| ----------------------- | ------------------------------------------ |
-| `pnpm dev`              | Start development server                   |
-| `pnpm build`            | Build for production                       |
-| `pnpm preview`          | Preview production build                   |
-| `pnpm test`             | Run unit tests with Vitest                 |
-| `pnpm test:ui`          | Run tests with UI interface                |
-| `pnpm test:coverage`    | Run tests with coverage report             |
-| `pnpm e2e`              | Run end-to-end tests with Playwright       |
-| `pnpm e2e:ui`           | Run e2e tests with UI interface            |
-| `pnpm storybook`        | Start Storybook development server         |
-| `pnpm storybook:build`  | Build Storybook for production             |
-| `pnpm lint`             | Lint code with ESLint                      |
-| `pnpm lint:fix`         | Fix linting issues automatically           |
-| `pnpm lint:stylelint`   | Lint CSS/SCSS files                        |
-| `pnpm prettier:check`   | Check code formatting                      |
-| `pnpm prettier:write`   | Format code with Prettier                  |
-| `pnpm type-check`       | Check TypeScript types                     |
-| `pnpm messages:extract` | Extract i18n messages                      |
-| `pnpm messages:compile` | Compile i18n messages                      |
-| `pnpm release`          | Automate versioning and package publishing |
+| Command                   | Description                                |
+| ------------------------- | ------------------------------------------ |
+| `pnpm dev`                | Start development server                   |
+| `pnpm build`              | Build for production                       |
+| `pnpm preview`            | Preview production build                   |
+| `pnpm test`               | Run unit tests with Vitest                 |
+| `pnpm test:ui`            | Run tests with UI interface                |
+| `pnpm test:coverage`      | Run tests with coverage report             |
+| `pnpm e2e`                | Run end-to-end tests with Playwright       |
+| `pnpm e2e:ui`             | Run e2e tests with UI interface            |
+| `pnpm e2e:headed`         | Run e2e tests in headed mode               |
+| `pnpm e2e:report`         | Open last Playwright HTML report           |
+| `pnpm e2e:update`         | Update Playwright snapshots                |
+| `pnpm e2e:debug`          | Debug e2e tests (PWDEBUG)                  |
+| `pnpm playwright:install` | Install Playwright browsers                |
+| `pnpm storybook`          | Start Storybook development server         |
+| `pnpm storybook:build`    | Build Storybook for production             |
+| `pnpm lint`               | Lint code with ESLint                      |
+| `pnpm lint:fix`           | Fix linting issues automatically           |
+| `pnpm lint:stylelint`     | Lint CSS/SCSS files                        |
+| `pnpm prettier:check`     | Check code formatting                      |
+| `pnpm prettier:write`     | Format code with Prettier                  |
+| `pnpm type-check`         | Check TypeScript types                     |
+| `pnpm messages:extract`   | Extract i18n messages                      |
+| `pnpm messages:compile`   | Compile i18n messages                      |
+| `pnpm release`            | Automate versioning and package publishing |
 
 ### 🏗️ **Feature-Sliced Design Architecture**
 
@@ -241,6 +243,17 @@ This project includes Cursor AI IDE rules for enhanced development experience:
 The rules are located in `.cursor/rules/` directory and are automatically applied when using Cursor IDE.
 
 ---
+
+## 🧪 E2E Testing (Playwright)
+
+- Install browsers (first time): `pnpm playwright:install`
+- Run tests: `pnpm e2e`
+- UI mode: `pnpm e2e:ui`
+- Headed: `pnpm e2e:headed`
+- Report: `pnpm e2e:report`
+
+The dev server is auto-started by Playwright via `webServer` in `playwright.config.ts`.
+CI runs Playwright on PRs/pushes via `.github/workflows/e2e-playwright.yml`.
 
 ## 📆 Changelog
 
