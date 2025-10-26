@@ -10,10 +10,10 @@ test.describe("App smoke", () => {
       page.getByRole("heading", { name: "Welcome to Mantine UI Template" })
     ).toBeVisible();
 
-    await expect(page.getByText("A modern React template"))
-      .toBeVisible();
+    await expect(page.getByText("A modern React template")).toBeVisible();
 
-    await expect(page.getByRole("button", { name: "Show Notification" }))
-      .toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Show Notification" })
+    ).toBeVisible();
   });
 });
