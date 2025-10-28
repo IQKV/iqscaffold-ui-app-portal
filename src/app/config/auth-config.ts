@@ -1,5 +1,3 @@
-import { getConfig } from "./index";
-
 export interface AuthEndpoints {
   login: string;
   signup: string;
@@ -34,8 +32,9 @@ const DEFAULT_APP_DOMAIN = "https://app.gripday.com";
 
 // Build auth configuration from environment variables with fallbacks
 const buildAuthConfig = (): AuthConfig => {
-  const authDomain = getConfig("VITE_AUTH_DOMAIN_AUTH", DEFAULT_AUTH_DOMAIN);
-  const appDomain = getConfig("VITE_AUTH_DOMAIN_APP", DEFAULT_APP_DOMAIN);
+  const authDomain =
+    import.meta.env.VITE_AUTH_DOMAIN_AUTH ?? DEFAULT_AUTH_DOMAIN;
+  const appDomain = import.meta.env.VITE_AUTH_DOMAIN_APP ?? DEFAULT_APP_DOMAIN;
 
   return {
     endpoints: {
@@ -53,13 +52,15 @@ const buildAuthConfig = (): AuthConfig => {
       refreshTokenKey: "refreshToken",
     },
     redirects: {
-      afterLogin: getConfig("VITE_AUTH_REDIRECT_AFTER_LOGIN", appDomain!),
-      afterLogout: getConfig("VITE_AUTH_REDIRECT_AFTER_LOGOUT", authDomain!),
-      afterSignup: getConfig("VITE_AUTH_REDIRECT_AFTER_SIGNUP", authDomain!),
+      afterLogin: import.meta.env.VITE_AUTH_REDIRECT_AFTER_LOGIN ?? appDomain,
+      afterLogout:
+        import.meta.env.VITE_AUTH_REDIRECT_AFTER_LOGOUT ?? authDomain,
+      afterSignup:
+        import.meta.env.VITE_AUTH_REDIRECT_AFTER_SIGNUP ?? authDomain,
     },
     domains: {
-      auth: authDomain!,
-      app: appDomain!,
+      auth: authDomain,
+      app: appDomain,
     },
   };
 };

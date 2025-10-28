@@ -25,6 +25,7 @@ import {
   DataTable,
   useConfirmationModal,
   type DataTableColumn,
+  ProtectedRoute,
 } from "@/shared/ui";
 import { notificationService } from "@/shared/lib";
 
@@ -176,161 +177,163 @@ function ExamplesPage() {
   };
 
   return (
-    <Container size="xl">
-      <Stack gap="xl">
-        <div>
-          <Title order={1} mb="md">
-            Component Examples
-          </Title>
-          <Text c="dimmed">
-            Explore the various components and features available in this
-            template
-          </Text>
-        </div>
+    <ProtectedRoute>
+      <Container size="xl">
+        <Stack gap="xl">
+          <div>
+            <Title order={1} mb="md">
+              Component Examples
+            </Title>
+            <Text c="dimmed">
+              Explore the various components and features available in this
+              template
+            </Text>
+          </div>
 
-        <Grid>
-          <Grid.Col span={{ base: 12, md: 4 }}>
-            <Card shadow="sm" padding="lg" radius="md" withBorder h="100%">
-              <Group mb="md">
-                <IconCode size="1.5rem" color="var(--mantine-color-blue-6)" />
-                <Title order={3}>Forms</Title>
-              </Group>
-              <Text size="sm" c="dimmed" mb="md">
-                Reusable form components with validation, built using Mantine
-                Form and custom validation rules.
-              </Text>
-              <Badge color="blue" variant="light">
-                Interactive
-              </Badge>
-            </Card>
-          </Grid.Col>
+          <Grid>
+            <Grid.Col span={{ base: 12, md: 4 }}>
+              <Card shadow="sm" padding="lg" radius="md" withBorder h="100%">
+                <Group mb="md">
+                  <IconCode size="1.5rem" color="var(--mantine-color-blue-6)" />
+                  <Title order={3}>Forms</Title>
+                </Group>
+                <Text size="sm" c="dimmed" mb="md">
+                  Reusable form components with validation, built using Mantine
+                  Form and custom validation rules.
+                </Text>
+                <Badge color="blue" variant="light">
+                  Interactive
+                </Badge>
+              </Card>
+            </Grid.Col>
 
-          <Grid.Col span={{ base: 12, md: 4 }}>
-            <Card shadow="sm" padding="lg" radius="md" withBorder h="100%">
-              <Group mb="md">
-                <IconDatabase
-                  size="1.5rem"
-                  color="var(--mantine-color-green-6)"
-                />
-                <Title order={3}>Data Tables</Title>
-              </Group>
-              <Text size="sm" c="dimmed" mb="md">
-                Sortable, filterable data tables with pagination and custom cell
-                rendering.
-              </Text>
-              <Badge color="green" variant="light">
-                Functional
-              </Badge>
-            </Card>
-          </Grid.Col>
+            <Grid.Col span={{ base: 12, md: 4 }}>
+              <Card shadow="sm" padding="lg" radius="md" withBorder h="100%">
+                <Group mb="md">
+                  <IconDatabase
+                    size="1.5rem"
+                    color="var(--mantine-color-green-6)"
+                  />
+                  <Title order={3}>Data Tables</Title>
+                </Group>
+                <Text size="sm" c="dimmed" mb="md">
+                  Sortable, filterable data tables with pagination and custom
+                  cell rendering.
+                </Text>
+                <Badge color="green" variant="light">
+                  Functional
+                </Badge>
+              </Card>
+            </Grid.Col>
 
-          <Grid.Col span={{ base: 12, md: 4 }}>
-            <Card shadow="sm" padding="lg" radius="md" withBorder h="100%">
-              <Group mb="md">
-                <IconPalette
-                  size="1.5rem"
-                  color="var(--mantine-color-orange-6)"
-                />
-                <Title order={3}>UI Components</Title>
-              </Group>
-              <Text size="sm" c="dimmed" mb="md">
-                Confirmation modals, notifications, loading states, and error
-                boundaries.
-              </Text>
-              <Badge color="orange" variant="light">
-                Reusable
-              </Badge>
-            </Card>
-          </Grid.Col>
-        </Grid>
+            <Grid.Col span={{ base: 12, md: 4 }}>
+              <Card shadow="sm" padding="lg" radius="md" withBorder h="100%">
+                <Group mb="md">
+                  <IconPalette
+                    size="1.5rem"
+                    color="var(--mantine-color-orange-6)"
+                  />
+                  <Title order={3}>UI Components</Title>
+                </Group>
+                <Text size="sm" c="dimmed" mb="md">
+                  Confirmation modals, notifications, loading states, and error
+                  boundaries.
+                </Text>
+                <Badge color="orange" variant="light">
+                  Reusable
+                </Badge>
+              </Card>
+            </Grid.Col>
+          </Grid>
 
-        <Card shadow="sm" padding="lg" radius="md" withBorder>
-          <Title order={3} mb="md">
-            Sample Form Feature
-          </Title>
-          <Text size="sm" c="dimmed" mb="md">
-            This demonstrates a complete feature implementation following
-            Feature-Sliced Design principles.
-          </Text>
-          <SampleFormFeature />
-        </Card>
+          <Card shadow="sm" padding="lg" radius="md" withBorder>
+            <Title order={3} mb="md">
+              Sample Form Feature
+            </Title>
+            <Text size="sm" c="dimmed" mb="md">
+              This demonstrates a complete feature implementation following
+              Feature-Sliced Design principles.
+            </Text>
+            <SampleFormFeature />
+          </Card>
 
-        <Card shadow="sm" padding="lg" radius="md" withBorder>
-          <Group justify="space-between" mb="md">
-            <div>
-              <Title order={3}>Data Table Example</Title>
-              <Text size="sm" c="dimmed">
-                Interactive data table with sorting, actions, and custom
-                rendering
-              </Text>
-            </div>
-            <Button
-              onClick={() =>
-                notificationService.info({ message: "Add new user clicked" })
-              }
-            >
-              Add User
-            </Button>
-          </Group>
+          <Card shadow="sm" padding="lg" radius="md" withBorder>
+            <Group justify="space-between" mb="md">
+              <div>
+                <Title order={3}>Data Table Example</Title>
+                <Text size="sm" c="dimmed">
+                  Interactive data table with sorting, actions, and custom
+                  rendering
+                </Text>
+              </div>
+              <Button
+                onClick={() =>
+                  notificationService.info({ message: "Add new user clicked" })
+                }
+              >
+                Add User
+              </Button>
+            </Group>
 
-          <DataTable
-            data={users}
-            columns={columns}
-            onSort={handleSort}
-            emptyText="No users found"
-          />
-        </Card>
+            <DataTable
+              data={users}
+              columns={columns}
+              onSort={handleSort}
+              emptyText="No users found"
+            />
+          </Card>
 
-        <Card shadow="sm" padding="lg" radius="md" withBorder>
-          <Title order={3} mb="md">
-            Notification Examples
-          </Title>
-          <Text size="sm" c="dimmed" mb="md">
-            Test different types of notifications
-          </Text>
+          <Card shadow="sm" padding="lg" radius="md" withBorder>
+            <Title order={3} mb="md">
+              Notification Examples
+            </Title>
+            <Text size="sm" c="dimmed" mb="md">
+              Test different types of notifications
+            </Text>
 
-          <Group>
-            <Button
-              color="green"
-              onClick={() =>
-                notificationService.success({
-                  message: "Success notification!",
-                })
-              }
-            >
-              Success
-            </Button>
-            <Button
-              color="red"
-              onClick={() =>
-                notificationService.error({ message: "Error notification!" })
-              }
-            >
-              Error
-            </Button>
-            <Button
-              color="yellow"
-              onClick={() =>
-                notificationService.warning({
-                  message: "Warning notification!",
-                })
-              }
-            >
-              Warning
-            </Button>
-            <Button
-              color="blue"
-              onClick={() =>
-                notificationService.info({ message: "Info notification!" })
-              }
-            >
-              Info
-            </Button>
-          </Group>
-        </Card>
+            <Group>
+              <Button
+                color="green"
+                onClick={() =>
+                  notificationService.success({
+                    message: "Success notification!",
+                  })
+                }
+              >
+                Success
+              </Button>
+              <Button
+                color="red"
+                onClick={() =>
+                  notificationService.error({ message: "Error notification!" })
+                }
+              >
+                Error
+              </Button>
+              <Button
+                color="yellow"
+                onClick={() =>
+                  notificationService.warning({
+                    message: "Warning notification!",
+                  })
+                }
+              >
+                Warning
+              </Button>
+              <Button
+                color="blue"
+                onClick={() =>
+                  notificationService.info({ message: "Info notification!" })
+                }
+              >
+                Info
+              </Button>
+            </Group>
+          </Card>
 
-        {confirmationModal.modal}
-      </Stack>
-    </Container>
+          {confirmationModal.modal}
+        </Stack>
+      </Container>
+    </ProtectedRoute>
   );
 }

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SignInFormFeature } from "@/features/signin-form";
-import { AuthLayout } from "@/widgets/auth-layout";
+import { ProtectedRoute } from "@/shared/ui";
+import { DashboardFeature } from "@/features/dashboard";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -8,11 +8,8 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   return (
-    <AuthLayout
-      title="Welcome to Gripday"
-      subtitle="Sign in to your account to continue"
-    >
-      <SignInFormFeature useExternalRedirect />
-    </AuthLayout>
+    <ProtectedRoute>
+      <DashboardFeature />
+    </ProtectedRoute>
   );
 }

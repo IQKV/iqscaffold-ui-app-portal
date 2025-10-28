@@ -9,3 +9,4 @@ export {
   type DataTableProps,
 } from "./data-table";
 export { ConfirmationModal, useConfirmationModal } from "./confirmation-modal";
+export { ProtectedRoute } from "./protected-route";
