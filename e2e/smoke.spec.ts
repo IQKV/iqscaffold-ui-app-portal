@@ -17,7 +17,7 @@ test.describe("App Smoke Tests", () => {
 
     // Verify main heading
     await expect(
-      page.getByRole("heading", { name: "Welcome to Gripday" })
+      page.getByRole("heading", { name: "Welcome to IQKV" })
     ).toBeVisible();
 
     // Verify subtitle
@@ -94,7 +94,7 @@ test.describe("App Smoke Tests", () => {
     // Start at login
     await page.goto("/");
     await expect(
-      page.getByRole("heading", { name: "Welcome to Gripday" })
+      page.getByRole("heading", { name: "Welcome to IQKV" })
     ).toBeVisible();
 
     // Navigate to register
@@ -108,7 +108,7 @@ test.describe("App Smoke Tests", () => {
     await page.getByText("Already have an account? Sign in").click();
     await expect(page).toHaveURL(/\/?$/);
     await expect(
-      page.getByRole("heading", { name: "Welcome to Gripday" })
+      page.getByRole("heading", { name: "Welcome to IQKV" })
     ).toBeVisible();
   });
 
@@ -129,7 +129,7 @@ test.describe("App Smoke Tests", () => {
 
     // Core elements should be visible on mobile
     await expect(
-      page.getByRole("heading", { name: "Welcome to Gripday" })
+      page.getByRole("heading", { name: "Welcome to IQKV" })
     ).toBeVisible();
     await expect(
       page.getByLabel("Username or Email", { exact: true })

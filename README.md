@@ -1,15 +1,3 @@
-> ## 🤔 What is this template all about?
->
-> - This template can be used as a base layer for a ReactJS UI projects.
-> - Make the project easy to maintain with **7 issue templates**.
-> - Quick-start documentation with an extraordinary README structure.
-> - Manage issues with **20 issue labels**.
-> - Make _community healthier_ with all the guides like code of conduct, contributing, support, security...
-> - Learn more with the [official GitHub guide on creating repositories from a template](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
-> - To start using it, click **[Use this template](https://github.com/IQKV/standard-mantine-ui-project-layout/generate)** to create your new repository.
-
----
-
 # 🚀 Mantine UI Project Layout
 
 ## 📜 Description
@@ -214,15 +202,6 @@ After creating your project from this template, you'll want to customize it:
 
 This project follows **Feature-Sliced Design (FSD)** methodology for scalable frontend architecture.
 
-### 📚 **Architecture Documentation**
-
-- 📚 [**Documentation Index**](template-docs/index.md) - Complete documentation guide
-- 📖 [**FSD Architecture Guide**](template-docs/fsd-architecture.md) - Complete architecture overview
-- 🔒 [**Public API Enforcement**](template-docs/public-api-enforcement.md) - API patterns and rules
-- ✅ [**Validation Guide**](template-docs/validation-guide.md) - Zod validation patterns
-- 🛠️ [**Development Guide**](template-docs/development-guide.md) - Step-by-step development patterns
-- 📋 [**Project Overview**](template-docs/project-overview.md) - Implementation summary
-
 ### Environment Variables
 
 | Variable   | Description                | Default       |
@@ -272,32 +251,3 @@ Please follow [Code of Conduct](.github/CODE_OF_CONDUCT.md) page.
 ## 📑 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-
----
-
-## _GitHub Project Tooling Overview_
-
-A concise summary of automation and quality tooling. For full details, see:
-
-- template-docs/index.md
-- template-docs/development-guide.md
-
-### CI/CD (GitHub Actions)
-
-- .github/workflows/build-nodejs-project.yml – build & test pipeline
-- .github/workflows/check-pr-title.yml – PR naming conventions
-- .github/workflows/check-commit-message.yml – commit message validation
-- .github/workflows/use-template.yml – one-time template setup
-
-### Local Automation (Husky)
-
-- .husky/pre-commit – triggers pre-commit checks
-- commitlint.config.js – enforces conventional commit messages
-
-### Quality Gates
-
-- ESLint – see eslint.config.js
-- Prettier & Stylelint – run via package.json scripts
-- TypeScript – pnpm type-check
-
-See the Available Scripts section above for everyday commands.

@@ -8,7 +8,7 @@ interface ProtectedRouteProps {
 
 /**
  * Protected Route Component
- * Redirects to auth.gripday.com if user is not authenticated
+ * Redirects to auth.iqkv.com if user is not authenticated
  */
 export function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { isAuthenticated, isLoading } = useAuth();
