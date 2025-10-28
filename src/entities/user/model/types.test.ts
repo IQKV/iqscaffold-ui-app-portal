@@ -1,10 +1,5 @@
 import { describe, it, expect } from "vitest";
-import type {
-  User,
-  UserContext,
-  UserRegistration,
-  UserProfile,
-} from "./types";
+import type { User, UserContext, UserRegistration, UserProfile } from "./types";
 
 describe("User entity types", () => {
   describe("User type", () => {

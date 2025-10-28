@@ -4,9 +4,12 @@ export const clientBuildEnv: Record<string, string | undefined> = {
   VITE_AUTH_DOMAIN_AUTH: import.meta.env.VITE_AUTH_DOMAIN_AUTH,
   VITE_AUTH_DOMAIN_APP: import.meta.env.VITE_AUTH_DOMAIN_APP,
   // Auth redirect configuration
-  VITE_AUTH_REDIRECT_AFTER_LOGIN: import.meta.env.VITE_AUTH_REDIRECT_AFTER_LOGIN,
-  VITE_AUTH_REDIRECT_AFTER_LOGOUT: import.meta.env.VITE_AUTH_REDIRECT_AFTER_LOGOUT,
-  VITE_AUTH_REDIRECT_AFTER_SIGNUP: import.meta.env.VITE_AUTH_REDIRECT_AFTER_SIGNUP,
+  VITE_AUTH_REDIRECT_AFTER_LOGIN: import.meta.env
+    .VITE_AUTH_REDIRECT_AFTER_LOGIN,
+  VITE_AUTH_REDIRECT_AFTER_LOGOUT: import.meta.env
+    .VITE_AUTH_REDIRECT_AFTER_LOGOUT,
+  VITE_AUTH_REDIRECT_AFTER_SIGNUP: import.meta.env
+    .VITE_AUTH_REDIRECT_AFTER_SIGNUP,
 };
 
 export const getConfig = (

@@ -21,9 +21,7 @@ test.describe("Register Page", () => {
     await expect(page.getByLabel("Last Name")).toBeVisible();
     await expect(page.getByLabel("Username")).toBeVisible();
     await expect(page.getByLabel("Email")).toBeVisible();
-    await expect(
-      page.getByLabel("Password", { exact: true })
-    ).toBeVisible();
+    await expect(page.getByLabel("Password", { exact: true })).toBeVisible();
     await expect(page.getByLabel("Confirm Password")).toBeVisible();
 
     // Check submit button
@@ -185,7 +183,9 @@ test.describe("Register Page", () => {
     await expect(
       page.getByText("Username must be between 3 and 50 characters")
     ).not.toBeVisible();
-    await expect(page.getByText("Please enter a valid email")).not.toBeVisible();
+    await expect(
+      page.getByText("Please enter a valid email")
+    ).not.toBeVisible();
   });
 
   test("should show username helper text", async ({ page }) => {
@@ -270,16 +270,18 @@ test.describe("Register Page", () => {
     await submitButton.click();
 
     // Button should show loading state
-    await expect(submitButton).toBeDisabled({ timeout: 1000 }).catch(() => {
-      // Loading state might be too fast to catch
-    });
+    await expect(submitButton)
+      .toBeDisabled({ timeout: 1000 })
+      .catch(() => {
+        // Loading state might be too fast to catch
+      });
   });
 
   test("should have gradient background", async ({ page }) => {
     // Check if the auth layout has a gradient background
     const background = page.locator("body > div > div").first();
-    const bgStyle = await background.evaluate((el) =>
-      window.getComputedStyle(el).background
+    const bgStyle = await background.evaluate(
+      (el) => window.getComputedStyle(el).background
     );
 
     // Should contain gradient

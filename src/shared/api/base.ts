@@ -1,8 +1,4 @@
-import axios, {
-  AxiosError,
-  AxiosRequestConfig,
-  AxiosInstance,
-} from "axios";
+import axios, { AxiosError, AxiosRequestConfig, AxiosInstance } from "axios";
 import { getConfig } from "@/app/config";
 import { normalizeAxiosError } from "@/shared/lib/http-error";
 import { notificationService } from "@/shared/lib/notifications";
@@ -56,9 +52,7 @@ apiClient.interceptors.response.use(
 /**
  * Generic API request helper
  */
-export async function apiRequest<T>(
-  config: AxiosRequestConfig
-): Promise<T> {
+export async function apiRequest<T>(config: AxiosRequestConfig): Promise<T> {
   const response = await apiClient.request<T>(config);
   return response.data;
 }

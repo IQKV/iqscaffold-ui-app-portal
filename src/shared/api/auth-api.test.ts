@@ -190,10 +190,9 @@ describe("authApi", () => {
 
       await authApi.verifyEmail(token);
 
-      expect(apiClient.post).toHaveBeenCalledWith(
-        "/api/v1/auth/email/verify",
-        { token }
-      );
+      expect(apiClient.post).toHaveBeenCalledWith("/api/v1/auth/email/verify", {
+        token,
+      });
     });
   });
 
@@ -205,10 +204,9 @@ describe("authApi", () => {
 
       await authApi.resendVerification(email);
 
-      expect(apiClient.post).toHaveBeenCalledWith(
-        "/api/v1/auth/email/resend",
-        { email }
-      );
+      expect(apiClient.post).toHaveBeenCalledWith("/api/v1/auth/email/resend", {
+        email,
+      });
     });
   });
 });

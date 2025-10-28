@@ -15,10 +15,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useMutation } from "@tanstack/react-query";
 import { authApi, type TokenResponse } from "@/shared/api";
 import { getAuthConfig } from "@/app/config";
-import {
-  initialSignInValues,
-  validateSignInForm,
-} from "../model/validation";
+import { initialSignInValues, validateSignInForm } from "../model/validation";
 import type { SignInFormValues } from "../model/types";
 
 interface SignInFormFeatureProps {

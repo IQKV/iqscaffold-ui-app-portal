@@ -51,11 +51,11 @@ test.describe("Auth Flow", () => {
     // 4. Verify navigation to login page
 
     // For now, we just verify the form was submitted (button disabled)
-    await expect(
-      page.getByRole("button", { name: "Create Account" })
-    ).toBeDisabled({ timeout: 2000 }).catch(() => {
-      // If not disabled, the form was processed too quickly or API failed
-    });
+    await expect(page.getByRole("button", { name: "Create Account" }))
+      .toBeDisabled({ timeout: 2000 })
+      .catch(() => {
+        // If not disabled, the form was processed too quickly or API failed
+      });
   });
 
   test("should handle login form submission", async ({ page }) => {
@@ -63,7 +63,9 @@ test.describe("Auth Flow", () => {
     await page.goto("/");
 
     // Fill login form
-    await page.getByLabel("Username or Email", { exact: true }).fill("testuser");
+    await page
+      .getByLabel("Username or Email", { exact: true })
+      .fill("testuser");
     await page.getByLabel("Password").fill("TestPassword123!");
 
     // Submit form
@@ -117,7 +119,9 @@ test.describe("Auth Flow", () => {
     await expect(rememberMeCheckbox).toBeChecked();
 
     // Fill and submit form
-    await page.getByLabel("Username or Email", { exact: true }).fill("testuser");
+    await page
+      .getByLabel("Username or Email", { exact: true })
+      .fill("testuser");
     await page.getByLabel("Password").fill("password123");
     await page.getByRole("button", { name: "Sign In" }).click();
 
@@ -129,7 +133,9 @@ test.describe("Auth Flow", () => {
     await page.goto("/");
 
     // Fill form
-    await page.getByLabel("Username or Email", { exact: true }).fill("testuser");
+    await page
+      .getByLabel("Username or Email", { exact: true })
+      .fill("testuser");
     await page.getByLabel("Password").fill("password123");
 
     // Submit multiple times rapidly
@@ -140,9 +146,11 @@ test.describe("Auth Flow", () => {
     });
 
     // Should handle gracefully (button disabled or prevented)
-    await expect(submitButton).toBeDisabled({ timeout: 1000 }).catch(() => {
-      // Loading state might be too fast
-    });
+    await expect(submitButton)
+      .toBeDisabled({ timeout: 1000 })
+      .catch(() => {
+        // Loading state might be too fast
+      });
   });
 });
 
@@ -151,14 +159,18 @@ test.describe("Auth Flow - Edge Cases", () => {
     await page.goto("/");
 
     // Fill form
-    await page.getByLabel("Username or Email", { exact: true }).fill("testuser");
+    await page
+      .getByLabel("Username or Email", { exact: true })
+      .fill("testuser");
     await page.getByLabel("Password").fill("password123");
 
     // Reload page
     await page.reload();
 
     // Form should be empty (no state persistence)
-    await expect(page.getByLabel("Username or Email", { exact: true })).toHaveValue("");
+    await expect(
+      page.getByLabel("Username or Email", { exact: true })
+    ).toHaveValue("");
     await expect(page.getByLabel("Password")).toHaveValue("");
   });
 
@@ -239,7 +251,9 @@ test.describe("Auth Flow - Responsive Design", () => {
     await expect(
       page.getByRole("heading", { name: "Welcome to Gripday" })
     ).toBeVisible();
-    await expect(page.getByLabel("Username or Email", { exact: true })).toBeVisible();
+    await expect(
+      page.getByLabel("Username or Email", { exact: true })
+    ).toBeVisible();
     await expect(page.getByLabel("Password")).toBeVisible();
     await expect(page.getByRole("button", { name: "Sign In" })).toBeVisible();
   });
@@ -269,6 +283,8 @@ test.describe("Auth Flow - Responsive Design", () => {
     await expect(
       page.getByRole("heading", { name: "Welcome to Gripday" })
     ).toBeVisible();
-    await expect(page.getByLabel("Username or Email", { exact: true })).toBeVisible();
+    await expect(
+      page.getByLabel("Username or Email", { exact: true })
+    ).toBeVisible();
   });
 });

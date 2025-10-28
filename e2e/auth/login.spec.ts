@@ -24,11 +24,11 @@ test.describe("Login Page", () => {
     await expect(page.getByLabel("Remember me")).toBeVisible();
 
     // Check links and buttons
-    await expect(
-      page.getByRole("button", { name: "Sign In" })
-    ).toBeVisible();
+    await expect(page.getByRole("button", { name: "Sign In" })).toBeVisible();
     await expect(page.getByText("Forgot password?")).toBeVisible();
-    await expect(page.getByText("Don't have an account? Sign up")).toBeVisible();
+    await expect(
+      page.getByText("Don't have an account? Sign up")
+    ).toBeVisible();
   });
 
   test("should show validation errors for empty fields", async ({ page }) => {
@@ -58,7 +58,9 @@ test.describe("Login Page", () => {
 
   test("should accept valid username format", async ({ page }) => {
     // Fill form with valid data
-    await page.getByLabel("Username or Email", { exact: true }).fill("testuser");
+    await page
+      .getByLabel("Username or Email", { exact: true })
+      .fill("testuser");
     await page.getByLabel("Password").fill("password123");
 
     // Should not show validation errors for these fields
@@ -124,7 +126,9 @@ test.describe("Login Page", () => {
 
   test("should show loading state when submitting", async ({ page }) => {
     // Fill form
-    await page.getByLabel("Username or Email", { exact: true }).fill("testuser");
+    await page
+      .getByLabel("Username or Email", { exact: true })
+      .fill("testuser");
     await page.getByLabel("Password").fill("password123");
 
     // Click submit
@@ -134,10 +138,12 @@ test.describe("Login Page", () => {
     // Button should show loading state (disabled or with loading indicator)
     // Note: This test may fail if the API responds too quickly
     // In real scenario, you might want to mock the API to delay response
-    await expect(submitButton).toBeDisabled({ timeout: 1000 }).catch(() => {
-      // If button is not disabled quickly enough, that's okay
-      // The loading state might be too fast to catch
-    });
+    await expect(submitButton)
+      .toBeDisabled({ timeout: 1000 })
+      .catch(() => {
+        // If button is not disabled quickly enough, that's okay
+        // The loading state might be too fast to catch
+      });
   });
 
   test("should have proper form accessibility", async ({ page }) => {
@@ -151,16 +157,14 @@ test.describe("Login Page", () => {
     await expect(page.getByLabel("Remember me")).toBeVisible();
 
     // Check submit button is properly labeled
-    await expect(
-      page.getByRole("button", { name: "Sign In" })
-    ).toBeVisible();
+    await expect(page.getByRole("button", { name: "Sign In" })).toBeVisible();
   });
 
   test("should have gradient background", async ({ page }) => {
     // Check if the auth layout has a gradient background
     const background = page.locator("body > div > div").first();
-    const bgStyle = await background.evaluate((el) =>
-      window.getComputedStyle(el).background
+    const bgStyle = await background.evaluate(
+      (el) => window.getComputedStyle(el).background
     );
 
     // Should contain gradient
@@ -169,7 +173,7 @@ test.describe("Login Page", () => {
 
   test("should display form in a card", async ({ page }) => {
     // Check if form is in a card component
-    const card = page.locator('form').locator('..');
+    const card = page.locator("form").locator("..");
     await expect(card).toBeVisible();
   });
 });
@@ -207,7 +211,9 @@ test.describe("Login Form Interactions", () => {
   });
 
   test("should submit form with Enter key", async ({ page }) => {
-    await page.getByLabel("Username or Email", { exact: true }).fill("testuser");
+    await page
+      .getByLabel("Username or Email", { exact: true })
+      .fill("testuser");
     await page.getByLabel("Password").fill("password123");
 
     // Press Enter in password field

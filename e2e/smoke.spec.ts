@@ -26,11 +26,11 @@ test.describe("App Smoke Tests", () => {
     ).toBeVisible();
 
     // Verify login form is present
-    await expect(page.getByLabel("Username or Email", { exact: true })).toBeVisible();
-    await expect(page.getByLabel("Password")).toBeVisible();
     await expect(
-      page.getByRole("button", { name: "Sign In" })
+      page.getByLabel("Username or Email", { exact: true })
     ).toBeVisible();
+    await expect(page.getByLabel("Password")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Sign In" })).toBeVisible();
   });
 
   test("register page loads successfully", async ({ page }) => {
@@ -131,10 +131,10 @@ test.describe("App Smoke Tests", () => {
     await expect(
       page.getByRole("heading", { name: "Welcome to Gripday" })
     ).toBeVisible();
-    await expect(page.getByLabel("Username or Email", { exact: true })).toBeVisible();
     await expect(
-      page.getByRole("button", { name: "Sign In" })
+      page.getByLabel("Username or Email", { exact: true })
     ).toBeVisible();
+    await expect(page.getByRole("button", { name: "Sign In" })).toBeVisible();
   });
 
   test("app handles network errors gracefully", async ({ page }) => {
@@ -144,13 +144,17 @@ test.describe("App Smoke Tests", () => {
     await page.context().setOffline(true);
 
     // Fill and submit form (should fail gracefully)
-    await page.getByLabel("Username or Email", { exact: true }).fill("testuser");
+    await page
+      .getByLabel("Username or Email", { exact: true })
+      .fill("testuser");
     await page.getByLabel("Password").fill("password123");
     await page.getByRole("button", { name: "Sign In" }).click();
 
     // App should handle the error (not crash)
     // The form should still be visible
-    await expect(page.getByLabel("Username or Email", { exact: true })).toBeVisible();
+    await expect(
+      page.getByLabel("Username or Email", { exact: true })
+    ).toBeVisible();
 
     // Restore network
     await page.context().setOffline(false);
@@ -163,11 +167,7 @@ test.describe("App Smoke Tests", () => {
     page.on("requestfailed", (request) => {
       const url = request.url();
       // Only track critical assets (JS, CSS, fonts)
-      if (
-        url.endsWith(".js") ||
-        url.endsWith(".css") ||
-        url.includes("font")
-      ) {
+      if (url.endsWith(".js") || url.endsWith(".css") || url.includes("font")) {
         failedRequests.push(url);
       }
     });
@@ -200,7 +200,7 @@ test.describe("App Smoke Tests", () => {
 
     // Check for charset
     const hasCharset =
-      (await page.locator('meta[charset]').count()) > 0 ||
+      (await page.locator("meta[charset]").count()) > 0 ||
       (await page.locator('meta[charset="utf-8"]').count()) > 0;
     expect(hasCharset).toBeTruthy();
   });
@@ -223,7 +223,9 @@ test.describe("Critical User Paths", () => {
     await page.goto("/");
 
     // Fill form
-    await page.getByLabel("Username or Email", { exact: true }).fill("testuser");
+    await page
+      .getByLabel("Username or Email", { exact: true })
+      .fill("testuser");
     await page.getByLabel("Password").fill("password123");
 
     // Check remember me

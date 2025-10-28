@@ -82,12 +82,16 @@ describe("signup-form validation", () => {
 
       it("should return error for password without lowercase letter", () => {
         const result = validateSignUpForm.password("PASSWORD123!");
-        expect(result).toBe("Password must include at least one lowercase letter");
+        expect(result).toBe(
+          "Password must include at least one lowercase letter"
+        );
       });
 
       it("should return error for password without uppercase letter", () => {
         const result = validateSignUpForm.password("password123!");
-        expect(result).toBe("Password must include at least one uppercase letter");
+        expect(result).toBe(
+          "Password must include at least one uppercase letter"
+        );
       });
 
       it("should return error for password without number", () => {
