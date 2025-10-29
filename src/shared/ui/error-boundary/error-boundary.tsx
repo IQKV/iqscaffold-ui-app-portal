@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Container,
-  Title,
   Text,
   Button,
   Stack,
@@ -25,7 +24,6 @@ import { useDisclosure } from "@mantine/hooks";
 import {
   errorFromAxios,
   formatErrorForDisplay,
-  type AppError,
 } from "@/shared/lib/http-error";
 import { notificationService } from "@/shared/lib/notifications";
 
@@ -99,7 +97,7 @@ export function DefaultErrorFallback({
                 <Text size="xs" c="dimmed">
                   Error ID:
                 </Text>
-                <Code size="xs">{displayError.referenceId}</Code>
+                <Code>{displayError.referenceId}</Code>
               </Group>
             )}
 
