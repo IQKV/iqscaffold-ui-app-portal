@@ -9,11 +9,29 @@ vi.mock("./notifications", () => ({
   notificationService: {
     success: vi.fn(),
     error: vi.fn(),
+    fromAppError: vi.fn(),
+    validationError: vi.fn(),
+    showLoading: vi.fn(() => "loading-id"),
+    updateLoadingNotification: vi.fn(),
   },
 }));
 
 vi.mock("./http-error", () => ({
   normalizeAxiosError: vi.fn((error) => error),
+  errorFromAxios: vi.fn((error) => ({
+    errorType: "unknown",
+    message: error?.message || "Unknown error",
+    title: "Unknown Error",
+    detail: error?.message || "Unknown error",
+    type: "about:blank",
+    retryable: false,
+  })),
+  formatErrorForDisplay: vi.fn((error) => ({
+    title: error?.title || "Unknown Error",
+    message: error?.detail || error?.message || "Unknown error",
+    referenceId: error?.requestId,
+    type: error?.type,
+  })),
   toMantineErrors: vi.fn(() => ({})),
   getErrorMessage: vi.fn((error, fallback) => error?.message || fallback),
 }));
@@ -129,10 +147,16 @@ describe("useFormMutation", () => {
       expect(result.current.isError).toBe(true);
     });
 
-    expect(notificationService.error).toHaveBeenCalledWith({
-      title: "Error!",
-      message: "Test error",
-    });
+    expect(notificationService.fromAppError).toHaveBeenCalledWith(
+      expect.objectContaining({
+        errorType: "unknown",
+        message: "Test error",
+        title: "Unknown Error",
+      }),
+      expect.objectContaining({
+        title: "Error!",
+      })
+    );
   });
 
   it("does not show error notification when disabled", async () => {
@@ -196,12 +220,27 @@ describe("useFormMutation", () => {
       expect(result.current.isError).toBe(true);
     });
 
-    expect(onError).toHaveBeenCalledWith(error, "test data", undefined);
+    // The onError callback now receives the normalized AppError instead of the raw error
+    expect(onError).toHaveBeenCalledWith(
+      expect.objectContaining({
+        errorType: "unknown",
+        message: "Test error",
+        title: "Unknown Error",
+        detail: "Test error",
+        type: "about:blank",
+        retryable: false,
+      }),
+      "test data",
+      undefined
+    );
   });
 
   it("maps field errors using custom mapField function", async () => {
-    const { toMantineErrors } = await import("./http-error");
-    (toMantineErrors as any).mockReturnValue({ email: "Invalid email" });
+    // Import and mock toMantineErrors to return field errors
+    const httpError = await import("./http-error");
+    vi.mocked(httpError.toMantineErrors).mockReturnValue({
+      email: "Invalid email",
+    });
 
     const mapField = vi.fn((errors) => ({ userEmail: errors.email }));
     const error = new Error("Validation error");

@@ -1,3 +1,4 @@
+import React from "react";
 import { UseFormReturnType } from "@mantine/form";
 import {
   useMutation,
@@ -5,9 +6,9 @@ import {
   type UseMutationResult,
 } from "@tanstack/react-query";
 import {
-  getErrorMessage,
-  normalizeAxiosError,
+  errorFromAxios,
   toMantineErrors,
+  formatErrorForDisplay,
 } from "./http-error";
 import { notificationService } from "./notifications";
 
@@ -21,9 +22,19 @@ export type FormMutationOptions<TData, TVariables, TContext> =
   UseMutationOptions<TData, unknown, TVariables, TContext> & {
     notifySuccess?: NotifyConfig | false;
     notifyError?:
-      | (NotifyConfig & { includeFieldErrorsInMessage?: boolean })
+      | (NotifyConfig & {
+          includeFieldErrorsInMessage?: boolean;
+          showTechnicalDetails?: boolean;
+          enableRetry?: boolean;
+        })
       | false;
     mapField?: (errors: Record<string, string>) => Record<string, string>;
+    /** Focus first field with error after validation failure */
+    focusErrorField?: boolean;
+    /** Clear form on successful submission */
+    clearOnSuccess?: boolean;
+    /** Show loading notification during submission */
+    showLoadingNotification?: boolean | { title?: string; message: string };
   };
 
 export function useFormMutation<TData, TVariables, TContext = unknown>(
@@ -35,18 +46,52 @@ export function useFormMutation<TData, TVariables, TContext = unknown>(
     notifySuccess,
     notifyError = { title: "Request failed", fallback: "Something went wrong" },
     mapField,
+    focusErrorField = true,
+    clearOnSuccess = false,
+    showLoadingNotification = false,
     onError,
     onSuccess,
+    onMutate,
     ...rest
   } = options ?? ({} as any);
 
+  const loadingNotificationIdRef = React.useRef<string | null>(null);
+
   return useMutation<TData, unknown, TVariables, TContext>({
     mutationFn,
-    onSuccess: (data, variables, context) => {
+    onMutate: (variables) => {
       // Clear previous field errors
       form.setErrors({});
 
-      if (
+      // Show loading notification if enabled
+      if (showLoadingNotification) {
+        const loadingConfig =
+          typeof showLoadingNotification === "object"
+            ? showLoadingNotification
+            : { message: "Processing your request..." };
+
+        loadingNotificationIdRef.current = notificationService.showLoading({
+          title: loadingConfig.title,
+          message: loadingConfig.message,
+        });
+      }
+
+      return onMutate?.(variables);
+    },
+    onSuccess: (data, variables, context) => {
+      // Update loading notification to success
+      if (loadingNotificationIdRef.current) {
+        notificationService.updateLoadingNotification(
+          loadingNotificationIdRef.current,
+          {
+            title: notifySuccess?.title ?? "Success",
+            message:
+              notifySuccess?.message ?? "Operation completed successfully",
+            type: "success",
+          }
+        );
+        loadingNotificationIdRef.current = null;
+      } else if (
         notifySuccess &&
         (notifySuccess.message || typeof notifySuccess === "object")
       ) {
@@ -58,38 +103,81 @@ export function useFormMutation<TData, TVariables, TContext = unknown>(
         });
       }
 
+      // Clear form if requested
+      if (clearOnSuccess) {
+        form.reset();
+      }
+
       onSuccess?.(data, variables, context);
     },
     onError: (error, variables, context) => {
-      const normalized = normalizeAxiosError(error);
+      const appError = errorFromAxios(error);
+
+      // Update loading notification to error
+      if (loadingNotificationIdRef.current) {
+        const displayError = formatErrorForDisplay(appError);
+        notificationService.updateLoadingNotification(
+          loadingNotificationIdRef.current,
+          {
+            title:
+              notifyError !== false
+                ? (notifyError.title ?? displayError.title)
+                : "Error",
+            message: displayError.message,
+            type: "error",
+          }
+        );
+        loadingNotificationIdRef.current = null;
+      }
 
       // Map field-level errors to form
-      const fieldErrors = toMantineErrors(normalized);
+      const fieldErrors = toMantineErrors(appError);
       const mapped = mapField ? mapField(fieldErrors) : fieldErrors;
-      if (Object.keys(mapped).length) {
+      const hasFieldErrors = Object.keys(mapped).length > 0;
+
+      if (hasFieldErrors) {
         form.setErrors(mapped);
-      }
 
-      if (notifyError !== false) {
-        const message = getErrorMessage(
-          normalized,
-          notifyError.fallback ?? "Something went wrong"
-        );
-        let finalMessage = message;
-        if (notifyError.includeFieldErrorsInMessage) {
-          const fields = toMantineErrors(normalized);
-          const msgs = Object.values(fields).filter(Boolean) as string[];
-          if (msgs.length) {
-            finalMessage = `${message}: ${msgs.join(", ")}`;
-          }
+        // Focus first field with error if enabled
+        if (focusErrorField) {
+          const firstErrorField = Object.keys(mapped)[0];
+          // Use setTimeout to ensure the error is rendered first
+          setTimeout(() => {
+            const element = document.querySelector(
+              `[name="${firstErrorField}"]`
+            ) as HTMLElement;
+            element?.focus();
+          }, 100);
         }
-        notificationService.error({
-          title: notifyError.title ?? "Error",
-          message: finalMessage,
-        });
       }
 
-      onError?.(normalized as any, variables, context);
+      // Show appropriate notification based on error type
+      if (notifyError !== false && !loadingNotificationIdRef.current) {
+        if (appError.errorType === "validation" && hasFieldErrors) {
+          // Show validation-specific notification
+          notificationService.validationError({
+            title: notifyError.title ?? "Validation Error",
+            message: notifyError.includeFieldErrorsInMessage
+              ? undefined
+              : appError.message,
+            fieldErrors: appError.fieldErrors || {},
+          });
+        } else {
+          // Show enhanced error notification
+          const retryAction =
+            notifyError.enableRetry && appError.retryable
+              ? () => mutationFn(variables)
+              : undefined;
+
+          notificationService.fromAppError(appError, {
+            title: notifyError.title,
+            showTechnicalDetails: notifyError.showTechnicalDetails,
+            retryAction,
+          });
+        }
+      }
+
+      onError?.(appError as any, variables, context);
     },
     ...rest,
   });

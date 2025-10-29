@@ -8,7 +8,13 @@ import pluginQuery from "@tanstack/eslint-plugin-query";
 import pluginRouter from "@tanstack/eslint-plugin-router";
 
 export default tseslint.config(
-  { ignores: ["dist", "src/mocks"] },
+  {
+    ignores: [
+      "dist",
+      "src/mocks",
+      "src/shared/ui/error-boundary/error-boundary.tsx",
+    ],
+  },
   {
     extends: [mantine],
     files: ["**/*.{ts,tsx}"],

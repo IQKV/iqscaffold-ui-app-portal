@@ -1,25 +1,18 @@
 import axios, { AxiosError } from "axios";
+import {
+  AppError,
+  AppErrorType,
+  ProblemDetail,
+  createProblemDetail,
+  validateProblemDetail,
+  extractExtensionMembers,
+  determineErrorType,
+  DEFAULT_RETRY_CONFIGS,
+  PROBLEM_TYPES,
+} from "./rfc9457-problem-details";
 
-export type AppErrorType =
-  | "network"
-  | "timeout"
-  | "canceled"
-  | "auth"
-  | "validation"
-  | "client"
-  | "server"
-  | "unknown";
-
-export interface AppError {
-  type: AppErrorType;
-  message: string;
-  status?: number;
-  code?: string | number;
-  details?: any;
-  requestId?: string;
-  retryable?: boolean;
-  cause?: unknown;
-}
+// Re-export types for backward compatibility
+export type { AppError, AppErrorType, ProblemDetail };
 
 function extractRequestId(from: any): string | undefined {
   const headers = (from?.headers ?? {}) as Record<
@@ -31,6 +24,7 @@ function extractRequestId(from: any): string | undefined {
     headers["x-correlation-id"] ??
     headers.traceparent ??
     headers["x-amzn-trace-id"] ??
+    headers["request-id"] ??
     undefined;
   if (Array.isArray(id)) {
     return id[0];
@@ -67,16 +61,56 @@ function flattenValidationErrors(errors: any): string[] {
   return [String(errors)];
 }
 
+/**
+ * Extract Problem Details from response data
+ */
+function extractProblemDetail(data: any): Partial<ProblemDetail> | null {
+  if (!data || typeof data !== "object") {
+    return null;
+  }
+
+  // Check if it's a valid Problem Detail
+  if (validateProblemDetail(data)) {
+    return data as ProblemDetail;
+  }
+
+  // Try to construct Problem Detail from common response formats
+  const problemDetail: Partial<ProblemDetail> = {};
+
+  // Extract standard fields
+  if (data.type) {
+    problemDetail.type = String(data.type);
+  }
+  if (data.title) {
+    problemDetail.title = String(data.title);
+  }
+  if (data.status) {
+    problemDetail.status = Number(data.status);
+  }
+  if (data.detail) {
+    problemDetail.detail = String(data.detail);
+  }
+  if (data.instance) {
+    problemDetail.instance = String(data.instance);
+  }
+
+  return Object.keys(problemDetail).length > 0 ? problemDetail : null;
+}
+
 export function normalizeAxiosError(err: unknown): AppError {
   // Axios cancellation
   if (axios.isCancel(err)) {
-    return {
-      type: "canceled",
+    const cancelError: AppError = {
+      errorType: "canceled",
       message: "Request was canceled",
       code: (err as any)?.code,
       cause: err,
       retryable: false,
+      type: PROBLEM_TYPES.NETWORK_ERROR,
+      title: "Request Canceled",
+      detail: "The request was canceled before completion",
     };
+    return cancelError;
   }
 
   const isAxios = axios.isAxiosError(err);
@@ -87,64 +121,94 @@ export function normalizeAxiosError(err: unknown): AppError {
     const code = ax.code;
     const isTimeout =
       code === "ECONNABORTED" || /timeout/i.test(ax.message || "");
-    return {
-      type: isTimeout ? "timeout" : "network",
-      message: isTimeout
-        ? "Request timed out"
-        : "Network error. Please check your connection",
+
+    const errorType = isTimeout ? "timeout" : "network";
+    const message = isTimeout
+      ? "Request timed out"
+      : "Network error. Please check your connection";
+
+    const networkError: AppError = {
+      errorType,
+      message,
       code,
       cause: err,
       retryable: true,
       requestId: extractRequestId(ax),
+      retryConfig: DEFAULT_RETRY_CONFIGS[errorType] || undefined,
+      type: isTimeout
+        ? PROBLEM_TYPES.TIMEOUT_ERROR
+        : PROBLEM_TYPES.NETWORK_ERROR,
+      title: isTimeout ? "Request Timeout" : "Network Error",
+      detail: message,
     };
+    return networkError;
   }
 
   if (isAxios && ax.response) {
     const { status, data } = ax.response as { status: number; data: any };
     const hdrRequestId = extractRequestId(ax.response as any);
 
-    // Try to extract common shapes: Spring Boot, RFC7807, OAuth2, custom
+    // Extract Problem Detail if present
+    const problemDetail = extractProblemDetail(data);
+
+    // Try to extract common shapes: Spring Boot, RFC9457, OAuth2, custom
     const message =
       (typeof data === "string" ? data : undefined) ??
+      problemDetail?.detail ??
       data?.message ??
       data?.detail ??
       data?.error_description ??
       data?.error ??
+      problemDetail?.title ??
       data?.title ??
       ax.message ??
       "Request failed";
 
-    const errors = flattenValidationErrors(
+    const fieldErrors = getFieldErrorsFromData(data);
+    const hasFieldErrors = Object.keys(fieldErrors).length > 0;
+
+    // Flatten validation errors for message combination
+    const flattenedErrors = flattenValidationErrors(
       (data as any)?.errors ?? (data as any)?.violations
     );
 
-    let type: AppErrorType = "unknown";
-    let retryable = false;
-    if (status === 401 || status === 403) {
-      type = "auth";
-    } else if (status === 400 || status === 422) {
-      type = errors.length ? "validation" : "client";
-    } else if (status === 404) {
-      type = "client";
-    } else if (status === 408) {
-      type = "timeout";
-      retryable = true;
-    } else if (status === 429) {
-      type = "server";
-      retryable = true;
-    } else if (status >= 500) {
-      type = "server";
-      retryable = true;
-    } else if (status >= 400) {
-      type = "client";
-    }
+    // Use flattened errors if available, otherwise use field error messages
+    const allErrors =
+      flattenedErrors.length > 0
+        ? flattenedErrors
+        : Object.values(fieldErrors).flat();
 
-    const combinedMessage = errors.length
-      ? `${message}: ${errors.join(", ")}`
-      : message;
+    // Enhanced error type detection
+    const errorType = determineErrorType(
+      status,
+      message,
+      ax.code,
+      problemDetail?.type,
+      hasFieldErrors
+    );
 
-    return {
-      type,
+    const retryable =
+      errorType === "timeout" ||
+      errorType === "network" ||
+      errorType === "rate-limit" ||
+      (errorType === "server" && status >= 500);
+
+    // Combine message with validation errors if present
+    const combinedMessage =
+      allErrors.length > 0 ? `${message}: ${allErrors.join(", ")}` : message;
+
+    // Create Problem Detail
+    const problemType = getProblemTypeForError(errorType, status);
+    const problemTitle = getProblemTitleForError(errorType, status);
+
+    // Get extension members but exclude standard RFC 9457 fields and our AppError fields
+    const extensionMembers = problemDetail
+      ? extractExtensionMembers(problemDetail)
+      : {};
+    const { message: _, ...safeExtensions } = extensionMembers; // Remove message to avoid override
+
+    const appError: AppError = {
+      errorType,
       message: combinedMessage,
       status,
       code: (data?.code as any) ?? ax.code,
@@ -152,45 +216,109 @@ export function normalizeAxiosError(err: unknown): AppError {
       requestId: hdrRequestId,
       retryable,
       cause: err,
+      fieldErrors: hasFieldErrors ? fieldErrors : undefined,
+      retryConfig: retryable
+        ? DEFAULT_RETRY_CONFIGS[errorType] || undefined
+        : undefined,
+      // RFC 9457 Problem Detail fields
+      type: problemDetail?.type ?? problemType,
+      title: problemDetail?.title ?? problemTitle,
+      detail: problemDetail?.detail ?? combinedMessage,
+      instance:
+        problemDetail?.instance ??
+        (hdrRequestId ? `/errors/${hdrRequestId}` : undefined),
+      // Extension members (excluding message to prevent override)
+      ...safeExtensions,
     };
+
+    return appError;
   }
 
   // Non-axios or unknown error
   const anyErr = err as any;
-  return {
-    type: "unknown",
+  const unknownError: AppError = {
+    errorType: "unknown",
     message: anyErr?.message || "Unexpected error",
     code: anyErr?.code,
     cause: err,
     retryable: false,
+    type: "about:blank",
+    title: "Unknown Error",
+    detail: anyErr?.message || "An unexpected error occurred",
   };
+  return unknownError;
 }
 
-export type FieldErrors = Record<string, string[]>;
-
-function normalizeFieldKey(key: string): string {
-  if (!key) {
-    return key;
+/**
+ * Get Problem Detail type for error type and status
+ */
+function getProblemTypeForError(
+  errorType: AppErrorType,
+  status?: number
+): string {
+  switch (errorType) {
+    case "auth":
+      return status === 401
+        ? PROBLEM_TYPES.AUTHENTICATION_REQUIRED
+        : PROBLEM_TYPES.AUTHORIZATION_FAILED;
+    case "validation":
+      return PROBLEM_TYPES.VALIDATION_ERROR;
+    case "rate-limit":
+      return PROBLEM_TYPES.RATE_LIMIT_EXCEEDED;
+    case "server":
+      return PROBLEM_TYPES.SERVER_ERROR;
+    case "network":
+      return PROBLEM_TYPES.NETWORK_ERROR;
+    case "timeout":
+      return PROBLEM_TYPES.TIMEOUT_ERROR;
+    case "client":
+      return status === 404 ? PROBLEM_TYPES.RESOURCE_NOT_FOUND : "about:blank";
+    default:
+      return "about:blank";
   }
-  // Convert propertyPath like "user.email" -> "email"
-  const parts = key.split(".");
-  const last = parts[parts.length - 1];
-  // Unify common backend variants to our snake_case form field names
-  if (last === "passwordConfirmation" || last === "password-confirmation") {
-    return "password_confirmation";
-  }
-  return last;
 }
 
-export function getFieldErrors(err: unknown): FieldErrors {
-  const appErr = normalizeAxiosError(err);
-  const data = (appErr as any).details;
-  const out: FieldErrors = {};
+/**
+ * Get Problem Detail title for error type and status
+ */
+function getProblemTitleForError(
+  errorType: AppErrorType,
+  status?: number
+): string {
+  switch (errorType) {
+    case "auth":
+      return status === 401
+        ? "Authentication Required"
+        : "Authorization Failed";
+    case "validation":
+      return "Validation Error";
+    case "rate-limit":
+      return "Rate Limit Exceeded";
+    case "server":
+      return "Server Error";
+    case "network":
+      return "Network Error";
+    case "timeout":
+      return "Request Timeout";
+    case "client":
+      return status === 404 ? "Resource Not Found" : "Client Error";
+    case "canceled":
+      return "Request Canceled";
+    default:
+      return "Unknown Error";
+  }
+}
+
+/**
+ * Extract field errors from response data
+ */
+function getFieldErrorsFromData(data: any): Record<string, string[]> {
+  const out: Record<string, string[]> = {};
   if (!data) {
     return out;
   }
 
-  // RFC7807-style violations: [{ field/propertyPath, message }]
+  // RFC9457-style violations: [{ field/propertyPath, message }]
   const violations = (data as any)?.violations as Array<any> | undefined;
   if (Array.isArray(violations)) {
     for (const v of violations) {
@@ -226,7 +354,49 @@ export function getFieldErrors(err: unknown): FieldErrors {
     }
   }
 
+  // Check for errors array in RFC 9457 format
+  const errorsArray = (data as any)?.errors as Array<any> | undefined;
+  if (Array.isArray(errorsArray)) {
+    for (const error of errorsArray) {
+      if (error && typeof error === "object") {
+        const field = normalizeFieldKey(error.field || "");
+        const message = error.message || "Invalid value";
+        if (field) {
+          (out[field] = out[field] || []).push(String(message));
+        }
+      }
+    }
+  }
+
   return out;
+}
+
+export type FieldErrors = Record<string, string[]>;
+
+function normalizeFieldKey(key: string): string {
+  if (!key) {
+    return key;
+  }
+  // Convert propertyPath like "user.email" -> "email"
+  const parts = key.split(".");
+  const last = parts[parts.length - 1];
+  // Unify common backend variants to our snake_case form field names
+  if (last === "passwordConfirmation" || last === "password-confirmation") {
+    return "password_confirmation";
+  }
+  return last;
+}
+
+export function getFieldErrors(err: unknown): FieldErrors {
+  const appErr = normalizeAxiosError(err);
+
+  // Use the enhanced field errors from the normalized error
+  if (appErr.fieldErrors) {
+    return appErr.fieldErrors;
+  }
+
+  // Fallback to extracting from details
+  return getFieldErrorsFromData(appErr.details);
 }
 
 export function toMantineErrors(err: unknown): Record<string, string> {
@@ -248,9 +418,35 @@ export function getErrorMessage(
   // Optionally include request id for server/unknown cases to aid debugging
   if (
     appErr.requestId &&
-    (appErr.type === "server" || appErr.type === "unknown")
+    (appErr.errorType === "server" || appErr.errorType === "unknown")
   ) {
     return `${appErr.message} (ref: ${appErr.requestId})`;
   }
   return appErr.message || fallback;
+}
+
+/**
+ * Create an AppError from axios error with RFC 9457 compliance
+ * This is the main function to use for converting axios errors
+ */
+export function errorFromAxios(err: unknown): AppError {
+  return normalizeAxiosError(err);
+}
+
+/**
+ * Format error for display with Problem Details information
+ */
+export function formatErrorForDisplay(error: AppError): {
+  title: string;
+  message: string;
+  referenceId?: string;
+  type?: string;
+} {
+  return {
+    title:
+      error.title || getProblemTitleForError(error.errorType, error.status),
+    message: error.detail || error.message,
+    referenceId: error.requestId,
+    type: error.type,
+  };
 }

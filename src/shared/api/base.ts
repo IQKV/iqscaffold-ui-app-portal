@@ -1,17 +1,19 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosInstance } from "axios";
 import { getConfig } from "@/app/config";
-import { normalizeAxiosError } from "@/shared/lib/http-error";
+import { errorFromAxios, formatErrorForDisplay } from "@/shared/lib/http-error";
 import { notificationService } from "@/shared/lib/notifications";
 
 const BASE_URL = getConfig("VITE_API_URL_SERVER");
 
 /**
  * Create base axios instance with common configuration
+ * Updated with RFC 9457 Problem Details support
  */
 export const apiClient: AxiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
+    Accept: "application/json, application/problem+json",
   },
   withCredentials: true,
 });
@@ -20,32 +22,40 @@ export const apiClient: AxiosInstance = axios.create({
 axios.defaults.withCredentials = true;
 
 /**
- * Response interceptor for error handling
+ * Response interceptor for enhanced error handling with RFC 9457 compliance
  */
 apiClient.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
     const original = error.config as
-      | (AxiosRequestConfig & { _retry?: boolean })
+      | (AxiosRequestConfig & {
+          _retry?: boolean;
+          __suppressGlobalError?: boolean;
+        })
       | undefined;
-    const status = error.response?.status;
 
-    // If no response or different error, propagate
-    if (!status || !original) {
-      return Promise.reject(error);
-    }
+    // Convert to RFC 9457 compliant AppError
+    const appError = errorFromAxios(error);
 
-    const normalized = normalizeAxiosError(error);
-    if (normalized.type === "server") {
+    // Show global error notification for server errors (unless suppressed)
+    if (
+      appError.errorType === "server" ||
+      appError.errorType === "network" ||
+      appError.errorType === "timeout"
+    ) {
       const cfg = original as any;
       if (!cfg?.__suppressGlobalError) {
+        const displayError = formatErrorForDisplay(appError);
         notificationService.error({
-          title: "Server error",
-          message: normalized.message,
+          title: displayError.title,
+          message: displayError.referenceId
+            ? `${displayError.message} (ref: ${displayError.referenceId})`
+            : displayError.message,
         });
       }
     }
-    return Promise.reject(normalized);
+
+    return Promise.reject(appError);
   }
 );
 
