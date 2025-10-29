@@ -21,10 +21,7 @@ import {
   IconHome,
 } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
-import {
-  errorFromAxios,
-  formatErrorForDisplay,
-} from "@/shared/lib/http-error";
+import { errorFromAxios, formatErrorForDisplay } from "@/shared/lib/http-error";
 import { notificationService } from "@/shared/lib/notifications";
 
 interface ErrorBoundaryProps {

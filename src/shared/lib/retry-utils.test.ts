@@ -25,14 +25,20 @@ describe("Retry Utilities", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.useFakeTimers();
-    
+
     // Capture and replace unhandled rejection handlers during tests
-    originalUnhandledRejectionListeners = process.listeners('unhandledRejection');
-    process.removeAllListeners('unhandledRejection');
-    process.on('unhandledRejection', (reason) => {
+    originalUnhandledRejectionListeners =
+      process.listeners("unhandledRejection");
+    process.removeAllListeners("unhandledRejection");
+    process.on("unhandledRejection", (reason) => {
       // Ignore network errors from our retry tests as they are expected
       // and handled asynchronously due to the nature of the retry mechanism
-      if (reason && typeof reason === 'object' && 'errorType' in reason && reason.errorType === 'network') {
+      if (
+        reason &&
+        typeof reason === "object" &&
+        "errorType" in reason &&
+        reason.errorType === "network"
+      ) {
         return;
       }
       // Re-throw other unhandled rejections
@@ -48,11 +54,11 @@ describe("Retry Utilities", () => {
       // Ignore errors from pending timers during cleanup
     }
     vi.useRealTimers();
-    
+
     // Restore original unhandled rejection handlers
-    process.removeAllListeners('unhandledRejection');
+    process.removeAllListeners("unhandledRejection");
     originalUnhandledRejectionListeners.forEach((listener) => {
-      process.on('unhandledRejection', listener);
+      process.on("unhandledRejection", listener);
     });
   });
 
@@ -127,7 +133,7 @@ describe("Retry Utilities", () => {
       } catch (error) {
         expect(error).toEqual(networkError);
       }
-      
+
       expect(apiClient.request).toHaveBeenCalledTimes(2);
     });
 

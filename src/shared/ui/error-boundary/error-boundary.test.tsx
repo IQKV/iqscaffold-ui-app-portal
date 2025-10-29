@@ -24,8 +24,6 @@ const ThrowError = ({ shouldThrow }: { shouldThrow: boolean }) => {
   return <div>No error</div>;
 };
 
-
-
 // Mock window.location.reload
 const mockReload = vi.fn();
 Object.defineProperty(window, "location", {
@@ -124,14 +122,14 @@ describe("ErrorBoundary", () => {
 
     // Should show error UI with try again button
     expect(screen.getByText("Something went wrong")).toBeInTheDocument();
-    
+
     const tryAgainButton = screen.getByRole("button", { name: /try again/i });
     expect(tryAgainButton).toBeInTheDocument();
-    
+
     // Button should be clickable (this tests the reset functionality)
     await user.click(tryAgainButton);
-    
-    // After clicking, the component will re-render and throw again, 
+
+    // After clicking, the component will re-render and throw again,
     // but the important thing is that the reset mechanism works
     expect(screen.getByText("Something went wrong")).toBeInTheDocument();
   });
