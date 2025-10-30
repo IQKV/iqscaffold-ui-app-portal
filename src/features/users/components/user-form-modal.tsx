@@ -16,17 +16,18 @@ import {
   useUpdateUserMutation,
 } from "../hooks/use-users-query";
 import { notifications } from "@mantine/notifications";
+import { t } from "@lingui/core/macro";
 
 const userFormSchema = z.object({
-  username: z.string().min(3, "Username must be at least 3 characters"),
-  email: z.string().email("Invalid email address"),
-  firstName: z.string().min(2, "First name must be at least 2 characters"),
-  lastName: z.string().min(2, "Last name must be at least 2 characters"),
+  username: z.string().min(3, t`Username must be at least 3 characters`),
+  email: z.string().email(t`Invalid email address`),
+  firstName: z.string().min(2, t`First name must be at least 2 characters`),
+  lastName: z.string().min(2, t`Last name must be at least 2 characters`),
   password: z
     .string()
-    .min(8, "Password must be at least 8 characters")
+    .min(8, t`Password must be at least 8 characters`)
     .optional(),
-  role: z.string().min(1, "Role is required"),
+  role: z.string().min(1, t`Role is required`),
 });
 
 type UserFormData = z.infer<typeof userFormSchema>;
@@ -39,9 +40,9 @@ interface UserFormModalProps {
 }
 
 const roleOptions = [
-  { value: "user", label: "User" },
-  { value: "manager", label: "Manager" },
-  { value: "admin", label: "Admin" },
+  { value: "user", label: t`User` },
+  { value: "manager", label: t`Manager` },
+  { value: "admin", label: t`Admin` },
 ];
 
 export function UserFormModal({
@@ -99,16 +100,16 @@ export function UserFormModal({
         {
           onSuccess: () => {
             notifications.show({
-              title: "Success",
-              message: "User updated successfully",
+              title: t`Success`,
+              message: t`User updated successfully`,
               color: "green",
             });
             onClose();
           },
           onError: (error) => {
             notifications.show({
-              title: "Error",
-              message: `Failed to update user: ${error.message}`,
+              title: t`Error`,
+              message: t`Failed to update user: ${error.message}`,
               color: "red",
             });
           },
@@ -117,8 +118,8 @@ export function UserFormModal({
     } else {
       if (!values.password) {
         notifications.show({
-          title: "Error",
-          message: "Password is required for new users",
+          title: t`Error`,
+          message: t`Password is required for new users`,
           color: "red",
         });
         return;
@@ -136,16 +137,16 @@ export function UserFormModal({
       createUserMutation.mutate(createData, {
         onSuccess: () => {
           notifications.show({
-            title: "Success",
-            message: "User created successfully",
+            title: t`Success`,
+            message: t`User created successfully`,
             color: "green",
           });
           onClose();
         },
         onError: (error) => {
           notifications.show({
-            title: "Error",
-            message: `Failed to create user: ${error.message}`,
+            title: t`Error`,
+            message: t`Failed to create user: ${error.message}`,
             color: "red",
           });
         },
@@ -169,15 +170,15 @@ export function UserFormModal({
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack gap="md">
           <TextInput
-            label="Username"
-            placeholder="Enter username"
+            label={t`Username`}
+            placeholder={t`Enter username`}
             required
             {...form.getInputProps("username")}
           />
 
           <TextInput
-            label="Email"
-            placeholder="Enter email address"
+            label={t`Email`}
+            placeholder={t`Enter email address`}
             required
             type="email"
             {...form.getInputProps("email")}
@@ -185,15 +186,15 @@ export function UserFormModal({
 
           <Group grow>
             <TextInput
-              label="First Name"
-              placeholder="Enter first name"
+              label={t`First Name`}
+              placeholder={t`Enter first name`}
               required
               {...form.getInputProps("firstName")}
             />
 
             <TextInput
-              label="Last Name"
-              placeholder="Enter last name"
+              label={t`Last Name`}
+              placeholder={t`Enter last name`}
               required
               {...form.getInputProps("lastName")}
             />
@@ -201,8 +202,8 @@ export function UserFormModal({
 
           {!isEditing && (
             <TextInput
-              label="Password"
-              placeholder="Enter password"
+              label={t`Password`}
+              placeholder={t`Enter password`}
               required
               type="password"
               {...form.getInputProps("password")}
@@ -210,8 +211,8 @@ export function UserFormModal({
           )}
 
           <Select
-            label="Role"
-            placeholder="Select user role"
+            label={t`Role`}
+            placeholder={t`Select user role`}
             required
             data={roleOptions}
             {...form.getInputProps("role")}
@@ -219,19 +220,21 @@ export function UserFormModal({
 
           {isEditing && (
             <Text size="sm" c="dimmed">
-              Created: {user && new Date(user.createdAt).toLocaleString()}
+              {t`Created:`} {user && new Date(user.createdAt).toLocaleString()}
               {user?.updatedAt && (
-                <>, Updated: {new Date(user.updatedAt).toLocaleString()}</>
+                <>
+                  , {t`Updated:`} {new Date(user.updatedAt).toLocaleString()}
+                </>
               )}
             </Text>
           )}
 
           <Group justify="flex-end" mt="md">
             <Button variant="subtle" onClick={handleClose} disabled={isLoading}>
-              Cancel
+              {t`Cancel`}
             </Button>
             <Button type="submit" loading={isLoading}>
-              {isEditing ? "Update" : "Create"} User
+              {isEditing ? t`Update` : t`Create`} {t`User`}
             </Button>
           </Group>
         </Stack>

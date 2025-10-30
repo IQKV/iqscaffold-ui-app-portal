@@ -13,6 +13,7 @@ import {
 } from "@mantine/core";
 import { IconWifi, IconRefresh } from "@tabler/icons-react";
 import { type AppError } from "@/shared/lib/http-error";
+import { t } from "@lingui/core/macro";
 
 interface LoadingStateProps {
   /** Loading message to display */
@@ -64,7 +65,7 @@ interface RetryableLoadingProps {
  * Basic loading state with Mantine styling
  */
 export function LoadingState({
-  message = "Loading...",
+  message = t`Loading...`,
   size = "md",
   variant = "oval",
   overlay = false,
@@ -144,7 +145,7 @@ export function SkeletonLoading({
  */
 export function ProgressLoading({
   value,
-  message = "Loading...",
+  message = t`Loading...`,
   showPercentage = true,
   color = "blue",
 }: ProgressLoadingProps) {
@@ -181,24 +182,24 @@ export function RetryableLoading({
 
     switch (error.errorType) {
       case "network":
-        return "Check your internet connection and try again";
+        return t`Check your internet connection and try again`;
       case "timeout":
-        return "The request timed out. Please try again";
+        return t`The request timed out. Please try again`;
       case "server":
-        return "Server is temporarily unavailable. Please try again";
+        return t`Server is temporarily unavailable. Please try again`;
       default:
-        return "Something went wrong. Please try again";
+        return t`Something went wrong. Please try again`;
     }
   };
 
   if (isRetrying) {
-    return <LoadingState message="Retrying..." size="sm" />;
+    return <LoadingState message={t`Retrying...`} size="sm" />;
   }
 
   return (
     <Alert
       icon={<IconWifi size="1rem" />}
-      title="Connection Issue"
+      title={t`Connection Issue`}
       color="orange"
       variant="light"
     >
@@ -210,7 +211,7 @@ export function RetryableLoading({
           size="sm"
           variant="light"
         >
-          Try Again
+          {t`Try Again`}
         </Button>
       </Stack>
     </Alert>

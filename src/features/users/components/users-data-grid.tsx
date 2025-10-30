@@ -18,6 +18,7 @@ import { User } from "../api/users-api";
 import { openConfirmModal } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 import { useDebouncedValue } from "@mantine/hooks";
+import { t } from "@lingui/core/macro";
 
 interface UsersDataGridProps {
   onCreateUser: () => void;
@@ -44,31 +45,31 @@ export function UsersDataGrid({
 
   const handleDeleteUser = (user: User) => {
     openConfirmModal({
-      title: "Delete User",
+      title: t`Delete User`,
       children: (
         <Text size="sm">
-          Are you sure you want to delete user{" "}
+          {t`Are you sure you want to delete user`}{" "}
           <strong>
             {user.firstName} {user.lastName}
           </strong>
-          ? This action cannot be undone.
+          ? {t`This action cannot be undone.`}
         </Text>
       ),
-      labels: { confirm: "Delete", cancel: "Cancel" },
+      labels: { confirm: t`Delete`, cancel: t`Cancel` },
       confirmProps: { color: "red" },
       onConfirm: () => {
         deleteUserMutation.mutate(user.id, {
           onSuccess: () => {
             notifications.show({
-              title: "Success",
-              message: "User deleted successfully",
+              title: t`Success`,
+              message: t`User deleted successfully`,
               color: "green",
             });
           },
           onError: (error) => {
             notifications.show({
-              title: "Error",
-              message: `Failed to delete user: ${error.message}`,
+              title: t`Error`,
+              message: t`Failed to delete user: ${error.message}`,
               color: "red",
             });
           },
@@ -94,7 +95,7 @@ export function UsersDataGrid({
     () => [
       {
         key: "name",
-        title: "User",
+        title: t`User`,
         sortable: true,
         render: (_, user: User) => (
           <Group gap="sm">
@@ -111,7 +112,7 @@ export function UsersDataGrid({
       },
       {
         key: "role",
-        title: "Role",
+        title: t`Role`,
         sortable: true,
         render: (_, user: User) => (
           <Badge color={getRoleBadgeColor(user.role)} variant="light">
@@ -121,7 +122,7 @@ export function UsersDataGrid({
       },
       {
         key: "createdAt",
-        title: "Created",
+        title: t`Created`,
         sortable: true,
         render: (_, user: User) => (
           <Text size="sm">{new Date(user.createdAt).toLocaleDateString()}</Text>
@@ -129,11 +130,11 @@ export function UsersDataGrid({
       },
       {
         key: "actions",
-        title: "Actions",
+        title: t`Actions`,
         align: "center" as const,
         render: (_, user: User) => (
           <Group gap="xs" justify="center">
-            <Tooltip label="Edit user">
+            <Tooltip label={t`Edit user`}>
               <ActionIcon
                 variant="subtle"
                 color="blue"
@@ -142,7 +143,7 @@ export function UsersDataGrid({
                 <IconEdit size={16} />
               </ActionIcon>
             </Tooltip>
-            <Tooltip label="Delete user">
+            <Tooltip label={t`Delete user`}>
               <ActionIcon
                 variant="subtle"
                 color="red"
@@ -162,7 +163,7 @@ export function UsersDataGrid({
   if (error) {
     return (
       <Paper p="md" withBorder>
-        <Text c="red">Error loading users: {error.message}</Text>
+        <Text c="red">{t`Error loading users: ${error.message}`}</Text>
       </Paper>
     );
   }
@@ -171,14 +172,14 @@ export function UsersDataGrid({
     <Stack gap="md">
       <Paper p="md" withBorder>
         <Group justify="space-between" mb="md">
-          <Title order={2}>User Management</Title>
+          <Title order={2}>{t`User Management`}</Title>
           <Button leftSection={<IconPlus size={16} />} onClick={onCreateUser}>
-            Add User
+            {t`Add User`}
           </Button>
         </Group>
 
         <TextInput
-          placeholder="Search users..."
+          placeholder={t`Search users...`}
           leftSection={<IconSearch size={16} />}
           value={search}
           onChange={(event) => setSearch(event.currentTarget.value)}
@@ -195,7 +196,7 @@ export function UsersDataGrid({
             pageSize: limit,
             onChange: setPage,
           }}
-          emptyText="No users found"
+          emptyText={t`No users found`}
         />
       </Paper>
     </Stack>

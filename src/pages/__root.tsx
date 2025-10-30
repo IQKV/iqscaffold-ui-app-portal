@@ -4,6 +4,7 @@ import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { Helmet } from "react-helmet-async";
 
 import { AppLayout } from "@/shared/ui/app-layout";
+import { t } from "@lingui/core/macro";
 
 const env = import.meta.env;
 const TanStackRouterDevtools =
@@ -22,8 +23,8 @@ function RootComponent() {
   return (
     <AppLayout>
       <Helmet
-        defaultTitle="Mantine UI Template"
-        titleTemplate="%s | Mantine UI Template"
+        defaultTitle={t`Mantine UI Template`}
+        titleTemplate={t`%s | Mantine UI Template`}
       />
       <Outlet />
       <TanStackRouterDevtools />

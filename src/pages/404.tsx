@@ -9,6 +9,7 @@ import {
 } from "@mantine/core";
 import { IconHome, IconArrowLeft, IconError404 } from "@tabler/icons-react";
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
+import { t } from "@lingui/core/macro";
 
 export const Route = createFileRoute("/404")({
   component: NotFoundPage,
@@ -29,11 +30,10 @@ function NotFoundPage() {
             404
           </Title>
           <Title order={2} mb="md">
-            Page Not Found
+            {t`Page Not Found`}
           </Title>
           <Text size="lg" c="dimmed" mb="xl">
-            The page you are looking for might have been removed, had its name
-            changed, or is temporarily unavailable.
+            {t`The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.`}
           </Text>
         </div>
 
@@ -43,14 +43,14 @@ function NotFoundPage() {
             variant="outline"
             onClick={() => router.history.back()}
           >
-            Go Back
+            {t`Go Back`}
           </Button>
           <Button
             leftSection={<IconHome size="1rem" />}
             component={Link}
             to="/"
           >
-            Go Home
+            {t`Go Home`}
           </Button>
         </Group>
       </Stack>

@@ -17,6 +17,7 @@ import { FormValues } from "../model/types";
 import { FormField } from "@/shared/ui";
 import { useFormMutation, queryClient } from "@/shared/lib";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { t } from "@lingui/core/macro";
 
 export function SampleFormFeature() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -34,12 +35,12 @@ export function SampleFormFeature() {
     },
     {
       notifySuccess: {
-        title: "Form submitted!",
-        message: "We have received your submission.",
+        title: t`Form submitted!`,
+        message: t`We have received your submission.`,
       },
       notifyError: {
-        title: "Submit Failed",
-        fallback: "Could not submit the form",
+        title: t`Submit Failed`,
+        fallback: t`Could not submit the form`,
       },
       onSuccess: () => {
         form.reset();
@@ -56,32 +57,31 @@ export function SampleFormFeature() {
     <>
       <Card shadow="sm" padding="lg" radius="md" withBorder>
         <Group justify="space-between" mb="xs">
-          <Title order={3}>Sample Form Feature</Title>
+          <Title order={3}>{t`Sample Form Feature`}</Title>
           <ActionIcon variant="filled" color="blue" onClick={open}>
             <IconPlus size="1rem" />
           </ActionIcon>
         </Group>
         <Text size="sm" c="dimmed">
-          Click the plus button to open a modal with a sample form using Mantine
-          components. This demonstrates Feature-Sliced Design architecture.
+          {t`Click the plus button to open a modal with a sample form using Mantine components. This demonstrates Feature-Sliced Design architecture.`}
         </Text>
       </Card>
 
-      <Modal opened={opened} onClose={close} title="Sample Form" centered>
+      <Modal opened={opened} onClose={close} title={t`Sample Form`} centered>
         <form onSubmit={form.onSubmit(handleSubmit)}>
           <Stack>
             <FormField
               type="text"
               name="name"
-              label="Name"
-              placeholder="Enter your name"
+              label={t`Name`}
+              placeholder={t`Enter your name`}
               form={form}
             />
             <FormField
               type="email"
               name="email"
-              label="Email"
-              placeholder="Enter your email"
+              label={t`Email`}
+              placeholder={t`Enter your email`}
               form={form}
             />
             <Group justify="flex-end">
@@ -90,14 +90,14 @@ export function SampleFormFeature() {
                 onClick={close}
                 leftSection={<IconX size="1rem" />}
               >
-                Cancel
+                {t`Cancel`}
               </Button>
               <Button
                 type="submit"
                 leftSection={<IconCheck size="1rem" />}
                 loading={mutation.isPending}
               >
-                Submit
+                {t`Submit`}
               </Button>
             </Group>
           </Stack>

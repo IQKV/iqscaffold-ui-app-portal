@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from "./pages/__root"
+import { Route as UsersRouteImport } from "./pages/users"
 import { Route as ExamplesRouteImport } from "./pages/examples"
 import { Route as AboutRouteImport } from "./pages/about"
 import { Route as R404RouteImport } from "./pages/404"
 import { Route as IndexRouteImport } from "./pages/index"
 
+const UsersRoute = UsersRouteImport.update({
+  id: "/users",
+  path: "/users",
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExamplesRoute = ExamplesRouteImport.update({
   id: "/examples",
   path: "/examples",
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   "/404": typeof R404Route
   "/about": typeof AboutRoute
   "/examples": typeof ExamplesRoute
+  "/users": typeof UsersRoute
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
   "/404": typeof R404Route
   "/about": typeof AboutRoute
   "/examples": typeof ExamplesRoute
+  "/users": typeof UsersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,14 @@ export interface FileRoutesById {
   "/404": typeof R404Route
   "/about": typeof AboutRoute
   "/examples": typeof ExamplesRoute
+  "/users": typeof UsersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/404" | "/about" | "/examples"
+  fullPaths: "/" | "/404" | "/about" | "/examples" | "/users"
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/404" | "/about" | "/examples"
-  id: "__root__" | "/" | "/404" | "/about" | "/examples"
+  to: "/" | "/404" | "/about" | "/examples" | "/users"
+  id: "__root__" | "/" | "/404" | "/about" | "/examples" | "/users"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,10 +76,18 @@ export interface RootRouteChildren {
   R404Route: typeof R404Route
   AboutRoute: typeof AboutRoute
   ExamplesRoute: typeof ExamplesRoute
+  UsersRoute: typeof UsersRoute
 }
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
+    "/users": {
+      id: "/users"
+      path: "/users"
+      fullPath: "/users"
+      preLoaderRoute: typeof UsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     "/examples": {
       id: "/examples"
       path: "/examples"
@@ -107,6 +124,7 @@ const rootRouteChildren: RootRouteChildren = {
   R404Route: R404Route,
   AboutRoute: AboutRoute,
   ExamplesRoute: ExamplesRoute,
+  UsersRoute: UsersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

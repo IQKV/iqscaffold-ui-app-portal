@@ -3,6 +3,7 @@ import { Container } from "@mantine/core";
 import { UsersDataGrid } from "./users-data-grid";
 import { UserFormModal } from "./user-form-modal";
 import { User } from "../api/users-api";
+import { t } from "@lingui/core/macro";
 
 export function UsersPage() {
   const [modalOpened, setModalOpened] = useState(false);
@@ -23,7 +24,7 @@ export function UsersPage() {
     setSelectedUser(null);
   };
 
-  const modalTitle = selectedUser ? "Edit User" : "Create New User";
+  const modalTitle = selectedUser ? t`Edit User` : t`Create New User`;
 
   return (
     <Container size="xl" py="md">

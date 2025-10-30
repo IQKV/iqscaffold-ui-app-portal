@@ -14,6 +14,7 @@ import {
 } from "@mantine/core";
 import { IconSettings, IconBug, IconBugOff } from "@tabler/icons-react";
 import { useMSWControl } from "@/shared/lib/use-msw-control";
+import { t } from "@lingui/core/macro";
 
 /**
  * Development tools for MSW control
@@ -51,15 +52,15 @@ export function MSWDevTools() {
     >
       <Group justify="space-between" mb="xs">
         <Group>
-          <Text fw={500}>MSW Dev Tools</Text>
+          <Text fw={500}>{t`MSW Dev Tools`}</Text>
           <Badge color={isRunning ? "green" : "gray"} size="sm">
-            {isRunning ? "Running" : "Stopped"}
+            {isRunning ? t`Running` : t`Stopped`}
           </Badge>
         </Group>
         <ActionIcon
           variant="subtle"
           onClick={() => setOpened(!opened)}
-          aria-label="Toggle MSW settings"
+          aria-label={t`Toggle MSW settings`}
         >
           <IconSettings size={16} />
         </ActionIcon>
@@ -75,36 +76,36 @@ export function MSWDevTools() {
           onClick={toggleMSW}
           size="sm"
         >
-          {isRunning ? "Disable MSW" : "Enable MSW"}
+          {isRunning ? t`Disable MSW` : t`Enable MSW`}
         </Button>
       </Group>
 
       <Collapse in={opened}>
         <Stack gap="md">
           <Switch
-            label="Enable logging"
-            description="Log MSW requests to console"
+            label={t`Enable logging`}
+            description={t`Log MSW requests to console`}
             checked={config.enableLogging}
             onChange={(event) => setLogging(event.currentTarget.checked)}
           />
 
           <Select
-            label="Unhandled requests"
-            description="How to handle requests without mocks"
+            label={t`Unhandled requests`}
+            description={t`How to handle requests without mocks`}
             value={config.onUnhandledRequest}
             onChange={(value) =>
               setUnhandledRequestBehavior(value as "bypass" | "warn" | "error")
             }
             data={[
-              { value: "bypass", label: "Bypass (allow through)" },
-              { value: "warn", label: "Warn (log warning)" },
-              { value: "error", label: "Error (throw error)" },
+              { value: "bypass", label: t`Bypass (allow through)` },
+              { value: "warn", label: t`Warn (log warning)` },
+              { value: "error", label: t`Error (throw error)` },
             ]}
           />
 
           <NumberInput
-            label="Response delay (ms)"
-            description="Simulate network latency"
+            label={t`Response delay (ms)`}
+            description={t`Simulate network latency`}
             value={
               typeof config.delay === "object"
                 ? config.delay.min
@@ -123,8 +124,7 @@ export function MSWDevTools() {
           />
 
           <Text size="xs" c="dimmed">
-            Changes take effect immediately. MSW will intercept API calls when
-            enabled.
+            {t`Changes take effect immediately. MSW will intercept API calls when enabled.`}
           </Text>
         </Stack>
       </Collapse>
