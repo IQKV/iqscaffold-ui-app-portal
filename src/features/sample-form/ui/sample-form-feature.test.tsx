@@ -8,8 +8,7 @@ import { Notifications } from "@mantine/notifications";
 import { SampleFormFeature } from "./sample-form-feature";
 
 // Mock the form mutation hook
-vi.mock("@/shared/lib", () => ({
-  ...vi.importActual("@/shared/lib"),
+vi.mock("@/shared/lib/use-form-mutation", () => ({
   useFormMutation: vi.fn(),
 }));
 
@@ -43,7 +42,7 @@ describe("SampleFormFeature", () => {
 
   beforeEach(async () => {
     vi.clearAllMocks();
-    const { useFormMutation } = await import("@/shared/lib");
+    const { useFormMutation } = await import("@/shared/lib/use-form-mutation");
     (useFormMutation as any).mockReturnValue(mockMutation);
   });
 

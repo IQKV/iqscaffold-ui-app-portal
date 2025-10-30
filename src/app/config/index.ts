@@ -10,6 +10,9 @@ export const clientBuildEnv: Record<string, string | undefined> = {
     .VITE_AUTH_REDIRECT_AFTER_LOGOUT,
   VITE_AUTH_REDIRECT_AFTER_SIGNUP: import.meta.env
     .VITE_AUTH_REDIRECT_AFTER_SIGNUP,
+  // MSW configuration
+  VITE_ENABLE_MSW: import.meta.env.VITE_ENABLE_MSW,
+  VITE_LOG_LEVEL: import.meta.env.VITE_LOG_LEVEL,
 };
 
 export const getConfig = (
@@ -27,3 +30,12 @@ export {
   type AuthConfig,
   type AuthEndpoints,
 } from "./auth-config";
+
+// Re-export MSW configuration
+export {
+  getAppMSWConfig,
+  isAppMSWEnabled,
+  configureMSW,
+  getFinalMSWConfig,
+  type AppMSWConfig,
+} from "./msw-config";

@@ -16,8 +16,12 @@ import { theme } from "./theme";
 import { queryClient } from "@/shared/lib";
 
 import { ErrorBoundary } from "@/shared/ui";
+import { MSWDevTools } from "@/shared/ui/msw-dev-tools";
 import { dynamicActivateLocale, getClientLocale } from "@/shared/locales";
 import { ConfirmContextModal } from "@/shared/ui/confirmation-modal";
+
+// MSW setup
+import { startMSW } from "@/shared/mocks";
 
 // Import Mantine styles
 import "@mantine/core/styles.css";
@@ -44,6 +48,11 @@ export function App() {
   useEffect(() => {
     // Activate locale based on cookie or browser
     dynamicActivateLocale(getClientLocale());
+
+    // Start MSW if enabled
+    if (typeof window !== "undefined") {
+      startMSW();
+    }
   }, []);
 
   return (
@@ -57,6 +66,7 @@ export function App() {
                 <QueryClientProvider client={queryClient}>
                   <RouterProvider router={router} />
                   <ReactQueryDevtools initialIsOpen={false} />
+                  <MSWDevTools />
                 </QueryClientProvider>
               </ModalsProvider>
             </MantineProvider>
