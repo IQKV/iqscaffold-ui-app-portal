@@ -1,0 +1,245 @@
+import { http, HttpResponse } from "msw";
+import {
+  User,
+  UsersResponse,
+  UserResponse,
+} from "@/features/users/api/users-api";
+
+// Mock data
+const mockUsers: User[] = [
+  {
+    id: "1",
+    username: "john_doe",
+    name: "John Doe",
+    email: "john.doe@example.com",
+    firstName: "John",
+    lastName: "Doe",
+    role: "admin",
+    roles: ["admin", "user"],
+    emailVerified: true,
+    tenantId: "default",
+    createdAt: "2024-01-15T10:30:00Z",
+    updatedAt: "2024-01-20T14:45:00Z",
+  },
+  {
+    id: "2",
+    username: "jane_smith",
+    name: "Jane Smith",
+    email: "jane.smith@example.com",
+    firstName: "Jane",
+    lastName: "Smith",
+    role: "manager",
+    roles: ["manager", "user"],
+    emailVerified: true,
+    tenantId: "default",
+    createdAt: "2024-01-16T09:15:00Z",
+    updatedAt: "2024-01-18T11:20:00Z",
+  },
+  {
+    id: "3",
+    username: "bob_wilson",
+    name: "Bob Wilson",
+    email: "bob.wilson@example.com",
+    firstName: "Bob",
+    lastName: "Wilson",
+    role: "user",
+    roles: ["user"],
+    emailVerified: false,
+    tenantId: "default",
+    createdAt: "2024-01-17T16:45:00Z",
+  },
+  {
+    id: "4",
+    username: "alice_brown",
+    name: "Alice Brown",
+    email: "alice.brown@example.com",
+    firstName: "Alice",
+    lastName: "Brown",
+    role: "user",
+    roles: ["user"],
+    emailVerified: true,
+    tenantId: "default",
+    createdAt: "2024-01-18T08:30:00Z",
+  },
+  {
+    id: "5",
+    username: "charlie_davis",
+    name: "Charlie Davis",
+    email: "charlie.davis@example.com",
+    firstName: "Charlie",
+    lastName: "Davis",
+    role: "manager",
+    roles: ["manager", "user"],
+    emailVerified: true,
+    tenantId: "default",
+    createdAt: "2024-01-19T13:20:00Z",
+  },
+];
+
+let users = [...mockUsers];
+let nextId = 6;
+
+export const usersHandlers = [
+  // Get users with pagination and search
+  http.get("/api/v1/users", ({ request }) => {
+    const url = new URL(request.url);
+    const page = parseInt(url.searchParams.get("page") || "1");
+    const limit = parseInt(url.searchParams.get("limit") || "10");
+    const search = url.searchParams.get("search") || "";
+
+    let filteredUsers = users;
+
+    // Apply search filter
+    if (search) {
+      const searchLower = search.toLowerCase();
+      filteredUsers = users.filter(
+        (user) =>
+          user.firstName.toLowerCase().includes(searchLower) ||
+          user.lastName.toLowerCase().includes(searchLower) ||
+          user.username.toLowerCase().includes(searchLower) ||
+          user.email.toLowerCase().includes(searchLower) ||
+          user.role.toLowerCase().includes(searchLower)
+      );
+    }
+
+    // Apply pagination
+    const startIndex = (page - 1) * limit;
+    const endIndex = startIndex + limit;
+    const paginatedUsers = filteredUsers.slice(startIndex, endIndex);
+
+    const response: UsersResponse = {
+      data: paginatedUsers,
+      pagination: {
+        page,
+        limit,
+        total: filteredUsers.length,
+        totalPages: Math.ceil(filteredUsers.length / limit),
+        hasNext: endIndex < filteredUsers.length,
+        hasPrev: page > 1,
+      },
+    };
+
+    return HttpResponse.json(response);
+  }),
+
+  // Get user by ID
+  http.get("/api/v1/users/:id", ({ params }) => {
+    const { id } = params;
+    const user = users.find((u) => u.id === id);
+
+    if (!user) {
+      return HttpResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    const response: UserResponse = { data: user };
+    return HttpResponse.json(response);
+  }),
+
+  // Create user (signup)
+  http.post("/api/v1/auth/signup", async ({ request }) => {
+    const body = (await request.json()) as any;
+
+    // Check if username or email already exists
+    const existingUser = users.find(
+      (u) => u.username === body.username || u.email === body.email
+    );
+
+    if (existingUser) {
+      return HttpResponse.json(
+        { error: "Username or email already exists" },
+        { status: 409 }
+      );
+    }
+
+    const newUser: User = {
+      id: nextId.toString(),
+      username: body.username,
+      name: `${body.firstName} ${body.lastName}`,
+      email: body.email,
+      firstName: body.firstName,
+      lastName: body.lastName,
+      role: body.role || "user",
+      roles:
+        body.role === "admin"
+          ? ["admin", "user"]
+          : body.role === "manager"
+            ? ["manager", "user"]
+            : ["user"],
+      emailVerified: false,
+      tenantId: body.tenantId || "default",
+      createdAt: new Date().toISOString(),
+    };
+
+    users.push(newUser);
+    nextId++;
+
+    const response: UserResponse = { data: newUser };
+    return HttpResponse.json(response, { status: 201 });
+  }),
+
+  // Update user
+  http.put("/api/v1/users/:id", async ({ params, request }) => {
+    const { id } = params;
+    const body = (await request.json()) as any;
+
+    const userIndex = users.findIndex((u) => u.id === id);
+
+    if (userIndex === -1) {
+      return HttpResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    // Check if username or email conflicts with other users
+    if (body.username || body.email) {
+      const conflictingUser = users.find(
+        (u) =>
+          u.id !== id &&
+          ((body.username && u.username === body.username) ||
+            (body.email && u.email === body.email))
+      );
+
+      if (conflictingUser) {
+        return HttpResponse.json(
+          { error: "Username or email already exists" },
+          { status: 409 }
+        );
+      }
+    }
+
+    const updatedUser: User = {
+      ...users[userIndex],
+      ...body,
+      name:
+        body.firstName && body.lastName
+          ? `${body.firstName} ${body.lastName}`
+          : users[userIndex].name,
+      roles:
+        body.role === "admin"
+          ? ["admin", "user"]
+          : body.role === "manager"
+            ? ["manager", "user"]
+            : body.role === "user"
+              ? ["user"]
+              : users[userIndex].roles,
+      updatedAt: new Date().toISOString(),
+    };
+
+    users[userIndex] = updatedUser;
+
+    const response: UserResponse = { data: updatedUser };
+    return HttpResponse.json(response);
+  }),
+
+  // Delete user
+  http.delete("/api/v1/users/:id", ({ params }) => {
+    const { id } = params;
+    const userIndex = users.findIndex((u) => u.id === id);
+
+    if (userIndex === -1) {
+      return HttpResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    users.splice(userIndex, 1);
+
+    return HttpResponse.json({ message: "User deleted successfully" });
+  }),
+];

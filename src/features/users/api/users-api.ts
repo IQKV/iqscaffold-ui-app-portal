@@ -2,24 +2,37 @@ import { api } from "@/shared/lib";
 
 export interface User {
   id: string;
+  username: string;
   name: string;
   email: string;
-  avatar: string;
+  firstName: string;
+  lastName: string;
+  avatar?: string;
   role: string;
+  roles: string[];
+  emailVerified: boolean;
+  tenantId: string;
   createdAt: string;
-  updatedAt: string;
+  updatedAt?: string;
 }
 
 export interface CreateUserRequest {
-  name: string;
+  username: string;
   email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
   role?: string;
+  tenantId?: string;
 }
 
 export interface UpdateUserRequest {
-  name?: string;
+  username?: string;
   email?: string;
+  firstName?: string;
+  lastName?: string;
   role?: string;
+  emailVerified?: boolean;
 }
 
 export interface UsersResponse {
@@ -48,8 +61,11 @@ export async function fetchUsers(
     search?: string;
   } = {}
 ): Promise<UsersResponse> {
-  const { data } = await api.get<UsersResponse>("/v1/users", {
+  const { data } = await api.get<UsersResponse>("/api/v1/users", {
     params,
+    headers: {
+      "X-Tenant-ID": "default",
+    },
   });
   return data;
 }
@@ -58,7 +74,11 @@ export async function fetchUsers(
  * Fetch user by ID
  */
 export async function fetchUser(id: string): Promise<UserResponse> {
-  const { data } = await api.get<UserResponse>(`/v1/users/${id}`);
+  const { data } = await api.get<UserResponse>(`/api/v1/users/${id}`, {
+    headers: {
+      "X-Tenant-ID": "default",
+    },
+  });
   return data;
 }
 
@@ -68,7 +88,15 @@ export async function fetchUser(id: string): Promise<UserResponse> {
 export async function createUser(
   userData: CreateUserRequest
 ): Promise<UserResponse> {
-  const { data } = await api.post<UserResponse>("/v1/users", userData);
+  const { data } = await api.post<UserResponse>(
+    "/api/v1/auth/signup",
+    userData,
+    {
+      headers: {
+        "X-Tenant-ID": "default",
+      },
+    }
+  );
   return data;
 }
 
@@ -79,7 +107,15 @@ export async function updateUser(
   id: string,
   userData: UpdateUserRequest
 ): Promise<UserResponse> {
-  const { data } = await api.put<UserResponse>(`/v1/users/${id}`, userData);
+  const { data } = await api.put<UserResponse>(
+    `/api/v1/users/${id}`,
+    userData,
+    {
+      headers: {
+        "X-Tenant-ID": "default",
+      },
+    }
+  );
   return data;
 }
 
@@ -87,6 +123,13 @@ export async function updateUser(
  * Delete user
  */
 export async function deleteUser(id: string): Promise<{ message: string }> {
-  const { data } = await api.delete<{ message: string }>(`/v1/users/${id}`);
+  const { data } = await api.delete<{ message: string }>(
+    `/api/v1/users/${id}`,
+    {
+      headers: {
+        "X-Tenant-ID": "default",
+      },
+    }
+  );
   return data;
 }

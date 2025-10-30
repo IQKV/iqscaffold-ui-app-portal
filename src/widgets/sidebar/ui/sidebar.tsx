@@ -1,5 +1,10 @@
 import { NavLink, Stack, Text } from "@mantine/core";
-import { IconExposure, IconHome, IconInfoCircle } from "@tabler/icons-react";
+import {
+  IconExposure,
+  IconHome,
+  IconInfoCircle,
+  IconUsers,
+} from "@tabler/icons-react";
 import { Link, useLocation } from "@tanstack/react-router";
 
 export function Sidebar() {
@@ -25,6 +30,14 @@ export function Sidebar() {
         label="About"
         leftSection={<IconInfoCircle size="1rem" />}
         active={location.pathname === "/about"}
+      />
+
+      <NavLink
+        component={Link}
+        to="/users"
+        label="User Management"
+        leftSection={<IconUsers size="1rem" />}
+        active={location.pathname === "/users"}
       />
 
       <NavLink
