@@ -15,7 +15,12 @@ export function useMSWControl() {
     if (typeof window !== "undefined" && worker) {
       // MSW doesn't provide a direct way to check if it's running
       // We'll track this state manually
-      setIsRunning(config.enabled);
+      // Use a timeout to avoid synchronous setState in effect
+      const timeoutId = setTimeout(() => {
+        setIsRunning(config.enabled);
+      }, 0);
+
+      return () => clearTimeout(timeoutId);
     }
   }, [config.enabled]);
 
@@ -60,14 +65,14 @@ export function useMSWControl() {
     (delay: typeof config.delay) => {
       updateConfig({ delay });
     },
-    [updateConfig]
+    [updateConfig, config]
   );
 
   const setUnhandledRequestBehavior = useCallback(
     (behavior: typeof config.onUnhandledRequest) => {
       updateConfig({ onUnhandledRequest: behavior });
     },
-    [updateConfig]
+    [updateConfig, config]
   );
 
   return {

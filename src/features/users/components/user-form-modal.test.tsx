@@ -53,11 +53,7 @@ describe("UserFormModal", () => {
   it("renders create user modal correctly", () => {
     render(
       <TestWrapper>
-        <UserFormModal
-          opened={true}
-          onClose={mockOnClose}
-          title="Create New User"
-        />
+        <UserFormModal opened onClose={mockOnClose} title="Create New User" />
       </TestWrapper>
     );
 
@@ -75,7 +71,7 @@ describe("UserFormModal", () => {
     render(
       <TestWrapper>
         <UserFormModal
-          opened={true}
+          opened
           onClose={mockOnClose}
           user={mockUser}
           title="Edit User"
@@ -97,11 +93,7 @@ describe("UserFormModal", () => {
   it("validates required fields", async () => {
     render(
       <TestWrapper>
-        <UserFormModal
-          opened={true}
-          onClose={mockOnClose}
-          title="Create New User"
-        />
+        <UserFormModal opened onClose={mockOnClose} title="Create New User" />
       </TestWrapper>
     );
 
@@ -127,11 +119,7 @@ describe("UserFormModal", () => {
   it("validates email format", async () => {
     render(
       <TestWrapper>
-        <UserFormModal
-          opened={true}
-          onClose={mockOnClose}
-          title="Create New User"
-        />
+        <UserFormModal opened onClose={mockOnClose} title="Create New User" />
       </TestWrapper>
     );
 
@@ -149,11 +137,7 @@ describe("UserFormModal", () => {
   it("validates password length for new users", async () => {
     render(
       <TestWrapper>
-        <UserFormModal
-          opened={true}
-          onClose={mockOnClose}
-          title="Create New User"
-        />
+        <UserFormModal opened onClose={mockOnClose} title="Create New User" />
       </TestWrapper>
     );
 
@@ -177,11 +161,7 @@ describe("UserFormModal", () => {
   it("submits form with valid data for creating user", async () => {
     render(
       <TestWrapper>
-        <UserFormModal
-          opened={true}
-          onClose={mockOnClose}
-          title="Create New User"
-        />
+        <UserFormModal opened onClose={mockOnClose} title="Create New User" />
       </TestWrapper>
     );
 
@@ -206,7 +186,7 @@ describe("UserFormModal", () => {
     render(
       <TestWrapper>
         <UserFormModal
-          opened={true}
+          opened
           onClose={mockOnClose}
           user={mockUser}
           title="Edit User"
@@ -231,11 +211,7 @@ describe("UserFormModal", () => {
   it("calls onClose when cancel button is clicked", async () => {
     render(
       <TestWrapper>
-        <UserFormModal
-          opened={true}
-          onClose={mockOnClose}
-          title="Create New User"
-        />
+        <UserFormModal opened onClose={mockOnClose} title="Create New User" />
       </TestWrapper>
     );
 
@@ -248,11 +224,7 @@ describe("UserFormModal", () => {
   it("resets form when modal is closed and reopened", async () => {
     const { rerender } = render(
       <TestWrapper>
-        <UserFormModal
-          opened={true}
-          onClose={mockOnClose}
-          title="Create New User"
-        />
+        <UserFormModal opened onClose={mockOnClose} title="Create New User" />
       </TestWrapper>
     );
 
@@ -274,11 +246,7 @@ describe("UserFormModal", () => {
     // Reopen modal
     rerender(
       <TestWrapper>
-        <UserFormModal
-          opened={true}
-          onClose={mockOnClose}
-          title="Create New User"
-        />
+        <UserFormModal opened onClose={mockOnClose} title="Create New User" />
       </TestWrapper>
     );
 
@@ -291,7 +259,7 @@ describe("UserFormModal", () => {
     render(
       <TestWrapper>
         <UserFormModal
-          opened={true}
+          opened
           onClose={mockOnClose}
           user={mockUser}
           title="Edit User"

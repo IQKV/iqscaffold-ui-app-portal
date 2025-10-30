@@ -18,19 +18,20 @@ import {
 import { notifications } from "@mantine/notifications";
 import { t } from "@lingui/core/macro";
 
-const userFormSchema = z.object({
-  username: z.string().min(3, t`Username must be at least 3 characters`),
-  email: z.string().email(t`Invalid email address`),
-  firstName: z.string().min(2, t`First name must be at least 2 characters`),
-  lastName: z.string().min(2, t`Last name must be at least 2 characters`),
-  password: z
-    .string()
-    .min(8, t`Password must be at least 8 characters`)
-    .optional(),
-  role: z.string().min(1, t`Role is required`),
-});
+const createUserFormSchema = () =>
+  z.object({
+    username: z.string().min(3, t`Username must be at least 3 characters`),
+    email: z.string().email(t`Invalid email address`),
+    firstName: z.string().min(2, t`First name must be at least 2 characters`),
+    lastName: z.string().min(2, t`Last name must be at least 2 characters`),
+    password: z
+      .string()
+      .min(8, t`Password must be at least 8 characters`)
+      .optional(),
+    role: z.string().min(1, t`Role is required`),
+  });
 
-type UserFormData = z.infer<typeof userFormSchema>;
+type UserFormData = z.infer<ReturnType<typeof createUserFormSchema>>;
 
 interface UserFormModalProps {
   opened: boolean;
@@ -39,7 +40,7 @@ interface UserFormModalProps {
   title: string;
 }
 
-const roleOptions = [
+const getRoleOptions = () => [
   { value: "user", label: t`User` },
   { value: "manager", label: t`Manager` },
   { value: "admin", label: t`Admin` },
@@ -59,7 +60,7 @@ export function UserFormModal({
     createUserMutation.isPending || updateUserMutation.isPending;
 
   const form = useForm<UserFormData>({
-    validate: zodResolver(userFormSchema),
+    validate: zodResolver(createUserFormSchema()),
     initialValues: {
       username: "",
       email: "",
@@ -83,7 +84,7 @@ export function UserFormModal({
     } else {
       form.reset();
     }
-  }, [user, opened]);
+  }, [user, opened, form]);
 
   const handleSubmit = (values: UserFormData) => {
     if (isEditing && user) {
@@ -107,9 +108,10 @@ export function UserFormModal({
             onClose();
           },
           onError: (error) => {
+            const errorMessage = error.message;
             notifications.show({
               title: t`Error`,
-              message: t`Failed to update user: ${error.message}`,
+              message: t`Failed to update user: ${errorMessage}`,
               color: "red",
             });
           },
@@ -144,9 +146,10 @@ export function UserFormModal({
           onClose();
         },
         onError: (error) => {
+          const errorMessage = error.message;
           notifications.show({
             title: t`Error`,
-            message: t`Failed to create user: ${error.message}`,
+            message: t`Failed to create user: ${errorMessage}`,
             color: "red",
           });
         },
@@ -214,7 +217,7 @@ export function UserFormModal({
             label={t`Role`}
             placeholder={t`Select user role`}
             required
-            data={roleOptions}
+            data={getRoleOptions()}
             {...form.getInputProps("role")}
           />
 

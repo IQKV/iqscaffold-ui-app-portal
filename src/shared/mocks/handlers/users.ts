@@ -4,7 +4,7 @@ import { getMSWConfig } from "@/shared/lib/msw-config";
 const config = getMSWConfig();
 
 // Mock users data
-let mockUsers = [
+const mockUsers = [
   {
     id: "1",
     username: "john_doe",
@@ -94,8 +94,8 @@ export const usersHandlers = [
     }
 
     const url = new URL(request.url);
-    const page = parseInt(url.searchParams.get("page") || "1");
-    const limit = parseInt(url.searchParams.get("limit") || "10");
+    const page = parseInt(url.searchParams.get("page") || "1", 10);
+    const limit = parseInt(url.searchParams.get("limit") || "10", 10);
     const search = url.searchParams.get("search") || "";
 
     if (config.enableLogging) {

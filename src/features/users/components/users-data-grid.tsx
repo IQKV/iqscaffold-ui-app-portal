@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import {
   ActionIcon,
   Badge,
@@ -43,40 +43,44 @@ export function UsersDataGrid({
 
   const deleteUserMutation = useDeleteUserMutation();
 
-  const handleDeleteUser = (user: User) => {
-    openConfirmModal({
-      title: t`Delete User`,
-      children: (
-        <Text size="sm">
-          {t`Are you sure you want to delete user`}{" "}
-          <strong>
-            {user.firstName} {user.lastName}
-          </strong>
-          ? {t`This action cannot be undone.`}
-        </Text>
-      ),
-      labels: { confirm: t`Delete`, cancel: t`Cancel` },
-      confirmProps: { color: "red" },
-      onConfirm: () => {
-        deleteUserMutation.mutate(user.id, {
-          onSuccess: () => {
-            notifications.show({
-              title: t`Success`,
-              message: t`User deleted successfully`,
-              color: "green",
-            });
-          },
-          onError: (error) => {
-            notifications.show({
-              title: t`Error`,
-              message: t`Failed to delete user: ${error.message}`,
-              color: "red",
-            });
-          },
-        });
-      },
-    });
-  };
+  const handleDeleteUser = useCallback(
+    (user: User) => {
+      openConfirmModal({
+        title: t`Delete User`,
+        children: (
+          <Text size="sm">
+            {t`Are you sure you want to delete user`}{" "}
+            <strong>
+              {user.firstName} {user.lastName}
+            </strong>
+            ? {t`This action cannot be undone.`}
+          </Text>
+        ),
+        labels: { confirm: t`Delete`, cancel: t`Cancel` },
+        confirmProps: { color: "red" },
+        onConfirm: () => {
+          deleteUserMutation.mutate(user.id, {
+            onSuccess: () => {
+              notifications.show({
+                title: t`Success`,
+                message: t`User deleted successfully`,
+                color: "green",
+              });
+            },
+            onError: (error) => {
+              const errorMessage = error.message;
+              notifications.show({
+                title: t`Error`,
+                message: t`Failed to delete user: ${errorMessage}`,
+                color: "red",
+              });
+            },
+          });
+        },
+      });
+    },
+    [deleteUserMutation]
+  );
 
   const getRoleBadgeColor = (role: string) => {
     switch (role.toLowerCase()) {
@@ -157,13 +161,14 @@ export function UsersDataGrid({
         ),
       },
     ],
-    [onEditUser, deleteUserMutation.isPending]
+    [onEditUser, deleteUserMutation.isPending, handleDeleteUser]
   );
 
   if (error) {
+    const errorMessage = error.message;
     return (
       <Paper p="md" withBorder>
-        <Text c="red">{t`Error loading users: ${error.message}`}</Text>
+        <Text c="red">{t`Error loading users: ${errorMessage}`}</Text>
       </Paper>
     );
   }

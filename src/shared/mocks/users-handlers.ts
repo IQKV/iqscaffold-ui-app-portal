@@ -76,15 +76,15 @@ const mockUsers: User[] = [
   },
 ];
 
-let users = [...mockUsers];
+const users = [...mockUsers];
 let nextId = 6;
 
 export const usersHandlers = [
   // Get users with pagination and search
   http.get("/api/v1/users", ({ request }) => {
     const url = new URL(request.url);
-    const page = parseInt(url.searchParams.get("page") || "1");
-    const limit = parseInt(url.searchParams.get("limit") || "10");
+    const page = parseInt(url.searchParams.get("page") || "1", 10);
+    const limit = parseInt(url.searchParams.get("limit") || "10", 10);
     const search = url.searchParams.get("search") || "";
 
     let filteredUsers = users;

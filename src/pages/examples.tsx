@@ -137,18 +137,20 @@ function ExamplesPage() {
           <ActionIcon
             variant="subtle"
             color="blue"
-            onClick={() =>
-              notificationService.info({ message: t`Viewing ${record.name}` })
-            }
+            onClick={() => {
+              const userName = record.name;
+              notificationService.info({ message: t`Viewing ${userName}` });
+            }}
           >
             <IconEye size="1rem" />
           </ActionIcon>
           <ActionIcon
             variant="subtle"
             color="orange"
-            onClick={() =>
-              notificationService.info({ message: t`Editing ${record.name}` })
-            }
+            onClick={() => {
+              const userName = record.name;
+              notificationService.info({ message: t`Editing ${userName}` });
+            }}
           >
             <IconEdit size="1rem" />
           </ActionIcon>
@@ -157,8 +159,9 @@ function ExamplesPage() {
             color="red"
             onClick={() =>
               confirmationModal.confirm(() => {
+                const userName = record.name;
                 notificationService.success({
-                  message: t`${record.name} deleted successfully`,
+                  message: t`${userName} deleted successfully`,
                 });
               })
             }
