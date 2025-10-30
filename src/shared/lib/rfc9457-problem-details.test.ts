@@ -404,25 +404,25 @@ describe("RFC 9457 Problem Details", () => {
 
     it("has valid pattern structures", () => {
       for (const [errorType, pattern] of Object.entries(ERROR_PATTERNS)) {
-        if (pattern.statusCodes) {
+        if ("statusCodes" in pattern && pattern.statusCodes) {
           expect(Array.isArray(pattern.statusCodes)).toBe(true);
           expect(
-            pattern.statusCodes.every((code) => typeof code === "number")
+            pattern.statusCodes.every((code: any) => typeof code === "number")
           ).toBe(true);
         }
 
-        if (pattern.messagePatterns) {
+        if ("messagePatterns" in pattern && pattern.messagePatterns) {
           expect(Array.isArray(pattern.messagePatterns)).toBe(true);
           expect(
-            pattern.messagePatterns.every((p) => p instanceof RegExp)
+            pattern.messagePatterns.every((p: any) => p instanceof RegExp)
           ).toBe(true);
         }
 
-        if (pattern.codes) {
+        if ("codes" in pattern && pattern.codes) {
           expect(Array.isArray(pattern.codes)).toBe(true);
-          expect(pattern.codes.every((code) => typeof code === "string")).toBe(
-            true
-          );
+          expect(
+            pattern.codes.every((code: any) => typeof code === "string")
+          ).toBe(true);
         }
 
         if (pattern.typePatterns) {

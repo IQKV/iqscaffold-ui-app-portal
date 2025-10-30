@@ -14,8 +14,11 @@ export { ProtectedRoute } from "./protected-route";
 export {
   ErrorBoundary,
   DefaultErrorFallback,
-  type ErrorBoundaryProps,
-  type ErrorFallbackProps,
+} from "./error-boundary/error-boundary";
+
+export type {
+  ErrorBoundaryProps,
+  ErrorFallbackProps,
 } from "./error-boundary/error-boundary";
 
 export {

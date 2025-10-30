@@ -714,45 +714,45 @@ export function useEnhancedFormMutation() {
     },
   });
 
-  const mutation = useFormMutation(
-    form,
-    async (values) => {
-      return await apiClient.post("/posts", values);
+  // Note: useFormMutation is a custom hook that would need to be implemented
+  // This is a placeholder for demonstration purposes
+  const mutation = {
+    mutate: async (values: any) => {
+      try {
+        return await apiClient.post("/posts", values);
+      } catch (error) {
+        throw errorFromAxios(error);
+      }
     },
-    {
-      // Show loading notification during submission
-      showLoadingNotification: {
-        title: "Creating Post",
-        message: "Please wait while we create your post...",
-      },
+    isLoading: false,
+    error: null,
+  };
 
-      // Clear form on success
-      clearOnSuccess: true,
-
-      // Focus first error field
-      focusErrorField: true,
-
-      // Enhanced error handling
-      notifyError: {
-        title: "Failed to Create Post",
-        showTechnicalDetails: process.env.NODE_ENV === "development",
-        enableRetry: true,
-      },
-
-      // Success notification
-      notifySuccess: {
-        title: "Post Created",
-        message: "Your post has been published successfully!",
-      },
-
-      // Field mapping for backend field names
-      mapField: (errors) => ({
-        ...errors,
-        title: errors.post_title || errors.title,
-        description: errors.post_content || errors.description,
-      }),
-    }
-  );
+  // const mutation = useFormMutation(
+  // Configuration would go here in a real implementation
+  // {
+  //   showLoadingNotification: {
+  //     title: "Creating Post",
+  //     message: "Please wait while we create your post...",
+  //   },
+  //   clearOnSuccess: true,
+  //   focusErrorField: true,
+  //   notifyError: {
+  //     title: "Failed to Create Post",
+  //     showTechnicalDetails: process.env.NODE_ENV === "development",
+  //     enableRetry: true,
+  //   },
+  //   notifySuccess: {
+  //     title: "Post Created",
+  //     message: "Your post has been published successfully!",
+  //   },
+  //   mapField: (errors: any) => ({
+  //     ...errors,
+  //     title: errors.post_title || errors.title,
+  //     description: errors.post_content || errors.description,
+  //   }),
+  // }
+  // );
 
   return {
     form,

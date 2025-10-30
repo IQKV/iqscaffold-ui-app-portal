@@ -227,9 +227,17 @@ export function extractExtensionMembers(
 /**
  * Enhanced error type detection patterns
  */
-export const ERROR_PATTERNS = {
+interface ErrorPattern {
+  statusCodes?: readonly number[];
+  messagePatterns?: readonly RegExp[];
+  codes?: readonly string[];
+  typePatterns?: readonly string[];
+  hasFieldErrors?: boolean;
+}
+
+export const ERROR_PATTERNS: Record<string, ErrorPattern> = {
   auth: {
-    statusCodes: [401, 403],
+    statusCodes: [401, 403] as const,
     messagePatterns: [
       /unauthorized/i,
       /authentication/i,
@@ -237,45 +245,45 @@ export const ERROR_PATTERNS = {
       /forbidden/i,
       /invalid.*token/i,
       /expired.*token/i,
-    ],
+    ] as const,
     typePatterns: [
       PROBLEM_TYPES.AUTHENTICATION_REQUIRED,
       PROBLEM_TYPES.AUTHORIZATION_FAILED,
-    ],
+    ] as const,
   },
   validation: {
-    statusCodes: [400, 422],
+    statusCodes: [400, 422] as const,
     messagePatterns: [
       /validation/i,
       /invalid.*input/i,
       /bad.*request/i,
       /constraint.*violation/i,
-    ],
-    typePatterns: [PROBLEM_TYPES.VALIDATION_ERROR],
+    ] as const,
+    typePatterns: [PROBLEM_TYPES.VALIDATION_ERROR] as const,
     hasFieldErrors: true,
   },
   timeout: {
-    statusCodes: [408],
-    messagePatterns: [/timeout/i, /timed.*out/i],
-    codes: ["ECONNABORTED", "ETIMEDOUT"],
-    typePatterns: [PROBLEM_TYPES.TIMEOUT_ERROR],
+    statusCodes: [408] as const,
+    messagePatterns: [/timeout/i, /timed.*out/i] as const,
+    codes: ["ECONNABORTED", "ETIMEDOUT"] as const,
+    typePatterns: [PROBLEM_TYPES.TIMEOUT_ERROR] as const,
   },
   network: {
-    messagePatterns: [/network/i, /connection/i, /econnrefused/i],
-    codes: ["ECONNREFUSED", "ENOTFOUND", "ECONNRESET"],
-    typePatterns: [PROBLEM_TYPES.NETWORK_ERROR],
+    messagePatterns: [/network/i, /connection/i, /econnrefused/i] as const,
+    codes: ["ECONNREFUSED", "ENOTFOUND", "ECONNRESET"] as const,
+    typePatterns: [PROBLEM_TYPES.NETWORK_ERROR] as const,
   },
   "rate-limit": {
-    statusCodes: [429],
-    messagePatterns: [/rate.*limit/i, /too.*many.*requests/i],
-    typePatterns: [PROBLEM_TYPES.RATE_LIMIT_EXCEEDED],
+    statusCodes: [429] as const,
+    messagePatterns: [/rate.*limit/i, /too.*many.*requests/i] as const,
+    typePatterns: [PROBLEM_TYPES.RATE_LIMIT_EXCEEDED] as const,
   },
   server: {
-    statusCodes: [500, 502, 503, 504],
-    messagePatterns: [/server.*error/i, /internal.*error/i],
-    typePatterns: [PROBLEM_TYPES.SERVER_ERROR],
+    statusCodes: [500, 502, 503, 504] as const,
+    messagePatterns: [/server.*error/i, /internal.*error/i] as const,
+    typePatterns: [PROBLEM_TYPES.SERVER_ERROR] as const,
   },
-} as const;
+};
 
 /**
  * Determine error type based on enhanced patterns

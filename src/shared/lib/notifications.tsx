@@ -173,9 +173,7 @@ export const notificationService = {
             <Text size="xs" c="dimmed">
               Reference ID:
             </Text>
-            <Code size="xs" c="blue">
-              {referenceId}
-            </Code>
+            <Code c="blue">{referenceId}</Code>
           </Group>
         )}
 

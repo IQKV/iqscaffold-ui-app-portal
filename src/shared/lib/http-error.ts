@@ -359,8 +359,8 @@ function getFieldErrorsFromData(data: any): Record<string, string[]> {
   if (Array.isArray(errorsArray)) {
     for (const error of errorsArray) {
       if (error && typeof error === "object") {
-        const field = normalizeFieldKey(error.field || "");
-        const message = error.message || "Invalid value";
+        const field = normalizeFieldKey((error as any).field || "");
+        const message = (error as any).message || "Invalid value";
         if (field) {
           (out[field] = out[field] || []).push(String(message));
         }

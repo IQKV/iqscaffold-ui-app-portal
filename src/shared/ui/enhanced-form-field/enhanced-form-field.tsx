@@ -6,7 +6,6 @@ import {
   Select,
   MultiSelect,
   NumberInput,
-  DateInput,
   Checkbox,
   Switch,
   Radio,
@@ -17,6 +16,7 @@ import {
   ActionIcon,
   Alert,
 } from "@mantine/core";
+import { DateInput } from "@mantine/dates";
 import { UseFormReturnType } from "@mantine/form";
 import { IconInfoCircle, IconAlertTriangle } from "@tabler/icons-react";
 
@@ -306,7 +306,7 @@ export function EnhancedFormField(props: EnhancedFormFieldProps) {
             min={numberProps.min}
             max={numberProps.max}
             step={numberProps.step}
-            precision={numberProps.precision}
+            decimalScale={numberProps.precision}
           />
         );
       }
@@ -319,7 +319,8 @@ export function EnhancedFormField(props: EnhancedFormFieldProps) {
             data={selectProps.data}
             searchable={selectProps.searchable}
             clearable={selectProps.clearable}
-            creatable={selectProps.creatable}
+            // Note: creatable prop is deprecated in newer Mantine versions
+            // Use Combobox component for creatable functionality
           />
         );
       }
@@ -430,7 +431,7 @@ export function EnhancedFormField(props: EnhancedFormFieldProps) {
           icon={<IconAlertTriangle size="1rem" />}
           color="red"
           variant="light"
-          size="xs"
+          // Note: size prop is deprecated in newer Mantine versions
         >
           <Text size="xs">{fieldError}</Text>
         </Alert>

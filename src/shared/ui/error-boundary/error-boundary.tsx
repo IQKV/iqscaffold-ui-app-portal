@@ -24,7 +24,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { errorFromAxios, formatErrorForDisplay } from "@/shared/lib/http-error";
 import { notificationService } from "@/shared/lib/notifications";
 
-interface ErrorBoundaryProps {
+export interface ErrorBoundaryProps {
   children: React.ReactNode;
   fallback?: React.ComponentType<ErrorFallbackProps>;
   onError?: (error: Error, errorInfo: React.ErrorInfo) => void;
@@ -32,7 +32,7 @@ interface ErrorBoundaryProps {
   showTechnicalDetails?: boolean;
 }
 
-interface ErrorFallbackProps {
+export interface ErrorFallbackProps {
   error: Error;
   resetError: () => void;
   showReportButton?: boolean;
