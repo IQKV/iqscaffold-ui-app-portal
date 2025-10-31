@@ -3,6 +3,5 @@ declare module "../locales/en" {
 }
 
 declare module "../locales/*" {
-  const messages: Record<string, any>;
-  export { messages };
+  export const messages: Record<string, any>;
 }
