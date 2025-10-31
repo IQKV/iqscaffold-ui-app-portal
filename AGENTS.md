@@ -535,7 +535,8 @@ export const initialFormValues: UserFormData = {
 };
 
 // features/user-form/ui/user-form-feature.tsx
-import { useForm, zodResolver } from "@mantine/form";
+import { useForm } from "@mantine/form";
+import { zodResolver } from "mantine-form-zod-resolver";
 import { Modal, Stack, Button, Group, LoadingOverlay } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Trans } from "@lingui/macro";

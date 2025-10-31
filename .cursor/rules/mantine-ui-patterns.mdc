@@ -211,7 +211,8 @@ function UserCardHeader({ user, onEdit, onDelete }: {
 
 ```typescript
 // ✅ CORRECT - Mantine form with validation
-import { useForm, zodResolver } from "@mantine/form";
+import { useForm } from "@mantine/form";
+import { zodResolver } from "mantine-form-zod-resolver";
 import { 
   TextInput, 
   Select, 

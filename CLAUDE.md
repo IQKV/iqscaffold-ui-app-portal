@@ -534,7 +534,8 @@ export const transformUserFormData = (data: UserFormData) => ({
 
 ```tsx
 // features/user-form/ui/user-form.tsx
-import { useForm, zodResolver } from "@mantine/form";
+import { useForm } from "@mantine/form";
+import { zodResolver } from "mantine-form-zod-resolver";
 import { 
   TextInput, 
   Textarea, 

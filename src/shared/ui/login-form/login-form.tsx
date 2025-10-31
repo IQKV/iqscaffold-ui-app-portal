@@ -10,7 +10,8 @@ import {
   Text,
   Alert,
 } from "@mantine/core";
-import { useForm, zodResolver } from "@mantine/form";
+import { useForm } from "@mantine/form";
+import { zodResolver } from "mantine-form-zod-resolver";
 import { z } from "zod";
 import { IconLogin, IconAlertCircle } from "@tabler/icons-react";
 import { useAuth } from "@/shared/lib";

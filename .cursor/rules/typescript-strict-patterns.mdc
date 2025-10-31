@@ -145,7 +145,8 @@ export function useUsersQuery(params?: { page?: number; search?: string }) {
 
 ```typescript
 // ✅ CORRECT - Zod + Mantine Form integration
-import { useForm, zodResolver } from "@mantine/form";
+import { useForm } from "@mantine/form";
+import { zodResolver } from "mantine-form-zod-resolver";
 
 const userFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
