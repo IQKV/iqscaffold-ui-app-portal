@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from "./pages/__root"
 import { Route as UsersRouteImport } from "./pages/users"
 import { Route as ExamplesRouteImport } from "./pages/examples"
+import { Route as AuthDemoRouteImport } from "./pages/auth-demo"
 import { Route as AboutRouteImport } from "./pages/about"
 import { Route as R404RouteImport } from "./pages/404"
 import { Route as IndexRouteImport } from "./pages/index"
@@ -23,6 +24,11 @@ const UsersRoute = UsersRouteImport.update({
 const ExamplesRoute = ExamplesRouteImport.update({
   id: "/examples",
   path: "/examples",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthDemoRoute = AuthDemoRouteImport.update({
+  id: "/auth-demo",
+  path: "/auth-demo",
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
   "/404": typeof R404Route
   "/about": typeof AboutRoute
+  "/auth-demo": typeof AuthDemoRoute
   "/examples": typeof ExamplesRoute
   "/users": typeof UsersRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   "/": typeof IndexRoute
   "/404": typeof R404Route
   "/about": typeof AboutRoute
+  "/auth-demo": typeof AuthDemoRoute
   "/examples": typeof ExamplesRoute
   "/users": typeof UsersRoute
 }
@@ -60,21 +68,30 @@ export interface FileRoutesById {
   "/": typeof IndexRoute
   "/404": typeof R404Route
   "/about": typeof AboutRoute
+  "/auth-demo": typeof AuthDemoRoute
   "/examples": typeof ExamplesRoute
   "/users": typeof UsersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/404" | "/about" | "/examples" | "/users"
+  fullPaths: "/" | "/404" | "/about" | "/auth-demo" | "/examples" | "/users"
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/404" | "/about" | "/examples" | "/users"
-  id: "__root__" | "/" | "/404" | "/about" | "/examples" | "/users"
+  to: "/" | "/404" | "/about" | "/auth-demo" | "/examples" | "/users"
+  id:
+    | "__root__"
+    | "/"
+    | "/404"
+    | "/about"
+    | "/auth-demo"
+    | "/examples"
+    | "/users"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
   AboutRoute: typeof AboutRoute
+  AuthDemoRoute: typeof AuthDemoRoute
   ExamplesRoute: typeof ExamplesRoute
   UsersRoute: typeof UsersRoute
 }
@@ -93,6 +110,13 @@ declare module "@tanstack/react-router" {
       path: "/examples"
       fullPath: "/examples"
       preLoaderRoute: typeof ExamplesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/auth-demo": {
+      id: "/auth-demo"
+      path: "/auth-demo"
+      fullPath: "/auth-demo"
+      preLoaderRoute: typeof AuthDemoRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/about": {
@@ -123,6 +147,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R404Route: R404Route,
   AboutRoute: AboutRoute,
+  AuthDemoRoute: AuthDemoRoute,
   ExamplesRoute: ExamplesRoute,
   UsersRoute: UsersRoute,
 }

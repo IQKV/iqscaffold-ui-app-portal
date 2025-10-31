@@ -42,3 +42,8 @@ export { useLoadingState } from "./loading-state/loading-state-hooks";
 export { EnhancedFormField } from "./enhanced-form-field/enhanced-form-field";
 
 export { useEnhancedFormValidation } from "./enhanced-form-field/validation-utils";
+
+// Auth demo component
+export { AuthDemo } from "./auth-demo";
+export { LoginForm } from "./login-form";
+export { AuthExamples } from "./auth-examples";

@@ -18,10 +18,13 @@ msgstr ""
 msgid "{0}"
 msgstr "{0}"
 
-#. placeholder {0}: record.name
 #: src/pages/examples.tsx:161
-msgid "{0} deleted successfully"
-msgstr "{0} deleted successfully"
+#~ msgid "{0} deleted successfully"
+#~ msgstr "{0} deleted successfully"
+
+#: src/pages/examples.tsx:164
+msgid "{userName} deleted successfully"
+msgstr "{userName} deleted successfully"
 
 #: src/pages/__root.tsx:27
 msgid "%s | Mantine UI Template"
@@ -35,25 +38,25 @@ msgstr "About"
 msgid "About This Template"
 msgstr "About This Template"
 
-#: src/features/users/components/users-data-grid.tsx:133
+#: src/features/users/components/users-data-grid.tsx:161
 #: src/pages/examples.tsx:134
 msgid "Actions"
 msgstr "Actions"
 
-#: src/pages/examples.tsx:265
+#: src/pages/examples.tsx:268
 msgid "Add new user clicked"
 msgstr "Add new user clicked"
 
-#: src/features/users/components/users-data-grid.tsx:177
-#: src/pages/examples.tsx:268
+#: src/features/users/components/users-data-grid.tsx:216
+#: src/pages/examples.tsx:271
 msgid "Add User"
 msgstr "Add User"
 
-#: src/features/users/components/user-form-modal.tsx:45
+#: src/features/users/components/user-form-modal.tsx:51
 msgid "Admin"
 msgstr "Admin"
 
-#: src/pages/about.tsx:72
+#: src/pages/about.tsx:78
 msgid "Architecture"
 msgstr "Architecture"
 
@@ -61,7 +64,7 @@ msgstr "Architecture"
 msgid "Are you sure you want to delete this user? This action cannot be undone."
 msgstr "Are you sure you want to delete this user? This action cannot be undone."
 
-#: src/features/users/components/users-data-grid.tsx:51
+#: src/features/users/components/users-data-grid.tsx:54
 msgid "Are you sure you want to delete user"
 msgstr "Are you sure you want to delete user"
 
@@ -71,7 +74,11 @@ msgstr "Are you sure you want to delete user"
 msgid "Are you sure you want to proceed?"
 msgstr "Are you sure you want to proceed?"
 
-#: src/pages/about.tsx:79
+#: src/features/users/components/user-form-modal.tsx:35
+msgid "At least one role is required"
+msgstr "At least one role is required"
+
+#: src/pages/about.tsx:85
 msgid "Built following Feature-Sliced Design methodology for maintainable and scalable frontend architecture."
 msgstr "Built following Feature-Sliced Design methodology for maintainable and scalable frontend architecture."
 
@@ -80,8 +87,8 @@ msgid "Bypass (allow through)"
 msgstr "Bypass (allow through)"
 
 #: src/features/sample-form/ui/sample-form-feature.tsx:93
-#: src/features/users/components/user-form-modal.tsx:232
-#: src/features/users/components/users-data-grid.tsx:58
+#: src/features/users/components/user-form-modal.tsx:284
+#: src/features/users/components/users-data-grid.tsx:61
 #: src/shared/ui/confirmation-modal/confirm-context-modal.tsx:25
 #: src/shared/ui/confirmation-modal/confirmation-modal.tsx:25
 #: src/shared/ui/confirmation-modal/open-confirm.ts:18
@@ -100,11 +107,11 @@ msgstr "Check your internet connection and try again"
 msgid "Click the plus button to open a modal with a sample form using Mantine components. This demonstrates Feature-Sliced Design architecture."
 msgstr "Click the plus button to open a modal with a sample form using Mantine components. This demonstrates Feature-Sliced Design architecture."
 
-#: src/pages/about.tsx:93
+#: src/pages/about.tsx:102
 msgid "Code Quality:"
 msgstr "Code Quality:"
 
-#: src/pages/examples.tsx:185
+#: src/pages/examples.tsx:188
 msgid "Component Examples"
 msgstr "Component Examples"
 
@@ -120,7 +127,7 @@ msgstr "Confirm"
 msgid "Confirm Action"
 msgstr "Confirm Action"
 
-#: src/pages/examples.tsx:236
+#: src/pages/examples.tsx:239
 msgid "Confirmation modals, notifications, loading states, and error boundaries."
 msgstr "Confirmation modals, notifications, loading states, and error boundaries."
 
@@ -132,19 +139,19 @@ msgstr "Connection Issue"
 msgid "Could not submit the form"
 msgstr "Could not submit the form"
 
-#: src/features/users/components/user-form-modal.tsx:235
+#: src/features/users/components/user-form-modal.tsx:287
 msgid "Create"
 msgstr "Create"
 
-#: src/features/users/components/users-page.tsx:27
+#: src/features/users/components/users-page.tsx:46
 msgid "Create New User"
 msgstr "Create New User"
 
-#: src/features/users/components/users-data-grid.tsx:125
+#: src/features/users/components/users-data-grid.tsx:153
 msgid "Created"
 msgstr "Created"
 
-#: src/features/users/components/user-form-modal.tsx:223
+#: src/features/users/components/user-form-modal.tsx:273
 msgid "Created:"
 msgstr "Created:"
 
@@ -152,24 +159,24 @@ msgstr "Created:"
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: src/pages/examples.tsx:258
+#: src/pages/examples.tsx:261
 msgid "Data Table Example"
 msgstr "Data Table Example"
 
-#: src/pages/examples.tsx:215
+#: src/pages/examples.tsx:218
 msgid "Data Tables"
 msgstr "Data Tables"
 
-#: src/features/users/components/users-data-grid.tsx:58
+#: src/features/users/components/users-data-grid.tsx:61
 #: src/pages/examples.tsx:50
 msgid "Delete"
 msgstr "Delete"
 
-#: src/features/users/components/users-data-grid.tsx:146
+#: src/features/users/components/users-data-grid.tsx:177
 msgid "Delete user"
 msgstr "Delete user"
 
-#: src/features/users/components/users-data-grid.tsx:48
+#: src/features/users/components/users-data-grid.tsx:51
 #: src/pages/examples.tsx:48
 msgid "Delete User"
 msgstr "Delete User"
@@ -178,27 +185,38 @@ msgstr "Delete User"
 msgid "Disable MSW"
 msgstr "Disable MSW"
 
-#: src/pages/about.tsx:102
+#: src/features/users/components/users-data-grid.tsx:139
+msgid "Disabled"
+msgstr "Disabled"
+
+#: src/pages/about.tsx:112
 msgid "Easy"
 msgstr "Easy"
 
-#: src/features/users/components/users-data-grid.tsx:137
+#: src/features/users/components/users-data-grid.tsx:166
 msgid "Edit user"
 msgstr "Edit user"
 
-#: src/features/users/components/users-page.tsx:27
+#: src/features/users/components/users-page.tsx:46
 msgid "Edit User"
 msgstr "Edit User"
 
-#. placeholder {0}: record.name
 #: src/pages/examples.tsx:150
-msgid "Editing {0}"
-msgstr "Editing {0}"
+#~ msgid "Editing {0}"
+#~ msgstr "Editing {0}"
+
+#: src/pages/examples.tsx:152
+msgid "Editing {userName}"
+msgstr "Editing {userName}"
 
 #: src/features/sample-form/ui/sample-form-feature.tsx:83
-#: src/features/users/components/user-form-modal.tsx:180
+#: src/features/users/components/user-form-modal.tsx:215
 msgid "Email"
 msgstr "Email"
+
+#: src/features/users/components/user-form-modal.tsx:264
+msgid "Email Verified"
+msgstr "Email Verified"
 
 #: src/shared/ui/msw-dev-tools.tsx:86
 msgid "Enable logging"
@@ -208,27 +226,32 @@ msgstr "Enable logging"
 msgid "Enable MSW"
 msgstr "Enable MSW"
 
-#: src/pages/about.tsx:87
+#: src/features/users/components/user-form-modal.tsx:259
+#: src/features/users/components/users-data-grid.tsx:139
+msgid "Enabled"
+msgstr "Enabled"
+
+#: src/pages/about.tsx:95
 msgid "End-to-end type safety from API to UI components"
 msgstr "End-to-end type safety from API to UI components"
 
-#: src/features/users/components/user-form-modal.tsx:181
+#: src/features/users/components/user-form-modal.tsx:216
 msgid "Enter email address"
 msgstr "Enter email address"
 
-#: src/features/users/components/user-form-modal.tsx:190
+#: src/features/users/components/user-form-modal.tsx:225
 msgid "Enter first name"
 msgstr "Enter first name"
 
-#: src/features/users/components/user-form-modal.tsx:197
+#: src/features/users/components/user-form-modal.tsx:232
 msgid "Enter last name"
 msgstr "Enter last name"
 
-#: src/features/users/components/user-form-modal.tsx:206
+#: src/features/users/components/user-form-modal.tsx:241
 msgid "Enter password"
 msgstr "Enter password"
 
-#: src/features/users/components/user-form-modal.tsx:174
+#: src/features/users/components/user-form-modal.tsx:209
 msgid "Enter username"
 msgstr "Enter username"
 
@@ -240,11 +263,11 @@ msgstr "Enter your email"
 msgid "Enter your name"
 msgstr "Enter your name"
 
-#: src/features/users/components/user-form-modal.tsx:111
-#: src/features/users/components/user-form-modal.tsx:121
-#: src/features/users/components/user-form-modal.tsx:148
-#: src/features/users/components/users-data-grid.tsx:71
-#: src/pages/examples.tsx:305
+#: src/features/users/components/user-form-modal.tsx:145
+#: src/features/users/components/user-form-modal.tsx:155
+#: src/features/users/components/user-form-modal.tsx:183
+#: src/features/users/components/users-data-grid.tsx:75
+#: src/pages/examples.tsx:308
 msgid "Error"
 msgstr "Error"
 
@@ -252,16 +275,19 @@ msgstr "Error"
 msgid "Error (throw error)"
 msgstr "Error (throw error)"
 
-#. placeholder {0}: error.message
 #: src/features/users/components/users-data-grid.tsx:166
-msgid "Error loading users: {0}"
-msgstr "Error loading users: {0}"
+#~ msgid "Error loading users: {0}"
+#~ msgstr "Error loading users: {0}"
 
-#: src/pages/examples.tsx:302
+#: src/features/users/components/users-data-grid.tsx:204
+msgid "Error loading users: {errorMessage}"
+msgstr "Error loading users: {errorMessage}"
+
+#: src/pages/examples.tsx:305
 msgid "Error notification!"
 msgstr "Error notification!"
 
-#: src/pages/about.tsx:93
+#: src/pages/about.tsx:103
 msgid "ESLint, Prettier, and automated quality checks"
 msgstr "ESLint, Prettier, and automated quality checks"
 
@@ -269,34 +295,43 @@ msgstr "ESLint, Prettier, and automated quality checks"
 msgid "Examples"
 msgstr "Examples"
 
-#: src/pages/examples.tsx:188
+#: src/pages/examples.tsx:191
 msgid "Explore the various components and features available in this template"
 msgstr "Explore the various components and features available in this template"
 
-#. placeholder {0}: error.message
 #: src/features/users/components/user-form-modal.tsx:149
-msgid "Failed to create user: {0}"
-msgstr "Failed to create user: {0}"
+#~ msgid "Failed to create user: {0}"
+#~ msgstr "Failed to create user: {0}"
 
-#. placeholder {0}: error.message
+#: src/features/users/components/user-form-modal.tsx:184
+msgid "Failed to create user: {errorMessage}"
+msgstr "Failed to create user: {errorMessage}"
+
 #: src/features/users/components/users-data-grid.tsx:72
-msgid "Failed to delete user: {0}"
-msgstr "Failed to delete user: {0}"
+#~ msgid "Failed to delete user: {0}"
+#~ msgstr "Failed to delete user: {0}"
 
-#. placeholder {0}: error.message
+#: src/features/users/components/users-data-grid.tsx:76
+msgid "Failed to delete user: {errorMessage}"
+msgstr "Failed to delete user: {errorMessage}"
+
 #: src/features/users/components/user-form-modal.tsx:112
-msgid "Failed to update user: {0}"
-msgstr "Failed to update user: {0}"
+#~ msgid "Failed to update user: {0}"
+#~ msgstr "Failed to update user: {0}"
 
-#: src/pages/about.tsx:84
+#: src/features/users/components/user-form-modal.tsx:146
+msgid "Failed to update user: {errorMessage}"
+msgstr "Failed to update user: {errorMessage}"
+
+#: src/pages/about.tsx:90
 msgid "Feature-Sliced Design:"
 msgstr "Feature-Sliced Design:"
 
-#: src/features/users/components/user-form-modal.tsx:189
+#: src/features/users/components/user-form-modal.tsx:224
 msgid "First Name"
 msgstr "First Name"
 
-#: src/features/users/components/user-form-modal.tsx:24
+#: src/features/users/components/user-form-modal.tsx:29
 msgid "First name must be at least 2 characters"
 msgstr "First name must be at least 2 characters"
 
@@ -304,15 +339,15 @@ msgstr "First name must be at least 2 characters"
 msgid "Form submitted!"
 msgstr "Form submitted!"
 
-#: src/pages/examples.tsx:197
+#: src/pages/examples.tsx:200
 msgid "Forms"
 msgstr "Forms"
 
-#: src/pages/examples.tsx:221
+#: src/pages/examples.tsx:224
 msgid "Functional"
 msgstr "Functional"
 
-#: src/pages/about.tsx:100
+#: src/pages/about.tsx:110
 msgid "Getting Started"
 msgstr "Getting Started"
 
@@ -336,44 +371,44 @@ msgstr "Home"
 msgid "How to handle requests without mocks"
 msgstr "How to handle requests without mocks"
 
-#: src/pages/examples.tsx:323
+#: src/pages/examples.tsx:326
 msgid "Info"
 msgstr "Info"
 
-#: src/pages/examples.tsx:320
+#: src/pages/examples.tsx:323
 msgid "Info notification!"
 msgstr "Info notification!"
 
-#: src/pages/examples.tsx:203
+#: src/pages/examples.tsx:206
 msgid "Interactive"
 msgstr "Interactive"
 
-#: src/pages/examples.tsx:260
+#: src/pages/examples.tsx:263
 msgid "Interactive data table with sorting, actions, and custom rendering"
 msgstr "Interactive data table with sorting, actions, and custom rendering"
 
 #: src/entities/form/model/validation-rules.ts:13
-#: src/features/users/components/user-form-modal.tsx:23
+#: src/features/users/components/user-form-modal.tsx:28
 msgid "Invalid email address"
 msgstr "Invalid email address"
 
-#: src/entities/form/model/validation-rules.ts:67
+#: src/entities/form/model/validation-rules.ts:69
 msgid "Invalid phone number"
 msgstr "Invalid phone number"
 
-#: src/entities/form/model/validation-rules.ts:78
+#: src/entities/form/model/validation-rules.ts:80
 msgid "Invalid URL"
 msgstr "Invalid URL"
 
-#: src/features/users/components/user-form-modal.tsx:196
+#: src/features/users/components/user-form-modal.tsx:231
 msgid "Last Name"
 msgstr "Last Name"
 
-#: src/features/users/components/user-form-modal.tsx:25
+#: src/features/users/components/user-form-modal.tsx:30
 msgid "Last name must be at least 2 characters"
 msgstr "Last name must be at least 2 characters"
 
-#: src/pages/about.tsx:50
+#: src/pages/about.tsx:51
 msgid "Latest React with concurrent features and improved performance"
 msgstr "Latest React with concurrent features and improved performance"
 
@@ -381,7 +416,7 @@ msgstr "Latest React with concurrent features and improved performance"
 msgid "Learn more about the technologies and architecture used in this project"
 msgstr "Learn more about the technologies and architecture used in this project"
 
-#: src/pages/about.tsx:56
+#: src/pages/about.tsx:59
 msgid "Lightning-fast development server with instant HMR"
 msgstr "Lightning-fast development server with instant HMR"
 
@@ -395,15 +430,15 @@ msgid "Log MSW requests to console"
 msgstr "Log MSW requests to console"
 
 #: src/features/users/components/user-form-modal.tsx:44
-msgid "Manager"
-msgstr "Manager"
+#~ msgid "Manager"
+#~ msgstr "Manager"
 
 #: src/pages/__root.tsx:26
 #: src/widgets/header/ui/header.tsx:8
 msgid "Mantine UI Template"
 msgstr "Mantine UI Template"
 
-#: src/pages/about.tsx:59
+#: src/pages/about.tsx:62
 msgid "Mantine UI:"
 msgstr "Mantine UI:"
 
@@ -411,7 +446,7 @@ msgstr "Mantine UI:"
 msgid "Modern"
 msgstr "Modern"
 
-#: src/pages/about.tsx:59
+#: src/pages/about.tsx:63
 msgid "Modern React components library with comprehensive theming"
 msgstr "Modern React components library with comprehensive theming"
 
@@ -419,7 +454,7 @@ msgstr "Modern React components library with comprehensive theming"
 msgid "MSW Dev Tools"
 msgstr "MSW Dev Tools"
 
-#: src/entities/form/model/validation-rules.ts:86
+#: src/entities/form/model/validation-rules.ts:88
 msgid "Must be a number"
 msgstr "Must be a number"
 
@@ -427,11 +462,11 @@ msgstr "Must be a number"
 msgid "Must be at least {min} characters"
 msgstr "Must be at least {min} characters"
 
-#: src/entities/form/model/validation-rules.ts:31
+#: src/entities/form/model/validation-rules.ts:32
 msgid "Must be no more than {max} characters"
 msgstr "Must be no more than {max} characters"
 
-#: src/entities/form/model/validation-rules.ts:95
+#: src/entities/form/model/validation-rules.ts:97
 msgid "Must contain only letters and numbers"
 msgstr "Must contain only letters and numbers"
 
@@ -443,16 +478,16 @@ msgstr "Name"
 msgid "Navigation"
 msgstr "Navigation"
 
-#: src/features/users/components/users-data-grid.tsx:199
-#: src/pages/examples.tsx:276
+#: src/features/users/components/users-data-grid.tsx:239
+#: src/pages/examples.tsx:279
 msgid "No users found"
 msgstr "No users found"
 
-#: src/pages/examples.tsx:282
+#: src/pages/examples.tsx:285
 msgid "Notification Examples"
 msgstr "Notification Examples"
 
-#: src/pages/about.tsx:84
+#: src/pages/about.tsx:91
 msgid "Organized by business features rather than technical layers"
 msgstr "Organized by business features rather than technical layers"
 
@@ -460,36 +495,36 @@ msgstr "Organized by business features rather than technical layers"
 msgid "Page Not Found"
 msgstr "Page Not Found"
 
-#: src/features/users/components/user-form-modal.tsx:205
+#: src/features/users/components/user-form-modal.tsx:240
 msgid "Password"
 msgstr "Password"
 
-#: src/features/users/components/user-form-modal.tsx:122
+#: src/features/users/components/user-form-modal.tsx:156
 msgid "Password is required for new users"
 msgstr "Password is required for new users"
 
-#: src/entities/form/model/validation-rules.ts:39
-#: src/features/users/components/user-form-modal.tsx:28
+#: src/entities/form/model/validation-rules.ts:41
+#: src/features/users/components/user-form-modal.tsx:33
 msgid "Password must be at least 8 characters"
 msgstr "Password must be at least 8 characters"
 
-#: src/entities/form/model/validation-rules.ts:42
+#: src/entities/form/model/validation-rules.ts:44
 msgid "Password must contain at least one lowercase letter"
 msgstr "Password must contain at least one lowercase letter"
 
-#: src/entities/form/model/validation-rules.ts:48
+#: src/entities/form/model/validation-rules.ts:50
 msgid "Password must contain at least one number"
 msgstr "Password must contain at least one number"
 
-#: src/entities/form/model/validation-rules.ts:45
+#: src/entities/form/model/validation-rules.ts:47
 msgid "Password must contain at least one uppercase letter"
 msgstr "Password must contain at least one uppercase letter"
 
-#: src/entities/form/model/validation-rules.ts:57
+#: src/entities/form/model/validation-rules.ts:59
 msgid "Passwords do not match"
 msgstr "Passwords do not match"
 
-#: src/pages/about.tsx:65
+#: src/pages/about.tsx:71
 msgid "Powerful data synchronization and caching"
 msgstr "Powerful data synchronization and caching"
 
@@ -497,7 +532,7 @@ msgstr "Powerful data synchronization and caching"
 msgid "React 19:"
 msgstr "React 19:"
 
-#: src/pages/about.tsx:107
+#: src/pages/about.tsx:117
 msgid "Ready to start building? Check out the documentation and source code."
 msgstr "Ready to start building? Check out the documentation and source code."
 
@@ -509,11 +544,11 @@ msgstr "Response delay (ms)"
 msgid "Retrying..."
 msgstr "Retrying..."
 
-#: src/pages/examples.tsx:239
+#: src/pages/examples.tsx:242
 msgid "Reusable"
 msgstr "Reusable"
 
-#: src/pages/examples.tsx:200
+#: src/pages/examples.tsx:203
 msgid "Reusable form components with validation, built using Mantine Form and custom validation rules."
 msgstr "Reusable form components with validation, built using Mantine Form and custom validation rules."
 
@@ -521,15 +556,18 @@ msgstr "Reusable form components with validation, built using Mantine Form and c
 msgid "Revenue"
 msgstr "Revenue"
 
-#: src/features/users/components/user-form-modal.tsx:214
-#: src/features/users/components/users-data-grid.tsx:115
 #: src/pages/examples.tsx:111
 msgid "Role"
 msgstr "Role"
 
 #: src/features/users/components/user-form-modal.tsx:30
-msgid "Role is required"
-msgstr "Role is required"
+#~ msgid "Role is required"
+#~ msgstr "Role is required"
+
+#: src/features/users/components/user-form-modal.tsx:249
+#: src/features/users/components/users-data-grid.tsx:120
+msgid "Roles"
+msgstr "Roles"
 
 #: src/shared/ui/msw-dev-tools.tsx:57
 msgid "Running"
@@ -540,21 +578,25 @@ msgid "Sample Form"
 msgstr "Sample Form"
 
 #: src/features/sample-form/ui/sample-form-feature.tsx:60
-#: src/pages/examples.tsx:247
+#: src/pages/examples.tsx:250
 msgid "Sample Form Feature"
 msgstr "Sample Form Feature"
 
-#: src/pages/about.tsx:74
+#: src/pages/about.tsx:80
 msgid "Scalable"
 msgstr "Scalable"
 
-#: src/features/users/components/users-data-grid.tsx:182
+#: src/features/users/components/users-data-grid.tsx:222
 msgid "Search users..."
 msgstr "Search users..."
 
 #: src/features/users/components/user-form-modal.tsx:215
-msgid "Select user role"
-msgstr "Select user role"
+#~ msgid "Select user role"
+#~ msgstr "Select user role"
+
+#: src/features/users/components/user-form-modal.tsx:250
+msgid "Select user roles"
+msgstr "Select user roles"
 
 #: src/shared/ui/loading-state/loading-state.tsx:189
 msgid "Server is temporarily unavailable. Please try again"
@@ -568,14 +610,15 @@ msgstr "Simulate network latency"
 msgid "Something went wrong. Please try again"
 msgstr "Something went wrong. Please try again"
 
-#: src/pages/examples.tsx:218
+#: src/pages/examples.tsx:221
 msgid "Sortable, filterable data tables with pagination and custom cell rendering."
 msgstr "Sortable, filterable data tables with pagination and custom cell rendering."
 
-#: src/pages/examples.tsx:175
+#: src/pages/examples.tsx:178
 msgid "Sorting by {key} in {direction} order"
 msgstr "Sorting by {key} in {direction} order"
 
+#: src/features/users/components/users-data-grid.tsx:130
 #: src/pages/examples.tsx:125
 msgid "Status"
 msgstr "Status"
@@ -592,22 +635,26 @@ msgstr "Submit"
 msgid "Submit Failed"
 msgstr "Submit Failed"
 
-#: src/features/users/components/user-form-modal.tsx:103
-#: src/features/users/components/user-form-modal.tsx:140
-#: src/features/users/components/users-data-grid.tsx:64
-#: src/pages/examples.tsx:297
+#: src/features/users/components/user-form-modal.tsx:136
+#: src/features/users/components/user-form-modal.tsx:174
+#: src/features/users/components/users-data-grid.tsx:67
+#: src/pages/examples.tsx:300
 msgid "Success"
 msgstr "Success"
 
-#: src/pages/examples.tsx:293
+#: src/pages/examples.tsx:296
 msgid "Success notification!"
 msgstr "Success notification!"
 
-#: src/pages/about.tsx:65
+#: src/features/users/components/user-form-modal.tsx:52
+msgid "Super Admin"
+msgstr "Super Admin"
+
+#: src/pages/about.tsx:70
 msgid "TanStack Query:"
 msgstr "TanStack Query:"
 
-#: src/pages/about.tsx:62
+#: src/pages/about.tsx:66
 msgid "TanStack Router:"
 msgstr "TanStack Router:"
 
@@ -615,15 +662,15 @@ msgstr "TanStack Router:"
 msgid "Technology Stack"
 msgstr "Technology Stack"
 
-#: src/pages/examples.tsx:285
+#: src/pages/examples.tsx:288
 msgid "Test different types of notifications"
 msgstr "Test different types of notifications"
 
-#: src/pages/about.tsx:90
+#: src/pages/about.tsx:98
 msgid "Testing Ready:"
 msgstr "Testing Ready:"
 
-#: src/pages/about.tsx:90
+#: src/pages/about.tsx:99
 msgid "testing setup with Vitest and Playwright"
 msgstr "testing setup with Vitest and Playwright"
 
@@ -635,11 +682,11 @@ msgstr "The page you are looking for might have been removed, had its name chang
 msgid "The request timed out. Please try again"
 msgstr "The request timed out. Please try again"
 
-#: src/features/users/components/users-data-grid.tsx:55
+#: src/features/users/components/users-data-grid.tsx:58
 msgid "This action cannot be undone."
 msgstr "This action cannot be undone."
 
-#: src/pages/examples.tsx:250
+#: src/pages/examples.tsx:253
 msgid "This demonstrates a complete feature implementation following Feature-Sliced Design principles."
 msgstr "This demonstrates a complete feature implementation following Feature-Sliced Design principles."
 
@@ -667,23 +714,23 @@ msgstr "Total Users"
 msgid "Try Again"
 msgstr "Try Again"
 
-#: src/pages/about.tsx:87
+#: src/pages/about.tsx:94
 msgid "Type Safety:"
 msgstr "Type Safety:"
 
-#: src/pages/about.tsx:53
+#: src/pages/about.tsx:55
 msgid "Type-safe development with enhanced developer experience"
 msgstr "Type-safe development with enhanced developer experience"
 
-#: src/pages/about.tsx:62
+#: src/pages/about.tsx:67
 msgid "Type-safe routing with code splitting"
 msgstr "Type-safe routing with code splitting"
 
-#: src/pages/about.tsx:53
+#: src/pages/about.tsx:54
 msgid "TypeScript:"
 msgstr "TypeScript:"
 
-#: src/pages/examples.tsx:233
+#: src/pages/examples.tsx:236
 msgid "UI Components"
 msgstr "UI Components"
 
@@ -691,56 +738,79 @@ msgstr "UI Components"
 msgid "Unhandled requests"
 msgstr "Unhandled requests"
 
-#: src/features/users/components/user-form-modal.tsx:235
+#: src/features/users/components/users-data-grid.tsx:146
+msgid "Unverified"
+msgstr "Unverified"
+
+#: src/features/users/components/user-form-modal.tsx:287
 msgid "Update"
 msgstr "Update"
 
-#: src/features/users/components/user-form-modal.tsx:225
+#: src/features/users/components/user-form-modal.tsx:276
 msgid "Updated:"
 msgstr "Updated:"
 
-#: src/features/users/components/user-form-modal.tsx:43
-#: src/features/users/components/user-form-modal.tsx:235
-#: src/features/users/components/users-data-grid.tsx:98
+#: src/features/users/components/user-form-modal.tsx:50
+#: src/features/users/components/user-form-modal.tsx:287
+#: src/features/users/components/users-data-grid.tsx:103
 #: src/pages/examples.tsx:89
 msgid "User"
 msgstr "User"
 
-#: src/features/users/components/user-form-modal.tsx:141
+#: src/features/users/components/user-form-modal.tsx:260
+msgid "User can log in and access the system"
+msgstr "User can log in and access the system"
+
+#: src/features/users/components/user-form-modal.tsx:175
 msgid "User created successfully"
 msgstr "User created successfully"
 
-#: src/features/users/components/users-data-grid.tsx:65
+#: src/features/users/components/users-data-grid.tsx:68
 msgid "User deleted successfully"
 msgstr "User deleted successfully"
 
-#: src/features/users/components/users-data-grid.tsx:175
+#: src/features/users/components/users-data-grid.tsx:213
 #: src/widgets/sidebar/ui/sidebar.tsx:39
 msgid "User Management"
 msgstr "User Management"
 
-#: src/features/users/components/user-form-modal.tsx:104
+#: src/features/users/components/user-form-modal.tsx:137
 msgid "User updated successfully"
 msgstr "User updated successfully"
 
-#: src/features/users/components/user-form-modal.tsx:173
+#: src/features/users/components/user-form-modal.tsx:265
+msgid "User's email address has been verified"
+msgstr "User's email address has been verified"
+
+#: src/features/users/components/user-form-modal.tsx:208
 msgid "Username"
 msgstr "Username"
 
-#: src/features/users/components/user-form-modal.tsx:22
+#: src/features/users/components/user-form-modal.tsx:27
 msgid "Username must be at least 3 characters"
 msgstr "Username must be at least 3 characters"
 
-#: src/pages/about.tsx:118
+#: src/features/users/components/users-data-grid.tsx:146
+msgid "Verified"
+msgstr "Verified"
+
+#: src/pages/about.tsx:128
 msgid "View on GitHub"
 msgstr "View on GitHub"
 
-#. placeholder {0}: record.name
-#: src/pages/examples.tsx:141
-msgid "Viewing {0}"
-msgstr "Viewing {0}"
+#: src/features/users/components/users-data-grid.tsx:190
+msgid "View only"
+msgstr "View only"
 
-#: src/pages/about.tsx:56
+#: src/pages/examples.tsx:141
+#~ msgid "Viewing {0}"
+#~ msgstr "Viewing {0}"
+
+#: src/pages/examples.tsx:142
+msgid "Viewing {userName}"
+msgstr "Viewing {userName}"
+
+#: src/pages/about.tsx:58
 msgid "Vite:"
 msgstr "Vite:"
 
@@ -748,11 +818,11 @@ msgstr "Vite:"
 msgid "Warn (log warning)"
 msgstr "Warn (log warning)"
 
-#: src/pages/examples.tsx:315
+#: src/pages/examples.tsx:318
 msgid "Warning"
 msgstr "Warning"
 
-#: src/pages/examples.tsx:311
+#: src/pages/examples.tsx:314
 msgid "Warning notification!"
 msgstr "Warning notification!"
 

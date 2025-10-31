@@ -104,16 +104,18 @@ export function MSWDemoPage() {
                 <Card key={user.id} withBorder padding="sm">
                   <Group>
                     <div>
-                      <Text fw={500}>{user.name}</Text>
+                      <Text fw={500}>
+                        {user.firstName} {user.lastName}
+                      </Text>
                       <Text size="sm" c="dimmed">
                         {user.email}
                       </Text>
                     </div>
                     <Badge
-                      color={user.role === "admin" ? "red" : "blue"}
+                      color={user.roles.includes("ADMIN") ? "red" : "blue"}
                       variant="light"
                     >
-                      {user.role}
+                      {user.roles.join(", ")}
                     </Badge>
                   </Group>
                 </Card>

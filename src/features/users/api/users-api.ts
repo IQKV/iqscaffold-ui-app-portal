@@ -1,16 +1,15 @@
-import { api } from "@/shared/lib";
+import { apiClient } from "@/shared/api";
+import { getAuthConfig } from "@/app/config";
 
 export interface User {
-  id: string;
+  id: number;
   username: string;
-  name: string;
   email: string;
   firstName: string;
   lastName: string;
-  avatar?: string;
-  role: string;
-  roles: string[];
+  enabled: boolean;
   emailVerified: boolean;
+  roles: string[];
   tenantId: string;
   createdAt: string;
   updatedAt?: string;
@@ -22,7 +21,7 @@ export interface CreateUserRequest {
   password: string;
   firstName: string;
   lastName: string;
-  role?: string;
+  roles?: string[];
   tenantId?: string;
 }
 
@@ -31,8 +30,9 @@ export interface UpdateUserRequest {
   email?: string;
   firstName?: string;
   lastName?: string;
-  role?: string;
+  enabled?: boolean;
   emailVerified?: boolean;
+  roles?: string[];
 }
 
 export interface UsersResponse {
@@ -52,6 +52,19 @@ export interface UserResponse {
 }
 
 /**
+ * Get authorization headers with tenant ID and access token
+ */
+function getAuthHeaders() {
+  const config = getAuthConfig();
+  const accessToken = localStorage.getItem(config.tokenStorage.accessTokenKey);
+
+  return {
+    Authorization: accessToken ? `Bearer ${accessToken}` : "",
+    "X-Tenant-ID": "default",
+  };
+}
+
+/**
  * Fetch users with pagination and search
  */
 export async function fetchUsers(
@@ -61,75 +74,65 @@ export async function fetchUsers(
     search?: string;
   } = {}
 ): Promise<UsersResponse> {
-  const { data } = await api.get<UsersResponse>("/api/v1/users", {
+  const response = await apiClient.get<UsersResponse>("/api/v1/users", {
     params,
-    headers: {
-      "X-Tenant-ID": "default",
-    },
+    headers: getAuthHeaders(),
   });
-  return data;
+  return response.data;
 }
 
 /**
  * Fetch user by ID
  */
-export async function fetchUser(id: string): Promise<UserResponse> {
-  const { data } = await api.get<UserResponse>(`/api/v1/users/${id}`, {
-    headers: {
-      "X-Tenant-ID": "default",
-    },
+export async function fetchUser(id: number): Promise<UserResponse> {
+  const response = await apiClient.get<UserResponse>(`/api/v1/users/${id}`, {
+    headers: getAuthHeaders(),
   });
-  return data;
+  return response.data;
 }
 
 /**
- * Create a new user
+ * Create a new user (Admin/Super Admin only)
  */
 export async function createUser(
   userData: CreateUserRequest
 ): Promise<UserResponse> {
-  const { data } = await api.post<UserResponse>(
-    "/api/v1/auth/signup",
+  const response = await apiClient.post<UserResponse>(
+    "/api/v1/users",
     userData,
     {
-      headers: {
-        "X-Tenant-ID": "default",
-      },
+      headers: getAuthHeaders(),
     }
   );
-  return data;
+  return response.data;
 }
 
 /**
- * Update user
+ * Update user (Admin/Super Admin only)
  */
 export async function updateUser(
-  id: string,
+  id: number,
   userData: UpdateUserRequest
 ): Promise<UserResponse> {
-  const { data } = await api.put<UserResponse>(
+  const response = await apiClient.put<UserResponse>(
     `/api/v1/users/${id}`,
     userData,
     {
-      headers: {
-        "X-Tenant-ID": "default",
-      },
+      headers: getAuthHeaders(),
     }
   );
-  return data;
+  return response.data;
 }
 
 /**
- * Delete user
+ * Delete user (Admin/Super Admin only)
  */
-export async function deleteUser(id: string): Promise<{ message: string }> {
-  const { data } = await api.delete<{ message: string }>(
+export async function deleteUser(id: number): Promise<{ message: string }> {
+  const response = await apiClient.delete<{ message: string }>(
     `/api/v1/users/${id}`,
     {
-      headers: {
-        "X-Tenant-ID": "default",
-      },
+      headers: getAuthHeaders(),
     }
   );
-  return data;
+  return response.data;
 }

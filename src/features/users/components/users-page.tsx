@@ -1,13 +1,32 @@
 import { useState } from "react";
-import { Container } from "@mantine/core";
+import { Container, Alert, Text } from "@mantine/core";
+import { IconLock } from "@tabler/icons-react";
 import { UsersDataGrid } from "./users-data-grid";
 import { UserFormModal } from "./user-form-modal";
 import { User } from "../api/users-api";
+import { useAuth, UserManagementGuard } from "@/shared/lib";
 import { t } from "@lingui/core/macro";
 
 export function UsersPage() {
   const [modalOpened, setModalOpened] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const { isAuthenticated } = useAuth();
+
+  // Check if user has access to view users page
+  if (!isAuthenticated) {
+    return (
+      <Container size="xl" py="md">
+        <Alert
+          variant="light"
+          color="red"
+          title="Access Denied"
+          icon={<IconLock size={16} />}
+        >
+          <Text size="sm">You must be logged in to view this page.</Text>
+        </Alert>
+      </Container>
+    );
+  }
 
   const handleCreateUser = () => {
     setSelectedUser(null);
@@ -33,12 +52,14 @@ export function UsersPage() {
         onEditUser={handleEditUser}
       />
 
-      <UserFormModal
-        opened={modalOpened}
-        onClose={handleCloseModal}
-        user={selectedUser}
-        title={modalTitle}
-      />
+      <UserManagementGuard>
+        <UserFormModal
+          opened={modalOpened}
+          onClose={handleCloseModal}
+          user={selectedUser}
+          title={modalTitle}
+        />
+      </UserManagementGuard>
     </Container>
   );
 }

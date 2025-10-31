@@ -3,11 +3,14 @@ import {
   Modal,
   Button,
   TextInput,
-  Select,
+  MultiSelect,
   Group,
   Stack,
   Text,
+  Switch,
+  Alert,
 } from "@mantine/core";
+import { IconLock } from "@tabler/icons-react";
 import { useForm, zodResolver } from "@mantine/form";
 import { z } from "zod";
 import { User, CreateUserRequest, UpdateUserRequest } from "../api/users-api";
@@ -15,6 +18,7 @@ import {
   useCreateUserMutation,
   useUpdateUserMutation,
 } from "../hooks/use-users-query";
+import { useAuth } from "@/shared/lib";
 import { notifications } from "@mantine/notifications";
 import { t } from "@lingui/core/macro";
 
@@ -28,7 +32,9 @@ const createUserFormSchema = () =>
       .string()
       .min(8, t`Password must be at least 8 characters`)
       .optional(),
-    role: z.string().min(1, t`Role is required`),
+    roles: z.array(z.string()).min(1, t`At least one role is required`),
+    enabled: z.boolean(),
+    emailVerified: z.boolean(),
   });
 
 type UserFormData = z.infer<ReturnType<typeof createUserFormSchema>>;
@@ -41,9 +47,9 @@ interface UserFormModalProps {
 }
 
 const getRoleOptions = () => [
-  { value: "user", label: t`User` },
-  { value: "manager", label: t`Manager` },
-  { value: "admin", label: t`Admin` },
+  { value: "USER", label: t`User` },
+  { value: "ADMIN", label: t`Admin` },
+  { value: "SUPER_ADMIN", label: t`Super Admin` },
 ];
 
 export function UserFormModal({
@@ -54,6 +60,7 @@ export function UserFormModal({
 }: UserFormModalProps) {
   const createUserMutation = useCreateUserMutation();
   const updateUserMutation = useUpdateUserMutation();
+  const { canManageUsers } = useAuth();
 
   const isEditing = !!user;
   const isLoading =
@@ -67,7 +74,9 @@ export function UserFormModal({
       firstName: "",
       lastName: "",
       password: "",
-      role: "user",
+      roles: ["USER"],
+      enabled: true,
+      emailVerified: false,
     },
   });
 
@@ -78,13 +87,34 @@ export function UserFormModal({
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
-        role: user.role,
+        roles: user.roles || ["USER"],
+        enabled: user.enabled,
+        emailVerified: user.emailVerified,
         password: "", // Don't populate password for editing
       });
     } else {
       form.reset();
     }
   }, [user, opened, form]);
+
+  // Check if user has permission to create/update users
+  if (!canManageUsers()) {
+    return (
+      <Modal opened={opened} onClose={onClose} title={title} size="md" centered>
+        <Alert
+          variant="light"
+          color="red"
+          title="Access Denied"
+          icon={<IconLock size={16} />}
+        >
+          <Text size="sm">
+            You need administrator privileges to {isEditing ? "edit" : "create"}{" "}
+            users.
+          </Text>
+        </Alert>
+      </Modal>
+    );
+  }
 
   const handleSubmit = (values: UserFormData) => {
     if (isEditing && user) {
@@ -93,7 +123,9 @@ export function UserFormModal({
         email: values.email,
         firstName: values.firstName,
         lastName: values.lastName,
-        role: values.role,
+        roles: values.roles,
+        enabled: values.enabled,
+        emailVerified: values.emailVerified,
       };
 
       updateUserMutation.mutate(
@@ -133,7 +165,7 @@ export function UserFormModal({
         firstName: values.firstName,
         lastName: values.lastName,
         password: values.password,
-        role: values.role,
+        roles: values.roles,
       };
 
       createUserMutation.mutate(createData, {
@@ -213,13 +245,28 @@ export function UserFormModal({
             />
           )}
 
-          <Select
-            label={t`Role`}
-            placeholder={t`Select user role`}
+          <MultiSelect
+            label={t`Roles`}
+            placeholder={t`Select user roles`}
             required
             data={getRoleOptions()}
-            {...form.getInputProps("role")}
+            {...form.getInputProps("roles")}
           />
+
+          {isEditing && (
+            <Group grow>
+              <Switch
+                label={t`Enabled`}
+                description={t`User can log in and access the system`}
+                {...form.getInputProps("enabled", { type: "checkbox" })}
+              />
+              <Switch
+                label={t`Email Verified`}
+                description={t`User's email address has been verified`}
+                {...form.getInputProps("emailVerified", { type: "checkbox" })}
+              />
+            </Group>
+          )}
 
           {isEditing && (
             <Text size="sm" c="dimmed">

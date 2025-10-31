@@ -13,7 +13,7 @@ import { i18n } from "@lingui/core";
 // Import the generated route tree
 import { routeTree } from "@/routeTree.gen";
 import { theme } from "./theme";
-import { queryClient } from "@/shared/lib";
+import { queryClient, AuthProvider } from "@/shared/lib";
 
 import { ErrorBoundary } from "@/shared/ui";
 import { MSWDevTools } from "@/shared/ui/msw-dev-tools";
@@ -64,9 +64,11 @@ export function App() {
               <ModalsProvider modals={{ confirmation: ConfirmContextModal }}>
                 <Notifications />
                 <QueryClientProvider client={queryClient}>
-                  <RouterProvider router={router} />
-                  <ReactQueryDevtools initialIsOpen={false} />
-                  <MSWDevTools />
+                  <AuthProvider>
+                    <RouterProvider router={router} />
+                    <ReactQueryDevtools initialIsOpen={false} />
+                    <MSWDevTools />
+                  </AuthProvider>
                 </QueryClientProvider>
               </ModalsProvider>
             </MantineProvider>

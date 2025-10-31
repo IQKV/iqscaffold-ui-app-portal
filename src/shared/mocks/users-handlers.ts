@@ -8,68 +8,63 @@ import {
 // Mock data
 const mockUsers: User[] = [
   {
-    id: "1",
+    id: 1,
     username: "john_doe",
-    name: "John Doe",
     email: "john.doe@example.com",
     firstName: "John",
     lastName: "Doe",
-    role: "admin",
-    roles: ["admin", "user"],
+    enabled: true,
+    roles: ["ADMIN", "USER"],
     emailVerified: true,
     tenantId: "default",
     createdAt: "2024-01-15T10:30:00Z",
     updatedAt: "2024-01-20T14:45:00Z",
   },
   {
-    id: "2",
+    id: 2,
     username: "jane_smith",
-    name: "Jane Smith",
     email: "jane.smith@example.com",
     firstName: "Jane",
     lastName: "Smith",
-    role: "manager",
-    roles: ["manager", "user"],
+    enabled: true,
+    roles: ["USER"],
     emailVerified: true,
     tenantId: "default",
     createdAt: "2024-01-16T09:15:00Z",
     updatedAt: "2024-01-18T11:20:00Z",
   },
   {
-    id: "3",
+    id: 3,
     username: "bob_wilson",
-    name: "Bob Wilson",
     email: "bob.wilson@example.com",
     firstName: "Bob",
     lastName: "Wilson",
-    role: "user",
-    roles: ["user"],
+    enabled: true,
+    roles: ["USER"],
     emailVerified: false,
     tenantId: "default",
     createdAt: "2024-01-17T16:45:00Z",
   },
   {
-    id: "4",
+    id: 4,
     username: "alice_brown",
-    name: "Alice Brown",
     email: "alice.brown@example.com",
     firstName: "Alice",
     lastName: "Brown",
-    role: "user",
-    roles: ["user"],
+    enabled: true,
+    roles: ["USER"],
     emailVerified: true,
     tenantId: "default",
     createdAt: "2024-01-18T08:30:00Z",
   },
   {
-    id: "5",
+    id: 5,
     username: "charlie_davis",
-    name: "Charlie Davis",
     email: "charlie.davis@example.com",
     firstName: "Charlie",
     lastName: "Davis",
-    role: "manager",
-    roles: ["manager", "user"],
+    enabled: true,
+    roles: ["SUPER_ADMIN"],
     emailVerified: true,
     tenantId: "default",
     createdAt: "2024-01-19T13:20:00Z",
@@ -98,7 +93,7 @@ export const usersHandlers = [
           user.lastName.toLowerCase().includes(searchLower) ||
           user.username.toLowerCase().includes(searchLower) ||
           user.email.toLowerCase().includes(searchLower) ||
-          user.role.toLowerCase().includes(searchLower)
+          user.roles.some((role) => role.toLowerCase().includes(searchLower))
       );
     }
 
@@ -125,7 +120,8 @@ export const usersHandlers = [
   // Get user by ID
   http.get("/api/v1/users/:id", ({ params }) => {
     const { id } = params;
-    const user = users.find((u) => u.id === id);
+    const userId = parseInt(id as string, 10);
+    const user = users.find((u) => u.id === userId);
 
     if (!user) {
       return HttpResponse.json({ error: "User not found" }, { status: 404 });
@@ -152,19 +148,13 @@ export const usersHandlers = [
     }
 
     const newUser: User = {
-      id: nextId.toString(),
+      id: nextId,
       username: body.username,
-      name: `${body.firstName} ${body.lastName}`,
       email: body.email,
       firstName: body.firstName,
       lastName: body.lastName,
-      role: body.role || "user",
-      roles:
-        body.role === "admin"
-          ? ["admin", "user"]
-          : body.role === "manager"
-            ? ["manager", "user"]
-            : ["user"],
+      enabled: true,
+      roles: body.roles || ["USER"],
       emailVerified: false,
       tenantId: body.tenantId || "default",
       createdAt: new Date().toISOString(),
@@ -181,8 +171,9 @@ export const usersHandlers = [
   http.put("/api/v1/users/:id", async ({ params, request }) => {
     const { id } = params;
     const body = (await request.json()) as any;
+    const userId = parseInt(id as string, 10);
 
-    const userIndex = users.findIndex((u) => u.id === id);
+    const userIndex = users.findIndex((u) => u.id === userId);
 
     if (userIndex === -1) {
       return HttpResponse.json({ error: "User not found" }, { status: 404 });
@@ -192,7 +183,7 @@ export const usersHandlers = [
     if (body.username || body.email) {
       const conflictingUser = users.find(
         (u) =>
-          u.id !== id &&
+          u.id !== userId &&
           ((body.username && u.username === body.username) ||
             (body.email && u.email === body.email))
       );
@@ -208,18 +199,7 @@ export const usersHandlers = [
     const updatedUser: User = {
       ...users[userIndex],
       ...body,
-      name:
-        body.firstName && body.lastName
-          ? `${body.firstName} ${body.lastName}`
-          : users[userIndex].name,
-      roles:
-        body.role === "admin"
-          ? ["admin", "user"]
-          : body.role === "manager"
-            ? ["manager", "user"]
-            : body.role === "user"
-              ? ["user"]
-              : users[userIndex].roles,
+      roles: body.roles || users[userIndex].roles,
       updatedAt: new Date().toISOString(),
     };
 
@@ -232,7 +212,8 @@ export const usersHandlers = [
   // Delete user
   http.delete("/api/v1/users/:id", ({ params }) => {
     const { id } = params;
-    const userIndex = users.findIndex((u) => u.id === id);
+    const userId = parseInt(id as string, 10);
+    const userIndex = users.findIndex((u) => u.id === userId);
 
     if (userIndex === -1) {
       return HttpResponse.json({ error: "User not found" }, { status: 404 });

@@ -5,10 +5,16 @@ import {
   stopMSWServer,
   resetMSWServer,
 } from "@/shared/mocks/server-exports";
+import { i18n } from "@lingui/core";
+import { messages } from "../locales/en";
 
 // Setup MSW server for testing
 beforeAll(() => {
   startMSWServer();
+
+  // Setup Lingui for tests
+  i18n.load("en", messages);
+  i18n.activate("en");
 });
 
 afterEach(() => {

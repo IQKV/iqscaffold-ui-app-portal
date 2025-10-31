@@ -7,14 +7,13 @@ import { User } from "../api/users-api";
 import { http, HttpResponse } from "msw";
 
 const mockUser: User = {
-  id: "1",
+  id: 1,
   username: "john_doe",
-  name: "John Doe",
   email: "john.doe@example.com",
   firstName: "John",
   lastName: "Doe",
-  role: "admin",
-  roles: ["admin", "user"],
+  enabled: true,
+  roles: ["ADMIN", "USER"],
   emailVerified: true,
   tenantId: "default",
   createdAt: "2024-01-15T10:30:00Z",

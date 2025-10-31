@@ -16,7 +16,7 @@ export const usersKeys = {
   list: (params: Record<string, unknown>) =>
     [...usersKeys.lists(), params] as const,
   details: () => [...usersKeys.all, "detail"] as const,
-  detail: (id: string) => [...usersKeys.details(), id] as const,
+  detail: (id: number) => [...usersKeys.details(), id] as const,
 };
 
 /**
@@ -39,7 +39,7 @@ export function useUsersQuery(
 /**
  * Hook to fetch a single user by ID
  */
-export function useUserQuery(id: string) {
+export function useUserQuery(id: number) {
   return useQuery({
     queryKey: usersKeys.detail(id),
     queryFn: () => fetchUser(id),
@@ -74,7 +74,7 @@ export function useUpdateUserMutation() {
       id,
       userData,
     }: {
-      id: string;
+      id: number;
       userData: UpdateUserRequest;
     }) => updateUser(id, userData),
     onSuccess: (data, { id }) => {
@@ -93,7 +93,7 @@ export function useDeleteUserMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (id: string) => deleteUser(id),
+    mutationFn: (id: number) => deleteUser(id),
     onSuccess: (_, id) => {
       // Remove user from cache
       queryClient.removeQueries({ queryKey: usersKeys.detail(id) });

@@ -81,7 +81,7 @@ describe("useUsersQuery", () => {
 
 describe("useUserQuery", () => {
   it("fetches single user successfully", async () => {
-    const { result } = renderHook(() => useUserQuery("1"), {
+    const { result } = renderHook(() => useUserQuery(1), {
       wrapper: createWrapper(),
     });
 
@@ -89,7 +89,7 @@ describe("useUserQuery", () => {
       expect(result.current.isSuccess).toBe(true);
     });
 
-    expect(result.current.data?.data.id).toBe("1");
+    expect(result.current.data?.data.id).toBe(1);
     expect(result.current.data?.data.firstName).toBe("John");
   });
 
@@ -100,7 +100,7 @@ describe("useUserQuery", () => {
       })
     );
 
-    const { result } = renderHook(() => useUserQuery("999"), {
+    const { result } = renderHook(() => useUserQuery(999), {
       wrapper: createWrapper(),
     });
 
@@ -110,7 +110,7 @@ describe("useUserQuery", () => {
   });
 
   it("does not fetch when id is empty", () => {
-    const { result } = renderHook(() => useUserQuery(""), {
+    const { result } = renderHook(() => useUserQuery(0), {
       wrapper: createWrapper(),
     });
 
@@ -181,7 +181,7 @@ describe("useUpdateUserMutation", () => {
     });
 
     const updateData = {
-      id: "1",
+      id: 1,
       userData: {
         firstName: "Johnny",
         lastName: "Doe",
@@ -209,7 +209,7 @@ describe("useUpdateUserMutation", () => {
     });
 
     const updateData = {
-      id: "999",
+      id: 999,
       userData: {
         firstName: "Updated",
       },
@@ -229,7 +229,7 @@ describe("useDeleteUserMutation", () => {
       wrapper: createWrapper(),
     });
 
-    result.current.mutate("1");
+    result.current.mutate(1);
 
     await waitFor(() => {
       expect(result.current.isSuccess).toBe(true);
@@ -249,7 +249,7 @@ describe("useDeleteUserMutation", () => {
       wrapper: createWrapper(),
     });
 
-    result.current.mutate("999");
+    result.current.mutate(999);
 
     await waitFor(() => {
       expect(result.current.isError).toBe(true);
