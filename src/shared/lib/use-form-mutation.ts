@@ -139,14 +139,16 @@ export function useFormMutation<TData, TVariables, TContext = unknown>(
         form.setErrors(mapped);
 
         // Focus first field with error if enabled
-        if (focusErrorField) {
+        if (focusErrorField && typeof document !== "undefined") {
           const firstErrorField = Object.keys(mapped)[0];
           // Use setTimeout to ensure the error is rendered first
           setTimeout(() => {
-            const element = document.querySelector(
-              `[name="${firstErrorField}"]`
-            ) as HTMLElement;
-            element?.focus();
+            if (typeof document !== "undefined") {
+              const element = document.querySelector(
+                `[name="${firstErrorField}"]`
+              ) as HTMLElement;
+              element?.focus();
+            }
           }, 100);
         }
       }

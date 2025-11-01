@@ -1,7 +1,6 @@
 // Shared UI public API
 export { AppLayout } from "./app-layout";
 export { LoadingOverlay } from "./loading-overlay";
-export { FormField } from "./form-field";
 export {
   DataTable,
   type DataTableColumn,
@@ -38,8 +37,8 @@ export {
 
 export { useLoadingState } from "./loading-state/loading-state-hooks";
 
-// Enhanced form fields
-export { EnhancedFormField } from "./enhanced-form-field/enhanced-form-field";
+// Enhanced form fields - comprehensive form field with Mantine + Zod + Lingui
+export { FormField, EnhancedFormField } from "./enhanced-form-field";
 
 export { useEnhancedFormValidation } from "./enhanced-form-field/validation-utils";
 

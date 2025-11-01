@@ -68,7 +68,7 @@ export function SampleFormFeature() {
       </Card>
 
       <Modal opened={opened} onClose={close} title={t`Sample Form`} centered>
-        <form onSubmit={form.onSubmit(handleSubmit)}>
+        <form onSubmit={form.onSubmit(handleSubmit)} noValidate>
           <Stack>
             <FormField
               type="text"

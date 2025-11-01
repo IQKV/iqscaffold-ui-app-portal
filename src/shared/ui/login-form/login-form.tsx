@@ -1,19 +1,10 @@
 import React from "react";
-import {
-  Paper,
-  Title,
-  TextInput,
-  PasswordInput,
-  Button,
-  Stack,
-  Group,
-  Text,
-  Alert,
-} from "@mantine/core";
+import { Paper, Title, Button, Stack, Group, Text, Alert } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { z } from "zod";
 import { IconLogin, IconAlertCircle } from "@tabler/icons-react";
+import { FormField } from "@/shared/ui";
 import { useAuth } from "@/shared/lib";
 import { notifications } from "@mantine/notifications";
 
@@ -98,20 +89,24 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
         </Text>
       </Alert>
 
-      <form onSubmit={form.onSubmit(handleSubmit)}>
+      <form onSubmit={form.onSubmit(handleSubmit)} noValidate>
         <Stack gap="md">
-          <TextInput
+          <FormField
+            type="text"
+            name="username"
             label="Username"
             placeholder="Enter username"
-            required
-            {...form.getInputProps("username")}
+            form={form}
+            withAsterisk
           />
 
-          <PasswordInput
+          <FormField
+            type="password"
+            name="password"
             label="Password"
             placeholder="Enter password"
-            required
-            {...form.getInputProps("password")}
+            form={form}
+            withAsterisk
           />
 
           <Button

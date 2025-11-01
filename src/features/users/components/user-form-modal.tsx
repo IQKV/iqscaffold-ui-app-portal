@@ -1,19 +1,10 @@
 import { useEffect } from "react";
-import {
-  Modal,
-  Button,
-  TextInput,
-  MultiSelect,
-  Group,
-  Stack,
-  Text,
-  Switch,
-  Alert,
-} from "@mantine/core";
+import { Modal, Button, Group, Stack, Text, Alert } from "@mantine/core";
 import { IconLock } from "@tabler/icons-react";
 import { useForm } from "@mantine/form";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { z } from "zod";
+import { FormField } from "@/shared/ui";
 import { User, CreateUserRequest, UpdateUserRequest } from "../api/users-api";
 import {
   useCreateUserMutation,
@@ -203,68 +194,83 @@ export function UserFormModal({
       size="md"
       centered
     >
-      <form onSubmit={form.onSubmit(handleSubmit)}>
+      <form onSubmit={form.onSubmit(handleSubmit)} noValidate>
         <Stack gap="md">
-          <TextInput
+          <FormField
+            type="text"
+            name="username"
             label={t`Username`}
             placeholder={t`Enter username`}
-            required
-            {...form.getInputProps("username")}
+            form={form}
+            withAsterisk
           />
 
-          <TextInput
+          <FormField
+            type="email"
+            name="email"
             label={t`Email`}
             placeholder={t`Enter email address`}
-            required
-            type="email"
-            {...form.getInputProps("email")}
+            form={form}
+            withAsterisk
           />
 
           <Group grow>
-            <TextInput
+            <FormField
+              type="text"
+              name="firstName"
               label={t`First Name`}
               placeholder={t`Enter first name`}
-              required
-              {...form.getInputProps("firstName")}
+              form={form}
+              withAsterisk
             />
 
-            <TextInput
+            <FormField
+              type="text"
+              name="lastName"
               label={t`Last Name`}
               placeholder={t`Enter last name`}
-              required
-              {...form.getInputProps("lastName")}
+              form={form}
+              withAsterisk
             />
           </Group>
 
           {!isEditing && (
-            <TextInput
+            <FormField
+              type="password"
+              name="password"
               label={t`Password`}
               placeholder={t`Enter password`}
-              required
-              type="password"
-              {...form.getInputProps("password")}
+              form={form}
+              withAsterisk
+              showStrengthIndicator
             />
           )}
 
-          <MultiSelect
+          <FormField
+            type="multiselect"
+            name="roles"
             label={t`Roles`}
             placeholder={t`Select user roles`}
-            required
             data={getRoleOptions()}
-            {...form.getInputProps("roles")}
+            form={form}
+            withAsterisk
           />
 
           {isEditing && (
             <Group grow>
-              <Switch
+              <FormField
+                type="switch"
+                name="enabled"
                 label={t`Enabled`}
                 description={t`User can log in and access the system`}
-                {...form.getInputProps("enabled", { type: "checkbox" })}
+                form={form}
               />
-              <Switch
+              <FormField
+                type="switch"
+                name="emailVerified"
                 label={t`Email Verified`}
                 description={t`User's email address has been verified`}
-                {...form.getInputProps("emailVerified", { type: "checkbox" })}
+                form={form}
               />
             </Group>
           )}
