@@ -1,15 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Container, Title, Stack, Tabs } from "@mantine/core";
 import { IconUser, IconShield, IconLogin, IconCode } from "@tabler/icons-react";
-import { AuthDemo, LoginForm, AuthExamples } from "@/shared/ui";
-import { useAuth } from "@/shared/lib";
+import { AuthDemo, AuthExamples } from "@/shared/ui";
+import { AuthLoginForm, useAuthStore } from "@/processes/auth";
 
 export const Route = createFileRoute("/auth-demo")({
   component: AuthDemoPage,
 });
 
 function AuthDemoPage() {
-  const { isAuthenticated } = useAuth();
+  const status = useAuthStore((s) => s.status);
+  const isAuthenticated = status === "authenticated";
 
   return (
     <Container size="lg" py="md">
@@ -31,7 +32,7 @@ function AuthDemoPage() {
         </Tabs.List>
 
         <Tabs.Panel value="login" pt="md">
-          <LoginForm />
+          <AuthLoginForm />
         </Tabs.Panel>
 
         <Tabs.Panel value="demo" pt="md">

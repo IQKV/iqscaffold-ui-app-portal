@@ -1,7 +1,13 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosInstance } from "axios";
-import { getConfig } from "@/app/config";
+import { getConfig, getAuthConfig } from "@/app/config";
 import { errorFromAxios, formatErrorForDisplay } from "@/shared/lib/http-error";
 import { notificationService } from "@/shared/lib/notifications";
+import {
+  getAccessToken,
+  getRefreshToken,
+  setTokens,
+  clearTokens,
+} from "@/shared/lib/auth-tokens";
 
 const BASE_URL = getConfig("VITE_API_URL_SERVER");
 
@@ -21,6 +27,45 @@ export const apiClient: AxiosInstance = axios.create({
 // Ensure cookies are sent globally
 axios.defaults.withCredentials = true;
 
+// Attach Authorization header from token storage
+apiClient.interceptors.request.use((config) => {
+  const token = getAccessToken();
+  if (token) {
+    config.headers = config.headers ?? {};
+    (config.headers as any).Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// Refresh flow control
+let isRefreshing = false;
+let pendingQueue: Array<{
+  resolve: (token: string | null) => void;
+  reject: (err: any) => void;
+}> = [];
+
+function enqueueRequest(): Promise<string | null> {
+  return new Promise((resolve, reject) =>
+    pendingQueue.push({ resolve, reject })
+  );
+}
+
+function resolveQueue(token: string | null) {
+  pendingQueue.forEach((p) => p.resolve(token));
+  pendingQueue = [];
+}
+
+function rejectQueue(err: any) {
+  pendingQueue.forEach((p) => p.reject(err));
+  pendingQueue = [];
+}
+
+// Dedicated client for token refresh to avoid interceptor recursion
+const refreshClient = axios.create({
+  baseURL: BASE_URL,
+  withCredentials: true,
+});
+
 /**
  * Response interceptor for enhanced error handling with RFC 9457 compliance
  */
@@ -33,6 +78,58 @@ apiClient.interceptors.response.use(
           __suppressGlobalError?: boolean;
         })
       | undefined;
+
+    // If Unauthorized, try refresh flow
+    if (error.response?.status === 401 && original && !original._retry) {
+      original._retry = true;
+
+      if (isRefreshing) {
+        // Wait for ongoing refresh
+        const newToken = await enqueueRequest();
+        if (newToken) {
+          original.headers = original.headers ?? {};
+          (original.headers as any).Authorization = `Bearer ${newToken}`;
+          return apiClient.request(original);
+        }
+        // No token after refresh -> propagate
+        return Promise.reject(error);
+      }
+
+      isRefreshing = true;
+      try {
+        const cfg = getAuthConfig();
+        const refreshToken = getRefreshToken();
+        if (!refreshToken) {
+          clearTokens();
+          resolveQueue(null);
+          return Promise.reject(error);
+        }
+        const res = await refreshClient.post<{
+          accessToken: string;
+          refreshToken: string;
+        }>(cfg.endpoints.refresh, { refreshToken });
+        const accessToken = res.data.accessToken;
+        const newRefreshToken = res.data.refreshToken;
+        // We don't decode here; store raw and let auth store sync
+        setTokens({
+          accessToken,
+          refreshToken: newRefreshToken,
+          expiresAt: null,
+        });
+        resolveQueue(accessToken);
+
+        // Retry original with new token
+        original.headers = original.headers ?? {};
+        (original.headers as any).Authorization = `Bearer ${accessToken}`;
+        return apiClient.request(original);
+      } catch (refreshErr) {
+        clearTokens();
+        rejectQueue(refreshErr);
+        return Promise.reject(refreshErr);
+      } finally {
+        isRefreshing = false;
+      }
+    }
 
     // Convert to RFC 9457 compliant AppError
     const appError = errorFromAxios(error);

@@ -48,6 +48,14 @@ export function Sidebar() {
         leftSection={<IconExposure size="1rem" />}
         active={location.pathname === "/examples"}
       />
+
+      <NavLink
+        component={Link}
+        to="/dashboard"
+        label={t`Dashboard`}
+        leftSection={<IconHome size="1rem" />}
+        active={location.pathname === "/dashboard"}
+      />
     </Stack>
   );
 }

@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from "./pages/__root"
 import { Route as UsersRouteImport } from "./pages/users"
+import { Route as UnauthorizedRouteImport } from "./pages/unauthorized"
 import { Route as ExamplesRouteImport } from "./pages/examples"
+import { Route as DashboardRouteImport } from "./pages/dashboard"
 import { Route as AuthDemoRouteImport } from "./pages/auth-demo"
 import { Route as AboutRouteImport } from "./pages/about"
 import { Route as R404RouteImport } from "./pages/404"
@@ -21,9 +23,19 @@ const UsersRoute = UsersRouteImport.update({
   path: "/users",
   getParentRoute: () => rootRouteImport,
 } as any)
+const UnauthorizedRoute = UnauthorizedRouteImport.update({
+  id: "/unauthorized",
+  path: "/unauthorized",
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExamplesRoute = ExamplesRouteImport.update({
   id: "/examples",
   path: "/examples",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: "/dashboard",
+  path: "/dashboard",
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthDemoRoute = AuthDemoRouteImport.update({
@@ -52,7 +64,9 @@ export interface FileRoutesByFullPath {
   "/404": typeof R404Route
   "/about": typeof AboutRoute
   "/auth-demo": typeof AuthDemoRoute
+  "/dashboard": typeof DashboardRoute
   "/examples": typeof ExamplesRoute
+  "/unauthorized": typeof UnauthorizedRoute
   "/users": typeof UsersRoute
 }
 export interface FileRoutesByTo {
@@ -60,7 +74,9 @@ export interface FileRoutesByTo {
   "/404": typeof R404Route
   "/about": typeof AboutRoute
   "/auth-demo": typeof AuthDemoRoute
+  "/dashboard": typeof DashboardRoute
   "/examples": typeof ExamplesRoute
+  "/unauthorized": typeof UnauthorizedRoute
   "/users": typeof UsersRoute
 }
 export interface FileRoutesById {
@@ -69,21 +85,41 @@ export interface FileRoutesById {
   "/404": typeof R404Route
   "/about": typeof AboutRoute
   "/auth-demo": typeof AuthDemoRoute
+  "/dashboard": typeof DashboardRoute
   "/examples": typeof ExamplesRoute
+  "/unauthorized": typeof UnauthorizedRoute
   "/users": typeof UsersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/404" | "/about" | "/auth-demo" | "/examples" | "/users"
+  fullPaths:
+    | "/"
+    | "/404"
+    | "/about"
+    | "/auth-demo"
+    | "/dashboard"
+    | "/examples"
+    | "/unauthorized"
+    | "/users"
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/404" | "/about" | "/auth-demo" | "/examples" | "/users"
+  to:
+    | "/"
+    | "/404"
+    | "/about"
+    | "/auth-demo"
+    | "/dashboard"
+    | "/examples"
+    | "/unauthorized"
+    | "/users"
   id:
     | "__root__"
     | "/"
     | "/404"
     | "/about"
     | "/auth-demo"
+    | "/dashboard"
     | "/examples"
+    | "/unauthorized"
     | "/users"
   fileRoutesById: FileRoutesById
 }
@@ -92,7 +128,9 @@ export interface RootRouteChildren {
   R404Route: typeof R404Route
   AboutRoute: typeof AboutRoute
   AuthDemoRoute: typeof AuthDemoRoute
+  DashboardRoute: typeof DashboardRoute
   ExamplesRoute: typeof ExamplesRoute
+  UnauthorizedRoute: typeof UnauthorizedRoute
   UsersRoute: typeof UsersRoute
 }
 
@@ -105,11 +143,25 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof UsersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    "/unauthorized": {
+      id: "/unauthorized"
+      path: "/unauthorized"
+      fullPath: "/unauthorized"
+      preLoaderRoute: typeof UnauthorizedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     "/examples": {
       id: "/examples"
       path: "/examples"
       fullPath: "/examples"
       preLoaderRoute: typeof ExamplesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/dashboard": {
+      id: "/dashboard"
+      path: "/dashboard"
+      fullPath: "/dashboard"
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/auth-demo": {
@@ -148,7 +200,9 @@ const rootRouteChildren: RootRouteChildren = {
   R404Route: R404Route,
   AboutRoute: AboutRoute,
   AuthDemoRoute: AuthDemoRoute,
+  DashboardRoute: DashboardRoute,
   ExamplesRoute: ExamplesRoute,
+  UnauthorizedRoute: UnauthorizedRoute,
   UsersRoute: UsersRoute,
 }
 export const routeTree = rootRouteImport

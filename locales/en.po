@@ -52,7 +52,7 @@ msgstr "Add new user clicked"
 msgid "Add User"
 msgstr "Add User"
 
-#: src/features/users/components/user-form-modal.tsx:50
+#: src/features/users/components/user-form-modal.tsx:43
 msgid "Admin"
 msgstr "Admin"
 
@@ -74,7 +74,7 @@ msgstr "Are you sure you want to delete user"
 msgid "Are you sure you want to proceed?"
 msgstr "Are you sure you want to proceed?"
 
-#: src/features/users/components/user-form-modal.tsx:34
+#: src/features/users/components/user-form-modal.tsx:27
 msgid "At least one role is required"
 msgstr "At least one role is required"
 
@@ -87,7 +87,7 @@ msgid "Bypass (allow through)"
 msgstr "Bypass (allow through)"
 
 #: src/features/sample-form/ui/sample-form-feature.tsx:93
-#: src/features/users/components/user-form-modal.tsx:298
+#: src/features/users/components/user-form-modal.tsx:291
 #: src/features/users/components/users-data-grid.tsx:61
 #: src/shared/ui/confirmation-modal/confirm-context-modal.tsx:25
 #: src/shared/ui/confirmation-modal/confirmation-modal.tsx:25
@@ -139,7 +139,7 @@ msgstr "Connection Issue"
 msgid "Could not submit the form"
 msgstr "Could not submit the form"
 
-#: src/features/users/components/user-form-modal.tsx:301
+#: src/features/users/components/user-form-modal.tsx:294
 msgid "Create"
 msgstr "Create"
 
@@ -151,11 +151,12 @@ msgstr "Create New User"
 msgid "Created"
 msgstr "Created"
 
-#: src/features/users/components/user-form-modal.tsx:287
+#: src/features/users/components/user-form-modal.tsx:280
 msgid "Created:"
 msgstr "Created:"
 
 #: src/features/dashboard/ui/dashboard-feature.tsx:15
+#: src/widgets/sidebar/ui/sidebar.tsx:55
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -210,11 +211,11 @@ msgid "Editing {userName}"
 msgstr "Editing {userName}"
 
 #: src/features/sample-form/ui/sample-form-feature.tsx:83
-#: src/features/users/components/user-form-modal.tsx:218
+#: src/features/users/components/user-form-modal.tsx:211
 msgid "Email"
 msgstr "Email"
 
-#: src/features/users/components/user-form-modal.tsx:278
+#: src/features/users/components/user-form-modal.tsx:271
 msgid "Email Verified"
 msgstr "Email Verified"
 
@@ -226,7 +227,7 @@ msgstr "Enable logging"
 msgid "Enable MSW"
 msgstr "Enable MSW"
 
-#: src/features/users/components/user-form-modal.tsx:271
+#: src/features/users/components/user-form-modal.tsx:264
 #: src/features/users/components/users-data-grid.tsx:147
 msgid "Enabled"
 msgstr "Enabled"
@@ -235,23 +236,23 @@ msgstr "Enabled"
 msgid "End-to-end type safety from API to UI components"
 msgstr "End-to-end type safety from API to UI components"
 
-#: src/features/users/components/user-form-modal.tsx:219
+#: src/features/users/components/user-form-modal.tsx:212
 msgid "Enter email address"
 msgstr "Enter email address"
 
-#: src/features/users/components/user-form-modal.tsx:229
+#: src/features/users/components/user-form-modal.tsx:222
 msgid "Enter first name"
 msgstr "Enter first name"
 
-#: src/features/users/components/user-form-modal.tsx:238
+#: src/features/users/components/user-form-modal.tsx:231
 msgid "Enter last name"
 msgstr "Enter last name"
 
-#: src/features/users/components/user-form-modal.tsx:249
+#: src/features/users/components/user-form-modal.tsx:242
 msgid "Enter password"
 msgstr "Enter password"
 
-#: src/features/users/components/user-form-modal.tsx:210
+#: src/features/users/components/user-form-modal.tsx:203
 msgid "Enter username"
 msgstr "Enter username"
 
@@ -263,9 +264,9 @@ msgstr "Enter your email"
 msgid "Enter your name"
 msgstr "Enter your name"
 
-#: src/features/users/components/user-form-modal.tsx:144
-#: src/features/users/components/user-form-modal.tsx:154
-#: src/features/users/components/user-form-modal.tsx:182
+#: src/features/users/components/user-form-modal.tsx:137
+#: src/features/users/components/user-form-modal.tsx:147
+#: src/features/users/components/user-form-modal.tsx:175
 #: src/features/users/components/users-data-grid.tsx:75
 #: src/pages/examples.tsx:308
 msgid "Error"
@@ -303,7 +304,7 @@ msgstr "Explore the various components and features available in this template"
 #~ msgid "Failed to create user: {0}"
 #~ msgstr "Failed to create user: {0}"
 
-#: src/features/users/components/user-form-modal.tsx:183
+#: src/features/users/components/user-form-modal.tsx:176
 msgid "Failed to create user: {errorMessage}"
 msgstr "Failed to create user: {errorMessage}"
 
@@ -319,11 +320,11 @@ msgstr "Failed to delete user: {errorMessage}"
 #~ msgid "Failed to update user: {0}"
 #~ msgstr "Failed to update user: {0}"
 
-#: src/features/users/components/user-form-modal.tsx:145
+#: src/features/users/components/user-form-modal.tsx:138
 msgid "Failed to update user: {errorMessage}"
 msgstr "Failed to update user: {errorMessage}"
 
-#: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:325
+#: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:357
 msgid "Fair"
 msgstr "Fair"
 
@@ -331,11 +332,11 @@ msgstr "Fair"
 msgid "Feature-Sliced Design:"
 msgstr "Feature-Sliced Design:"
 
-#: src/features/users/components/user-form-modal.tsx:228
+#: src/features/users/components/user-form-modal.tsx:221
 msgid "First Name"
 msgstr "First Name"
 
-#: src/features/users/components/user-form-modal.tsx:28
+#: src/features/users/components/user-form-modal.tsx:21
 msgid "First name must be at least 2 characters"
 msgstr "First name must be at least 2 characters"
 
@@ -363,7 +364,7 @@ msgstr "Go Back"
 msgid "Go Home"
 msgstr "Go Home"
 
-#: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:326
+#: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:358
 msgid "Good"
 msgstr "Good"
 
@@ -396,7 +397,7 @@ msgid "Interactive data table with sorting, actions, and custom rendering"
 msgstr "Interactive data table with sorting, actions, and custom rendering"
 
 #: src/entities/form/model/validation-rules.ts:13
-#: src/features/users/components/user-form-modal.tsx:27
+#: src/features/users/components/user-form-modal.tsx:20
 msgid "Invalid email address"
 msgstr "Invalid email address"
 
@@ -408,11 +409,11 @@ msgstr "Invalid phone number"
 msgid "Invalid URL"
 msgstr "Invalid URL"
 
-#: src/features/users/components/user-form-modal.tsx:237
+#: src/features/users/components/user-form-modal.tsx:230
 msgid "Last Name"
 msgstr "Last Name"
 
-#: src/features/users/components/user-form-modal.tsx:29
+#: src/features/users/components/user-form-modal.tsx:22
 msgid "Last name must be at least 2 characters"
 msgstr "Last name must be at least 2 characters"
 
@@ -442,7 +443,7 @@ msgstr "Log MSW requests to console"
 #~ msgstr "Manager"
 
 #: src/pages/__root.tsx:26
-#: src/widgets/header/ui/header.tsx:8
+#: src/widgets/header/ui/header.tsx:9
 msgid "Mantine UI Template"
 msgstr "Mantine UI Template"
 
@@ -503,16 +504,16 @@ msgstr "Organized by business features rather than technical layers"
 msgid "Page Not Found"
 msgstr "Page Not Found"
 
-#: src/features/users/components/user-form-modal.tsx:248
+#: src/features/users/components/user-form-modal.tsx:241
 msgid "Password"
 msgstr "Password"
 
-#: src/features/users/components/user-form-modal.tsx:155
+#: src/features/users/components/user-form-modal.tsx:148
 msgid "Password is required for new users"
 msgstr "Password is required for new users"
 
 #: src/entities/form/model/validation-rules.ts:41
-#: src/features/users/components/user-form-modal.tsx:32
+#: src/features/users/components/user-form-modal.tsx:25
 msgid "Password must be at least 8 characters"
 msgstr "Password must be at least 8 characters"
 
@@ -528,7 +529,7 @@ msgstr "Password must contain at least one number"
 msgid "Password must contain at least one uppercase letter"
 msgstr "Password must contain at least one uppercase letter"
 
-#: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:437
+#: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:469
 msgid "Password strength"
 msgstr "Password strength"
 
@@ -576,7 +577,7 @@ msgstr "Role"
 #~ msgid "Role is required"
 #~ msgstr "Role is required"
 
-#: src/features/users/components/user-form-modal.tsx:259
+#: src/features/users/components/user-form-modal.tsx:252
 #: src/features/users/components/users-data-grid.tsx:128
 msgid "Roles"
 msgstr "Roles"
@@ -606,7 +607,7 @@ msgstr "Search users..."
 #~ msgid "Select user role"
 #~ msgstr "Select user role"
 
-#: src/features/users/components/user-form-modal.tsx:260
+#: src/features/users/components/user-form-modal.tsx:253
 msgid "Select user roles"
 msgstr "Select user roles"
 
@@ -639,7 +640,7 @@ msgstr "Status"
 msgid "Stopped"
 msgstr "Stopped"
 
-#: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:327
+#: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:359
 msgid "Strong"
 msgstr "Strong"
 
@@ -651,8 +652,8 @@ msgstr "Submit"
 msgid "Submit Failed"
 msgstr "Submit Failed"
 
-#: src/features/users/components/user-form-modal.tsx:135
-#: src/features/users/components/user-form-modal.tsx:173
+#: src/features/users/components/user-form-modal.tsx:128
+#: src/features/users/components/user-form-modal.tsx:166
 #: src/features/users/components/users-data-grid.tsx:67
 #: src/pages/examples.tsx:300
 msgid "Success"
@@ -662,7 +663,7 @@ msgstr "Success"
 msgid "Success notification!"
 msgstr "Success notification!"
 
-#: src/features/users/components/user-form-modal.tsx:51
+#: src/features/users/components/user-form-modal.tsx:44
 msgid "Super Admin"
 msgstr "Super Admin"
 
@@ -758,26 +759,26 @@ msgstr "Unhandled requests"
 msgid "Unverified"
 msgstr "Unverified"
 
-#: src/features/users/components/user-form-modal.tsx:301
+#: src/features/users/components/user-form-modal.tsx:294
 msgid "Update"
 msgstr "Update"
 
-#: src/features/users/components/user-form-modal.tsx:290
+#: src/features/users/components/user-form-modal.tsx:283
 msgid "Updated:"
 msgstr "Updated:"
 
-#: src/features/users/components/user-form-modal.tsx:49
-#: src/features/users/components/user-form-modal.tsx:301
+#: src/features/users/components/user-form-modal.tsx:42
+#: src/features/users/components/user-form-modal.tsx:294
 #: src/features/users/components/users-data-grid.tsx:111
 #: src/pages/examples.tsx:89
 msgid "User"
 msgstr "User"
 
-#: src/features/users/components/user-form-modal.tsx:272
+#: src/features/users/components/user-form-modal.tsx:265
 msgid "User can log in and access the system"
 msgstr "User can log in and access the system"
 
-#: src/features/users/components/user-form-modal.tsx:174
+#: src/features/users/components/user-form-modal.tsx:167
 msgid "User created successfully"
 msgstr "User created successfully"
 
@@ -790,19 +791,19 @@ msgstr "User deleted successfully"
 msgid "User Management"
 msgstr "User Management"
 
-#: src/features/users/components/user-form-modal.tsx:136
+#: src/features/users/components/user-form-modal.tsx:129
 msgid "User updated successfully"
 msgstr "User updated successfully"
 
-#: src/features/users/components/user-form-modal.tsx:279
+#: src/features/users/components/user-form-modal.tsx:272
 msgid "User's email address has been verified"
 msgstr "User's email address has been verified"
 
-#: src/features/users/components/user-form-modal.tsx:209
+#: src/features/users/components/user-form-modal.tsx:202
 msgid "Username"
 msgstr "Username"
 
-#: src/features/users/components/user-form-modal.tsx:26
+#: src/features/users/components/user-form-modal.tsx:19
 msgid "Username must be at least 3 characters"
 msgstr "Username must be at least 3 characters"
 
@@ -810,8 +811,8 @@ msgstr "Username must be at least 3 characters"
 msgid "Verified"
 msgstr "Verified"
 
-#: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:323
-#: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:334
+#: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:355
+#: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:366
 msgid "Very Weak"
 msgstr "Very Weak"
 
@@ -851,6 +852,6 @@ msgstr "Warning notification!"
 msgid "We have received your submission."
 msgstr "We have received your submission."
 
-#: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:324
+#: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:356
 msgid "Weak"
 msgstr "Weak"

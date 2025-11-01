@@ -11,7 +11,7 @@ import {
 } from "@mantine/core";
 import { IconBrandGithub, IconInfoCircle } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ProtectedRoute } from "@/shared/ui";
+import { AuthGuard } from "@/processes/auth";
 import { t } from "@lingui/core/macro";
 
 export const Route = createFileRoute("/about")({
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/about")({
 
 function AboutPage() {
   return (
-    <ProtectedRoute>
+    <AuthGuard>
       <Container size="md">
         <Stack gap="xl">
           <div>
@@ -132,6 +132,6 @@ function AboutPage() {
           </Card>
         </Stack>
       </Container>
-    </ProtectedRoute>
+    </AuthGuard>
   );
 }

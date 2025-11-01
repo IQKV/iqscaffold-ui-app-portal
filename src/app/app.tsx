@@ -13,7 +13,8 @@ import { i18n } from "@lingui/core";
 // Import the generated route tree
 import { routeTree } from "@/routeTree.gen";
 import { theme } from "./theme";
-import { queryClient, AuthProvider } from "@/shared/lib";
+import { queryClient } from "@/shared/lib";
+import { AuthProvider } from "@/processes/auth";
 
 import { ErrorBoundary } from "@/shared/ui";
 import { MSWDevTools } from "@/shared/ui/msw-dev-tools";
