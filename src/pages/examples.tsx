@@ -25,8 +25,8 @@ import {
   DataTable,
   useConfirmationModal,
   type DataTableColumn,
-  ProtectedRoute,
 } from "@/shared/ui";
+import { AuthGuard } from "@/processes/auth";
 import { notificationService } from "@/shared/lib";
 import { t } from "@lingui/core/macro";
 
@@ -180,7 +180,7 @@ function ExamplesPage() {
   };
 
   return (
-    <ProtectedRoute>
+    <AuthGuard>
       <Container size="xl">
         <Stack gap="xl">
           <div>
@@ -331,6 +331,6 @@ function ExamplesPage() {
           {confirmationModal.modal}
         </Stack>
       </Container>
-    </ProtectedRoute>
+    </AuthGuard>
   );
 }

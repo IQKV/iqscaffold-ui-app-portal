@@ -30,7 +30,7 @@ export function RoleGuard({
       navigate({ to: "/auth-demo", replace: true });
       return;
     }
-    const ok = roles.some((r) => user.roles.includes(r));
+    const ok = roles.some((r) => (user.roles ?? []).includes(r));
     if (!ok) {
       navigate({ to: "/unauthorized", replace: true });
     }
@@ -38,7 +38,7 @@ export function RoleGuard({
   if (!user) {
     return null;
   }
-  const ok = roles.some((r) => user.roles.includes(r));
+  const ok = roles.some((r) => (user.roles ?? []).includes(r));
   return ok ? (children as any) : null;
 }
 
@@ -53,7 +53,7 @@ export function PermissionGuard({
       navigate({ to: "/auth-demo", replace: true });
       return;
     }
-    const ok = permissions.every((p) => user.permissions.includes(p));
+    const ok = permissions.every((p) => (user.permissions ?? []).includes(p));
     if (!ok) {
       navigate({ to: "/unauthorized", replace: true });
     }
@@ -61,6 +61,18 @@ export function PermissionGuard({
   if (!user) {
     return null;
   }
-  const ok = permissions.every((p) => user.permissions.includes(p));
+  const ok = permissions.every((p) => (user.permissions ?? []).includes(p));
   return ok ? (children as any) : null;
+}
+
+export function AdminGuard({ children }: PropsWithChildren) {
+  return <RoleGuard roles={["ADMIN", "SUPER_ADMIN"]}>{children}</RoleGuard>;
+}
+
+export function SuperAdminGuard({ children }: PropsWithChildren) {
+  return <RoleGuard roles={["SUPER_ADMIN"]}>{children}</RoleGuard>;
+}
+
+export function UserManagementGuard({ children }: PropsWithChildren) {
+  return <RoleGuard roles={["ADMIN", "SUPER_ADMIN"]}>{children}</RoleGuard>;
 }

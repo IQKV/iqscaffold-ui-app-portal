@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ProtectedRoute } from "@/shared/ui";
+import { AuthGuard } from "@/processes/auth";
 import { UsersPage } from "@/features/users";
 
 export const Route = createFileRoute("/users")({
@@ -8,8 +8,8 @@ export const Route = createFileRoute("/users")({
 
 function UsersPageRoute() {
   return (
-    <ProtectedRoute>
+    <AuthGuard>
       <UsersPage />
-    </ProtectedRoute>
+    </AuthGuard>
   );
 }

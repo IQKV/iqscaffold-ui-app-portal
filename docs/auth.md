@@ -4,13 +4,13 @@ This project now uses a centralized auth process layer built with Zustand and Fe
 
 ## Overview
 
-- Store: `features/auth/model/store.ts` (`useAuthStore`)
-- JWT decode: `features/auth/lib/jwt.ts`
-- Provider: `features/auth/provider/auth-provider.tsx`
-- Guards: `features/auth/lib/guards.tsx`
+- Store: `processes/auth/model/store.ts` (`useAuthStore`)
+- JWT decode: `processes/auth/lib/jwt.ts`
+- Provider: `processes/auth/provider/auth-provider.tsx`
+- Guards: `processes/auth/lib/guards.tsx`
 - Tokens manager (multi-tab sync): `shared/lib/auth-tokens.ts`
 - API client: `shared/api/base.ts` (auto token injection + refresh)
-- UI: `features/auth/ui/user-menu.tsx`, `features/auth/ui/login-form.tsx`
+- UI: `processes/auth/ui/user-menu.tsx`, `processes/auth/ui/login-form.tsx`
 - Pages: `/auth-demo` (login), `/dashboard` (protected), `/unauthorized`
 
 ## Usage
@@ -19,7 +19,7 @@ This project now uses a centralized auth process layer built with Zustand and Fe
 
 ```tsx
 // app/app.tsx
-import { AuthProvider } from "@/features/auth";
+import { AuthProvider } from "@/processes/auth";
 
 <QueryClientProvider client={queryClient}>
   <AuthProvider>
@@ -31,7 +31,7 @@ import { AuthProvider } from "@/features/auth";
 ### Reading auth state
 
 ```tsx
-import { useAuthStore } from "@/features/auth";
+import { useAuthStore } from "@/processes/auth";
 
 const user = useAuthStore((s) => s.user);
 const status = useAuthStore((s) => s.status); // "authenticated" | "unauthenticated" | "initializing"
@@ -50,7 +50,7 @@ await logout();
 ### Guards
 
 ```tsx
-import { AuthGuard, RoleGuard, PermissionGuard } from "@/features/auth";
+import { AuthGuard, RoleGuard, PermissionGuard } from "@/processes/auth";
 
 <AuthGuard>
   <Dashboard />
@@ -78,6 +78,20 @@ import { AuthGuard, RoleGuard, PermissionGuard } from "@/features/auth";
 ## Notes
 
 - Run the dev server once to regenerate `routeTree.gen.ts` for new routes.
-- If you had previous imports from `@/shared/lib` like `useAuth` or `ProtectedRoute`, replace them with:
-  - `useAuthStore` from `@/features/auth`
-  - `AuthGuard` from `@/features/auth`
+- Migration from legacy:
+  - Replace `useAuth` with `useAuthStore` from `@/processes/auth` (a compatibility shim exists temporarily).
+  - Replace `ProtectedRoute` with `AuthGuard` from `@/processes/auth`.
+  - Move any auth UI to `@/processes/auth/ui`.
+
+### Testing tips
+
+- For unit tests, you can set auth state via the store:
+  ```ts
+  import { useAuthStore } from "@/processes/auth";
+  useAuthStore.setState({
+    status: "authenticated",
+    user: {
+      /* ... */
+    },
+  } as any);
+  ```

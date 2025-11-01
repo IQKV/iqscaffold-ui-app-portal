@@ -4,13 +4,14 @@ import { IconLock } from "@tabler/icons-react";
 import { UsersDataGrid } from "./users-data-grid";
 import { UserFormModal } from "./user-form-modal";
 import { User } from "../api/users-api";
-import { useAuth, UserManagementGuard } from "@/shared/lib";
+import { useAuthStore, UserManagementGuard } from "@/processes/auth";
 import { t } from "@lingui/core/macro";
 
 export function UsersPage() {
   const [modalOpened, setModalOpened] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const { isAuthenticated } = useAuth();
+  const status = useAuthStore((s) => s.status);
+  const isAuthenticated = status === "authenticated";
 
   // Check if user has access to view users page
   if (!isAuthenticated) {

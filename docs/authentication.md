@@ -1,5 +1,14 @@
 # Authentication & Authorization System
 
+> Note: This document describes the legacy implementation that used a React Context in the shared layer. The project has migrated to a centralized processes/auth layer powered by a Zustand store and declarative guards. For the current implementation and APIs, see `docs/auth.md`.
+
+Key differences in the new system (see docs/auth.md):
+
+- Centralized store at `src/processes/auth` with `useAuthStore`.
+- Declarative guards from `@/processes/auth`: `AuthGuard`, `RoleGuard`, `PermissionGuard`.
+- UI like `UserMenu`, `LoginForm`, `AuthDemo`, `AuthExamples` moved under `processes/auth/ui`.
+- Backward-compat shim: `useAuth` from `@/shared/lib` proxies to the store for now.
+
 This document describes the comprehensive authentication and authorization system implemented for the React 19 + Mantine 8 UI project with Spring Boot backend integration.
 
 ## Overview

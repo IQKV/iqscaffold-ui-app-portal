@@ -7,7 +7,6 @@ export {
   type DataTableProps,
 } from "./data-table";
 export { ConfirmationModal, useConfirmationModal } from "./confirmation-modal";
-export { ProtectedRoute } from "./protected-route";
 
 // Enhanced error handling components
 export {
@@ -42,7 +41,4 @@ export { FormField, EnhancedFormField } from "./enhanced-form-field";
 
 export { useEnhancedFormValidation } from "./enhanced-form-field/validation-utils";
 
-// Auth demo component
-export { AuthDemo } from "./auth-demo";
-export { LoginForm } from "./login-form";
-export { AuthExamples } from "./auth-examples";
+// (auth-related UI moved to processes/auth)
