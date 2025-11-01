@@ -24,26 +24,39 @@ function AdminTestWrapper({ children }: { children: React.ReactNode }) {
   return <TestWrapper>{children}</TestWrapper>;
 }
 
-// Mock the useAuth hook to return admin user
-vi.mock("@/shared/lib/use-auth-hook", () => ({
-  useAuth: () => ({
-    user: mockAdminUser,
-    isAuthenticated: true,
-    isLoading: false,
-    hasRole: (role: string) => mockAdminUser.roles.includes(role),
-    hasAnyRole: (roles: string[]) =>
-      roles.some((role) => mockAdminUser.roles.includes(role)),
-    hasAllRoles: (roles: string[]) =>
-      roles.every((role) => mockAdminUser.roles.includes(role)),
-    hasPermission: () => false,
-    isAdmin: () => true,
-    isSuperAdmin: () => false,
-    canManageUsers: () => true,
-    login: vi.fn(),
-    logout: vi.fn(),
-    refreshUser: vi.fn(),
-  }),
-}));
+// Mock the useAuth hook to return admin user (mock the actual module used by the component)
+vi.mock("@/processes/auth", () => {
+  const user = {
+    userId: 1,
+    username: "admin",
+    email: "admin@example.com",
+    roles: ["ADMIN", "USER"],
+    permissions: [],
+    firstName: "Admin",
+    lastName: "User",
+    tenantId: "default",
+    customClaims: {},
+  };
+  return {
+    useAuth: () => ({
+      user,
+      isAuthenticated: true,
+      isLoading: false,
+      hasRole: (role: string) => user.roles.includes(role),
+      hasAnyRole: (roles: string[]) =>
+        roles.some((role) => user.roles.includes(role)),
+      hasAllRoles: (roles: string[]) =>
+        roles.every((role) => user.roles.includes(role)),
+      hasPermission: () => false,
+      isAdmin: () => true,
+      isSuperAdmin: () => false,
+      canManageUsers: () => true,
+      login: vi.fn(),
+      logout: vi.fn(),
+      refreshUser: vi.fn(),
+    }),
+  };
+});
 
 // Mock functions
 const mockOnCreateUser = vi.fn();

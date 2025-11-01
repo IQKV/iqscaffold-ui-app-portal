@@ -2,7 +2,6 @@ import React, { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MantineProvider } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
-import { AuthProvider } from "./auth-provider";
 import { AuthContext, type AuthContextType } from "./auth-context";
 import { theme } from "@/app/theme";
 import type { UserContext } from "@/entities/user";

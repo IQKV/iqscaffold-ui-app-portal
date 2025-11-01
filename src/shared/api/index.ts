@@ -1,8 +1,2 @@
 export { apiClient, apiRequest } from "./base";
-export { authApi } from "./auth-api";
-export type {
-  TokenResponse,
-  UserRegistrationResponse,
-  LoginCredentials,
-  RefreshTokenRequest,
-} from "./auth-api";
+// Note: authApi and related types are exposed via processes/auth public API

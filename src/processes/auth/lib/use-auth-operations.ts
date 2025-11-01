@@ -5,7 +5,7 @@ import {
   canDeleteUsers,
   canReadUsers,
   canManageUsers as canManageUsersUtil,
-} from "@/shared/lib/auth-utils";
+} from "@/processes/auth/lib/permissions";
 
 /**
  * Hook that provides authorization checks for common operations

@@ -6,9 +6,9 @@ import {
   setTokens,
   clearTokens,
   subscribe as subscribeTokens,
-} from "@/shared/lib/auth-tokens";
+} from "@/processes/auth/lib/auth-tokens";
 import { getAuthConfig } from "@/app/config";
-import { authApi } from "@/shared/api/auth-api";
+import { authApi } from "@/processes/auth/lib/auth-api";
 import { decodeUser } from "../lib/jwt";
 import type { AuthStore, LoginCredentials } from "./types";
 
