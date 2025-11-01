@@ -1,6 +1,8 @@
-# Comprehensive Form Field Guide: Mantine + Zod + Lingui
+# FormField Component Guide: Mantine + Zod + Lingui Integration
 
-This guide explains how to use the enhanced `FormField` component that integrates Mantine forms, Zod validation, and Lingui internationalization.
+This guide explains how to use the comprehensive `FormField` component that replaces all basic form fields with a unified solution integrating Mantine forms, Zod validation, and Lingui internationalization.
+
+> **Note**: This component replaces the previous basic `FormField` component. See the [complete FormField documentation](./form-field-component.md) for detailed usage.
 
 ## Overview
 
@@ -398,15 +400,18 @@ const profileSchema = z
 
 ## Migration Checklist
 
-When updating existing forms:
+When migrating to the new FormField component:
 
+- [ ] Replace all basic `FormField` imports with the enhanced version
 - [ ] Add `noValidate` to all `<form>` elements
-- [ ] Remove `required` props from all form inputs
-- [ ] Create Zod schemas for validation
+- [ ] Remove `required` props and use `withAsterisk` instead
+- [ ] Create comprehensive Zod schemas for validation
 - [ ] Use `zodResolver` in `useForm`
-- [ ] Update form field components to not use `required` prop
-- [ ] Test all validation scenarios
-- [ ] Update tests to not expect HTML5 validation
+- [ ] Update field types to use specific types (email, tel, url, etc.)
+- [ ] Enable enhanced features (showValidationStatus, showStrengthIndicator, etc.)
+- [ ] Add Lingui messages for labels, placeholders, and descriptions
+- [ ] Test all validation scenarios and UX features
+- [ ] Update tests to use the new component API
 
 ## Benefits
 

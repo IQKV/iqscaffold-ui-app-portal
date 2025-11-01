@@ -17,13 +17,15 @@ This project follows **Feature-Sliced Design (FSD)** methodology, providing a sc
 - **TanStack Router** - Type-safe routing with code splitting
 - **TanStack Query** - Server state management and caching
 - **Zustand** - Client state management
-- **React Hook Form + Zod** - Form state and validation
+- **Mantine Forms + Zod** - Form state and validation with zodResolver
+- **Lingui** - Internationalization for forms and UI
 
 ### UI & Styling
 
 - **Mantine UI** - Component library with theming
 - **PostCSS** - CSS processing with Mantine preset
 - **Tabler Icons** - Icon library
+- **FormField Component** - Unified form field with 15+ types, validation status, and UX enhancements
 
 ### Development Tools
 
@@ -55,6 +57,9 @@ src/
 │   └── session/          # Session entity
 └── shared/               # Shared layer
     ├── ui/               # Shared UI components
+    │   ├── enhanced-form-field/  # Comprehensive FormField component
+    │   ├── loading-overlay/      # Loading states
+    │   └── error-boundary/       # Error handling
     ├── lib/              # Shared utilities
     ├── api/              # API clients
     └── config/           # Configuration
@@ -243,22 +248,34 @@ export const useAppStore = create<AppState>((set) => ({
 }));
 ```
 
-### Form State (React Hook Form)
+### Form State (Mantine Forms + Zod)
 
-- Form validation
-- Field management
-- Submission handling
+- Zod schema validation
+- Mantine form management
+- Lingui internationalization
+- Enhanced UX features
 
 ```typescript
-// Form with validation
+// Form with Zod validation and Mantine integration
 const form = useForm<UserFormData>({
-  resolver: zodResolver(userSchema),
-  defaultValues: {
+  validate: zodResolver(userSchema),
+  initialValues: {
     name: "",
     email: "",
     role: "user",
   },
 });
+
+// Comprehensive FormField usage
+<FormField
+  type="email"
+  name="email"
+  label={msg`Email Address`}
+  placeholder={msg`Enter your email`}
+  form={form}
+  withAsterisk
+  showValidationStatus
+/>
 ```
 
 ## Routing Architecture
@@ -305,6 +322,104 @@ navigate({
   params: { userId: "123" },
   search: { tab: "profile" },
 });
+```
+
+## Form Architecture
+
+### Unified FormField Component
+
+The project uses a comprehensive `FormField` component that integrates Mantine UI, Zod validation, and Lingui internationalization:
+
+```typescript
+// 15+ field types supported
+<FormField type="text" name="firstName" label={msg`First Name`} form={form} />
+<FormField type="email" name="email" label={msg`Email`} form={form} showValidationStatus />
+<FormField type="password" name="password" label={msg`Password`} form={form} showStrengthIndicator />
+<FormField type="select" name="country" label={msg`Country`} data={countries} form={form} searchable />
+<FormField type="multiselect" name="interests" label={msg`Interests`} data={interests} form={form} maxValues={5} />
+<FormField type="textarea" name="bio" label={msg`Bio`} form={form} showCharacterCount maxLength={500} />
+<FormField type="number" name="age" label={msg`Age`} form={form} min={18} max={120} />
+<FormField type="date" name="birthDate" label={msg`Birth Date`} form={form} />
+<FormField type="checkbox" name="agree" label={msg`Terms`} checkboxLabel={msg`I agree`} form={form} />
+<FormField type="switch" name="notifications" label={msg`Notifications`} form={form} />
+<FormField type="radio" name="plan" label={msg`Plan`} data={plans} form={form} />
+```
+
+### Form Validation Strategy
+
+1. **HTML5 Validation Disabled**: All forms use `noValidate` attribute
+2. **Zod Schema Validation**: Comprehensive validation rules with custom messages
+3. **Real-time Feedback**: Validation status indicators and error messages
+4. **Internationalization**: All validation messages support Lingui
+
+```typescript
+// Zod schema with i18n messages
+const userSchema = z.object({
+  email: z
+    .string()
+    .min(1, _(msg`Email is required`))
+    .email(_(msg`Please enter a valid email address`)),
+
+  password: z
+    .string()
+    .min(8, _(msg`Password must be at least 8 characters`))
+    .regex(/[A-Z]/, _(msg`Password must contain uppercase letter`))
+    .regex(/[a-z]/, _(msg`Password must contain lowercase letter`))
+    .regex(/[0-9]/, _(msg`Password must contain number`)),
+});
+
+// Form setup with zodResolver
+const form = useForm<UserFormData>({
+  validate: zodResolver(userSchema),
+  initialValues: { email: "", password: "" },
+});
+```
+
+### Enhanced UX Features
+
+- **Validation Status Indicators**: Visual checkmarks and X icons
+- **Password Strength Meter**: Real-time strength calculation with progress bar
+- **Character Counters**: Smart counting with color-coded limits
+- **Tooltips**: Contextual help with info icons
+- **Loading States**: Proper disabled states during async operations
+- **Accessibility**: Full ARIA support and screen reader compatibility
+
+### Form Submission Pattern
+
+```typescript
+// Unified form submission with error handling
+const handleSubmit = async (values: FormData) => {
+  setIsLoading(true);
+
+  try {
+    await submitForm(values);
+    form.reset();
+    notifications.show({
+      title: _(msg`Success`),
+      message: _(msg`Form submitted successfully`),
+      color: "green",
+    });
+  } catch (error) {
+    notifications.show({
+      title: _(msg`Error`),
+      message: _(msg`Form submission failed`),
+      color: "red",
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+// Form with noValidate to disable HTML5 validation
+<form onSubmit={form.onSubmit(handleSubmit)} noValidate>
+  <Stack gap="md">
+    <FormField type="email" name="email" label={msg`Email`} form={form} withAsterisk />
+    <FormField type="password" name="password" label={msg`Password`} form={form} withAsterisk showStrengthIndicator />
+    <Button type="submit" loading={isLoading}>
+      {_(msg`Submit`)}
+    </Button>
+  </Stack>
+</form>
 ```
 
 ## Component Architecture

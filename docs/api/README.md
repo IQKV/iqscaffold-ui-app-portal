@@ -4,6 +4,13 @@
 
 This document provides comprehensive information about the API endpoints, authentication, and integration patterns used in the Mantine UI Project Layout.
 
+## Documentation Index
+
+- **[FormField API Reference](./form-field-api.md)** - Complete API documentation for the FormField component
+- **[Endpoints Reference](./endpoints.md)** - REST API endpoints and schemas
+- **Authentication & Authorization** - Token-based auth patterns
+- **Mock Service Worker** - Development and testing setup
+
 ## Base Configuration
 
 The API client is configured in `src/shared/lib/client.ts` using Axios with the following features:

@@ -12,6 +12,14 @@ Welcome to the comprehensive documentation for the Mantine UI Project Layout. Th
 - State management strategies
 - Performance optimization techniques
 
+### [📝 Form Development](./form-field-component.md)
+
+- Comprehensive FormField component guide
+- 15+ field types with enhanced UX features
+- Mantine + Zod + Lingui integration
+- Validation strategies and best practices
+- Migration guide from basic form fields
+
 ### [📡 API Documentation](./api/README.md)
 
 - API client configuration
@@ -52,6 +60,68 @@ Welcome to the comprehensive documentation for the Mantine UI Project Layout. Th
    pnpm preview
    ```
 
+## 🎯 Quick Reference
+
+### FormField Component
+
+```typescript
+import { FormField } from "@/shared/ui";
+import { msg } from "@lingui/core/macro";
+
+// Basic usage with enhanced features
+<FormField
+  type="email"
+  name="email"
+  label={msg`Email Address`}
+  placeholder={msg`Enter your email`}
+  form={form}
+  withAsterisk
+  showValidationStatus
+/>
+
+// Password with strength indicator
+<FormField
+  type="password"
+  name="password"
+  label={msg`Password`}
+  form={form}
+  withAsterisk
+  showStrengthIndicator
+/>
+
+// Select with search and internationalization
+<FormField
+  type="select"
+  name="country"
+  label={msg`Country`}
+  data={countries}
+  form={form}
+  searchable
+  clearable
+/>
+```
+
+### Form Setup Pattern
+
+```typescript
+// 1. Define Zod schema with i18n messages
+const schema = z.object({
+  email: z.string().email(_(msg`Invalid email`)),
+  password: z.string().min(8, _(msg`Password too short`)),
+});
+
+// 2. Setup Mantine form with zodResolver
+const form = useForm({
+  validate: zodResolver(schema),
+  initialValues: { email: "", password: "" },
+});
+
+// 3. Form with noValidate attribute
+<form onSubmit={form.onSubmit(handleSubmit)} noValidate>
+  {/* FormField components */}
+</form>
+```
+
 ## 🔧 Development Workflow
 
 ### Code Quality
@@ -72,6 +142,7 @@ Welcome to the comprehensive documentation for the Mantine UI Project Layout. Th
 - **Hot Reload**: Vite with instant HMR
 - **DevTools**: React Query and Router devtools
 - **Storybook**: Component development and documentation
+- **Form Validation**: Comprehensive FormField component with Mantine + Zod + Lingui integration
 
 ## 📋 Project Standards
 
@@ -81,6 +152,15 @@ Welcome to the comprehensive documentation for the Mantine UI Project Layout. Th
 - Use TypeScript for type safety
 - Implement proper error boundaries
 - Write comprehensive tests
+- Use unified FormField component for all form inputs
+
+### Form Development
+
+- **Validation**: Use Zod schemas with mantine-form-zod-resolver
+- **Internationalization**: Integrate Lingui for all form labels and messages
+- **UX Enhancement**: Leverage validation status indicators, character counters, and password strength meters
+- **Accessibility**: Ensure proper ARIA attributes and screen reader support
+- **HTML5 Validation**: Disabled in favor of Zod validation for consistency
 
 ### Performance
 
@@ -128,6 +208,13 @@ Please read our [Contributing Guidelines](./.github/CONTRIBUTING.md) before subm
 - **Issues**: Use GitHub Issues for bug reports and feature requests
 - **Discussions**: Use GitHub Discussions for questions and ideas
 - **Security**: Report security issues privately via email
+
+## 📋 Additional Resources
+
+- **[Changelog](./CHANGELOG.md)** - Version history and migration guides
+- **[Mantine + Zod Validation Guide](./mantine-zod-validation-guide.md)** - Form validation patterns
+- **[Authentication Guide](./authentication.md)** - Auth implementation details
+- **[MSW Implementation](./msw-implementation.md)** - API mocking setup
 
 ## 📄 License
 
