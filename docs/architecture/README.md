@@ -639,15 +639,15 @@ export const Route = createFileRoute('/admin')({
   }
 });
 
-// Component-level authorization
+// Component-level authorization (processes/auth guards)
+import { RoleGuard } from "@/processes/auth";
+
 export function AdminPanel() {
-  const { user } = useAuth();
-
-  if (!user?.isAdmin) {
-    return <UnauthorizedMessage />;
-  }
-
-  return <AdminContent />;
+  return (
+    <RoleGuard roles={["ADMIN", "SUPER_ADMIN"]}>
+      <AdminContent />
+    </RoleGuard>
+  );
 }
 ```
 

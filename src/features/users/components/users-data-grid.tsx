@@ -15,7 +15,7 @@ import { IconEdit, IconTrash, IconPlus, IconSearch } from "@tabler/icons-react";
 import { DataTable, type DataTableColumn } from "@/shared/ui/data-table";
 import { useUsersQuery, useDeleteUserMutation } from "../hooks/use-users-query";
 import { User } from "../api/users-api";
-import { useAuth } from "@/shared/lib";
+import { useAuth } from "@/processes/auth";
 import { openConfirmModal } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 import { useDebouncedValue } from "@mantine/hooks";

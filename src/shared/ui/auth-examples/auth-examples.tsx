@@ -24,7 +24,7 @@ import {
   SuperAdminGuard,
   UserManagementGuard,
   useAuthOperations,
-} from "@/shared/lib";
+} from "@/processes/auth";
 
 /**
  * Example component showing different authorization patterns

@@ -5,7 +5,7 @@ import { zodResolver } from "mantine-form-zod-resolver";
 import { z } from "zod";
 import { IconLogin, IconAlertCircle } from "@tabler/icons-react";
 import { FormField } from "@/shared/ui";
-import { useAuth } from "@/shared/lib";
+import { useAuth } from "@/processes/auth";
 import { notifications } from "@mantine/notifications";
 
 const loginSchema = z.object({

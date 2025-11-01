@@ -9,7 +9,7 @@ This project now uses a centralized auth process layer built with Zustand and Fe
 - Provider: `processes/auth/provider/auth-provider.tsx`
 - Guards: `processes/auth/lib/guards.tsx`
 - Tokens manager (multi-tab sync): `shared/lib/auth-tokens.ts`
-- API client: `shared/api/base.ts` (auto token injection + refresh)
+- API client: `shared/lib/client.ts` (axios instance with global error normalization)
 - UI: `processes/auth/ui/user-menu.tsx`, `processes/auth/ui/login-form.tsx`
 - Pages: `/auth-demo` (login), `/dashboard` (protected), `/unauthorized`
 
@@ -67,8 +67,7 @@ import { AuthGuard, RoleGuard, PermissionGuard } from "@/processes/auth";
 
 ### API client
 
-- `shared/api/base.ts` automatically injects `Authorization: Bearer <accessToken>` from the token store.
-- On `401`, it performs a refresh using a concurrency-safe queue, updates tokens, and retries the original request.
+- Use `shared/lib/client.ts` (`api` axios instance) for HTTP. Token injection/refresh logic can be added via interceptors if your backend requires it. See `shared/lib/http-error.ts` and notifications for standardized handling.
 
 ### Tokens & multi-tab sync
 
@@ -79,8 +78,8 @@ import { AuthGuard, RoleGuard, PermissionGuard } from "@/processes/auth";
 
 - Run the dev server once to regenerate `routeTree.gen.ts` for new routes.
 - Migration from legacy:
-  - Replace `useAuth` with `useAuthStore` from `@/processes/auth` (a compatibility shim exists temporarily).
-  - Replace `ProtectedRoute` with `AuthGuard` from `@/processes/auth`.
+  - Replace `useAuth` with `useAuthStore` from `@/processes/auth` (a compatibility shim `useAuth` in `@/shared/lib` exists but prefer the store directly).
+  - Replace any `ProtectedRoute` usages with `AuthGuard` from `@/processes/auth`.
   - Move any auth UI to `@/processes/auth/ui`.
 
 ### Testing tips

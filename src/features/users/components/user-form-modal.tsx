@@ -10,7 +10,7 @@ import {
   useCreateUserMutation,
   useUpdateUserMutation,
 } from "../hooks/use-users-query";
-import { useAuth } from "@/shared/lib";
+import { useAuth } from "@/processes/auth";
 import { notifications } from "@mantine/notifications";
 import { t } from "@lingui/core/macro";
 

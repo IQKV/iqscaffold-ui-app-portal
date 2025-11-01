@@ -23,7 +23,7 @@ import {
   SuperAdminGuard,
   UserManagementGuard,
   useAuthOperations,
-} from "@/shared/lib";
+} from "@/processes/auth";
 
 export function AuthDemo() {
   const {
@@ -80,7 +80,7 @@ export function AuthDemo() {
           ))}
         </Group>
 
-        <Button variant="outline" color="red" onClick={logout}>
+        <Button variant="outline" color="red" onClick={() => logout()}>
           Logout
         </Button>
       </Paper>

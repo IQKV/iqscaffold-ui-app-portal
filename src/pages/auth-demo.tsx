@@ -1,8 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Container, Title, Stack, Tabs } from "@mantine/core";
 import { IconUser, IconShield, IconLogin, IconCode } from "@tabler/icons-react";
-import { AuthDemo, AuthExamples } from "@/shared/ui";
-import { AuthLoginForm, useAuthStore } from "@/processes/auth";
+import {
+  AuthDemo,
+  AuthExamples,
+  AuthLoginForm,
+  useAuthStore,
+} from "@/processes/auth";
 
 export const Route = createFileRoute("/auth-demo")({
   component: AuthDemoPage,

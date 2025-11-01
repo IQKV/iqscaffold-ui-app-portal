@@ -13,7 +13,6 @@ export * from "./rfc9457-problem-details";
 export * from "./retry-utils";
 export * from "./use-form-mutation";
 export * from "./auth-utils";
-export { useAuth } from "./use-auth-hook";
 export * from "./test-utils";
 export * from "./msw-config";
 export { useMSWControl } from "./use-msw-control";

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useAuth, redirectToAuth } from "@/shared/lib";
+import { useAuth, redirectToAuth } from "@/processes/auth";
 import { LoadingOverlay } from "@/shared/ui";
 
 interface ProtectedRouteProps {

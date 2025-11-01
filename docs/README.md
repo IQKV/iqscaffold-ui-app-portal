@@ -213,7 +213,7 @@ Please read our [Contributing Guidelines](./.github/CONTRIBUTING.md) before subm
 
 - **[Changelog](./CHANGELOG.md)** - Version history and migration guides
 - **[Mantine + Zod Validation Guide](./mantine-zod-validation-guide.md)** - Form validation patterns
-- **[Authentication Guide](./authentication.md)** - Auth implementation details
+- **[Authentication Guide](./auth.md)** - Auth implementation details
 - **[MSW Implementation](./msw-implementation.md)** - API mocking setup
 
 ## 📄 License
