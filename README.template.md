@@ -1,78 +1,51 @@
-# Project Name 🚀
+# Mantine UI Project Layout
 
-<!-- TEMPLATE: This README.template.md is a starter template. Copy parts into your real README.md and replace placeholders. -->
+ A modern React + TypeScript + Vite template with Mantine UI, TanStack Router, TanStack Query, and Feature‑Sliced Design. Production‑ready tooling with Storybook, Vitest, Playwright, ESLint 9, Prettier, and Lingui.
 
-<details>
-  <summary><strong>How to use this template (click to expand)</strong></summary>
+## 🔑 Tech Stack
 
-1. Rename the title above to your project name and optionally add a logo right below it.
-2. Add badges (build, tests, coverage, license) under the title.
-3. Fill each section below with your actual project content (keep the section order if you like it).
-4. Replace placeholder code blocks and bullet points with real commands and steps.
-5. Keep the "Template Usage" links if you want quick access to template docs, or remove them in your final README.md.
-6. Remove this guidance block after you finish customizing.
+ - **React 19**, **TypeScript**, **Vite 7** (SWC)
+ - **Mantine UI v8** + extensions (Carousel, Charts, Dates, Dropzone, Modals, Notifications, DataTable)
+ - **TanStack Router v1**, **TanStack Query v5**, **Zustand**
+ - **React Hook Form** + **Zod** validation
+ - **Axios**, **GraphQL Request**
+ - **Lingui** i18n, **Storybook 8**, **Vitest**, **Playwright**, **ESLint 9**, **Prettier**
 
-</details>
+## 🚀 Getting Started
 
-- Add your project logo.
-- Write a short introduction to the project.
-- If you are using badges, add them here.
+ - Prerequisites: Node LTS, pnpm
+ - Install: `pnpm install`
+ - Env: `cp .env.example .env`
+ - Dev: `pnpm dev` -> http://localhost:5173
 
-<details>
-  <summary><strong>Badge examples (optional)</strong></summary>
+## 📜 Common Scripts
 
-- Build: <code>![CI](https://img.shields.io/github/actions/workflow/status/ORG/REPO/ci.yml?label=CI)</code>
-- Tests: <code>![Tests](https://img.shields.io/badge/tests-passing-brightgreen)</code>
-- Coverage: <code>![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)</code>
-- License: <code>![License](https://img.shields.io/github/license/ORG/REPO)</code>
+ - `pnpm dev` — start dev server
+ - `pnpm build` — type-check, extract/compile i18n, build
+ - `pnpm preview` — preview production build
+ - `pnpm test` / `pnpm test:coverage` — unit tests
+ - `pnpm e2e` / `pnpm e2e:ui` — Playwright tests
+ - `pnpm storybook` — Storybook dev server
+ - `pnpm lint` / `pnpm prettier:check` — lint and format
 
-</details>
+## 🏗️ Architecture (FSD)
 
-## :beginner: About
+ - `app/` providers, routing, global styles
+ - `pages/` route components
+ - `widgets/` complex UI blocks
+ - `features/` user scenarios and business logic
+ - `entities/` data models and API
+ - `shared/` UI kit, utilities, libs
 
-Add a detailed introduction about the project here, everything you want the reader to know.
+ Import via slice public APIs only (barrels). Higher layers may import lower ones; cross‑feature deps are disallowed.
 
 ## 📚 Documentation
 
-- [API Documentation](docs/api/README.md)
-- [Architecture Overview](docs/architecture/README.md)
-- [Deployment Guide](docs/deployment/README.md)
-- [Contributing Guidelines](.github/CONTRIBUTING.md)
+ - API Docs: `docs/api/README.md`
+ - Architecture: `docs/architecture/README.md`
+ - Deployment: `docs/deployment/README.md`
+ - Contributing: `.github/CONTRIBUTING.md`
 
----
+## 📑 License
 
-<details>
-  <summary><strong>✅ Pre-publish checklist (remove in final README)</strong></summary>
-
-- [ ] Title updated and logo added
-- [ ] Badges added (CI, tests, coverage, license)
-- [ ] About/Usage/Installation/Commands completed
-- [ ] Development prerequisites and environment documented
-- [ ] Architecture notes reflect your stack and modules
-- [ ] Links verified (Getting Started, docs, external resources)
-- [ ] Guidance blocks, template-docs folder, are removed before publishing
-
-</details>
-
----
-
-## 📚 Template Usage
-
-- [Getting Started](template-docs/getting-started.md)
-- [Project Overview](template-docs/project-overview.md)
-- [FSD Architecture](template-docs/fsd-architecture.md)
-- [Development Guide](template-docs/development-guide.md)
-- [Public API Enforcement](template-docs/public-api-enforcement.md)
-- [Template Features](template-docs/template-features.md)
-- [Zustand Integration](template-docs/zustand-integration.md)
-- [Deployment](template-docs/deployment.md)
-
-## 🧩 Boilerplate Architecture
-
-- FSD boundaries with public API barrels
-- Typed forms, notifications, and devtools
-- Vite, ESLint/Prettier, Vitest/Playwright, Storybook, Lingui
-- Processes: Auth session refresh/logout via `useAuthSession` + provider
-- Features: Form/business logic via `useLoginForm`, `useRegisterForm`
-- Entities: Pure API methods (e.g., `authApi`)
-- Shared: UI kit, utilities, query client, notifications
+ MIT — see `LICENSE`.
