@@ -1,15 +1,6 @@
 # Mantine UI Project Layout
 
-A modern React + TypeScript + Vite template with Mantine UI, TanStack Router, TanStack Query, and Feature‑Sliced Design. Production‑ready tooling with Storybook, Vitest, Playwright, ESLint 9, Prettier, and Lingui.
-
-## 🔑 Tech Stack
-
-- **React 19**, **TypeScript**, **Vite 7** (SWC)
-- **Mantine UI v8** + extensions (Carousel, Charts, Dates, Dropzone, Modals, Notifications, DataTable)
-- **TanStack Router v1**, **TanStack Query v5**, **Zustand**
-- **React Hook Form** + **Zod** validation
-- **Axios**, **GraphQL Request**
-- **Lingui** i18n, **Storybook 8**, **Vitest**, **Playwright**, **ESLint 9**, **Prettier**
+This repository is a robust Mantine + React template that demonstrates a complete, scalable application skeleton—with authentication/authorization, a users management example, reusable form and table components, and guarded routes—designed to jump‑start new projects following Feature‑Sliced Design.
 
 ## 🚀 Getting Started
 
