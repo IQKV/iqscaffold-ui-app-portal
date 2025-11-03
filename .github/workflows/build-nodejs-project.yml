@@ -2,7 +2,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: ["dev", "wip", "prerelease/blank-starter-without-features"]
+    branches: ["dev", "wip", "feature/starter-user-management"]
   pull_request:
     branches: ["dev"]
 
