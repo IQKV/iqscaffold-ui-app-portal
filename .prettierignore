@@ -28,5 +28,6 @@ tsconfig.json
 # Optional stylelint cache
 .stylelintcache
 
+public/mockServiceWorker.js
 CLAUDE.md
 CLAUDE.local.md
