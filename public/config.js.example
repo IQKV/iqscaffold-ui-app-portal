@@ -1,8 +1,16 @@
+// Runtime configuration for containerized deployments
+// Copy this file to public/config.js and modify values as needed
+
+// API Configuration
 window.VITE_API_URL_SERVER = "http://localhost:3000";
-window.VITE_ENABLE_MSW = "false";
-window.VITE_LOG_LEVEL = "info";
+
+// Authentication Configuration
 window.VITE_AUTH_DOMAIN_AUTH = "http://localhost:5173";
 window.VITE_AUTH_DOMAIN_APP = "http://localhost:5173";
 window.VITE_AUTH_REDIRECT_AFTER_LOGIN = "/";
 window.VITE_AUTH_REDIRECT_AFTER_LOGOUT = "/auth/login";
 window.VITE_AUTH_REDIRECT_AFTER_SIGNUP = "/auth/verify-email";
+
+// Development & Debugging
+window.VITE_ENABLE_MSW = "false";  // Enable Mock Service Worker
+window.VITE_LOG_LEVEL = "info";    // Log level: silent, error, warn, info, debug

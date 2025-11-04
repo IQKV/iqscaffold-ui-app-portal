@@ -88,13 +88,35 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 ```
 
-## Environment Variables
+## Configuration
+
+### Runtime Configuration
+
+The application supports runtime configuration through `public/config.js` for containerized deployments:
+
+- **[Runtime Configuration Guide](./runtime-configuration.md)** - Configure the app without rebuilding
+- **[Kubernetes ConfigMap Guide](./kubernetes-configmap.md)** - Complete K8s deployment with ConfigMaps
+
+### Environment Variables
 
 ```bash
-# Production environment
+# Build-time environment variables
 NODE_ENV=production
-VITE_API_BASE_URL=https://api.yourdomain.com
-VITE_APP_VERSION=1.0.0
+VITE_API_URL_SERVER=https://api.yourdomain.com
+VITE_AUTH_DOMAIN_AUTH=https://auth.yourdomain.com
+VITE_AUTH_DOMAIN_APP=https://app.yourdomain.com
+VITE_ENABLE_MSW=false
+VITE_LOG_LEVEL=warn
+```
+
+### Quick Runtime Config Example
+
+```javascript
+// public/config.js - overrides build-time values
+window.VITE_API_URL_SERVER = "https://api.production.com";
+window.VITE_AUTH_DOMAIN_AUTH = "https://auth.production.com";
+window.VITE_AUTH_DOMAIN_APP = "https://app.production.com";
+window.VITE_LOG_LEVEL = "error";
 ```
 
 ## CI/CD Pipeline
