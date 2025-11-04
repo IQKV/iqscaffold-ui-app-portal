@@ -1,0 +1,8 @@
+window.VITE_API_URL_SERVER = "http://localhost:3000";
+window.VITE_ENABLE_MSW = "false";
+window.VITE_LOG_LEVEL = "info";
+window.VITE_AUTH_DOMAIN_AUTH = "http://localhost:5173";
+window.VITE_AUTH_DOMAIN_APP = "http://localhost:5173";
+window.VITE_AUTH_REDIRECT_AFTER_LOGIN = "/";
+window.VITE_AUTH_REDIRECT_AFTER_LOGOUT = "/auth/login";
+window.VITE_AUTH_REDIRECT_AFTER_SIGNUP = "/auth/verify-email";
