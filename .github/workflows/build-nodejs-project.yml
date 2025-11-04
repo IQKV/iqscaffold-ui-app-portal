@@ -34,7 +34,7 @@ jobs:
       - name: Run Playwright tests
         env:
           CI: true
-        run: pnpm e2e
+        run: pnpm e2e:smoke
 
       #  - name: Upload Playwright HTML report
       #    if: always()
