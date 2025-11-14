@@ -7,6 +7,10 @@ export interface AuthEndpoints {
   resetPassword: string;
   verifyEmail: string;
   resendVerification: string;
+  validateToken: string;
+  changePassword: string;
+  logoutAll: string;
+  emailStatus: string;
 }
 
 export interface AuthConfig {
@@ -43,9 +47,13 @@ const buildAuthConfig = (): AuthConfig => {
       refresh: "/api/v1/auth/refresh",
       logout: "/api/v1/auth/logout",
       forgotPassword: "/api/v1/password/forgot",
-      resetPassword: "/api/v1/auth/password/reset",
+      resetPassword: "/api/v1/password/reset",
       verifyEmail: "/api/v1/auth/email/verify",
       resendVerification: "/api/v1/auth/email/resend",
+      validateToken: "/api/v1/auth/validate",
+      changePassword: "/api/v1/password/change",
+      logoutAll: "/api/v1/auth/logout-all",
+      emailStatus: "/api/v1/auth/email/status",
     },
     tokenStorage: {
       accessTokenKey: "accessToken",

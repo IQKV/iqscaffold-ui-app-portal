@@ -159,10 +159,9 @@ describe("authApi", () => {
 
       await authApi.forgotPassword(email);
 
-      expect(apiClient.post).toHaveBeenCalledWith(
-        "/api/v1/password/forgot",
-        { email }
-      );
+      expect(apiClient.post).toHaveBeenCalledWith("/api/v1/password/forgot", {
+        email,
+      });
     });
   });
 

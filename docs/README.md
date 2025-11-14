@@ -1,221 +1,368 @@
-# 📚 Project Documentation
+# Authentication API Documentation
 
-Welcome to the comprehensive documentation for the Mantine UI Project Layout. This documentation covers all aspects of the project from architecture to deployment.
+Welcome to the auth.gripday.com authentication API documentation. This directory contains comprehensive guides for using the authentication system.
 
-## 📖 Documentation Structure
+## � Doccumentation Index
 
-### [🏗️ Architecture](./architecture/README.md)
+### 1. [Quick Start Guide](./QUICK_START.md)
 
-- Feature-Sliced Design methodology
-- Technology stack overview
-- Component architecture patterns
-- State management strategies
-- Performance optimization techniques
+**Start here!** Quick reference for common authentication tasks.
 
-### [📝 Form Development](./form-field-component.md)
+- Basic usage examples
+- Common patterns
+- Hook reference
+- Configuration guide
 
-- Comprehensive FormField component guide
-- 15+ field types with enhanced UX features
-- Mantine + Zod + Lingui integration
-- Validation strategies and best practices
-- Migration guide from basic form fields
+**Best for**: Getting started quickly, quick reference
 
-### [📡 API Documentation](./api/README.md)
+---
 
-- API client configuration
-- Authentication patterns
-- Endpoint reference
-- Error handling strategies
-- Mock Service Worker setup
-- Testing API integration
+### 2. [Complete API Reference](./API.md)
 
-### [🚀 Deployment Guide](./deployment/README.md)
+Comprehensive documentation of all authentication endpoints.
 
-- Quick deployment steps
-- Multiple deployment options (Vercel, Netlify, Docker)
-- CI/CD pipeline setup
-- Performance optimization
-- Security configurations
+- All API endpoints
+- Request/response schemas
+- Security features
+- Rate limiting
+- Error handling
+- JWT token structure
+- Configuration guide
 
-## 🚀 Quick Start
+**Best for**: Detailed API information, integration reference
 
-1. **Setup Development Environment**
+---
 
-   ```bash
-   pnpm install
-   cp .env.example .env
-   pnpm dev
-   ```
+### 3. [Usage Examples](./API_USAGE_EXAMPLES.md)
 
-2. **Run Tests**
+Practical code examples and implementation patterns.
 
-   ```bash
-   pnpm test          # Unit tests
-   pnpm e2e           # E2E tests
-   ```
+- Complete authentication flows
+- React component examples
+- Advanced use cases
+- Error handling patterns
+- Testing examples
+- Best practices
 
-3. **Build for Production**
-   ```bash
-   pnpm build
-   pnpm preview
-   ```
+**Best for**: Learning by example, implementation guidance
 
-## 🎯 Quick Reference
+---
 
-### FormField Component
+### 4. [Refactoring Summary](./REFACTORING_SUMMARY.md)
 
-```typescript
-import { FormField } from "@/shared/ui";
-import { msg } from "@lingui/core/macro";
+Overview of the authentication API refactoring.
 
-// Basic usage with enhanced features
-<FormField
-  type="email"
-  name="email"
-  label={msg`Email Address`}
-  placeholder={msg`Enter your email`}
-  form={form}
-  withAsterisk
-  showValidationStatus
-/>
+- Changes made
+- Backend alignment
+- Migration guide
+- Architecture benefits
+- Feature comparison
 
-// Password with strength indicator
-<FormField
-  type="password"
-  name="password"
-  label={msg`Password`}
-  form={form}
-  withAsterisk
-  showStrengthIndicator
-/>
+**Best for**: Understanding the refactoring, migration planning
 
-// Select with search and internationalization
-<FormField
-  type="select"
-  name="country"
-  label={msg`Country`}
-  data={countries}
-  form={form}
-  searchable
-  clearable
-/>
+---
+
+## 🚀 Quick Links
+
+### Common Tasks
+
+- **Register a user**: [Quick Start](./QUICK_START.md#1-user-registration) | [Examples](./API_USAGE_EXAMPLES.md#user-registration)
+- **Login**: [Quick Start](./QUICK_START.md#3-user-login) | [Examples](./API_USAGE_EXAMPLES.md#basic-authentication-flow)
+- **Email verification**: [Quick Start](./QUICK_START.md#2-email-verification) | [Examples](./API_USAGE_EXAMPLES.md#email-verification)
+- **Password reset**: [Quick Start](./QUICK_START.md#4-password-reset) | [Examples](./API_USAGE_EXAMPLES.md#password-management)
+- **Token management**: [Quick Start](./QUICK_START.md#5-token-management) | [Examples](./API_USAGE_EXAMPLES.md#token-management)
+
+### API Endpoints
+
+- **All endpoints**: [API Reference](./API.md#api-endpoints)
+- **Authentication**: [API Reference](./API.md#authentication-endpoints)
+- **Email verification**: [API Reference](./API.md#email-verification-endpoints)
+- **Password management**: [API Reference](./API.md#password-management-endpoints)
+
+### React Hooks
+
+- **Hook reference**: [Quick Start](./QUICK_START.md#available-hooks)
+- **Hook examples**: [Usage Examples](./API_USAGE_EXAMPLES.md#email-verification)
+
+---
+
+## 🎯 Use Cases
+
+### I want to...
+
+#### Implement user registration
+
+1. Read: [Quick Start - User Registration](./QUICK_START.md#1-user-registration)
+2. See example: [Usage Examples - User Registration](./API_USAGE_EXAMPLES.md#user-registration)
+3. API details: [API Reference - User Signup](./API.md#1-user-registration-signup)
+
+#### Add email verification
+
+1. Read: [Quick Start - Email Verification](./QUICK_START.md#2-email-verification)
+2. See example: [Usage Examples - Email Verification](./API_USAGE_EXAMPLES.md#email-verification)
+3. API details: [API Reference - Email Verification](./API.md#email-verification-endpoints)
+
+#### Implement password reset
+
+1. Read: [Quick Start - Password Reset](./QUICK_START.md#4-password-reset)
+2. See example: [Usage Examples - Password Management](./API_USAGE_EXAMPLES.md#password-management)
+3. API details: [API Reference - Password Management](./API.md#password-management-endpoints)
+
+#### Manage user sessions
+
+1. Read: [Quick Start - Token Management](./QUICK_START.md#5-token-management)
+2. See example: [Usage Examples - Token Management](./API_USAGE_EXAMPLES.md#token-management)
+3. API details: [API Reference - Token Refresh](./API.md#3-token-refresh)
+
+#### Handle authentication errors
+
+1. Read: [Quick Start - Error Handling](./QUICK_START.md#error-handling)
+2. See example: [Usage Examples - Error Handling](./API_USAGE_EXAMPLES.md#error-handling-best-practices)
+3. API details: [API Reference - Error Handling](./API.md#error-handling)
+
+---
+
+## 🏗️ Architecture
+
+### Frontend (auth.gripday.com)
+
+```
+src/
+├── app/config/
+│   └── auth-config.ts          # API endpoint configuration
+├── shared/
+│   ├── api/
+│   │   ├── auth-api.ts         # API implementation
+│   │   └── index.ts            # Exports
+│   └── lib/
+│       └── use-auth-api.ts     # React hooks
+└── processes/auth/
+    └── model/
+        └── auth-store.ts       # Auth state management
 ```
 
-### Form Setup Pattern
+### Backend Services
 
-```typescript
-// 1. Define Zod schema with i18n messages
-const schema = z.object({
-  email: z.string().email(_(msg`Invalid email`)),
-  password: z.string().min(8, _(msg`Password too short`)),
-});
+- **User Service** (Port 8080): Authentication authority
+- **Gateway Service** (Port 8080): API gateway with JWT validation
 
-// 2. Setup Mantine form with zodResolver
-const form = useForm({
-  validate: zodResolver(schema),
-  initialValues: { email: "", password: "" },
-});
+### Authentication Flow
 
-// 3. Form with noValidate attribute
-<form onSubmit={form.onSubmit(handleSubmit)} noValidate>
-  {/* FormField components */}
-</form>
+```
+Client → Gateway → User Service
+         ↓
+    JWT Validation
+         ↓
+    User Context
 ```
 
-## 🔧 Development Workflow
+For detailed architecture, see [Backend Authentication Architecture](../../backend/AUTHENTICATION-ARCHITECTURE.md).
 
-### Code Quality
+---
 
-- **Linting**: ESLint with React and TypeScript rules
-- **Formatting**: Prettier with automatic formatting
-- **Type Checking**: TypeScript strict mode
-- **Testing**: Vitest for unit tests, Playwright for E2E
+## 🔐 Security Features
 
-### Git Workflow
+### Token Security
 
-- **Conventional Commits**: Enforced via commitlint
-- **Pre-commit Hooks**: Husky for code quality checks
-- **Automated Releases**: Release-it with conventional changelog
+- **Algorithm**: RSA256 (asymmetric encryption)
+- **Access Token**: 15 minutes expiry
+- **Refresh Token**: 7 days (30 days with rememberMe)
+- **Token Blacklisting**: Immediate invalidation on logout
 
-### Development Tools
+### Account Protection
 
-- **Hot Reload**: Vite with instant HMR
-- **DevTools**: React Query and Router devtools
-- **Storybook**: Component development and documentation
-- **Form Validation**: Comprehensive FormField component with Mantine + Zod + Lingui integration
+- **Account Lockout**: 5 failed attempts = 15-minute lockout
+- **Email Verification**: Required before login
+- **Password Requirements**: Strong password enforcement
+- **Rate Limiting**: Per-endpoint limits
 
-## 📋 Project Standards
+### Audit & Monitoring
 
-### Code Organization
+- All authentication events logged
+- Failed login attempts tracked
+- Token operations monitored
+- Correlation IDs for tracing
 
-- Follow Feature-Sliced Design methodology
-- Use TypeScript for type safety
-- Implement proper error boundaries
-- Write comprehensive tests
-- Use unified FormField component for all form inputs
+---
 
-### Form Development
+## 📊 API Endpoints Summary
 
-- **Validation**: Use Zod schemas with mantine-form-zod-resolver
-- **Internationalization**: Integrate Lingui for all form labels and messages
-- **UX Enhancement**: Leverage validation status indicators, character counters, and password strength meters
-- **Accessibility**: Ensure proper ARIA attributes and screen reader support
-- **HTML5 Validation**: Disabled in favor of Zod validation for consistency
+| Category                | Endpoints        | Documentation                                  |
+| ----------------------- | ---------------- | ---------------------------------------------- |
+| **Authentication**      | 6 endpoints      | [View](./API.md#authentication-endpoints)      |
+| **Email Verification**  | 3 endpoints      | [View](./API.md#email-verification-endpoints)  |
+| **Password Management** | 3 endpoints      | [View](./API.md#password-management-endpoints) |
+| **Total**               | **12 endpoints** | [View All](./API.md#api-endpoints)             |
 
-### Performance
+---
 
-- Lazy load routes and heavy components
-- Optimize bundle size with code splitting
-- Implement proper caching strategies
-- Monitor Core Web Vitals
+## 🎨 React Hooks Summary
 
-### Accessibility
+| Hook                      | Purpose                 | Documentation                            |
+| ------------------------- | ----------------------- | ---------------------------------------- |
+| `useValidateToken()`      | Validate JWT tokens     | [View](./QUICK_START.md#available-hooks) |
+| `useChangePassword()`     | Change user password    | [View](./QUICK_START.md#available-hooks) |
+| `useLogoutAll()`          | Logout from all devices | [View](./QUICK_START.md#available-hooks) |
+| `useEmailStatus()`        | Query email status      | [View](./QUICK_START.md#available-hooks) |
+| `useResendVerification()` | Resend verification     | [View](./QUICK_START.md#available-hooks) |
+| `useVerifyEmail()`        | Verify email            | [View](./QUICK_START.md#available-hooks) |
+| `useForgotPassword()`     | Request password reset  | [View](./QUICK_START.md#available-hooks) |
+| `useResetPassword()`      | Reset password          | [View](./QUICK_START.md#available-hooks) |
 
-- Follow WCAG 2.1 guidelines
-- Use semantic HTML elements
-- Implement proper ARIA attributes
-- Test with screen readers
+---
 
-### Security
+## 🔧 Configuration
 
-- Validate all user inputs
-- Implement proper authentication
-- Use secure HTTP headers
-- Regular dependency updates
+### Environment Variables
+
+```env
+# API Base URL
+VITE_API_URL_SERVER=http://localhost:8080
+
+# Auth Domain Configuration
+VITE_AUTH_DOMAIN_AUTH=https://auth.iqkv.com
+VITE_AUTH_DOMAIN_APP=https://app.iqkv.com
+
+# Redirect URLs
+VITE_AUTH_REDIRECT_AFTER_LOGIN=https://app.iqkv.com
+VITE_AUTH_REDIRECT_AFTER_LOGOUT=https://auth.iqkv.com
+VITE_AUTH_REDIRECT_AFTER_SIGNUP=https://auth.iqkv.com
+```
+
+See [API Reference - Configuration](./API.md#configuration) for details.
+
+---
+
+## 📈 Rate Limits
+
+| Endpoint       | Requests/Minute | Burst Capacity |
+| -------------- | --------------- | -------------- |
+| Login          | 10              | 20             |
+| Signup         | 5               | 10             |
+| Email Resend   | 3               | 5              |
+| Password Reset | 3               | 5              |
+
+See [API Reference - Rate Limiting](./API.md#rate-limiting) for complete list.
+
+---
+
+## 🧪 Testing
+
+### Quick Test
+
+```typescript
+import { authApi } from "@/shared/api";
+
+// Register
+const user = await authApi.signup({
+  username: "test",
+  email: "test@example.com",
+  password: "Test123!",
+  firstName: "Test",
+  lastName: "User",
+});
+
+// Login
+const session = await authApi.login({
+  username: "test",
+  password: "Test123!",
+  rememberMe: false,
+});
+
+console.log("Access token:", session.accessToken);
+```
+
+See [Usage Examples - Testing](./API_USAGE_EXAMPLES.md#testing-examples) for more.
+
+---
+
+## 🆘 Troubleshooting
+
+### Common Issues
+
+#### 401 Unauthorized
+
+- Check token expiry
+- Verify token signature
+- Ensure email is verified
+
+#### 423 Account Locked
+
+- Wait 15 minutes
+- Contact support if persistent
+
+#### 429 Too Many Requests
+
+- Wait before retrying
+- Check rate limits
+
+See [API Reference - Error Handling](./API.md#error-handling) for complete guide.
+
+---
+
+## 📚 Additional Resources
+
+### Backend Documentation
+
+- [Authentication Architecture](../../backend/AUTHENTICATION-ARCHITECTURE.md)
+- [User Service README](../../backend/gripday-user-service/README.md)
+- [Gateway Service README](../../backend/gripday-gateway-service/README.md)
+
+### Frontend Documentation
+
+- [Refactoring Changelog](../CHANGELOG_AUTH_REFACTOR.md)
+- [Project README](../README.md)
+
+---
 
 ## 🤝 Contributing
 
-Please read our [Contributing Guidelines](./.github/CONTRIBUTING.md) before submitting pull requests.
+When updating authentication features:
 
-### Development Process
+1. Update API implementation in `src/shared/api/auth-api.ts`
+2. Add/update hooks in `src/shared/lib/use-auth-api.ts`
+3. Update configuration in `src/app/config/auth-config.ts`
+4. Update documentation in this directory
+5. Add examples to `API_USAGE_EXAMPLES.md`
+6. Update changelog
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Ensure all tests pass
-6. Submit a pull request
-
-### Code Review
-
-- All changes require code review
-- Automated checks must pass
-- Documentation must be updated
-- Tests must be included
+---
 
 ## 📞 Support
 
-- **Issues**: Use GitHub Issues for bug reports and feature requests
-- **Discussions**: Use GitHub Discussions for questions and ideas
-- **Security**: Report security issues privately via email
+### Getting Help
 
-## 📋 Additional Resources
+1. **Check Documentation**: Start with [Quick Start](./QUICK_START.md)
+2. **Review Examples**: See [Usage Examples](./API_USAGE_EXAMPLES.md)
+3. **API Reference**: Check [API Documentation](./API.md)
+4. **Backend Docs**: Review [Backend Architecture](../../backend/AUTHENTICATION-ARCHITECTURE.md)
 
-- **[Changelog](./CHANGELOG.md)** - Version history and migration guides
-- **[Mantine + Zod Validation Guide](./mantine-zod-validation-guide.md)** - Form validation patterns
-- **[Authentication Guide](./auth.md)** - Auth implementation details
-- **[MSW Implementation](./msw-implementation.md)** - API mocking setup
+### Reporting Issues
 
-## 📄 License
+When reporting issues, include:
 
-This project is licensed under the MIT License. See the [LICENSE](../LICENSE) file for details.
+- Error message and status code
+- Request/response details
+- Steps to reproduce
+- Environment information
+
+---
+
+## 📝 Documentation Versions
+
+- **Current Version**: 2.0.0
+- **Last Updated**: 2024
+- **Status**: ✅ Complete and up-to-date
+
+---
+
+## 🎯 Next Steps
+
+1. **New to the API?** Start with [Quick Start Guide](./QUICK_START.md)
+2. **Need details?** Check [API Reference](./API.md)
+3. **Want examples?** See [Usage Examples](./API_USAGE_EXAMPLES.md)
+4. **Migrating?** Read [Refactoring Summary](./REFACTORING_SUMMARY.md)
+
+---
+
+**Happy coding! 🚀**

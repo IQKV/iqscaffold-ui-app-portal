@@ -34,6 +34,31 @@ export interface RefreshTokenRequest {
   refreshToken: string;
 }
 
+export interface ValidateTokenRequest {
+  token: string;
+}
+
+export interface ValidateTokenResponse {
+  active: boolean;
+  tokenId: string | null;
+  tokenType: string | null;
+  issuedAt: string | null;
+  expiresAt: string | null;
+  user: User | null;
+}
+
+export interface ChangePasswordRequest {
+  currentPassword: string;
+  newPassword: string;
+}
+
+export interface EmailStatusResponse {
+  email: string;
+  emailVerified: boolean;
+  registrationDate: string;
+  message: string;
+}
+
 /**
  * Authentication API
  */
@@ -115,5 +140,53 @@ export const authApi = {
   async resendVerification(email: string): Promise<void> {
     const config = getAuthConfig();
     await apiClient.post(config.endpoints.resendVerification, { email });
+  },
+
+  /**
+   * Validate JWT token
+   */
+  async validateToken(token: string): Promise<ValidateTokenResponse> {
+    const config = getAuthConfig();
+    const response = await apiClient.post<ValidateTokenResponse>(
+      config.endpoints.validateToken,
+      { token }
+    );
+    return response.data;
+  },
+
+  /**
+   * Change password for authenticated user
+   */
+  async changePassword(
+    currentPassword: string,
+    newPassword: string
+  ): Promise<void> {
+    const config = getAuthConfig();
+    await apiClient.post(config.endpoints.changePassword, {
+      currentPassword,
+      newPassword,
+    });
+  },
+
+  /**
+   * Logout from all devices
+   */
+  async logoutAll(): Promise<void> {
+    const config = getAuthConfig();
+    await apiClient.post(config.endpoints.logoutAll);
+  },
+
+  /**
+   * Get email verification status
+   */
+  async getEmailStatus(email: string): Promise<EmailStatusResponse> {
+    const config = getAuthConfig();
+    const response = await apiClient.get<EmailStatusResponse>(
+      config.endpoints.emailStatus,
+      {
+        params: { email },
+      }
+    );
+    return response.data;
   },
 };
