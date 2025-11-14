@@ -197,7 +197,7 @@ export const authHandlers = [
   }),
 
   // Forgot password
-  http.post("/api/v1/auth/forgot-password", async ({ request }) => {
+  http.post("/api/v1/password/forgot", async ({ request }) => {
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
@@ -219,7 +219,7 @@ export const authHandlers = [
   }),
 
   // Reset password
-  http.post("/api/v1/auth/reset-password", async ({ request }) => {
+  http.post("/api/v1/auth/password/reset", async ({ request }) => {
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
