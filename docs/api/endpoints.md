@@ -47,7 +47,7 @@ Authorization: Bearer <token>
 }
 ```
 
-### GET /api/users/me
+### GET /api/me
 
 Get current authenticated user information.
 

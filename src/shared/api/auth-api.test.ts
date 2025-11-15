@@ -17,7 +17,7 @@ vi.mock("@/app/config", () => ({
       signup: "/api/v1/auth/signup",
       refresh: "/api/v1/auth/refresh",
       logout: "/api/v1/auth/logout",
-      forgotPassword: "/api/v1/password/forgot",
+      forgotPassword: "/api/v1/auth/password/forgot",
       resetPassword: "/api/v1/auth/password/reset",
       verifyEmail: "/api/v1/auth/email/verify",
       resendVerification: "/api/v1/auth/email/resend",
@@ -159,7 +159,7 @@ describe("authApi", () => {
 
       await authApi.forgotPassword(email);
 
-      expect(apiClient.post).toHaveBeenCalledWith("/api/v1/password/forgot", {
+      expect(apiClient.post).toHaveBeenCalledWith("/api/v1/auth/password/forgot", {
         email,
       });
     });

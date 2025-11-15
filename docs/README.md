@@ -105,8 +105,8 @@ Overview of the authentication API refactoring.
 #### Implement password reset
 
 1. Read: [Quick Start - Password Reset](./QUICK_START.md#4-password-reset)
-2. See example: [Usage Examples - Password Management](./API_USAGE_EXAMPLES.md#password-management)
-3. API details: [API Reference - Password Management](./API.md#password-management-endpoints)
+2. See example: [Usage Examples - Password Reset API](./API_USAGE_EXAMPLES.md#password-management)
+3. API details: [API Reference - Password Reset API](./API.md#password-management-endpoints)
 
 #### Manage user sessions
 
@@ -191,7 +191,7 @@ For detailed architecture, see [Backend Authentication Architecture](../../backe
 | ----------------------- | ---------------- | ---------------------------------------------- |
 | **Authentication**      | 6 endpoints      | [View](./API.md#authentication-endpoints)      |
 | **Email Verification**  | 3 endpoints      | [View](./API.md#email-verification-endpoints)  |
-| **Password Management** | 3 endpoints      | [View](./API.md#password-management-endpoints) |
+| **Password Reset API** | 3 endpoints      | [View](./API.md#password-management-endpoints) |
 | **Total**               | **12 endpoints** | [View All](./API.md#api-endpoints)             |
 
 ---
