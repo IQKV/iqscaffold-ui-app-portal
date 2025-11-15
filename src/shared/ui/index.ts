@@ -40,7 +40,3 @@ export { useLoadingState } from "./loading-state/loading-state-hooks";
 export { FormField, EnhancedFormField } from "./enhanced-form-field";
 
 export { useEnhancedFormValidation } from "./enhanced-form-field/validation-utils";
-
-// (auth-related UI moved to processes/auth)
-export { AuthDemo } from "./auth-demo/auth-demo";
-export { AuthExamples } from "./auth-examples/auth-examples";

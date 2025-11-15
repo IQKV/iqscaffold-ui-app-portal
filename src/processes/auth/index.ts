@@ -10,9 +10,6 @@ export {
   UserManagementGuard,
 } from "./lib/guards";
 export { UserMenu } from "./ui/user-menu";
-export { LoginForm as AuthLoginForm } from "./ui/login-form";
-export { AuthExamples } from "./ui/auth-examples";
-export { AuthDemo } from "./ui/auth-demo";
 export { useAuth } from "./lib/use-auth";
 export { useAuthOperations } from "./lib/use-auth-operations";
 export { redirectToAuth, logoutAndRedirect } from "./lib/navigation";

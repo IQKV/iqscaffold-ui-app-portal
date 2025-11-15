@@ -101,7 +101,7 @@ msgid "Cancel"
 msgstr "Cancel"
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:83
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:125
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:121
 msgid "Change Password"
 msgstr "Change Password"
 

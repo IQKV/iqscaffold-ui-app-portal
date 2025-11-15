@@ -1,18 +1,20 @@
 import { type PropsWithChildren, type ReactNode, useEffect } from "react";
 import { useAuthStore } from "../model/store";
-import { useNavigate } from "@tanstack/react-router";
 import { Alert, Text } from "@mantine/core";
 import { IconLock } from "@tabler/icons-react";
 import { useAuth } from "./use-auth";
+import { getAuthConfig } from "@/app/config";
 
 export function AuthGuard({ children }: PropsWithChildren) {
   const status = useAuthStore((s) => s.status);
-  const navigate = useNavigate();
   useEffect(() => {
     if (status !== "initializing" && status !== "authenticated") {
-      navigate({ to: "/auth-demo", replace: true });
+      // Redirect to auth portal (external domain)
+      const config = getAuthConfig();
+      const currentUrl = window.location.href;
+      window.location.href = `${config.domains.auth}/login?redirect=${encodeURIComponent(currentUrl)}`;
     }
-  }, [status, navigate]);
+  }, [status]);
   if (status === "initializing") {
     return null;
   }
