@@ -5,24 +5,12 @@ import { ModalsProvider } from "@mantine/modals";
 import { AuthContext, type AuthContextType } from "./auth-context";
 import { theme } from "@/app/theme";
 import type { UserContext } from "@/entities/user";
+import { defaultMockUser } from "./test-constants";
 
 interface TestWrapperProps {
   children: ReactNode;
   mockUser?: UserContext | null;
 }
-
-// Mock authenticated user for tests
-const defaultMockUser: UserContext = {
-  userId: 1,
-  username: "testuser",
-  email: "test@example.com",
-  roles: ["ADMIN"],
-  permissions: ["users:read", "users:write", "users:delete"],
-  firstName: "Test",
-  lastName: "User",
-  tenantId: "test-tenant",
-  customClaims: {},
-};
 
 export function TestWrapper({
   children,
@@ -75,11 +63,5 @@ export function TestWrapper({
         </QueryClientProvider>
       </ModalsProvider>
     </MantineProvider>
-  );
-}
-
-export function createTestWrapper() {
-  return ({ children }: { children: ReactNode }) => (
-    <TestWrapper>{children}</TestWrapper>
   );
 }
