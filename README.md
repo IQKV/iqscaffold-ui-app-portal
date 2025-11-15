@@ -28,7 +28,6 @@ React + TypeScript + Vite + TanStack Router + Mantine UI Template
 - 🔄 **TanStack Router** - Type-safe routing with code splitting and search params
 - 🔄 **TanStack Query** - Powerful data synchronization and caching
 - 🔄 **Axios** - Promise-based HTTP client for API calls
-- 🔍 **GraphQL Request** - Lightweight GraphQL client
 - ✅ **React Hook Form + Zod** - Type-safe form validation and management
 - 🍪 **JS Cookie** - Simple cookie management
 - 🔗 **nuqs** - Type-safe URL search params state management
@@ -73,7 +72,6 @@ React + TypeScript + Vite + TanStack Router + Mantine UI Template
 ### 🏗️ **Architecture & Patterns**
 
 - 🏗️ **Feature-Sliced Design** - Scalable frontend architecture methodology
-- 🔌 **API Code Generation** - Kubb for OpenAPI/Swagger client generation
 - 🎯 **TypeScript Strict Mode** - Enhanced type safety with strict configuration
 - 🔄 **Hot Module Replacement** - Instant updates during development
 
