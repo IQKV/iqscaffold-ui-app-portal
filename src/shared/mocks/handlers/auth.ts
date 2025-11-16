@@ -165,7 +165,7 @@ export const authHandlers = [
   }),
 
   // Get current user
-  http.get("/api/v1/me", async ({ request }) => {
+  http.get("/api/v1/users/me", async ({ request }) => {
     if (config.delay) {
       await delay(
         typeof config.delay === "object"

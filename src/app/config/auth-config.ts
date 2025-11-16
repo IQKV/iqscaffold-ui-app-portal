@@ -51,7 +51,7 @@ const buildAuthConfig = (): AuthConfig => {
       verifyEmail: "/api/v1/auth/email/verify",
       resendVerification: "/api/v1/auth/email/resend",
       validateToken: "/api/v1/auth/validate",
-      changePassword: "/api/v1/me/password",
+      changePassword: "/api/v1/users/me/password",
       logoutAll: "/api/v1/auth/logout-all",
       emailStatus: "/api/v1/auth/email/status",
     },

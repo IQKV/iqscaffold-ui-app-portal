@@ -21,7 +21,7 @@ vi.mock("@/app/config", () => ({
       resetPassword: "/api/v1/auth/password/reset",
       verifyEmail: "/api/v1/auth/email/verify",
       resendVerification: "/api/v1/auth/email/resend",
-      changePassword: "/api/v1/me/password",
+      changePassword: "/api/v1/users/me/password",
     },
   }),
 }));
