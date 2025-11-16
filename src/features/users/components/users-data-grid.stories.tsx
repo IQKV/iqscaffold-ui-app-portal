@@ -69,10 +69,10 @@ const meta: Meta<typeof UsersDataGrid> = {
     layout: "fullscreen",
     msw: {
       handlers: [
-        http.get("/api/v1/users", () => {
+        http.get("/api/v1/admin/users", () => {
           return HttpResponse.json(mockUsersResponse);
         }),
-        http.delete("/api/v1/users/:id", () => {
+        http.delete("/api/v1/admin/users/:id", () => {
           return HttpResponse.json({ message: "User deleted successfully" });
         }),
       ],
@@ -122,7 +122,7 @@ export const Loading: Story = {
   parameters: {
     msw: {
       handlers: [
-        http.get("/api/v1/users", async () => {
+        http.get("/api/v1/admin/users", async () => {
           // Simulate loading state
           await new Promise((resolve) => setTimeout(resolve, 10000));
           return HttpResponse.json(mockUsersResponse);
@@ -140,7 +140,7 @@ export const Empty: Story = {
   parameters: {
     msw: {
       handlers: [
-        http.get("/api/v1/users", () => {
+        http.get("/api/v1/admin/users", () => {
           return HttpResponse.json({
             data: [],
             pagination: {
@@ -166,7 +166,7 @@ export const Error: Story = {
   parameters: {
     msw: {
       handlers: [
-        http.get("/api/v1/users", () => {
+        http.get("/api/v1/admin/users", () => {
           return HttpResponse.json(
             { error: "Internal server error" },
             { status: 500 }
@@ -185,7 +185,7 @@ export const LargeDataset: Story = {
   parameters: {
     msw: {
       handlers: [
-        http.get("/api/v1/users", () => {
+        http.get("/api/v1/admin/users", () => {
           const users = Array.from({ length: 50 }, (_, i) => ({
             id: (i + 1).toString(),
             username: `user_${i + 1}`,

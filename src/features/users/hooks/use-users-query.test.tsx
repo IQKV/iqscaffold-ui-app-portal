@@ -59,7 +59,7 @@ describe("useUsersQuery", () => {
 
   it("handles API error", async () => {
     server.use(
-      http.get("/api/v1/users", () => {
+      http.get("/api/v1/admin/users", () => {
         return HttpResponse.json(
           { error: "Internal server error" },
           { status: 500 }
@@ -95,7 +95,7 @@ describe("useUserQuery", () => {
 
   it("handles user not found", async () => {
     server.use(
-      http.get("/api/v1/users/999", () => {
+      http.get("/api/v1/admin/users/999", () => {
         return HttpResponse.json({ error: "User not found" }, { status: 404 });
       })
     );
@@ -199,7 +199,7 @@ describe("useUpdateUserMutation", () => {
 
   it("handles update error for non-existent user", async () => {
     server.use(
-      http.put("/api/v1/users/999", () => {
+      http.put("/api/v1/admin/users/999", () => {
         return HttpResponse.json({ error: "User not found" }, { status: 404 });
       })
     );
@@ -240,7 +240,7 @@ describe("useDeleteUserMutation", () => {
 
   it("handles delete error for non-existent user", async () => {
     server.use(
-      http.delete("/api/v1/users/999", () => {
+      http.delete("/api/v1/admin/users/999", () => {
         return HttpResponse.json({ error: "User not found" }, { status: 404 });
       })
     );

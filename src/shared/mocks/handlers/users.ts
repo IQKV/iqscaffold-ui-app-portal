@@ -73,7 +73,7 @@ let nextUserId = 6;
 
 export const usersHandlers = [
   // Get all users with pagination
-  http.get("/api/v1/users", async ({ request }) => {
+  http.get("/api/v1/admin/users", async ({ request }) => {
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
@@ -125,7 +125,7 @@ export const usersHandlers = [
   }),
 
   // Get user by ID
-  http.get("/api/v1/users/:id", async ({ params }) => {
+  http.get("/api/v1/admin/users/:id", async ({ params }) => {
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
@@ -220,7 +220,7 @@ export const usersHandlers = [
   }),
 
   // Create user (admin endpoint)
-  http.post("/api/v1/users", async ({ request }) => {
+  http.post("/api/v1/admin/users", async ({ request }) => {
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
@@ -280,7 +280,7 @@ export const usersHandlers = [
   }),
 
   // Update user
-  http.put("/api/v1/users/:id", async ({ params, request }) => {
+  http.put("/api/v1/admin/users/:id", async ({ params, request }) => {
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
@@ -354,7 +354,7 @@ export const usersHandlers = [
   }),
 
   // Delete user
-  http.delete("/api/v1/users/:id", async ({ params }) => {
+  http.delete("/api/v1/admin/users/:id", async ({ params }) => {
     if (config.delay) {
       await delay(
         typeof config.delay === "object"

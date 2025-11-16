@@ -162,7 +162,7 @@ export const authApi = {
     newPassword: string
   ): Promise<void> {
     const config = getAuthConfig();
-    await apiClient.post(config.endpoints.changePassword, {
+    await apiClient.patch(config.endpoints.changePassword, {
       currentPassword,
       newPassword,
     });

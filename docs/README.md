@@ -187,12 +187,12 @@ For detailed architecture, see [Backend Authentication Architecture](../../backe
 
 ## 📊 API Endpoints Summary
 
-| Category                | Endpoints        | Documentation                                  |
-| ----------------------- | ---------------- | ---------------------------------------------- |
-| **Authentication**      | 6 endpoints      | [View](./API.md#authentication-endpoints)      |
-| **Email Verification**  | 3 endpoints      | [View](./API.md#email-verification-endpoints)  |
+| Category               | Endpoints        | Documentation                                  |
+| ---------------------- | ---------------- | ---------------------------------------------- |
+| **Authentication**     | 6 endpoints      | [View](./API.md#authentication-endpoints)      |
+| **Email Verification** | 3 endpoints      | [View](./API.md#email-verification-endpoints)  |
 | **Password Reset API** | 3 endpoints      | [View](./API.md#password-management-endpoints) |
-| **Total**               | **12 endpoints** | [View All](./API.md#api-endpoints)             |
+| **Total**              | **12 endpoints** | [View All](./API.md#api-endpoints)             |
 
 ---
 

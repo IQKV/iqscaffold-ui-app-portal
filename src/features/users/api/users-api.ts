@@ -74,7 +74,7 @@ export async function fetchUsers(
     search?: string;
   } = {}
 ): Promise<UsersResponse> {
-  const response = await apiClient.get<UsersResponse>("/api/v1/users", {
+  const response = await apiClient.get<UsersResponse>("/api/v1/admin/users", {
     params,
     headers: getAuthHeaders(),
   });
@@ -85,9 +85,12 @@ export async function fetchUsers(
  * Fetch user by ID
  */
 export async function fetchUser(id: number): Promise<UserResponse> {
-  const response = await apiClient.get<UserResponse>(`/api/v1/users/${id}`, {
-    headers: getAuthHeaders(),
-  });
+  const response = await apiClient.get<UserResponse>(
+    `/api/v1/admin/users/${id}`,
+    {
+      headers: getAuthHeaders(),
+    }
+  );
   return response.data;
 }
 
@@ -98,7 +101,7 @@ export async function createUser(
   userData: CreateUserRequest
 ): Promise<UserResponse> {
   const response = await apiClient.post<UserResponse>(
-    "/api/v1/users",
+    "/api/v1/admin/users",
     userData,
     {
       headers: getAuthHeaders(),
@@ -115,7 +118,7 @@ export async function updateUser(
   userData: UpdateUserRequest
 ): Promise<UserResponse> {
   const response = await apiClient.put<UserResponse>(
-    `/api/v1/users/${id}`,
+    `/api/v1/admin/users/${id}`,
     userData,
     {
       headers: getAuthHeaders(),
@@ -129,7 +132,7 @@ export async function updateUser(
  */
 export async function deleteUser(id: number): Promise<{ message: string }> {
   const response = await apiClient.delete<{ message: string }>(
-    `/api/v1/users/${id}`,
+    `/api/v1/admin/users/${id}`,
     {
       headers: getAuthHeaders(),
     }
