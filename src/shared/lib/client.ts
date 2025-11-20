@@ -6,6 +6,7 @@ import axios, {
 import { getConfig } from "@/app/config";
 import { normalizeAxiosError } from "./http-error";
 import { notificationService } from "./notifications";
+import { resolveTenantId } from "./tenant-utils";
 
 const BASE_URL = getConfig("VITE_API_URL_SERVER");
 
@@ -19,6 +20,19 @@ export const api = axios.create({
 
 // Ensure cookies are sent globally as well (for any raw axios calls below)
 axios.defaults.withCredentials = true;
+
+// Add tenant header interceptor
+api.interceptors.request.use(
+  (config) => {
+    // Add tenant ID header if available
+    const tenantId = resolveTenantId();
+    if (tenantId && !config.headers["X-Tenant-ID"]) {
+      config.headers["X-Tenant-ID"] = tenantId;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 api.interceptors.response.use(
   (response) => response,

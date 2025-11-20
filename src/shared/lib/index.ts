@@ -16,3 +16,6 @@ export * from "./auth-utils";
 export * from "./test-utils";
 export * from "./msw-config";
 export { useMSWControl } from "./use-msw-control";
+
+// Tenant utilities
+export * from "./tenant-utils";

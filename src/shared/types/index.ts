@@ -15,3 +15,11 @@ export interface SortableItem {
   id: string | number;
   order: number;
 }
+
+// Tenant types
+export type {
+  Tenant,
+  TenantSummary,
+  TenantResolutionResult,
+  TenantContext,
+} from "./tenant";

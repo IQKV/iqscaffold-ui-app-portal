@@ -15,6 +15,7 @@ import { routeTree } from "@/routeTree.gen";
 import { theme } from "./theme";
 import { queryClient } from "@/shared/lib";
 import { AuthProvider } from "@/processes/auth";
+import { TenantProvider } from "@/processes/tenant";
 
 import { ErrorBoundary } from "@/shared/ui";
 import { MSWDevTools } from "@/shared/ui/msw-dev-tools";
@@ -65,11 +66,13 @@ export function App() {
               <ModalsProvider modals={{ confirmation: ConfirmContextModal }}>
                 <Notifications />
                 <QueryClientProvider client={queryClient}>
-                  <AuthProvider>
-                    <RouterProvider router={router} />
-                    <ReactQueryDevtools initialIsOpen={false} />
-                    <MSWDevTools />
-                  </AuthProvider>
+                  <TenantProvider>
+                    <AuthProvider>
+                      <RouterProvider router={router} />
+                      <ReactQueryDevtools initialIsOpen={false} />
+                      <MSWDevTools />
+                    </AuthProvider>
+                  </TenantProvider>
                 </QueryClientProvider>
               </ModalsProvider>
             </MantineProvider>

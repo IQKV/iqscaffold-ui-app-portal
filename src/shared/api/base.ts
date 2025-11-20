@@ -8,6 +8,7 @@ import {
   setTokens,
   clearTokens,
 } from "@/shared/lib/auth-tokens";
+import { resolveTenantId } from "@/shared/lib/tenant-utils";
 
 const BASE_URL = getConfig("VITE_API_URL_SERVER");
 
@@ -27,13 +28,21 @@ export const apiClient: AxiosInstance = axios.create({
 // Ensure cookies are sent globally
 axios.defaults.withCredentials = true;
 
-// Attach Authorization header from token storage
+// Attach Authorization header from token storage and tenant header
 apiClient.interceptors.request.use((config) => {
   const token = getAccessToken();
   if (token) {
     config.headers = config.headers ?? {};
     (config.headers as any).Authorization = `Bearer ${token}`;
   }
+
+  // Add tenant ID header if available
+  const tenantId = resolveTenantId();
+  if (tenantId && !config.headers?.["X-Tenant-ID"]) {
+    config.headers = config.headers ?? {};
+    (config.headers as any)["X-Tenant-ID"] = tenantId;
+  }
+
   return config;
 });
 
