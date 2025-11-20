@@ -1,19 +1,33 @@
 import { jwtDecode } from "jwt-decode";
 import type { UserContext } from "@/entities/user";
+import {
+  JWT_CLAIM_SUBJECT,
+  JWT_CLAIM_USER_ID,
+  JWT_CLAIM_USERNAME,
+  JWT_CLAIM_EMAIL,
+  JWT_CLAIM_ROLES,
+  JWT_CLAIM_PERMISSIONS,
+  JWT_CLAIM_FIRST_NAME,
+  JWT_CLAIM_LAST_NAME,
+  JWT_CLAIM_TENANT_ID,
+  JWT_CLAIM_CUSTOM_CLAIMS,
+  JWT_CLAIM_EXPIRATION,
+  JWT_CLAIM_ISSUED_AT,
+} from "@/shared/constants/jwt-claims";
 
 interface JWTPayload {
-  sub: string;
-  userId: number;
-  username: string;
-  email: string;
-  roles: string[];
-  permissions: string[];
-  firstName: string;
-  lastName: string;
-  tenantId: string;
-  customClaims: Record<string, unknown>;
-  exp: number;
-  iat: number;
+  [JWT_CLAIM_SUBJECT]: string;
+  [JWT_CLAIM_USER_ID]: number;
+  [JWT_CLAIM_USERNAME]: string;
+  [JWT_CLAIM_EMAIL]: string;
+  [JWT_CLAIM_ROLES]: string[];
+  [JWT_CLAIM_PERMISSIONS]: string[];
+  [JWT_CLAIM_FIRST_NAME]: string;
+  [JWT_CLAIM_LAST_NAME]: string;
+  [JWT_CLAIM_TENANT_ID]: string;
+  [JWT_CLAIM_CUSTOM_CLAIMS]: Record<string, unknown>;
+  [JWT_CLAIM_EXPIRATION]: number;
+  [JWT_CLAIM_ISSUED_AT]: number;
 }
 
 export function decodeUser(token: string): {
@@ -22,25 +36,27 @@ export function decodeUser(token: string): {
 } {
   try {
     const decoded = jwtDecode<JWTPayload>(token);
-    if (!decoded?.exp) {
+    const exp = decoded[JWT_CLAIM_EXPIRATION];
+
+    if (!exp) {
       return { user: null, exp: null };
     }
-    if (decoded.exp * 1000 < Date.now()) {
-      return { user: null, exp: decoded.exp * 1000 };
+    if (exp * 1000 < Date.now()) {
+      return { user: null, exp: exp * 1000 };
     }
     return {
       user: {
-        userId: decoded.userId,
-        username: decoded.username,
-        email: decoded.email,
-        roles: decoded.roles || [],
-        permissions: decoded.permissions || [],
-        firstName: decoded.firstName,
-        lastName: decoded.lastName,
-        tenantId: decoded.tenantId,
-        customClaims: decoded.customClaims || {},
+        userId: decoded[JWT_CLAIM_USER_ID],
+        username: decoded[JWT_CLAIM_USERNAME],
+        email: decoded[JWT_CLAIM_EMAIL],
+        roles: decoded[JWT_CLAIM_ROLES] || [],
+        permissions: decoded[JWT_CLAIM_PERMISSIONS] || [],
+        firstName: decoded[JWT_CLAIM_FIRST_NAME],
+        lastName: decoded[JWT_CLAIM_LAST_NAME],
+        tenantId: decoded[JWT_CLAIM_TENANT_ID],
+        customClaims: decoded[JWT_CLAIM_CUSTOM_CLAIMS] || {},
       },
-      exp: decoded.exp * 1000,
+      exp: exp * 1000,
     };
   } catch {
     return { user: null, exp: null };

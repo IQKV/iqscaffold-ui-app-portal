@@ -100,8 +100,8 @@ msgstr "Bypass (allow through)"
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:83
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:121
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:94
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:132
 msgid "Change Password"
 msgstr "Change Password"
 
@@ -141,11 +141,11 @@ msgstr "Confirm"
 msgid "Confirm Action"
 msgstr "Confirm Action"
 
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:114
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:125
 msgid "Confirm New Password"
 msgstr "Confirm New Password"
 
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:115
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:126
 msgid "Confirm your new password"
 msgstr "Confirm your new password"
 
@@ -177,12 +177,12 @@ msgstr "Created"
 msgid "Created:"
 msgstr "Created:"
 
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:94
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:105
 msgid "Current Password"
 msgstr "Current Password"
 
-#: src/features/change-password-form/model/validation.ts:6
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:13
+#: src/features/change-password-form/model/validation.ts:9
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:16
 msgid "Current password is required"
 msgstr "Current password is required"
 
@@ -296,7 +296,7 @@ msgstr "Enter password"
 msgid "Enter username"
 msgstr "Enter username"
 
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:95
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:106
 msgid "Enter your current password"
 msgstr "Enter your current password"
 
@@ -308,7 +308,7 @@ msgstr "Enter your email"
 msgid "Enter your name"
 msgstr "Enter your name"
 
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:104
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:115
 msgid "Enter your new password"
 msgstr "Enter your new password"
 
@@ -565,7 +565,7 @@ msgstr "Mantine UI Template"
 msgid "Mantine UI:"
 msgstr "Mantine UI:"
 
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:105
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:116
 msgid "Min 8 characters with uppercase, lowercase, number, and special character"
 msgstr "Min 8 characters with uppercase, lowercase, number, and special character"
 
@@ -605,12 +605,12 @@ msgstr "Name"
 msgid "Navigation"
 msgstr "Navigation"
 
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:103
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:114
 msgid "New Password"
 msgstr "New Password"
 
-#: src/features/change-password-form/model/validation.ts:24
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:31
+#: src/features/change-password-form/model/validation.ts:35
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:42
 msgid "New password must be different from current password"
 msgstr "New password must be different from current password"
 
@@ -652,32 +652,32 @@ msgid "Password is required for new users"
 msgstr "Password is required for new users"
 
 #: src/entities/form/model/validation-rules.ts:41
-#: src/features/change-password-form/model/validation.ts:9
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:16
+#: src/features/change-password-form/model/validation.ts:12
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:19
 #: src/features/users/components/user-form-modal.tsx:25
 msgid "Password must be at least 8 characters"
 msgstr "Password must be at least 8 characters"
 
 #: src/entities/form/model/validation-rules.ts:44
-#: src/features/change-password-form/model/validation.ts:11
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:18
+#: src/features/change-password-form/model/validation.ts:19
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:26
 msgid "Password must contain at least one lowercase letter"
 msgstr "Password must contain at least one lowercase letter"
 
 #: src/entities/form/model/validation-rules.ts:50
-#: src/features/change-password-form/model/validation.ts:12
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:19
+#: src/features/change-password-form/model/validation.ts:21
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:28
 msgid "Password must contain at least one number"
 msgstr "Password must contain at least one number"
 
-#: src/features/change-password-form/model/validation.ts:15
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:22
+#: src/features/change-password-form/model/validation.ts:24
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:31
 msgid "Password must contain at least one special character"
 msgstr "Password must contain at least one special character"
 
 #: src/entities/form/model/validation-rules.ts:47
-#: src/features/change-password-form/model/validation.ts:10
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:17
+#: src/features/change-password-form/model/validation.ts:15
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:22
 msgid "Password must contain at least one uppercase letter"
 msgstr "Password must contain at least one uppercase letter"
 
@@ -694,8 +694,8 @@ msgid "Password strength"
 msgstr "Password strength"
 
 #: src/entities/form/model/validation-rules.ts:59
-#: src/features/change-password-form/model/validation.ts:20
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:27
+#: src/features/change-password-form/model/validation.ts:31
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:38
 msgid "Passwords do not match"
 msgstr "Passwords do not match"
 
@@ -707,8 +707,8 @@ msgstr "Please check your email for the password reset link"
 msgid "Please check your inbox for the verification link"
 msgstr "Please check your inbox for the verification link"
 
-#: src/features/change-password-form/model/validation.ts:17
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:24
+#: src/features/change-password-form/model/validation.ts:28
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:35
 msgid "Please confirm your new password"
 msgstr "Please confirm your new password"
 
@@ -959,7 +959,7 @@ msgstr "Unverified"
 msgid "Update"
 msgstr "Update"
 
-#: src/features/change-password-form/ui/change-password-form-feature.tsx:86
+#: src/features/change-password-form/ui/change-password-form-feature.tsx:97
 msgid "Update your password to keep your account secure."
 msgstr "Update your password to keep your account secure."
 

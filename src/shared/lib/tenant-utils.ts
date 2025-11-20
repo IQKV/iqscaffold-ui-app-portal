@@ -7,7 +7,9 @@
  * e.g., "acme.gripday.com" -> "acme"
  */
 export function extractTenantFromSubdomain(hostname: string): string | null {
-  if (!hostname) return null;
+  if (!hostname) {
+    return null;
+  }
 
   // Skip localhost and IP addresses
   if (
@@ -54,7 +56,9 @@ export function isValidSubdomainFormat(subdomain: string): boolean {
  * Get tenant ID from current location
  */
 export function getTenantFromLocation(): string | null {
-  if (typeof window === "undefined") return null;
+  if (typeof window === "undefined") {
+    return null;
+  }
   return extractTenantFromSubdomain(window.location.hostname);
 }
 
@@ -62,7 +66,9 @@ export function getTenantFromLocation(): string | null {
  * Get tenant ID from storage (for development/testing)
  */
 export function getTenantFromStorage(): string | null {
-  if (typeof window === "undefined") return null;
+  if (typeof window === "undefined") {
+    return null;
+  }
 
   try {
     return localStorage.getItem("tenantId");
@@ -75,7 +81,9 @@ export function getTenantFromStorage(): string | null {
  * Set tenant ID in storage (for development/testing)
  */
 export function setTenantInStorage(tenantId: string | null): void {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined") {
+    return;
+  }
 
   try {
     if (tenantId) {
