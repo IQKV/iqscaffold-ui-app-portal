@@ -62,7 +62,7 @@ export function App() {
       <HelmetProvider>
         <I18nProvider i18n={i18n}>
           <ErrorBoundary>
-            <MantineProvider theme={theme}>
+            <MantineProvider theme={theme} defaultColorScheme="auto">
               <ModalsProvider modals={{ confirmation: ConfirmContextModal }}>
                 <Notifications />
                 <QueryClientProvider client={queryClient}>

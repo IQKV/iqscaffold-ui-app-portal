@@ -7,6 +7,7 @@ export {
   type DataTableProps,
 } from "./data-table";
 export { ConfirmationModal, useConfirmationModal } from "./confirmation-modal";
+export { ThemeToggle } from "./theme-toggle";
 
 // Enhanced error handling components
 export {

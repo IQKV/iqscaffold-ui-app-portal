@@ -3,6 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Mantine color scheme script - prevents flash of wrong theme
+      (function () {
+        try {
+          var colorScheme =
+            window.localStorage.getItem("mantine-color-scheme-value") || "auto";
+          if (colorScheme === "auto") {
+            colorScheme = window.matchMedia("(prefers-color-scheme: dark)")
+              .matches
+              ? "dark"
+              : "light";
+          }
+          document.documentElement.setAttribute(
+            "data-mantine-color-scheme",
+            colorScheme
+          );
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
