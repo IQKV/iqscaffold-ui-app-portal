@@ -11,7 +11,6 @@ export interface TenantResponse {
   description?: string;
   enabled: boolean;
   domain?: string;
-  subdomain?: string;
   maxUsers?: number;
   storageQuotaGb?: number;
   apiRateLimitPerMinute?: number;
@@ -25,7 +24,6 @@ export interface CreateTenantRequest {
   name: string;
   description?: string;
   domain?: string;
-  subdomain?: string;
   maxUsers?: number;
   storageQuotaGb?: number;
   apiRateLimitPerMinute?: number;
@@ -35,7 +33,6 @@ export interface UpdateTenantRequest {
   name?: string;
   description?: string;
   domain?: string;
-  subdomain?: string;
   maxUsers?: number;
   storageQuotaGb?: number;
   apiRateLimitPerMinute?: number;

@@ -9,7 +9,6 @@ export interface Tenant {
   description?: string;
   enabled: boolean;
   domain?: string;
-  subdomain?: string;
   maxUsers?: number;
   storageQuotaGb?: number;
   apiRateLimitPerMinute?: number;
@@ -29,7 +28,7 @@ export interface TenantSummary {
 
 export interface TenantResolutionResult {
   tenantId: string | null;
-  resolutionMethod: "JWT" | "HEADER" | "SUBDOMAIN" | "NONE";
+  resolutionMethod: "JWT" | "HEADER" | "NONE";
   resolvedValue: string | null;
   isValid: boolean;
 }

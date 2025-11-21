@@ -46,7 +46,8 @@ const createTenantStore: TenantStoreCreator = (set) => ({
   ...initialState,
 
   /**
-   * Initialize tenant context from subdomain or storage
+   * Initialize tenant context from storage (dev mode only)
+   * In production, tenant context is set from JWT after authentication
    */
   initialize: () => {
     set((state) => {

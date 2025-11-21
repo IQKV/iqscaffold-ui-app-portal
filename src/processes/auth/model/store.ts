@@ -10,6 +10,7 @@ import {
 import { getAuthConfig } from "@/app/config";
 import { authApi } from "@/processes/auth/lib/auth-api";
 import { decodeUser } from "../lib/jwt";
+import { useTenantStore } from "@/processes/tenant";
 import type { AuthStore, LoginCredentials } from "./types";
 
 let refreshTimer: number | null = null;
@@ -62,6 +63,10 @@ export const useAuthStore = create<AuthStore>()(
             s.expiresAt = exp ?? null;
             s.status = user ? "authenticated" : "unauthenticated";
           });
+          // Set tenant context from user data
+          if (user?.tenantId) {
+            useTenantStore.getState().setTenantId(user.tenantId);
+          }
           if (exp) {
             scheduleRefresh(exp - Date.now(), () => get().refresh());
           }
@@ -88,6 +93,12 @@ export const useAuthStore = create<AuthStore>()(
             s.expiresAt = exp ?? null;
             s.status = user ? "authenticated" : "unauthenticated";
           });
+          // Sync tenant context from user data
+          if (user?.tenantId) {
+            useTenantStore.getState().setTenantId(user.tenantId);
+          } else {
+            useTenantStore.getState().clearTenant();
+          }
           clearRefreshTimer();
           if (exp) {
             scheduleRefresh(exp - Date.now(), () => get().refresh());
@@ -120,6 +131,10 @@ export const useAuthStore = create<AuthStore>()(
           s.status = user ? "authenticated" : "unauthenticated";
           s.lastRefreshAt = Date.now();
         });
+        // Set tenant context from user data
+        if (user?.tenantId) {
+          useTenantStore.getState().setTenantId(user.tenantId);
+        }
         clearRefreshTimer();
         if (exp) {
           scheduleRefresh(exp - Date.now(), () => get().refresh());
@@ -139,6 +154,10 @@ export const useAuthStore = create<AuthStore>()(
           s.expiresAt = exp ?? null;
           s.status = user ? "authenticated" : "unauthenticated";
         });
+        // Set tenant context from user data
+        if (user?.tenantId) {
+          useTenantStore.getState().setTenantId(user.tenantId);
+        }
         clearRefreshTimer();
         if (exp) {
           scheduleRefresh(exp - Date.now(), () => get().refresh());
@@ -170,6 +189,10 @@ export const useAuthStore = create<AuthStore>()(
             s.lastRefreshAt = Date.now();
             s.error = null;
           });
+          // Update tenant context from refreshed user data
+          if (user?.tenantId) {
+            useTenantStore.getState().setTenantId(user.tenantId);
+          }
           clearRefreshTimer();
           if (exp) {
             scheduleRefresh(exp - Date.now(), () => get().refresh());
@@ -197,6 +220,8 @@ export const useAuthStore = create<AuthStore>()(
           s.expiresAt = null;
           s.error = null;
         });
+        // Clear tenant context on logout
+        useTenantStore.getState().clearTenant();
         if (!silent) {
           const cfg = getAuthConfig();
           window.location.href = cfg.redirects.afterLogout;

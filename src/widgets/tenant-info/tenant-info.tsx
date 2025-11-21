@@ -63,14 +63,7 @@ export function TenantInfo({ showInProduction = false }: TenantInfoProps) {
                   </Badge>
                 </Group>
 
-                {tenant.subdomain && (
-                  <Group gap="xs">
-                    <Text size="xs" c="dimmed">
-                      Subdomain:
-                    </Text>
-                    <Text size="xs">{tenant.subdomain}</Text>
-                  </Group>
-                )}
+
               </>
             )}
           </>

@@ -8,7 +8,7 @@ import {
   setTokens,
   clearTokens,
 } from "@/shared/lib/auth-tokens";
-import { resolveTenantId } from "@/shared/lib/tenant-utils";
+import { useTenantStore } from "@/processes/tenant";
 
 const BASE_URL = getConfig("VITE_API_URL_SERVER");
 
@@ -36,8 +36,9 @@ apiClient.interceptors.request.use((config) => {
     (config.headers as any).Authorization = `Bearer ${token}`;
   }
 
-  // Add tenant ID header if available
-  const tenantId = resolveTenantId();
+  // Add tenant ID header if available from tenant store
+  // Tenant ID comes from JWT token after authentication
+  const tenantId = useTenantStore.getState().currentTenantId;
   if (tenantId && !config.headers?.["X-Tenant-ID"]) {
     config.headers = config.headers ?? {};
     (config.headers as any)["X-Tenant-ID"] = tenantId;
