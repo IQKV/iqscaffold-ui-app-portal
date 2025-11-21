@@ -1,6 +1,7 @@
 export * from "./model/types";
 export { useAuthStore } from "./model/store";
 export { AuthProvider } from "./provider/auth-provider";
+export { AuthGuardWrapper } from "./provider/auth-guard-wrapper";
 export {
   AuthGuard,
   RoleGuard,

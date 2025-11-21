@@ -14,7 +14,7 @@ import { i18n } from "@lingui/core";
 import { routeTree } from "@/routeTree.gen";
 import { theme } from "./theme";
 import { queryClient } from "@/shared/lib";
-import { AuthProvider } from "@/processes/auth";
+import { AuthProvider, AuthGuardWrapper } from "@/processes/auth";
 import { TenantProvider } from "@/processes/tenant";
 
 import { ErrorBoundary } from "@/shared/ui";
@@ -68,9 +68,11 @@ export function App() {
                 <QueryClientProvider client={queryClient}>
                   <TenantProvider>
                     <AuthProvider>
-                      <RouterProvider router={router} />
-                      <ReactQueryDevtools initialIsOpen={false} />
-                      <MSWDevTools />
+                      <AuthGuardWrapper>
+                        <RouterProvider router={router} />
+                        <ReactQueryDevtools initialIsOpen={false} />
+                        <MSWDevTools />
+                      </AuthGuardWrapper>
                     </AuthProvider>
                   </TenantProvider>
                 </QueryClientProvider>
