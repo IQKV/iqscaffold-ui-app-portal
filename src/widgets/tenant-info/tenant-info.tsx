@@ -62,8 +62,6 @@ export function TenantInfo({ showInProduction = false }: TenantInfoProps) {
                     {tenant.enabled ? "Active" : "Disabled"}
                   </Badge>
                 </Group>
-
-
               </>
             )}
           </>
