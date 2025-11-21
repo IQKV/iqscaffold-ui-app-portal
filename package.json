@@ -36,6 +36,7 @@
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
     "test": "vitest run",
+    "test:arch": "vitest run architecture",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest run --ui",
     "test:wath": "vitest",
