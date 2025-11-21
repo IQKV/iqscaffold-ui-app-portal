@@ -12,7 +12,7 @@ export function AuthGuard({ children }: PropsWithChildren) {
       // Redirect to auth portal (external domain)
       const config = getAuthConfig();
       const currentUrl = window.location.href;
-      window.location.href = `${config.domains.auth}/login?redirect=${encodeURIComponent(currentUrl)}`;
+      window.location.href = `${config.domains.auth}/login?returnTo=${encodeURIComponent(currentUrl)}`;
     }
   }, [status]);
   if (status === "initializing") {

@@ -6,7 +6,7 @@ import { getAuthConfig } from "@/app/config";
 export function redirectToAuth() {
   const config = getAuthConfig();
   const currentUrl = window.location.href;
-  window.location.href = `${config.domains.auth}?redirect=${encodeURIComponent(currentUrl)}`;
+  window.location.href = `${config.domains.auth}?returnTo=${encodeURIComponent(currentUrl)}`;
 }
 
 /**
