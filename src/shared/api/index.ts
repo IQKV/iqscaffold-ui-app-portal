@@ -8,3 +8,5 @@ export type {
   UpdateTenantRequest,
   TenantStatistics,
 } from "./tenant-api";
+
+export { userPreferenceApi } from "./user-preference-api";

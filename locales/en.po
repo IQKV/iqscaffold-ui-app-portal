@@ -186,6 +186,10 @@ msgstr "Current Password"
 msgid "Current password is required"
 msgstr "Current password is required"
 
+#: src/shared/ui/theme-toggle/theme-toggle.tsx:10
+msgid "Dark mode"
+msgstr "Dark mode"
+
 #: src/features/dashboard/ui/dashboard-feature.tsx:15
 #: src/widgets/sidebar/ui/sidebar.tsx:55
 msgid "Dashboard"
@@ -517,6 +521,10 @@ msgstr "Latest React with concurrent features and improved performance"
 msgid "Learn more about the technologies and architecture used in this project"
 msgstr "Learn more about the technologies and architecture used in this project"
 
+#: src/shared/ui/theme-toggle/theme-toggle.tsx:10
+msgid "Light mode"
+msgstr "Light mode"
+
 #: src/pages/about.tsx:59
 msgid "Lightning-fast development server with instant HMR"
 msgstr "Lightning-fast development server with instant HMR"
@@ -557,7 +565,7 @@ msgstr "Manage your account security and active sessions."
 #~ msgstr "Manager"
 
 #: src/pages/__root.tsx:26
-#: src/widgets/header/ui/header.tsx:9
+#: src/widgets/header/ui/header.tsx:10
 msgid "Mantine UI Template"
 msgstr "Mantine UI Template"
 
@@ -854,6 +862,14 @@ msgstr "Success notification!"
 #: src/features/users/components/user-form-modal.tsx:44
 msgid "Super Admin"
 msgstr "Super Admin"
+
+#: src/shared/ui/theme-toggle/theme-toggle.tsx:16
+msgid "Switch to dark mode"
+msgstr "Switch to dark mode"
+
+#: src/shared/ui/theme-toggle/theme-toggle.tsx:16
+msgid "Switch to light mode"
+msgstr "Switch to light mode"
 
 #: src/pages/about.tsx:70
 msgid "TanStack Query:"

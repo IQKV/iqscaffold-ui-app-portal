@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from "./pages/__root"
 import { Route as UsersRouteImport } from "./pages/users"
+import { Route as UserPreferencesRouteImport } from "./pages/user-preferences"
+import { Route as PreferencesDemoRouteImport } from "./pages/preferences-demo"
 import { Route as ExamplesRouteImport } from "./pages/examples"
 import { Route as DashboardRouteImport } from "./pages/dashboard"
 import { Route as AboutRouteImport } from "./pages/about"
@@ -19,6 +21,16 @@ import { Route as IndexRouteImport } from "./pages/index"
 const UsersRoute = UsersRouteImport.update({
   id: "/users",
   path: "/users",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UserPreferencesRoute = UserPreferencesRouteImport.update({
+  id: "/user-preferences",
+  path: "/user-preferences",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreferencesDemoRoute = PreferencesDemoRouteImport.update({
+  id: "/preferences-demo",
+  path: "/preferences-demo",
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExamplesRoute = ExamplesRouteImport.update({
@@ -53,6 +65,8 @@ export interface FileRoutesByFullPath {
   "/about": typeof AboutRoute
   "/dashboard": typeof DashboardRoute
   "/examples": typeof ExamplesRoute
+  "/preferences-demo": typeof PreferencesDemoRoute
+  "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +75,8 @@ export interface FileRoutesByTo {
   "/about": typeof AboutRoute
   "/dashboard": typeof DashboardRoute
   "/examples": typeof ExamplesRoute
+  "/preferences-demo": typeof PreferencesDemoRoute
+  "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
 }
 export interface FileRoutesById {
@@ -70,13 +86,31 @@ export interface FileRoutesById {
   "/about": typeof AboutRoute
   "/dashboard": typeof DashboardRoute
   "/examples": typeof ExamplesRoute
+  "/preferences-demo": typeof PreferencesDemoRoute
+  "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/404" | "/about" | "/dashboard" | "/examples" | "/users"
+  fullPaths:
+    | "/"
+    | "/404"
+    | "/about"
+    | "/dashboard"
+    | "/examples"
+    | "/preferences-demo"
+    | "/user-preferences"
+    | "/users"
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/404" | "/about" | "/dashboard" | "/examples" | "/users"
+  to:
+    | "/"
+    | "/404"
+    | "/about"
+    | "/dashboard"
+    | "/examples"
+    | "/preferences-demo"
+    | "/user-preferences"
+    | "/users"
   id:
     | "__root__"
     | "/"
@@ -84,6 +118,8 @@ export interface FileRouteTypes {
     | "/about"
     | "/dashboard"
     | "/examples"
+    | "/preferences-demo"
+    | "/user-preferences"
     | "/users"
   fileRoutesById: FileRoutesById
 }
@@ -93,6 +129,8 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   DashboardRoute: typeof DashboardRoute
   ExamplesRoute: typeof ExamplesRoute
+  PreferencesDemoRoute: typeof PreferencesDemoRoute
+  UserPreferencesRoute: typeof UserPreferencesRoute
   UsersRoute: typeof UsersRoute
 }
 
@@ -103,6 +141,20 @@ declare module "@tanstack/react-router" {
       path: "/users"
       fullPath: "/users"
       preLoaderRoute: typeof UsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/user-preferences": {
+      id: "/user-preferences"
+      path: "/user-preferences"
+      fullPath: "/user-preferences"
+      preLoaderRoute: typeof UserPreferencesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/preferences-demo": {
+      id: "/preferences-demo"
+      path: "/preferences-demo"
+      fullPath: "/preferences-demo"
+      preLoaderRoute: typeof PreferencesDemoRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/examples": {
@@ -149,6 +201,8 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   DashboardRoute: DashboardRoute,
   ExamplesRoute: ExamplesRoute,
+  PreferencesDemoRoute: PreferencesDemoRoute,
+  UserPreferencesRoute: UserPreferencesRoute,
   UsersRoute: UsersRoute,
 }
 export const routeTree = rootRouteImport
