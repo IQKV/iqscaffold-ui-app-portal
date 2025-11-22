@@ -194,6 +194,272 @@ export { SampleFormFeature } from "./ui/sample-form-feature";
 - [ ] Public API exports through index.ts
 - [ ] Tests only when explicitly requested
 
+## User Confirmation Policy
+
+### CRITICAL RULE: Always Ask Before Applying Changes
+
+**Default Behavior:** AI agents MUST ask for explicit user confirmation before applying any changes to the codebase, configuration, or environment.
+
+### Approval Workflow
+
+Follow this workflow for ALL operations:
+
+1. **Analyze** - Understand the user's request and identify required changes
+2. **Explain** - Describe what needs to be done and why
+3. **Assess** - Evaluate impact, risks, and alternatives
+4. **Present** - Show proposed changes with clear examples
+5. **⏸️ WAIT FOR APPROVAL** - Stop and wait for explicit user confirmation
+6. **Apply** - Only after approval, execute the changes
+7. **Verify** - Confirm changes were applied correctly and report results
+
+### Decision Framework
+
+Use this framework to determine if confirmation is needed:
+
+```
+┌─────────────────────────────────────┐
+│ Will this operation modify files,   │
+│ execute commands, or change state?  │
+└─────────────┬───────────────────────┘
+              │
+         ┌────┴────┐
+         │   YES   │
+         └────┬────┘
+              │
+         ┌────▼────────────────────────┐
+         │ ASK FOR CONFIRMATION        │
+         │ Present changes → Wait      │
+         └─────────────────────────────┘
+
+         ┌────┐
+         │ NO │
+         └────┬────┘
+              │
+         ┌────▼────────────────────────┐
+         │ Is it read-only/info?       │
+         └────┬────────────────────────┘
+              │
+         ┌────┴────┐
+         │   YES   │
+         └────┬────┘
+              │
+         ┌────▼────────────────────────┐
+         │ PROCEED WITHOUT ASKING      │
+         │ (Read, analyze, explain)    │
+         └─────────────────────────────┘
+```
+
+### Operations That NEVER Auto-Apply
+
+These operations ALWAYS require explicit user confirmation:
+
+**File Operations:**
+
+- ✋ Creating new files
+- ✋ Modifying existing files (strReplace, fsWrite, fsAppend)
+- ✋ Deleting files
+- ✋ Moving or renaming files
+
+**Command Execution:**
+
+- ✋ Running build commands (`pnpm build`, `npm run build`)
+- ✋ Installing dependencies (`pnpm install`, `npm install`)
+- ✋ Running database migrations
+- ✋ Deploying to production
+- ✋ Modifying git state (`git commit`, `git push`, `git reset`)
+- ✋ Starting/stopping services
+- ✋ Modifying environment variables
+
+**Configuration Changes:**
+
+- ✋ Updating package.json
+- ✋ Modifying tsconfig.json, vite.config.ts, eslint.config.js
+- ✋ Changing .env files
+- ✋ Updating CI/CD workflows
+- ✋ Modifying Docker configurations
+
+**Destructive Operations:**
+
+- ✋ Dropping databases or tables
+- ✋ Clearing caches or storage
+- ✋ Removing node_modules
+- ✋ Force-pushing to git
+- ✋ Reverting commits
+
+### Operations That Can Auto-Execute
+
+These operations are safe to execute without confirmation:
+
+**Read-Only Operations:**
+
+- ✅ Reading files (readFile, readMultipleFiles)
+- ✅ Listing directories (listDirectory)
+- ✅ Searching code (grepSearch, fileSearch)
+- ✅ Checking diagnostics (getDiagnostics)
+- ✅ Viewing git status or logs
+
+**Information Requests:**
+
+- ✅ Explaining concepts or code
+- ✅ Answering questions about the codebase
+- ✅ Providing documentation
+- ✅ Suggesting approaches or solutions
+- ✅ Analyzing code for issues
+
+**Recommendations:**
+
+- ✅ Proposing architectural improvements
+- ✅ Suggesting refactoring opportunities
+- ✅ Identifying potential bugs
+- ✅ Recommending best practices
+
+### Example Scenarios
+
+#### ❌ WRONG: Auto-applying changes
+
+```
+User: "Add a new user form feature"
+
+Agent: *Creates files immediately*
+- Created src/features/user-form/index.ts
+- Created src/features/user-form/ui/user-form.tsx
+- Created src/features/user-form/model/validation.ts
+```
+
+#### ✅ CORRECT: Ask first, then apply
+
+```
+User: "Add a new user form feature"
+
+Agent: I'll create a new user form feature following FSD architecture.
+
+**Proposed Changes:**
+
+1. Create `src/features/user-form/` directory with:
+   - `index.ts` - Public API exports
+   - `model/types.ts` - TypeScript interfaces
+   - `model/validation.ts` - Form validation rules
+   - `ui/user-form-feature.tsx` - Main component
+
+2. The form will include:
+   - Name field (text input, min 2 chars)
+   - Email field (email validation)
+   - Submit button with loading state
+   - Integration with useFormMutation
+
+**Files to create:** 4 new files
+**Estimated lines:** ~150 lines total
+
+Would you like me to proceed with creating these files?
+
+[WAITING FOR USER RESPONSE]
+```
+
+#### ✅ CORRECT: Read-only operations proceed
+
+```
+User: "What validation rules are used in the sample form?"
+
+Agent: *Reads files immediately*
+
+Looking at src/features/sample-form/model/validation.ts:
+
+The sample form uses these validation rules:
+- name: minLength(2) - Requires at least 2 characters
+- email: email - Validates email format
+
+These rules are imported from @/entities/form.
+```
+
+### Confirmation Response Patterns
+
+When waiting for approval, accept these responses:
+
+**Approval:**
+
+- "yes", "y", "ok", "proceed", "go ahead", "do it", "apply", "confirm"
+- "looks good", "lgtm", "approved", "👍"
+
+**Rejection:**
+
+- "no", "n", "cancel", "stop", "don't", "abort"
+- "wait", "hold on", "not yet"
+
+**Modification:**
+
+- "change X to Y", "use Z instead", "modify the approach"
+- "can you adjust...", "what if we..."
+
+### Handling Ambiguity
+
+If the user's intent is unclear:
+
+1. **Ask clarifying questions** before proposing changes
+2. **Present multiple options** with pros/cons
+3. **Suggest the recommended approach** but wait for confirmation
+4. **Never assume** - when in doubt, ask
+
+### Emergency Override
+
+In rare cases where immediate action is critical (e.g., security vulnerability, production outage), the agent may:
+
+1. **Clearly state the emergency**
+2. **Explain why immediate action is needed**
+3. **Show exactly what will be done**
+4. **Ask for rapid confirmation** (yes/no)
+5. **Proceed only with explicit approval**
+
+**Never skip confirmation even in emergencies.**
+
+### Verification After Changes
+
+After applying approved changes:
+
+1. **List all files modified/created/deleted**
+2. **Run relevant checks** (lint, type-check, tests if applicable)
+3. **Report any errors or warnings**
+4. **Confirm the changes achieve the intended goal**
+5. **Suggest next steps** if applicable
+6. **Generate commit message** - For complex tasks involving multiple changes, provide a concise git commit message following conventional commit format
+
+**Commit Message Format:**
+
+```bash
+<type>(<scope>): <subject>
+
+<body>
+```
+
+**Examples:**
+
+```bash
+# Simple change
+feat: add user preferences form feature
+
+# Complex change with details
+refactor: restructure authentication flow
+
+- Move auth logic to processes/auth layer
+- Add JWT token refresh mechanism
+- Implement cookie-based session management
+- Update API client with auth interceptors
+```
+
+**Commit Types:**
+
+- `feat:` - New feature
+- `fix:` - Bug fix
+- `docs:` - Documentation changes
+- `refactor:` - Code refactoring
+- `test:` - Adding or updating tests
+- `chore:` - Maintenance tasks
+- `style:` - Code style changes (formatting)
+- `perf:` - Performance improvements
+
+### Summary
+
+**Remember:** When in doubt, ASK. User trust is built through transparency and respect for their codebase. It's always better to ask unnecessarily than to make unwanted changes.
+
 ## Development Guidelines
 
 ### Component Development Standards
