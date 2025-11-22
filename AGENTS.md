@@ -460,6 +460,223 @@ refactor: restructure authentication flow
 
 **Remember:** When in doubt, ASK. User trust is built through transparency and respect for their codebase. It's always better to ask unnecessarily than to make unwanted changes.
 
+## Concise Output Requirements
+
+### CRITICAL RULE: Be Direct and Concise
+
+AI agents MUST communicate efficiently without unnecessary verbosity. Users value clarity and brevity over lengthy explanations.
+
+### Communication Standards
+
+**Core Principles:**
+
+1. **Get to the point** - State what you're doing, do it, report results
+2. **No fluff** - Avoid unnecessary preambles, repetition, or over-explanation
+3. **Action-oriented** - Focus on what's being done, not meta-commentary
+4. **Minimal summaries** - 2-3 sentences maximum for completion reports
+5. **No documentation artifacts** - Never create summary/review markdown files unless explicitly requested
+
+### Response Length Guidelines
+
+**For Task Completion:**
+
+- ✅ "Created 4 files for user-form feature. All checks passed."
+- ❌ "I have successfully completed the task of creating a new user form feature. Let me provide you with a comprehensive summary of everything that was accomplished..."
+
+**For Explanations:**
+
+- ✅ "The validation uses minLength(2) for name and email format check."
+- ❌ "Let me explain in detail how the validation system works. First, we need to understand that validation is a critical part of form handling..."
+
+**For Verification:**
+
+- ✅ "Modified 3 files. No lint errors. Type check passed."
+- ❌ "I have carefully verified all the changes and I'm pleased to report that everything is working correctly. Here's a detailed breakdown of what was checked..."
+
+### What NOT to Do
+
+**❌ WRONG: Verbose, repetitive output**
+
+```
+I understand you want to add a user form feature. Let me break this down for you.
+
+First, I'll analyze the requirements and create a comprehensive plan.
+Then, I'll implement the feature following best practices.
+After that, I'll verify everything works correctly.
+
+Now, let me proceed with creating the files...
+
+[Creates files]
+
+Great! I've successfully created all the necessary files. Let me provide
+you with a detailed summary of what was accomplished:
+
+1. Created index.ts - This file serves as the public API...
+2. Created types.ts - This file contains TypeScript interfaces...
+3. Created validation.ts - This file defines validation rules...
+4. Created user-form-feature.tsx - This is the main component...
+
+Everything has been implemented according to FSD architecture principles.
+The code follows all best practices and is ready for use.
+
+Would you like me to create a detailed documentation file summarizing
+all the changes?
+```
+
+**✅ CORRECT: Concise, action-focused output**
+
+```
+I'll create a user form feature with name/email fields following FSD architecture.
+
+**Proposed Changes:**
+- 4 new files in src/features/user-form/
+- Form with validation, loading states, and error handling
+- ~150 lines total
+
+Proceed?
+
+[User approves]
+
+[Creates files]
+
+Created user form feature. All files pass lint and type checks.
+```
+
+### Prohibited Behaviors
+
+**Never do these:**
+
+1. ❌ **Auto-generate summary files** - Don't create `CHANGES.md`, `SUMMARY.md`, `REVIEW.md` unless explicitly requested
+2. ❌ **Repeat yourself** - Don't say "I'm going to do X" then "I'm doing X" then "I did X"
+3. ❌ **Over-explain obvious actions** - Reading a file doesn't need explanation
+4. ❌ **Apologize excessively** - One "sorry" is enough if needed
+5. ❌ **Ask rhetorical questions** - "Shall we proceed?" when you're already proceeding
+6. ❌ **Provide unsolicited tutorials** - Explain only what's necessary for the task
+7. ❌ **List every file touched** - Summarize: "Modified 5 files" not a bullet list of each
+
+### Verification Reporting
+
+After applying changes, keep it brief:
+
+**✅ Good Examples:**
+
+```
+Created user-form feature (4 files). Lint passed, no type errors.
+```
+
+```
+Updated validation rules. Tests pass. Ready to commit.
+```
+
+```
+Refactored auth flow (8 files). All checks passed. Breaking changes: none.
+```
+
+**❌ Bad Examples:**
+
+```
+I have successfully completed the implementation of the user form feature.
+Here's a comprehensive breakdown of everything that was done:
+
+Files Created:
+- src/features/user-form/index.ts (15 lines)
+  * This file exports the public API
+  * It follows FSD architecture principles
+  * All exports are properly typed
+...
+[continues for 50 more lines]
+```
+
+### When to Be Verbose
+
+**Only provide detailed explanations when:**
+
+1. **User explicitly asks** - "Explain how this works"
+2. **Complex architectural decisions** - Major refactoring that needs justification
+3. **Breaking changes** - Changes that affect existing code
+4. **Multiple options exist** - Presenting alternatives with trade-offs
+5. **Errors or warnings** - Explaining what went wrong and how to fix it
+
+### Examples: Before and After
+
+**Scenario: User asks to add a form field**
+
+❌ **Verbose (Don't do this):**
+
+```
+I understand you'd like to add a phone number field to the user form.
+Let me explain what needs to be done:
+
+First, I'll need to update the TypeScript types to include the phone field.
+Then, I'll add validation rules for phone number format.
+After that, I'll update the form component to include the new field.
+Finally, I'll ensure everything is properly exported.
+
+This is a straightforward change that follows our established patterns.
+Let me proceed with the implementation...
+
+[Makes changes]
+
+Perfect! I've successfully added the phone number field. Here's what was changed:
+- Updated types.ts to include phone: string
+- Added phone validation in validation.ts
+- Added FormField for phone in the component
+- All changes follow FSD architecture
+
+The implementation is complete and ready for testing!
+```
+
+✅ **Concise (Do this):**
+
+```
+Adding phone field to user form.
+
+[Makes changes]
+
+Added phone field with validation. 3 files modified, all checks passed.
+```
+
+**Scenario: User asks what validation rules are used**
+
+❌ **Verbose:**
+
+```
+Great question! Let me take a look at the validation rules for you.
+
+I'll read the validation file to see what rules are currently implemented...
+
+[Reads file]
+
+Excellent! I found the validation rules. Let me explain what I discovered:
+
+The sample form uses a validation system that's based on custom validation
+functions. These functions are imported from the entities/form layer, which
+is part of our FSD architecture. This is a best practice because it allows
+us to reuse validation logic across different features.
+
+Specifically, the validation rules are:
+1. name field: Uses minLength(2) which requires at least 2 characters
+2. email field: Uses email which validates the email format
+
+These rules are very straightforward and follow our established patterns.
+```
+
+✅ **Concise:**
+
+```
+The sample form uses these validation rules:
+- name: minLength(2) - requires 2+ characters
+- email: email - validates format
+
+Both imported from @/entities/form.
+```
+
+### Summary
+
+**Keep it short. Keep it clear. Keep it actionable.**
+
+Users don't need a play-by-play commentary. They need results. Respect their time by being concise.
+
 ## Development Guidelines
 
 ### Component Development Standards
