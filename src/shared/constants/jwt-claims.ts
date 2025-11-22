@@ -1,5 +1,5 @@
 /**
- * Standard JWT claim names used across the Gripday platform.
+ * Standard JWT claim names used across the platform.
  * Follows JWT RFC conventions using snake_case for claim names.
  */
 
@@ -10,7 +10,7 @@ export const JWT_CLAIM_ISSUED_AT = "iat";
 export const JWT_CLAIM_EXPIRATION = "exp";
 export const JWT_CLAIM_JWT_ID = "jti";
 
-// Custom Gripday claims
+// Custom claims
 export const JWT_CLAIM_TYPE = "type";
 export const JWT_CLAIM_USER_ID = "userId";
 export const JWT_CLAIM_USERNAME = "username";
