@@ -21,7 +21,8 @@ import {
   Alert,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { IconAlertCircle } from "@tabler/icons-react";
+import { modals } from "@mantine/modals";
+import { IconAlertCircle, IconAlertTriangle } from "@tabler/icons-react";
 import {
   useUserPreferences,
   useUpdateUserPreferences,
@@ -116,14 +117,24 @@ export function UserPreferencesForm() {
   };
 
   const handleReset = () => {
-    // eslint-disable-next-line no-restricted-globals
-    if (
-      confirm(
-        "Are you sure you want to reset all preferences to defaults? This cannot be undone."
-      )
-    ) {
-      deleteMutation.mutate();
-    }
+    modals.openConfirmModal({
+      title: (
+        <Group gap="xs">
+          <IconAlertTriangle size={20} color="var(--mantine-color-red-6)" />
+          <Text fw={600}>Reset Preferences</Text>
+        </Group>
+      ),
+      centered: true,
+      children: (
+        <Text size="sm">
+          Are you sure you want to reset all preferences to defaults? This
+          action cannot be undone.
+        </Text>
+      ),
+      labels: { confirm: "Reset to Defaults", cancel: "Cancel" },
+      confirmProps: { color: "red" },
+      onConfirm: () => deleteMutation.mutate(),
+    });
   };
 
   if (error) {
