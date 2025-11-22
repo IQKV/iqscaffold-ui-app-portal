@@ -1,26 +1,31 @@
 # AI Agent Development Guide
 
+> **Last Updated:** Based on actual codebase analysis - December 2024
+>
+> This guide reflects the **actual implementation patterns** used in this project, not theoretical best practices. All code examples are taken from or based on real code in the repository.
+
 ## Project Overview
 
-This is a modern React application built with Feature-Sliced Design (FSD) architecture, focusing on maintainability, scalability, and developer experience. The project uses React 19,
-TypeScript, Mantine UI v8, and a comprehensive toolchain for building high-performance Single Page Applications.
+This is a modern React application built with Feature-Sliced Design (FSD) architecture, focusing on maintainability, scalability, and developer experience. The project uses React 19, TypeScript, Mantine UI v8, and a comprehensive toolchain for building high-performance Single Page Applications.
 
 **Key Characteristics:**
 
 - Type-safe development with strict TypeScript configuration
 - Component-driven development with Storybook integration
 - Comprehensive testing strategy (Unit, Integration, E2E)
-- Modern build tooling with Vite 6 and SWC
-- Internationalization ready with Lingui
+- Modern build tooling with Vite 7 and SWC
+- Internationalization with Lingui macros
 - Production-ready with Docker and CI/CD workflows
+- RFC 9457 Problem Details compliant error handling
+- Multi-tenant architecture support
 
 ## Tech Stack
 
 ### Core Framework
 
 - **React 19** - Latest React with concurrent features and improved performance
-- **TypeScript** - Strict type safety with latest language features
-- **Vite 6** - Lightning-fast development with SWC compiler
+- **TypeScript** - Strict type safety with ES2020 target
+- **Vite 7** - Lightning-fast development with SWC compiler
 - **PNPM** - Fast, disk space efficient package manager
 
 ### UI & Styling
@@ -32,31 +37,39 @@ TypeScript, Mantine UI v8, and a comprehensive toolchain for building high-perfo
 
 ### Routing & State
 
-- **TanStack Router v1** - Type-safe routing with code splitting
+- **TanStack Router v1** - Type-safe routing with code splitting and file-based routing
 - **TanStack Query v5** - Server state management and caching
-- **Zustand** - Lightweight client state management
+- **Zustand** - Lightweight client state management (when needed)
 - **nuqs** - Type-safe URL search params state management
 
 ### Data & API
 
 - **Axios** - HTTP client with interceptors and error handling
-- **GraphQL Request** - Lightweight GraphQL client
 - **Zod** - Runtime type validation and schema parsing
-- **React Hook Form** - Performant forms with validation
+- **Mantine Form** - Form state management with validation
+- **mantine-form-zod-resolver** - Zod integration for Mantine forms
 
 ### Development & Quality
 
 - **Vitest** - Fast unit testing with coverage and UI
 - **Playwright** - Reliable end-to-end testing
 - **Storybook 8** - Component development in isolation
-- **ESLint 9** - Modern linting with flat config
+- **ESLint 9** - Modern flat config with Mantine preset
 - **Prettier** - Code formatting with package.json plugin
 - **Husky** - Git hooks for quality gates
+- **Commitlint** - Conventional commit enforcement
+- **Knip** - Dead code elimination
 
 ### Internationalization & Accessibility
 
-- **Lingui** - Modern i18n with macro support and pluralization
-- **Built-in A11y** - Accessibility features and testing
+- **Lingui** - Modern i18n with macro support (`msg`, `t`, `Trans`)
+- **Built-in A11y** - Accessibility features and Storybook a11y addon
+
+### Testing & Mocking
+
+- **MSW (Mock Service Worker)** - API mocking for development and testing
+- **React Testing Library** - Component testing utilities
+- **happy-dom** - Fast DOM implementation for tests
 
 ## Architecture: Feature-Sliced Design (FSD)
 
@@ -64,12 +77,13 @@ The project follows Feature-Sliced Design methodology with strict layer hierarch
 
 ```
 src/
-├── app/          # Application layer (providers, routing, global styles)
+├── app/          # Application layer (providers, routing, global styles, config)
+├── processes/    # Process layer (cross-feature business processes like auth flow)
 ├── pages/        # Page layer (route components)
-├── widgets/      # Widget layer (complex UI blocks)
+├── widgets/      # Widget layer (complex UI blocks like header, sidebar)
 ├── features/     # Feature layer (user scenarios, business logic)
-├── entities/     # Entity layer (business entities, data models)
-└── shared/       # Shared layer (reusable code, UI kit, utilities)
+├── entities/     # Entity layer (business entities, data models, domain logic)
+└── shared/       # Shared layer (reusable code, UI kit, utilities, API clients)
 ```
 
 ### FSD Layer Rules (CRITICAL)
@@ -77,23 +91,54 @@ src/
 1. **Import Rule**: Higher layers can ONLY import from lower layers
    - ❌ `shared` cannot import from `features`
    - ✅ `features` can import from `shared` and `entities`
-2. **Public API**: Each slice exposes functionality through `index.ts`
-   - All imports must go through public API: `from "@/features/auth"`
-   - Never import internal files: `from "@/features/auth/model/store"`
+   - ✅ `processes` can import from `features`, `entities`, and `shared`
+   - ✅ `app` can import from all layers
+
+2. **Public API**: Each slice MUST expose functionality through `index.ts`
+   - All imports must go through public API: `from "@/features/sample-form"`
+   - Never import internal files: `from "@/features/sample-form/model/validation"`
+   - Architecture tests enforce this rule automatically
 
 3. **Cross-Feature Isolation**: Features cannot depend on each other
    - Use `shared` layer for common functionality
-   - Communicate through `app` layer or events
+   - Use `entities` for shared domain logic
+   - Use `processes` for cross-feature orchestration
 
-4. **Segment Structure**: Each slice contains standardized segments
+4. **Segment Structure**: Each slice should follow these patterns
+
+   **Standard Feature Structure (Recommended):**
+
    ```
    feature-name/
-   ├── ui/           # React components
-   ├── model/        # Business logic, stores, types
-   ├── api/          # API calls and contracts
-   ├── lib/          # Utilities specific to this feature
-   └── index.ts      # Public API exports
+   ├── ui/           # React components (recommended)
+   ├── model/        # Business logic, stores, types (recommended)
+   ├── api/          # API calls and contracts (optional)
+   ├── lib/          # Utilities specific to this feature (optional)
+   ├── hooks/        # Custom hooks (optional)
+   └── index.ts      # Public API exports (REQUIRED)
    ```
+
+   **Simplified Feature Structure (Allowed):**
+
+   ```
+   feature-name/
+   ├── feature-name.tsx          # Component file
+   ├── other-component.tsx       # Additional components
+   └── index.ts                  # Public API exports (REQUIRED)
+   ```
+
+   **Examples in codebase:**
+   - `features/sample-form/` - Standard structure with ui/ and model/
+   - `features/user-preferences/` - Simplified structure with direct component files
+   - `features/dashboard/` - Simplified structure with ui/ only
+
+5. **Architecture Testing**: The project includes automated FSD compliance tests
+   - Tests verify layer structure exists
+   - Tests enforce public API (index.ts) presence
+   - Tests validate file naming conventions (kebab-case)
+   - Run with: `pnpm test:arch`
+
+   **Note:** Some features use simplified structure without strict ui/model separation. This is acceptable for simple features.
 
 ## AI Agent Development Guidelines
 
@@ -104,38 +149,50 @@ src/
 3. **Component Composition**: Prefer composition over complex prop drilling
 4. **Performance by Default**: Use React.memo, useMemo, useCallback appropriately
 5. **Accessibility First**: Include ARIA attributes and semantic HTML
-6. **Test-Driven Approach**: Generate tests alongside components
+6. **Minimal Implementation**: Write only the code needed to solve the problem
+7. **Use Existing Patterns**: Follow established patterns in the codebase
 
 ### AI-Assisted Development Workflow
 
 ```typescript
-// 1. Define types first
-interface UserProfileProps {
-  userId: string;
-  onEdit?: (user: User) => void;
-  variant?: "compact" | "detailed";
+// 1. Define types in model/types.ts
+export interface FormValues {
+  name: string;
+  email: string;
 }
 
-// 2. Create component with proper FSD location
-// features/user-profile/ui/user-profile.tsx
+// 2. Define validation in model/validation.ts
+import { email, minLength } from "@/entities/form";
 
-// 3. Implement with Mantine components
-// 4. Add Storybook story
-// 5. Write unit tests
-// 6. Export through public API
+export const validateSampleForm = {
+  name: minLength(2),
+  email,
+};
+
+export const initialFormValues: FormValues = {
+  name: "",
+  email: "",
+};
+
+// 3. Create component in ui/feature-name.tsx
+// Use Mantine components, Lingui macros, and useFormMutation
+
+// 4. Export through index.ts
+export { SampleFormFeature } from "./ui/sample-form-feature";
 ```
 
 ### Code Quality Checklist for AI
 
-- [ ] TypeScript strict mode compliance
-- [ ] Proper error boundaries and loading states
-- [ ] Mantine theme integration
+- [ ] TypeScript strict mode compliance (no `any` without justification)
+- [ ] Proper error handling with RFC 9457 compliant errors
+- [ ] Loading states and error boundaries
+- [ ] Mantine theme integration (use theme colors, spacing)
 - [ ] Responsive design with Mantine breakpoints
-- [ ] Internationalization with Lingui macros
+- [ ] Internationalization with Lingui macros (`msg`, `t`, `Trans`)
 - [ ] Accessibility attributes (ARIA, semantic HTML)
-- [ ] Performance optimizations (memoization)
-- [ ] Unit tests with React Testing Library
-- [ ] Storybook story with variants
+- [ ] Performance optimizations (memoization when needed)
+- [ ] Public API exports through index.ts
+- [ ] Tests only when explicitly requested
 
 ## Development Guidelines
 
@@ -143,517 +200,372 @@ interface UserProfileProps {
 
 1. **Mantine Components First**: Use Mantine UI components as building blocks
 2. **TypeScript Interfaces**: Define strict interfaces for all props
-3. **Component Naming**: PascalCase, file name matches component name
+3. **Component Naming**: PascalCase for components, kebab-case for folders
 4. **Feature-Sliced Structure**: Organize by features, not by file types
+5. **Use EnhancedFormField**: The project has a comprehensive FormField component in `@/shared/ui`
+
+### Actual FormField Implementation
+
+The project includes a comprehensive `EnhancedFormField` component that supports:
+
+- All common input types (text, email, password, textarea, select, multiselect, etc.)
+- Lingui i18n integration with MessageDescriptor support
+- Character counting and validation status indicators
+- Password strength indicators
+- Tooltips and descriptions
+- Loading states and custom errors
+- Mantine form integration
+
+**Usage Example:**
 
 ```tsx
-// shared/ui/form-field/form-field.tsx
-import {
-  TextInput,
-  Select,
-  Textarea,
-  type TextInputProps,
-} from "@mantine/core";
-import { type UseFormReturnType } from "@mantine/form";
-import { forwardRef } from "react";
+import { FormField } from "@/shared/ui";
+import { useForm } from "@mantine/form";
 
-interface BaseFormFieldProps {
-  name: string;
-  label: string;
-  form: UseFormReturnType<any>;
-  required?: boolean;
-  description?: string;
-}
+const form = useForm<FormValues>({
+  initialValues: { name: "", email: "" },
+  validate: validateForm,
+});
 
-interface TextFormFieldProps extends BaseFormFieldProps {
-  type: "text" | "email" | "password" | "number";
-  placeholder?: string;
-}
+<FormField
+  type="text"
+  name="name"
+  label={msg`Name`}
+  placeholder={msg`Enter your name`}
+  form={form}
+  withAsterisk
+/>
 
-interface SelectFormFieldProps extends BaseFormFieldProps {
-  type: "select";
-  data: Array<{ value: string; label: string }>;
-  placeholder?: string;
-  searchable?: boolean;
-}
-
-interface TextareaFormFieldProps extends BaseFormFieldProps {
-  type: "textarea";
-  placeholder?: string;
-  rows?: number;
-}
-
-type FormFieldProps =
-  | TextFormFieldProps
-  | SelectFormFieldProps
-  | TextareaFormFieldProps;
-
-export const FormField = forwardRef<HTMLInputElement, FormFieldProps>(
-  ({ name, label, type, form, ...props }, ref) => {
-    const baseProps = {
-      label,
-      ...form.getInputProps(name),
-      error: form.errors[name],
-      required: props.required,
-      description: props.description,
-    };
-
-    switch (type) {
-      case "select":
-        return (
-          <Select
-            {...baseProps}
-            data={props.data}
-            placeholder={props.placeholder}
-            searchable={props.searchable}
-          />
-        );
-      case "textarea":
-        return (
-          <Textarea
-            {...baseProps}
-            placeholder={props.placeholder}
-            rows={props.rows}
-          />
-        );
-      default:
-        return (
-          <TextInput
-            {...baseProps}
-            ref={ref}
-            type={type}
-            placeholder={props.placeholder}
-          />
-        );
-    }
-  }
-);
-
-FormField.displayName = "FormField";
+<FormField
+  type="email"
+  name="email"
+  label={msg`Email`}
+  form={form}
+  tooltip={msg`We'll never share your email`}
+/>
 ```
 
 ### State Management Standards
 
 #### TanStack Query for Server State
 
+The project uses TanStack Query v5 with a pre-configured query client:
+
 ```tsx
-// shared/lib/use-form-mutation.ts
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { type UseFormReturnType } from "@mantine/form";
-import { notifications } from "@mantine/notifications";
-import { IconCheck, IconX } from "@tabler/icons-react";
-
-interface FormMutationOptions<TData, TVariables> {
-  onSuccess?: (data: TData, variables: TVariables) => void;
-  invalidateQueries?: string[][];
-  successNotification?: {
-    title: string;
-    message: string;
-  };
-  errorNotification?: {
-    title: string;
-    fallback: string;
-  };
-}
-
-export function useFormMutation<TData, TVariables>(
-  form: UseFormReturnType<any>,
-  mutationFn: (variables: TVariables) => Promise<TData>,
-  options?: FormMutationOptions<TData, TVariables>
-) {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn,
-    onSuccess: (data, variables) => {
-      // Clear form errors
-      form.setErrors({});
-
-      // Invalidate related queries
-      if (options?.invalidateQueries) {
-        options.invalidateQueries.forEach((queryKey) => {
-          queryClient.invalidateQueries({ queryKey });
-        });
-      }
-
-      // Show success notification
-      if (options?.successNotification) {
-        notifications.show({
-          title: options.successNotification.title,
-          message: options.successNotification.message,
-          color: "green",
-          icon: <IconCheck size="1rem" />,
-        });
-      }
-
-      // Custom success handler
-      options?.onSuccess?.(data, variables);
+// Query client configuration (src/shared/lib/query-client.ts)
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60, // 1 minute
+      refetchOnWindowFocus: false,
+      networkMode: "always",
+      retry: (failureCount, error: any) => {
+        // Don't retry on 4xx errors except 408, 429
+        if (error?.response?.status >= 400 && error?.response?.status < 500) {
+          return (
+            error?.response?.status === 408 || error?.response?.status === 429
+          );
+        }
+        return failureCount < 3;
+      },
     },
-    onError: (error: any) => {
-      // Handle validation errors
-      if (error.response?.data?.errors) {
-        form.setErrors(error.response.data.errors);
-      }
-
-      // Show error notification
-      if (options?.errorNotification) {
-        notifications.show({
-          title: options.errorNotification.title,
-          message:
-            error.response?.data?.message || options.errorNotification.fallback,
-          color: "red",
-          icon: <IconX size="1rem" />,
-        });
-      }
+    mutations: {
+      networkMode: "always",
+      retry: false,
     },
-  });
-}
+  },
+});
 ```
 
-#### Zustand for Client State
+#### useFormMutation Hook (CRITICAL)
+
+The project has a powerful `useFormMutation` hook that integrates Mantine forms with TanStack Query:
+
+**Key Features:**
+
+- Automatic field error mapping from RFC 9457 responses
+- Loading notifications with update capability
+- Success/error notifications with customization
+- Field focus on validation errors
+- Form clearing on success
+- Retry actions for network errors
+
+**Usage Example:**
 
 ```tsx
-// shared/lib/stores/ui-store.ts
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import { immer } from "zustand/middleware/immer";
+import { useFormMutation } from "@/shared/lib";
+import { t } from "@lingui/core/macro";
 
-interface UIState {
-  sidebarOpened: boolean;
-  colorScheme: "light" | "dark" | "auto";
-  locale: string;
-  notifications: {
-    enabled: boolean;
-    position: "top-right" | "top-left" | "bottom-right" | "bottom-left";
-  };
-}
-
-interface UIActions {
-  toggleSidebar: () => void;
-  setColorScheme: (scheme: UIState["colorScheme"]) => void;
-  setLocale: (locale: string) => void;
-  updateNotificationSettings: (
-    settings: Partial<UIState["notifications"]>
-  ) => void;
-  reset: () => void;
-}
-
-const initialState: UIState = {
-  sidebarOpened: false,
-  colorScheme: "auto",
-  locale: "en",
-  notifications: {
-    enabled: true,
-    position: "top-right",
-  },
-};
-
-export const useUIStore = create<UIState & UIActions>()(
-  persist(
-    immer((set) => ({
-      ...initialState,
-
-      toggleSidebar: () =>
-        set((state) => {
-          state.sidebarOpened = !state.sidebarOpened;
-        }),
-
-      setColorScheme: (scheme) =>
-        set((state) => {
-          state.colorScheme = scheme;
-        }),
-
-      setLocale: (locale) =>
-        set((state) => {
-          state.locale = locale;
-        }),
-
-      updateNotificationSettings: (settings) =>
-        set((state) => {
-          Object.assign(state.notifications, settings);
-        }),
-
-      reset: () => set(initialState),
-    })),
-    {
-      name: "ui-store",
-      partialize: (state) => ({
-        colorScheme: state.colorScheme,
-        locale: state.locale,
-        notifications: state.notifications,
-      }),
-    }
-  )
+const mutation = useFormMutation<ResponseType, FormValues>(
+  form,
+  async (values) => api.post("/endpoint", values),
+  {
+    notifySuccess: {
+      title: t`Success!`,
+      message: t`Form submitted successfully`,
+    },
+    notifyError: {
+      title: t`Error`,
+      fallback: t`Failed to submit form`,
+      showTechnicalDetails: false,
+      enableRetry: true,
+    },
+    clearOnSuccess: true,
+    focusErrorField: true,
+    onSuccess: (data) => {
+      // Custom success logic
+    },
+  }
 );
 
-// Selectors for better performance
-export const useSidebarOpened = () =>
-  useUIStore((state) => state.sidebarOpened);
-export const useColorScheme = () => useUIStore((state) => state.colorScheme);
-export const useLocale = () => useUIStore((state) => state.locale);
+const handleSubmit = (values: FormValues) => {
+  mutation.mutateAsync(values);
+};
 ```
+
+#### Zustand for Client State (When Needed)
+
+The project uses Zustand with immer middleware for client state. Example: `theme-store.ts` for theme preferences.
+
+**When to use:**
+
+- UI state that needs to persist (localStorage)
+- Global client-side state (theme, locale)
+- State shared across many components
+
+**When NOT to use:**
+
+- Server state (use TanStack Query)
+- Form state (use Mantine useForm)
+- URL state (use nuqs)
 
 ### API Service Standards
 
+The project uses Axios with RFC 9457 Problem Details compliant error handling:
+
+#### API Client Configuration
+
 ```tsx
-// shared/lib/client.ts
-import axios, { type AxiosError, type AxiosResponse } from "axios";
-import { notifications } from "@mantine/notifications";
-import { IconX } from "@tabler/icons-react";
+// src/shared/lib/client.ts
+import axios from "axios";
+import { getConfig } from "@/app/config";
+import { normalizeAxiosError } from "./http-error";
+import { notificationService } from "./notifications";
+import { resolveTenantId } from "./tenant-utils";
 
-// API Error Types
-export interface ApiError {
-  message: string;
-  code?: string;
-  status?: number;
-  errors?: Record<string, string[]>;
-}
+const BASE_URL = getConfig("VITE_API_URL_SERVER");
 
-// Create axios instance
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "/api",
-  timeout: 10000,
+  baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true, // Important for cookie-based auth
 });
 
-// Request interceptor
-api.interceptors.request.use(
-  (config) => {
-    // Add auth token
-    const token = localStorage.getItem("auth_token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+// Tenant header interceptor
+api.interceptors.request.use((config) => {
+  const tenantId = resolveTenantId();
+  if (tenantId && !config.headers["X-Tenant-ID"]) {
+    config.headers["X-Tenant-ID"] = tenantId;
+  }
+  return config;
+});
 
-    // Add request ID for tracking
-    config.headers["X-Request-ID"] = crypto.randomUUID();
-
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
-
-// Response interceptor
+// Error handling interceptor
 api.interceptors.response.use(
-  (response: AxiosResponse) => response.data,
-  (error: AxiosError<ApiError>) => {
-    const status = error.response?.status;
-    const data = error.response?.data;
+  (response) => response,
+  async (error) => {
+    const normalized = normalizeAxiosError(error);
 
-    // Handle different error types
-    switch (status) {
-      case 401:
-        // Unauthorized - redirect to login
-        localStorage.removeItem("auth_token");
-        window.location.href = "/login";
-        break;
-
-      case 403:
-        // Forbidden - show notification
-        notifications.show({
-          title: "Access Denied",
-          message:
-            data?.message || "You don't have permission to perform this action",
-          color: "red",
-          icon: <IconX size="1rem" />,
+    // Show global error notification for server errors
+    if (normalized.type === "server") {
+      const cfg = error.config as any;
+      if (!cfg?.__suppressGlobalError) {
+        notificationService.error({
+          title: "Server error",
+          message: normalized.message,
         });
-        break;
-
-      case 422:
-        // Validation errors - let components handle
-        break;
-
-      case 500:
-        // Server error - show generic message
-        notifications.show({
-          title: "Server Error",
-          message: "Something went wrong on our end. Please try again later.",
-          color: "red",
-          icon: <IconX size="1rem" />,
-        });
-        break;
-
-      default:
-        // Network or other errors
-        if (!error.response) {
-          notifications.show({
-            title: "Network Error",
-            message: "Please check your internet connection and try again.",
-            color: "red",
-            icon: <IconX size="1rem" />,
-          });
-        }
+      }
     }
 
-    return Promise.reject({
-      message: data?.message || error.message,
-      code: data?.code,
-      status,
-      errors: data?.errors,
-    } as ApiError);
+    return Promise.reject(normalized);
   }
 );
+```
 
-// Utility functions
-export const isApiError = (error: unknown): error is ApiError => {
-  return typeof error === "object" && error !== null && "message" in error;
-};
+#### RFC 9457 Error Handling
 
-export const getErrorMessage = (
-  error: unknown,
-  fallback = "An error occurred"
-): string => {
-  if (isApiError(error)) {
-    return error.message;
-  }
-  return fallback;
-};
+The project implements RFC 9457 Problem Details for HTTP APIs:
+
+**AppError Type:**
+
+```typescript
+interface AppError {
+  errorType:
+    | "auth"
+    | "validation"
+    | "network"
+    | "timeout"
+    | "server"
+    | "client"
+    | "rate-limit"
+    | "canceled"
+    | "unknown";
+  message: string;
+  status?: number;
+  code?: string;
+  details?: any;
+  requestId?: string;
+  retryable: boolean;
+  fieldErrors?: Record<string, string[]>;
+  retryConfig?: RetryConfig;
+  // RFC 9457 fields
+  type: string;
+  title: string;
+  detail: string;
+  instance?: string;
+}
+```
+
+**Usage:**
+
+```tsx
+import { errorFromAxios, formatErrorForDisplay } from "@/shared/lib";
+
+try {
+  await api.post("/endpoint", data);
+} catch (error) {
+  const appError = errorFromAxios(error);
+
+  // Use with notifications
+  notificationService.fromAppError(appError, {
+    showTechnicalDetails: true,
+    enableRetry: true,
+  });
+
+  // Or format for display
+  const { title, message, referenceId } = formatErrorForDisplay(appError);
+}
+```
+
+#### Environment Configuration
+
+Use the config helper for environment variables:
+
+```tsx
+import { getConfig } from "@/app/config";
+
+const apiUrl = getConfig("VITE_API_URL_SERVER");
+const authDomain = getConfig("VITE_AUTH_DOMAIN_AUTH");
 ```
 
 ### Form Handling Standards
 
+The project uses **Mantine Form** with custom validation rules (NOT Zod by default):
+
+#### Validation Pattern (Actual Implementation)
+
 ```tsx
-// features/user-form/model/validation.ts
-import { z } from "zod";
+// features/sample-form/model/validation.ts
+import { email, minLength } from "@/entities/form";
+import { FormValues } from "./types";
 
-export const userFormSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Invalid email address"),
-  role: z.enum(["admin", "user", "manager"]),
-  bio: z.string().max(500, "Bio must be less than 500 characters").optional(),
-});
-
-export type UserFormData = z.infer<typeof userFormSchema>;
-
-export const initialFormValues: UserFormData = {
-  name: "",
-  email: "",
-  role: "user",
-  bio: "",
+export const validateSampleForm = {
+  name: minLength(2),
+  email,
 };
 
-// features/user-form/ui/user-form-feature.tsx
+export const initialFormValues: FormValues = {
+  name: "",
+  email: "",
+};
+```
+
+#### Entity-Level Validation Rules
+
+The project defines reusable validation rules in `entities/form`:
+
+```tsx
+// entities/form/model/validation-rules.ts
+export const minLength = (min: number) => (value: string) =>
+  value.length < min ? `Must be at least ${min} characters` : null;
+
+export const email = (value: string) =>
+  /^\S+@\S+$/.test(value) ? null : "Invalid email";
+```
+
+#### Complete Form Feature Example
+
+```tsx
+// features/sample-form/ui/sample-form-feature.tsx
+import { Button, Modal, Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { zodResolver } from "mantine-form-zod-resolver";
-import { Modal, Stack, Button, Group, LoadingOverlay } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { Trans } from "@lingui/macro";
-import { useFormMutation } from "@/shared/lib";
+import { t } from "@lingui/core/macro";
 import { FormField } from "@/shared/ui";
-import {
-  userFormSchema,
-  initialFormValues,
-  type UserFormData,
-} from "../model/validation";
-import { createUser } from "../api/user-api";
+import { useFormMutation } from "@/shared/lib";
+import { initialFormValues, validateSampleForm } from "../model/validation";
+import { FormValues } from "../model/types";
 
-interface UserFormFeatureProps {
-  onSuccess?: (user: User) => void;
-}
-
-export function UserFormFeature({ onSuccess }: UserFormFeatureProps) {
+export function SampleFormFeature() {
   const [opened, { open, close }] = useDisclosure(false);
 
-  const form = useForm<UserFormData>({
+  const form = useForm<FormValues>({
     initialValues: initialFormValues,
-    validate: zodResolver(userFormSchema),
-    transformValues: (values) => ({
-      ...values,
-      bio: values.bio || undefined, // Convert empty string to undefined
-    }),
+    validate: validateSampleForm,
   });
 
-  const mutation = useFormMutation(form, createUser, {
-    successNotification: {
-      title: "Success!",
-      message: "User created successfully",
+  const mutation = useFormMutation<void, FormValues>(
+    form,
+    async (values) => {
+      // API call here
+      console.log("Submitting:", values);
     },
-    errorNotification: {
-      title: "Error",
-      fallback: "Failed to create user",
-    },
-    invalidateQueries: [["users"]],
-    onSuccess: (user) => {
-      form.reset();
-      close();
-      onSuccess?.(user);
-    },
-  });
+    {
+      notifySuccess: {
+        title: t`Form submitted!`,
+        message: t`We have received your submission.`,
+      },
+      notifyError: {
+        title: t`Submit Failed`,
+        fallback: t`Could not submit the form`,
+      },
+      onSuccess: () => {
+        form.reset();
+        close();
+      },
+    }
+  );
 
-  const handleSubmit = form.onSubmit((values) => {
-    mutation.mutate(values);
-  });
+  const handleSubmit = (values: FormValues) => {
+    void mutation.mutateAsync(values);
+  };
 
   return (
     <>
-      <Button onClick={open}>
-        <Trans>Create User</Trans>
-      </Button>
+      <Button onClick={open}>{t`Open Form`}</Button>
 
-      <Modal
-        opened={opened}
-        onClose={close}
-        title={<Trans>Create New User</Trans>}
-        size="md"
-      >
-        <LoadingOverlay visible={mutation.isPending} />
-
-        <form onSubmit={handleSubmit}>
-          <Stack gap="md">
+      <Modal opened={opened} onClose={close} title={t`Sample Form`} centered>
+        <form onSubmit={form.onSubmit(handleSubmit)} noValidate>
+          <Stack>
             <FormField
               type="text"
               name="name"
-              label="Full Name"
+              label={t`Name`}
+              placeholder={t`Enter your name`}
               form={form}
-              required
-              placeholder="Enter full name"
             />
-
             <FormField
               type="email"
               name="email"
-              label="Email Address"
+              label={t`Email`}
+              placeholder={t`Enter your email`}
               form={form}
-              required
-              placeholder="user@example.com"
             />
-
-            <FormField
-              type="select"
-              name="role"
-              label="Role"
-              form={form}
-              required
-              data={[
-                { value: "user", label: "User" },
-                { value: "admin", label: "Administrator" },
-                { value: "manager", label: "Manager" },
-              ]}
-            />
-
-            <FormField
-              type="textarea"
-              name="bio"
-              label="Bio"
-              form={form}
-              placeholder="Optional bio..."
-              rows={3}
-            />
-
-            <Group justify="flex-end" mt="md">
-              <Button
-                variant="subtle"
-                onClick={close}
-                disabled={mutation.isPending}
-              >
-                <Trans>Cancel</Trans>
-              </Button>
-              <Button type="submit" loading={mutation.isPending}>
-                <Trans>Create User</Trans>
-              </Button>
-            </Group>
+            <Button type="submit" loading={mutation.isPending}>
+              {t`Submit`}
+            </Button>
           </Stack>
         </form>
       </Modal>
@@ -661,562 +573,829 @@ export function UserFormFeature({ onSuccess }: UserFormFeatureProps) {
   );
 }
 
-// features/user-form/api/user-api.ts
-import { api } from "@/shared/lib/client";
-import type { UserFormData } from "../model/validation";
-
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  bio?: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export async function createUser(data: UserFormData): Promise<User> {
-  return api.post("/users", data);
-}
-
-// features/user-form/index.ts (Public API)
-export { UserFormFeature } from "./ui/user-form-feature";
-export type { UserFormData } from "./model/validation";
-export type { User } from "./api/user-api";
+// features/sample-form/index.ts
+export { SampleFormFeature } from "./ui/sample-form-feature";
 ```
+
+**Note:** While Zod can be used with `mantine-form-zod-resolver`, the project's established pattern uses custom validation functions from the `entities/form` layer.
 
 ## Environment Setup
 
 ### Development Requirements
 
-- **Node.js**: >= 22.0.0
-- **Package Manager**: pnpm (required)
-- **Editor**: VS Code with recommended extensions
-
-### Recommended VS Code Extensions
-
-```json
-// .vscode/extensions.json
-{
-  "recommendations": [
-    "bradlc.vscode-tailwindcss",
-    "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint",
-    "ms-vscode.vscode-typescript-next",
-    "formulahendry.auto-rename-tag",
-    "christian-kohler.path-intellisense"
-  ]
-}
-```
+- **Node.js**: >= 22.0.0 (LTS)
+- **Package Manager**: pnpm 10.20.0+ (required)
+- **Editor**: VS Code or Cursor IDE
 
 ### Environment Variables
 
 ```env
-# .env.local
-VITE_API_URL=http://localhost:3001/api
-VITE_APP_TITLE=Mantine UI Project
-VITE_ENABLE_MOCK=false
-VITE_LINGUI_LOCALE=en
+# Backend API
+VITE_API_URL_SERVER=http://localhost:8080
+
+# Auth Configuration
+VITE_AUTH_DOMAIN_AUTH=https://auth.iqkv.com
+VITE_AUTH_DOMAIN_APP=https://app.iqkv.com
+VITE_AUTH_REDIRECT_AFTER_LOGIN=/dashboard
+VITE_AUTH_REDIRECT_AFTER_LOGOUT=/
+VITE_AUTH_REDIRECT_AFTER_SIGNUP=/verify-email
+
+# Development
+VITE_ENABLE_MSW=true
+VITE_LOG_LEVEL=info
+
+# System
+TZ=UTC
+NODE_ENV=development
 ```
 
 ### Editor Configuration
 
-The project uses these formatting rules:
-
-```yaml
-# .prettierrc
-endOfLine: lf
-trailingComma: es5
-tabWidth: 2
-semi: true
-singleQuote: false
+```json
+// .prettierrc
+{
+  "endOfLine": "lf",
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": false
+}
 ```
 
 ### Development Scripts
 
 ```bash
 # Development
-pnpm dev                    # Start development server
+pnpm dev                    # Start dev server (http://localhost:5173)
 pnpm build                  # Build for production
-pnpm preview               # Preview production build
+pnpm preview                # Preview production build
 
 # Testing
-pnpm test                  # Run unit tests
-pnpm test:coverage         # Run tests with coverage
-pnpm test:ui               # Run tests with UI
-pnpm e2e                   # Run E2E tests
+pnpm test                   # Run unit tests
+pnpm test:coverage          # Run tests with coverage
+pnpm test:ui                # Run tests with UI
+pnpm test:arch              # Run architecture tests
+pnpm e2e                    # Run E2E tests
+pnpm e2e:ui                 # Run E2E with UI
+pnpm e2e:headed             # Run E2E in headed mode
 
 # Code Quality
-pnpm lint                  # Run ESLint
-pnpm lint:fix              # Fix ESLint issues
-pnpm prettier:check        # Check formatting
-pnpm prettier:write        # Format code
-pnpm type-check            # TypeScript type checking
+pnpm lint                   # Run ESLint
+pnpm lint:fix               # Fix ESLint issues
+pnpm lint:stylelint         # Lint CSS/SCSS
+pnpm prettier:check         # Check formatting
+pnpm prettier:write         # Format code
+pnpm type-check             # TypeScript type checking
+pnpm knip                   # Find dead code
 
 # Internationalization
-pnpm messages:extract      # Extract translation messages
-pnpm messages:compile      # Compile translations
+pnpm messages:extract       # Extract i18n messages
+pnpm messages:compile       # Compile translations
 
 # Storybook
-pnpm storybook             # Start Storybook
-pnpm storybook:build       # Build Storybook
+pnpm storybook              # Start Storybook
+pnpm storybook:build        # Build Storybook
+
+# Release
+pnpm release                # Automated versioning
 ```
 
 ## Testing Strategy
 
 ### Testing Stack
 
-- **Unit Tests**: Vitest + React Testing Library
-- **E2E Tests**: Playwright
-- **Component Tests**: Storybook with interactions
+- **Unit Tests**: Vitest + React Testing Library + happy-dom
+- **E2E Tests**: Playwright with auto-start dev server
+- **Component Tests**: Storybook 8 with interactions
 - **Coverage**: Vitest coverage with v8
+- **Architecture Tests**: Automated FSD compliance tests
 
-### Unit Testing with Mantine Components
+### Test Configuration
 
-```tsx
-// shared/ui/form-field/form-field.test.tsx
-import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { MantineProvider } from "@mantine/core";
-import { useForm } from "@mantine/form";
-import { FormField } from "./form-field";
-
-const TestWrapper = ({ children }: { children: React.ReactNode }) => (
-  <MantineProvider>{children}</MantineProvider>
-);
-
-const FormFieldTestComponent = ({ type, ...props }: any) => {
-  const form = useForm({
-    initialValues: { testField: "" },
-  });
-
-  return (
-    <FormField
-      name="testField"
-      label="Test Field"
-      form={form}
-      type={type}
-      {...props}
-    />
-  );
-};
-
-describe("FormField", () => {
-  it("renders text input correctly", () => {
-    render(
-      <TestWrapper>
-        <FormFieldTestComponent type="text" placeholder="Enter text" />
-      </TestWrapper>
-    );
-
-    const input = screen.getByLabelText("Test Field");
-    expect(input).toBeInTheDocument();
-    expect(input).toHaveAttribute("type", "text");
-    expect(input).toHaveAttribute("placeholder", "Enter text");
-  });
-
-  it("handles user input correctly", async () => {
-    const user = userEvent.setup();
-
-    render(
-      <TestWrapper>
-        <FormFieldTestComponent type="text" />
-      </TestWrapper>
-    );
-
-    const input = screen.getByLabelText("Test Field");
-    await user.type(input, "test value");
-
-    expect(input).toHaveValue("test value");
-  });
-});
+```typescript
+// vitest.config.ts uses happy-dom for fast DOM simulation
+// setupTests.ts includes Mantine-specific mocks
 ```
 
-### Feature Testing with TanStack Query
+### Architecture Testing (Automated)
 
-```tsx
-// features/sample-form/ui/sample-form-feature.test.tsx
-import { describe, it, expect, beforeEach, vi } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { MantineProvider } from "@mantine/core";
-import { SampleFormFeature } from "./sample-form-feature";
+The project includes automated FSD compliance tests in `src/architecture.test.ts`:
 
-// Mock the form mutation hook
-vi.mock("@/shared/lib", () => ({
-  ...vi.importActual("@/shared/lib"),
-  useFormMutation: vi.fn(),
-}));
-
-const createWrapper = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-
-  return ({ children }: { children: React.ReactNode }) => (
-    <QueryClientProvider client={queryClient}>
-      <MantineProvider>{children}</MantineProvider>
-    </QueryClientProvider>
-  );
-};
-
-describe("SampleFormFeature", () => {
-  const mockMutation = {
-    mutateAsync: vi.fn(),
-    isPending: false,
-  };
-
-  beforeEach(async () => {
-    vi.clearAllMocks();
-    const { useFormMutation } = await import("@/shared/lib");
-    (useFormMutation as any).mockReturnValue(mockMutation);
-  });
-
-  it("submits form with valid data", async () => {
-    const user = userEvent.setup();
-    mockMutation.mutateAsync.mockResolvedValue(undefined);
-
-    render(<SampleFormFeature />, { wrapper: createWrapper() });
-
-    // Open modal
-    const openButton = screen.getByRole("button", { name: /open form/i });
-    await user.click(openButton);
-
-    // Fill form
-    const nameInput = screen.getByLabelText("Name");
-    const emailInput = screen.getByLabelText("Email");
-
-    await user.type(nameInput, "John Doe");
-    await user.type(emailInput, "john@example.com");
-
-    // Submit
-    const submitButton = screen.getByRole("button", { name: /submit/i });
-    await user.click(submitButton);
-
-    await waitFor(() => {
-      expect(mockMutation.mutateAsync).toHaveBeenCalledWith({
-        name: "John Doe",
-        email: "john@example.com",
-      });
-    });
-  });
-});
+```bash
+pnpm test:arch  # Run architecture tests
 ```
 
-### Test Setup Configuration
+**What it validates:**
 
-```tsx
-// src/setupTests.ts
-import "@testing-library/jest-dom";
+- All FSD layers exist (app, processes, pages, widgets, features, entities, shared)
+- Every feature/widget/entity has `index.ts` (public API)
+- Features have required segments (ui/, model/)
+- File naming conventions (kebab-case)
+- Shared layer has standard segments (api/, lib/, ui/, types/)
 
-// Mock window.matchMedia for Mantine components
-Object.defineProperty(window, "matchMedia", {
-  writable: true,
-  value: (query: string) => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: () => {},
-    removeListener: () => {},
-    addEventListener: () => {},
-    removeEventListener: () => {},
-    dispatchEvent: () => {},
-  }),
-});
+### Testing Best Practices
 
-// Mock ResizeObserver
-global.ResizeObserver = class ResizeObserver {
-  observe() {}
-  unobserve() {}
-  disconnect() {}
-};
+**DO:**
+
+- Write tests only when explicitly requested
+- Use the existing test utilities in `@/shared/lib/test-utils`
+- Mock MSW handlers for API calls
+- Test user interactions, not implementation details
+
+**DON'T:**
+
+- Don't write tests automatically for every component
+- Don't test Mantine components (they're already tested)
+- Don't test implementation details (internal state)
+
+### E2E Testing with Playwright
+
+```bash
+# Run E2E tests
+pnpm e2e                    # Headless mode
+pnpm e2e:ui                 # UI mode (recommended)
+pnpm e2e:headed             # Headed mode
+pnpm e2e:debug              # Debug mode
+
+# Playwright auto-starts dev server via webServer config
+```
+
+### MSW (Mock Service Worker)
+
+The project uses MSW for API mocking:
+
+```typescript
+// Enable/disable via environment variable
+VITE_ENABLE_MSW = true;
+
+// Handlers in src/shared/mocks/handlers/
+// Browser setup in src/shared/mocks/browser.ts
 ```
 
 ## Performance Optimization
 
-### Code Splitting with TanStack Router
+### TanStack Router File-Based Routing
+
+The project uses TanStack Router with file-based routing and automatic code splitting:
 
 ```tsx
-// pages/examples.tsx
+// src/pages/dashboard.tsx
 import { createFileRoute } from "@tanstack/react-router";
-import { lazy, Suspense } from "react";
-import { LoadingOverlay } from "@/shared/ui";
 
-const ExamplesPage = lazy(() => import("../widgets/examples-page"));
-
-export const Route = createFileRoute("/examples")({
-  component: () => (
-    <Suspense
-      fallback={<LoadingOverlay visible message="Loading examples..." />}
-    >
-      <ExamplesPage />
-    </Suspense>
-  ),
+export const Route = createFileRoute("/dashboard")({
+  component: DashboardPage,
 });
+
+function DashboardPage() {
+  return <div>Dashboard</div>;
+}
 ```
 
-### Mantine Component Optimization
+**Route files are automatically:**
 
-```tsx
-// shared/ui/data-table/data-table.tsx
-import { memo, useMemo } from "react";
-import { DataTable as MantineDataTable } from "mantine-datatable";
-import type { DataTableProps } from "mantine-datatable";
+- Code-split by Vite
+- Type-safe with generated route tree
+- Lazy-loaded on navigation
 
-interface OptimizedDataTableProps<T>
-  extends Omit<DataTableProps<T>, "records"> {
-  data: T[];
-  searchQuery?: string;
-  searchFields?: (keyof T)[];
-}
+### TanStack Query Configuration
 
-export const DataTable = memo(
-  <T extends Record<string, any>>({
-    data,
-    searchQuery,
-    searchFields = [],
-    ...props
-  }: OptimizedDataTableProps<T>) => {
-    const filteredData = useMemo(() => {
-      if (!searchQuery || !searchFields.length) return data;
+The project has optimized query defaults:
 
-      return data.filter((item) =>
-        searchFields.some((field) =>
-          String(item[field]).toLowerCase().includes(searchQuery.toLowerCase())
-        )
-      );
-    }, [data, searchQuery, searchFields]);
-
-    return (
-      <MantineDataTable
-        records={filteredData}
-        highlightOnHover
-        striped
-        {...props}
-      />
-    );
-  }
-);
-```
-
-### TanStack Query Optimization
-
-```tsx
-// shared/lib/queries/use-users-query.ts
-import { useQuery } from "@tanstack/react-query";
-import { api } from "../client";
-
-export function useUsersQuery(params?: {
-  page?: number;
-  search?: string;
-  enabled?: boolean;
-}) {
-  return useQuery({
-    queryKey: ["users", params],
-    queryFn: () => api.get("/users", { params }),
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    gcTime: 10 * 60 * 1000, // 10 minutes
-    enabled: params?.enabled ?? true,
-  });
-}
-
-// Prefetch for better UX
-export function usePrefetchUsers() {
-  const queryClient = useQueryClient();
-
-  return useCallback(
-    (params?: { page?: number; search?: string }) => {
-      queryClient.prefetchQuery({
-        queryKey: ["users", params],
-        queryFn: () => api.get("/users", { params }),
-        staleTime: 5 * 60 * 1000,
-      });
+```typescript
+// src/shared/lib/query-client.ts
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60, // 1 minute
+      refetchOnWindowFocus: false,
+      networkMode: "always",
+      retry: (failureCount, error: any) => {
+        // Smart retry logic for 4xx vs 5xx
+        if (error?.response?.status >= 400 && error?.response?.status < 500) {
+          return (
+            error?.response?.status === 408 || error?.response?.status === 429
+          );
+        }
+        return failureCount < 3;
+      },
     },
-    [queryClient]
-  );
-}
-```
-
-## Internationalization with Lingui
-
-### Setup and Usage
-
-```tsx
-// shared/lib/i18n.ts
-import { i18n } from "@lingui/core";
-import { messages as enMessages } from "../locales/en/messages";
-import { messages as esMessages } from "../locales/es/messages";
-
-i18n.load({
-  en: enMessages,
-  es: esMessages,
+    mutations: {
+      networkMode: "always",
+      retry: false,
+    },
+  },
 });
-
-i18n.activate("en");
-
-export { i18n };
 ```
+
+### Mantine DataTable
+
+The project uses `mantine-datatable` for advanced tables:
 
 ```tsx
-// Component with translations
-import { Trans, t } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
+import { DataTable } from "mantine-datatable";
 
-export function WelcomeMessage({ userName }: { userName: string }) {
-  const { _ } = useLingui();
-
-  return (
-    <div>
-      <h1>
-        <Trans>Welcome, {userName}!</Trans>
-      </h1>
-      <p>{_(t`Click the button below to get started.`)}</p>
-    </div>
-  );
-}
+<DataTable
+  records={data}
+  columns={columns}
+  highlightOnHover
+  striped
+  withTableBorder
+  withColumnBorders
+/>;
 ```
-
-## Error Handling Best Practices
-
-### Global Error Boundary
-
-```tsx
-// shared/ui/error-boundary/error-boundary.tsx
-import { Alert, Button, Container, Stack, Title } from "@mantine/core";
-import { IconAlertCircle, IconRefresh } from "@tabler/icons-react";
-import { Component, ErrorInfo, ReactNode } from "react";
-
-interface Props {
-  children: ReactNode;
-  fallback?: ReactNode;
-}
-
-interface State {
-  hasError: boolean;
-  error?: Error;
-}
-
-export class ErrorBoundary extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { hasError: false };
-  }
-
-  static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, error };
-  }
-
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error("Error caught by boundary:", error, errorInfo);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      if (this.props.fallback) {
-        return this.props.fallback;
-      }
-
-      return (
-        <Container size="sm" py="xl">
-          <Stack align="center" gap="lg">
-            <Title order={2}>Something went wrong</Title>
-
-            <Alert
-              icon={<IconAlertCircle size="1rem" />}
-              title="Application Error"
-              color="red"
-              variant="light"
-            >
-              {this.state.error?.message || "An unexpected error occurred"}
-            </Alert>
-
-            <Button
-              leftSection={<IconRefresh size="1rem" />}
-              onClick={() => window.location.reload()}
-            >
-              Reload Page
-            </Button>
-          </Stack>
-        </Container>
-      );
-    }
-
-    return this.props.children;
-  }
-}
-```
-
-## Code Quality Standards
-
-### ESLint Configuration
-
-The project uses Mantine's ESLint configuration with additional rules:
-
-- **TanStack Query**: Enforces query best practices
-- **TanStack Router**: Ensures proper route configuration
-- **Lingui**: Validates translation usage
-- **React Hooks**: Prevents common hook mistakes
-
-### Commit Standards
-
-```bash
-# Conventional Commits with Commitizen
-pnpm commit  # Interactive commit with proper formatting
-
-# Examples:
-feat: add user profile form
-fix: resolve validation error in login form
-docs: update API documentation
-test: add unit tests for form components
-```
-
-### Pre-commit Hooks
-
-```json
-// package.json
-{
-  "lint-staged": {
-    "*": ["pnpm prettier:check"],
-    "package.json": ["sort-package-json"]
-  }
-}
-```
-
-## Deployment Considerations
 
 ### Build Optimization
 
 ```typescript
 // vite.config.ts
 export default defineConfig({
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ["react", "react-dom"],
-          mantine: ["@mantine/core", "@mantine/hooks"],
-          tanstack: ["@tanstack/react-query", "@tanstack/react-router"],
-        },
-      },
-    },
+  plugins: [
+    tsconfigPaths(),
+    react({
+      plugins: [["@lingui/swc-plugin", {}]], // SWC for fast compilation
+    }),
+    lingui(),
+    tanstackRouter(), // Auto-generates route tree
+  ],
+});
+```
+
+**Vite 7 Features:**
+
+- SWC compiler for fast builds
+- Automatic code splitting
+- Tree shaking
+- CSS code splitting
+- Image optimization (via plugin)
+
+## Internationalization with Lingui
+
+### Lingui Macros (CRITICAL)
+
+The project uses Lingui macros for i18n. **Always use macros, not runtime functions:**
+
+**Correct Usage:**
+
+```tsx
+import { t } from "@lingui/core/macro";  // For variables
+import { Trans } from "@lingui/react";   // For JSX
+import { msg } from "@lingui/core/macro"; // For MessageDescriptor
+
+// In JSX
+<Button>{t`Submit Form`}</Button>
+<Title><Trans>Welcome, {userName}!</Trans></Title>
+
+// For variables (extracted at compile time)
+const placeholder = t`Enter your name`;
+
+// For MessageDescriptor (used in props)
+<FormField
+  label={msg`Email Address`}
+  placeholder={msg`Enter your email`}
+/>
+```
+
+**Wrong Usage (Don't do this):**
+
+```tsx
+import { t } from "@lingui/core"; // ❌ Runtime function, not extracted
+```
+
+### Lingui Workflow
+
+```bash
+# 1. Write code with macros (t``, Trans, msg``)
+# 2. Extract messages
+pnpm messages:extract
+
+# 3. Translate in locales/*/messages.po
+# 4. Compile messages
+pnpm messages:compile
+
+# 5. Messages are auto-loaded in app
+```
+
+### Dynamic Locale Activation
+
+```tsx
+// Locale is activated in app.tsx on mount
+import { dynamicActivateLocale, getClientLocale } from "@/shared/locales";
+
+useEffect(() => {
+  dynamicActivateLocale(getClientLocale());
+}, []);
+```
+
+### ESLint Rules
+
+The project enforces Lingui best practices:
+
+- `lingui/t-call-in-function`: Ensures `t` is called correctly
+- `lingui/no-single-variables-to-translate`: Prevents translating single variables
+- `lingui/no-expression-in-message`: Prevents complex expressions in messages
+- `lingui/no-trans-inside-trans`: Prevents nested Trans components
+
+## Error Handling Best Practices
+
+### RFC 9457 Problem Details
+
+The project implements RFC 9457 Problem Details for HTTP APIs. All API errors are normalized to `AppError`:
+
+```typescript
+interface AppError {
+  errorType:
+    | "auth"
+    | "validation"
+    | "network"
+    | "timeout"
+    | "server"
+    | "client"
+    | "rate-limit"
+    | "canceled"
+    | "unknown";
+  message: string;
+  status?: number;
+  code?: string;
+  requestId?: string;
+  retryable: boolean;
+  fieldErrors?: Record<string, string[]>;
+  // RFC 9457 fields
+  type: string; // Problem type URI
+  title: string; // Short, human-readable summary
+  detail: string; // Human-readable explanation
+  instance?: string; // URI reference to specific occurrence
+}
+```
+
+### Error Handling Utilities
+
+```tsx
+import { errorFromAxios, toMantineErrors, getErrorMessage } from "@/shared/lib";
+
+try {
+  await api.post("/endpoint", data);
+} catch (error) {
+  // Convert to AppError
+  const appError = errorFromAxios(error);
+
+  // Get field errors for form
+  const fieldErrors = toMantineErrors(error);
+  form.setErrors(fieldErrors);
+
+  // Get error message
+  const message = getErrorMessage(error, "Something went wrong");
+}
+```
+
+### Notification Service
+
+The project has an enhanced notification service with RFC 9457 support:
+
+```tsx
+import { notificationService } from "@/shared/lib";
+
+// Simple notifications
+notificationService.success({ message: "Saved successfully" });
+notificationService.error({ message: "Failed to save" });
+notificationService.warning({ message: "Please review" });
+notificationService.info({ message: "New update available" });
+
+// From AppError (with retry, technical details, etc.)
+notificationService.fromAppError(appError, {
+  showTechnicalDetails: true,
+  enableRetry: true,
+  retryAction: () => retryFunction(),
+});
+
+// Validation errors with field details
+notificationService.validationError({
+  title: "Validation Failed",
+  fieldErrors: { email: ["Invalid format"], name: ["Too short"] },
+});
+
+// Loading notifications
+const id = notificationService.showLoading({ message: "Processing..." });
+notificationService.updateLoadingNotification(id, {
+  message: "Completed!",
+  type: "success",
+});
+```
+
+### Global Error Boundary
+
+The project includes an ErrorBoundary component in `@/shared/ui`:
+
+```tsx
+import { ErrorBoundary } from "@/shared/ui";
+
+// Already wrapped in app.tsx
+<ErrorBoundary>
+  <App />
+</ErrorBoundary>;
+```
+
+## Code Quality Standards
+
+### ESLint Configuration
+
+The project uses ESLint 9 with flat config and Mantine preset:
+
+```javascript
+// eslint.config.js
+export default tseslint.config({
+  extends: [mantine],
+  plugins: {
+    "react-hooks": reactHooks,
+    "react-refresh": reactRefresh,
+    lingui: pluginLingui,
+    "@tanstack/query": pluginQuery,
+    "@tanstack/router": pluginRouter,
+  },
+  rules: {
+    // TanStack Router
+    "@tanstack/router/create-route-property-order": "error",
+
+    // Lingui i18n
+    "lingui/t-call-in-function": 2,
+    "lingui/no-single-variables-to-translate": 2,
+    "lingui/no-expression-in-message": 2,
+    "lingui/no-single-tag-to-translate": 2,
+    "lingui/no-trans-inside-trans": 2,
+
+    // Relaxed rules
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "no-console": "off",
   },
 });
 ```
 
-### Environment-specific Configuration
+### TypeScript Configuration
+
+```json
+// tsconfig.app.json
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+### Commit Standards
+
+```bash
+# Conventional Commits with Commitlint
+# Enforced by Husky pre-commit hook
+
+# Format: <type>(<scope>): <subject>
+feat: add user profile form
+fix: resolve validation error in login form
+docs: update API documentation
+test: add unit tests for form components
+refactor: simplify error handling logic
+style: format code with prettier
+chore: update dependencies
+```
+
+### Pre-commit Hooks
+
+```bash
+# Husky hooks in .husky/
+# - pre-commit: runs lint-staged (prettier check)
+# - commit-msg: runs commitlint
+
+# lint-staged configuration
+{
+  "*": ["pnpm prettier:check"],
+  "package.json": ["sort-package-json"]
+}
+```
+
+### Dead Code Detection
+
+```bash
+# Use Knip to find unused code
+pnpm knip
+```
+
+## Key Project Patterns
+
+### Multi-Tenant Architecture
+
+The project supports multi-tenancy with tenant context:
+
+```tsx
+// Tenant ID resolution from subdomain or header
+import { resolveTenantId } from "@/shared/lib/tenant-utils";
+
+// Automatic tenant header injection in API client
+api.interceptors.request.use((config) => {
+  const tenantId = resolveTenantId();
+  if (tenantId) {
+    config.headers["X-Tenant-ID"] = tenantId;
+  }
+  return config;
+});
+```
+
+### Authentication Flow
+
+The project uses cookie-based authentication with JWT:
+
+```tsx
+// Auth context in processes/auth
+import { AuthProvider, useAuth } from "@/processes/auth";
+
+// Protected routes
+import { ProtectedRoute } from "@/shared/ui";
+
+<ProtectedRoute>
+  <DashboardPage />
+</ProtectedRoute>;
+```
+
+### Configuration Management
+
+```tsx
+// Centralized config in app/config
+import { getConfig } from "@/app/config";
+
+const apiUrl = getConfig("VITE_API_URL_SERVER");
+const authDomain = getConfig("VITE_AUTH_DOMAIN_AUTH");
+```
+
+### Theme Management
+
+```tsx
+// Theme configuration in app/theme.ts
+import { createTheme } from "@mantine/core";
+
+export const theme = createTheme({
+  primaryColor: "blue",
+  defaultRadius: "md",
+  // Custom theme configuration
+});
+
+// Theme store for persistence
+import { useThemeStore } from "@/shared/lib/theme-store";
+```
+
+### User Preferences
+
+The project includes a user preferences system:
+
+```tsx
+// Entity-level hooks
+import {
+  useUserPreferences,
+  useUpdateUserPreferences,
+  useTheme,
+  useLocale,
+} from "@/entities/user";
+
+const { data: preferences } = useUserPreferences();
+const theme = useTheme();
+const locale = useLocale();
+```
+
+### Modal Management
+
+```tsx
+// Mantine Modals with context
+import { modals } from "@mantine/modals";
+
+// Confirmation modal
+modals.openContextModal({
+  modal: "confirmation",
+  title: "Confirm Action",
+  innerProps: {
+    message: "Are you sure?",
+    onConfirm: () => handleConfirm(),
+  },
+});
+```
+
+### Notification Patterns
+
+```tsx
+// Enhanced notification service
+import { notificationService } from "@/shared/lib";
+
+// Loading with update
+const id = notificationService.showLoading({
+  message: "Processing...",
+});
+
+// Update to success/error
+notificationService.updateLoadingNotification(id, {
+  message: "Completed!",
+  type: "success",
+});
+
+// From AppError with retry
+notificationService.fromAppError(error, {
+  enableRetry: true,
+  retryAction: () => retry(),
+});
+```
+
+## Deployment & CI/CD
+
+### Build Process
 
 ```bash
 # Production build
 pnpm build
 
-# Preview production build locally
+# Build includes:
+# 1. TypeScript compilation
+# 2. Lingui message extraction and compilation
+# 3. Vite build with optimizations
+
+# Preview production build
 pnpm preview
 
-# Type checking before deployment
+# Type checking
 pnpm type-check
 ```
+
+### Docker Support
+
+The project includes Docker configuration:
+
+```bash
+# Development with Docker Compose
+docker compose -f compose.yaml up -d
+
+# DevContainer support
+# See .devcontainer/ for VS Code DevContainer config
+```
+
+### CI/CD Workflows
+
+The project includes GitHub Actions workflows:
+
+- **CI**: Linting, type checking, testing
+- **E2E**: Playwright tests
+- **Dependabot**: Automated dependency updates
+- **Release**: Automated versioning with release-it
+
+### Environment Variables for Production
+
+```env
+# Required for production
+VITE_API_URL_SERVER=https://api.production.com
+VITE_AUTH_DOMAIN_AUTH=https://auth.production.com
+VITE_AUTH_DOMAIN_APP=https://app.production.com
+
+# Disable MSW in production
+VITE_ENABLE_MSW=false
+
+# Set log level
+VITE_LOG_LEVEL=silent
+```
+
+### SonarQube Integration
+
+```bash
+# Code quality analysis
+# Configuration in sonar-project.properties
+```
+
+## Quick Reference
+
+### Common Import Paths
+
+```tsx
+// UI Components
+import { FormField, ErrorBoundary, LoadingOverlay } from "@/shared/ui";
+
+// Utilities
+import {
+  useFormMutation,
+  queryClient,
+  notificationService,
+} from "@/shared/lib";
+import { errorFromAxios, toMantineErrors } from "@/shared/lib";
+
+// API Clients
+import { api } from "@/shared/lib/client";
+import { publicApi } from "@/shared/lib/public-client";
+
+// Configuration
+import { getConfig } from "@/app/config";
+
+// Entities
+import { email, minLength } from "@/entities/form";
+import { useUserPreferences, useTheme } from "@/entities/user";
+
+// Lingui
+import { t } from "@lingui/core/macro";
+import { Trans } from "@lingui/react";
+import { msg } from "@lingui/core/macro";
+
+// Mantine
+import { Button, Stack, Group, Modal, TextInput } from "@mantine/core";
+import { useForm } from "@mantine/form";
+import { useDisclosure } from "@mantine/hooks";
+import { notifications } from "@mantine/notifications";
+import { modals } from "@mantine/modals";
+
+// TanStack
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+```
+
+### Feature Creation Checklist
+
+When creating a new feature:
+
+1. **Create feature directory**: `src/features/feature-name/`
+2. **Create required segments**:
+   - `model/types.ts` - TypeScript interfaces
+   - `model/validation.ts` - Form validation rules
+   - `ui/feature-name.tsx` - Main component
+3. **Create public API**: `index.ts` - Export only public interfaces
+4. **Use existing patterns**:
+   - `useFormMutation` for form submissions
+   - `FormField` for form inputs
+   - Lingui macros for i18n
+   - `notificationService` for notifications
+5. **Follow FSD rules**: Only import from lower layers
+6. **Test architecture**: `pnpm test:arch`
+
+### Common Patterns
+
+**Form Feature:**
+
+```tsx
+// model/validation.ts
+export const validateForm = { name: minLength(2), email };
+export const initialFormValues = { name: "", email: "" };
+
+// ui/feature.tsx
+const form = useForm({ initialValues, validate: validateForm });
+const mutation = useFormMutation(form, apiCall, { notifySuccess, notifyError });
+const handleSubmit = (values) => mutation.mutateAsync(values);
+```
+
+**Data Fetching:**
+
+```tsx
+const { data, isLoading, error } = useQuery({
+  queryKey: ["resource", id],
+  queryFn: () => api.get(`/resource/${id}`),
+});
+```
+
+**Modal with Form:**
+
+```tsx
+const [opened, { open, close }] = useDisclosure(false);
+<Modal opened={opened} onClose={close}>
+  <form onSubmit={form.onSubmit(handleSubmit)}>
+    <FormField type="text" name="name" form={form} />
+    <Button type="submit" loading={mutation.isPending}>
+      Submit
+    </Button>
+  </form>
+</Modal>;
+```
+
+### Troubleshooting
+
+**Issue: Import not found**
+
+- Check if importing through public API (`index.ts`)
+- Verify path alias `@/*` is used correctly
+
+**Issue: Lingui messages not extracted**
+
+- Use macros (`t`, `msg`, `Trans`), not runtime functions
+- Run `pnpm messages:extract`
+
+**Issue: Architecture test fails**
+
+- Ensure `index.ts` exists in feature/widget/entity
+- Check segment structure (ui/, model/)
+- Verify kebab-case naming
+
+**Issue: Form validation not working**
+
+- Check validation rules are from `@/entities/form`
+- Ensure `form.getInputProps(name)` is used
+- Verify `useFormMutation` is handling errors
+
+**Issue: API errors not showing**
+
+- Check `notificationService` is imported
+- Verify `useFormMutation` has `notifyError` config
+- Check API interceptor is not suppressing errors
