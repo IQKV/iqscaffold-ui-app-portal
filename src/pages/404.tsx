@@ -19,20 +19,20 @@ function NotFoundPage() {
   const router = useRouter();
 
   return (
-    <Container size="md" py={80}>
+    <Container size="md" py={80} data-testid="page-404">
       <Stack align="center" gap="xl">
         <ThemeIcon size={120} radius="xl" variant="light" color="red">
           <IconError404 size={80} />
         </ThemeIcon>
 
         <div style={{ textAlign: "center" }}>
-          <Title order={1} size="3rem" mb="md">
+          <Title order={1} size="3rem" mb="md" data-testid="404-code">
             404
           </Title>
-          <Title order={2} mb="md">
+          <Title order={2} mb="md" data-testid="404-title">
             {t`Page Not Found`}
           </Title>
-          <Text size="lg" c="dimmed" mb="xl">
+          <Text size="lg" c="dimmed" mb="xl" data-testid="404-message">
             {t`The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.`}
           </Text>
         </div>
@@ -42,6 +42,7 @@ function NotFoundPage() {
             leftSection={<IconArrowLeft size="1rem" />}
             variant="outline"
             onClick={() => router.history.back()}
+            data-testid="btn-go-back"
           >
             {t`Go Back`}
           </Button>
@@ -49,6 +50,7 @@ function NotFoundPage() {
             leftSection={<IconHome size="1rem" />}
             component={Link}
             to="/"
+            data-testid="btn-go-home"
           >
             {t`Go Home`}
           </Button>

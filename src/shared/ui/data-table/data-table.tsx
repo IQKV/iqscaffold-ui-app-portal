@@ -117,7 +117,7 @@ export function DataTable<T = any>({
   return (
     <>
       <ScrollArea>
-        <Table>
+        <Table data-testid="data-table">
           <Table.Thead>
             <Table.Tr>
               {columns.map((column) => (
@@ -129,6 +129,7 @@ export function DataTable<T = any>({
                     cursor: column.sortable ? "pointer" : "default",
                   }}
                   onClick={() => column.sortable && handleSort(column.key)}
+                  data-testid={`table-header-${column.key}`}
                 >
                   <Group
                     gap="xs"
@@ -149,11 +150,12 @@ export function DataTable<T = any>({
           </Table.Thead>
           <Table.Tbody>
             {data.map((record, index) => (
-              <Table.Tr key={index}>
+              <Table.Tr key={index} data-testid={`table-row-${index}`}>
                 {columns.map((column) => (
                   <Table.Td
                     key={column.key}
                     style={{ textAlign: column.align || "left" }}
+                    data-testid={`table-cell-${column.key}-${index}`}
                   >
                     {column.render
                       ? column.render(
@@ -176,6 +178,7 @@ export function DataTable<T = any>({
             value={pagination.page}
             onChange={pagination.onChange}
             total={Math.ceil(pagination.total / pagination.pageSize)}
+            data-testid="table-pagination"
           />
         </Group>
       )}

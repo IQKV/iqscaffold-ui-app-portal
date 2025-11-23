@@ -35,9 +35,15 @@ export function PreferenceCard() {
   }
 
   return (
-    <Card shadow="sm" padding="lg" radius="md" withBorder>
+    <Card
+      shadow="sm"
+      padding="lg"
+      radius="md"
+      withBorder
+      data-testid="preference-card"
+    >
       <Stack gap="md">
-        <Text fw={500} size="lg">
+        <Text fw={500} size="lg" data-testid="preference-card-title">
           Your Preferences
         </Text>
 

@@ -12,11 +12,13 @@ export const Route = createFileRoute("/user-preferences")({
 
 function UserPreferencesPage() {
   return (
-    <Container size="lg" py="xl">
+    <Container size="lg" py="xl" data-testid="page-user-preferences">
       <Stack gap="lg">
         <div>
-          <Title order={1}>User Preferences</Title>
-          <Text c="dimmed" mt="xs">
+          <Title order={1} data-testid="preferences-title">
+            User Preferences
+          </Title>
+          <Text c="dimmed" mt="xs" data-testid="preferences-description">
             Manage your personal settings and preferences
           </Text>
         </div>

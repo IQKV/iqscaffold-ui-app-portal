@@ -12,7 +12,7 @@ export function Sidebar() {
   const location = useLocation();
 
   return (
-    <Stack gap="md">
+    <Stack gap="md" data-testid="widget-sidebar">
       <Text size="sm" fw={500}>
         {t`Navigation`}
       </Text>
@@ -23,6 +23,7 @@ export function Sidebar() {
         label={t`Home`}
         leftSection={<IconHome size="1rem" />}
         active={location.pathname === "/"}
+        data-testid="nav-home"
       />
 
       <NavLink
@@ -31,6 +32,7 @@ export function Sidebar() {
         label={t`About`}
         leftSection={<IconInfoCircle size="1rem" />}
         active={location.pathname === "/about"}
+        data-testid="nav-about"
       />
 
       <NavLink
@@ -39,6 +41,7 @@ export function Sidebar() {
         label={t`User Management`}
         leftSection={<IconUsers size="1rem" />}
         active={location.pathname === "/users"}
+        data-testid="nav-users"
       />
 
       <NavLink
@@ -47,6 +50,7 @@ export function Sidebar() {
         label={t`Examples`}
         leftSection={<IconExposure size="1rem" />}
         active={location.pathname === "/examples"}
+        data-testid="nav-examples"
       />
 
       <NavLink
@@ -55,6 +59,7 @@ export function Sidebar() {
         label={t`Dashboard`}
         leftSection={<IconHome size="1rem" />}
         active={location.pathname === "/dashboard"}
+        data-testid="nav-dashboard"
       />
     </Stack>
   );

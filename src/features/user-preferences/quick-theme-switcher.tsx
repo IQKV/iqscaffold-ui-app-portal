@@ -53,6 +53,7 @@ export function QuickThemeSwitcher() {
         },
       ]}
       disabled={updateMutation.isPending}
+      data-testid="quick-theme-switcher"
     />
   );
 }

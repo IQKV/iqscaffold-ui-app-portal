@@ -9,7 +9,9 @@ export const Route = createFileRoute("/users")({
 function UsersPageRoute() {
   return (
     <AuthGuard>
-      <UsersPage />
+      <div data-testid="page-users">
+        <UsersPage />
+      </div>
     </AuthGuard>
   );
 }

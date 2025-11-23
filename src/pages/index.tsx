@@ -9,7 +9,9 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   return (
     <AuthGuard>
-      <DashboardFeature />
+      <div data-testid="page-home">
+        <DashboardFeature />
+      </div>
     </AuthGuard>
   );
 }

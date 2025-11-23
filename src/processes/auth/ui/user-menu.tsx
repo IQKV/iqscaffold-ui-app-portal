@@ -13,22 +13,23 @@ export function UserMenu() {
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
-        <Avatar color="indigo" radius="xl">
+        <Avatar color="indigo" radius="xl" data-testid="user-menu-avatar">
           {initials}
         </Avatar>
       </Menu.Target>
-      <Menu.Dropdown>
+      <Menu.Dropdown data-testid="user-menu-dropdown">
         <Menu.Label>
-          <Text size="sm">
+          <Text size="sm" data-testid="user-menu-name">
             {user.firstName} {user.lastName}
           </Text>
-          <Text size="xs" c="dimmed">
+          <Text size="xs" c="dimmed" data-testid="user-menu-email">
             {user.email}
           </Text>
         </Menu.Label>
         <Menu.Item
           leftSection={<IconLogout size={16} />}
           onClick={() => logout()}
+          data-testid="btn-logout"
         >
           Logout
         </Menu.Item>

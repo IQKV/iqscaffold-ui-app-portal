@@ -181,20 +181,27 @@ function ExamplesPage() {
 
   return (
     <AuthGuard>
-      <Container size="xl">
+      <Container size="xl" data-testid="page-examples">
         <Stack gap="xl">
           <div>
-            <Title order={1} mb="md">
+            <Title order={1} mb="md" data-testid="examples-title">
               {t`Component Examples`}
             </Title>
-            <Text c="dimmed">
+            <Text c="dimmed" data-testid="examples-description">
               {t`Explore the various components and features available in this template`}
             </Text>
           </div>
 
           <Grid>
             <Grid.Col span={{ base: 12, md: 4 }}>
-              <Card shadow="sm" padding="lg" radius="md" withBorder h="100%">
+              <Card
+                shadow="sm"
+                padding="lg"
+                radius="md"
+                withBorder
+                h="100%"
+                data-testid="card-forms"
+              >
                 <Group mb="md">
                   <IconCode size="1.5rem" color="var(--mantine-color-blue-6)" />
                   <Title order={3}>{t`Forms`}</Title>
@@ -209,7 +216,14 @@ function ExamplesPage() {
             </Grid.Col>
 
             <Grid.Col span={{ base: 12, md: 4 }}>
-              <Card shadow="sm" padding="lg" radius="md" withBorder h="100%">
+              <Card
+                shadow="sm"
+                padding="lg"
+                radius="md"
+                withBorder
+                h="100%"
+                data-testid="card-data-tables"
+              >
                 <Group mb="md">
                   <IconDatabase
                     size="1.5rem"
@@ -227,7 +241,14 @@ function ExamplesPage() {
             </Grid.Col>
 
             <Grid.Col span={{ base: 12, md: 4 }}>
-              <Card shadow="sm" padding="lg" radius="md" withBorder h="100%">
+              <Card
+                shadow="sm"
+                padding="lg"
+                radius="md"
+                withBorder
+                h="100%"
+                data-testid="card-ui-components"
+              >
                 <Group mb="md">
                   <IconPalette
                     size="1.5rem"
@@ -245,7 +266,13 @@ function ExamplesPage() {
             </Grid.Col>
           </Grid>
 
-          <Card shadow="sm" padding="lg" radius="md" withBorder>
+          <Card
+            shadow="sm"
+            padding="lg"
+            radius="md"
+            withBorder
+            data-testid="section-sample-form"
+          >
             <Title order={3} mb="md">
               {t`Sample Form Feature`}
             </Title>
@@ -255,7 +282,13 @@ function ExamplesPage() {
             <SampleFormFeature />
           </Card>
 
-          <Card shadow="sm" padding="lg" radius="md" withBorder>
+          <Card
+            shadow="sm"
+            padding="lg"
+            radius="md"
+            withBorder
+            data-testid="section-data-table"
+          >
             <Group justify="space-between" mb="md">
               <div>
                 <Title order={3}>{t`Data Table Example`}</Title>
@@ -264,6 +297,7 @@ function ExamplesPage() {
                 </Text>
               </div>
               <Button
+                data-testid="btn-add-user-demo"
                 onClick={() =>
                   notificationService.info({ message: t`Add new user clicked` })
                 }
@@ -280,7 +314,13 @@ function ExamplesPage() {
             />
           </Card>
 
-          <Card shadow="sm" padding="lg" radius="md" withBorder>
+          <Card
+            shadow="sm"
+            padding="lg"
+            radius="md"
+            withBorder
+            data-testid="section-notifications"
+          >
             <Title order={3} mb="md">
               {t`Notification Examples`}
             </Title>
@@ -291,6 +331,7 @@ function ExamplesPage() {
             <Group>
               <Button
                 color="green"
+                data-testid="btn-notification-success"
                 onClick={() =>
                   notificationService.success({
                     message: t`Success notification!`,
@@ -301,6 +342,7 @@ function ExamplesPage() {
               </Button>
               <Button
                 color="red"
+                data-testid="btn-notification-error"
                 onClick={() =>
                   notificationService.error({ message: t`Error notification!` })
                 }
@@ -309,6 +351,7 @@ function ExamplesPage() {
               </Button>
               <Button
                 color="yellow"
+                data-testid="btn-notification-warning"
                 onClick={() =>
                   notificationService.warning({
                     message: t`Warning notification!`,
@@ -319,6 +362,7 @@ function ExamplesPage() {
               </Button>
               <Button
                 color="blue"
+                data-testid="btn-notification-info"
                 onClick={() =>
                   notificationService.info({ message: t`Info notification!` })
                 }

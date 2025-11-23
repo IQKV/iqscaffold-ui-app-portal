@@ -14,6 +14,7 @@ export function ThemeToggle() {
         onClick={() => toggleColorScheme()}
         size="lg"
         aria-label={dark ? t`Switch to light mode` : t`Switch to dark mode`}
+        data-testid="btn-theme-toggle"
       >
         {dark ? <IconSun size={20} /> : <IconMoon size={20} />}
       </ActionIcon>

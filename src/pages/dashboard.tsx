@@ -9,9 +9,11 @@ export const Route = createFileRoute("/dashboard")({
 function DashboardPage() {
   return (
     <AuthGuard>
-      <Paper p="lg" withBorder>
-        <Title order={2}>Dashboard</Title>
-        <Text c="dimmed">
+      <Paper p="lg" withBorder data-testid="page-dashboard">
+        <Title order={2} data-testid="dashboard-title">
+          Dashboard
+        </Title>
+        <Text c="dimmed" data-testid="dashboard-description">
           Protected content visible to authenticated users.
         </Text>
       </Paper>

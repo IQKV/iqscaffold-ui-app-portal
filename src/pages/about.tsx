@@ -21,19 +21,28 @@ export const Route = createFileRoute("/about")({
 function AboutPage() {
   return (
     <AuthGuard>
-      <Container size="md">
+      <Container size="md" data-testid="page-about">
         <Stack gap="xl">
           <div>
             <Group mb="md">
               <IconInfoCircle size="2rem" color="var(--mantine-color-blue-6)" />
-              <Title order={1}>{t`About This Template`}</Title>
+              <Title
+                order={1}
+                data-testid="about-title"
+              >{t`About This Template`}</Title>
             </Group>
-            <Text size="lg" c="dimmed">
+            <Text size="lg" c="dimmed" data-testid="about-description">
               {t`Learn more about the technologies and architecture used in this project`}
             </Text>
           </div>
 
-          <Card shadow="sm" padding="lg" radius="md" withBorder>
+          <Card
+            shadow="sm"
+            padding="lg"
+            radius="md"
+            withBorder
+            data-testid="card-tech-stack"
+          >
             <Group justify="space-between" mb="xs">
               <Text fw={500}>{t`Technology Stack`}</Text>
               <Badge color="blue" variant="light">
@@ -73,7 +82,13 @@ function AboutPage() {
             </List>
           </Card>
 
-          <Card shadow="sm" padding="lg" radius="md" withBorder>
+          <Card
+            shadow="sm"
+            padding="lg"
+            radius="md"
+            withBorder
+            data-testid="card-architecture"
+          >
             <Group justify="space-between" mb="xs">
               <Text fw={500}>{t`Architecture`}</Text>
               <Badge color="green" variant="light">
@@ -105,7 +120,13 @@ function AboutPage() {
             </List>
           </Card>
 
-          <Card shadow="sm" padding="lg" radius="md" withBorder>
+          <Card
+            shadow="sm"
+            padding="lg"
+            radius="md"
+            withBorder
+            data-testid="card-getting-started"
+          >
             <Group justify="space-between" mb="xs">
               <Text fw={500}>{t`Getting Started`}</Text>
               <Badge color="pink" variant="light">
@@ -122,6 +143,7 @@ function AboutPage() {
                 href="https://github.com/IQKV/standard-mantine-ui-project-layout"
                 target="_blank"
                 rel="noopener noreferrer"
+                data-testid="link-github"
               >
                 <Group gap="xs">
                   <IconBrandGithub size="1rem" />

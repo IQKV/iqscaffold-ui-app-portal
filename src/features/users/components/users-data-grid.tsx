@@ -176,6 +176,7 @@ export function UsersDataGrid({
                   variant="subtle"
                   color="blue"
                   onClick={() => onEditUser(user)}
+                  data-testid={`btn-edit-user-${user.id}`}
                 >
                   <IconEdit size={16} />
                 </ActionIcon>
@@ -188,6 +189,7 @@ export function UsersDataGrid({
                   color="red"
                   onClick={() => handleDeleteUser(user)}
                   loading={deleteUserMutation.isPending}
+                  data-testid={`btn-delete-user-${user.id}`}
                 >
                   <IconTrash size={16} />
                 </ActionIcon>
@@ -215,12 +217,19 @@ export function UsersDataGrid({
   }
 
   return (
-    <Stack gap="md">
+    <Stack gap="md" data-testid="feature-users-data-grid">
       <Paper p="md" withBorder>
         <Group justify="space-between" mb="md">
-          <Title order={2}>{t`User Management`}</Title>
+          <Title
+            order={2}
+            data-testid="users-title"
+          >{t`User Management`}</Title>
           {canManageUsers() && (
-            <Button leftSection={<IconPlus size={16} />} onClick={onCreateUser}>
+            <Button
+              leftSection={<IconPlus size={16} />}
+              onClick={onCreateUser}
+              data-testid="btn-add-user"
+            >
               {t`Add User`}
             </Button>
           )}
@@ -232,6 +241,7 @@ export function UsersDataGrid({
           value={search}
           onChange={(event) => setSearch(event.currentTarget.value)}
           mb="md"
+          data-testid="input-search-users"
         />
 
         <DataTable

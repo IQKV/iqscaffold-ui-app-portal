@@ -151,14 +151,23 @@ export function UserPreferencesForm() {
   }
 
   return (
-    <Paper shadow="sm" p="xl" radius="md" pos="relative">
+    <Paper
+      shadow="sm"
+      p="xl"
+      radius="md"
+      pos="relative"
+      data-testid="feature-user-preferences-form"
+    >
       <LoadingOverlay
         visible={
           isLoading || updateMutation.isPending || deleteMutation.isPending
         }
       />
 
-      <form onSubmit={form.onSubmit(handleSubmit)}>
+      <form
+        onSubmit={form.onSubmit(handleSubmit)}
+        data-testid="form-user-preferences"
+      >
         <Stack gap="xl">
           {/* Localization Section */}
           <div>
@@ -316,6 +325,7 @@ export function UserPreferencesForm() {
               color="red"
               onClick={handleReset}
               disabled={updateMutation.isPending || deleteMutation.isPending}
+              data-testid="btn-reset-preferences"
             >
               Reset to Defaults
             </Button>
@@ -324,6 +334,7 @@ export function UserPreferencesForm() {
                 variant="default"
                 onClick={() => form.reset()}
                 disabled={updateMutation.isPending || deleteMutation.isPending}
+                data-testid="btn-cancel-preferences"
               >
                 Cancel
               </Button>
@@ -331,6 +342,7 @@ export function UserPreferencesForm() {
                 type="submit"
                 loading={updateMutation.isPending}
                 disabled={deleteMutation.isPending}
+                data-testid="btn-save-preferences"
               >
                 Save Preferences
               </Button>

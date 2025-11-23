@@ -55,10 +55,21 @@ export function SampleFormFeature() {
 
   return (
     <>
-      <Card shadow="sm" padding="lg" radius="md" withBorder>
+      <Card
+        shadow="sm"
+        padding="lg"
+        radius="md"
+        withBorder
+        data-testid="feature-sample-form"
+      >
         <Group justify="space-between" mb="xs">
           <Title order={3}>{t`Sample Form Feature`}</Title>
-          <ActionIcon variant="filled" color="blue" onClick={open}>
+          <ActionIcon
+            variant="filled"
+            color="blue"
+            onClick={open}
+            data-testid="btn-open-sample-form"
+          >
             <IconPlus size="1rem" />
           </ActionIcon>
         </Group>
@@ -67,8 +78,18 @@ export function SampleFormFeature() {
         </Text>
       </Card>
 
-      <Modal opened={opened} onClose={close} title={t`Sample Form`} centered>
-        <form onSubmit={form.onSubmit(handleSubmit)} noValidate>
+      <Modal
+        opened={opened}
+        onClose={close}
+        title={t`Sample Form`}
+        centered
+        data-testid="modal-sample-form"
+      >
+        <form
+          onSubmit={form.onSubmit(handleSubmit)}
+          noValidate
+          data-testid="form-sample"
+        >
           <Stack>
             <FormField
               type="text"
@@ -89,6 +110,7 @@ export function SampleFormFeature() {
                 variant="subtle"
                 onClick={close}
                 leftSection={<IconX size="1rem" />}
+                data-testid="btn-cancel-sample-form"
               >
                 {t`Cancel`}
               </Button>
@@ -96,6 +118,7 @@ export function SampleFormFeature() {
                 type="submit"
                 leftSection={<IconCheck size="1rem" />}
                 loading={mutation.isPending}
+                data-testid="btn-submit-sample-form"
               >
                 {t`Submit`}
               </Button>

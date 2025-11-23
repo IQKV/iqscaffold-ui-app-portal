@@ -10,11 +10,15 @@ import { t } from "@lingui/core/macro";
 
 export function DashboardFeature() {
   return (
-    <Container size="xl" py="xl">
-      <Title order={1} mb="xl">
+    <Container size="xl" py="xl" data-testid="feature-dashboard">
+      <Title order={1} mb="xl" data-testid="dashboard-feature-title">
         {t`Dashboard`}
       </Title>
-      <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }} spacing="lg">
+      <SimpleGrid
+        cols={{ base: 1, sm: 2, lg: 4 }}
+        spacing="lg"
+        data-testid="dashboard-stats-grid"
+      >
         <StatsCard
           title={t`Total Users`}
           value="1,234"

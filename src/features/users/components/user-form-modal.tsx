@@ -193,8 +193,13 @@ export function UserFormModal({
       title={title}
       size="md"
       centered
+      data-testid="modal-user-form"
     >
-      <form onSubmit={form.onSubmit(handleSubmit)} noValidate>
+      <form
+        onSubmit={form.onSubmit(handleSubmit)}
+        noValidate
+        data-testid="form-user"
+      >
         <Stack gap="md">
           <FormField
             type="text"
@@ -287,10 +292,19 @@ export function UserFormModal({
           )}
 
           <Group justify="flex-end" mt="md">
-            <Button variant="subtle" onClick={handleClose} disabled={isLoading}>
+            <Button
+              variant="subtle"
+              onClick={handleClose}
+              disabled={isLoading}
+              data-testid="btn-cancel-user-form"
+            >
               {t`Cancel`}
             </Button>
-            <Button type="submit" loading={isLoading}>
+            <Button
+              type="submit"
+              loading={isLoading}
+              data-testid="btn-submit-user-form"
+            >
               {isEditing ? t`Update` : t`Create`} {t`User`}
             </Button>
           </Group>
