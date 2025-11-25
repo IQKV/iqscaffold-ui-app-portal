@@ -19,10 +19,12 @@ describe("TenantInfo", () => {
     it("renders tenant info when tenant ID exists", () => {
       vi.mocked(tenantHooks.useCurrentTenantId).mockReturnValue("tenant-123");
       vi.mocked(tenantHooks.useCurrentTenant).mockReturnValue({
-        id: "tenant-123",
+        id: 123,
+        tenantId: "tenant-123",
         name: "Test Tenant",
         enabled: true,
         createdAt: "2024-01-01",
+        updatedAt: "2024-01-01",
       });
 
       render(<TenantInfo />, { wrapper: TestWrapper });
@@ -36,10 +38,12 @@ describe("TenantInfo", () => {
     it("renders disabled status for disabled tenant", () => {
       vi.mocked(tenantHooks.useCurrentTenantId).mockReturnValue("tenant-456");
       vi.mocked(tenantHooks.useCurrentTenant).mockReturnValue({
-        id: "tenant-456",
+        id: 456,
+        tenantId: "tenant-456",
         name: "Disabled Tenant",
         enabled: false,
         createdAt: "2024-01-01",
+        updatedAt: "2024-01-01",
       });
 
       render(<TenantInfo />, { wrapper: TestWrapper });
@@ -78,10 +82,12 @@ describe("TenantInfo", () => {
     it("does not render by default in production", () => {
       vi.mocked(tenantHooks.useCurrentTenantId).mockReturnValue("tenant-123");
       vi.mocked(tenantHooks.useCurrentTenant).mockReturnValue({
-        id: "tenant-123",
+        id: 123,
+        tenantId: "tenant-123",
         name: "Test Tenant",
         enabled: true,
         createdAt: "2024-01-01",
+        updatedAt: "2024-01-01",
       });
 
       render(<TenantInfo />, { wrapper: TestWrapper });
@@ -92,10 +98,12 @@ describe("TenantInfo", () => {
     it("renders when showInProduction is true", () => {
       vi.mocked(tenantHooks.useCurrentTenantId).mockReturnValue("tenant-123");
       vi.mocked(tenantHooks.useCurrentTenant).mockReturnValue({
-        id: "tenant-123",
+        id: 123,
+        tenantId: "tenant-123",
         name: "Test Tenant",
         enabled: true,
         createdAt: "2024-01-01",
+        updatedAt: "2024-01-01",
       });
 
       render(<TenantInfo showInProduction />, { wrapper: TestWrapper });

@@ -21,7 +21,7 @@ import {
 
 describe("Auth Utils", () => {
   const mockUser: UserContext = {
-    id: "user-1",
+    userId: 1,
     username: "john_doe",
     email: "john@example.com",
     firstName: "John",
@@ -29,7 +29,7 @@ describe("Auth Utils", () => {
     roles: ["USER", "ADMIN"],
     permissions: ["read:users", "write:users"],
     tenantId: "tenant-123",
-    emailVerified: true,
+    customClaims: {},
   };
 
   describe("hasRole", () => {
