@@ -1176,12 +1176,48 @@ pnpm test:arch  # Run architecture tests
 - File naming conventions (kebab-case)
 - Shared layer has standard segments (api/, lib/, ui/, types/)
 
+### Test Organization
+
+**Co-located Tests:**
+
+Tests are placed alongside the source files they test, following this pattern:
+
+```
+src/
+├── shared/
+│   ├── lib/
+│   │   ├── helpers.ts
+│   │   ├── helpers.test.ts          # Co-located test
+│   │   ├── theme-store.ts
+│   │   └── theme-store.test.ts      # Co-located test
+│   └── ui/
+│       └── form-field/
+│           ├── form-field.tsx
+│           └── form-field.test.tsx  # Co-located test
+├── features/
+│   └── sample-form/
+│       ├── ui/
+│       │   ├── sample-form-feature.tsx
+│       │   └── sample-form-feature.test.tsx  # Co-located test
+│       └── model/
+│           ├── validation.ts
+│           └── validation.test.ts   # Co-located test
+```
+
+**Benefits:**
+
+- Tests are easy to find and maintain
+- Clear relationship between code and tests
+- Encourages writing tests as features are developed
+- Simplifies refactoring (move file → move test)
+
 ### Testing Best Practices
 
 **DO:**
 
 - Write tests only when explicitly requested
-- Use the existing test utilities in `@/shared/lib/test-utils`
+- Co-locate tests with source files (e.g., `component.tsx` → `component.test.tsx`)
+- Use `TestWrapper` from `@/shared/lib/test-utils` for components requiring providers
 - Mock MSW handlers for API calls
 - Test user interactions, not implementation details
 
@@ -1190,6 +1226,7 @@ pnpm test:arch  # Run architecture tests
 - Don't write tests automatically for every component
 - Don't test Mantine components (they're already tested)
 - Don't test implementation details (internal state)
+- Don't place tests in separate `__tests__` directories
 
 ### E2E Testing with Playwright
 

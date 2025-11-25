@@ -259,7 +259,22 @@ The rules are located in `.cursor/rules/` directory and are automatically applie
 
 ---
 
-## 🧪 E2E Testing (Playwright)
+## 🧪 Testing
+
+### Unit Tests (Vitest)
+
+- Run tests: `pnpm test`
+- Watch mode: `pnpm test:watch`
+- Coverage: `pnpm test:coverage`
+- UI mode: `pnpm test:ui`
+
+**Test Organization:**
+
+- Tests are co-located with source files (e.g., `component.tsx` → `component.test.tsx`)
+- This approach keeps tests close to the code they test, making them easier to maintain
+- Use `TestWrapper` from `@/shared/lib/test-utils` for components requiring Mantine/Query providers
+
+### E2E Testing (Playwright)
 
 - Install browsers (first time): `pnpm playwright:install`
 - Run tests: `pnpm e2e`
