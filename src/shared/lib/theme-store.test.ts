@@ -50,7 +50,8 @@ describe("Theme Store", () => {
 
       const stored = localStorage.getItem("theme-storage");
       expect(stored).toBeTruthy();
-      expect(JSON.parse(stored!).state.colorScheme).toBe("dark");
+      const parsed = JSON.parse(stored!) as { state: { colorScheme: string } };
+      expect(parsed.state.colorScheme).toBe("dark");
     });
   });
 
