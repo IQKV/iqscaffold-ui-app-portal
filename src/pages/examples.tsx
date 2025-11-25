@@ -20,7 +20,6 @@ import {
   IconEye,
 } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
-import { SampleFormFeature } from "@/features/sample-form";
 import {
   DataTable,
   useConfirmationModal,
@@ -265,22 +264,6 @@ function ExamplesPage() {
               </Card>
             </Grid.Col>
           </Grid>
-
-          <Card
-            shadow="sm"
-            padding="lg"
-            radius="md"
-            withBorder
-            data-testid="section-sample-form"
-          >
-            <Title order={3} mb="md">
-              {t`Sample Form Feature`}
-            </Title>
-            <Text size="sm" c="dimmed" mb="md">
-              {t`This demonstrates a complete feature implementation following Feature-Sliced Design principles.`}
-            </Text>
-            <SampleFormFeature />
-          </Card>
 
           <Card
             shadow="sm"

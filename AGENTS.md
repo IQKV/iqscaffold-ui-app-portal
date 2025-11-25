@@ -95,8 +95,8 @@ src/
    - ✅ `app` can import from all layers
 
 2. **Public API**: Each slice MUST expose functionality through `index.ts`
-   - All imports must go through public API: `from "@/features/sample-form"`
-   - Never import internal files: `from "@/features/sample-form/model/validation"`
+   - All imports must go through public API: `from "@/features/user-form"`
+   - Never import internal files: `from "@/features/user-form/model/validation"`
    - Architecture tests enforce this rule automatically
 
 3. **Cross-Feature Isolation**: Features cannot depend on each other
@@ -128,7 +128,6 @@ src/
    ```
 
    **Examples in codebase:**
-   - `features/sample-form/` - Standard structure with ui/ and model/
    - `features/user-preferences/` - Simplified structure with direct component files
    - `features/dashboard/` - Simplified structure with ui/ only
 
@@ -164,7 +163,7 @@ export interface FormValues {
 // 2. Define validation in model/validation.ts
 import { email, minLength } from "@/entities/form";
 
-export const validateSampleForm = {
+export const validateUserForm = {
   name: minLength(2),
   email,
 };
@@ -178,7 +177,7 @@ export const initialFormValues: FormValues = {
 // Use Mantine components, Lingui macros, and useFormMutation
 
 // 4. Export through index.ts
-export { SampleFormFeature } from "./ui/sample-form-feature";
+export { UserFormFeature } from "./ui/user-form-feature";
 ```
 
 ### Code Quality Checklist for AI
@@ -358,13 +357,13 @@ Would you like me to proceed with creating these files?
 #### ✅ CORRECT: Read-only operations proceed
 
 ```
-User: "What validation rules are used in the sample form?"
+User: "What validation rules are used in the user form?"
 
 Agent: *Reads files immediately*
 
-Looking at src/features/sample-form/model/validation.ts:
+Looking at src/features/user-form/model/validation.ts:
 
-The sample form uses these validation rules:
+The user form uses these validation rules:
 - name: minLength(2) - Requires at least 2 characters
 - email: email - Validates email format
 
@@ -950,11 +949,11 @@ The project uses **Mantine Form** with custom validation rules (NOT Zod by defau
 #### Validation Pattern (Actual Implementation)
 
 ```tsx
-// features/sample-form/model/validation.ts
+// features/user-form/model/validation.ts
 import { email, minLength } from "@/entities/form";
 import { FormValues } from "./types";
 
-export const validateSampleForm = {
+export const validateUserForm = {
   name: minLength(2),
   email,
 };
@@ -981,22 +980,22 @@ export const email = (value: string) =>
 #### Complete Form Feature Example
 
 ```tsx
-// features/sample-form/ui/sample-form-feature.tsx
+// features/user-form/ui/user-form-feature.tsx
 import { Button, Modal, Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { t } from "@lingui/core/macro";
 import { FormField } from "@/shared/ui";
 import { useFormMutation } from "@/shared/lib";
-import { initialFormValues, validateSampleForm } from "../model/validation";
+import { initialFormValues, validateUserForm } from "../model/validation";
 import { FormValues } from "../model/types";
 
-export function SampleFormFeature() {
+export function UserFormFeature() {
   const [opened, { open, close }] = useDisclosure(false);
 
   const form = useForm<FormValues>({
     initialValues: initialFormValues,
-    validate: validateSampleForm,
+    validate: validateUserForm,
   });
 
   const mutation = useFormMutation<void, FormValues>(
@@ -1029,7 +1028,7 @@ export function SampleFormFeature() {
     <>
       <Button onClick={open}>{t`Open Form`}</Button>
 
-      <Modal opened={opened} onClose={close} title={t`Sample Form`} centered>
+      <Modal opened={opened} onClose={close} title={t`User Form`} centered>
         <form onSubmit={form.onSubmit(handleSubmit)} noValidate>
           <Stack>
             <FormField
@@ -1056,8 +1055,8 @@ export function SampleFormFeature() {
   );
 }
 
-// features/sample-form/index.ts
-export { SampleFormFeature } from "./ui/sample-form-feature";
+// features/user-form/index.ts
+export { UserFormFeature } from "./ui/user-form-feature";
 ```
 
 **Note:** While Zod can be used with `mantine-form-zod-resolver`, the project's established pattern uses custom validation functions from the `entities/form` layer.
@@ -1195,10 +1194,10 @@ src/
 │           ├── form-field.tsx
 │           └── form-field.test.tsx  # Co-located test
 ├── features/
-│   └── sample-form/
+│   └── user-form/
 │       ├── ui/
-│       │   ├── sample-form-feature.tsx
-│       │   └── sample-form-feature.test.tsx  # Co-located test
+│       │   ├── user-form-feature.tsx
+│       │   └── user-form-feature.test.tsx  # Co-located test
 │       └── model/
 │           ├── validation.ts
 │           └── validation.test.ts   # Co-located test

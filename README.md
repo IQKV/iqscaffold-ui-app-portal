@@ -154,9 +154,8 @@ After creating your project from this template, you'll want to customize it:
 - [ ] Configure `src/shared/lib/client.ts` with your API base URL and update values in `src/app/config`
 - [ ] Set up authentication endpoints in API clients
 
-#### 4. Remove Template Examples (Optional)
+#### 4. Customize Template Content (Optional)
 
-- [ ] Remove or modify `src/features/sample-form`
 - [ ] Update the home page content in `src/routes/index.tsx`
 - [ ] Customize the about page in `src/routes/about.tsx`
 - [ ] Remove template-specific Storybook stories
