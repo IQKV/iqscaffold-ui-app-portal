@@ -1,4 +1,4 @@
-# 🚀 IQKV Application Portal
+# 🚀 IQ Scaffold Application Portal
 
 > Web application providing authenticated user experience, user management, dashboard analytics, and security settings with integration to the IQKV microservices platform. Reference implementation and starting point for developing microservices frontends for SaaS applications.
 

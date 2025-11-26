@@ -1,4 +1,4 @@
-# 🚀 IQKV Application Portal
+# 🚀 IQ Scaffold Application Portal
 
 ## 📜 Description
 
