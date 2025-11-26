@@ -137,7 +137,7 @@ cd my-app
 rm -rf .git
 git init
 git add .
-git commit -m "Initial commit from template"
+git commit -m "feat: initial commit"
 ```
 
 ### 🔺 Local Development Setup
