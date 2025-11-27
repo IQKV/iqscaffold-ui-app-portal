@@ -27,8 +27,8 @@ msgid "{userName} deleted successfully"
 msgstr "{userName} deleted successfully"
 
 #: src/pages/__root.tsx:27
-msgid "%s | Mantine UI Template"
-msgstr "%s | Mantine UI Template"
+msgid "%s | IQ Scaffold Platform"
+msgstr "%s | IQ Scaffold Platform"
 
 #: src/widgets/sidebar/ui/sidebar.tsx:32
 msgid "About"
@@ -564,8 +564,8 @@ msgstr "Manage your account security and active sessions."
 
 #: src/pages/__root.tsx:26
 #: src/widgets/header/ui/header.tsx:10
-msgid "Mantine UI Template"
-msgstr "Mantine UI Template"
+msgid "IQ Scaffold Platform"
+msgstr "IQ Scaffold Platform"
 
 #: src/pages/about.tsx:71
 msgid "Mantine UI:"

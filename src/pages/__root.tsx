@@ -1,7 +1,7 @@
 import React from "react";
 
 import { createRootRoute, Outlet } from "@tanstack/react-router";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "@dr.pogodin/react-helmet";
 
 import { AppLayout } from "@/shared/ui/app-layout";
 import { t } from "@lingui/core/macro";
@@ -23,8 +23,8 @@ function RootComponent() {
   return (
     <AppLayout>
       <Helmet
-        defaultTitle={t`Mantine UI Template`}
-        titleTemplate={t`%s | Mantine UI Template`}
+        defaultTitle={t`IQ Scaffold Platform`}
+        titleTemplate={t`%s | IQ Scaffold Platform`}
       />
       <Outlet />
       <TanStackRouterDevtools />
