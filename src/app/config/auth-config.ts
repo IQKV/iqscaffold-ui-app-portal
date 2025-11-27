@@ -31,8 +31,8 @@ export interface AuthConfig {
 }
 
 // Default hardcoded values (fallbacks)
-const DEFAULT_AUTH_DOMAIN = "https://auth.iqkv.com";
-const DEFAULT_APP_DOMAIN = "https://app.iqkv.com";
+const DEFAULT_AUTH_DOMAIN = "https://auth.iqscaffold.com";
+const DEFAULT_APP_DOMAIN = "https://app.iqscaffold.com";
 
 // Build auth configuration from environment variables with fallbacks
 const buildAuthConfig = (): AuthConfig => {

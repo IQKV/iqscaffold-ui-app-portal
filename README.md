@@ -307,8 +307,8 @@ Run `pnpm test:arch` to verify FSD compliance (layer structure, public APIs, nam
 | Variable                          | Description                                   | Default                 | Required |
 | --------------------------------- | --------------------------------------------- | ----------------------- | -------- |
 | `VITE_API_URL_SERVER`             | Backend API base URL (user service)           | `http://localhost:8080` | Yes      |
-| `VITE_AUTH_DOMAIN_AUTH`           | Auth portal domain                            | `https://auth.iqkv.com` | Yes      |
-| `VITE_AUTH_DOMAIN_APP`            | Main application domain                       | `https://app.iqkv.com`  | Yes      |
+| `VITE_AUTH_DOMAIN_AUTH`           | Auth portal domain                            | `https://auth.iqscaffold.com` | Yes      |
+| `VITE_AUTH_DOMAIN_APP`            | Main application domain                       | `https://app.iqscaffold.com`  | Yes      |
 | `VITE_AUTH_REDIRECT_AFTER_LOGIN`  | Redirect URL after successful login           | `/dashboard`            | No       |
 | `VITE_AUTH_REDIRECT_AFTER_LOGOUT` | Redirect URL after logout                     | `/`                     | No       |
 | `VITE_AUTH_REDIRECT_AFTER_SIGNUP` | Redirect URL after signup                     | `/verify-email`         | No       |
