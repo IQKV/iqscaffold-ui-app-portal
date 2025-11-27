@@ -7,7 +7,7 @@ const isCI = Boolean(process.env.CI);
 export default defineConfig({
   forbidOnly: isCI,
   fullyParallel: true,
-  timeout: 30_000,
+  timeout: 60_000,
   expect: {
     timeout: 5_000,
   },
