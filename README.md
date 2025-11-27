@@ -304,18 +304,18 @@ Run `pnpm test:arch` to verify FSD compliance (layer structure, public APIs, nam
 
 ### Environment Variables
 
-| Variable                          | Description                                   | Default                 | Required |
-| --------------------------------- | --------------------------------------------- | ----------------------- | -------- |
-| `VITE_API_URL_SERVER`             | Backend API base URL (user service)           | `http://localhost:8080` | Yes      |
+| Variable                          | Description                                   | Default                       | Required |
+| --------------------------------- | --------------------------------------------- | ----------------------------- | -------- |
+| `VITE_API_URL_SERVER`             | Backend API base URL (user service)           | `http://localhost:8080`       | Yes      |
 | `VITE_AUTH_DOMAIN_AUTH`           | Auth portal domain                            | `https://auth.iqscaffold.com` | Yes      |
 | `VITE_AUTH_DOMAIN_APP`            | Main application domain                       | `https://app.iqscaffold.com`  | Yes      |
-| `VITE_AUTH_REDIRECT_AFTER_LOGIN`  | Redirect URL after successful login           | `/dashboard`            | No       |
-| `VITE_AUTH_REDIRECT_AFTER_LOGOUT` | Redirect URL after logout                     | `/`                     | No       |
-| `VITE_AUTH_REDIRECT_AFTER_SIGNUP` | Redirect URL after signup                     | `/verify-email`         | No       |
-| `VITE_ENABLE_MSW`                 | Enable Mock Service Worker for API mocking    | `true`                  | No       |
-| `VITE_LOG_LEVEL`                  | Console logging verbosity (silent/info/debug) | `info`                  | No       |
-| `TZ`                              | Defines timezone                              | `UTC`                   | No       |
-| `NODE_ENV`                        | Defines nodejs environment                    | `development`           | No       |
+| `VITE_AUTH_REDIRECT_AFTER_LOGIN`  | Redirect URL after successful login           | `/dashboard`                  | No       |
+| `VITE_AUTH_REDIRECT_AFTER_LOGOUT` | Redirect URL after logout                     | `/`                           | No       |
+| `VITE_AUTH_REDIRECT_AFTER_SIGNUP` | Redirect URL after signup                     | `/verify-email`               | No       |
+| `VITE_ENABLE_MSW`                 | Enable Mock Service Worker for API mocking    | `true`                        | No       |
+| `VITE_LOG_LEVEL`                  | Console logging verbosity (silent/info/debug) | `info`                        | No       |
+| `TZ`                              | Defines timezone                              | `UTC`                         | No       |
+| `NODE_ENV`                        | Defines nodejs environment                    | `development`                 | No       |
 
 #### API Endpoints
 
