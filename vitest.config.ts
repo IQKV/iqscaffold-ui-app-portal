@@ -1,4 +1,4 @@
-import { defineConfig } from "vitest/config";
+import { defineConfig, coverageConfigDefaults } from "vitest/config";
 import react from "@vitejs/plugin-react-swc";
 import tsconfigPaths from "vite-tsconfig-paths";
 
@@ -23,6 +23,7 @@ export default defineConfig({
     include: ["./src/**/*.{test,spec}.{ts,tsx}"],
     coverage: {
       exclude: [
+        ...coverageConfigDefaults.exclude,
         "./*.??",
         "./src/**/*.d.ts",
         "./**/*.config.{ts,js}",
@@ -34,7 +35,7 @@ export default defineConfig({
         "./src/pages/**",
         "./node_modules/**",
         "./e2e/**",
-        "**/storybook/**",
+        "**/.storybook/**",
       ],
       provider: "v8",
       reporter: ["text", "html", "lcov"],
