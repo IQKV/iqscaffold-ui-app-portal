@@ -503,6 +503,11 @@ msgstr "Invalid phone number"
 msgid "Invalid URL"
 msgstr "Invalid URL"
 
+#: src/pages/__root.tsx:26
+#: src/widgets/header/ui/header.tsx:10
+msgid "IQ Scaffold Platform"
+msgstr "IQ Scaffold Platform"
+
 #: src/features/users/components/user-form-modal.tsx:235
 msgid "Last Name"
 msgstr "Last Name"
@@ -561,11 +566,6 @@ msgstr "Manage your account security and active sessions."
 #: src/features/users/components/user-form-modal.tsx:44
 #~ msgid "Manager"
 #~ msgstr "Manager"
-
-#: src/pages/__root.tsx:26
-#: src/widgets/header/ui/header.tsx:10
-msgid "IQ Scaffold Platform"
-msgstr "IQ Scaffold Platform"
 
 #: src/pages/about.tsx:71
 msgid "Mantine UI:"

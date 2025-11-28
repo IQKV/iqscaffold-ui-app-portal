@@ -15,6 +15,7 @@ const config: LinguiConfig = {
   fallbackLocales: {
     default: "en",
   },
+  compileNamespace: "ts",
 };
 
 export default config;
