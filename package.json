@@ -63,7 +63,7 @@
     "@hookform/resolvers": "^5.2.2",
     "@lingui/core": "^5.5.1",
     "@lingui/macro": "^5.5.1",
-    "@lingui/react": "^5.5.1",
+    "@lingui/react": "^5.6.1",
     "@mantine/carousel": "^8.3.5",
     "@mantine/charts": "^8.3.5",
     "@mantine/core": "^8.3.5",
