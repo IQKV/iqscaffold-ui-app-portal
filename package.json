@@ -184,7 +184,7 @@
     "identity-obj-proxy": "^3.0.0",
     "is-ci": "4.1.0",
     "jiti": "2.6.1",
-    "jsdom": "^27.0.1",
+    "jsdom": "^27.2.0",
     "knip": "5.66.3",
     "lint-staged": "^16.2.6",
     "lru-cache": "^11.2.2",
