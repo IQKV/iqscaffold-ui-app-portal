@@ -346,7 +346,10 @@ export const PaymentMethodInput: React.FC<PaymentMethodInputProps> = ({
               description="Use this payment method for future charges"
               checked={(form.values as any).setAsDefault || false}
               onChange={(event) =>
-                form.setFieldValue("setAsDefault" as any, event.currentTarget.checked)
+                form.setFieldValue(
+                  "setAsDefault" as any,
+                  event.currentTarget.checked
+                )
               }
               disabled={disabled}
             />

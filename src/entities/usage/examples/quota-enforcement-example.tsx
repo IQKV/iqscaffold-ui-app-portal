@@ -43,8 +43,9 @@ export const QuotaEnforcementExample: React.FC = () => {
     getUpgradeSuggestions,
   } = useQuotaEnforcement(tenantId);
 
-  const [selectedMetric, setSelectedMetric] =
-    useState<UsageMetricType>(UsageMetricType.API_CALLS);
+  const [selectedMetric, setSelectedMetric] = useState<UsageMetricType>(
+    UsageMetricType.API_CALLS
+  );
   const [usageAmount, setUsageAmount] = useState<number>(1);
   const [isRecording, setIsRecording] = useState(false);
   const [isChecking, setIsChecking] = useState(false);

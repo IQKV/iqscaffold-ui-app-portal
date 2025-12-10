@@ -28,7 +28,8 @@ export const useSubscriptionManagement = () => {
     error: subscriptionError,
   } = useQuery({
     queryKey: ["subscription", currentTenant?.tenantId],
-    queryFn: () => subscriptionApi.getActiveSubscription(currentTenant!.tenantId),
+    queryFn: () =>
+      subscriptionApi.getActiveSubscription(currentTenant!.tenantId),
     enabled: !!currentTenant?.tenantId,
   });
 

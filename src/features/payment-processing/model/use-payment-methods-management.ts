@@ -101,7 +101,11 @@ export const usePaymentMethodsManagement = () => {
   // Add payment method mutation
   const addPaymentMethodMutation = useMutation({
     mutationFn: (data: PaymentMethodData) =>
-      paymentMethodApi.add({ ...data, tenantId: currentTenant!.tenantId, provider: data.provider || PaymentProvider.STRIPE } as any),
+      paymentMethodApi.add({
+        ...data,
+        tenantId: currentTenant!.tenantId,
+        provider: data.provider || PaymentProvider.STRIPE,
+      } as any),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["paymentMethods"] });
       notifications.show({

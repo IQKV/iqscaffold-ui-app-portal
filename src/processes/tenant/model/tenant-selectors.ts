@@ -48,7 +48,7 @@ export const useTenant = () => {
   const isLoading = useTenantLoading();
   const error = useTenantError();
   const isInitialized = useTenantInitialized();
-  
+
   return {
     tenant,
     tenantId,

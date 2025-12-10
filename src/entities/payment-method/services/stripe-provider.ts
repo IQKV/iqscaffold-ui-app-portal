@@ -155,7 +155,9 @@ export class StripePaymentProvider implements PaymentProviderInterface {
     return PaymentRetryService.executeWithRetry(async () => {
       // For security reasons, we should use Stripe Elements instead of raw card data
       // This is a placeholder implementation - in production, use Stripe Elements
-      throw new Error("Direct card tokenization not supported. Use Stripe Elements instead.");
+      throw new Error(
+        "Direct card tokenization not supported. Use Stripe Elements instead."
+      );
     });
   }
 
@@ -245,7 +247,7 @@ export class StripePaymentProvider implements PaymentProviderInterface {
       try {
         const result = await this.stripe!.confirmSetup({
           elements: {} as any, // This should be actual Stripe Elements
-          redirect: 'if_required'
+          redirect: "if_required",
         });
 
         if (result.error) {

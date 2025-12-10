@@ -208,9 +208,7 @@ export class RefundService {
   /**
    * Process bulk refunds (for admin operations)
    */
-  static async processBulkRefunds(
-    requests: RefundRequest[]
-  ): Promise<{
+  static async processBulkRefunds(requests: RefundRequest[]): Promise<{
     successful: RefundResult[];
     failed: { request: RefundRequest; error: string }[];
   }> {

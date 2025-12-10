@@ -69,8 +69,9 @@ export const PaymentMethodForm: React.FC<PaymentMethodFormProps> = ({
   loading = false,
   initialData,
 }) => {
-  const [selectedProvider, setSelectedProvider] =
-    useState<PaymentProvider>(PaymentProvider.STRIPE);
+  const [selectedProvider, setSelectedProvider] = useState<PaymentProvider>(
+    PaymentProvider.STRIPE
+  );
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [isValidating, setIsValidating] = useState(false);
 
@@ -134,14 +135,22 @@ export const PaymentMethodForm: React.FC<PaymentMethodFormProps> = ({
               <Text fw={500}>Payment Provider</Text>
               <Group>
                 <Button
-                  variant={selectedProvider === PaymentProvider.STRIPE ? "filled" : "outline"}
+                  variant={
+                    selectedProvider === PaymentProvider.STRIPE
+                      ? "filled"
+                      : "outline"
+                  }
                   leftSection={<IconCreditCard size={16} />}
                   onClick={() => setSelectedProvider(PaymentProvider.STRIPE)}
                 >
                   Credit Card (Stripe)
                 </Button>
                 <Button
-                  variant={selectedProvider === PaymentProvider.PAYPAL ? "filled" : "outline"}
+                  variant={
+                    selectedProvider === PaymentProvider.PAYPAL
+                      ? "filled"
+                      : "outline"
+                  }
                   leftSection={<IconBrandPaypal size={16} />}
                   onClick={() => setSelectedProvider(PaymentProvider.PAYPAL)}
                 >
@@ -324,7 +333,9 @@ const PayPalPaymentMethodForm: React.FC<{
     // Load PayPal SDK
     const loadPayPal = async () => {
       try {
-        const provider = await PaymentMethodService.getProvider(PaymentProvider.PAYPAL);
+        const provider = await PaymentMethodService.getProvider(
+          PaymentProvider.PAYPAL
+        );
         setPaypalLoaded(true);
       } catch (error) {
         onValidationError(["Failed to load PayPal"]);

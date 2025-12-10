@@ -22,7 +22,10 @@ import {
  */
 export class PayPalPaymentProvider implements PaymentProviderInterface {
   readonly name = PaymentProvider.PAYPAL;
-  readonly supportedTypes: PaymentMethodType[] = [PaymentMethodType.CARD, PaymentMethodType.BANK_ACCOUNT];
+  readonly supportedTypes: PaymentMethodType[] = [
+    PaymentMethodType.CARD,
+    PaymentMethodType.BANK_ACCOUNT,
+  ];
   readonly supportedCountries = [
     "US",
     "CA",

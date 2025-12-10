@@ -61,7 +61,8 @@ export const PaymentMethodManagementExample: React.FC = () => {
       // Convert form data to payment method data
       const paymentMethodData = {
         type: formData.type,
-        provider: (formData.provider || PaymentProvider.STRIPE) as PaymentProvider,
+        provider: (formData.provider ||
+          PaymentProvider.STRIPE) as PaymentProvider,
         cardNumber: formData.cardNumber,
         expiryMonth: formData.expiryMonth,
         expiryYear: formData.expiryYear,
