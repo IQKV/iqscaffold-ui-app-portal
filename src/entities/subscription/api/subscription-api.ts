@@ -84,6 +84,10 @@ export class SubscriptionApiClient {
   }
 
   // Plan information
+  async getPlan(planId: string): Promise<any> {
+    return billingApi.getPlan(planId);
+  }
+
   async getAvailablePlans(): Promise<any[]> {
     return billingApi.getPlans();
   }

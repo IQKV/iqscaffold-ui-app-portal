@@ -27,6 +27,17 @@ export class InvoiceApiClient {
     return billingApi.getInvoices(tenantId, params);
   }
 
+  async getRecentInvoices(
+    tenantId: string,
+    limit: number = 5
+  ): Promise<Invoice[]> {
+    const response = await billingApi.getInvoices(tenantId, {
+      page: 1,
+      limit,
+    });
+    return response.data;
+  }
+
   // Payment operations
   async retryPayment(invoiceId: string): Promise<Invoice> {
     return billingApi.retryInvoicePayment(invoiceId);

@@ -34,6 +34,10 @@ export class UsageApiClient {
     return billingApi.getQuotaStatus(tenantId);
   }
 
+  async getCurrentUsage(tenantId: string): Promise<QuotaStatus[]> {
+    return this.getQuotaStatus(tenantId);
+  }
+
   // Usage metrics
   async getUsageMetrics(
     tenantId: string,

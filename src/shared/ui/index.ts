@@ -48,4 +48,5 @@ export * from "./billing";
 // Authority-based Access Control Components
 export * from "./authority-guard";
 export * from "./protected-action";
+export * from "./protected-route";
 export * from "./conditional-widget";
