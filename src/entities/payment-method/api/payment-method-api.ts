@@ -16,7 +16,7 @@ export class PaymentMethodApiClient {
     return billingApi.getPaymentMethods(tenantId);
   }
 
-async add(
+  async add(
     data: PaymentMethodData & { tenantId: string; provider: PaymentProvider }
   ): Promise<PaymentMethod> {
     // If provider token already present (e.g., from Stripe Elements or PayPal approval), skip tokenization

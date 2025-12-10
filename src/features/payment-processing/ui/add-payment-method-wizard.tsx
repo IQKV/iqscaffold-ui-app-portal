@@ -197,7 +197,7 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
 
-const handleSubmit = async () => {
+  const handleSubmit = async () => {
     const validation = form.validate();
     if (validation.hasErrors) return;
 
@@ -314,9 +314,15 @@ const handleSubmit = async () => {
           {/* Step 2: Payment Details */}
           <Stepper.Step label="Details" description="Enter payment information">
             <Stack gap="md" mt="md">
-{selectedProvider === "stripe" && (
+              {selectedProvider === "stripe" && (
                 <>
-                  <Box style={{ border: "1px solid var(--mantine-color-gray-4)", borderRadius: 6, padding: 12 }}>
+                  <Box
+                    style={{
+                      border: "1px solid var(--mantine-color-gray-4)",
+                      borderRadius: 6,
+                      padding: 12,
+                    }}
+                  >
                     <CardElement options={{ hidePostalCode: true }} />
                   </Box>
                 </>
@@ -324,15 +330,22 @@ const handleSubmit = async () => {
 
               {selectedProvider === "paypal" && (
                 <Stack gap="xs">
-                  <Alert icon={<IconInfoCircle size={16} />} color="blue" variant="light">
-                    <Text size="sm">Approve PayPal to vault a payment method.</Text>
+                  <Alert
+                    icon={<IconInfoCircle size={16} />}
+                    color="blue"
+                    variant="light"
+                  >
+                    <Text size="sm">
+                      Approve PayPal to vault a payment method.
+                    </Text>
                   </Alert>
-<PayPalButtons
+                  <PayPalButtons
                     style={{ layout: "vertical" }}
                     // Use advanced vault setup via onClick delegating to server if needed. For now, rely on billing token from onApprove
                     onApprove={(data: any) => {
                       // Prefer data.billingToken when vaulting; fall back to data.orderID
-                      const token = (data as any).billingToken || (data as any).orderID;
+                      const token =
+                        (data as any).billingToken || (data as any).orderID;
                       if (token) setPaypalToken(token);
                     }}
                   />
