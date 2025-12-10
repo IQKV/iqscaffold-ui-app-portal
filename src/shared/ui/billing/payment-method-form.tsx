@@ -15,8 +15,17 @@ import {
 import { useForm } from "@mantine/form";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { z } from "zod";
-import { IconCreditCard, IconBrandPaypal, IconAlertCircle } from "@tabler/icons-react";
-import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import {
+  IconCreditCard,
+  IconBrandPaypal,
+  IconAlertCircle,
+} from "@tabler/icons-react";
+import {
+  Elements,
+  CardElement,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import type {
   PaymentMethodFormData,
@@ -26,7 +35,9 @@ import type {
 import { PaymentMethodService } from "@/entities/payment-method/services/payment-method-service";
 
 // Initialize Stripe
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || "");
+const stripePromise = loadStripe(
+  import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || ""
+);
 
 // Validation schema
 const paymentMethodSchema = z.object({
@@ -58,7 +69,8 @@ export const PaymentMethodForm: React.FC<PaymentMethodFormProps> = ({
   loading = false,
   initialData,
 }) => {
-  const [selectedProvider, setSelectedProvider] = useState<PaymentProvider>("stripe");
+  const [selectedProvider, setSelectedProvider] =
+    useState<PaymentProvider>("stripe");
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [isValidating, setIsValidating] = useState(false);
 
@@ -102,7 +114,8 @@ export const PaymentMethodForm: React.FC<PaymentMethodFormProps> = ({
 
       await onSubmit(formData);
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : "Failed to add payment method";
+      const errorMessage =
+        error instanceof Error ? error.message : "Failed to add payment method";
       setValidationErrors([errorMessage]);
     } finally {
       setIsValidating(false);
@@ -112,7 +125,7 @@ export const PaymentMethodForm: React.FC<PaymentMethodFormProps> = ({
   return (
     <Box pos="relative">
       <LoadingOverlay visible={loading || isValidating} />
-      
+
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack gap="md">
           {/* Provider Selection */}

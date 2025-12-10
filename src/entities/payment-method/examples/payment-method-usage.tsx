@@ -72,7 +72,8 @@ export const PaymentMethodManagementExample: React.FC = () => {
       await addPaymentMethod(paymentMethodData);
       setShowAddForm(false);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Failed to add payment method";
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to add payment method";
       setError(errorMessage);
     }
   };
@@ -82,7 +83,8 @@ export const PaymentMethodManagementExample: React.FC = () => {
       setError(null);
       await deletePaymentMethod(paymentMethod.id);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Failed to delete payment method";
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to delete payment method";
       setError(errorMessage);
     }
   };
@@ -92,7 +94,10 @@ export const PaymentMethodManagementExample: React.FC = () => {
       setError(null);
       await setAsDefault(tenantId, paymentMethod.id);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Failed to set default payment method";
+      const errorMessage =
+        err instanceof Error
+          ? err.message
+          : "Failed to set default payment method";
       setError(errorMessage);
     }
   };
@@ -116,7 +121,7 @@ export const PaymentMethodManagementExample: React.FC = () => {
             Manage your payment methods with support for multiple providers
           </Text>
         </div>
-        
+
         {!showAddForm && (
           <Button
             leftSection={<IconPlus size={16} />}
@@ -145,7 +150,7 @@ export const PaymentMethodManagementExample: React.FC = () => {
 
       {/* Payment Methods List */}
       <PaymentMethodList
-        paymentMethods={paymentMethods.filter(pm => pm.tenantId === tenantId)}
+        paymentMethods={paymentMethods.filter((pm) => pm.tenantId === tenantId)}
         metrics={metrics}
         loading={loading}
         onDelete={handleDeletePaymentMethod}
@@ -159,13 +164,15 @@ export const PaymentMethodManagementExample: React.FC = () => {
           <Group gap="xs">
             <IconCreditCard size={16} />
             <Text size="sm">
-              <strong>Stripe:</strong> Credit cards with secure tokenization and PCI compliance
+              <strong>Stripe:</strong> Credit cards with secure tokenization and
+              PCI compliance
             </Text>
           </Group>
           <Group gap="xs">
             <IconCreditCard size={16} />
             <Text size="sm">
-              <strong>PayPal:</strong> PayPal accounts and credit cards through PayPal's secure vault
+              <strong>PayPal:</strong> PayPal accounts and credit cards through
+              PayPal's secure vault
             </Text>
           </Group>
         </Stack>
@@ -175,19 +182,24 @@ export const PaymentMethodManagementExample: React.FC = () => {
       <Alert color="gray" title="Integration Features">
         <Stack gap="xs">
           <Text size="sm">
-            ✅ <strong>Provider Abstraction:</strong> Seamlessly switch between Stripe and PayPal
+            ✅ <strong>Provider Abstraction:</strong> Seamlessly switch between
+            Stripe and PayPal
           </Text>
           <Text size="sm">
-            ✅ <strong>Retry Logic:</strong> Automatic retry with exponential backoff for failed operations
+            ✅ <strong>Retry Logic:</strong> Automatic retry with exponential
+            backoff for failed operations
           </Text>
           <Text size="sm">
-            ✅ <strong>Validation:</strong> Client-side and provider-side validation
+            ✅ <strong>Validation:</strong> Client-side and provider-side
+            validation
           </Text>
           <Text size="sm">
-            ✅ <strong>Tokenization:</strong> Secure storage without handling sensitive card data
+            ✅ <strong>Tokenization:</strong> Secure storage without handling
+            sensitive card data
           </Text>
           <Text size="sm">
-            ✅ <strong>Error Handling:</strong> Comprehensive error handling with user-friendly messages
+            ✅ <strong>Error Handling:</strong> Comprehensive error handling
+            with user-friendly messages
           </Text>
         </Stack>
       </Alert>

@@ -43,19 +43,29 @@ export class PaymentMethodService {
     );
 
     // Initialize providers with configuration
-    const stripeProvider = PaymentProviderFactory.getProvider(PaymentProvider.STRIPE);
-    const paypalProvider = PaymentProviderFactory.getProvider(PaymentProvider.PAYPAL);
+    const stripeProvider = PaymentProviderFactory.getProvider(
+      PaymentProvider.STRIPE
+    );
+    const paypalProvider = PaymentProviderFactory.getProvider(
+      PaymentProvider.PAYPAL
+    );
 
     try {
       await stripeProvider.initialize({
         apiKey: import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || "",
-        environment: import.meta.env.VITE_ENVIRONMENT === "production" ? "production" : "sandbox",
+        environment:
+          import.meta.env.VITE_ENVIRONMENT === "production"
+            ? "production"
+            : "sandbox",
       });
 
       await paypalProvider.initialize({
         apiKey: import.meta.env.VITE_PAYPAL_CLIENT_ID || "",
         secretKey: import.meta.env.VITE_PAYPAL_CLIENT_SECRET || "",
-        environment: import.meta.env.VITE_ENVIRONMENT === "production" ? "production" : "sandbox",
+        environment:
+          import.meta.env.VITE_ENVIRONMENT === "production"
+            ? "production"
+            : "sandbox",
       });
 
       this.initialized = true;
@@ -71,7 +81,10 @@ export class PaymentMethodService {
   static async validateAndTokenizePaymentMethod(
     data: PaymentMethodData,
     provider: PaymentProvider
-  ): Promise<{ validation: ValidationResult; tokenization?: TokenizationResult }> {
+  ): Promise<{
+    validation: ValidationResult;
+    tokenization?: TokenizationResult;
+  }> {
     await this.initialize();
 
     const providerInstance = PaymentProviderFactory.getProvider(provider);
@@ -116,13 +129,16 @@ export class PaymentMethodService {
   ): Promise<PaymentMethodMetadata> {
     await this.initialize();
 
-    const providerInstance = PaymentProviderFactory.getProvider(paymentMethod.provider);
+    const providerInstance = PaymentProviderFactory.getProvider(
+      paymentMethod.provider
+    );
 
     return PaymentRetryService.executeWithRetry(
-      () => providerInstance.updatePaymentMethod(
-        paymentMethod.providerPaymentMethodId,
-        updates
-      ),
+      () =>
+        providerInstance.updatePaymentMethod(
+          paymentMethod.providerPaymentMethodId,
+          updates
+        ),
       DEFAULT_RETRY_CONFIG
     );
   }
@@ -135,12 +151,15 @@ export class PaymentMethodService {
   ): Promise<void> {
     await this.initialize();
 
-    const providerInstance = PaymentProviderFactory.getProvider(paymentMethod.provider);
+    const providerInstance = PaymentProviderFactory.getProvider(
+      paymentMethod.provider
+    );
 
     return PaymentRetryService.executeWithRetry(
-      () => providerInstance.deletePaymentMethod(
-        paymentMethod.providerPaymentMethodId
-      ),
+      () =>
+        providerInstance.deletePaymentMethod(
+          paymentMethod.providerPaymentMethodId
+        ),
       DEFAULT_RETRY_CONFIG
     );
   }
@@ -149,7 +168,7 @@ export class PaymentMethodService {
    * Get supported providers and their capabilities
    */
   static getSupportedProviders() {
-    return PaymentProviderFactory.getSupportedProviders().map(provider => ({
+    return PaymentProviderFactory.getSupportedProviders().map((provider) => ({
       provider,
       capabilities: PaymentProviderFactory.getProviderCapabilities(provider),
     }));

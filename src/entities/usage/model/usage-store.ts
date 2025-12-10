@@ -11,7 +11,9 @@ import type {
   QuotaCheckResult,
 } from "../types/usage-types";
 import { UsageService } from "../services/usage-service";
+import { QuotaEnforcementService } from "../services/quota-enforcement-service";
 import { usageApi } from "../api/usage-api";
+import { quotaApi } from "../api/quota-api";
 
 interface UsageStore extends UsageState {
   // Actions
@@ -39,6 +41,28 @@ interface UsageStore extends UsageState {
     metricType: UsageMetricType,
     amount?: number
   ) => Promise<QuotaCheckResult>;
+
+  // Quota Enforcement Operations
+  checkQuotaRealtime: (
+    tenantId: string,
+    metricType: UsageMetricType,
+    amount?: number
+  ) => Promise<QuotaCheckResult>;
+  recordUsageWithQuotaCheck: (
+    tenantId: string,
+    metricType: UsageMetricType,
+    amount: number,
+    metadata?: Record<string, any>
+  ) => Promise<{
+    success: boolean;
+    errorMessage?: string;
+    upgradeInfo?: { suggestedPlan: string; upgradeUrl: string };
+  }>;
+  monitorUsageThresholds: (tenantId: string) => Promise<void>;
+  checkMultipleQuotas: (
+    tenantId: string,
+    requests: Array<{ metricType: UsageMetricType; amount: number }>
+  ) => Promise<Array<QuotaCheckResult & { metricType: UsageMetricType }>>;
 
   // Real-time operations
   updateCurrentUsage: (metricType: UsageMetricType, amount: number) => void;
@@ -357,6 +381,175 @@ export const useUsageStore = create<UsageStore>()(
 
         isQuotaExceeded: (metricType: UsageMetricType) => {
           return get().quotaExceeded.includes(metricType);
+        },
+
+        // Quota Enforcement Operations
+        checkQuotaRealtime: async (
+          tenantId: string,
+          metricType: UsageMetricType,
+          amount: number = 1
+        ) => {
+          try {
+            const result = await QuotaEnforcementService.checkQuotaRealtime(
+              tenantId,
+              metricType,
+              amount
+            );
+
+            // Update store with latest quota status
+            const currentQuotaStatus = get().quotaStatus;
+            const updatedStatus = currentQuotaStatus.map((status) =>
+              status.metricType === metricType ? result.quotaStatus : status
+            );
+
+            set((state) => {
+              state.quotaStatus = updatedStatus;
+              state.lastUpdated = new Date();
+            });
+
+            return result;
+          } catch (error) {
+            const errorMessage =
+              error instanceof Error
+                ? error.message
+                : "Failed to check quota in real-time";
+            set((state) => {
+              state.error = errorMessage;
+            });
+            throw error;
+          }
+        },
+
+        recordUsageWithQuotaCheck: async (
+          tenantId: string,
+          metricType: UsageMetricType,
+          amount: number,
+          metadata?: Record<string, any>
+        ) => {
+          try {
+            const result = await QuotaEnforcementService.recordUsageAtomic(
+              tenantId,
+              metricType,
+              amount,
+              metadata
+            );
+
+            if (result.success) {
+              // Update store with successful usage recording
+              set((state) => {
+                // Update current usage
+                state.currentUsage[metricType] =
+                  (state.currentUsage[metricType] || 0) + amount;
+
+                // Update quota status
+                const quotaIndex = state.quotaStatus.findIndex(
+                  (q) => q.metricType === metricType
+                );
+                if (quotaIndex >= 0) {
+                  state.quotaStatus[quotaIndex].current += amount;
+                  state.quotaStatus[quotaIndex].percentage =
+                    UsageService.calculateUsagePercentage(
+                      state.quotaStatus[quotaIndex].current,
+                      state.quotaStatus[quotaIndex].limit
+                    );
+                }
+
+                // Update warnings and exceeded status
+                state.quotaWarnings = UsageService.generateQuotaWarnings(
+                  state.quotaStatus
+                );
+                state.quotaExceeded = state.quotaStatus
+                  .filter((quota) => quota.exceeded && !quota.withinGrace)
+                  .map((quota) => quota.metricType);
+
+                state.lastUpdated = new Date();
+              });
+            }
+
+            return {
+              success: result.success,
+              errorMessage: result.errorMessage,
+              upgradeInfo: result.upgradeInfo,
+            };
+          } catch (error) {
+            const errorMessage =
+              error instanceof Error
+                ? error.message
+                : "Failed to record usage with quota check";
+            set((state) => {
+              state.error = errorMessage;
+            });
+            throw error;
+          }
+        },
+
+        monitorUsageThresholds: async (tenantId: string) => {
+          try {
+            const monitoring =
+              await QuotaEnforcementService.monitorUsageThresholds(tenantId);
+
+            set((state) => {
+              // Update warnings
+              state.quotaWarnings = monitoring.warnings;
+
+              // Process notifications (in a real app, this would trigger actual notifications)
+              monitoring.notifications.forEach((notification) => {
+                if (notification.shouldNotify) {
+                  console.log(
+                    `Usage Notification [${notification.type}]: ${notification.message}`
+                  );
+                }
+              });
+
+              state.lastUpdated = new Date();
+            });
+          } catch (error) {
+            const errorMessage =
+              error instanceof Error
+                ? error.message
+                : "Failed to monitor usage thresholds";
+            set((state) => {
+              state.error = errorMessage;
+            });
+            throw error;
+          }
+        },
+
+        checkMultipleQuotas: async (
+          tenantId: string,
+          requests: Array<{ metricType: UsageMetricType; amount: number }>
+        ) => {
+          try {
+            const results = await QuotaEnforcementService.checkMultipleQuotas(
+              tenantId,
+              requests
+            );
+
+            // Update store with latest quota statuses
+            set((state) => {
+              results.forEach((result) => {
+                const quotaIndex = state.quotaStatus.findIndex(
+                  (q) => q.metricType === result.metricType
+                );
+                if (quotaIndex >= 0) {
+                  state.quotaStatus[quotaIndex] = result.quotaStatus;
+                }
+              });
+
+              state.lastUpdated = new Date();
+            });
+
+            return results;
+          } catch (error) {
+            const errorMessage =
+              error instanceof Error
+                ? error.message
+                : "Failed to check multiple quotas";
+            set((state) => {
+              state.error = errorMessage;
+            });
+            throw error;
+          }
         },
 
         // Utilities

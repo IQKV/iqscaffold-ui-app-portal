@@ -62,7 +62,7 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
     try {
       // Load PayPal SDK dynamically
       await this.loadPayPalSDK();
-      
+
       // Initialize PayPal with client ID
       if (typeof window !== "undefined" && (window as any).paypal) {
         this.paypalSdk = (window as any).paypal;
@@ -99,7 +99,9 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
     });
   }
 
-  async validatePaymentMethod(data: PaymentMethodData): Promise<ValidationResult> {
+  async validatePaymentMethod(
+    data: PaymentMethodData
+  ): Promise<ValidationResult> {
     const errors: string[] = [];
     const warnings: string[] = [];
 
@@ -120,7 +122,8 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
         const expiryYear = parseInt(data.expiryYear, 10);
         const expiryMonth = parseInt(data.expiryMonth, 10);
 
-        const fullExpiryYear = expiryYear < 100 ? 2000 + expiryYear : expiryYear;
+        const fullExpiryYear =
+          expiryYear < 100 ? 2000 + expiryYear : expiryYear;
 
         if (
           fullExpiryYear < currentYear ||
@@ -151,7 +154,9 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
     };
   }
 
-  async tokenizePaymentMethod(data: PaymentMethodData): Promise<TokenizationResult> {
+  async tokenizePaymentMethod(
+    data: PaymentMethodData
+  ): Promise<TokenizationResult> {
     if (!this.paypalSdk) {
       throw new Error("PayPal SDK not initialized");
     }
@@ -168,7 +173,11 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
           country: data.billingAddress.country,
         };
 
-        if (data.type === "card" && vaultResponse.expiryMonth && vaultResponse.expiryYear) {
+        if (
+          data.type === "card" &&
+          vaultResponse.expiryMonth &&
+          vaultResponse.expiryYear
+        ) {
           metadata.expiryMonth = vaultResponse.expiryMonth;
           metadata.expiryYear = vaultResponse.expiryYear;
         }
@@ -188,14 +197,18 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
     });
   }
 
-  private async createVaultedPaymentMethod(data: PaymentMethodData): Promise<any> {
+  private async createVaultedPaymentMethod(
+    data: PaymentMethodData
+  ): Promise<any> {
     // This would typically use PayPal's REST API to create a vaulted payment method
     // For now, we'll simulate the response
     const mockResponse = {
       id: `paypal_pm_${Date.now()}`,
       last4: data.cardNumber?.slice(-4),
       brand: this.detectCardBrand(data.cardNumber || ""),
-      expiryMonth: data.expiryMonth ? parseInt(data.expiryMonth, 10) : undefined,
+      expiryMonth: data.expiryMonth
+        ? parseInt(data.expiryMonth, 10)
+        : undefined,
       expiryYear: data.expiryYear ? parseInt(data.expiryYear, 10) : undefined,
     };
 
@@ -207,12 +220,12 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
 
   private detectCardBrand(cardNumber: string): string {
     const cleanNumber = cardNumber.replace(/\D/g, "");
-    
+
     if (/^4/.test(cleanNumber)) return "visa";
     if (/^5[1-5]/.test(cleanNumber)) return "mastercard";
     if (/^3[47]/.test(cleanNumber)) return "amex";
     if (/^6(?:011|5)/.test(cleanNumber)) return "discover";
-    
+
     return "unknown";
   }
 
@@ -224,7 +237,9 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
       try {
         // PayPal typically doesn't allow updating vaulted payment methods
         // You usually need to create a new one
-        throw new Error("PayPal does not support updating vaulted payment methods");
+        throw new Error(
+          "PayPal does not support updating vaulted payment methods"
+        );
       } catch (error) {
         throw new Error(
           `PayPal update failed: ${
@@ -283,7 +298,11 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
           ],
         };
 
-        const response = await this.makePayPalApiCall("POST", "/v1/payments/payment", paymentData);
+        const response = await this.makePayPalApiCall(
+          "POST",
+          "/v1/payments/payment",
+          paymentData
+        );
 
         return {
           id: response.id,
@@ -299,7 +318,8 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
           status: PaymentStatus.FAILED,
           amount,
           currency,
-          failureReason: error instanceof Error ? error.message : "Unknown error",
+          failureReason:
+            error instanceof Error ? error.message : "Unknown error",
           processedAt: new Date(),
         };
       }
@@ -360,8 +380,12 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
   ): Promise<WebhookEvent> {
     try {
       // PayPal webhook verification
-      const isValid = await this.verifyPayPalWebhook(payload, signature, secret);
-      
+      const isValid = await this.verifyPayPalWebhook(
+        payload,
+        signature,
+        secret
+      );
+
       if (!isValid) {
         throw new Error("Invalid PayPal webhook signature");
       }
@@ -454,7 +478,9 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.message || `PayPal API error: ${response.status}`);
+      throw new Error(
+        errorData.message || `PayPal API error: ${response.status}`
+      );
     }
 
     return response.json();
@@ -525,38 +551,40 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
       throw new Error("PayPal SDK not initialized");
     }
 
-    return this.paypalSdk.Buttons({
-      style: {
-        layout: "vertical",
-        color: "blue",
-        shape: "rect",
-        label: "paypal",
-        ...options.style,
-      },
-      createVaultSetupToken: async () => {
-        // Create vault setup token
-        const response = await this.makePayPalApiCall(
-          "POST",
-          "/v3/vault/setup-tokens",
-          {
-            payment_source: {
-              paypal: {
-                usage_type: "MERCHANT",
-                customer_type: "CONSUMER",
+    return this.paypalSdk
+      .Buttons({
+        style: {
+          layout: "vertical",
+          color: "blue",
+          shape: "rect",
+          label: "paypal",
+          ...options.style,
+        },
+        createVaultSetupToken: async () => {
+          // Create vault setup token
+          const response = await this.makePayPalApiCall(
+            "POST",
+            "/v3/vault/setup-tokens",
+            {
+              payment_source: {
+                paypal: {
+                  usage_type: "MERCHANT",
+                  customer_type: "CONSUMER",
+                },
               },
-            },
-          }
-        );
-        return response.id;
-      },
-      onApprove: async (data: any) => {
-        // Handle approval
-        return options.onApprove?.(data);
-      },
-      onError: (error: any) => {
-        // Handle error
-        options.onError?.(error);
-      },
-    }).render(`#${containerId}`);
+            }
+          );
+          return response.id;
+        },
+        onApprove: async (data: any) => {
+          // Handle approval
+          return options.onApprove?.(data);
+        },
+        onError: (error: any) => {
+          // Handle error
+          options.onError?.(error);
+        },
+      })
+      .render(`#${containerId}`);
   }
 }

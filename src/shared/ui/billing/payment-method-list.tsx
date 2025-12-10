@@ -70,14 +70,21 @@ export const PaymentMethodList: React.FC<PaymentMethodListProps> = ({
   };
 
   const isCardExpiring = (paymentMethod: PaymentMethod): boolean => {
-    if (paymentMethod.type !== "card" || !paymentMethod.metadata.expiryYear || !paymentMethod.metadata.expiryMonth) {
+    if (
+      paymentMethod.type !== "card" ||
+      !paymentMethod.metadata.expiryYear ||
+      !paymentMethod.metadata.expiryMonth
+    ) {
       return false;
     }
 
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth() + 1;
-    const expiryDate = new Date(paymentMethod.metadata.expiryYear, paymentMethod.metadata.expiryMonth - 1);
+    const expiryDate = new Date(
+      paymentMethod.metadata.expiryYear,
+      paymentMethod.metadata.expiryMonth - 1
+    );
     const threeMonthsFromNow = new Date();
     threeMonthsFromNow.setMonth(threeMonthsFromNow.getMonth() + 3);
 
@@ -136,7 +143,10 @@ export const PaymentMethodList: React.FC<PaymentMethodListProps> = ({
               <Text size="sm" c="dimmed">
                 Expiring Soon
               </Text>
-              <Text fw={500} c={metrics.expiringMethods.length > 0 ? "orange" : "green"}>
+              <Text
+                fw={500}
+                c={metrics.expiringMethods.length > 0 ? "orange" : "green"}
+              >
                 {metrics.expiringMethods.length}
               </Text>
             </div>
@@ -152,8 +162,9 @@ export const PaymentMethodList: React.FC<PaymentMethodListProps> = ({
           title="Payment Methods Expiring Soon"
         >
           <Text size="sm">
-            {metrics.expiringMethods.length} payment method(s) will expire within the next 3 months.
-            Please update them to avoid payment interruptions.
+            {metrics.expiringMethods.length} payment method(s) will expire
+            within the next 3 months. Please update them to avoid payment
+            interruptions.
           </Text>
         </Alert>
       )}
@@ -179,7 +190,7 @@ export const PaymentMethodList: React.FC<PaymentMethodListProps> = ({
                       </Badge>
                     )}
                   </Group>
-                  
+
                   <Group gap="xs" mt="xs">
                     <Badge
                       color={getProviderColor(paymentMethod.provider)}
@@ -189,13 +200,21 @@ export const PaymentMethodList: React.FC<PaymentMethodListProps> = ({
                       {paymentMethod.provider.charAt(0).toUpperCase() +
                         paymentMethod.provider.slice(1)}
                     </Badge>
-                    
-                    {paymentMethod.type === "card" && paymentMethod.metadata.expiryMonth && paymentMethod.metadata.expiryYear && (
-                      <Text size="sm" c="dimmed">
-                        Expires {paymentMethod.metadata.expiryMonth.toString().padStart(2, '0')}/
-                        {paymentMethod.metadata.expiryYear.toString().slice(-2)}
-                      </Text>
-                    )}
+
+                    {paymentMethod.type === "card" &&
+                      paymentMethod.metadata.expiryMonth &&
+                      paymentMethod.metadata.expiryYear && (
+                        <Text size="sm" c="dimmed">
+                          Expires{" "}
+                          {paymentMethod.metadata.expiryMonth
+                            .toString()
+                            .padStart(2, "0")}
+                          /
+                          {paymentMethod.metadata.expiryYear
+                            .toString()
+                            .slice(-2)}
+                        </Text>
+                      )}
                   </Group>
 
                   {paymentMethod.metadata.country && (

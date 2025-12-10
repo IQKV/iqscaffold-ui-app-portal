@@ -16,6 +16,203 @@ import { UsageUtils } from "@/shared/lib/billing-utils";
  * Contains all usage-related business rules and quota enforcement
  */
 export class UsageService {
+  // Quota enforcement constants
+  private static readonly DEFAULT_GRACE_PERCENTAGE = 5;
+  private static readonly WARNING_THRESHOLD = 90;
+  private static readonly CRITICAL_THRESHOLD = 100;
+  // Real-time quota enforcement methods
+  static enforceQuota(
+    tenantId: string,
+    metricType: UsageMetricType,
+    requestedAmount: number,
+    currentUsage: number,
+    limit: number,
+    gracePercentage: number = UsageService.DEFAULT_GRACE_PERCENTAGE
+  ): {
+    allowed: boolean;
+    remaining: number;
+    exceeded: boolean;
+    withinGrace: boolean;
+    errorMessage?: string;
+    upgradeInfo?: {
+      suggestedPlan: string;
+      upgradeUrl: string;
+    };
+  } {
+    const graceLimit = limit * (1 + gracePercentage / 100);
+    const newUsage = currentUsage + requestedAmount;
+    const remaining = Math.max(0, limit - currentUsage);
+    const exceeded = newUsage > limit;
+    const withinGrace = newUsage <= graceLimit;
+
+    // Allow operation if within grace period
+    if (withinGrace) {
+      return {
+        allowed: true,
+        remaining,
+        exceeded,
+        withinGrace,
+      };
+    }
+
+    // Block operation if exceeds grace period
+    return {
+      allowed: false,
+      remaining: 0,
+      exceeded: true,
+      withinGrace: false,
+      errorMessage: `Quota exceeded for ${metricType}. Current usage: ${currentUsage}, Limit: ${limit}, Requested: ${requestedAmount}`,
+      upgradeInfo: {
+        suggestedPlan: UsageService.getSuggestedPlan(metricType, newUsage),
+        upgradeUrl: `/billing/subscription?upgrade=${metricType}`,
+      },
+    };
+  }
+
+  static getSuggestedPlan(
+    metricType: UsageMetricType,
+    projectedUsage: number
+  ): string {
+    // Business logic to suggest appropriate plan based on usage
+    // This would typically query available plans and find the best fit
+    switch (metricType) {
+      case "api_calls":
+        if (projectedUsage > 1000000) return "enterprise";
+        if (projectedUsage > 100000) return "pro";
+        return "starter";
+      case "storage_gb":
+        if (projectedUsage > 1000) return "enterprise";
+        if (projectedUsage > 100) return "pro";
+        return "starter";
+      default:
+        return "pro";
+    }
+  }
+
+  // Atomic usage recording with quota validation
+  static async recordUsageWithQuotaCheck(
+    tenantId: string,
+    metricType: UsageMetricType,
+    amount: number,
+    currentQuotaStatus: QuotaStatus,
+    metadata?: Record<string, any>
+  ): Promise<{
+    success: boolean;
+    usageMetric?: UsageMetric;
+    quotaEnforcement: ReturnType<typeof UsageService.enforceQuota>;
+  }> {
+    // First, check if the operation would exceed quota
+    const quotaCheck = UsageService.enforceQuota(
+      tenantId,
+      metricType,
+      amount,
+      currentQuotaStatus.current,
+      currentQuotaStatus.limit
+    );
+
+    if (!quotaCheck.allowed) {
+      return {
+        success: false,
+        quotaEnforcement: quotaCheck,
+      };
+    }
+
+    // If allowed, record the usage (this would be atomic in the backend)
+    try {
+      const usageMetric: UsageMetric = {
+        id: `usage_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        tenantId,
+        metricType,
+        value: amount,
+        period: new Date().toISOString().substring(0, 7), // YYYY-MM format
+        timestamp: new Date(),
+      };
+
+      return {
+        success: true,
+        usageMetric,
+        quotaEnforcement: quotaCheck,
+      };
+    } catch (error) {
+      throw new Error(`Failed to record usage: ${error}`);
+    }
+  }
+
+  // Threshold monitoring for notifications
+  static checkUsageThresholds(quotaStatus: QuotaStatus[]): {
+    warnings: QuotaWarning[];
+    criticalAlerts: QuotaWarning[];
+    thresholdNotifications: Array<{
+      metricType: UsageMetricType;
+      threshold: number;
+      message: string;
+      shouldNotify: boolean;
+    }>;
+  } {
+    const warnings: QuotaWarning[] = [];
+    const criticalAlerts: QuotaWarning[] = [];
+    const thresholdNotifications: Array<{
+      metricType: UsageMetricType;
+      threshold: number;
+      message: string;
+      shouldNotify: boolean;
+    }> = [];
+
+    quotaStatus.forEach((quota) => {
+      const percentage = quota.percentage;
+
+      // 90% threshold notification
+      if (percentage >= UsageService.WARNING_THRESHOLD && percentage < 100) {
+        const warning: QuotaWarning = {
+          metricType: quota.metricType,
+          currentUsage: quota.current,
+          limit: quota.limit,
+          percentage,
+          severity: "warning",
+          message: `${UsageService.getMetricDisplayName(quota.metricType)} usage at ${percentage}% - approaching limit`,
+          timestamp: new Date(),
+        };
+        warnings.push(warning);
+
+        thresholdNotifications.push({
+          metricType: quota.metricType,
+          threshold: 90,
+          message: warning.message,
+          shouldNotify: true,
+        });
+      }
+
+      // Critical alerts for exceeded quotas
+      if (quota.exceeded) {
+        const alert: QuotaWarning = {
+          metricType: quota.metricType,
+          currentUsage: quota.current,
+          limit: quota.limit,
+          percentage,
+          severity: quota.withinGrace ? "warning" : "critical",
+          message: quota.withinGrace
+            ? `${UsageService.getMetricDisplayName(quota.metricType)} quota exceeded but within grace period (${percentage}% used)`
+            : `${UsageService.getMetricDisplayName(quota.metricType)} quota exceeded - operations blocked (${percentage}% used)`,
+          timestamp: new Date(),
+        };
+        criticalAlerts.push(alert);
+
+        thresholdNotifications.push({
+          metricType: quota.metricType,
+          threshold: 100,
+          message: alert.message,
+          shouldNotify: true,
+        });
+      }
+    });
+
+    return {
+      warnings,
+      criticalAlerts,
+      thresholdNotifications,
+    };
+  }
+
   // Quota validation methods
   static validateQuota(
     current: number,

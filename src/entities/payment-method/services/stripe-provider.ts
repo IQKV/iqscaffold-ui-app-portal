@@ -71,7 +71,9 @@ export class StripePaymentProvider implements PaymentProviderInterface {
     }
   }
 
-  async validatePaymentMethod(data: PaymentMethodData): Promise<ValidationResult> {
+  async validatePaymentMethod(
+    data: PaymentMethodData
+  ): Promise<ValidationResult> {
     const errors: string[] = [];
     const warnings: string[] = [];
 
@@ -82,7 +84,7 @@ export class StripePaymentProvider implements PaymentProviderInterface {
     // Validate card number using Stripe's validation
     if (data.type === "card" && data.cardNumber) {
       const cardElement = this.stripe.elements().create("card");
-      
+
       // Basic validation
       if (!data.cardNumber || data.cardNumber.replace(/\s/g, "").length < 13) {
         errors.push("Invalid card number");
@@ -100,7 +102,8 @@ export class StripePaymentProvider implements PaymentProviderInterface {
         const expiryMonth = parseInt(data.expiryMonth, 10);
 
         // Handle 2-digit years
-        const fullExpiryYear = expiryYear < 100 ? 2000 + expiryYear : expiryYear;
+        const fullExpiryYear =
+          expiryYear < 100 ? 2000 + expiryYear : expiryYear;
 
         if (
           fullExpiryYear < currentYear ||
@@ -110,10 +113,7 @@ export class StripePaymentProvider implements PaymentProviderInterface {
         }
 
         // Warning for cards expiring soon
-        if (
-          fullExpiryYear === currentYear &&
-          expiryMonth <= currentMonth + 2
-        ) {
+        if (fullExpiryYear === currentYear && expiryMonth <= currentMonth + 2) {
           warnings.push("Card expires soon");
         }
       }
@@ -145,7 +145,9 @@ export class StripePaymentProvider implements PaymentProviderInterface {
     };
   }
 
-  async tokenizePaymentMethod(data: PaymentMethodData): Promise<TokenizationResult> {
+  async tokenizePaymentMethod(
+    data: PaymentMethodData
+  ): Promise<TokenizationResult> {
     if (!this.stripe) {
       throw new Error("Stripe not initialized");
     }
@@ -174,7 +176,9 @@ export class StripePaymentProvider implements PaymentProviderInterface {
         });
 
         if (result.error) {
-          throw new Error(result.error.message || "Failed to create payment method");
+          throw new Error(
+            result.error.message || "Failed to create payment method"
+          );
         }
 
         const paymentMethod = result.paymentMethod!;
@@ -233,7 +237,9 @@ export class StripePaymentProvider implements PaymentProviderInterface {
         );
 
         if (result.error) {
-          throw new Error(result.error.message || "Failed to update payment method");
+          throw new Error(
+            result.error.message || "Failed to update payment method"
+          );
         }
 
         const paymentMethod = result.paymentMethod!;
@@ -268,7 +274,9 @@ export class StripePaymentProvider implements PaymentProviderInterface {
         );
 
         if (result.error) {
-          throw new Error(result.error.message || "Failed to delete payment method");
+          throw new Error(
+            result.error.message || "Failed to delete payment method"
+          );
         }
       } catch (error) {
         throw new Error(
@@ -342,7 +350,9 @@ export class StripePaymentProvider implements PaymentProviderInterface {
         });
 
         if (result.error) {
-          throw new Error(result.error.message || "Failed to setup recurring payment");
+          throw new Error(
+            result.error.message || "Failed to setup recurring payment"
+          );
         }
 
         const setupIntent = result.setupIntent!;
@@ -373,7 +383,11 @@ export class StripePaymentProvider implements PaymentProviderInterface {
     }
 
     try {
-      const event = this.stripe.webhooks.constructEvent(payload, signature, secret);
+      const event = this.stripe.webhooks.constructEvent(
+        payload,
+        signature,
+        secret
+      );
 
       return {
         id: event.id,
@@ -405,7 +419,9 @@ export class StripePaymentProvider implements PaymentProviderInterface {
         );
 
         if (result.error) {
-          throw new Error(result.error.message || "Failed to retrieve payment method");
+          throw new Error(
+            result.error.message || "Failed to retrieve payment method"
+          );
         }
 
         const paymentMethod = result.paymentMethod!;

@@ -141,7 +141,10 @@ export const usePaymentMethodStore = create<PaymentMethodStore>()(
         },
 
         addPaymentMethod: async (
-          data: PaymentMethodData & { tenantId: string; provider: PaymentProvider }
+          data: PaymentMethodData & {
+            tenantId: string;
+            provider: PaymentProvider;
+          }
         ) => {
           set((state) => {
             state.validatingPaymentMethod = true;

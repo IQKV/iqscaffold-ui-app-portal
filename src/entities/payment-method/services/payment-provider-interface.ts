@@ -125,7 +125,10 @@ export interface WebhookEvent {
  * Payment provider factory for creating provider instances
  */
 export class PaymentProviderFactory {
-  private static providers = new Map<PaymentProvider, PaymentProviderInterface>();
+  private static providers = new Map<
+    PaymentProvider,
+    PaymentProviderInterface
+  >();
 
   static registerProvider(
     provider: PaymentProvider,

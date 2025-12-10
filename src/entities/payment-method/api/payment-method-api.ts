@@ -20,10 +20,11 @@ export class PaymentMethodApiClient {
     data: PaymentMethodData & { tenantId: string; provider: PaymentProvider }
   ): Promise<PaymentMethod> {
     // Validate and tokenize through the appropriate provider
-    const { validation, tokenization } = await PaymentMethodService.validateAndTokenizePaymentMethod(
-      data,
-      data.provider
-    );
+    const { validation, tokenization } =
+      await PaymentMethodService.validateAndTokenizePaymentMethod(
+        data,
+        data.provider
+      );
 
     if (!validation.isValid) {
       throw new Error(validation.errors.join(", "));
@@ -48,9 +49,13 @@ export class PaymentMethodApiClient {
     updates: Partial<PaymentMethodData>
   ): Promise<PaymentMethod> {
     // Get the existing payment method to determine provider
-    const existingPaymentMethods = await this.getByTenant(updates.tenantId || "");
-    const existingPaymentMethod = existingPaymentMethods.find(pm => pm.id === paymentMethodId);
-    
+    const existingPaymentMethods = await this.getByTenant(
+      updates.tenantId || ""
+    );
+    const existingPaymentMethod = existingPaymentMethods.find(
+      (pm) => pm.id === paymentMethodId
+    );
+
     if (!existingPaymentMethod) {
       throw new Error("Payment method not found");
     }
@@ -58,13 +63,17 @@ export class PaymentMethodApiClient {
     // Update through provider if needed
     if (updates.billingAddress || updates.cardNumber) {
       try {
-        const updatedMetadata = await PaymentMethodService.updatePaymentMethodWithProvider(
-          existingPaymentMethod,
-          updates
-        );
-        
+        const updatedMetadata =
+          await PaymentMethodService.updatePaymentMethodWithProvider(
+            existingPaymentMethod,
+            updates
+          );
+
         // Merge updated metadata
-        updates.metadata = { ...existingPaymentMethod.metadata, ...updatedMetadata };
+        updates.metadata = {
+          ...existingPaymentMethod.metadata,
+          ...updatedMetadata,
+        };
       } catch (error) {
         // If provider update fails, still try to update our records
         console.warn("Provider update failed:", error);
@@ -77,8 +86,10 @@ export class PaymentMethodApiClient {
   async delete(paymentMethodId: string): Promise<void> {
     // Get the payment method to determine provider
     const paymentMethods = await billingApi.getPaymentMethods("");
-    const paymentMethod = paymentMethods.find(pm => pm.id === paymentMethodId);
-    
+    const paymentMethod = paymentMethods.find(
+      (pm) => pm.id === paymentMethodId
+    );
+
     if (!paymentMethod) {
       throw new Error("Payment method not found");
     }

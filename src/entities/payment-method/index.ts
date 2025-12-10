@@ -5,7 +5,10 @@ export { PaymentMethodService } from "./services/payment-method-service";
 
 // Provider interfaces and implementations
 export type { PaymentProviderInterface } from "./services/payment-provider-interface";
-export { PaymentProviderFactory, PaymentRetryService } from "./services/payment-provider-interface";
+export {
+  PaymentProviderFactory,
+  PaymentRetryService,
+} from "./services/payment-provider-interface";
 export { StripePaymentProvider } from "./services/stripe-provider";
 export { PayPalPaymentProvider } from "./services/paypal-provider";
 

@@ -3,7 +3,6 @@ import { PaymentMethodService } from "./payment-method-service";
 import type { PaymentMethodData } from "../types/payment-method-types";
 
 describe("PaymentMethodService", () => {
-
   describe("Card brand detection", () => {
     it("should detect Visa cards", () => {
       const brand = PaymentMethodService.detectCardBrand("4242424242424242");
@@ -28,19 +27,22 @@ describe("PaymentMethodService", () => {
 
   describe("Card number formatting", () => {
     it("should format Visa card numbers with spaces", () => {
-      const formatted = PaymentMethodService.formatCardNumber("4242424242424242");
+      const formatted =
+        PaymentMethodService.formatCardNumber("4242424242424242");
       expect(formatted).toBe("4242 4242 4242 4242");
     });
 
     it("should format American Express card numbers correctly", () => {
-      const formatted = PaymentMethodService.formatCardNumber("378282246310005");
+      const formatted =
+        PaymentMethodService.formatCardNumber("378282246310005");
       expect(formatted).toBe("3782 822463 10005");
     });
   });
 
   describe("Card number validation", () => {
     it("should validate correct Visa card number", () => {
-      const result = PaymentMethodService.validateCardNumber("4242424242424242");
+      const result =
+        PaymentMethodService.validateCardNumber("4242424242424242");
       expect(result.isValid).toBe(true);
       expect(result.brand?.name).toBe("visa");
     });
@@ -61,7 +63,10 @@ describe("PaymentMethodService", () => {
   describe("Expiry date validation", () => {
     it("should validate future expiry date", () => {
       const currentYear = new Date().getFullYear();
-      const result = PaymentMethodService.validateExpiryDate("12", (currentYear + 1).toString());
+      const result = PaymentMethodService.validateExpiryDate(
+        "12",
+        (currentYear + 1).toString()
+      );
       expect(result.isValid).toBe(true);
     });
 
@@ -73,7 +78,10 @@ describe("PaymentMethodService", () => {
 
     it("should reject invalid month", () => {
       const currentYear = new Date().getFullYear();
-      const result = PaymentMethodService.validateExpiryDate("13", currentYear.toString());
+      const result = PaymentMethodService.validateExpiryDate(
+        "13",
+        currentYear.toString()
+      );
       expect(result.isValid).toBe(false);
       expect(result.error).toBe("Invalid month");
     });
@@ -114,14 +122,17 @@ describe("PaymentMethodService", () => {
     };
 
     it("should validate complete payment method data", () => {
-      const result = PaymentMethodService.validatePaymentMethodData(validPaymentMethodData);
+      const result = PaymentMethodService.validatePaymentMethodData(
+        validPaymentMethodData
+      );
       expect(result.isValid).toBe(true);
       expect(result.errors).toHaveLength(0);
     });
 
     it("should reject payment method with missing card number", () => {
       const invalidData = { ...validPaymentMethodData, cardNumber: "" };
-      const result = PaymentMethodService.validatePaymentMethodData(invalidData);
+      const result =
+        PaymentMethodService.validatePaymentMethodData(invalidData);
       expect(result.isValid).toBe(false);
       expect(result.errors).toContain("Card number is required");
     });
@@ -131,7 +142,8 @@ describe("PaymentMethodService", () => {
         ...validPaymentMethodData,
         billingAddress: { ...validPaymentMethodData.billingAddress, line1: "" },
       };
-      const result = PaymentMethodService.validatePaymentMethodData(invalidData);
+      const result =
+        PaymentMethodService.validatePaymentMethodData(invalidData);
       expect(result.isValid).toBe(false);
       expect(result.errors).toContain("Billing address is required");
     });
@@ -156,7 +168,8 @@ describe("PaymentMethodService", () => {
         },
       } as any;
 
-      const displayName = PaymentMethodService.getCardDisplayName(paymentMethod);
+      const displayName =
+        PaymentMethodService.getCardDisplayName(paymentMethod);
       expect(displayName).toBe("visa ending in 4242");
     });
   });
