@@ -64,3 +64,14 @@ export type {
   SecurityContext,
   ComponentVisibility,
 } from "./billing";
+
+// Authority types
+export type {
+  Authority,
+  UserAuthority,
+  AuthorityCheck,
+  SecurityContext,
+  ComponentVisibility,
+  AuthorityRule,
+  PageLayoutConfig,
+} from "./authority";

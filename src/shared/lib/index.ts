@@ -24,3 +24,8 @@ export * from "./tenant-utils";
 export * from "./billing-utils";
 export * from "./billing-store";
 export * from "./billing-validation";
+
+// Authority and Security
+export * from "./use-authority";
+export * from "./security-guard";
+export * from "./audit-logger";
