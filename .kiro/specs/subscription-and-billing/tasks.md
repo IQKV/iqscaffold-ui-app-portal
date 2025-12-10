@@ -22,14 +22,14 @@
   - **Property 33: Localized Date/Time Formatting**
   - **Validates: Requirements 17.3**
 
-- [ ] 2. Implement core billing business entities
+- [x] 2. Implement core billing business entities
   - Create Subscription business logic with plan management and lifecycle operations
   - Implement Invoice business logic with generation, payment processing, and PDF creation
   - Build PaymentMethod business logic with provider integration and validation
   - Set up Usage business logic with quota enforcement and metric tracking
   - _Requirements: 1.1, 1.2, 2.1, 3.1, 4.1, 5.1_
 
-- [ ] 2.1 Create subscription state management
+- [x] 2.1 Create subscription state management
   - Implement subscription store using createEntityStore<Subscription>()
   - Add subscription lifecycle operations (create, update, cancel)
   - Build plan change logic with proration calculations
@@ -48,7 +48,7 @@
   - **Property 8: Downgrade Credit Application**
   - **Validates: Requirements 2.3**
 
-- [ ] 2.5 Implement invoice entity with shared financial patterns
+- [x] 2.5 Implement invoice entity with shared financial patterns
   - Create invoice store using shared entity patterns
   - Build invoice generation logic with line item calculations
   - Implement invoice status tracking and payment processing
