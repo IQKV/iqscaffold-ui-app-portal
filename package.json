@@ -76,6 +76,7 @@
     "@mantine/nprogress": "^8.3.5",
     "@mantine/tiptap": "^8.3.5",
     "@microsoft/fetch-event-source": "^2.0.1",
+    "@paypal/react-paypal-js": "^8.9.2",
     "@stripe/react-stripe-js": "^4.0.2",
     "@stripe/stripe-js": "^7.9.0",
     "@tabler/icons-react": "^3.35.0",

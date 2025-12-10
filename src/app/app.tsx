@@ -8,6 +8,9 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { HelmetProvider } from "@dr.pogodin/react-helmet";
 import { LocaleProvider, LocaleUtils } from "@/shared/lib/i18n";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 // Import the generated route tree
 import { routeTree } from "@/routeTree.gen";
@@ -52,6 +55,16 @@ export function App() {
     }
   }, []);
 
+  const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || "");
+
+  const paypalOptions = {
+    "client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID || "",
+    components: "buttons",
+    intent: "authorize",
+    vault: true,
+    currency: "USD",
+  } as const;
+
   return (
     <StrictMode>
       <HelmetProvider>
@@ -63,11 +76,15 @@ export function App() {
                 <QueryClientProvider client={queryClient}>
                   <TenantProvider>
                     <AuthProvider>
-                      <AuthGuardWrapper>
-                        <RouterProvider router={router} />
-                        <ReactQueryDevtools initialIsOpen={false} />
-                        <MSWDevTools />
-                      </AuthGuardWrapper>
+                      <PayPalScriptProvider options={paypalOptions}>
+                        <Elements stripe={stripePromise}>
+                          <AuthGuardWrapper>
+                            <RouterProvider router={router} />
+                            <ReactQueryDevtools initialIsOpen={false} />
+                            <MSWDevTools />
+                          </AuthGuardWrapper>
+                        </Elements>
+                      </PayPalScriptProvider>
                     </AuthProvider>
                   </TenantProvider>
                 </QueryClientProvider>

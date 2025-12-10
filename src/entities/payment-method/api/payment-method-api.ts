@@ -16,10 +16,15 @@ export class PaymentMethodApiClient {
     return billingApi.getPaymentMethods(tenantId);
   }
 
-  async add(
+async add(
     data: PaymentMethodData & { tenantId: string; provider: PaymentProvider }
   ): Promise<PaymentMethod> {
-    // Validate and tokenize through the appropriate provider
+    // If provider token already present (e.g., from Stripe Elements or PayPal approval), skip tokenization
+    if (data.providerPaymentMethodId) {
+      return billingApi.addPaymentMethod(data as any);
+    }
+
+    // Otherwise validate and tokenize through the provider abstraction
     const { validation, tokenization } =
       await PaymentMethodService.validateAndTokenizePaymentMethod(
         data,
@@ -39,7 +44,7 @@ export class PaymentMethodApiClient {
       ...data,
       providerPaymentMethodId: tokenization.token,
       metadata: tokenization.metadata,
-    };
+    } as any;
 
     return billingApi.addPaymentMethod(paymentMethodData);
   }

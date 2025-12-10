@@ -3,7 +3,7 @@
  * Multi-step payment method addition with provider integration
  */
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
   Card,
   Text,
@@ -32,6 +32,8 @@ import type {
   PaymentMethodType,
   PaymentProvider,
 } from "@/entities/payment-method/types/payment-method-types";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { PayPalButtons } from "@paypal/react-paypal-js";
 
 interface AddPaymentMethodWizardProps {
   onAdd: (data: PaymentMethodData) => void;
@@ -75,6 +77,9 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
   onAdd,
   loading = false,
 }) => {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [paypalToken, setPaypalToken] = useState<string | null>(null);
   const [active, setActive] = useState(0);
   const [selectedProvider, setSelectedProvider] =
     useState<PaymentProvider | null>(null);
@@ -192,15 +197,64 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
 
-  const handleSubmit = () => {
+const handleSubmit = async () => {
     const validation = form.validate();
-    if (!validation.hasErrors) {
-      onAdd(form.values);
-      // Reset form
-      form.reset();
-      setActive(0);
-      setSelectedProvider(null);
+    if (validation.hasErrors) return;
+
+    if (selectedProvider === "stripe") {
+      if (!stripe || !elements) return;
+      const card = elements.getElement(CardElement);
+      if (!card) return;
+
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: "card",
+        card,
+        billing_details: {
+          name: undefined,
+          address: {
+            line1: form.values.billingAddress.line1 || undefined,
+            line2: form.values.billingAddress.line2 || undefined,
+            city: form.values.billingAddress.city || undefined,
+            state: form.values.billingAddress.state || undefined,
+            postal_code: form.values.billingAddress.postalCode || undefined,
+            country: form.values.billingAddress.country || undefined,
+          },
+        },
+      });
+
+      if (error || !paymentMethod) {
+        // Simple alert; production code should show UI error
+        return;
+      }
+
+      onAdd({
+        ...form.values,
+        provider: "stripe",
+        providerPaymentMethodId: paymentMethod.id,
+        // clear raw fields as we used Elements
+        cardNumber: undefined,
+        expiryMonth: undefined,
+        expiryYear: undefined,
+        cvv: undefined,
+      });
+    } else if (selectedProvider === "paypal") {
+      if (!paypalToken) {
+        // Wait for PayPal approval to set token
+        return;
+      }
+      onAdd({
+        ...form.values,
+        provider: "paypal",
+        type: "bank_account", // or "card" depending on PayPal funding source
+        providerPaymentMethodId: paypalToken,
+      });
     }
+
+    // Reset form
+    form.reset();
+    setActive(0);
+    setSelectedProvider(null);
+    setPaypalToken(null);
   };
 
   return (
@@ -260,60 +314,29 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
           {/* Step 2: Payment Details */}
           <Stepper.Step label="Details" description="Enter payment information">
             <Stack gap="md" mt="md">
-              {selectedProvider === "stripe" && (
+{selectedProvider === "stripe" && (
                 <>
-                  <TextInput
-                    label="Card Number"
-                    placeholder="1234 5678 9012 3456"
-                    {...form.getInputProps("cardNumber")}
-                    onChange={(event) => {
-                      const formatted = formatCardNumber(
-                        event.currentTarget.value
-                      );
-                      form.setFieldValue("cardNumber", formatted);
-                    }}
-                    maxLength={19}
-                  />
-
-                  <Grid>
-                    <Grid.Col span={6}>
-                      <Select
-                        label="Expiry Month"
-                        placeholder="MM"
-                        data={MONTHS}
-                        {...form.getInputProps("expiryMonth")}
-                      />
-                    </Grid.Col>
-                    <Grid.Col span={6}>
-                      <Select
-                        label="Expiry Year"
-                        placeholder="YYYY"
-                        data={YEARS}
-                        {...form.getInputProps("expiryYear")}
-                      />
-                    </Grid.Col>
-                  </Grid>
-
-                  <TextInput
-                    label="CVV"
-                    placeholder="123"
-                    {...form.getInputProps("cvv")}
-                    maxLength={4}
-                  />
+                  <Box style={{ border: "1px solid var(--mantine-color-gray-4)", borderRadius: 6, padding: 12 }}>
+                    <CardElement options={{ hidePostalCode: true }} />
+                  </Box>
                 </>
               )}
 
               {selectedProvider === "paypal" && (
-                <Alert
-                  icon={<IconInfoCircle size={16} />}
-                  color="blue"
-                  variant="light"
-                >
-                  <Text size="sm">
-                    You'll be redirected to PayPal to complete the setup
-                    process.
-                  </Text>
-                </Alert>
+                <Stack gap="xs">
+                  <Alert icon={<IconInfoCircle size={16} />} color="blue" variant="light">
+                    <Text size="sm">Approve PayPal to vault a payment method.</Text>
+                  </Alert>
+<PayPalButtons
+                    style={{ layout: "vertical" }}
+                    // Use advanced vault setup via onClick delegating to server if needed. For now, rely on billing token from onApprove
+                    onApprove={(data: any) => {
+                      // Prefer data.billingToken when vaulting; fall back to data.orderID
+                      const token = (data as any).billingToken || (data as any).orderID;
+                      if (token) setPaypalToken(token);
+                    }}
+                  />
+                </Stack>
               )}
             </Stack>
           </Stepper.Step>

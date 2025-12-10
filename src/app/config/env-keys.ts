@@ -7,6 +7,11 @@ export const ENV_KEYS = [
   "VITE_AUTH_REDIRECT_AFTER_SIGNUP",
   "VITE_ENABLE_MSW",
   "VITE_LOG_LEVEL",
+  // Payment provider configuration
+  "VITE_STRIPE_PUBLISHABLE_KEY",
+  "VITE_PAYPAL_CLIENT_ID",
+  "VITE_PAYPAL_CLIENT_SECRET",
+  "VITE_ENVIRONMENT",
 ] as const;
 
 export type EnvKey = (typeof ENV_KEYS)[number];
