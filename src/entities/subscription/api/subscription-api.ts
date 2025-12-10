@@ -23,6 +23,10 @@ export class SubscriptionApiClient {
     return billingApi.getSubscription(tenantId);
   }
 
+  async getActiveSubscription(tenantId: string): Promise<Subscription> {
+    return billingApi.getSubscription(tenantId);
+  }
+
   async create(data: CreateSubscriptionData): Promise<Subscription> {
     return billingApi.createSubscription({
       tenantId: data.tenantId,
