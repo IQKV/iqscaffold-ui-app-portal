@@ -1,7 +1,9 @@
 import { BillingCycle, Plan, Subscription } from "@/shared/types/billing";
+import { LocaleCurrencyUtils, LocaleDateUtils } from "./i18n/locale-formatting";
 
 /**
  * Currency formatting utilities with locale support
+ * @deprecated Use LocaleCurrencyUtils instead for better i18n support
  */
 export class CurrencyUtils {
   /**
@@ -12,12 +14,7 @@ export class CurrencyUtils {
     currency: string = "USD",
     locale: string = "en-US"
   ): string {
-    return new Intl.NumberFormat(locale, {
-      style: "currency",
-      currency,
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(amount);
+    return LocaleCurrencyUtils.format(amount, currency, locale);
   }
 
   /**
@@ -53,17 +50,14 @@ export class CurrencyUtils {
 
 /**
  * Date calculation utilities for billing periods
+ * @deprecated Use LocaleDateUtils instead for better i18n support
  */
 export class BillingDateUtils {
   /**
    * Format billing date with locale support
    */
   static formatBillingDate(date: Date, locale: string = "en-US"): string {
-    return new Intl.DateTimeFormat(locale, {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }).format(date);
+    return LocaleDateUtils.formatDate(date, locale);
   }
 
   /**

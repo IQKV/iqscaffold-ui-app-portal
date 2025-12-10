@@ -7,8 +7,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { HelmetProvider } from "@dr.pogodin/react-helmet";
-import { I18nProvider } from "@lingui/react";
-import { i18n } from "@lingui/core";
+import { LocaleProvider, LocaleUtils } from "@/shared/lib/i18n";
 
 // Import the generated route tree
 import { routeTree } from "@/routeTree.gen";
@@ -19,7 +18,6 @@ import { TenantProvider } from "@/processes/tenant";
 
 import { ErrorBoundary } from "@/shared/ui";
 import { MSWDevTools } from "@/shared/ui/msw-dev-tools";
-import { dynamicActivateLocale, getClientLocale } from "@/shared/locales";
 import { ConfirmContextModal } from "@/shared/ui/confirmation-modal";
 
 // MSW setup
@@ -48,9 +46,6 @@ declare module "@tanstack/react-router" {
 
 export function App() {
   useEffect(() => {
-    // Activate locale based on cookie or browser
-    dynamicActivateLocale(getClientLocale());
-
     // Start MSW if enabled
     if (typeof window !== "undefined") {
       startMSW();
@@ -60,7 +55,7 @@ export function App() {
   return (
     <StrictMode>
       <HelmetProvider>
-        <I18nProvider i18n={i18n}>
+        <LocaleProvider defaultLocale={LocaleUtils.detectLocale()}>
           <ErrorBoundary>
             <MantineProvider theme={theme} defaultColorScheme="auto">
               <ModalsProvider modals={{ confirmation: ConfirmContextModal }}>
@@ -79,7 +74,7 @@ export function App() {
               </ModalsProvider>
             </MantineProvider>
           </ErrorBoundary>
-        </I18nProvider>
+        </LocaleProvider>
       </HelmetProvider>
     </StrictMode>
   );

@@ -1,168 +1,158 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-09-19 18:34+0300\n"
+"POT-Creation-Date: 2025-12-10 16:31+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: en\n"
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Plural-Forms: \n"
+"Language: de\n"
 
 #. placeholder {0}: localeToNameMap[locale]
 #: src/shared/locales/index.ts:18
 msgid "{0}"
-msgstr "{0}"
-
-#: src/pages/examples.tsx:161
-#~ msgid "{0} deleted successfully"
-#~ msgstr "{0} deleted successfully"
+msgstr ""
 
 #: src/pages/examples.tsx:163
 msgid "{userName} deleted successfully"
-msgstr "{userName} deleted successfully"
+msgstr ""
 
 #: src/pages/__root.tsx:27
 msgid "%s | IQ Scaffold Platform"
-msgstr "%s | IQ Scaffold Platform"
+msgstr ""
 
 #: src/widgets/sidebar/ui/sidebar.tsx:32
 msgid "About"
-msgstr "About"
+msgstr ""
 
 #: src/pages/about.tsx:32
 msgid "About This Template"
-msgstr "About This Template"
+msgstr ""
 
 #: src/features/users/components/users-data-grid.tsx:169
 #: src/pages/examples.tsx:133
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:180
 msgid "Actions"
-msgstr "Actions"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:12
 msgid "Active"
-msgstr "Active"
+msgstr ""
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:80
 msgid "Active Sessions"
-msgstr "Active Sessions"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:117
 msgid "Active Users"
-msgstr "Active Users"
+msgstr ""
 
 #: src/pages/examples.tsx:285
 msgid "Add new user clicked"
-msgstr "Add new user clicked"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:50
 msgid "Add Payment Method"
-msgstr "Add Payment Method"
+msgstr ""
 
 #: src/features/users/components/users-data-grid.tsx:233
 #: src/pages/examples.tsx:288
 msgid "Add User"
-msgstr "Add User"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:184
 msgid "Address"
-msgstr "Address"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:43
 msgid "Admin"
-msgstr "Admin"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:95
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:178
 msgid "Amount"
-msgstr "Amount"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:236
 msgid "Amount cannot exceed {max}"
-msgstr "Amount cannot exceed {max}"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:235
 msgid "Amount must be at least {min}"
-msgstr "Amount must be at least {min}"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:222
 msgid "An error occurred"
-msgstr "An error occurred"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:150
 msgid "Annual"
-msgstr "Annual"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:114
 msgid "API Calls"
-msgstr "API Calls"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:128
 msgid "Approaching Limit"
-msgstr "Approaching Limit"
+msgstr ""
 
 #: src/pages/about.tsx:93
 msgid "Architecture"
-msgstr "Architecture"
+msgstr ""
 
 #: src/pages/examples.tsx:48
 msgid "Are you sure you want to delete this user? This action cannot be undone."
-msgstr "Are you sure you want to delete this user? This action cannot be undone."
+msgstr ""
 
 #: src/features/users/components/users-data-grid.tsx:54
 msgid "Are you sure you want to delete user"
-msgstr "Are you sure you want to delete user"
+msgstr ""
 
 #: src/shared/ui/confirmation-modal/confirm-context-modal.tsx:23
 #: src/shared/ui/confirmation-modal/confirmation-modal.tsx:23
 #: src/shared/ui/confirmation-modal/open-confirm.ts:16
 msgid "Are you sure you want to proceed?"
-msgstr "Are you sure you want to proceed?"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:27
 msgid "At least one role is required"
-msgstr "At least one role is required"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:225
 msgid "Back"
-msgstr "Back"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:46
 msgid "Bank Account"
-msgstr "Bank Account"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:61
 msgid "Billing Address"
-msgstr "Billing Address"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:27
 msgid "Billing Cycle"
-msgstr "Billing Cycle"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:312
 msgid "Billing information updated successfully"
-msgstr "Billing information updated successfully"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:318
 msgid "Billing Update Failed"
-msgstr "Billing Update Failed"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:311
 msgid "Billing Updated"
-msgstr "Billing Updated"
+msgstr ""
 
 #: src/pages/about.tsx:100
 msgid "Built following Feature-Sliced Design methodology for maintainable and scalable frontend architecture."
-msgstr "Built following Feature-Sliced Design methodology for maintainable and scalable frontend architecture."
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:100
 msgid "Bypass (allow through)"
-msgstr "Bypass (allow through)"
+msgstr ""
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:41
 #: src/features/users/components/user-form-modal.tsx:301
@@ -172,342 +162,322 @@ msgstr "Bypass (allow through)"
 #: src/shared/ui/confirmation-modal/confirmation-modal.tsx:25
 #: src/shared/ui/confirmation-modal/open-confirm.ts:18
 msgid "Cancel"
-msgstr "Cancel"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:21
 msgid "Cancel Subscription"
-msgstr "Cancel Subscription"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:15
 msgid "Canceled"
-msgstr "Canceled"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:57
 msgid "Card Number"
-msgstr "Card Number"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:60
 msgid "Cardholder Name"
-msgstr "Cardholder Name"
+msgstr ""
 
 #: src/shared/ui/locale-selector/locale-selector.tsx:42
 msgid "Change Language"
-msgstr "Change Language"
+msgstr ""
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:94
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:132
 msgid "Change Password"
-msgstr "Change Password"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:23
 msgid "Change Plan"
-msgstr "Change Plan"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:127
 msgid "Changes take effect immediately. MSW will intercept API calls when enabled."
-msgstr "Changes take effect immediately. MSW will intercept API calls when enabled."
+msgstr ""
 
 #: src/shared/ui/loading-state/loading-state.tsx:185
 msgid "Check your internet connection and try again"
-msgstr "Check your internet connection and try again"
+msgstr ""
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:42
 msgid "Checking email status..."
-msgstr "Checking email status..."
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:185
 msgid "City"
-msgstr "City"
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:66
-#~ msgid "Click the plus button to open a modal with a sample form using Mantine components. This demonstrates Feature-Sliced Design architecture."
-#~ msgstr "Click the plus button to open a modal with a sample form using Mantine components. This demonstrates Feature-Sliced Design architecture."
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:224
 msgid "Close"
-msgstr "Close"
+msgstr ""
 
 #: src/pages/about.tsx:117
 msgid "Code Quality:"
-msgstr "Code Quality:"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:183
 msgid "Company"
-msgstr "Company"
+msgstr ""
 
 #: src/pages/examples.tsx:187
 msgid "Component Examples"
-msgstr "Component Examples"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:196
 #: src/shared/ui/confirmation-modal/confirm-context-modal.tsx:24
 #: src/shared/ui/confirmation-modal/confirmation-modal.tsx:24
 #: src/shared/ui/confirmation-modal/open-confirm.ts:17
 msgid "Confirm"
-msgstr "Confirm"
+msgstr ""
 
 #: src/shared/ui/confirmation-modal/confirm-context-modal.tsx:22
 #: src/shared/ui/confirmation-modal/confirmation-modal.tsx:22
 #: src/shared/ui/confirmation-modal/open-confirm.ts:15
 msgid "Confirm Action"
-msgstr "Confirm Action"
+msgstr ""
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:125
 msgid "Confirm New Password"
-msgstr "Confirm New Password"
+msgstr ""
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:126
 msgid "Confirm your new password"
-msgstr "Confirm your new password"
+msgstr ""
 
 #: src/pages/examples.tsx:259
 msgid "Confirmation modals, notifications, loading states, and error boundaries."
-msgstr "Confirmation modals, notifications, loading states, and error boundaries."
+msgstr ""
 
 #: src/shared/ui/loading-state/loading-state.tsx:202
 msgid "Connection Issue"
-msgstr "Connection Issue"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:136
 msgid "Consider upgrading your plan"
-msgstr "Consider upgrading your plan"
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:43
-#~ msgid "Could not submit the form"
-#~ msgstr "Could not submit the form"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:188
 msgid "Country"
-msgstr "Country"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:308
 msgid "Create"
-msgstr "Create"
+msgstr ""
 
 #: src/features/users/components/users-page.tsx:47
 msgid "Create New User"
-msgstr "Create New User"
+msgstr ""
 
 #: src/features/users/components/users-data-grid.tsx:161
 msgid "Created"
-msgstr "Created"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:285
 msgid "Created:"
-msgstr "Created:"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:45
 msgid "Credit Card"
-msgstr "Credit Card"
+msgstr ""
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:105
 msgid "Current Password"
-msgstr "Current Password"
+msgstr ""
 
 #: src/features/change-password-form/model/validation.ts:9
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:16
 msgid "Current password is required"
-msgstr "Current password is required"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:26
 #: src/shared/lib/i18n/billing-translations.ts:157
 msgid "Current Plan"
-msgstr "Current Plan"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:120
 msgid "Current Usage"
-msgstr "Current Usage"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:59
 msgid "CVV"
-msgstr "CVV"
+msgstr ""
 
 #: src/shared/ui/theme-toggle/theme-toggle.tsx:10
 msgid "Dark mode"
-msgstr "Dark mode"
+msgstr ""
 
 #: src/features/dashboard/ui/dashboard-feature.tsx:15
 #: src/widgets/sidebar/ui/sidebar.tsx:59
 msgid "Dashboard"
-msgstr "Dashboard"
+msgstr ""
 
 #: src/pages/examples.tsx:277
 msgid "Data Table Example"
-msgstr "Data Table Example"
+msgstr ""
 
 #: src/pages/examples.tsx:231
 msgid "Data Tables"
-msgstr "Data Tables"
+msgstr ""
 
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:177
 msgid "Date"
-msgstr "Date"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:29
 msgid "Date must be in the future"
-msgstr "Date must be in the future"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:30
 msgid "Date must be in the past"
-msgstr "Date must be in the past"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:62
 msgid "Default Payment Method"
-msgstr "Default Payment Method"
+msgstr ""
 
 #: src/features/users/components/users-data-grid.tsx:61
 #: src/pages/examples.tsx:49
 #: src/shared/lib/i18n/billing-translations.ts:195
 msgid "Delete"
-msgstr "Delete"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:52
 msgid "Delete Payment Method"
-msgstr "Delete Payment Method"
+msgstr ""
 
 #: src/features/users/components/users-data-grid.tsx:186
 msgid "Delete user"
-msgstr "Delete user"
+msgstr ""
 
 #: src/features/users/components/users-data-grid.tsx:51
 #: src/pages/examples.tsx:47
 msgid "Delete User"
-msgstr "Delete User"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:79
 msgid "Disable MSW"
-msgstr "Disable MSW"
+msgstr ""
 
 #: src/features/users/components/users-data-grid.tsx:147
 msgid "Disabled"
-msgstr "Disabled"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:20
 msgid "Downgrade Plan"
-msgstr "Downgrade Plan"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:162
 msgid "Downgrade to {planName}"
-msgstr "Downgrade to {planName}"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:87
 msgid "Download Invoice"
-msgstr "Download Invoice"
+msgstr ""
 
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:243
 msgid "Download PDF"
-msgstr "Download PDF"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:79
 msgid "Draft"
-msgstr "Draft"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:96
 msgid "Due Date"
-msgstr "Due Date"
+msgstr ""
 
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:197
 msgid "Due:"
-msgstr "Due:"
+msgstr ""
 
 #: src/pages/about.tsx:133
 msgid "Easy"
-msgstr "Easy"
+msgstr ""
 
 #: src/features/users/components/users-data-grid.tsx:174
 msgid "Edit user"
-msgstr "Edit user"
+msgstr ""
 
 #: src/features/users/components/users-page.tsx:47
 msgid "Edit User"
-msgstr "Edit User"
-
-#: src/pages/examples.tsx:150
-#~ msgid "Editing {0}"
-#~ msgstr "Editing {0}"
+msgstr ""
 
 #: src/pages/examples.tsx:151
 msgid "Editing {userName}"
-msgstr "Editing {userName}"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:216
 msgid "Email"
-msgstr "Email"
+msgstr ""
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:63
 #: src/shared/lib/i18n/billing-translations.ts:180
 msgid "Email Address"
-msgstr "Email Address"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:116
 msgid "Email Sends"
-msgstr "Email Sends"
+msgstr ""
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:33
 msgid "Email Verification Status"
-msgstr "Email Verification Status"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:276
 #: src/shared/lib/use-auth-api.ts:124
 msgid "Email Verified"
-msgstr "Email Verified"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:86
 msgid "Enable logging"
-msgstr "Enable logging"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:79
 msgid "Enable MSW"
-msgstr "Enable MSW"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:269
 #: src/features/users/components/users-data-grid.tsx:147
 msgid "Enabled"
-msgstr "Enabled"
+msgstr ""
 
 #: src/pages/about.tsx:110
 msgid "End-to-end type safety from API to UI components"
-msgstr "End-to-end type safety from API to UI components"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:217
 msgid "Enter email address"
-msgstr "Enter email address"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:227
 msgid "Enter first name"
-msgstr "Enter first name"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:236
 msgid "Enter last name"
-msgstr "Enter last name"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:247
 msgid "Enter password"
-msgstr "Enter password"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:208
 msgid "Enter username"
-msgstr "Enter username"
+msgstr ""
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:106
 msgid "Enter your current password"
-msgstr "Enter your current password"
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:84
-#~ msgid "Enter your email"
-#~ msgstr "Enter your email"
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:77
-#~ msgid "Enter your name"
-#~ msgstr "Enter your name"
+msgstr ""
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:115
 msgid "Enter your new password"
-msgstr "Enter your new password"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:145
 msgid "Enterprise"
-msgstr "Enterprise"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:137
 #: src/features/users/components/user-form-modal.tsx:147
@@ -516,623 +486,595 @@ msgstr "Enterprise"
 #: src/pages/examples.tsx:333
 #: src/shared/lib/i18n/billing-translations.ts:204
 msgid "Error"
-msgstr "Error"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:102
 msgid "Error (throw error)"
-msgstr "Error (throw error)"
-
-#: src/features/users/components/users-data-grid.tsx:166
-#~ msgid "Error loading users: {0}"
-#~ msgstr "Error loading users: {0}"
+msgstr ""
 
 #: src/features/users/components/users-data-grid.tsx:214
 msgid "Error loading users: {errorMessage}"
-msgstr "Error loading users: {errorMessage}"
+msgstr ""
 
 #: src/pages/examples.tsx:330
 msgid "Error notification!"
-msgstr "Error notification!"
+msgstr ""
 
 #: src/pages/about.tsx:118
 msgid "ESLint, Prettier, and automated quality checks"
-msgstr "ESLint, Prettier, and automated quality checks"
+msgstr ""
 
 #: src/widgets/sidebar/ui/sidebar.tsx:50
 msgid "Examples"
-msgstr "Examples"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:58
 msgid "Expiry Date"
-msgstr "Expiry Date"
+msgstr ""
 
 #: src/pages/examples.tsx:190
 msgid "Explore the various components and features available in this template"
-msgstr "Explore the various components and features available in this template"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:231
 msgid "Export"
-msgstr "Export"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:68
 msgid "Failed to add payment method"
-msgstr "Failed to add payment method"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:38
 msgid "Failed to cancel subscription"
-msgstr "Failed to cancel subscription"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:51
 msgid "Failed to change password. Please check your current password."
-msgstr "Failed to change password. Please check your current password."
+msgstr ""
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:53
 msgid "Failed to check email status. Please try again."
-msgstr "Failed to check email status. Please try again."
-
-#: src/features/users/components/user-form-modal.tsx:149
-#~ msgid "Failed to create user: {0}"
-#~ msgstr "Failed to create user: {0}"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:176
 msgid "Failed to create user: {errorMessage}"
-msgstr "Failed to create user: {errorMessage}"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:70
 msgid "Failed to delete payment method"
-msgstr "Failed to delete payment method"
-
-#: src/features/users/components/users-data-grid.tsx:72
-#~ msgid "Failed to delete user: {0}"
-#~ msgstr "Failed to delete user: {0}"
+msgstr ""
 
 #: src/features/users/components/users-data-grid.tsx:76
 msgid "Failed to delete user: {errorMessage}"
-msgstr "Failed to delete user: {errorMessage}"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:37
 msgid "Failed to downgrade plan"
-msgstr "Failed to downgrade plan"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:105
 msgid "Failed to download invoice"
-msgstr "Failed to download invoice"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:74
 msgid "Failed to logout from all devices"
-msgstr "Failed to logout from all devices"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:260
 msgid "Failed to process invoice. Please try again."
-msgstr "Failed to process invoice. Please try again."
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:107
 msgid "Failed to process payment"
-msgstr "Failed to process payment"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:188
 msgid "Failed to reset password. The link may be invalid or expired."
-msgstr "Failed to reset password. The link may be invalid or expired."
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:72
 msgid "Failed to retry payment"
-msgstr "Failed to retry payment"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:108
 msgid "Failed to Send Email"
-msgstr "Failed to Send Email"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:157
 msgid "Failed to send password reset link"
-msgstr "Failed to send password reset link"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:156
 msgid "Failed to Send Reset Link"
-msgstr "Failed to Send Reset Link"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:109
 msgid "Failed to send verification email"
-msgstr "Failed to send verification email"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:319
 msgid "Failed to update billing information. Please try again."
-msgstr "Failed to update billing information. Please try again."
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:69
 msgid "Failed to update payment method"
-msgstr "Failed to update payment method"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:238
 msgid "Failed to update payment method. Please try again."
-msgstr "Failed to update payment method. Please try again."
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:195
 msgid "Failed to update subscription. Please try again."
-msgstr "Failed to update subscription. Please try again."
-
-#: src/features/users/components/user-form-modal.tsx:112
-#~ msgid "Failed to update user: {0}"
-#~ msgstr "Failed to update user: {0}"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:138
 msgid "Failed to update user: {errorMessage}"
-msgstr "Failed to update user: {errorMessage}"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:36
 msgid "Failed to upgrade plan"
-msgstr "Failed to upgrade plan"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:20
 msgid "Failed to validate token"
-msgstr "Failed to validate token"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:134
 msgid "Failed to verify email. The link may be invalid or expired."
-msgstr "Failed to verify email. The link may be invalid or expired."
+msgstr ""
 
 #: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:357
 msgid "Fair"
-msgstr "Fair"
+msgstr ""
 
 #: src/pages/about.tsx:105
 msgid "Feature-Sliced Design:"
-msgstr "Feature-Sliced Design:"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:154
 msgid "Features"
-msgstr "Features"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:229
 msgid "Filter"
-msgstr "Filter"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:226
 #: src/shared/lib/i18n/billing-translations.ts:181
 msgid "First Name"
-msgstr "First Name"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:21
 msgid "First name must be at least 2 characters"
-msgstr "First name must be at least 2 characters"
+msgstr ""
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:106
 msgid "For additional security, we recommend changing your password regularly and enabling two-factor authentication when available."
-msgstr "For additional security, we recommend changing your password regularly and enabling two-factor authentication when available."
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:38
-#~ msgid "Form submitted!"
-#~ msgstr "Form submitted!"
+msgstr ""
 
 #: src/pages/examples.tsx:206
 msgid "Forms"
-msgstr "Forms"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:143
 msgid "Free"
-msgstr "Free"
+msgstr ""
 
 #: src/pages/examples.tsx:237
 msgid "Functional"
-msgstr "Functional"
+msgstr ""
 
 #: src/pages/about.tsx:131
 msgid "Getting Started"
-msgstr "Getting Started"
+msgstr ""
 
 #: src/pages/404.tsx:47
 msgid "Go Back"
-msgstr "Go Back"
+msgstr ""
 
 #: src/pages/404.tsx:55
 msgid "Go Home"
-msgstr "Go Home"
+msgstr ""
 
 #: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:358
 msgid "Good"
-msgstr "Good"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:130
 msgid "Grace Period"
-msgstr "Grace Period"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:135
 msgid "Grace period active"
-msgstr "Grace period active"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:281
 msgid "Grace Period Active"
-msgstr "Grace Period Active"
+msgstr ""
 
 #: src/features/dashboard/ui/dashboard-feature.tsx:41
 msgid "Growth"
-msgstr "Growth"
+msgstr ""
 
 #: src/widgets/sidebar/ui/sidebar.tsx:23
 msgid "Home"
-msgstr "Home"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:94
 msgid "How to handle requests without mocks"
-msgstr "How to handle requests without mocks"
+msgstr ""
 
 #: src/pages/examples.tsx:353
 msgid "Info"
-msgstr "Info"
+msgstr ""
 
 #: src/pages/examples.tsx:350
 msgid "Info notification!"
-msgstr "Info notification!"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:206
 msgid "Information"
-msgstr "Information"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:231
 msgid "Insufficient funds for this transaction"
-msgstr "Insufficient funds for this transaction"
+msgstr ""
 
 #: src/pages/examples.tsx:212
 msgid "Interactive"
-msgstr "Interactive"
+msgstr ""
 
 #: src/pages/examples.tsx:279
 msgid "Interactive data table with sorting, actions, and custom rendering"
-msgstr "Interactive data table with sorting, actions, and custom rendering"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:13
 #: src/features/users/components/user-form-modal.tsx:20
 msgid "Invalid email address"
-msgstr "Invalid email address"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:69
 msgid "Invalid phone number"
-msgstr "Invalid phone number"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:80
 msgid "Invalid URL"
-msgstr "Invalid URL"
+msgstr ""
 
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:176
 msgid "Invoice"
-msgstr "Invoice"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:253
 msgid "Invoice {invoiceNumber} has been paid"
-msgstr "Invoice {invoiceNumber} has been paid"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:245
 msgid "Invoice Downloaded"
-msgstr "Invoice Downloaded"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:104
 #: src/shared/lib/i18n/localized-notifications.ts:246
 msgid "Invoice downloaded successfully"
-msgstr "Invoice downloaded successfully"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:259
 msgid "Invoice Error"
-msgstr "Invoice Error"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:94
 msgid "Invoice Number"
-msgstr "Invoice Number"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:252
 msgid "Invoice Paid"
-msgstr "Invoice Paid"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:106
 msgid "Invoice paid successfully"
-msgstr "Invoice paid successfully"
+msgstr ""
 
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:169
 msgid "Invoices and payment history will appear here"
-msgstr "Invoices and payment history will appear here"
+msgstr ""
 
 #: src/pages/__root.tsx:26
 #: src/widgets/header/ui/header.tsx:10
 msgid "IQ Scaffold Platform"
-msgstr "IQ Scaffold Platform"
+msgstr ""
 
 #: src/shared/ui/locale-selector/locale-selector.tsx:64
 msgid "Language:"
-msgstr "Language:"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:235
 #: src/shared/lib/i18n/billing-translations.ts:182
 msgid "Last Name"
-msgstr "Last Name"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:22
 msgid "Last name must be at least 2 characters"
-msgstr "Last name must be at least 2 characters"
+msgstr ""
 
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:115
 msgid "Latest invoices and payment history"
-msgstr "Latest invoices and payment history"
+msgstr ""
 
 #: src/pages/about.tsx:60
 msgid "Latest React with concurrent features and improved performance"
-msgstr "Latest React with concurrent features and improved performance"
+msgstr ""
 
 #: src/pages/about.tsx:35
 msgid "Learn more about the technologies and architecture used in this project"
-msgstr "Learn more about the technologies and architecture used in this project"
+msgstr ""
 
 #: src/shared/ui/theme-toggle/theme-toggle.tsx:10
 msgid "Light mode"
-msgstr "Light mode"
+msgstr ""
 
 #: src/pages/about.tsx:68
 msgid "Lightning-fast development server with instant HMR"
-msgstr "Lightning-fast development server with instant HMR"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:121
 msgid "Limit"
-msgstr "Limit"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:129
 msgid "Limit Exceeded"
-msgstr "Limit Exceeded"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:98
 msgid "Line Items"
-msgstr "Line Items"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:345
 msgid "Loading"
-msgstr "Loading"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:346
 msgid "Loading billing information..."
-msgstr "Loading billing information..."
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:220
 #: src/shared/ui/loading-state/loading-state.tsx:68
 #: src/shared/ui/loading-state/loading-state.tsx:148
 msgid "Loading..."
-msgstr "Loading..."
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:87
 msgid "Log MSW requests to console"
-msgstr "Log MSW requests to console"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:66
 msgid "Logged Out from All Devices"
-msgstr "Logged Out from All Devices"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:73
 msgid "Logout Failed"
-msgstr "Logout Failed"
+msgstr ""
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:24
 #: src/features/security-settings/ui/security-settings-feature.tsx:40
 #: src/features/security-settings/ui/security-settings-feature.tsx:95
 msgid "Logout from All Devices"
-msgstr "Logout from All Devices"
+msgstr ""
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:83
 msgid "Logout from all devices where you're currently signed in. This is useful if you've lost a device or suspect unauthorized access."
-msgstr "Logout from all devices where you're currently signed in. This is useful if you've lost a device or suspect unauthorized access."
+msgstr ""
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:69
 msgid "Manage your account security and active sessions."
-msgstr "Manage your account security and active sessions."
-
-#: src/features/users/components/user-form-modal.tsx:44
-#~ msgid "Manager"
-#~ msgstr "Manager"
+msgstr ""
 
 #: src/pages/about.tsx:71
 msgid "Mantine UI:"
-msgstr "Mantine UI:"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:90
 msgid "Mark as Paid"
-msgstr "Mark as Paid"
+msgstr ""
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:116
 msgid "Min 8 characters with uppercase, lowercase, number, and special character"
-msgstr "Min 8 characters with uppercase, lowercase, number, and special character"
+msgstr ""
 
 #: src/pages/about.tsx:49
 msgid "Modern"
-msgstr "Modern"
+msgstr ""
 
 #: src/pages/about.tsx:72
 msgid "Modern React components library with comprehensive theming"
-msgstr "Modern React components library with comprehensive theming"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:148
 msgid "Monthly"
-msgstr "Monthly"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:155
 msgid "Most Popular"
-msgstr "Most Popular"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:55
 msgid "MSW Dev Tools"
-msgstr "MSW Dev Tools"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:88
 msgid "Must be a number"
-msgstr "Must be a number"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:22
 #: src/shared/lib/i18n/billing-translations.ts:176
 msgid "Must be at least {min} characters"
-msgstr "Must be at least {min} characters"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:23
 msgid "Must be at least {min} characters long"
-msgstr "Must be at least {min} characters long"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:32
 #: src/shared/lib/i18n/billing-translations.ts:177
 msgid "Must be no more than {max} characters"
-msgstr "Must be no more than {max} characters"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:24
 msgid "Must be no more than {max} characters long"
-msgstr "Must be no more than {max} characters long"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:97
 msgid "Must contain only letters and numbers"
-msgstr "Must contain only letters and numbers"
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:76
-#~ msgid "Name"
-#~ msgstr "Name"
+msgstr ""
 
 #: src/widgets/sidebar/ui/sidebar.tsx:17
 msgid "Navigation"
-msgstr "Navigation"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:211
 msgid "New invoice generated"
-msgstr "New invoice generated"
+msgstr ""
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:114
 msgid "New Password"
-msgstr "New Password"
+msgstr ""
 
 #: src/features/change-password-form/model/validation.ts:35
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:42
 msgid "New password must be different from current password"
-msgstr "New password must be different from current password"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:226
 msgid "Next"
-msgstr "Next"
+msgstr ""
 
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:291
 msgid "Next billing:"
-msgstr "Next billing:"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:28
 msgid "Next Payment"
-msgstr "Next Payment"
+msgstr ""
 
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:166
 msgid "No billing activity yet"
-msgstr "No billing activity yet"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:221
 msgid "No data available"
-msgstr "No data available"
+msgstr ""
 
 #: src/features/users/components/users-data-grid.tsx:257
 #: src/pages/examples.tsx:296
 msgid "No users found"
-msgstr "No users found"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:127
 msgid "Normal"
-msgstr "Normal"
+msgstr ""
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:85
 msgid "Not Verified"
-msgstr "Not Verified"
+msgstr ""
 
 #: src/pages/examples.tsx:308
 msgid "Notification Examples"
-msgstr "Notification Examples"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:80
 msgid "Open"
-msgstr "Open"
+msgstr ""
 
 #: src/pages/about.tsx:106
 msgid "Organized by business features rather than technical layers"
-msgstr "Organized by business features rather than technical layers"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:124
 msgid "Overage"
-msgstr "Overage"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:84
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:224
 msgid "Overdue"
-msgstr "Overdue"
+msgstr ""
 
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:136
 msgid "Overdue Invoices"
-msgstr "Overdue Invoices"
+msgstr ""
 
 #: src/pages/404.tsx:33
 msgid "Page Not Found"
-msgstr "Page Not Found"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:81
 msgid "Paid"
-msgstr "Paid"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:97
 msgid "Paid Date"
-msgstr "Paid Date"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:246
 msgid "Password"
-msgstr "Password"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:48
 msgid "Password Change Failed"
-msgstr "Password Change Failed"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:41
 msgid "Password Changed"
-msgstr "Password Changed"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:148
 msgid "Password is required for new users"
-msgstr "Password is required for new users"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:26
 msgid "Password is too weak"
-msgstr "Password is too weak"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:41
 #: src/features/change-password-form/model/validation.ts:12
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:19
 #: src/features/users/components/user-form-modal.tsx:25
 msgid "Password must be at least 8 characters"
-msgstr "Password must be at least 8 characters"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:44
 #: src/features/change-password-form/model/validation.ts:19
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:26
 msgid "Password must contain at least one lowercase letter"
-msgstr "Password must contain at least one lowercase letter"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:50
 #: src/features/change-password-form/model/validation.ts:21
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:28
 msgid "Password must contain at least one number"
-msgstr "Password must contain at least one number"
+msgstr ""
 
 #: src/features/change-password-form/model/validation.ts:24
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:31
 msgid "Password must contain at least one special character"
-msgstr "Password must contain at least one special character"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:47
 #: src/features/change-password-form/model/validation.ts:15
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:22
 msgid "Password must contain at least one uppercase letter"
-msgstr "Password must contain at least one uppercase letter"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:185
 msgid "Password Reset Failed"
-msgstr "Password Reset Failed"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:178
 msgid "Password Reset Successful"
-msgstr "Password Reset Successful"
+msgstr ""
 
 #: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:469
 msgid "Password strength"
-msgstr "Password strength"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:59
 #: src/features/change-password-form/model/validation.ts:31
@@ -1140,433 +1082,412 @@ msgstr "Password strength"
 #: src/shared/lib/i18n/billing-translations.ts:175
 #: src/shared/lib/i18n/localized-validation.ts:25
 msgid "Passwords do not match"
-msgstr "Passwords do not match"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:14
 msgid "Past Due"
-msgstr "Past Due"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:89
 msgid "Pay Now"
-msgstr "Pay Now"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:210
 msgid "Payment could not be processed. Please check your payment method."
-msgstr "Payment could not be processed. Please check your payment method."
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:210
 msgid "Payment failed"
-msgstr "Payment failed"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:209
 msgid "Payment Failed"
-msgstr "Payment Failed"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:216
 msgid "Payment Method Added"
-msgstr "Payment Method Added"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:65
 #: src/shared/lib/i18n/localized-notifications.ts:217
 msgid "Payment method added successfully"
-msgstr "Payment method added successfully"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:230
 msgid "Payment Method Deleted"
-msgstr "Payment Method Deleted"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:67
 msgid "Payment method deleted successfully"
-msgstr "Payment method deleted successfully"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:237
 msgid "Payment Method Error"
-msgstr "Payment Method Error"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:231
 msgid "Payment method removed successfully"
-msgstr "Payment method removed successfully"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:223
 msgid "Payment Method Updated"
-msgstr "Payment Method Updated"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:66
 #: src/shared/lib/i18n/localized-notifications.ts:224
 msgid "Payment method updated successfully"
-msgstr "Payment method updated successfully"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:203
 msgid "Payment of {amount} processed successfully"
-msgstr "Payment of {amount} processed successfully"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:209
 msgid "Payment processed successfully"
-msgstr "Payment processed successfully"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:71
 msgid "Payment retry initiated"
-msgstr "Payment retry initiated"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:202
 msgid "Payment Successful"
-msgstr "Payment Successful"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:47
 msgid "PayPal"
-msgstr "PayPal"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:214
 msgid "Plan changed successfully"
-msgstr "Plan changed successfully"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:34
 msgid "Plan downgraded successfully"
-msgstr "Plan downgraded successfully"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:33
 msgid "Plan upgraded successfully"
-msgstr "Plan upgraded successfully"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:150
 msgid "Please check your email for the password reset link"
-msgstr "Please check your email for the password reset link"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:102
 msgid "Please check your inbox for the verification link"
-msgstr "Please check your inbox for the verification link"
+msgstr ""
 
 #: src/features/change-password-form/model/validation.ts:28
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:35
 msgid "Please confirm your new password"
-msgstr "Please confirm your new password"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:234
 msgid "Please enter a valid amount"
-msgstr "Please enter a valid amount"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:172
 #: src/shared/lib/i18n/localized-validation.ts:20
 msgid "Please enter a valid card number"
-msgstr "Please enter a valid card number"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:19
 msgid "Please enter a valid currency amount"
-msgstr "Please enter a valid currency amount"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:173
 msgid "Please enter a valid CVV"
-msgstr "Please enter a valid CVV"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:21
 msgid "Please enter a valid CVV code"
-msgstr "Please enter a valid CVV code"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:28
 msgid "Please enter a valid date"
-msgstr "Please enter a valid date"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:171
 #: src/shared/lib/i18n/localized-validation.ts:16
 msgid "Please enter a valid email address"
-msgstr "Please enter a valid email address"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:174
 #: src/shared/lib/i18n/localized-validation.ts:22
 msgid "Please enter a valid expiry date"
-msgstr "Please enter a valid expiry date"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:17
 msgid "Please enter a valid phone number"
-msgstr "Please enter a valid phone number"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:18
 msgid "Please enter a valid postal code"
-msgstr "Please enter a valid postal code"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:237
 msgid "Please enter a valid tax ID"
-msgstr "Please enter a valid tax ID"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:27
 msgid "Please enter a valid URL"
-msgstr "Please enter a valid URL"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:238
 msgid "Please enter a valid VAT number"
-msgstr "Please enter a valid VAT number"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:229
 msgid "Please select a billing cycle"
-msgstr "Please select a billing cycle"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:230
 msgid "Please select a payment method"
-msgstr "Please select a payment method"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:228
 msgid "Please select a valid plan"
-msgstr "Please select a valid plan"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:328
 msgid "Please wait while we process your payment..."
-msgstr "Please wait while we process your payment..."
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:337
 msgid "Please wait while we update your subscription..."
-msgstr "Please wait while we update your subscription..."
+msgstr ""
 
 #: src/pages/about.tsx:80
 msgid "Powerful data synchronization and caching"
-msgstr "Powerful data synchronization and caching"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:227
 msgid "Previous"
-msgstr "Previous"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:153
 msgid "Price"
-msgstr "Price"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:144
 msgid "Pro"
-msgstr "Pro"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:327
 msgid "Processing Payment"
-msgstr "Processing Payment"
+msgstr ""
 
 #: src/pages/about.tsx:59
 msgid "React 19:"
-msgstr "React 19:"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:22
 msgid "Reactivate Subscription"
-msgstr "Reactivate Subscription"
+msgstr ""
 
 #: src/pages/about.tsx:138
 msgid "Ready to start building? Check out the documentation and source code."
-msgstr "Ready to start building? Check out the documentation and source code."
+msgstr ""
 
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:112
 msgid "Recent Billing Activity"
-msgstr "Recent Billing Activity"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:156
 msgid "Recommended"
-msgstr "Recommended"
+msgstr ""
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:91
 msgid "Registered"
-msgstr "Registered"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:122
 msgid "Remaining"
-msgstr "Remaining"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:30
 msgid "Renews On"
-msgstr "Renews On"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:149
 msgid "Reset Link Sent"
-msgstr "Reset Link Sent"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:107
 msgid "Response delay (ms)"
-msgstr "Response delay (ms)"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:223
 msgid "Retry"
-msgstr "Retry"
+msgstr ""
 
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:255
 msgid "Retry payment"
-msgstr "Retry payment"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:54
 msgid "Retry Payment"
-msgstr "Retry Payment"
+msgstr ""
 
 #: src/shared/ui/loading-state/loading-state.tsx:196
 msgid "Retrying..."
-msgstr "Retrying..."
+msgstr ""
 
 #: src/pages/examples.tsx:262
 msgid "Reusable"
-msgstr "Reusable"
+msgstr ""
 
 #: src/pages/examples.tsx:209
 msgid "Reusable form components with validation, built using Mantine Form and custom validation rules."
-msgstr "Reusable form components with validation, built using Mantine Form and custom validation rules."
+msgstr ""
 
 #: src/features/dashboard/ui/dashboard-feature.tsx:35
 msgid "Revenue"
-msgstr "Revenue"
+msgstr ""
 
 #: src/pages/examples.tsx:110
 msgid "Role"
-msgstr "Role"
-
-#: src/features/users/components/user-form-modal.tsx:30
-#~ msgid "Role is required"
-#~ msgstr "Role is required"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:257
 #: src/features/users/components/users-data-grid.tsx:128
 msgid "Roles"
-msgstr "Roles"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:57
 msgid "Running"
-msgstr "Running"
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:70
-#~ msgid "Sample Form"
-#~ msgstr "Sample Form"
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:60
-#: src/pages/examples.tsx:250
-#~ msgid "Sample Form Feature"
-#~ msgstr "Sample Form Feature"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:191
 msgid "Save"
-msgstr "Save"
+msgstr ""
 
 #: src/pages/about.tsx:95
 msgid "Scalable"
-msgstr "Scalable"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:228
 msgid "Search"
-msgstr "Search"
+msgstr ""
 
 #: src/features/users/components/users-data-grid.tsx:239
 msgid "Search users..."
-msgstr "Search users..."
+msgstr ""
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:65
 msgid "Security Settings"
-msgstr "Security Settings"
+msgstr ""
 
 #: src/shared/ui/locale-selector/locale-selector.tsx:97
 msgid "Select language"
-msgstr "Select language"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:160
 msgid "Select Plan"
-msgstr "Select Plan"
-
-#: src/features/users/components/user-form-modal.tsx:215
-#~ msgid "Select user role"
-#~ msgstr "Select user role"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:258
 msgid "Select user roles"
-msgstr "Select user roles"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:91
 msgid "Send Reminder"
-msgstr "Send Reminder"
+msgstr ""
 
 #: src/shared/ui/loading-state/loading-state.tsx:189
 msgid "Server is temporarily unavailable. Please try again"
-msgstr "Server is temporarily unavailable. Please try again"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:53
 msgid "Set as Default"
-msgstr "Set as Default"
+msgstr ""
 
 #. placeholder {0}: invoices.length
 #. placeholder {1}: invoices.length > 1 ? "s" : ""
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:281
 msgid "Showing {0} recent invoice{1}"
-msgstr "Showing {0} recent invoice{1}"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:108
 msgid "Simulate network latency"
-msgstr "Simulate network latency"
+msgstr ""
 
 #: src/shared/ui/loading-state/loading-state.tsx:191
 msgid "Something went wrong. Please try again"
-msgstr "Something went wrong. Please try again"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:230
 msgid "Sort"
-msgstr "Sort"
+msgstr ""
 
 #: src/pages/examples.tsx:234
 msgid "Sortable, filterable data tables with pagination and custom cell rendering."
-msgstr "Sortable, filterable data tables with pagination and custom cell rendering."
+msgstr ""
 
 #: src/pages/examples.tsx:177
 msgid "Sorting by {key} in {direction} order"
-msgstr "Sorting by {key} in {direction} order"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:163
 msgid "Start Free Trial"
-msgstr "Start Free Trial"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:186
 msgid "State"
-msgstr "State"
+msgstr ""
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:72
 #: src/features/users/components/users-data-grid.tsx:138
 #: src/pages/examples.tsx:124
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:179
 msgid "Status"
-msgstr "Status"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:57
 msgid "Stopped"
-msgstr "Stopped"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:115
 msgid "Storage (GB)"
-msgstr "Storage (GB)"
+msgstr ""
 
 #: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:359
 msgid "Strong"
-msgstr "Strong"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:193
 msgid "Submit"
-msgstr "Submit"
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:42
-#~ msgid "Submit Failed"
-#~ msgstr "Submit Failed"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:213
 msgid "Subscription canceled"
-msgstr "Subscription canceled"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:180
 msgid "Subscription Canceled"
-msgstr "Subscription Canceled"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:35
 msgid "Subscription canceled successfully"
-msgstr "Subscription canceled successfully"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:194
 msgid "Subscription Error"
-msgstr "Subscription Error"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:187
 msgid "Subscription Reactivated"
-msgstr "Subscription Reactivated"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:166
 #: src/shared/lib/i18n/localized-notifications.ts:173
 msgid "Subscription Updated"
-msgstr "Subscription Updated"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:99
 msgid "Subtotal"
-msgstr "Subtotal"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:128
 #: src/features/users/components/user-form-modal.tsx:166
@@ -1574,420 +1495,408 @@ msgstr "Subtotal"
 #: src/pages/examples.tsx:324
 #: src/shared/lib/i18n/billing-translations.ts:203
 msgid "Success"
-msgstr "Success"
+msgstr ""
 
 #: src/pages/examples.tsx:320
 msgid "Success notification!"
-msgstr "Success notification!"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:174
 msgid "Successfully downgraded to {planName}"
-msgstr "Successfully downgraded to {planName}"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:167
 msgid "Successfully upgraded to {planName}"
-msgstr "Successfully upgraded to {planName}"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:44
 msgid "Super Admin"
-msgstr "Super Admin"
+msgstr ""
 
 #: src/shared/ui/theme-toggle/theme-toggle.tsx:16
 msgid "Switch to dark mode"
-msgstr "Switch to dark mode"
+msgstr ""
 
 #: src/shared/ui/theme-toggle/theme-toggle.tsx:16
 msgid "Switch to light mode"
-msgstr "Switch to light mode"
+msgstr ""
 
 #: src/pages/about.tsx:79
 msgid "TanStack Query:"
-msgstr "TanStack Query:"
+msgstr ""
 
 #: src/pages/about.tsx:75
 msgid "TanStack Router:"
-msgstr "TanStack Router:"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:100
 msgid "Tax"
-msgstr "Tax"
+msgstr ""
 
 #: src/pages/about.tsx:47
 msgid "Technology Stack"
-msgstr "Technology Stack"
+msgstr ""
 
 #: src/pages/examples.tsx:311
 msgid "Test different types of notifications"
-msgstr "Test different types of notifications"
+msgstr ""
 
 #: src/pages/about.tsx:113
 msgid "Testing Ready:"
-msgstr "Testing Ready:"
+msgstr ""
 
 #: src/pages/about.tsx:114
 msgid "testing setup with Vitest and Playwright"
-msgstr "testing setup with Vitest and Playwright"
+msgstr ""
 
 #: src/pages/404.tsx:36
 msgid "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
-msgstr "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
+msgstr ""
 
 #: src/shared/ui/loading-state/loading-state.tsx:187
 msgid "The request timed out. Please try again"
-msgstr "The request timed out. Please try again"
+msgstr ""
 
 #: src/features/users/components/users-data-grid.tsx:58
 msgid "This action cannot be undone."
-msgstr "This action cannot be undone."
-
-#: src/pages/examples.tsx:253
-#~ msgid "This demonstrates a complete feature implementation following Feature-Sliced Design principles."
-#~ msgstr "This demonstrates a complete feature implementation following Feature-Sliced Design principles."
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:6
 #: src/shared/lib/i18n/billing-translations.ts:170
 #: src/shared/lib/i18n/localized-validation.ts:15
 msgid "This field is required"
-msgstr "This field is required"
+msgstr ""
 
 #: src/pages/about.tsx:54
 msgid "This template is built with cutting-edge technologies for optimal developer experience and performance."
-msgstr "This template is built with cutting-edge technologies for optimal developer experience and performance."
+msgstr ""
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:28
 msgid "This will log you out from all devices where you're currently signed in, including this device."
-msgstr "This will log you out from all devices where you're currently signed in, including this device."
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:63
 msgid "Toggle MSW settings"
-msgstr "Toggle MSW settings"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:19
 msgid "Token Validation Failed"
-msgstr "Token Validation Failed"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:101
 msgid "Total"
-msgstr "Total"
+msgstr ""
 
 #: src/features/dashboard/ui/dashboard-feature.tsx:29
 msgid "Total Orders"
-msgstr "Total Orders"
+msgstr ""
 
 #: src/features/dashboard/ui/dashboard-feature.tsx:23
 msgid "Total Users"
-msgstr "Total Users"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:13
 msgid "Trial"
-msgstr "Trial"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:29
 msgid "Trial Ends"
-msgstr "Trial Ends"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:296
 msgid "Trial Expired"
-msgstr "Trial Expired"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:289
 msgid "Trial Expiring"
-msgstr "Trial Expiring"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:212
 msgid "Trial expiring soon"
-msgstr "Trial expiring soon"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:303
 msgid "Trial Extended"
-msgstr "Trial Extended"
+msgstr ""
 
 #: src/shared/ui/loading-state/loading-state.tsx:214
 msgid "Try Again"
-msgstr "Try Again"
+msgstr ""
 
 #: src/pages/about.tsx:109
 msgid "Type Safety:"
-msgstr "Type Safety:"
+msgstr ""
 
 #: src/pages/about.tsx:64
 msgid "Type-safe development with enhanced developer experience"
-msgstr "Type-safe development with enhanced developer experience"
+msgstr ""
 
 #: src/pages/about.tsx:76
 msgid "Type-safe routing with code splitting"
-msgstr "Type-safe routing with code splitting"
+msgstr ""
 
 #: src/pages/about.tsx:63
 msgid "TypeScript:"
-msgstr "TypeScript:"
+msgstr ""
 
 #: src/pages/examples.tsx:256
 msgid "UI Components"
-msgstr "UI Components"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:83
 msgid "Uncollectible"
-msgstr "Uncollectible"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:93
 msgid "Unhandled requests"
-msgstr "Unhandled requests"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:16
 msgid "Unpaid"
-msgstr "Unpaid"
+msgstr ""
 
 #: src/features/users/components/users-data-grid.tsx:154
 msgid "Unverified"
-msgstr "Unverified"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:308
 #: src/shared/lib/i18n/billing-translations.ts:194
 msgid "Update"
-msgstr "Update"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:51
 msgid "Update Payment Method"
-msgstr "Update Payment Method"
+msgstr ""
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:97
 msgid "Update your password to keep your account secure."
-msgstr "Update your password to keep your account secure."
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:288
 msgid "Updated:"
-msgstr "Updated:"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:336
 msgid "Updating Subscription"
-msgstr "Updating Subscription"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:19
 msgid "Upgrade Plan"
-msgstr "Upgrade Plan"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:161
 msgid "Upgrade to {planName}"
-msgstr "Upgrade to {planName}"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:134
 msgid "Usage limit exceeded"
-msgstr "Usage limit exceeded"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:274
 msgid "Usage Limit Exceeded"
-msgstr "Usage Limit Exceeded"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:123
 msgid "Usage Percentage"
-msgstr "Usage Percentage"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:267
 msgid "Usage Warning"
-msgstr "Usage Warning"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:42
 #: src/features/users/components/user-form-modal.tsx:308
 #: src/features/users/components/users-data-grid.tsx:111
 #: src/pages/examples.tsx:88
 msgid "User"
-msgstr "User"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:270
 msgid "User can log in and access the system"
-msgstr "User can log in and access the system"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:167
 msgid "User created successfully"
-msgstr "User created successfully"
+msgstr ""
 
 #: src/features/users/components/users-data-grid.tsx:68
 msgid "User deleted successfully"
-msgstr "User deleted successfully"
+msgstr ""
 
 #: src/features/users/components/users-data-grid.tsx:226
 #: src/widgets/sidebar/ui/sidebar.tsx:41
 msgid "User Management"
-msgstr "User Management"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:129
 msgid "User updated successfully"
-msgstr "User updated successfully"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:277
 msgid "User's email address has been verified"
-msgstr "User's email address has been verified"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:207
 msgid "Username"
-msgstr "Username"
+msgstr ""
 
 #: src/features/users/components/user-form-modal.tsx:19
 msgid "Username must be at least 3 characters"
-msgstr "Username must be at least 3 characters"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:31
 msgid "Value must be at least {min}"
-msgstr "Value must be at least {min}"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:33
 msgid "Value must be between {min} and {max}"
-msgstr "Value must be between {min} and {max}"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:32
 msgid "Value must be no more than {max}"
-msgstr "Value must be no more than {max}"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:101
 msgid "Verification Email Sent"
-msgstr "Verification Email Sent"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:131
 msgid "Verification Failed"
-msgstr "Verification Failed"
+msgstr ""
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:85
 #: src/features/users/components/users-data-grid.tsx:154
 msgid "Verified"
-msgstr "Verified"
+msgstr ""
 
 #: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:355
 #: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:366
 msgid "Very Weak"
-msgstr "Very Weak"
+msgstr ""
 
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:127
 msgid "View All Invoices"
-msgstr "View All Invoices"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:88
 msgid "View Details"
-msgstr "View Details"
+msgstr ""
 
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:232
 msgid "View invoice details"
-msgstr "View invoice details"
+msgstr ""
 
 #: src/pages/about.tsx:150
 msgid "View on GitHub"
-msgstr "View on GitHub"
+msgstr ""
 
 #: src/features/users/components/users-data-grid.tsx:200
 msgid "View only"
-msgstr "View only"
-
-#: src/pages/examples.tsx:141
-#~ msgid "Viewing {0}"
-#~ msgstr "Viewing {0}"
+msgstr ""
 
 #: src/pages/examples.tsx:141
 msgid "Viewing {userName}"
-msgstr "Viewing {userName}"
+msgstr ""
 
 #: src/pages/about.tsx:67
 msgid "Vite:"
-msgstr "Vite:"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:82
 msgid "Void"
-msgstr "Void"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:101
 msgid "Warn (log warning)"
-msgstr "Warn (log warning)"
+msgstr ""
 
 #: src/pages/examples.tsx:344
 #: src/shared/lib/i18n/billing-translations.ts:205
 msgid "Warning"
-msgstr "Warning"
+msgstr ""
 
 #: src/pages/examples.tsx:340
 msgid "Warning notification!"
-msgstr "Warning notification!"
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:39
-#~ msgid "We have received your submission."
-#~ msgstr "We have received your submission."
+msgstr ""
 
 #: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:356
 msgid "Weak"
-msgstr "Weak"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:149
 msgid "Yearly"
-msgstr "Yearly"
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:133
 msgid "You are approaching your usage limit"
-msgstr "You are approaching your usage limit"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:282
 msgid "You are in the grace period for {metricName}. Please upgrade soon."
-msgstr "You are in the grace period for {metricName}. Please upgrade soon."
+msgstr ""
 
 #. placeholder {0}: overdueInvoices.length
 #. placeholder {1}: overdueInvoices.length > 1 ? "s" : ""
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:139
 msgid "You have {0} overdue invoice{1} requiring immediate attention."
-msgstr "You have {0} overdue invoice{1} requiring immediate attention."
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:67
 msgid "You have been logged out from all devices"
-msgstr "You have been logged out from all devices"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:275
 msgid "You have exceeded your {metricName} quota. Consider upgrading your plan."
-msgstr "You have exceeded your {metricName} quota. Consider upgrading your plan."
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:268
 msgid "You have used {percentage}% of your {metricName} quota"
-msgstr "You have used {percentage}% of your {metricName} quota"
+msgstr ""
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:35
 msgid "You will need to sign in again on all devices."
-msgstr "You will need to sign in again on all devices."
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:233
 msgid "Your card has expired"
-msgstr "Your card has expired"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-validation.ts:232
 msgid "Your card was declined"
-msgstr "Your card was declined"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:125
 msgid "Your email has been successfully verified"
-msgstr "Your email has been successfully verified"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:42
 msgid "Your password has been successfully changed"
-msgstr "Your password has been successfully changed"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:179
 msgid "Your password has been successfully reset"
-msgstr "Your password has been successfully reset"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:181
 msgid "Your subscription has been canceled successfully"
-msgstr "Your subscription has been canceled successfully"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:188
 msgid "Your subscription has been reactivated"
-msgstr "Your subscription has been reactivated"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:290
 msgid "Your trial expires in {daysLeft} days. Upgrade to continue service."
-msgstr "Your trial expires in {daysLeft} days. Upgrade to continue service."
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:304
 msgid "Your trial has been extended until {newEndDate}"
-msgstr "Your trial has been extended until {newEndDate}"
+msgstr ""
 
 #: src/shared/lib/i18n/localized-notifications.ts:297
 msgid "Your trial has expired. Please upgrade to continue using the service."
-msgstr "Your trial has expired. Please upgrade to continue using the service."
+msgstr ""
 
 #: src/shared/lib/i18n/billing-translations.ts:187
 msgid "ZIP Code"
-msgstr "ZIP Code"
+msgstr ""

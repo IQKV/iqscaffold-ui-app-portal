@@ -8,6 +8,7 @@ export {
 } from "./data-table";
 export { ConfirmationModal, useConfirmationModal } from "./confirmation-modal";
 export { ThemeToggle } from "./theme-toggle";
+export { LocaleSelector } from "./locale-selector";
 
 // Enhanced error handling components
 export {

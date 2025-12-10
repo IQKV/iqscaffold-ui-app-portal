@@ -22,8 +22,10 @@ import {
   IconArrowRight,
   IconInfoCircle,
 } from "@tabler/icons-react";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { InvoiceStatusIndicator } from "@/shared/ui/billing";
-import { CurrencyUtils, BillingDateUtils } from "@/shared/lib/billing-utils";
+import { LocaleCurrencyUtils, LocaleDateUtils, useBillingNotifications } from "@/shared/lib/i18n";
 import type { Invoice, Subscription } from "@/shared/types/billing";
 import { InvoiceStatus } from "@/shared/types/billing";
 
@@ -46,6 +48,8 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
   subscription,
   loading = false,
 }) => {
+  const { _ } = useLingui();
+  const billingNotifications = useBillingNotifications();
   if (loading) {
     return (
       <Card withBorder>
@@ -83,6 +87,7 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
   const handleDownloadInvoice = (invoiceId: string) => {
     // TODO: Implement invoice download
     console.log("Download invoice:", invoiceId);
+    billingNotifications.invoiceDownloaded();
   };
 
   const handleViewInvoice = (invoiceId: string) => {
@@ -93,6 +98,7 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
   const handleRetryPayment = (invoiceId: string) => {
     // TODO: Implement payment retry
     console.log("Retry payment for invoice:", invoiceId);
+    // billingNotifications.paymentSuccess() or billingNotifications.paymentFailed() based on result
   };
 
   return (
@@ -102,10 +108,10 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
         <Group justify="space-between" align="center">
           <div>
             <Text size="lg" fw={600}>
-              Recent Billing Activity
+              <Trans>Recent Billing Activity</Trans>
             </Text>
             <Text c="dimmed" size="sm">
-              Latest invoices and payment history
+              <Trans>Latest invoices and payment history</Trans>
             </Text>
           </div>
 
@@ -117,7 +123,7 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
               window.location.href = "/billing/invoices";
             }}
           >
-            View All Invoices
+            <Trans>View All Invoices</Trans>
           </Button>
         </Group>
 
@@ -126,18 +132,18 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
           <Alert
             color="red"
             icon={<IconCreditCard size={16} />}
-            title="Overdue Invoices"
+            title={_(msg`Overdue Invoices`)}
           >
             <Text size="sm" mb="xs">
-              You have {overdueInvoices.length} overdue invoice
-              {overdueInvoices.length > 1 ? "s" : ""} requiring immediate
-              attention.
+              <Trans>
+                You have {overdueInvoices.length} overdue {overdueInvoices.length > 1 ? "invoices" : "invoice"} requiring immediate attention.
+              </Trans>
             </Text>
             <Group gap="xs">
               {overdueInvoices.slice(0, 2).map((invoice) => (
                 <Badge key={invoice.id} color="red" variant="light" size="sm">
                   {invoice.number} -{" "}
-                  {CurrencyUtils.format(invoice.amount, invoice.currency)}
+                  {LocaleCurrencyUtils.format(invoice.amount, invoice.currency)}
                 </Badge>
               ))}
               {overdueInvoices.length > 2 && (
@@ -156,21 +162,21 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
           <Stack align="center" justify="center" py="xl">
             <IconReceipt size={48} color="var(--mantine-color-gray-5)" />
             <Text c="dimmed" size="lg">
-              No billing activity yet
+              <Trans>No billing activity yet</Trans>
             </Text>
             <Text c="dimmed" size="sm">
-              Invoices and payment history will appear here
+              <Trans>Invoices and payment history will appear here</Trans>
             </Text>
           </Stack>
         ) : (
           <Table>
             <Table.Thead>
               <Table.Tr>
-                <Table.Th>Invoice</Table.Th>
-                <Table.Th>Date</Table.Th>
-                <Table.Th>Amount</Table.Th>
-                <Table.Th>Status</Table.Th>
-                <Table.Th>Actions</Table.Th>
+                <Table.Th><Trans>Invoice</Trans></Table.Th>
+                <Table.Th><Trans>Date</Trans></Table.Th>
+                <Table.Th><Trans>Amount</Trans></Table.Th>
+                <Table.Th><Trans>Status</Trans></Table.Th>
+                <Table.Th><Trans>Actions</Trans></Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>
@@ -187,8 +193,8 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
                           {invoice.number}
                         </Text>
                         <Text size="xs" c="dimmed">
-                          Due:{" "}
-                          {BillingDateUtils.formatBillingDate(
+                          <Trans>Due:</Trans>{" "}
+                          {LocaleDateUtils.formatDate(
                             new Date(invoice.dueDate)
                           )}
                         </Text>
@@ -197,7 +203,7 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
 
                     <Table.Td>
                       <Text size="sm">
-                        {BillingDateUtils.formatBillingDate(
+                        {LocaleDateUtils.formatDate(
                           new Date(invoice.createdAt)
                         )}
                       </Text>
@@ -205,7 +211,7 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
 
                     <Table.Td>
                       <Text size="sm" fw={500}>
-                        {CurrencyUtils.format(invoice.amount, invoice.currency)}
+                        {LocaleCurrencyUtils.format(invoice.amount, invoice.currency)}
                       </Text>
                     </Table.Td>
 
@@ -214,7 +220,7 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
                         <InvoiceStatusIndicator invoice={invoice} />
                         {isOverdue && (
                           <Badge color="red" size="xs" variant="dot">
-                            Overdue
+                            <Trans>Overdue</Trans>
                           </Badge>
                         )}
                       </Group>
@@ -222,7 +228,7 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
 
                     <Table.Td>
                       <Group gap="xs">
-                        <Tooltip label="View invoice details">
+                        <Tooltip label={_(msg`View invoice details`)}>
                           <ActionIcon
                             variant="light"
                             size="sm"
@@ -233,7 +239,7 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
                         </Tooltip>
 
                         {invoice.status === "paid" && (
-                          <Tooltip label="Download PDF">
+                          <Tooltip label={_(msg`Download PDF`)}>
                             <ActionIcon
                               variant="light"
                               size="sm"
@@ -245,7 +251,7 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
                         )}
 
                         {(invoice.status === "open" || isOverdue) && (
-                          <Tooltip label="Retry payment">
+                          <Tooltip label={_(msg`Retry payment`)}>
                             <ActionIcon
                               variant="light"
                               color="blue"
@@ -271,8 +277,9 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
             <Divider />
             <Group justify="space-between">
               <Text size="sm" c="dimmed">
-                Showing {invoices.length} recent invoice
-                {invoices.length > 1 ? "s" : ""}
+                <Trans>
+                  Showing {invoices.length} recent {invoices.length > 1 ? "invoices" : "invoice"}
+                </Trans>
               </Text>
 
               {subscription && (
@@ -280,8 +287,8 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
                   <Group gap="xs">
                     <IconInfoCircle size={14} />
                     <Text size="xs" c="dimmed">
-                      Next billing:{" "}
-                      {BillingDateUtils.formatBillingDate(
+                      <Trans>Next billing:</Trans>{" "}
+                      {LocaleDateUtils.formatDate(
                         subscription.currentPeriodEnd
                       )}
                     </Text>
