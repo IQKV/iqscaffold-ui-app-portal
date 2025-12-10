@@ -16,7 +16,8 @@ import {
   IconInfoCircle,
 } from "@tabler/icons-react";
 import { UsageUtils } from "@/shared/lib/billing-utils";
-import type { QuotaStatus, UsageMetricType } from "@/shared/types/billing";
+import type { QuotaStatus } from "@/shared/types/billing";
+import { UsageMetricType } from "@/shared/types/billing";
 import classes from "./usage-progress-bar.module.css";
 
 export interface UsageProgressBarProps {

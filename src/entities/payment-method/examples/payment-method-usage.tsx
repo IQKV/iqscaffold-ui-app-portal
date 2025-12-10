@@ -6,6 +6,7 @@ import {
   PaymentMethodService,
   type PaymentMethodFormData,
 } from "@/entities/payment-method";
+import { PaymentProvider } from "@/shared/types/billing";
 import { PaymentMethodForm, PaymentMethodList } from "@/shared/ui/billing";
 import { useTenant } from "@/processes/tenant";
 
@@ -29,13 +30,13 @@ export const PaymentMethodManagementExample: React.FC = () => {
     getPaymentMethodMetrics,
   } = usePaymentMethodStore();
 
-  const tenantId = tenant?.id || "";
+  const tenantId = tenant?.tenantId || "";
   const metrics = getPaymentMethodMetrics(tenantId);
 
   useEffect(() => {
     if (tenantId) {
-      fetchPaymentMethods(tenantId).catch((err) => {
-        setError(err.message);
+      fetchPaymentMethods(tenantId).catch((err: unknown) => {
+        setError(err instanceof Error ? err.message : "Unknown error");
       });
     }
   }, [tenantId, fetchPaymentMethods]);
@@ -60,7 +61,7 @@ export const PaymentMethodManagementExample: React.FC = () => {
       // Convert form data to payment method data
       const paymentMethodData = {
         type: formData.type,
-        provider: formData.provider || "stripe",
+        provider: (formData.provider || PaymentProvider.STRIPE) as PaymentProvider,
         cardNumber: formData.cardNumber,
         expiryMonth: formData.expiryMonth,
         expiryYear: formData.expiryYear,

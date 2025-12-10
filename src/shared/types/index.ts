@@ -24,32 +24,23 @@ export type {
   TenantContext,
 } from "./tenant";
 
-// Billing types
+// Billing types - interfaces
 export type {
   Subscription,
-  SubscriptionStatus,
   BillingCycle,
   Plan,
   PlanTier,
   PlanFeature,
   PlanQuota,
   UsageMetric,
-  UsageMetricType,
   QuotaStatus,
   Invoice,
-  InvoiceStatus,
   InvoiceLineItem,
   PaymentAttempt,
-  PaymentStatus,
   PaymentMethod,
-  PaymentMethodType,
-  PaymentProvider,
   PaymentMethodMetadata,
   PaymentMethodData,
   BillingAddress,
-  UserAuthority,
-  Authority,
-  AuthorityCheck,
   BillingDashboardData,
   PlanChangeRequest,
   PlanChangeResponse,
@@ -59,15 +50,22 @@ export type {
   UsageTrendData,
   QuotaUtilizationData,
   WebhookEvent,
-  WebhookEventType,
   ProrationCalculation,
-  SecurityContext,
-  ComponentVisibility,
 } from "./billing";
 
-// Authority types
+// Billing types - enums (need regular export to be used as values)
+export {
+  SubscriptionStatus,
+  UsageMetricType,
+  InvoiceStatus,
+  PaymentStatus,
+  PaymentMethodType,
+  PaymentProvider,
+  WebhookEventType,
+} from "./billing";
+
+// Authority types - interfaces
 export type {
-  Authority,
   UserAuthority,
   AuthorityCheck,
   SecurityContext,
@@ -75,3 +73,6 @@ export type {
   AuthorityRule,
   PageLayoutConfig,
 } from "./authority";
+
+// Authority types - enums (need regular export to be used as values)
+export { Authority } from "./authority";

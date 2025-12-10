@@ -1,4 +1,4 @@
-import type { UsageMetricType } from "../types/usage-types";
+import { UsageMetricType } from "../types/usage-types";
 
 /**
  * Quota Error Handler

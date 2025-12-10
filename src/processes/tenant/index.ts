@@ -19,6 +19,7 @@ export {
   useTenantLoading,
   useTenantError,
   useHasTenantContext,
+  useTenant,
 } from "./model/tenant-selectors";
 
 // UI Components

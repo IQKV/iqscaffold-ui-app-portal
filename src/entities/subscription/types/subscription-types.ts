@@ -7,7 +7,7 @@ import type {
 } from "@/shared/types/billing";
 
 // Re-export base types
-export type { SubscriptionStatus, BillingCycle };
+export type { SubscriptionStatus, BillingCycle, Plan, ProrationCalculation };
 export type Subscription = BaseSubscription;
 
 // Subscription-specific business operations

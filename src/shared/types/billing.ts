@@ -164,27 +164,9 @@ export interface PaymentMethodMetadata {
   country?: string;
 }
 
-export interface UserAuthority {
-  userId: string;
-  tenantId?: string;
-  authorities: Authority[];
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-export enum Authority {
-  TENANT_ADMIN = "tenant_admin",
-  PLATFORM_ADMIN = "platform_admin",
-  SUPPORT_AGENT = "support_agent",
-  BILLING_VIEWER = "billing_viewer",
-}
-
-export interface AuthorityCheck {
-  authority: Authority;
-  resource: string;
-  action: string;
-  tenantId?: string;
-}
+// Authority types are now imported from authority.ts
+import { Authority } from "./authority";
+export { Authority };
 
 // Form-related types
 export interface PaymentMethodData {
@@ -303,19 +285,4 @@ export interface ProrationCalculation {
   effectiveDate: Date;
 }
 
-// Security context types
-export interface SecurityContext {
-  tenantId?: string;
-  userId: string;
-  sessionId: string;
-  ipAddress?: string;
-  userAgent?: string;
-}
-
-// Component visibility types
-export interface ComponentVisibility {
-  pages: string[];
-  widgets: string[];
-  actions: string[];
-  fields: string[];
-}
+// Security context and component visibility types are now in authority.ts

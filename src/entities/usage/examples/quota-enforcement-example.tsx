@@ -18,7 +18,7 @@ import { IconCheck, IconX, IconAlertTriangle } from "@tabler/icons-react";
 import { useQuotaEnforcement } from "../model/use-quota-enforcement";
 import { QuotaStatusGrid } from "../ui/quota-status-indicator";
 import { QuotaErrorHandler } from "../lib/quota-error-handler";
-import type { UsageMetricType } from "../types/usage-types";
+import { UsageMetricType } from "../types/usage-types";
 
 /**
  * Quota Enforcement Example Component
@@ -44,7 +44,7 @@ export const QuotaEnforcementExample: React.FC = () => {
   } = useQuotaEnforcement(tenantId);
 
   const [selectedMetric, setSelectedMetric] =
-    useState<UsageMetricType>("api_calls");
+    useState<UsageMetricType>(UsageMetricType.API_CALLS);
   const [usageAmount, setUsageAmount] = useState<number>(1);
   const [isRecording, setIsRecording] = useState(false);
   const [isChecking, setIsChecking] = useState(false);

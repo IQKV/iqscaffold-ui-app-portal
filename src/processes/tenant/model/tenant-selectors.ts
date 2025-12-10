@@ -38,3 +38,22 @@ export const useTenantError = () => useTenantStore((state) => state.error);
  */
 export const useHasTenantContext = () =>
   useTenantStore((state) => state.currentTenantId !== null);
+
+/**
+ * Convenience hook combining common tenant selectors
+ */
+export const useTenant = () => {
+  const tenant = useCurrentTenant();
+  const tenantId = useCurrentTenantId();
+  const isLoading = useTenantLoading();
+  const error = useTenantError();
+  const isInitialized = useTenantInitialized();
+  
+  return {
+    tenant,
+    tenantId,
+    isLoading,
+    error,
+    isInitialized,
+  };
+};

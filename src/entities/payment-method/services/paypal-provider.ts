@@ -3,9 +3,8 @@ import type {
   PaymentMethodMetadata,
   ValidationResult,
   TokenizationResult,
-  PaymentMethodType,
 } from "../types/payment-method-types";
-import { PaymentProvider } from "@/shared/types/billing";
+import { PaymentProvider, PaymentMethodType } from "@/shared/types/billing";
 import {
   PaymentProviderInterface,
   PaymentProviderConfig,
@@ -14,6 +13,7 @@ import {
   RecurringPaymentSetup,
   WebhookEvent,
   PaymentRetryService,
+  RefundResult,
 } from "./payment-provider-interface";
 
 /**
@@ -22,7 +22,7 @@ import {
  */
 export class PayPalPaymentProvider implements PaymentProviderInterface {
   readonly name = PaymentProvider.PAYPAL;
-  readonly supportedTypes: PaymentMethodType[] = ["card", "bank_account"];
+  readonly supportedTypes: PaymentMethodType[] = [PaymentMethodType.CARD, PaymentMethodType.BANK_ACCOUNT];
   readonly supportedCountries = [
     "US",
     "CA",
@@ -107,7 +107,7 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
 
     // PayPal validation is typically done through their SDK
     // For card payments through PayPal, basic validation
-    if (data.type === "card") {
+    if (data.type === PaymentMethodType.CARD) {
       if (data.cardNumber && data.cardNumber.replace(/\s/g, "").length < 13) {
         errors.push("Invalid card number");
       }
@@ -139,7 +139,7 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
     }
 
     // For bank account validation
-    if (data.type === "bank_account") {
+    if (data.type === PaymentMethodType.BANK_ACCOUNT) {
       // PayPal handles bank account validation through their flow
       // Basic checks can be done here
       if (!data.billingAddress.country) {
@@ -174,7 +174,7 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
         };
 
         if (
-          data.type === "card" &&
+          data.type === PaymentMethodType.CARD &&
           vaultResponse.expiryMonth &&
           vaultResponse.expiryYear
         ) {
@@ -398,7 +398,7 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
         throw new Error("Invalid PayPal webhook signature");
       }
 
-      const event = JSON.parse(payload);
+      const event = JSON.parse(payload) as any;
 
       return {
         id: event.id,
@@ -439,6 +439,50 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
         );
       }
     });
+  }
+
+  async processRefund(
+    providerPaymentId: string,
+    amount: number,
+    reason: string,
+    metadata?: Record<string, any>
+  ): Promise<RefundResult> {
+    return PaymentRetryService.executeWithRetry(async () => {
+      try {
+        const response = await this.makePayPalApiCall(
+          "POST",
+          `/v2/payments/captures/${providerPaymentId}/refund`,
+          {
+            amount: {
+              value: (amount / 100).toFixed(2), // Convert cents to dollars
+              currency_code: metadata?.currency || "USD",
+            },
+            note_to_payer: reason,
+          }
+        );
+
+        return {
+          id: response.id,
+          status: response.status,
+          amount,
+          currency: metadata?.currency || "USD",
+          processedAt: new Date(response.create_time),
+          metadata,
+        };
+      } catch (error) {
+        throw new Error(
+          `PayPal refund failed: ${
+            error instanceof Error ? error.message : "Unknown error"
+          }`
+        );
+      }
+    });
+  }
+
+  async cancelRefund(providerRefundId: string): Promise<void> {
+    // PayPal doesn't support canceling refunds once initiated
+    // Refunds are either completed or failed
+    throw new Error("PayPal does not support canceling refunds");
   }
 
   private mapPayPalStatus(paypalStatus: string): PaymentStatus {
@@ -485,7 +529,7 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
     });
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
+      const errorData = (await response.json().catch(() => ({}))) as any;
       throw new Error(
         errorData.message || `PayPal API error: ${response.status}`
       );
@@ -519,7 +563,7 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
       throw new Error("Failed to get PayPal access token");
     }
 
-    const data = await response.json();
+    const data = (await response.json()) as any;
     return data.access_token;
   }
 
