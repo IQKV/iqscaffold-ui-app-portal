@@ -1,0 +1,47 @@
+.revenueChart {
+  width: 100%;
+}
+
+.chartContainer {
+  width: 100%;
+  overflow: hidden;
+}
+
+.summaryStats {
+  padding-top: var(--mantine-spacing-md);
+  border-top: 1px solid var(--mantine-color-gray-2);
+}
+
+.statItem {
+  text-align: center;
+  min-width: 80px;
+}
+
+.statItem:not(:last-child) {
+  border-right: 1px solid var(--mantine-color-gray-2);
+  padding-right: var(--mantine-spacing-md);
+}
+
+.statItem:not(:first-child) {
+  padding-left: var(--mantine-spacing-md);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .summaryStats {
+    flex-direction: column;
+    gap: var(--mantine-spacing-sm);
+  }
+
+  .statItem:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid var(--mantine-color-gray-2);
+    padding-right: 0;
+    padding-bottom: var(--mantine-spacing-sm);
+  }
+
+  .statItem:not(:first-child) {
+    padding-left: 0;
+    padding-top: var(--mantine-spacing-sm);
+  }
+}

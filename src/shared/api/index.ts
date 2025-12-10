@@ -10,3 +10,5 @@ export type {
 } from "./tenant-api";
 
 export { userPreferenceApi } from "./user-preference-api";
+
+export { billingApi } from "./billing-api";

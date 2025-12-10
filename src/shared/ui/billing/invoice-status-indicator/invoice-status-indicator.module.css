@@ -1,0 +1,60 @@
+.statusBadge {
+  cursor: help;
+  transition: all 0.2s ease;
+}
+
+.statusBadge:hover {
+  transform: translateY(-1px);
+}
+
+.iconIndicator {
+  cursor: help;
+  transition: all 0.2s ease;
+}
+
+.iconIndicator:hover {
+  transform: scale(1.1);
+}
+
+.statusGroup {
+  align-items: center;
+}
+
+.statusGroup .statusBadge {
+  flex-shrink: 0;
+}
+
+.statusDetail {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Overdue animation */
+@keyframes pulse-red {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 var(--mantine-color-red-4);
+  }
+  50% {
+    box-shadow: 0 0 0 4px transparent;
+  }
+}
+
+.statusBadge[data-color="red"] {
+  animation: pulse-red 2s infinite;
+}
+
+@media (max-width: 768px) {
+  .statusGroup {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .statusDetail {
+    max-width: unset;
+    white-space: normal;
+  }
+}

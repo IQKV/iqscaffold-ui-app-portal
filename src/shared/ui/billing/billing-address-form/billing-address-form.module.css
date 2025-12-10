@@ -1,0 +1,31 @@
+.addressForm {
+  width: 100%;
+}
+
+.addressForm:focus-within {
+  border-color: var(--mantine-color-blue-6);
+  box-shadow: 0 0 0 2px var(--mantine-color-blue-1);
+}
+
+.sameAsShippingSwitch {
+  padding: var(--mantine-spacing-sm);
+  background-color: var(--mantine-color-gray-0);
+  border-radius: var(--mantine-radius-sm);
+  border: 1px solid var(--mantine-color-gray-2);
+}
+
+.fieldGroup {
+  display: flex;
+  gap: var(--mantine-spacing-md);
+}
+
+.fieldGroup > * {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .fieldGroup {
+    flex-direction: column;
+    gap: var(--mantine-spacing-sm);
+  }
+}

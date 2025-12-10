@@ -1,0 +1,24 @@
+.statusBadge {
+  cursor: help;
+  transition: all 0.2s ease;
+}
+
+.statusBadge:hover {
+  transform: translateY(-1px);
+}
+
+.statusGroup {
+  align-items: center;
+}
+
+.statusGroup .statusBadge {
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .statusGroup {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+}

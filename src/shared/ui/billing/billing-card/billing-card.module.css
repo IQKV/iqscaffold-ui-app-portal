@@ -1,0 +1,109 @@
+.billingCard {
+  transition: all 0.2s ease;
+}
+
+.billingCard.clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--mantine-shadow-md);
+}
+
+.headerContent {
+  flex: 1;
+  min-width: 0; /* Allow text truncation */
+}
+
+.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.headerActions {
+  flex-shrink: 0;
+}
+
+.cardContent {
+  min-height: 0;
+}
+
+.cardFooter {
+  flex-shrink: 0;
+}
+
+.primaryActionButton {
+  background: var(--mantine-color-blue-6);
+  color: white;
+  border: none;
+  border-radius: var(--mantine-radius-sm);
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.primaryActionButton:hover:not(:disabled) {
+  background: var(--mantine-color-blue-7);
+  transform: translateY(-1px);
+}
+
+.primaryActionButton:disabled {
+  background: var(--mantine-color-gray-4);
+  cursor: not-allowed;
+}
+
+.primaryActionButton[data-variant="light"] {
+  background: var(--mantine-color-blue-1);
+  color: var(--mantine-color-blue-7);
+}
+
+.primaryActionButton[data-variant="light"]:hover:not(:disabled) {
+  background: var(--mantine-color-blue-2);
+}
+
+.primaryActionButton[data-variant="outline"] {
+  background: transparent;
+  color: var(--mantine-color-blue-6);
+  border: 1px solid var(--mantine-color-blue-6);
+}
+
+.primaryActionButton[data-variant="outline"]:hover:not(:disabled) {
+  background: var(--mantine-color-blue-0);
+}
+
+.primaryActionButton[data-variant="subtle"] {
+  background: transparent;
+  color: var(--mantine-color-blue-6);
+}
+
+.primaryActionButton[data-variant="subtle"]:hover:not(:disabled) {
+  background: var(--mantine-color-blue-0);
+}
+
+/* Color variants */
+.primaryActionButton[data-color="green"] {
+  background: var(--mantine-color-green-6);
+}
+
+.primaryActionButton[data-color="green"]:hover:not(:disabled) {
+  background: var(--mantine-color-green-7);
+}
+
+.primaryActionButton[data-color="red"] {
+  background: var(--mantine-color-red-6);
+}
+
+.primaryActionButton[data-color="red"]:hover:not(:disabled) {
+  background: var(--mantine-color-red-7);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .headerContent {
+    margin-bottom: var(--mantine-spacing-xs);
+  }
+
+  .headerActions {
+    align-self: flex-start;
+  }
+}

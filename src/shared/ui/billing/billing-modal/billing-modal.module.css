@@ -1,0 +1,39 @@
+.billingModal {
+  /* Custom modal styles */
+}
+
+.modalStack {
+  min-height: 0; /* Allow flex shrinking */
+}
+
+.modalContent {
+  flex: 1;
+  min-height: 0;
+}
+
+.contentArea {
+  flex: 1;
+  min-height: 0;
+}
+
+.modalFooter {
+  padding-top: var(--mantine-spacing-md);
+  flex-shrink: 0;
+}
+
+.customFooter {
+  padding-top: var(--mantine-spacing-md);
+  flex-shrink: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .modalFooter {
+    flex-direction: column-reverse;
+    gap: var(--mantine-spacing-sm);
+  }
+
+  .modalFooter > * {
+    width: 100%;
+  }
+}
