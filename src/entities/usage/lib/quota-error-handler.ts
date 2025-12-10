@@ -198,20 +198,36 @@ export class QuotaErrorHandler {
   ): string {
     switch (metricType) {
       case "api_calls":
-        if (projectedUsage > 1000000) return "enterprise";
-        if (projectedUsage > 100000) return "pro";
+        if (projectedUsage > 1000000) {
+          return "enterprise";
+        }
+        if (projectedUsage > 100000) {
+          return "pro";
+        }
         return "starter";
       case "storage_gb":
-        if (projectedUsage > 1000) return "enterprise";
-        if (projectedUsage > 100) return "pro";
+        if (projectedUsage > 1000) {
+          return "enterprise";
+        }
+        if (projectedUsage > 100) {
+          return "pro";
+        }
         return "starter";
       case "email_sends":
-        if (projectedUsage > 50000) return "enterprise";
-        if (projectedUsage > 10000) return "pro";
+        if (projectedUsage > 50000) {
+          return "enterprise";
+        }
+        if (projectedUsage > 10000) {
+          return "pro";
+        }
         return "starter";
       case "active_users":
-        if (projectedUsage > 1000) return "enterprise";
-        if (projectedUsage > 100) return "pro";
+        if (projectedUsage > 1000) {
+          return "enterprise";
+        }
+        if (projectedUsage > 100) {
+          return "pro";
+        }
         return "starter";
       default:
         return "pro";

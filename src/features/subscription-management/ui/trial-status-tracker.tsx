@@ -56,8 +56,12 @@ export const TrialStatusTracker: React.FC<TrialStatusTrackerProps> = ({
   };
 
   const getTrialUrgency = () => {
-    if (trialInfo.daysRemaining <= 3) return "critical";
-    if (trialInfo.daysRemaining <= 7) return "warning";
+    if (trialInfo.daysRemaining <= 3) {
+      return "critical";
+    }
+    if (trialInfo.daysRemaining <= 7) {
+      return "warning";
+    }
     return "normal";
   };
 
@@ -173,10 +177,15 @@ export const TrialStatusTracker: React.FC<TrialStatusTrackerProps> = ({
         size="md"
       >
         <Stack gap="md">
-          <Alert icon={<IconInfoCircle size={16} />} color="blue" variant="light">
+          <Alert
+            icon={<IconInfoCircle size={16} />}
+            color="blue"
+            variant="light"
+          >
             <Text size="sm">
-              You can extend your trial period up to {trialInfo.maxExtensionDays} additional days.
-              This is a one-time extension to help you evaluate our platform.
+              You can extend your trial period up to{" "}
+              {trialInfo.maxExtensionDays} additional days. This is a one-time
+              extension to help you evaluate our platform.
             </Text>
           </Alert>
 
@@ -207,23 +216,29 @@ export const TrialStatusTracker: React.FC<TrialStatusTrackerProps> = ({
               <Group justify="space-between">
                 <Text size="sm">Current trial ends:</Text>
                 <Text size="sm" fw={500}>
-                  {new Date(Date.now() + trialInfo.daysRemaining * 24 * 60 * 60 * 1000).toLocaleDateString()}
+                  {new Date(
+                    Date.now() + trialInfo.daysRemaining * 24 * 60 * 60 * 1000
+                  ).toLocaleDateString()}
                 </Text>
               </Group>
               <Group justify="space-between">
                 <Text size="sm">Extended trial ends:</Text>
                 <Text size="sm" fw={500} c="blue">
-                  {new Date(Date.now() + (trialInfo.daysRemaining + extensionDays) * 24 * 60 * 60 * 1000).toLocaleDateString()}
+                  {new Date(
+                    Date.now() +
+                      (trialInfo.daysRemaining + extensionDays) *
+                        24 *
+                        60 *
+                        60 *
+                        1000
+                  ).toLocaleDateString()}
                 </Text>
               </Group>
             </Stack>
           </Card>
 
           <Group justify="flex-end" gap="sm">
-            <Button
-              variant="light"
-              onClick={() => setShowExtendModal(false)}
-            >
+            <Button variant="light" onClick={() => setShowExtendModal(false)}>
               Cancel
             </Button>
             <Button

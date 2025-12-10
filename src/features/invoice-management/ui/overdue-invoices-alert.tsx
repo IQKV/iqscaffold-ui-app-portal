@@ -61,7 +61,10 @@ export const OverdueInvoicesAlert: React.FC<OverdueInvoicesAlertProps> = ({
     return diffDays;
   };
 
-  const totalOverdueAmount = overdueInvoices.reduce((sum, invoice) => sum + invoice.amount, 0);
+  const totalOverdueAmount = overdueInvoices.reduce(
+    (sum, invoice) => sum + invoice.amount,
+    0
+  );
 
   if (overdueInvoices.length === 0) {
     return null;
@@ -81,7 +84,8 @@ export const OverdueInvoicesAlert: React.FC<OverdueInvoicesAlertProps> = ({
               Overdue Invoices Require Attention
             </Text>
             <Text size="sm" mt="xs">
-              You have {overdueInvoices.length} overdue invoice{overdueInvoices.length !== 1 ? "s" : ""} totaling{" "}
+              You have {overdueInvoices.length} overdue invoice
+              {overdueInvoices.length !== 1 ? "s" : ""} totaling{" "}
               <Text component="span" fw={600} c="red">
                 {formatCurrency(totalOverdueAmount)}
               </Text>
@@ -95,7 +99,7 @@ export const OverdueInvoicesAlert: React.FC<OverdueInvoicesAlertProps> = ({
         <Stack gap="sm">
           {overdueInvoices.slice(0, 3).map((invoice) => {
             const daysOverdue = getDaysOverdue(invoice.dueDate);
-            
+
             return (
               <Card key={invoice.id} withBorder p="md" radius="sm" bg="white">
                 <Group justify="space-between" align="flex-start">
@@ -104,29 +108,37 @@ export const OverdueInvoicesAlert: React.FC<OverdueInvoicesAlertProps> = ({
                       <Text size="sm" fw={500}>
                         Invoice {invoice.number}
                       </Text>
-                      <Badge
-                        variant="light"
-                        color="red"
-                        size="xs"
-                      >
+                      <Badge variant="light" color="red" size="xs">
                         {daysOverdue} day{daysOverdue !== 1 ? "s" : ""} overdue
                       </Badge>
                     </Group>
 
                     <Group gap="md" mb="xs">
                       <Text size="sm">
-                        Amount: <Text component="span" fw={500}>{formatCurrency(invoice.amount, invoice.currency)}</Text>
+                        Amount:{" "}
+                        <Text component="span" fw={500}>
+                          {formatCurrency(invoice.amount, invoice.currency)}
+                        </Text>
                       </Text>
                       <Text size="sm">
-                        Due: <Text component="span" fw={500}>{formatDate(invoice.dueDate)}</Text>
+                        Due:{" "}
+                        <Text component="span" fw={500}>
+                          {formatDate(invoice.dueDate)}
+                        </Text>
                       </Text>
                     </Group>
 
-                    {invoice.paymentAttempts && invoice.paymentAttempts.length > 0 && (
-                      <Text size="xs" c="dimmed">
-                        Last payment attempt: {invoice.paymentAttempts[invoice.paymentAttempts.length - 1].failureReason}
-                      </Text>
-                    )}
+                    {invoice.paymentAttempts &&
+                      invoice.paymentAttempts.length > 0 && (
+                        <Text size="xs" c="dimmed">
+                          Last payment attempt:{" "}
+                          {
+                            invoice.paymentAttempts[
+                              invoice.paymentAttempts.length - 1
+                            ].failureReason
+                          }
+                        </Text>
+                      )}
                   </Box>
 
                   <Group gap="xs">
@@ -180,7 +192,8 @@ export const OverdueInvoicesAlert: React.FC<OverdueInvoicesAlertProps> = ({
 
           {overdueInvoices.length > 3 && (
             <Text size="sm" c="dimmed" ta="center">
-              +{overdueInvoices.length - 3} more overdue invoice{overdueInvoices.length - 3 !== 1 ? "s" : ""}
+              +{overdueInvoices.length - 3} more overdue invoice
+              {overdueInvoices.length - 3 !== 1 ? "s" : ""}
             </Text>
           )}
         </Stack>
@@ -192,7 +205,7 @@ export const OverdueInvoicesAlert: React.FC<OverdueInvoicesAlertProps> = ({
             size="sm"
             onClick={() => {
               // Retry all overdue payments
-              overdueInvoices.forEach(invoice => onRetryPayment(invoice.id));
+              overdueInvoices.forEach((invoice) => onRetryPayment(invoice.id));
             }}
             loading={loading}
             leftSection={<IconRefresh size={14} />}
@@ -215,7 +228,7 @@ export const OverdueInvoicesAlert: React.FC<OverdueInvoicesAlertProps> = ({
             size="sm"
             onClick={() => {
               // Download all overdue invoices
-              overdueInvoices.forEach(invoice => onDownload(invoice.id));
+              overdueInvoices.forEach((invoice) => onDownload(invoice.id));
             }}
             leftSection={<IconDownload size={14} />}
           >

@@ -54,22 +54,22 @@ export const LocaleProvider: React.FC<LocaleProviderProps> = ({
     const initializeI18n = async () => {
       try {
         setIsLoading(true);
-        
+
         // Load messages for the current locale
         const messages = await loadLocaleMessages(locale);
-        
+
         // Configure i18n
         i18n.load(locale, messages);
         i18n.activate(locale);
-        
+
         // Update document attributes
         document.documentElement.lang = locale;
         document.documentElement.dir = LocaleUtils.getTextDirection(locale);
-        
+
         setIsLoading(false);
       } catch (error) {
         console.error("Failed to initialize i18n:", error);
-        
+
         // Fallback to English
         i18n.load("en", enMessages);
         i18n.activate("en");
@@ -89,22 +89,22 @@ export const LocaleProvider: React.FC<LocaleProviderProps> = ({
 
     try {
       setIsLoading(true);
-      
+
       // Load messages for the new locale
       const messages = await loadLocaleMessages(newLocale);
-      
+
       // Update i18n
       i18n.load(newLocale, messages);
       i18n.activate(newLocale);
-      
+
       // Update state and storage
       setLocaleState(newLocale);
       LocaleUtils.setLocale(newLocale);
-      
+
       // Update document attributes
       document.documentElement.lang = newLocale;
       document.documentElement.dir = LocaleUtils.getTextDirection(newLocale);
-      
+
       setIsLoading(false);
     } catch (error) {
       console.error(`Failed to load locale ${newLocale}:`, error);
@@ -130,9 +130,7 @@ export const LocaleProvider: React.FC<LocaleProviderProps> = ({
   return (
     <LocaleContext.Provider value={contextValue}>
       <I18nProvider i18n={i18n}>
-        <div dir={textDirection}>
-          {children}
-        </div>
+        <div dir={textDirection}>{children}</div>
       </I18nProvider>
     </LocaleContext.Provider>
   );
@@ -154,7 +152,7 @@ export const useLocale = (): LocaleContextValue => {
  */
 export const useLocaleFormatting = () => {
   const { locale } = useLocale();
-  
+
   return {
     formatCurrency: (amount: number, currency?: string) => {
       return new Intl.NumberFormat(locale, {
@@ -162,7 +160,7 @@ export const useLocaleFormatting = () => {
         currency: currency || "USD",
       }).format(amount);
     },
-    
+
     formatDate: (date: Date) => {
       return new Intl.DateTimeFormat(locale, {
         year: "numeric",
@@ -170,11 +168,11 @@ export const useLocaleFormatting = () => {
         day: "numeric",
       }).format(date);
     },
-    
+
     formatNumber: (number: number) => {
       return new Intl.NumberFormat(locale).format(number);
     },
-    
+
     formatPercentage: (value: number) => {
       return new Intl.NumberFormat(locale, {
         style: "percent",

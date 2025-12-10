@@ -155,7 +155,7 @@ export const PaymentMethodManagementExample: React.FC = () => {
         loading={loading}
         onDelete={handleDeletePaymentMethod}
         onSetDefault={handleSetDefault}
-        showMetrics={true}
+        showMetrics
       />
 
       {/* Provider Information */}

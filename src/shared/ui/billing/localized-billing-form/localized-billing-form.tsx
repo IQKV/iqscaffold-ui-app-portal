@@ -163,7 +163,9 @@ export const LocalizedBillingForm: React.FC<LocalizedBillingFormProps> = ({
               <Trans>Billing Information</Trans>
             </Text>
             <Text c="dimmed" size="sm">
-              <Trans>Please provide your billing details and payment information</Trans>
+              <Trans>
+                Please provide your billing details and payment information
+              </Trans>
             </Text>
           </div>
 
@@ -312,7 +314,11 @@ export const LocalizedBillingForm: React.FC<LocalizedBillingFormProps> = ({
 
             {form.values.amount > 0 && (
               <Text size="sm" c="dimmed">
-                <Trans>Total:</Trans> {formatCurrencyPreview(form.values.amount, form.values.currency)}
+                <Trans>Total:</Trans>{" "}
+                {formatCurrencyPreview(
+                  form.values.amount,
+                  form.values.currency
+                )}
               </Text>
             )}
           </Stack>
@@ -328,11 +334,7 @@ export const LocalizedBillingForm: React.FC<LocalizedBillingFormProps> = ({
             >
               <Trans>Reset</Trans>
             </Button>
-            <Button
-              type="submit"
-              loading={loading}
-              disabled={!form.isValid()}
-            >
+            <Button type="submit" loading={loading} disabled={!form.isValid()}>
               <Trans>Submit Payment</Trans>
             </Button>
           </Group>

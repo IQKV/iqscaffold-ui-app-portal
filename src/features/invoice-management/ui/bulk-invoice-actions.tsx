@@ -4,14 +4,7 @@
  */
 
 import React from "react";
-import {
-  Card,
-  Text,
-  Button,
-  Group,
-  Badge,
-  ActionIcon,
-} from "@mantine/core";
+import { Card, Text, Button, Group, Badge, ActionIcon } from "@mantine/core";
 import {
   IconDownload,
   IconRefresh,

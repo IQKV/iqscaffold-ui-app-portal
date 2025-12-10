@@ -66,7 +66,9 @@ export const BillingPageLayout: React.FC<BillingPageLayoutProps> = ({
   maxWidth = 1200,
 }) => {
   const renderBreadcrumbs = () => {
-    if (breadcrumbs.length === 0) return null;
+    if (breadcrumbs.length === 0) {
+      return null;
+    }
 
     const items = breadcrumbs.map((item, index) => {
       if (item.href && index < breadcrumbs.length - 1) {
@@ -91,7 +93,9 @@ export const BillingPageLayout: React.FC<BillingPageLayoutProps> = ({
   };
 
   const renderQuickActions = () => {
-    if (quickActions.length === 0) return null;
+    if (quickActions.length === 0) {
+      return null;
+    }
 
     const visibleActions = quickActions.slice(0, 3);
     const hiddenActions = quickActions.slice(3);

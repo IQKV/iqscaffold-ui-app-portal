@@ -46,7 +46,9 @@ export function AuthorityGuard({
     : hasAnyAuthority(requiredAuthorities);
 
   if (!hasAccess) {
-    if (hideOnUnauthorized) return null;
+    if (hideOnUnauthorized) {
+      return null;
+    }
 
     return (
       fallback || (
@@ -84,7 +86,9 @@ export function ResourceActionGuard({
   const hasAccess = canAccess(resource, action);
 
   if (!hasAccess) {
-    if (hideOnUnauthorized) return null;
+    if (hideOnUnauthorized) {
+      return null;
+    }
 
     return (
       fallback || (

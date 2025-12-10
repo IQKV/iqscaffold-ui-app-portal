@@ -209,7 +209,9 @@ export const creditCardSchema = z.object({
         let digit = parseInt(val.charAt(i), 10);
         if (isEven) {
           digit *= 2;
-          if (digit > 9) digit -= 9;
+          if (digit > 9) {
+            digit -= 9;
+          }
         }
         sum += digit;
         isEven = !isEven;
@@ -366,7 +368,9 @@ export const paymentMethodFormSchema = z
   .refine((data) => {
     // Validate card number with Luhn algorithm
     const cleanNumber = data.cardNumber.replace(/\D/g, "");
-    if (cleanNumber.length < 13 || cleanNumber.length > 19) return false;
+    if (cleanNumber.length < 13 || cleanNumber.length > 19) {
+      return false;
+    }
 
     let sum = 0;
     let isEven = false;
@@ -374,7 +378,9 @@ export const paymentMethodFormSchema = z
       let digit = parseInt(cleanNumber.charAt(i), 10);
       if (isEven) {
         digit *= 2;
-        if (digit > 9) digit -= 9;
+        if (digit > 9) {
+          digit -= 9;
+        }
       }
       sum += digit;
       isEven = !isEven;

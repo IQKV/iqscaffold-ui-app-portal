@@ -75,11 +75,9 @@ const CANCELLATION_REASONS = [
   "Other",
 ];
 
-export const SubscriptionCancellation: React.FC<SubscriptionCancellationProps> = ({
-  subscription,
-  onCancel,
-  loading = false,
-}) => {
+export const SubscriptionCancellation: React.FC<
+  SubscriptionCancellationProps
+> = ({ subscription, onCancel, loading = false }) => {
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [showRetentionOffers, setShowRetentionOffers] = useState(false);
   const [selectedReason, setSelectedReason] = useState("");
@@ -149,14 +147,19 @@ export const SubscriptionCancellation: React.FC<SubscriptionCancellationProps> =
           </Group>
 
           {isAlreadyCanceled ? (
-            <Alert icon={<IconInfoCircle size={16} />} color="orange" variant="light">
+            <Alert
+              icon={<IconInfoCircle size={16} />}
+              color="orange"
+              variant="light"
+            >
               <Stack gap="xs">
                 <Text size="sm" fw={500}>
                   Subscription Scheduled for Cancellation
                 </Text>
                 <Text size="sm">
-                  Your subscription will end on {formatDate(subscription.currentPeriodEnd)}.
-                  You'll continue to have access until then.
+                  Your subscription will end on{" "}
+                  {formatDate(subscription.currentPeriodEnd)}. You'll continue
+                  to have access until then.
                 </Text>
                 <Button
                   variant="light"
@@ -173,10 +176,15 @@ export const SubscriptionCancellation: React.FC<SubscriptionCancellationProps> =
               </Stack>
             </Alert>
           ) : (
-            <Alert icon={<IconAlertTriangle size={16} />} color="yellow" variant="light">
+            <Alert
+              icon={<IconAlertTriangle size={16} />}
+              color="yellow"
+              variant="light"
+            >
               <Text size="sm">
-                Canceling your subscription will stop all future billing and you'll lose access
-                to premium features at the end of your current billing period.
+                Canceling your subscription will stop all future billing and
+                you'll lose access to premium features at the end of your
+                current billing period.
               </Text>
             </Alert>
           )}
@@ -191,10 +199,14 @@ export const SubscriptionCancellation: React.FC<SubscriptionCancellationProps> =
         size="md"
       >
         <Stack gap="md">
-          <Alert icon={<IconAlertTriangle size={16} />} color="red" variant="light">
+          <Alert
+            icon={<IconAlertTriangle size={16} />}
+            color="red"
+            variant="light"
+          >
             <Text size="sm">
-              We're sorry to see you go! Before you cancel, let us know why you're leaving
-              so we can improve our service.
+              We're sorry to see you go! Before you cancel, let us know why
+              you're leaving so we can improve our service.
             </Text>
           </Alert>
 
@@ -209,7 +221,9 @@ export const SubscriptionCancellation: React.FC<SubscriptionCancellationProps> =
                   value={reason}
                   label={reason}
                   checked={selectedReason === reason}
-                  onChange={(event) => setSelectedReason(event.currentTarget.value)}
+                  onChange={(event) =>
+                    setSelectedReason(event.currentTarget.value)
+                  }
                 />
               ))}
             </Stack>
@@ -219,7 +233,9 @@ export const SubscriptionCancellation: React.FC<SubscriptionCancellationProps> =
             label="Additional Feedback (Optional)"
             description="Help us understand how we can improve"
             value={additionalFeedback}
-            onChange={(event) => setAdditionalFeedback(event.currentTarget.value)}
+            onChange={(event) =>
+              setAdditionalFeedback(event.currentTarget.value)
+            }
             placeholder="Tell us more about your experience..."
             rows={3}
           />
@@ -228,14 +244,13 @@ export const SubscriptionCancellation: React.FC<SubscriptionCancellationProps> =
             label="Cancel at the end of current billing period"
             description={`Keep access until ${formatDate(subscription.currentPeriodEnd)}`}
             checked={cancelAtPeriodEnd}
-            onChange={(event) => setCancelAtPeriodEnd(event.currentTarget.checked)}
+            onChange={(event) =>
+              setCancelAtPeriodEnd(event.currentTarget.checked)
+            }
           />
 
           <Group justify="space-between" gap="sm">
-            <Button
-              variant="light"
-              onClick={() => setShowCancelModal(false)}
-            >
+            <Button variant="light" onClick={() => setShowCancelModal(false)}>
               Keep Subscription
             </Button>
             <Group gap="xs">
@@ -270,7 +285,8 @@ export const SubscriptionCancellation: React.FC<SubscriptionCancellationProps> =
         <Stack gap="md">
           <Alert icon={<IconGift size={16} />} color="blue" variant="light">
             <Text size="sm">
-              We value your business! Here are some exclusive offers to help you stay:
+              We value your business! Here are some exclusive offers to help you
+              stay:
             </Text>
           </Alert>
 
@@ -306,7 +322,12 @@ export const SubscriptionCancellation: React.FC<SubscriptionCancellationProps> =
                           <List.Item
                             key={index}
                             icon={
-                              <ThemeIcon color="green" size={14} radius="xl" variant="light">
+                              <ThemeIcon
+                                color="green"
+                                size={14}
+                                radius="xl"
+                                variant="light"
+                              >
                                 <IconCheck size={10} />
                               </ThemeIcon>
                             }

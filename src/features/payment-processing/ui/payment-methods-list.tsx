@@ -84,14 +84,22 @@ export const PaymentMethodsList: React.FC<PaymentMethodsListProps> = ({
   };
 
   const getExpiryDisplay = (method: PaymentMethod) => {
-    if (method.type === "card" && method.metadata.expiryMonth && method.metadata.expiryYear) {
+    if (
+      method.type === "card" &&
+      method.metadata.expiryMonth &&
+      method.metadata.expiryYear
+    ) {
       return `${method.metadata.expiryMonth.toString().padStart(2, "0")}/${method.metadata.expiryYear}`;
     }
     return null;
   };
 
   const isExpiringSoon = (method: PaymentMethod) => {
-    if (method.type !== "card" || !method.metadata.expiryMonth || !method.metadata.expiryYear) {
+    if (
+      method.type !== "card" ||
+      !method.metadata.expiryMonth ||
+      !method.metadata.expiryYear
+    ) {
       return false;
     }
 
@@ -132,7 +140,8 @@ export const PaymentMethodsList: React.FC<PaymentMethodsListProps> = ({
           </Box>
           {method.isDefault && (
             <Alert color="orange">
-              This is your default payment method. You'll need to set another as default.
+              This is your default payment method. You'll need to set another as
+              default.
             </Alert>
           )}
         </Stack>
@@ -165,14 +174,20 @@ export const PaymentMethodsList: React.FC<PaymentMethodsListProps> = ({
             Payment Methods
           </Text>
           <Badge variant="light" color="blue" size="sm">
-            {paymentMethods.length} method{paymentMethods.length !== 1 ? "s" : ""}
+            {paymentMethods.length} method
+            {paymentMethods.length !== 1 ? "s" : ""}
           </Badge>
         </Group>
 
         {paymentMethods.length === 0 ? (
-          <Alert icon={<IconInfoCircle size={16} />} color="blue" variant="light">
+          <Alert
+            icon={<IconInfoCircle size={16} />}
+            color="blue"
+            variant="light"
+          >
             <Text size="sm">
-              No payment methods found. Add a payment method to enable automatic billing.
+              No payment methods found. Add a payment method to enable automatic
+              billing.
             </Text>
           </Alert>
         ) : (
@@ -218,7 +233,8 @@ export const PaymentMethodsList: React.FC<PaymentMethodsListProps> = ({
                             </Text>
                           )}
                           <Text size="xs" c="dimmed">
-                            Added {new Date(method.createdAt).toLocaleDateString()}
+                            Added{" "}
+                            {new Date(method.createdAt).toLocaleDateString()}
                           </Text>
                         </Group>
                       </Box>
@@ -280,10 +296,15 @@ export const PaymentMethodsList: React.FC<PaymentMethodsListProps> = ({
           </Stack>
         )}
 
-        {paymentMethods.some(method => isExpiringSoon(method)) && (
-          <Alert icon={<IconInfoCircle size={16} />} color="orange" variant="light">
+        {paymentMethods.some((method) => isExpiringSoon(method)) && (
+          <Alert
+            icon={<IconInfoCircle size={16} />}
+            color="orange"
+            variant="light"
+          >
             <Text size="sm">
-              One or more of your payment methods is expiring soon. Update your payment information to avoid service interruption.
+              One or more of your payment methods is expiring soon. Update your
+              payment information to avoid service interruption.
             </Text>
           </Alert>
         )}

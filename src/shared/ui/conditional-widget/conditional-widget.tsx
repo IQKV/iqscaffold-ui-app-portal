@@ -48,8 +48,12 @@ export function withWidgetVisibility<P extends object>(
     const canAccess = isVisible(widgetName);
 
     if (!canAccess) {
-      if (options?.hideOnUnauthorized) return null;
-      if (options?.fallback) return <options.fallback />;
+      if (options?.hideOnUnauthorized) {
+        return null;
+      }
+      if (options?.fallback) {
+        return <options.fallback />;
+      }
       return null;
     }
 

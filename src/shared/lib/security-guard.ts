@@ -15,22 +15,25 @@ import {
 import { auditLogger } from "./audit-logger";
 
 export interface SecurityGuard {
-  canAccess(
+  canAccess: (
     authorities: Authority[],
     resource: string,
     action: string,
     context?: SecurityContext
-  ): boolean;
-  getVisibleComponents(
+  ) => boolean;
+  getVisibleComponents: (
     authorities: Authority[],
     context?: SecurityContext
-  ): ComponentVisibility;
-  filterData<T extends { tenantId?: string }>(
+  ) => ComponentVisibility;
+  filterData: <T extends { tenantId?: string }>(
     data: T[],
     authorities: Authority[],
     context?: SecurityContext
-  ): T[];
-  checkWidgetVisibility(widgetName: string, authorities: Authority[]): boolean;
+  ) => T[];
+  checkWidgetVisibility: (
+    widgetName: string,
+    authorities: Authority[]
+  ) => boolean;
 }
 
 export class BillingSecurityGuard implements SecurityGuard {
@@ -81,7 +84,9 @@ export class BillingSecurityGuard implements SecurityGuard {
                 context.userId,
                 context.tenantId
               );
-              if (hasAccess) break;
+              if (hasAccess) {
+                break;
+              }
             }
           } else if (!rule.tenantScoped) {
             // Platform admin has cross-tenant access
@@ -103,7 +108,9 @@ export class BillingSecurityGuard implements SecurityGuard {
         }
       }
 
-      if (hasAccess) break;
+      if (hasAccess) {
+        break;
+      }
     }
 
     // Log the access attempt
@@ -213,7 +220,9 @@ export class BillingSecurityGuard implements SecurityGuard {
 
   checkWidgetVisibility(widgetName: string, authorities: Authority[]): boolean {
     const requiredAuthorities = WIDGET_VISIBILITY_MATRIX[widgetName];
-    if (!requiredAuthorities) return false;
+    if (!requiredAuthorities) {
+      return false;
+    }
 
     return authorities.some((authority) =>
       requiredAuthorities.includes(authority)

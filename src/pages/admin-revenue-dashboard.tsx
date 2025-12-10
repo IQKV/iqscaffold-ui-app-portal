@@ -131,11 +131,7 @@ function AdminRevenueDashboardPage() {
 
 export const Route = createFileRoute("/admin-revenue-dashboard")({
   component: () => (
-    <AuthorityProtectedRoute
-      authorities={[
-        Authority.PLATFORM_ADMIN,
-      ]}
-    >
+    <AuthorityProtectedRoute authorities={[Authority.PLATFORM_ADMIN]}>
       <AdminRevenueDashboardPage />
     </AuthorityProtectedRoute>
   ),

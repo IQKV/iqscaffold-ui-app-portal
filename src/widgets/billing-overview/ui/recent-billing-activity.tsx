@@ -25,7 +25,11 @@ import {
 import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { InvoiceStatusIndicator } from "@/shared/ui/billing";
-import { LocaleCurrencyUtils, LocaleDateUtils, useBillingNotifications } from "@/shared/lib/i18n";
+import {
+  LocaleCurrencyUtils,
+  LocaleDateUtils,
+  useBillingNotifications,
+} from "@/shared/lib/i18n";
 import type { Invoice, Subscription } from "@/shared/types/billing";
 import { InvoiceStatus } from "@/shared/types/billing";
 
@@ -136,7 +140,9 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
           >
             <Text size="sm" mb="xs">
               <Trans>
-                You have {overdueInvoices.length} overdue {overdueInvoices.length > 1 ? "invoices" : "invoice"} requiring immediate attention.
+                You have {overdueInvoices.length} overdue{" "}
+                {overdueInvoices.length > 1 ? "invoices" : "invoice"} requiring
+                immediate attention.
               </Trans>
             </Text>
             <Group gap="xs">
@@ -172,11 +178,21 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
           <Table>
             <Table.Thead>
               <Table.Tr>
-                <Table.Th><Trans>Invoice</Trans></Table.Th>
-                <Table.Th><Trans>Date</Trans></Table.Th>
-                <Table.Th><Trans>Amount</Trans></Table.Th>
-                <Table.Th><Trans>Status</Trans></Table.Th>
-                <Table.Th><Trans>Actions</Trans></Table.Th>
+                <Table.Th>
+                  <Trans>Invoice</Trans>
+                </Table.Th>
+                <Table.Th>
+                  <Trans>Date</Trans>
+                </Table.Th>
+                <Table.Th>
+                  <Trans>Amount</Trans>
+                </Table.Th>
+                <Table.Th>
+                  <Trans>Status</Trans>
+                </Table.Th>
+                <Table.Th>
+                  <Trans>Actions</Trans>
+                </Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>
@@ -211,7 +227,10 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
 
                     <Table.Td>
                       <Text size="sm" fw={500}>
-                        {LocaleCurrencyUtils.format(invoice.amount, invoice.currency)}
+                        {LocaleCurrencyUtils.format(
+                          invoice.amount,
+                          invoice.currency
+                        )}
                       </Text>
                     </Table.Td>
 
@@ -278,7 +297,8 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
             <Group justify="space-between">
               <Text size="sm" c="dimmed">
                 <Trans>
-                  Showing {invoices.length} recent {invoices.length > 1 ? "invoices" : "invoice"}
+                  Showing {invoices.length} recent{" "}
+                  {invoices.length > 1 ? "invoices" : "invoice"}
                 </Trans>
               </Text>
 

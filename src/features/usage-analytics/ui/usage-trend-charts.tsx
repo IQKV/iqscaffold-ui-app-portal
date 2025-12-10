@@ -27,7 +27,10 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { IconCalendar, IconChartLine } from "@tabler/icons-react";
-import type { UsageTrendData, UsageMetricType } from "@/entities/usage/types/usage-types";
+import type {
+  UsageTrendData,
+  UsageMetricType,
+} from "@/entities/usage/types/usage-types";
 
 interface UsageTrendChartsProps {
   usageTrends: UsageTrendData[];
@@ -60,7 +63,9 @@ export const UsageTrendCharts: React.FC<UsageTrendChartsProps> = ({
   onMetricsChange,
   loading = false,
 }) => {
-  const [chartType, setChartType] = useState<"daily" | "weekly" | "monthly">("daily");
+  const [chartType, setChartType] = useState<"daily" | "weekly" | "monthly">(
+    "daily"
+  );
 
   // Mock chart data - in real app this would be processed from usageTrends
   const chartData = [
@@ -154,7 +159,8 @@ export const UsageTrendCharts: React.FC<UsageTrendChartsProps> = ({
             </Text>
           </Group>
           <Badge variant="light" color="blue" size="sm">
-            {selectedMetrics.length} metric{selectedMetrics.length !== 1 ? "s" : ""}
+            {selectedMetrics.length} metric
+            {selectedMetrics.length !== 1 ? "s" : ""}
           </Badge>
         </Group>
 
@@ -163,7 +169,9 @@ export const UsageTrendCharts: React.FC<UsageTrendChartsProps> = ({
           <Select
             label="Time Period"
             value={chartType}
-            onChange={(value) => setChartType(value as "daily" | "weekly" | "monthly")}
+            onChange={(value) =>
+              setChartType(value as "daily" | "weekly" | "monthly")
+            }
             data={[
               { value: "daily", label: "Daily" },
               { value: "weekly", label: "Weekly" },
@@ -232,19 +240,26 @@ export const UsageTrendCharts: React.FC<UsageTrendChartsProps> = ({
         </Box>
 
         {/* Summary Stats */}
-        <Group justify="space-around" pt="md" style={{ borderTop: "1px solid var(--mantine-color-gray-3)" }}>
+        <Group
+          justify="space-around"
+          pt="md"
+          style={{ borderTop: "1px solid var(--mantine-color-gray-3)" }}
+        >
           {selectedMetrics.map((metric) => {
-            const values = chartData.map(d => d[metric]);
-            const avg = values.reduce((sum, val) => sum + val, 0) / values.length;
+            const values = chartData.map((d) => d[metric]);
+            const avg =
+              values.reduce((sum, val) => sum + val, 0) / values.length;
             const trend = values[values.length - 1] > values[0] ? "up" : "down";
-            
+
             return (
               <Box key={metric} ta="center">
                 <Text size="xs" c="dimmed" mb="xs">
                   {METRIC_LABELS[metric]} Avg
                 </Text>
                 <Text size="sm" fw={600} c={METRIC_COLORS[metric]}>
-                  {metric === "storage_gb" ? `${avg.toFixed(1)} GB` : avg.toLocaleString()}
+                  {metric === "storage_gb"
+                    ? `${avg.toFixed(1)} GB`
+                    : avg.toLocaleString()}
                 </Text>
                 <Badge
                   variant="light"

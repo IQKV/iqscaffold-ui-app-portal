@@ -25,7 +25,10 @@ import {
   IconX,
 } from "@tabler/icons-react";
 import { SubscriptionStatusBadge } from "@/shared/ui/billing";
-import type { Subscription, Plan } from "@/entities/subscription/types/subscription-types";
+import type {
+  Subscription,
+  Plan,
+} from "@/entities/subscription/types/subscription-types";
 
 interface CurrentPlanDetailsProps {
   subscription: Subscription | null;
@@ -217,7 +220,9 @@ export const CurrentPlanDetails: React.FC<CurrentPlanDetailsProps> = ({
                       {quota.metricType.replace("_", " ")}
                     </Text>
                     <Badge variant="light" size="sm">
-                      {quota.limit === -1 ? "Unlimited" : quota.limit.toLocaleString()}
+                      {quota.limit === -1
+                        ? "Unlimited"
+                        : quota.limit.toLocaleString()}
                     </Badge>
                   </Group>
                 ))}

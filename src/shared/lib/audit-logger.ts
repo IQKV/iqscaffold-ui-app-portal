@@ -31,35 +31,35 @@ export enum AuditEventType {
 }
 
 export interface AuditLogger {
-  logAccessAttempt(
+  logAccessAttempt: (
     context: SecurityContext,
     authorities: Authority[],
     resource: string,
     action: string,
     success: boolean,
     details?: Record<string, any>
-  ): void;
+  ) => void;
 
-  logAuthorityCheck(
+  logAuthorityCheck: (
     context: SecurityContext,
     authorities: Authority[],
     requiredAuthority: Authority,
     success: boolean
-  ): void;
+  ) => void;
 
-  logSensitiveDataAccess(
+  logSensitiveDataAccess: (
     context: SecurityContext,
     authorities: Authority[],
     dataType: string,
     recordCount: number
-  ): void;
+  ) => void;
 
-  logPrivilegeEscalation(
+  logPrivilegeEscalation: (
     context: SecurityContext,
     fromAuthorities: Authority[],
     toAuthorities: Authority[],
     reason: string
-  ): void;
+  ) => void;
 }
 
 class SecurityAuditLogger implements AuditLogger {
@@ -239,14 +239,24 @@ class SecurityAuditLogger implements AuditLogger {
 
     if (filters) {
       logs = logs.filter((log) => {
-        if (filters.userId && log.userId !== filters.userId) return false;
-        if (filters.tenantId && log.tenantId !== filters.tenantId) return false;
-        if (filters.eventType && log.eventType !== filters.eventType)
+        if (filters.userId && log.userId !== filters.userId) {
           return false;
-        if (filters.resource && log.resource !== filters.resource) return false;
-        if (filters.startDate && log.timestamp < filters.startDate)
+        }
+        if (filters.tenantId && log.tenantId !== filters.tenantId) {
           return false;
-        if (filters.endDate && log.timestamp > filters.endDate) return false;
+        }
+        if (filters.eventType && log.eventType !== filters.eventType) {
+          return false;
+        }
+        if (filters.resource && log.resource !== filters.resource) {
+          return false;
+        }
+        if (filters.startDate && log.timestamp < filters.startDate) {
+          return false;
+        }
+        if (filters.endDate && log.timestamp > filters.endDate) {
+          return false;
+        }
         return true;
       });
     }

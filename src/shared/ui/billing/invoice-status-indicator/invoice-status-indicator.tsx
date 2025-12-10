@@ -80,7 +80,9 @@ export const InvoiceStatusIndicator: React.FC<InvoiceStatusIndicatorProps> = ({
   };
 
   const getDaysOverdue = () => {
-    if (!isOverdue()) return 0;
+    if (!isOverdue()) {
+      return 0;
+    }
     return Math.abs(
       BillingDateUtils.getDaysRemaining(new Date(invoice.dueDate))
     );

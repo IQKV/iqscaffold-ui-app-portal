@@ -25,8 +25,13 @@ function SupportBillingToolsPage() {
     >
       <Container size="xl" px={0}>
         <Stack gap="xl">
-          <Alert icon={<IconInfoCircle size={16} />} color="blue" variant="light">
-            Support billing tools implementation placeholder. This would include customer search, billing overview, and support actions.
+          <Alert
+            icon={<IconInfoCircle size={16} />}
+            color="blue"
+            variant="light"
+          >
+            Support billing tools implementation placeholder. This would include
+            customer search, billing overview, and support actions.
           </Alert>
         </Stack>
       </Container>
@@ -37,10 +42,7 @@ function SupportBillingToolsPage() {
 export const Route = createFileRoute("/support-billing-tools")({
   component: () => (
     <AuthorityProtectedRoute
-      authorities={[
-        Authority.PLATFORM_ADMIN,
-        Authority.SUPPORT_AGENT,
-      ]}
+      authorities={[Authority.PLATFORM_ADMIN, Authority.SUPPORT_AGENT]}
     >
       <SupportBillingToolsPage />
     </AuthorityProtectedRoute>

@@ -372,7 +372,9 @@ export const useBillingCacheStore = create<BillingCacheStore>()(
 
       get: (key: string) => {
         const cached = get().cache.get(key);
-        if (!cached) return null;
+        if (!cached) {
+          return null;
+        }
 
         const now = new Date().getTime();
         const cacheTime = cached.timestamp.getTime();
@@ -397,7 +399,9 @@ export const useBillingCacheStore = create<BillingCacheStore>()(
 
       isExpired: (key: string) => {
         const cached = get().cache.get(key);
-        if (!cached) return true;
+        if (!cached) {
+          return true;
+        }
 
         const now = new Date().getTime();
         const cacheTime = cached.timestamp.getTime();

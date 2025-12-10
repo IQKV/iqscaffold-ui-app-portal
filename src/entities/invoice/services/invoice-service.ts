@@ -293,12 +293,21 @@ export class InvoiceService {
   } {
     const errors: string[] = [];
 
-    if (!invoice.tenantId) errors.push("Tenant ID is required");
-    if (!invoice.subscriptionId) errors.push("Subscription ID is required");
-    if (!invoice.amount || invoice.amount <= 0)
+    if (!invoice.tenantId) {
+      errors.push("Tenant ID is required");
+    }
+    if (!invoice.subscriptionId) {
+      errors.push("Subscription ID is required");
+    }
+    if (!invoice.amount || invoice.amount <= 0) {
       errors.push("Amount must be greater than 0");
-    if (!invoice.currency) errors.push("Currency is required");
-    if (!invoice.dueDate) errors.push("Due date is required");
+    }
+    if (!invoice.currency) {
+      errors.push("Currency is required");
+    }
+    if (!invoice.dueDate) {
+      errors.push("Due date is required");
+    }
     if (!invoice.lineItems || invoice.lineItems.length === 0) {
       errors.push("At least one line item is required");
     }

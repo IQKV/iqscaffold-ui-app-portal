@@ -25,7 +25,10 @@ import {
   IconTrendingDown,
   IconMinus,
 } from "@tabler/icons-react";
-import type { UsageMetric, UsageMetricType } from "@/entities/usage/types/usage-types";
+import type {
+  UsageMetric,
+  UsageMetricType,
+} from "@/entities/usage/types/usage-types";
 
 interface UsageMetricsGridProps {
   usageMetrics: UsageMetric[];
@@ -87,9 +90,15 @@ export const UsageMetricsGrid: React.FC<UsageMetricsGridProps> = ({
   };
 
   const getUtilizationColor = (percentage: number) => {
-    if (percentage >= 90) return "red";
-    if (percentage >= 75) return "orange";
-    if (percentage >= 50) return "yellow";
+    if (percentage >= 90) {
+      return "red";
+    }
+    if (percentage >= 75) {
+      return "orange";
+    }
+    if (percentage >= 50) {
+      return "yellow";
+    }
     return "green";
   };
 
@@ -200,10 +209,10 @@ export const UsageMetricsGrid: React.FC<UsageMetricsGridProps> = ({
                     {percentage >= 90
                       ? "Critical"
                       : percentage >= 75
-                      ? "High"
-                      : percentage >= 50
-                      ? "Moderate"
-                      : "Low"}
+                        ? "High"
+                        : percentage >= 50
+                          ? "Moderate"
+                          : "Low"}
                   </Badge>
                   {percentage >= 90 && (
                     <Text size="xs" c="red" fw={500}>

@@ -68,7 +68,11 @@ export const RevenueMetricsCards: React.FC<RevenueMetricsCardsProps> = ({
   };
 
   const getGrowthIcon = (value: number) => {
-    return value >= 0 ? <IconTrendingUp size={14} /> : <IconTrendingDown size={14} />;
+    return value >= 0 ? (
+      <IconTrendingUp size={14} />
+    ) : (
+      <IconTrendingDown size={14} />
+    );
   };
 
   if (loading || !revenueMetrics) {
@@ -109,7 +113,11 @@ export const RevenueMetricsCards: React.FC<RevenueMetricsCardsProps> = ({
     {
       title: "Active Subscriptions",
       value: revenueMetrics.activeSubscriptions.toLocaleString(),
-      change: ((revenueMetrics.newSubscriptions - revenueMetrics.canceledSubscriptions) / revenueMetrics.activeSubscriptions) * 100,
+      change:
+        ((revenueMetrics.newSubscriptions -
+          revenueMetrics.canceledSubscriptions) /
+          revenueMetrics.activeSubscriptions) *
+        100,
       icon: <IconUsers size={20} />,
       color: "purple",
       description: "Subscribers",
@@ -222,7 +230,9 @@ export const RevenueMetricsCards: React.FC<RevenueMetricsCardsProps> = ({
           </Box>
           <Box ta="center">
             <Text size="lg" fw={700} c="blue">
-              +{revenueMetrics.newSubscriptions - revenueMetrics.canceledSubscriptions}
+              +
+              {revenueMetrics.newSubscriptions -
+                revenueMetrics.canceledSubscriptions}
             </Text>
             <Text size="xs" c="dimmed">
               Net Growth
@@ -230,7 +240,13 @@ export const RevenueMetricsCards: React.FC<RevenueMetricsCardsProps> = ({
           </Box>
           <Box ta="center">
             <Text size="lg" fw={700} c="purple">
-              {((revenueMetrics.newSubscriptions - revenueMetrics.canceledSubscriptions) / revenueMetrics.activeSubscriptions * 100).toFixed(1)}%
+              {(
+                ((revenueMetrics.newSubscriptions -
+                  revenueMetrics.canceledSubscriptions) /
+                  revenueMetrics.activeSubscriptions) *
+                100
+              ).toFixed(1)}
+              %
             </Text>
             <Text size="xs" c="dimmed">
               Growth Rate

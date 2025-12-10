@@ -88,16 +88,28 @@ export const UsageQuotaAlerts: React.FC<UsageQuotaAlertsProps> = ({
   const hasAlerts = criticalUsage.length > 0 || warningUsage.length > 0;
 
   const getUsageStatusColor = (quota: QuotaStatus) => {
-    if (quota.exceeded) return "red";
-    if (quota.percentage >= 90) return "orange";
-    if (quota.percentage >= 75) return "yellow";
+    if (quota.exceeded) {
+      return "red";
+    }
+    if (quota.percentage >= 90) {
+      return "orange";
+    }
+    if (quota.percentage >= 75) {
+      return "yellow";
+    }
     return "blue";
   };
 
   const getUsageStatusIcon = (quota: QuotaStatus) => {
-    if (quota.exceeded) return <IconExclamationCircle size={16} />;
-    if (quota.percentage >= 90) return <IconAlertTriangle size={16} />;
-    if (quota.percentage >= 75) return <IconTrendingUp size={16} />;
+    if (quota.exceeded) {
+      return <IconExclamationCircle size={16} />;
+    }
+    if (quota.percentage >= 90) {
+      return <IconAlertTriangle size={16} />;
+    }
+    if (quota.percentage >= 75) {
+      return <IconTrendingUp size={16} />;
+    }
     return <IconInfoCircle size={16} />;
   };
 

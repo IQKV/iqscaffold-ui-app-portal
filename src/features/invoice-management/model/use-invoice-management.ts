@@ -8,7 +8,10 @@ import { useState } from "react";
 import { notifications } from "@mantine/notifications";
 import { invoiceApi } from "@/entities/invoice/api/invoice-api";
 import { useCurrentTenant } from "@/processes/tenant";
-import type { Invoice, InvoiceFilters } from "@/entities/invoice/types/invoice-types";
+import type {
+  Invoice,
+  InvoiceFilters,
+} from "@/entities/invoice/types/invoice-types";
 
 export const useInvoiceManagement = () => {
   const queryClient = useQueryClient();
@@ -28,14 +31,17 @@ export const useInvoiceManagement = () => {
   });
 
   // Extract invoices array from response
-  const invoices = Array.isArray(invoicesResponse) ? invoicesResponse : (invoicesResponse?.data || []);
+  const invoices = Array.isArray(invoicesResponse)
+    ? invoicesResponse
+    : invoicesResponse?.data || [];
 
   // Calculate overdue invoices
-  const overdueInvoices = Array.isArray(invoices) ? invoices.filter(
-    (invoice: Invoice) =>
-      invoice.status === "open" &&
-      new Date(invoice.dueDate) < new Date()
-  ) : [];
+  const overdueInvoices = Array.isArray(invoices)
+    ? invoices.filter(
+        (invoice: Invoice) =>
+          invoice.status === "open" && new Date(invoice.dueDate) < new Date()
+      )
+    : [];
 
   // Download invoice mutation
   const downloadMutation = useMutation({
@@ -146,7 +152,7 @@ export const useInvoiceManagement = () => {
     },
     onSuccess: (results) => {
       queryClient.invalidateQueries({ queryKey: ["invoices"] });
-      const successCount = results.filter(r => r.success).length;
+      const successCount = results.filter((r) => r.success).length;
       const failCount = results.length - successCount;
 
       if (failCount === 0) {
@@ -191,7 +197,8 @@ export const useInvoiceManagement = () => {
     isLoading,
     error,
     isDownloading: downloadMutation.isPending || bulkDownloadMutation.isPending,
-    isRetryingPayment: retryPaymentMutation.isPending || bulkRetryMutation.isPending,
+    isRetryingPayment:
+      retryPaymentMutation.isPending || bulkRetryMutation.isPending,
 
     // Actions
     downloadInvoice: downloadMutation.mutate,

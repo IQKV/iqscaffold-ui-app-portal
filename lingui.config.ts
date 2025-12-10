@@ -20,7 +20,7 @@ const config: LinguiConfig = {
   fallbackLocales: {
     default: "en",
     es: "en",
-    fr: "en", 
+    fr: "en",
     de: "en",
     ja: "en",
   },

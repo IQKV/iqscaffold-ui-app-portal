@@ -101,11 +101,18 @@ export const PaymentMethodInput: React.FC<PaymentMethodInputProps> = ({
   const detectCardType = (number: string) => {
     const cleanNumber = number.replace(/\D/g, "");
 
-    if (cleanNumber.startsWith("4")) return "visa";
-    if (cleanNumber.startsWith("5") || cleanNumber.startsWith("2"))
+    if (cleanNumber.startsWith("4")) {
+      return "visa";
+    }
+    if (cleanNumber.startsWith("5") || cleanNumber.startsWith("2")) {
       return "mastercard";
-    if (cleanNumber.startsWith("3")) return "amex";
-    if (cleanNumber.startsWith("6")) return "discover";
+    }
+    if (cleanNumber.startsWith("3")) {
+      return "amex";
+    }
+    if (cleanNumber.startsWith("6")) {
+      return "discover";
+    }
 
     return "";
   };
@@ -122,13 +129,12 @@ export const PaymentMethodInput: React.FC<PaymentMethodInputProps> = ({
         .substring(0, 15)
         .replace(/(\d{4})(\d{6})(\d{5})/, "$1 $2 $3")
         .trim();
-    } else {
-      // Others: 4-4-4-4 format
-      return cleanValue
-        .substring(0, 16)
-        .replace(/(\d{4})(?=\d)/g, "$1 ")
-        .trim();
     }
+    // Others: 4-4-4-4 format
+    return cleanValue
+      .substring(0, 16)
+      .replace(/(\d{4})(?=\d)/g, "$1 ")
+      .trim();
   };
 
   const handleCardNumberChange = (

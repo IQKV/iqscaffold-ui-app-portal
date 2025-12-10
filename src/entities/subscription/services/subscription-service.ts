@@ -264,13 +264,23 @@ export class SubscriptionService {
   } {
     const errors: string[] = [];
 
-    if (!data.tenantId) errors.push("Tenant ID is required");
-    if (!data.planId) errors.push("Plan ID is required");
-    if (!data.paymentMethodId) errors.push("Payment method ID is required");
+    if (!data.tenantId) {
+      errors.push("Tenant ID is required");
+    }
+    if (!data.planId) {
+      errors.push("Plan ID is required");
+    }
+    if (!data.paymentMethodId) {
+      errors.push("Payment method ID is required");
+    }
 
     if (data.trialDays !== undefined) {
-      if (data.trialDays < 0) errors.push("Trial days cannot be negative");
-      if (data.trialDays > 365) errors.push("Trial days cannot exceed 365");
+      if (data.trialDays < 0) {
+        errors.push("Trial days cannot be negative");
+      }
+      if (data.trialDays > 365) {
+        errors.push("Trial days cannot exceed 365");
+      }
     }
 
     return {

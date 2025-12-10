@@ -20,64 +20,81 @@ export interface PaymentProviderInterface {
   /**
    * Initialize the provider with configuration
    */
-  initialize(config: PaymentProviderConfig): Promise<void>;
+  initialize: (config: PaymentProviderConfig) => Promise<void>;
 
   /**
    * Validate payment method data before tokenization
    */
-  validatePaymentMethod(data: PaymentMethodData): Promise<ValidationResult>;
+  validatePaymentMethod: (data: PaymentMethodData) => Promise<ValidationResult>;
 
   /**
    * Tokenize payment method data for secure storage
    */
-  tokenizePaymentMethod(data: PaymentMethodData): Promise<TokenizationResult>;
+  tokenizePaymentMethod: (
+    data: PaymentMethodData
+  ) => Promise<TokenizationResult>;
 
   /**
    * Update an existing payment method
    */
-  updatePaymentMethod(
+  updatePaymentMethod: (
     providerPaymentMethodId: string,
     updates: Partial<PaymentMethodData>
-  ): Promise<PaymentMethodMetadata>;
+  ) => Promise<PaymentMethodMetadata>;
 
   /**
    * Delete a payment method from the provider
    */
-  deletePaymentMethod(providerPaymentMethodId: string): Promise<void>;
+  deletePaymentMethod: (providerPaymentMethodId: string) => Promise<void>;
 
   /**
    * Process a payment using the payment method
    */
-  processPayment(
+  processPayment: (
     providerPaymentMethodId: string,
     amount: number,
     currency: string,
     metadata?: Record<string, any>
-  ): Promise<PaymentResult>;
+  ) => Promise<PaymentResult>;
 
   /**
    * Set up a payment method for recurring payments
    */
-  setupRecurringPayment(
+  setupRecurringPayment: (
     providerPaymentMethodId: string,
     metadata?: Record<string, any>
-  ): Promise<RecurringPaymentSetup>;
+  ) => Promise<RecurringPaymentSetup>;
 
   /**
    * Handle webhook events from the provider
    */
-  handleWebhook(
+  handleWebhook: (
     payload: string,
     signature: string,
     secret: string
-  ): Promise<WebhookEvent>;
+  ) => Promise<WebhookEvent>;
 
   /**
    * Get provider-specific metadata for display
    */
-  getDisplayMetadata(
+  getDisplayMetadata: (
     providerPaymentMethodId: string
-  ): Promise<PaymentMethodMetadata>;
+  ) => Promise<PaymentMethodMetadata>;
+
+  /**
+   * Process a refund for a payment
+   */
+  processRefund: (
+    providerPaymentId: string,
+    amount: number,
+    reason: string,
+    metadata?: Record<string, any>
+  ) => Promise<RefundResult>;
+
+  /**
+   * Cancel a pending refund
+   */
+  cancelRefund: (providerRefundId: string) => Promise<void>;
 }
 
 export interface PaymentProviderConfig {
@@ -119,6 +136,15 @@ export interface WebhookEvent {
   data: Record<string, any>;
   timestamp: Date;
   processed: boolean;
+}
+
+export interface RefundResult {
+  id: string;
+  status: string;
+  amount: number;
+  currency: string;
+  processedAt: Date;
+  metadata?: Record<string, any>;
 }
 
 /**

@@ -1,7 +1,12 @@
 import { notifications } from "@mantine/notifications";
 import { msg } from "@lingui/macro";
 import { i18n, MessageDescriptor } from "@lingui/core";
-import { IconCheck, IconX, IconAlertTriangle, IconInfoCircle } from "@tabler/icons-react";
+import {
+  IconCheck,
+  IconX,
+  IconAlertTriangle,
+  IconInfoCircle,
+} from "@tabler/icons-react";
 
 /**
  * Notification types with consistent styling
@@ -114,15 +119,17 @@ export class LocalizedNotifications {
   /**
    * Resolve message descriptor to string
    */
-  private static resolveMessage(message?: MessageDescriptor | string): string | undefined {
+  private static resolveMessage(
+    message?: MessageDescriptor | string
+  ): string | undefined {
     if (!message) {
       return undefined;
     }
-    
+
     if (typeof message === "string") {
       return message;
     }
-    
+
     return i18n._(message);
   }
 
@@ -208,7 +215,9 @@ export class BillingNotifications extends LocalizedNotifications {
   static paymentFailed(reason?: string) {
     this.error({
       title: msg`Payment Failed`,
-      message: reason || msg`Payment could not be processed. Please check your payment method.`,
+      message:
+        reason ||
+        msg`Payment could not be processed. Please check your payment method.`,
     });
   }
 
@@ -317,7 +326,8 @@ export class BillingNotifications extends LocalizedNotifications {
   static billingUpdateError(error?: string) {
     this.error({
       title: msg`Billing Update Failed`,
-      message: error || msg`Failed to update billing information. Please try again.`,
+      message:
+        error || msg`Failed to update billing information. Please try again.`,
     });
   }
 
@@ -372,42 +382,63 @@ export const useLocalizedNotifications = () => {
 export const useBillingNotifications = () => {
   return {
     // Subscription
-    subscriptionUpgraded: BillingNotifications.subscriptionUpgraded.bind(BillingNotifications),
-    subscriptionDowngraded: BillingNotifications.subscriptionDowngraded.bind(BillingNotifications),
-    subscriptionCanceled: BillingNotifications.subscriptionCanceled.bind(BillingNotifications),
-    subscriptionReactivated: BillingNotifications.subscriptionReactivated.bind(BillingNotifications),
-    subscriptionError: BillingNotifications.subscriptionError.bind(BillingNotifications),
+    subscriptionUpgraded:
+      BillingNotifications.subscriptionUpgraded.bind(BillingNotifications),
+    subscriptionDowngraded:
+      BillingNotifications.subscriptionDowngraded.bind(BillingNotifications),
+    subscriptionCanceled:
+      BillingNotifications.subscriptionCanceled.bind(BillingNotifications),
+    subscriptionReactivated:
+      BillingNotifications.subscriptionReactivated.bind(BillingNotifications),
+    subscriptionError:
+      BillingNotifications.subscriptionError.bind(BillingNotifications),
 
     // Payment
-    paymentSuccess: BillingNotifications.paymentSuccess.bind(BillingNotifications),
-    paymentFailed: BillingNotifications.paymentFailed.bind(BillingNotifications),
-    paymentMethodAdded: BillingNotifications.paymentMethodAdded.bind(BillingNotifications),
-    paymentMethodUpdated: BillingNotifications.paymentMethodUpdated.bind(BillingNotifications),
-    paymentMethodDeleted: BillingNotifications.paymentMethodDeleted.bind(BillingNotifications),
-    paymentMethodError: BillingNotifications.paymentMethodError.bind(BillingNotifications),
+    paymentSuccess:
+      BillingNotifications.paymentSuccess.bind(BillingNotifications),
+    paymentFailed:
+      BillingNotifications.paymentFailed.bind(BillingNotifications),
+    paymentMethodAdded:
+      BillingNotifications.paymentMethodAdded.bind(BillingNotifications),
+    paymentMethodUpdated:
+      BillingNotifications.paymentMethodUpdated.bind(BillingNotifications),
+    paymentMethodDeleted:
+      BillingNotifications.paymentMethodDeleted.bind(BillingNotifications),
+    paymentMethodError:
+      BillingNotifications.paymentMethodError.bind(BillingNotifications),
 
     // Invoice
-    invoiceDownloaded: BillingNotifications.invoiceDownloaded.bind(BillingNotifications),
+    invoiceDownloaded:
+      BillingNotifications.invoiceDownloaded.bind(BillingNotifications),
     invoicePaid: BillingNotifications.invoicePaid.bind(BillingNotifications),
     invoiceError: BillingNotifications.invoiceError.bind(BillingNotifications),
 
     // Usage
     usageWarning: BillingNotifications.usageWarning.bind(BillingNotifications),
-    usageExceeded: BillingNotifications.usageExceeded.bind(BillingNotifications),
-    usageGracePeriod: BillingNotifications.usageGracePeriod.bind(BillingNotifications),
+    usageExceeded:
+      BillingNotifications.usageExceeded.bind(BillingNotifications),
+    usageGracePeriod:
+      BillingNotifications.usageGracePeriod.bind(BillingNotifications),
 
     // Trial
-    trialExpiring: BillingNotifications.trialExpiring.bind(BillingNotifications),
+    trialExpiring:
+      BillingNotifications.trialExpiring.bind(BillingNotifications),
     trialExpired: BillingNotifications.trialExpired.bind(BillingNotifications),
-    trialExtended: BillingNotifications.trialExtended.bind(BillingNotifications),
+    trialExtended:
+      BillingNotifications.trialExtended.bind(BillingNotifications),
 
     // General
-    billingUpdateSuccess: BillingNotifications.billingUpdateSuccess.bind(BillingNotifications),
-    billingUpdateError: BillingNotifications.billingUpdateError.bind(BillingNotifications),
+    billingUpdateSuccess:
+      BillingNotifications.billingUpdateSuccess.bind(BillingNotifications),
+    billingUpdateError:
+      BillingNotifications.billingUpdateError.bind(BillingNotifications),
 
     // Loading states
-    processingPayment: BillingNotifications.processingPayment.bind(BillingNotifications),
-    updatingSubscription: BillingNotifications.updatingSubscription.bind(BillingNotifications),
-    loadingBillingData: BillingNotifications.loadingBillingData.bind(BillingNotifications),
+    processingPayment:
+      BillingNotifications.processingPayment.bind(BillingNotifications),
+    updatingSubscription:
+      BillingNotifications.updatingSubscription.bind(BillingNotifications),
+    loadingBillingData:
+      BillingNotifications.loadingBillingData.bind(BillingNotifications),
   };
 };

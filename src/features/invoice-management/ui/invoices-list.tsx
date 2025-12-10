@@ -113,7 +113,7 @@ export const InvoicesList: React.FC<InvoicesListProps> = ({
 
   // Filter and search logic
   const filteredInvoices = invoices.filter((invoice) => {
-    const matchesSearch = 
+    const matchesSearch =
       invoice.number.toLowerCase().includes(searchQuery.toLowerCase()) ||
       invoice.id.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = !statusFilter || invoice.status === statusFilter;
@@ -123,11 +123,14 @@ export const InvoicesList: React.FC<InvoicesListProps> = ({
   // Pagination
   const totalPages = Math.ceil(filteredInvoices.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedInvoices = filteredInvoices.slice(startIndex, startIndex + itemsPerPage);
+  const paginatedInvoices = filteredInvoices.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   const handleSelectAll = (checked: boolean) => {
     if (checked) {
-      onSelectionChange(paginatedInvoices.map(invoice => invoice.id));
+      onSelectionChange(paginatedInvoices.map((invoice) => invoice.id));
     } else {
       onSelectionChange([]);
     }
@@ -137,7 +140,7 @@ export const InvoicesList: React.FC<InvoicesListProps> = ({
     if (checked) {
       onSelectionChange([...selectedInvoices, invoiceId]);
     } else {
-      onSelectionChange(selectedInvoices.filter(id => id !== invoiceId));
+      onSelectionChange(selectedInvoices.filter((id) => id !== invoiceId));
     }
   };
 
@@ -146,9 +149,12 @@ export const InvoicesList: React.FC<InvoicesListProps> = ({
     setShowInvoiceModal(true);
   };
 
-  const allSelected = paginatedInvoices.length > 0 && 
-    paginatedInvoices.every(invoice => selectedInvoices.includes(invoice.id));
-  const someSelected = paginatedInvoices.some(invoice => selectedInvoices.includes(invoice.id));
+  const allSelected =
+    paginatedInvoices.length > 0 &&
+    paginatedInvoices.every((invoice) => selectedInvoices.includes(invoice.id));
+  const someSelected = paginatedInvoices.some((invoice) =>
+    selectedInvoices.includes(invoice.id)
+  );
 
   if (loading) {
     return (
@@ -205,7 +211,11 @@ export const InvoicesList: React.FC<InvoicesListProps> = ({
 
           {/* Table */}
           {paginatedInvoices.length === 0 ? (
-            <Alert icon={<IconInfoCircle size={16} />} color="blue" variant="light">
+            <Alert
+              icon={<IconInfoCircle size={16} />}
+              color="blue"
+              variant="light"
+            >
               <Text size="sm">
                 {invoices.length === 0
                   ? "No invoices found."
@@ -221,7 +231,9 @@ export const InvoicesList: React.FC<InvoicesListProps> = ({
                       <Checkbox
                         checked={allSelected}
                         indeterminate={someSelected && !allSelected}
-                        onChange={(event) => handleSelectAll(event.currentTarget.checked)}
+                        onChange={(event) =>
+                          handleSelectAll(event.currentTarget.checked)
+                        }
                       />
                     </Table.Th>
                     <Table.Th>Invoice #</Table.Th>
@@ -238,8 +250,11 @@ export const InvoicesList: React.FC<InvoicesListProps> = ({
                       <Table.Td>
                         <Checkbox
                           checked={selectedInvoices.includes(invoice.id)}
-                          onChange={(event) => 
-                            handleSelectInvoice(invoice.id, event.currentTarget.checked)
+                          onChange={(event) =>
+                            handleSelectInvoice(
+                              invoice.id,
+                              event.currentTarget.checked
+                            )
                           }
                         />
                       </Table.Td>
@@ -340,16 +355,31 @@ export const InvoicesList: React.FC<InvoicesListProps> = ({
 
           {/* Summary */}
           {invoices.length > 0 && (
-            <Group justify="space-between" mt="md" pt="md" style={{ borderTop: "1px solid var(--mantine-color-gray-3)" }}>
+            <Group
+              justify="space-between"
+              mt="md"
+              pt="md"
+              style={{ borderTop: "1px solid var(--mantine-color-gray-3)" }}
+            >
               <Text size="sm" c="dimmed">
-                Showing {startIndex + 1}-{Math.min(startIndex + itemsPerPage, filteredInvoices.length)} of {filteredInvoices.length} invoices
+                Showing {startIndex + 1}-
+                {Math.min(startIndex + itemsPerPage, filteredInvoices.length)}{" "}
+                of {filteredInvoices.length} invoices
               </Text>
               <Group gap="md">
                 <Text size="sm" c="dimmed">
-                  Total: {formatCurrency(invoices.reduce((sum, inv) => sum + inv.amount, 0))}
+                  Total:{" "}
+                  {formatCurrency(
+                    invoices.reduce((sum, inv) => sum + inv.amount, 0)
+                  )}
                 </Text>
                 <Text size="sm" c="dimmed">
-                  Paid: {formatCurrency(invoices.filter(inv => inv.status === "paid").reduce((sum, inv) => sum + inv.amount, 0))}
+                  Paid:{" "}
+                  {formatCurrency(
+                    invoices
+                      .filter((inv) => inv.status === "paid")
+                      .reduce((sum, inv) => sum + inv.amount, 0)
+                  )}
                 </Text>
               </Group>
             </Group>
@@ -394,27 +424,31 @@ export const InvoicesList: React.FC<InvoicesListProps> = ({
             <Group justify="space-between">
               <Text size="sm">Amount:</Text>
               <Text size="lg" fw={700} c="blue">
-                {formatCurrency(selectedInvoice.amount, selectedInvoice.currency)}
+                {formatCurrency(
+                  selectedInvoice.amount,
+                  selectedInvoice.currency
+                )}
               </Text>
             </Group>
 
-            {selectedInvoice.lineItems && selectedInvoice.lineItems.length > 0 && (
-              <Box>
-                <Text size="sm" fw={500} mb="xs">
-                  Line Items:
-                </Text>
-                <Stack gap="xs">
-                  {selectedInvoice.lineItems.map((item, index) => (
-                    <Group key={index} justify="space-between">
-                      <Text size="sm">{item.description}</Text>
-                      <Text size="sm" fw={500}>
-                        {formatCurrency(item.amount)}
-                      </Text>
-                    </Group>
-                  ))}
-                </Stack>
-              </Box>
-            )}
+            {selectedInvoice.lineItems &&
+              selectedInvoice.lineItems.length > 0 && (
+                <Box>
+                  <Text size="sm" fw={500} mb="xs">
+                    Line Items:
+                  </Text>
+                  <Stack gap="xs">
+                    {selectedInvoice.lineItems.map((item, index) => (
+                      <Group key={index} justify="space-between">
+                        <Text size="sm">{item.description}</Text>
+                        <Text size="sm" fw={500}>
+                          {formatCurrency(item.amount)}
+                        </Text>
+                      </Group>
+                    ))}
+                  </Stack>
+                </Box>
+              )}
 
             <Group justify="flex-end" gap="sm" mt="md">
               <Button

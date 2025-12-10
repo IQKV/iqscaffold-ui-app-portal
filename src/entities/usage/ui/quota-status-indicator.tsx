@@ -24,9 +24,15 @@ export const QuotaStatusIndicator: React.FC<QuotaStatusIndicatorProps> = ({
   size = "md",
 }) => {
   const getStatusColor = (): string => {
-    if (quotaStatus.exceeded && !quotaStatus.withinGrace) return "red";
-    if (quotaStatus.exceeded && quotaStatus.withinGrace) return "orange";
-    if (quotaStatus.percentage >= 90) return "yellow";
+    if (quotaStatus.exceeded && !quotaStatus.withinGrace) {
+      return "red";
+    }
+    if (quotaStatus.exceeded && quotaStatus.withinGrace) {
+      return "orange";
+    }
+    if (quotaStatus.percentage >= 90) {
+      return "yellow";
+    }
     return "green";
   };
 
@@ -44,9 +50,15 @@ export const QuotaStatusIndicator: React.FC<QuotaStatusIndicatorProps> = ({
   };
 
   const getStatusText = (): string => {
-    if (quotaStatus.exceeded && !quotaStatus.withinGrace) return "Exceeded";
-    if (quotaStatus.exceeded && quotaStatus.withinGrace) return "Grace Period";
-    if (quotaStatus.percentage >= 90) return "Warning";
+    if (quotaStatus.exceeded && !quotaStatus.withinGrace) {
+      return "Exceeded";
+    }
+    if (quotaStatus.exceeded && quotaStatus.withinGrace) {
+      return "Grace Period";
+    }
+    if (quotaStatus.percentage >= 90) {
+      return "Warning";
+    }
     return "Normal";
   };
 
@@ -143,7 +155,7 @@ export const QuotaStatusGrid: React.FC<QuotaStatusGridProps> = ({
         <QuotaStatusIndicator
           key={status.metricType}
           quotaStatus={status}
-          showDetails={true}
+          showDetails
         />
       ))}
     </div>

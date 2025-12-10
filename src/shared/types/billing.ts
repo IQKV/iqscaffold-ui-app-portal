@@ -282,6 +282,15 @@ export enum WebhookEventType {
   INVOICE_FAILED = "invoice.payment_failed",
   PAYMENT_METHOD_ADDED = "payment_method.added",
   PAYMENT_METHOD_REMOVED = "payment_method.removed",
+  // Provider-specific event types
+  PAYMENT_INTENT_SUCCEEDED = "payment_intent.succeeded",
+  PAYMENT_INTENT_FAILED = "payment_intent.payment_failed",
+  CUSTOMER_SUBSCRIPTION_CREATED = "customer.subscription.created",
+  CUSTOMER_SUBSCRIPTION_UPDATED = "customer.subscription.updated",
+  CUSTOMER_SUBSCRIPTION_DELETED = "customer.subscription.deleted",
+  PAYMENT_METHOD_ATTACHED = "payment_method.attached",
+  PAYMENT_METHOD_DETACHED = "payment_method.detached",
+  INVOICE_FINALIZED = "invoice.finalized",
 }
 
 // Proration types

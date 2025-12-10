@@ -51,24 +51,23 @@ export const useUsageAnalytics = () => {
     error: metricsError,
   } = useQuery({
     queryKey: ["usageMetrics", currentTenantId],
-    queryFn: () => usageApi.getUsageMetrics(currentTenantId!, {
-      startDate: dateRange.start,
-      endDate: dateRange.end,
-    }),
+    queryFn: () =>
+      usageApi.getUsageMetrics(currentTenantId!, {
+        startDate: dateRange.start,
+        endDate: dateRange.end,
+      }),
     enabled: !!currentTenantId,
   });
 
   // Fetch usage analytics
-  const {
-    data: usageAnalytics,
-    isLoading: analyticsLoading,
-  } = useQuery({
+  const { data: usageAnalytics, isLoading: analyticsLoading } = useQuery({
     queryKey: ["usageAnalytics", currentTenantId, dateRange],
-    queryFn: () => usageApi.getUsageAnalytics(currentTenantId!, {
-      startDate: dateRange.start,
-      endDate: dateRange.end,
-      aggregation: "day",
-    }),
+    queryFn: () =>
+      usageApi.getUsageAnalytics(currentTenantId!, {
+        startDate: dateRange.start,
+        endDate: dateRange.end,
+        aggregation: "day",
+      }),
     enabled: !!currentTenantId,
   });
 
@@ -96,32 +95,33 @@ export const useUsageAnalytics = () => {
   ];
 
   // Mock quota utilization data
-  const quotaUtilization: QuotaUtilizationData[] = usageAnalytics?.quotaUtilization || [
-    {
-      metricType: "api_calls" as UsageMetricType,
-      utilization: 75,
-      trend: "increasing",
-      timestamp: new Date(),
-    },
-    {
-      metricType: "storage_gb" as UsageMetricType,
-      utilization: 45,
-      trend: "stable",
-      timestamp: new Date(),
-    },
-    {
-      metricType: "email_sends" as UsageMetricType,
-      utilization: 60,
-      trend: "decreasing",
-      timestamp: new Date(),
-    },
-    {
-      metricType: "active_users" as UsageMetricType,
-      utilization: 85,
-      trend: "increasing",
-      timestamp: new Date(),
-    },
-  ];
+  const quotaUtilization: QuotaUtilizationData[] =
+    usageAnalytics?.quotaUtilization || [
+      {
+        metricType: "api_calls" as UsageMetricType,
+        utilization: 75,
+        trend: "increasing",
+        timestamp: new Date(),
+      },
+      {
+        metricType: "storage_gb" as UsageMetricType,
+        utilization: 45,
+        trend: "stable",
+        timestamp: new Date(),
+      },
+      {
+        metricType: "email_sends" as UsageMetricType,
+        utilization: 60,
+        trend: "decreasing",
+        timestamp: new Date(),
+      },
+      {
+        metricType: "active_users" as UsageMetricType,
+        utilization: 85,
+        trend: "increasing",
+        timestamp: new Date(),
+      },
+    ];
 
   // Mock billing projection
   const billingProjection: BillingProjection = usageAnalytics?.costAnalysis || {
@@ -138,7 +138,7 @@ export const useUsageAnalytics = () => {
       active_users: 95,
     },
     currentCost: 29.99,
-    projectedCost: 34.50,
+    projectedCost: 34.5,
     overageCost: 4.51,
     potentialSavings: 0,
     recommendedPlan: "Pro Plus",

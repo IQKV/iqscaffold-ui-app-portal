@@ -1,5 +1,9 @@
 // Core i18n functionality
-export { LocaleProvider, useLocale, useLocaleFormatting } from "./locale-provider";
+export {
+  LocaleProvider,
+  useLocale,
+  useLocaleFormatting,
+} from "./locale-provider";
 
 // Translation utilities
 export { billingTranslations, getBillingMessage } from "./billing-translations";

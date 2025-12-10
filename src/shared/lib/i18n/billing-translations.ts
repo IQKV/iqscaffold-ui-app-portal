@@ -241,15 +241,15 @@ export type BillingTranslationKey = keyof typeof billingTranslations;
  * Helper function to get nested translation messages
  */
 export function getBillingMessage(path: string): MessageDescriptor {
-  const keys = path.split('.');
+  const keys = path.split(".");
   let current: any = billingTranslations;
-  
+
   for (const key of keys) {
     current = current[key];
     if (!current) {
       throw new Error(`Translation key not found: ${path}`);
     }
   }
-  
+
   return current;
 }

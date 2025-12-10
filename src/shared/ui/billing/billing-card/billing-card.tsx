@@ -94,7 +94,9 @@ export const BillingCard: React.FC<BillingCardProps> = ({
   headerOnly = false,
 }) => {
   const renderActions = () => {
-    if (actions.length === 0) return null;
+    if (actions.length === 0) {
+      return null;
+    }
 
     return (
       <Menu shadow="md" width={200}>

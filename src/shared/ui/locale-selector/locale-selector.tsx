@@ -35,7 +35,9 @@ export const LocaleSelector: React.FC<LocaleSelectorProps> = ({
     }
   };
 
-  const currentLocaleOption = LOCALE_OPTIONS.find(option => option.value === locale);
+  const currentLocaleOption = LOCALE_OPTIONS.find(
+    (option) => option.value === locale
+  );
 
   if (variant === "menu") {
     return (
@@ -46,7 +48,9 @@ export const LocaleSelector: React.FC<LocaleSelectorProps> = ({
           disabled={disabled || isLoading}
           onClick={() => {
             // This would open a menu - for now just cycle through locales
-            const currentIndex = LOCALE_OPTIONS.findIndex(opt => opt.value === locale);
+            const currentIndex = LOCALE_OPTIONS.findIndex(
+              (opt) => opt.value === locale
+            );
             const nextIndex = (currentIndex + 1) % LOCALE_OPTIONS.length;
             handleLocaleChange(LOCALE_OPTIONS[nextIndex].value);
           }}
@@ -64,11 +68,11 @@ export const LocaleSelector: React.FC<LocaleSelectorProps> = ({
           <Trans>Language:</Trans>
         </Text>
       )}
-      
+
       <Select
         value={locale}
         onChange={handleLocaleChange}
-        data={LOCALE_OPTIONS.map(option => ({
+        data={LOCALE_OPTIONS.map((option) => ({
           value: option.value,
           label: option.label,
         }))}
@@ -77,7 +81,9 @@ export const LocaleSelector: React.FC<LocaleSelectorProps> = ({
         leftSection={<IconLanguage size={16} />}
         rightSection={isLoading ? undefined : <IconCheck size={14} />}
         renderOption={({ option, checked }) => {
-          const localeOption = LOCALE_OPTIONS.find(opt => opt.value === option.value);
+          const localeOption = LOCALE_OPTIONS.find(
+            (opt) => opt.value === option.value
+          );
           return (
             <Group gap="sm" wrap="nowrap">
               <Text size="lg">{localeOption?.flag}</Text>

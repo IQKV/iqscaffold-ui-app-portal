@@ -49,10 +49,7 @@ export const usePaymentMethodsManagement = () => {
   });
 
   // Fetch payment history
-  const {
-    data: paymentHistory = [],
-    isLoading: historyLoading,
-  } = useQuery({
+  const { data: paymentHistory = [], isLoading: historyLoading } = useQuery({
     queryKey: ["paymentHistory", currentTenant?.id],
     queryFn: async (): Promise<PaymentTransaction[]> => {
       // Mock payment history - in real app this would come from API
@@ -80,27 +77,25 @@ export const usePaymentMethodsManagement = () => {
   });
 
   // Fetch failed payments
-  const {
-    data: failedPayments = [],
-    isLoading: failedPaymentsLoading,
-  } = useQuery({
-    queryKey: ["failedPayments", currentTenant?.id],
-    queryFn: async (): Promise<FailedPayment[]> => {
-      // Mock failed payments - in real app this would come from API
-      return [
-        {
-          id: "1",
-          invoiceId: "inv_123",
-          amount: 29.99,
-          paymentMethodId: paymentMethods[0]?.id || "",
-          failureReason: "Card expired",
-          canRetry: true,
-          attemptsRemaining: 2,
-        },
-      ];
-    },
-    enabled: !!currentTenant?.id && paymentMethods.length > 0,
-  });
+  const { data: failedPayments = [], isLoading: failedPaymentsLoading } =
+    useQuery({
+      queryKey: ["failedPayments", currentTenant?.id],
+      queryFn: async (): Promise<FailedPayment[]> => {
+        // Mock failed payments - in real app this would come from API
+        return [
+          {
+            id: "1",
+            invoiceId: "inv_123",
+            amount: 29.99,
+            paymentMethodId: paymentMethods[0]?.id || "",
+            failureReason: "Card expired",
+            canRetry: true,
+            attemptsRemaining: 2,
+          },
+        ];
+      },
+      enabled: !!currentTenant?.id && paymentMethods.length > 0,
+    });
 
   // Add payment method mutation
   const addPaymentMethodMutation = useMutation({
@@ -125,8 +120,13 @@ export const usePaymentMethodsManagement = () => {
 
   // Update payment method mutation
   const updatePaymentMethodMutation = useMutation({
-    mutationFn: ({ id, updates }: { id: string; updates: Partial<PaymentMethodData> }) =>
-      paymentMethodApi.update(id, updates),
+    mutationFn: ({
+      id,
+      updates,
+    }: {
+      id: string;
+      updates: Partial<PaymentMethodData>;
+    }) => paymentMethodApi.update(id, updates),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["paymentMethods"] });
       notifications.show({
@@ -216,7 +216,8 @@ export const usePaymentMethodsManagement = () => {
     queryClient.invalidateQueries({ queryKey: ["failedPayments"] });
   };
 
-  const isLoading = paymentMethodsLoading || historyLoading || failedPaymentsLoading;
+  const isLoading =
+    paymentMethodsLoading || historyLoading || failedPaymentsLoading;
   const error = paymentMethodsError?.message;
 
   return {

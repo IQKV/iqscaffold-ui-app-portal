@@ -17,7 +17,9 @@ export function useAuthorities(): Authority[] {
   const { user } = useAuth();
 
   return useMemo(() => {
-    if (!user?.roles) return [];
+    if (!user?.roles) {
+      return [];
+    }
 
     const authorities: Authority[] = [];
 
@@ -203,7 +205,9 @@ export function useAuthorizedData<T extends { tenantId?: string }>(
   const { filterData, authorities } = useAuthorityGuard();
 
   return useMemo(() => {
-    if (!data) return undefined;
+    if (!data) {
+      return undefined;
+    }
 
     // Apply tenant scoping
     let filteredData = data;

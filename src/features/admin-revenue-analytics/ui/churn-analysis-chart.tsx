@@ -4,14 +4,7 @@
  */
 
 import React from "react";
-import {
-  Card,
-  Text,
-  Group,
-  Stack,
-  Badge,
-  Skeleton,
-} from "@mantine/core";
+import { Card, Text, Group, Stack, Badge, Skeleton } from "@mantine/core";
 import { IconChartLine } from "@tabler/icons-react";
 
 interface ChurnAnalysisData {
@@ -62,23 +55,48 @@ export const ChurnAnalysisChart: React.FC<ChurnAnalysisChartProps> = ({
         </Group>
 
         {/* Placeholder for chart */}
-        <div style={{ height: 300, display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--mantine-color-gray-1)", borderRadius: 8 }}>
+        <div
+          style={{
+            height: 300,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "var(--mantine-color-gray-1)",
+            borderRadius: 8,
+          }}
+        >
           <Text c="dimmed">Churn Analysis Chart Placeholder</Text>
         </div>
 
         {/* Summary */}
-        <Group justify="space-around" pt="md" style={{ borderTop: "1px solid var(--mantine-color-gray-3)" }}>
+        <Group
+          justify="space-around"
+          pt="md"
+          style={{ borderTop: "1px solid var(--mantine-color-gray-3)" }}
+        >
           <div style={{ textAlign: "center" }}>
-            <Text size="lg" fw={700} c="red">3.2%</Text>
-            <Text size="xs" c="dimmed">Customer Churn</Text>
+            <Text size="lg" fw={700} c="red">
+              3.2%
+            </Text>
+            <Text size="xs" c="dimmed">
+              Customer Churn
+            </Text>
           </div>
           <div style={{ textAlign: "center" }}>
-            <Text size="lg" fw={700} c="orange">4.1%</Text>
-            <Text size="xs" c="dimmed">Revenue Churn</Text>
+            <Text size="lg" fw={700} c="orange">
+              4.1%
+            </Text>
+            <Text size="xs" c="dimmed">
+              Revenue Churn
+            </Text>
           </div>
           <div style={{ textAlign: "center" }}>
-            <Text size="lg" fw={700} c="green">+85</Text>
-            <Text size="xs" c="dimmed">New Customers</Text>
+            <Text size="lg" fw={700} c="green">
+              +85
+            </Text>
+            <Text size="xs" c="dimmed">
+              New Customers
+            </Text>
           </div>
         </Group>
       </Stack>

@@ -107,7 +107,10 @@ export const PaymentHistoryTable: React.FC<PaymentHistoryTableProps> = ({
   // Pagination
   const totalPages = Math.ceil(filteredHistory.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedHistory = filteredHistory.slice(startIndex, startIndex + itemsPerPage);
+  const paginatedHistory = filteredHistory.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   const handleDownloadReceipt = (transactionId: string) => {
     // Mock download - in real app this would download the receipt
@@ -142,7 +145,8 @@ export const PaymentHistoryTable: React.FC<PaymentHistoryTableProps> = ({
             Payment History
           </Text>
           <Badge variant="light" color="blue" size="sm">
-            {paymentHistory.length} transaction{paymentHistory.length !== 1 ? "s" : ""}
+            {paymentHistory.length} transaction
+            {paymentHistory.length !== 1 ? "s" : ""}
           </Badge>
         </Group>
 
@@ -171,7 +175,11 @@ export const PaymentHistoryTable: React.FC<PaymentHistoryTableProps> = ({
 
         {/* Table */}
         {paginatedHistory.length === 0 ? (
-          <Alert icon={<IconInfoCircle size={16} />} color="blue" variant="light">
+          <Alert
+            icon={<IconInfoCircle size={16} />}
+            color="blue"
+            variant="light"
+          >
             <Text size="sm">
               {paymentHistory.length === 0
                 ? "No payment history found."
@@ -232,7 +240,9 @@ export const PaymentHistoryTable: React.FC<PaymentHistoryTableProps> = ({
                           {transaction.status === "succeeded" && (
                             <Menu.Item
                               leftSection={<IconDownload size={14} />}
-                              onClick={() => handleDownloadReceipt(transaction.id)}
+                              onClick={() =>
+                                handleDownloadReceipt(transaction.id)
+                              }
                             >
                               Download Receipt
                             </Menu.Item>
@@ -278,13 +288,26 @@ export const PaymentHistoryTable: React.FC<PaymentHistoryTableProps> = ({
 
         {/* Summary */}
         {paymentHistory.length > 0 && (
-          <Group justify="space-between" mt="md" pt="md" style={{ borderTop: "1px solid var(--mantine-color-gray-3)" }}>
+          <Group
+            justify="space-between"
+            mt="md"
+            pt="md"
+            style={{ borderTop: "1px solid var(--mantine-color-gray-3)" }}
+          >
             <Text size="sm" c="dimmed">
-              Showing {startIndex + 1}-{Math.min(startIndex + itemsPerPage, filteredHistory.length)} of {filteredHistory.length} transactions
+              Showing {startIndex + 1}-
+              {Math.min(startIndex + itemsPerPage, filteredHistory.length)} of{" "}
+              {filteredHistory.length} transactions
             </Text>
             <Group gap="md">
               <Text size="sm" c="dimmed">
-                Total: {formatCurrency(paymentHistory.reduce((sum, t) => sum + (t.status === "succeeded" ? t.amount : 0), 0))}
+                Total:{" "}
+                {formatCurrency(
+                  paymentHistory.reduce(
+                    (sum, t) => sum + (t.status === "succeeded" ? t.amount : 0),
+                    0
+                  )
+                )}
               </Text>
             </Group>
           </Group>

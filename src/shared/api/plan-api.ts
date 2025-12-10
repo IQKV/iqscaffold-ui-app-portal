@@ -27,7 +27,9 @@ export const planApi = {
    * Get upgrade options for a current plan
    */
   async getUpgradeOptions(currentPlanId: string): Promise<Plan[]> {
-    const response = await apiClient.get(`/api/plans/${currentPlanId}/upgrade-options`);
+    const response = await apiClient.get(
+      `/api/plans/${currentPlanId}/upgrade-options`
+    );
     return response.data;
   },
 
@@ -35,7 +37,9 @@ export const planApi = {
    * Get downgrade options for a current plan
    */
   async getDowngradeOptions(currentPlanId: string): Promise<Plan[]> {
-    const response = await apiClient.get(`/api/plans/${currentPlanId}/downgrade-options`);
+    const response = await apiClient.get(
+      `/api/plans/${currentPlanId}/downgrade-options`
+    );
     return response.data;
   },
 

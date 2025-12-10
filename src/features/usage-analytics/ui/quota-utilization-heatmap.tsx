@@ -22,7 +22,10 @@ import {
   IconMinus,
   IconTarget,
 } from "@tabler/icons-react";
-import type { QuotaUtilizationData, UsageMetricType } from "@/entities/usage/types/usage-types";
+import type {
+  QuotaUtilizationData,
+  UsageMetricType,
+} from "@/entities/usage/types/usage-types";
 
 interface QuotaUtilizationHeatmapProps {
   quotaUtilization: QuotaUtilizationData[];
@@ -43,21 +46,32 @@ const METRIC_COLORS = {
   active_users: "purple",
 };
 
-export const QuotaUtilizationHeatmap: React.FC<QuotaUtilizationHeatmapProps> = ({
-  quotaUtilization,
-  loading = false,
-}) => {
+export const QuotaUtilizationHeatmap: React.FC<
+  QuotaUtilizationHeatmapProps
+> = ({ quotaUtilization, loading = false }) => {
   const getUtilizationColor = (percentage: number) => {
-    if (percentage >= 90) return "red";
-    if (percentage >= 75) return "orange";
-    if (percentage >= 50) return "yellow";
+    if (percentage >= 90) {
+      return "red";
+    }
+    if (percentage >= 75) {
+      return "orange";
+    }
+    if (percentage >= 50) {
+      return "yellow";
+    }
     return "green";
   };
 
   const getUtilizationStatus = (percentage: number) => {
-    if (percentage >= 90) return "Critical";
-    if (percentage >= 75) return "High";
-    if (percentage >= 50) return "Moderate";
+    if (percentage >= 90) {
+      return "Critical";
+    }
+    if (percentage >= 75) {
+      return "High";
+    }
+    if (percentage >= 50) {
+      return "Moderate";
+    }
     return "Low";
   };
 
@@ -85,13 +99,55 @@ export const QuotaUtilizationHeatmap: React.FC<QuotaUtilizationHeatmapProps> = (
 
   // Mock weekly utilization data for heatmap
   const weeklyData = [
-    { day: "Mon", api_calls: 65, storage_gb: 45, email_sends: 55, active_users: 80 },
-    { day: "Tue", api_calls: 70, storage_gb: 46, email_sends: 60, active_users: 82 },
-    { day: "Wed", api_calls: 75, storage_gb: 47, email_sends: 58, active_users: 85 },
-    { day: "Thu", api_calls: 80, storage_gb: 48, email_sends: 62, active_users: 88 },
-    { day: "Fri", api_calls: 85, storage_gb: 49, email_sends: 65, active_users: 90 },
-    { day: "Sat", api_calls: 60, storage_gb: 49, email_sends: 40, active_users: 75 },
-    { day: "Sun", api_calls: 55, storage_gb: 50, email_sends: 35, active_users: 70 },
+    {
+      day: "Mon",
+      api_calls: 65,
+      storage_gb: 45,
+      email_sends: 55,
+      active_users: 80,
+    },
+    {
+      day: "Tue",
+      api_calls: 70,
+      storage_gb: 46,
+      email_sends: 60,
+      active_users: 82,
+    },
+    {
+      day: "Wed",
+      api_calls: 75,
+      storage_gb: 47,
+      email_sends: 58,
+      active_users: 85,
+    },
+    {
+      day: "Thu",
+      api_calls: 80,
+      storage_gb: 48,
+      email_sends: 62,
+      active_users: 88,
+    },
+    {
+      day: "Fri",
+      api_calls: 85,
+      storage_gb: 49,
+      email_sends: 65,
+      active_users: 90,
+    },
+    {
+      day: "Sat",
+      api_calls: 60,
+      storage_gb: 49,
+      email_sends: 40,
+      active_users: 75,
+    },
+    {
+      day: "Sun",
+      api_calls: 55,
+      storage_gb: 50,
+      email_sends: 35,
+      active_users: 70,
+    },
   ];
 
   if (loading) {
@@ -206,7 +262,7 @@ export const QuotaUtilizationHeatmap: React.FC<QuotaUtilizationHeatmapProps> = (
               </Box>
             ))}
           </Stack>
-          
+
           {/* Legend */}
           <Group gap="md" mt="md" justify="center">
             <Group gap="xs" align="center">
@@ -218,7 +274,9 @@ export const QuotaUtilizationHeatmap: React.FC<QuotaUtilizationHeatmapProps> = (
                   borderRadius: 2,
                 }}
               />
-              <Text size="xs" c="dimmed">Low (0-50%)</Text>
+              <Text size="xs" c="dimmed">
+                Low (0-50%)
+              </Text>
             </Group>
             <Group gap="xs" align="center">
               <Box
@@ -229,7 +287,9 @@ export const QuotaUtilizationHeatmap: React.FC<QuotaUtilizationHeatmapProps> = (
                   borderRadius: 2,
                 }}
               />
-              <Text size="xs" c="dimmed">Moderate (50-75%)</Text>
+              <Text size="xs" c="dimmed">
+                Moderate (50-75%)
+              </Text>
             </Group>
             <Group gap="xs" align="center">
               <Box
@@ -240,7 +300,9 @@ export const QuotaUtilizationHeatmap: React.FC<QuotaUtilizationHeatmapProps> = (
                   borderRadius: 2,
                 }}
               />
-              <Text size="xs" c="dimmed">High (75-90%)</Text>
+              <Text size="xs" c="dimmed">
+                High (75-90%)
+              </Text>
             </Group>
             <Group gap="xs" align="center">
               <Box
@@ -251,25 +313,30 @@ export const QuotaUtilizationHeatmap: React.FC<QuotaUtilizationHeatmapProps> = (
                   borderRadius: 2,
                 }}
               />
-              <Text size="xs" c="dimmed">Critical (90%+)</Text>
+              <Text size="xs" c="dimmed">
+                Critical (90%+)
+              </Text>
             </Group>
           </Group>
         </Box>
 
         {/* Recommendations */}
-        <Box pt="md" style={{ borderTop: "1px solid var(--mantine-color-gray-3)" }}>
+        <Box
+          pt="md"
+          style={{ borderTop: "1px solid var(--mantine-color-gray-3)" }}
+        >
           <Text size="sm" fw={500} mb="xs">
             Recommendations
           </Text>
           <Stack gap="xs">
             {quotaUtilization
-              .filter(data => data.utilization >= 75)
-              .map(data => (
+              .filter((data) => data.utilization >= 75)
+              .map((data) => (
                 <Text key={data.metricType} size="xs" c="dimmed">
                   • Consider upgrading {METRIC_LABELS[data.metricType]} limit
                 </Text>
               ))}
-            {quotaUtilization.every(data => data.utilization < 75) && (
+            {quotaUtilization.every((data) => data.utilization < 75) && (
               <Text size="xs" c="dimmed">
                 • All quotas are within healthy limits
               </Text>

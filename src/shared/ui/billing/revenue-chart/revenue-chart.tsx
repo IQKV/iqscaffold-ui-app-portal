@@ -101,7 +101,9 @@ export const RevenueChart: React.FC<RevenueChartProps> = ({
   };
 
   const calculateTrend = () => {
-    if (data.length < 2) return { direction: "stable", percentage: 0 };
+    if (data.length < 2) {
+      return { direction: "stable", percentage: 0 };
+    }
 
     const latest = data[data.length - 1];
     const previous = data[data.length - 2];
@@ -110,13 +112,18 @@ export const RevenueChart: React.FC<RevenueChartProps> = ({
     const currentValue = latest[metric];
     const previousValue = previous[metric];
 
-    if (previousValue === 0) return { direction: "stable", percentage: 0 };
+    if (previousValue === 0) {
+      return { direction: "stable", percentage: 0 };
+    }
 
     const percentage = ((currentValue - previousValue) / previousValue) * 100;
 
-    if (percentage > 1) return { direction: "up", percentage };
-    if (percentage < -1)
+    if (percentage > 1) {
+      return { direction: "up", percentage };
+    }
+    if (percentage < -1) {
       return { direction: "down", percentage: Math.abs(percentage) };
+    }
     return { direction: "stable", percentage: Math.abs(percentage) };
   };
 

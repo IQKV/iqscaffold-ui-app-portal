@@ -82,10 +82,7 @@ export const useAdminRevenueAnalytics = () => {
   });
 
   // Fetch churn analysis
-  const {
-    data: churnAnalysis = [],
-    isLoading: churnLoading,
-  } = useQuery({
+  const { data: churnAnalysis = [], isLoading: churnLoading } = useQuery({
     queryKey: ["adminChurnAnalysis", dateRange],
     queryFn: async (): Promise<ChurnAnalysisData[]> => {
       // Mock data - in real app this would come from API
@@ -117,10 +114,7 @@ export const useAdminRevenueAnalytics = () => {
   });
 
   // Fetch tenant ranking
-  const {
-    data: tenantRanking = [],
-    isLoading: rankingLoading,
-  } = useQuery({
+  const { data: tenantRanking = [], isLoading: rankingLoading } = useQuery({
     queryKey: ["adminTenantRanking", selectedPeriod],
     queryFn: async (): Promise<TenantRankingData[]> => {
       // Mock data - in real app this would come from API
@@ -175,10 +169,7 @@ export const useAdminRevenueAnalytics = () => {
   });
 
   // Fetch conversion funnel
-  const {
-    data: conversionFunnel = [],
-    isLoading: funnelLoading,
-  } = useQuery({
+  const { data: conversionFunnel = [], isLoading: funnelLoading } = useQuery({
     queryKey: ["adminConversionFunnel", selectedPeriod],
     queryFn: async (): Promise<ConversionFunnelData[]> => {
       // Mock data - in real app this would come from API
@@ -230,7 +221,8 @@ export const useAdminRevenueAnalytics = () => {
     queryClient.invalidateQueries({ queryKey: ["adminConversionFunnel"] });
   };
 
-  const isLoading = metricsLoading || churnLoading || rankingLoading || funnelLoading;
+  const isLoading =
+    metricsLoading || churnLoading || rankingLoading || funnelLoading;
   const error = metricsError?.message;
 
   return {

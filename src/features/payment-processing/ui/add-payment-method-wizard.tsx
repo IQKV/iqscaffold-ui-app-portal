@@ -76,7 +76,8 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
   loading = false,
 }) => {
   const [active, setActive] = useState(0);
-  const [selectedProvider, setSelectedProvider] = useState<PaymentProvider | null>(null);
+  const [selectedProvider, setSelectedProvider] =
+    useState<PaymentProvider | null>(null);
 
   const form = useForm<PaymentMethodData>({
     initialValues: {
@@ -97,25 +98,45 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
     },
     validate: {
       cardNumber: (value, values) => {
-        if (values.provider === "paypal") return null;
-        if (!value) return "Card number is required";
-        if (value.replace(/\s/g, "").length < 13) return "Invalid card number";
+        if (values.provider === "paypal") {
+          return null;
+        }
+        if (!value) {
+          return "Card number is required";
+        }
+        if (value.replace(/\s/g, "").length < 13) {
+          return "Invalid card number";
+        }
         return null;
       },
       expiryMonth: (value, values) => {
-        if (values.provider === "paypal") return null;
-        if (!value) return "Expiry month is required";
+        if (values.provider === "paypal") {
+          return null;
+        }
+        if (!value) {
+          return "Expiry month is required";
+        }
         return null;
       },
       expiryYear: (value, values) => {
-        if (values.provider === "paypal") return null;
-        if (!value) return "Expiry year is required";
+        if (values.provider === "paypal") {
+          return null;
+        }
+        if (!value) {
+          return "Expiry year is required";
+        }
         return null;
       },
       cvv: (value, values) => {
-        if (values.provider === "paypal") return null;
-        if (!value) return "CVV is required";
-        if (value.length < 3) return "Invalid CVV";
+        if (values.provider === "paypal") {
+          return null;
+        }
+        if (!value) {
+          return "CVV is required";
+        }
+        if (value.length < 3) {
+          return "Invalid CVV";
+        }
         return null;
       },
       billingAddress: {
@@ -140,21 +161,25 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
 
     if (parts.length) {
       return parts.join(" ");
-    } else {
-      return v;
     }
+    return v;
   };
 
   const handleProviderSelect = (provider: PaymentProvider) => {
     setSelectedProvider(provider);
     form.setFieldValue("provider", provider);
-    form.setFieldValue("type", (provider === "paypal" ? "bank_account" : "card") as PaymentMethodType);
+    form.setFieldValue(
+      "type",
+      (provider === "paypal" ? "bank_account" : "card") as PaymentMethodType
+    );
     setActive(1);
   };
 
   const nextStep = () => {
     if (active === 0) {
-      if (!selectedProvider) return;
+      if (!selectedProvider) {
+        return;
+      }
       setActive(1);
     } else if (active === 1) {
       const validation = form.validate();
@@ -164,7 +189,8 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
     }
   };
 
-  const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
+  const prevStep = () =>
+    setActive((current) => (current > 0 ? current - 1 : current));
 
   const handleSubmit = () => {
     const validation = form.validate();
@@ -206,7 +232,9 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
                     style={{
                       cursor: "pointer",
                       borderColor:
-                        selectedProvider === provider.value ? "var(--mantine-color-blue-6)" : undefined,
+                        selectedProvider === provider.value
+                          ? "var(--mantine-color-blue-6)"
+                          : undefined,
                     }}
                     onClick={() => handleProviderSelect(provider.value)}
                   >
@@ -239,7 +267,9 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
                     placeholder="1234 5678 9012 3456"
                     {...form.getInputProps("cardNumber")}
                     onChange={(event) => {
-                      const formatted = formatCardNumber(event.currentTarget.value);
+                      const formatted = formatCardNumber(
+                        event.currentTarget.value
+                      );
                       form.setFieldValue("cardNumber", formatted);
                     }}
                     maxLength={19}
@@ -274,9 +304,14 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
               )}
 
               {selectedProvider === "paypal" && (
-                <Alert icon={<IconInfoCircle size={16} />} color="blue" variant="light">
+                <Alert
+                  icon={<IconInfoCircle size={16} />}
+                  color="blue"
+                  variant="light"
+                >
                   <Text size="sm">
-                    You'll be redirected to PayPal to complete the setup process.
+                    You'll be redirected to PayPal to complete the setup
+                    process.
                   </Text>
                 </Alert>
               )}
@@ -337,9 +372,14 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
           {/* Step 4: Confirmation */}
           <Stepper.Completed>
             <Stack gap="md" mt="md">
-              <Alert icon={<IconCheck size={16} />} color="green" variant="light">
+              <Alert
+                icon={<IconCheck size={16} />}
+                color="green"
+                variant="light"
+              >
                 <Text size="sm">
-                  Ready to add your payment method. Review the information and confirm.
+                  Ready to add your payment method. Review the information and
+                  confirm.
                 </Text>
               </Alert>
 
@@ -351,7 +391,11 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
                   <Group justify="space-between">
                     <Text size="sm">Provider:</Text>
                     <Text size="sm" fw={500}>
-                      {PAYMENT_PROVIDERS.find(p => p.value === selectedProvider)?.label}
+                      {
+                        PAYMENT_PROVIDERS.find(
+                          (p) => p.value === selectedProvider
+                        )?.label
+                      }
                     </Text>
                   </Group>
                   {selectedProvider === "stripe" && (
@@ -365,7 +409,8 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
                   <Group justify="space-between">
                     <Text size="sm">Billing Address:</Text>
                     <Text size="sm" fw={500}>
-                      {form.values.billingAddress.city}, {form.values.billingAddress.country}
+                      {form.values.billingAddress.city},{" "}
+                      {form.values.billingAddress.country}
                     </Text>
                   </Group>
                 </Stack>
@@ -376,11 +421,7 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
 
         {/* Navigation Buttons */}
         <Group justify="space-between" mt="md">
-          <Button
-            variant="light"
-            onClick={prevStep}
-            disabled={active === 0}
-          >
+          <Button variant="light" onClick={prevStep} disabled={active === 0}>
             Back
           </Button>
 

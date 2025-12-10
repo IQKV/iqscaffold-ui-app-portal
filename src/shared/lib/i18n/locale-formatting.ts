@@ -13,7 +13,7 @@ export class LocaleCurrencyUtils {
     locale?: string
   ): string {
     const userLocale = locale || i18n.locale || "en-US";
-    
+
     try {
       return new Intl.NumberFormat(userLocale, {
         style: "currency",
@@ -41,7 +41,7 @@ export class LocaleCurrencyUtils {
     locale?: string
   ): string {
     const userLocale = locale || i18n.locale || "en-US";
-    
+
     try {
       return new Intl.NumberFormat(userLocale, {
         style: "currency",
@@ -64,7 +64,7 @@ export class LocaleCurrencyUtils {
    */
   static getCurrencySymbol(currency: string = "USD", locale?: string): string {
     const userLocale = locale || i18n.locale || "en-US";
-    
+
     try {
       const formatter = new Intl.NumberFormat(userLocale, {
         style: "currency",
@@ -72,9 +72,9 @@ export class LocaleCurrencyUtils {
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
       });
-      
+
       const parts = formatter.formatToParts(0);
-      const symbolPart = parts.find(part => part.type === "currency");
+      const symbolPart = parts.find((part) => part.type === "currency");
       return symbolPart?.value || currency;
     } catch (error) {
       return currency;
@@ -91,7 +91,7 @@ export class LocaleDateUtils {
    */
   static formatDate(date: Date, locale?: string): string {
     const userLocale = locale || i18n.locale || "en-US";
-    
+
     return new Intl.DateTimeFormat(userLocale, {
       year: "numeric",
       month: "long",
@@ -104,7 +104,7 @@ export class LocaleDateUtils {
    */
   static formatDateShort(date: Date, locale?: string): string {
     const userLocale = locale || i18n.locale || "en-US";
-    
+
     return new Intl.DateTimeFormat(userLocale, {
       year: "numeric",
       month: "short",
@@ -117,7 +117,7 @@ export class LocaleDateUtils {
    */
   static formatDateTime(date: Date, locale?: string): string {
     const userLocale = locale || i18n.locale || "en-US";
-    
+
     return new Intl.DateTimeFormat(userLocale, {
       year: "numeric",
       month: "long",
@@ -134,12 +134,12 @@ export class LocaleDateUtils {
     const userLocale = locale || i18n.locale || "en-US";
     const now = new Date();
     const diffInSeconds = Math.floor((date.getTime() - now.getTime()) / 1000);
-    
+
     try {
       const rtf = new Intl.RelativeTimeFormat(userLocale, { numeric: "auto" });
-      
+
       const absDiff = Math.abs(diffInSeconds);
-      
+
       if (absDiff < 60) {
         return rtf.format(diffInSeconds, "second");
       } else if (absDiff < 3600) {
@@ -150,9 +150,8 @@ export class LocaleDateUtils {
         return rtf.format(Math.floor(diffInSeconds / 86400), "day");
       } else if (absDiff < 31536000) {
         return rtf.format(Math.floor(diffInSeconds / 2592000), "month");
-      } else {
-        return rtf.format(Math.floor(diffInSeconds / 31536000), "year");
       }
+      return rtf.format(Math.floor(diffInSeconds / 31536000), "year");
     } catch (error) {
       // Fallback to simple formatting
       return this.formatDate(date, locale);
@@ -168,10 +167,10 @@ export class LocaleDateUtils {
     locale?: string
   ): string {
     const userLocale = locale || i18n.locale || "en-US";
-    
+
     const start = this.formatDateShort(startDate, userLocale);
     const end = this.formatDateShort(endDate, userLocale);
-    
+
     return `${start} - ${end}`;
   }
 }
@@ -185,7 +184,7 @@ export class LocaleNumberUtils {
    */
   static format(number: number, locale?: string): string {
     const userLocale = locale || i18n.locale || "en-US";
-    
+
     return new Intl.NumberFormat(userLocale).format(number);
   }
 
@@ -199,7 +198,7 @@ export class LocaleNumberUtils {
     maximumFractionDigits: number = 1
   ): string {
     const userLocale = locale || i18n.locale || "en-US";
-    
+
     return new Intl.NumberFormat(userLocale, {
       style: "percent",
       minimumFractionDigits,
@@ -217,7 +216,7 @@ export class LocaleNumberUtils {
     maximumFractionDigits: number = 2
   ): string {
     const userLocale = locale || i18n.locale || "en-US";
-    
+
     return new Intl.NumberFormat(userLocale, {
       minimumFractionDigits,
       maximumFractionDigits,
@@ -229,7 +228,7 @@ export class LocaleNumberUtils {
    */
   static formatCompact(number: number, locale?: string): string {
     const userLocale = locale || i18n.locale || "en-US";
-    
+
     try {
       return new Intl.NumberFormat(userLocale, {
         notation: "compact",
@@ -257,11 +256,12 @@ export class LocaleValidationUtils {
    */
   static getValidationPatterns(locale?: string) {
     const userLocale = locale || i18n.locale || "en-US";
-    
+
     // Common patterns that vary by locale
     const patterns = {
       "en-US": {
-        phone: /^\+?1?[-.\s]?\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})$/,
+        phone:
+          /^\+?1?[-.\s]?\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})$/,
         postalCode: /^\d{5}(-\d{4})?$/,
         currency: /^\$?[\d,]+(\.\d{2})?$/,
       },
@@ -276,7 +276,8 @@ export class LocaleValidationUtils {
         currency: /^€?[\d.]+(?:,\d{2})?$/,
       },
       "fr-FR": {
-        phone: /^\+?33[-.\s]?(\d{1})[-.\s]?(\d{2})[-.\s]?(\d{2})[-.\s]?(\d{2})[-.\s]?(\d{2})$/,
+        phone:
+          /^\+?33[-.\s]?(\d{1})[-.\s]?(\d{2})[-.\s]?(\d{2})[-.\s]?(\d{2})[-.\s]?(\d{2})$/,
         postalCode: /^\d{5}$/,
         currency: /^€?[\d\s]+(?:,\d{2})?$/,
       },
@@ -286,7 +287,7 @@ export class LocaleValidationUtils {
         currency: /^¥?[\d,]+$/,
       },
     };
-    
+
     return patterns[userLocale as keyof typeof patterns] || patterns["en-US"];
   }
 
@@ -326,21 +327,23 @@ export class LocaleUtils {
     if (typeof window !== "undefined") {
       // Check for stored preference first
       const stored = localStorage.getItem("preferred-locale");
-      if (stored) return stored;
-      
+      if (stored) {
+        return stored;
+      }
+
       // Fall back to browser language
       const browserLang = navigator.language || navigator.languages?.[0];
       if (browserLang) {
         // Map browser language to supported locales
         const supportedLocales = ["en", "es", "fr", "de", "ja"];
         const langCode = browserLang.split("-")[0];
-        
+
         if (supportedLocales.includes(langCode)) {
           return langCode;
         }
       }
     }
-    
+
     return "en"; // Default fallback
   }
 
@@ -358,19 +361,22 @@ export class LocaleUtils {
    */
   static getLocaleDisplayName(locale: string, displayLocale?: string): string {
     const userLocale = displayLocale || i18n.locale || "en";
-    
+
     try {
-      return new Intl.DisplayNames([userLocale], { type: "language" }).of(locale) || locale;
+      return (
+        new Intl.DisplayNames([userLocale], { type: "language" }).of(locale) ||
+        locale
+      );
     } catch (error) {
       // Fallback to manual mapping
       const names: Record<string, string> = {
         en: "English",
         es: "Español",
-        fr: "Français", 
+        fr: "Français",
         de: "Deutsch",
         ja: "日本語",
       };
-      
+
       return names[locale] || locale;
     }
   }

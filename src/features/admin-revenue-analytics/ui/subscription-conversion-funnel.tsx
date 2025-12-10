@@ -29,10 +29,9 @@ interface SubscriptionConversionFunnelProps {
   loading?: boolean;
 }
 
-export const SubscriptionConversionFunnel: React.FC<SubscriptionConversionFunnelProps> = ({
-  conversionFunnel,
-  loading = false,
-}) => {
+export const SubscriptionConversionFunnel: React.FC<
+  SubscriptionConversionFunnelProps
+> = ({ conversionFunnel, loading = false }) => {
   const getStageColor = (index: number) => {
     const colors = ["blue", "green", "orange", "purple", "teal", "red"];
     return colors[index % colors.length];
@@ -81,16 +80,12 @@ export const SubscriptionConversionFunnel: React.FC<SubscriptionConversionFunnel
                   <Text size="sm" fw={600}>
                     {stage.count.toLocaleString()}
                   </Text>
-                  <Badge
-                    variant="light"
-                    color={getStageColor(index)}
-                    size="xs"
-                  >
+                  <Badge variant="light" color={getStageColor(index)} size="xs">
                     {stage.conversionRate.toFixed(1)}%
                   </Badge>
                 </Group>
               </Group>
-              
+
               <Progress
                 value={stage.conversionRate}
                 color={getStageColor(index)}
@@ -98,7 +93,7 @@ export const SubscriptionConversionFunnel: React.FC<SubscriptionConversionFunnel
                 radius="xl"
                 mb="xs"
               />
-              
+
               {stage.dropoffRate > 0 && (
                 <Text size="xs" c="dimmed">
                   {stage.dropoffRate.toFixed(1)}% drop-off from previous stage
@@ -109,14 +104,26 @@ export const SubscriptionConversionFunnel: React.FC<SubscriptionConversionFunnel
         </Stack>
 
         {/* Summary */}
-        <Box pt="md" style={{ borderTop: "1px solid var(--mantine-color-gray-3)" }}>
+        <Box
+          pt="md"
+          style={{ borderTop: "1px solid var(--mantine-color-gray-3)" }}
+        >
           <Group justify="space-between">
             <div>
-              <Text size="sm" fw={500}>Overall Conversion</Text>
-              <Text size="xs" c="dimmed">Visitor to Subscriber</Text>
+              <Text size="sm" fw={500}>
+                Overall Conversion
+              </Text>
+              <Text size="xs" c="dimmed">
+                Visitor to Subscriber
+              </Text>
             </div>
             <Badge variant="filled" color="blue" size="lg">
-              {conversionFunnel.length > 0 ? conversionFunnel[conversionFunnel.length - 1].conversionRate.toFixed(1) : 0}%
+              {conversionFunnel.length > 0
+                ? conversionFunnel[
+                    conversionFunnel.length - 1
+                  ].conversionRate.toFixed(1)
+                : 0}
+              %
             </Badge>
           </Group>
         </Box>

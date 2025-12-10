@@ -35,7 +35,9 @@ export class CurrencyUtils {
     toCurrency: string,
     exchangeRate?: number
   ): number {
-    if (fromCurrency === toCurrency) return amount;
+    if (fromCurrency === toCurrency) {
+      return amount;
+    }
     // In real implementation, this would call an exchange rate service
     return amount * (exchangeRate || 1);
   }
@@ -138,7 +140,9 @@ export class ProrationUtils {
     const totalPeriodDays = this.getDaysBetween(periodStart, periodEnd);
     const remainingDays = this.getDaysBetween(changeDate, periodEnd);
 
-    if (remainingDays <= 0) return 0;
+    if (remainingDays <= 0) {
+      return 0;
+    }
 
     const dailyOldRate = oldPlan.price / totalPeriodDays;
     const dailyNewRate = newPlan.price / totalPeriodDays;
@@ -204,7 +208,9 @@ export class UsageUtils {
    * Calculate usage percentage
    */
   static calculateUsagePercentage(current: number, limit: number): number {
-    if (limit === 0) return 0;
+    if (limit === 0) {
+      return 0;
+    }
     return Math.round((current / limit) * 100);
   }
 
@@ -280,7 +286,9 @@ export class SubscriptionUtils {
    * Get trial days remaining
    */
   static getTrialDaysRemaining(subscription: Subscription): number {
-    if (!subscription.trialEnd) return 0;
+    if (!subscription.trialEnd) {
+      return 0;
+    }
     return BillingDateUtils.getDaysRemaining(new Date(subscription.trialEnd));
   }
 

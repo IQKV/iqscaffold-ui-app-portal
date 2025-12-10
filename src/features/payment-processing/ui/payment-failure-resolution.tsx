@@ -45,14 +45,18 @@ interface PaymentFailureResolutionProps {
   loading?: boolean;
 }
 
-export const PaymentFailureResolution: React.FC<PaymentFailureResolutionProps> = ({
+export const PaymentFailureResolution: React.FC<
+  PaymentFailureResolutionProps
+> = ({
   failedPayments,
   onRetryPayment,
   onUpdatePaymentMethod,
   loading = false,
 }) => {
   const [showUpdateModal, setShowUpdateModal] = useState(false);
-  const [selectedPayment, setSelectedPayment] = useState<FailedPayment | null>(null);
+  const [selectedPayment, setSelectedPayment] = useState<FailedPayment | null>(
+    null
+  );
   const [newPaymentMethodId, setNewPaymentMethodId] = useState<string>("");
 
   const formatCurrency = (amount: number) => {
@@ -74,7 +78,10 @@ export const PaymentFailureResolution: React.FC<PaymentFailureResolutionProps> =
 
   const getFailureReasonColor = (reason: string) => {
     const lowerReason = reason.toLowerCase();
-    if (lowerReason.includes("insufficient") || lowerReason.includes("declined")) {
+    if (
+      lowerReason.includes("insufficient") ||
+      lowerReason.includes("declined")
+    ) {
       return "red";
     }
     if (lowerReason.includes("expired") || lowerReason.includes("invalid")) {
@@ -136,7 +143,9 @@ export const PaymentFailureResolution: React.FC<PaymentFailureResolutionProps> =
                 Payment Issues Detected
               </Text>
               <Text size="sm" mt="xs">
-                {failedPayments.length} payment{failedPayments.length !== 1 ? "s" : ""} failed and require{failedPayments.length === 1 ? "s" : ""} attention.
+                {failedPayments.length} payment
+                {failedPayments.length !== 1 ? "s" : ""} failed and require
+                {failedPayments.length === 1 ? "s" : ""} attention.
               </Text>
             </Box>
             <Badge color="red" variant="filled" size="sm">
@@ -164,10 +173,16 @@ export const PaymentFailureResolution: React.FC<PaymentFailureResolutionProps> =
 
                     <Group gap="md" mb="xs">
                       <Text size="sm">
-                        Amount: <Text component="span" fw={500}>{formatCurrency(payment.amount)}</Text>
+                        Amount:{" "}
+                        <Text component="span" fw={500}>
+                          {formatCurrency(payment.amount)}
+                        </Text>
                       </Text>
                       <Text size="sm">
-                        Attempts remaining: <Text component="span" fw={500}>{payment.attemptsRemaining}</Text>
+                        Attempts remaining:{" "}
+                        <Text component="span" fw={500}>
+                          {payment.attemptsRemaining}
+                        </Text>
                       </Text>
                     </Group>
 
@@ -179,7 +194,8 @@ export const PaymentFailureResolution: React.FC<PaymentFailureResolutionProps> =
                       <Group gap="xs" align="center">
                         <IconClock size={12} />
                         <Text size="xs" c="dimmed">
-                          Next automatic retry: {formatDate(payment.nextRetryDate)}
+                          Next automatic retry:{" "}
+                          {formatDate(payment.nextRetryDate)}
                         </Text>
                       </Group>
                     )}
@@ -245,7 +261,7 @@ export const PaymentFailureResolution: React.FC<PaymentFailureResolutionProps> =
               size="sm"
               onClick={() => {
                 // Retry all failed payments
-                failedPayments.forEach(payment => {
+                failedPayments.forEach((payment) => {
                   if (payment.canRetry) {
                     onRetryPayment(payment.id);
                   }
@@ -302,10 +318,7 @@ export const PaymentFailureResolution: React.FC<PaymentFailureResolutionProps> =
             />
 
             <Group justify="flex-end" gap="sm">
-              <Button
-                variant="light"
-                onClick={() => setShowUpdateModal(false)}
-              >
+              <Button variant="light" onClick={() => setShowUpdateModal(false)}>
                 Cancel
               </Button>
               <Button

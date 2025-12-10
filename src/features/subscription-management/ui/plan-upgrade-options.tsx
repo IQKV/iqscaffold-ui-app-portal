@@ -28,7 +28,10 @@ import {
   IconX,
 } from "@tabler/icons-react";
 import { subscriptionApi } from "@/entities/subscription/api/subscription-api";
-import type { Plan, ProrationCalculation } from "@/entities/subscription/types/subscription-types";
+import type {
+  Plan,
+  ProrationCalculation,
+} from "@/entities/subscription/types/subscription-types";
 
 interface PlanUpgradeOptionsProps {
   currentPlan: Plan | null;
@@ -44,7 +47,8 @@ export const PlanUpgradeOptions: React.FC<PlanUpgradeOptionsProps> = ({
   loading = false,
 }) => {
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
-  const [prorationData, setProrationData] = useState<ProrationCalculation | null>(null);
+  const [prorationData, setProrationData] =
+    useState<ProrationCalculation | null>(null);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [calculatingProration, setCalculatingProration] = useState(false);
 
@@ -56,7 +60,9 @@ export const PlanUpgradeOptions: React.FC<PlanUpgradeOptionsProps> = ({
   };
 
   const calculateProration = async (plan: Plan) => {
-    if (!currentPlan) return;
+    if (!currentPlan) {
+      return;
+    }
 
     setCalculatingProration(true);
     try {
@@ -94,25 +100,29 @@ export const PlanUpgradeOptions: React.FC<PlanUpgradeOptionsProps> = ({
   };
 
   const getUpgradeType = (plan: Plan) => {
-    if (!currentPlan) return "upgrade";
+    if (!currentPlan) {
+      return "upgrade";
+    }
     return plan.price > currentPlan.price ? "upgrade" : "downgrade";
   };
 
   const getPlanComparison = (plan: Plan) => {
-    if (!currentPlan) return { newFeatures: [], removedFeatures: [] };
+    if (!currentPlan) {
+      return { newFeatures: [], removedFeatures: [] };
+    }
 
     const currentFeatureIds = new Set(
-      currentPlan.features.filter(f => f.enabled).map(f => f.id)
+      currentPlan.features.filter((f) => f.enabled).map((f) => f.id)
     );
     const newFeatureIds = new Set(
-      plan.features.filter(f => f.enabled).map(f => f.id)
+      plan.features.filter((f) => f.enabled).map((f) => f.id)
     );
 
     const newFeatures = plan.features.filter(
-      f => f.enabled && !currentFeatureIds.has(f.id)
+      (f) => f.enabled && !currentFeatureIds.has(f.id)
     );
     const removedFeatures = currentPlan.features.filter(
-      f => f.enabled && !newFeatureIds.has(f.id)
+      (f) => f.enabled && !newFeatureIds.has(f.id)
     );
 
     return { newFeatures, removedFeatures };
@@ -175,7 +185,9 @@ export const PlanUpgradeOptions: React.FC<PlanUpgradeOptionsProps> = ({
                           </Text>
                           <Badge
                             variant="light"
-                            color={upgradeType === "upgrade" ? "green" : "orange"}
+                            color={
+                              upgradeType === "upgrade" ? "green" : "orange"
+                            }
                             size="xs"
                           >
                             {upgradeType}
@@ -224,7 +236,12 @@ export const PlanUpgradeOptions: React.FC<PlanUpgradeOptionsProps> = ({
                                 <List.Item
                                   key={feature.id}
                                   icon={
-                                    <ThemeIcon color="green" size={14} radius="xl" variant="light">
+                                    <ThemeIcon
+                                      color="green"
+                                      size={14}
+                                      radius="xl"
+                                      variant="light"
+                                    >
                                       <IconCheck size={10} />
                                     </ThemeIcon>
                                   }
@@ -251,7 +268,12 @@ export const PlanUpgradeOptions: React.FC<PlanUpgradeOptionsProps> = ({
                                 <List.Item
                                   key={feature.id}
                                   icon={
-                                    <ThemeIcon color="red" size={14} radius="xl" variant="light">
+                                    <ThemeIcon
+                                      color="red"
+                                      size={14}
+                                      radius="xl"
+                                      variant="light"
+                                    >
                                       <IconX size={10} />
                                     </ThemeIcon>
                                   }
@@ -275,10 +297,15 @@ export const PlanUpgradeOptions: React.FC<PlanUpgradeOptionsProps> = ({
             })}
           </Stack>
 
-          <Alert icon={<IconInfoCircle size={16} />} color="blue" variant="light">
+          <Alert
+            icon={<IconInfoCircle size={16} />}
+            color="blue"
+            variant="light"
+          >
             <Text size="sm">
-              Plan changes take effect immediately. You'll be charged or credited
-              based on the prorated amount for the current billing period.
+              Plan changes take effect immediately. You'll be charged or
+              credited based on the prorated amount for the current billing
+              period.
             </Text>
           </Alert>
         </Stack>
@@ -302,7 +329,8 @@ export const PlanUpgradeOptions: React.FC<PlanUpgradeOptionsProps> = ({
                   {selectedPlan.name}
                 </Text>
                 <Badge variant="light" color="blue">
-                  {formatCurrency(selectedPlan.price, selectedPlan.currency)} / {selectedPlan.billingCycle}
+                  {formatCurrency(selectedPlan.price, selectedPlan.currency)} /{" "}
+                  {selectedPlan.billingCycle}
                 </Badge>
               </Group>
             </Box>
@@ -316,14 +344,21 @@ export const PlanUpgradeOptions: React.FC<PlanUpgradeOptionsProps> = ({
                   <Group justify="space-between">
                     <Text size="sm">Prorated charge:</Text>
                     <Text size="sm" fw={500}>
-                      {formatCurrency(prorationData.chargeAmount, selectedPlan.currency)}
+                      {formatCurrency(
+                        prorationData.chargeAmount,
+                        selectedPlan.currency
+                      )}
                     </Text>
                   </Group>
                   {prorationData.creditAmount > 0 && (
                     <Group justify="space-between">
                       <Text size="sm">Credit applied:</Text>
                       <Text size="sm" fw={500} c="green">
-                        -{formatCurrency(prorationData.creditAmount, selectedPlan.currency)}
+                        -
+                        {formatCurrency(
+                          prorationData.creditAmount,
+                          selectedPlan.currency
+                        )}
                       </Text>
                     </Group>
                   )}
@@ -333,7 +368,10 @@ export const PlanUpgradeOptions: React.FC<PlanUpgradeOptionsProps> = ({
                       Total due today:
                     </Text>
                     <Text size="sm" fw={600}>
-                      {formatCurrency(prorationData.prorationAmount, selectedPlan.currency)}
+                      {formatCurrency(
+                        prorationData.prorationAmount,
+                        selectedPlan.currency
+                      )}
                     </Text>
                   </Group>
                 </Stack>

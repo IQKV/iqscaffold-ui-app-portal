@@ -81,9 +81,13 @@ export const PlanSelector: React.FC<PlanSelectorProps> = ({
   };
 
   const isUpgrade = (plan: Plan) => {
-    if (!currentPlanId) return false;
+    if (!currentPlanId) {
+      return false;
+    }
     const currentPlan = plans.find((p) => p.id === currentPlanId);
-    if (!currentPlan) return false;
+    if (!currentPlan) {
+      return false;
+    }
 
     const tierOrder = { free: 0, pro: 1, enterprise: 2 };
     return tierOrder[plan.tier] > tierOrder[currentPlan.tier];
@@ -99,7 +103,9 @@ export const PlanSelector: React.FC<PlanSelectorProps> = ({
     const monthlyPlan = plans.find(
       (p) => p.tier === plan.tier && p.billingCycle === "monthly"
     );
-    if (!monthlyPlan || plan.billingCycle === "monthly") return null;
+    if (!monthlyPlan || plan.billingCycle === "monthly") {
+      return null;
+    }
 
     const yearlyTotal = plan.price;
     const monthlyTotal = monthlyPlan.price * 12;

@@ -134,8 +134,9 @@ export const useQuotaEnforcement = (tenantId: string) => {
   const getRemainingQuota = useCallback(
     (metricType: UsageMetricType, includeGrace: boolean = true) => {
       const status = getQuotaStatus(metricType);
-      if (!status)
+      if (!status) {
         return { baseRemaining: 0, graceRemaining: 0, totalRemaining: 0 };
+      }
 
       return QuotaEnforcementService.calculateRemainingQuota(
         status.current,

@@ -15,7 +15,11 @@ import {
   Skeleton,
   ThemeIcon,
 } from "@mantine/core";
-import { IconTrophy, IconTrendingUp, IconTrendingDown } from "@tabler/icons-react";
+import {
+  IconTrophy,
+  IconTrendingUp,
+  IconTrendingDown,
+} from "@tabler/icons-react";
 
 interface TenantRankingData {
   tenantId: string;
@@ -46,19 +50,27 @@ export const TenantRevenueRanking: React.FC<TenantRevenueRankingProps> = ({
 
   const getRiskColor = (risk: string) => {
     switch (risk) {
-      case "low": return "green";
-      case "medium": return "yellow";
-      case "high": return "red";
-      default: return "gray";
+      case "low":
+        return "green";
+      case "medium":
+        return "yellow";
+      case "high":
+        return "red";
+      default:
+        return "gray";
     }
   };
 
   const getTierColor = (tier: string) => {
     switch (tier) {
-      case "Enterprise": return "purple";
-      case "Pro": return "blue";
-      case "Basic": return "gray";
-      default: return "gray";
+      case "Enterprise":
+        return "purple";
+      case "Pro":
+        return "blue";
+      case "Basic":
+        return "gray";
+      default:
+        return "gray";
     }
   };
 
@@ -147,7 +159,8 @@ export const TenantRevenueRanking: React.FC<TenantRevenueRankingProps> = ({
                       fw={500}
                       c={tenant.growthRate >= 0 ? "green" : "red"}
                     >
-                      {tenant.growthRate > 0 ? "+" : ""}{tenant.growthRate.toFixed(1)}%
+                      {tenant.growthRate > 0 ? "+" : ""}
+                      {tenant.growthRate.toFixed(1)}%
                     </Text>
                   </Group>
                 </Table.Td>

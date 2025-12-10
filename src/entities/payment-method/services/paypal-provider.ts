@@ -221,10 +221,18 @@ export class PayPalPaymentProvider implements PaymentProviderInterface {
   private detectCardBrand(cardNumber: string): string {
     const cleanNumber = cardNumber.replace(/\D/g, "");
 
-    if (/^4/.test(cleanNumber)) return "visa";
-    if (/^5[1-5]/.test(cleanNumber)) return "mastercard";
-    if (/^3[47]/.test(cleanNumber)) return "amex";
-    if (/^6(?:011|5)/.test(cleanNumber)) return "discover";
+    if (/^4/.test(cleanNumber)) {
+      return "visa";
+    }
+    if (/^5[1-5]/.test(cleanNumber)) {
+      return "mastercard";
+    }
+    if (/^3[47]/.test(cleanNumber)) {
+      return "amex";
+    }
+    if (/^6(?:011|5)/.test(cleanNumber)) {
+      return "discover";
+    }
 
     return "unknown";
   }

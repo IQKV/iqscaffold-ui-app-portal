@@ -368,6 +368,191 @@ export class BillingApiClient {
       url: `${this.baseUrl}/webhooks/events/${eventId}/retry`,
     });
   }
+
+  // Payment retry and failure handling endpoints
+  async recordPaymentFailure(
+    invoiceId: string,
+    failure: {
+      failureReason: string;
+      attemptedAt: Date;
+      paymentIntentId?: string;
+    }
+  ): Promise<void> {
+    return apiRequest<void>({
+      method: "POST",
+      url: `${this.baseUrl}/invoices/${invoiceId}/payment-failures`,
+      data: failure,
+    });
+  }
+
+  async schedulePaymentRetry(invoiceId: string): Promise<void> {
+    return apiRequest<void>({
+      method: "POST",
+      url: `${this.baseUrl}/invoices/${invoiceId}/schedule-retry`,
+    });
+  }
+
+  async updateInvoiceStatus(
+    invoiceId: string,
+    status: string,
+    metadata?: Record<string, any>
+  ): Promise<Invoice> {
+    return apiRequest<Invoice>({
+      method: "PATCH",
+      url: `${this.baseUrl}/invoices/${invoiceId}/status`,
+      data: { status, metadata },
+    });
+  }
+
+  async updateSubscriptionStatus(
+    subscriptionId: string,
+    status: string
+  ): Promise<Subscription> {
+    return apiRequest<Subscription>({
+      method: "PATCH",
+      url: `${this.baseUrl}/subscriptions/${subscriptionId}/status`,
+      data: { status },
+    });
+  }
+
+  // Webhook synchronization endpoints
+  async syncSubscriptionFromProvider(
+    subscriptionData: any
+  ): Promise<Subscription> {
+    return apiRequest<Subscription>({
+      method: "POST",
+      url: `${this.baseUrl}/sync/subscription`,
+      data: subscriptionData,
+    });
+  }
+
+  async syncPaymentMethodFromProvider(
+    paymentMethodData: any
+  ): Promise<PaymentMethod> {
+    return apiRequest<PaymentMethod>({
+      method: "POST",
+      url: `${this.baseUrl}/sync/payment-method`,
+      data: paymentMethodData,
+    });
+  }
+
+  async syncInvoiceFromProvider(invoiceData: any): Promise<Invoice> {
+    return apiRequest<Invoice>({
+      method: "POST",
+      url: `${this.baseUrl}/sync/invoice`,
+      data: invoiceData,
+    });
+  }
+
+  async removePaymentMethodByProviderId(
+    providerPaymentMethodId: string
+  ): Promise<void> {
+    return apiRequest<void>({
+      method: "DELETE",
+      url: `${this.baseUrl}/payment-methods/provider/${providerPaymentMethodId}`,
+    });
+  }
+
+  async storeWebhookEvent(event: {
+    id: string;
+    type: string;
+    data: Record<string, any>;
+    timestamp: Date;
+    provider: string;
+    processedAt: Date;
+  }): Promise<void> {
+    return apiRequest<void>({
+      method: "POST",
+      url: `${this.baseUrl}/webhooks/events`,
+      data: event,
+    });
+  }
+
+  // Refund-related endpoints
+  async getPaymentDetails(paymentId: string): Promise<any> {
+    return apiRequest<any>({
+      method: "GET",
+      url: `${this.baseUrl}/payments/${paymentId}`,
+    });
+  }
+
+  async createRefund(refund: any): Promise<void> {
+    return apiRequest<void>({
+      method: "POST",
+      url: `${this.baseUrl}/refunds`,
+      data: refund,
+    });
+  }
+
+  async getRefund(refundId: string): Promise<any> {
+    return apiRequest<any>({
+      method: "GET",
+      url: `${this.baseUrl}/refunds/${refundId}`,
+    });
+  }
+
+  async updateRefund(refundId: string, updates: any): Promise<void> {
+    return apiRequest<void>({
+      method: "PATCH",
+      url: `${this.baseUrl}/refunds/${refundId}`,
+      data: updates,
+    });
+  }
+
+  async getRefunds(filters: any): Promise<any[]> {
+    return apiRequest<any[]>({
+      method: "GET",
+      url: `${this.baseUrl}/refunds`,
+      params: filters,
+    });
+  }
+
+  async recordInvoiceRefund(invoiceId: string, refundData: any): Promise<void> {
+    return apiRequest<void>({
+      method: "POST",
+      url: `${this.baseUrl}/invoices/${invoiceId}/refunds`,
+      data: refundData,
+    });
+  }
+
+  async sendRefundNotification(
+    tenantId: string,
+    refundData: any
+  ): Promise<void> {
+    return apiRequest<void>({
+      method: "POST",
+      url: `${this.baseUrl}/notifications/refund`,
+      data: { tenantId, ...refundData },
+    });
+  }
+
+  async calculateProRatedRefund(
+    subscriptionId: string,
+    cancelDate: Date
+  ): Promise<{ amount: number; currency: string; calculation: any }> {
+    return apiRequest<{ amount: number; currency: string; calculation: any }>({
+      method: "POST",
+      url: `${this.baseUrl}/subscriptions/${subscriptionId}/calculate-refund`,
+      data: { cancelDate: cancelDate.toISOString() },
+    });
+  }
+
+  // Payment retry notification endpoints
+  async sendPaymentRetryNotification(
+    tenantId: string,
+    notificationData: {
+      invoiceId: string;
+      attempt: number;
+      nextRetryDate?: Date;
+      type: "retry_notification" | "final_failure";
+    }
+  ): Promise<void> {
+    return apiRequest<void>({
+      method: "POST",
+      url: `${this.baseUrl}/notifications/payment-retry`,
+      data: { tenantId, ...notificationData },
+    });
+  }
 }
 
 // Export singleton instance
@@ -408,4 +593,22 @@ export const {
   reactivateSubscription,
   getWebhookEvents,
   retryWebhook,
+  recordPaymentFailure,
+  schedulePaymentRetry,
+  updateInvoiceStatus,
+  updateSubscriptionStatus,
+  syncSubscriptionFromProvider,
+  syncPaymentMethodFromProvider,
+  syncInvoiceFromProvider,
+  removePaymentMethodByProviderId,
+  storeWebhookEvent,
+  getPaymentDetails,
+  createRefund,
+  getRefund,
+  updateRefund,
+  getRefunds,
+  recordInvoiceRefund,
+  sendRefundNotification,
+  calculateProRatedRefund,
+  sendPaymentRetryNotification,
 } = billingApi;

@@ -11,7 +11,7 @@ interface HeaderProps {
 export function Header({ title }: HeaderProps) {
   const { _ } = useLingui();
   const defaultTitle = _(msg`IQ Scaffold Platform`);
-  
+
   return (
     <Group h="100%" px="md" justify="space-between" data-testid="widget-header">
       <Title order={3} data-testid="header-title">

@@ -77,12 +77,20 @@ export class UsageService {
     // This would typically query available plans and find the best fit
     switch (metricType) {
       case "api_calls":
-        if (projectedUsage > 1000000) return "enterprise";
-        if (projectedUsage > 100000) return "pro";
+        if (projectedUsage > 1000000) {
+          return "enterprise";
+        }
+        if (projectedUsage > 100000) {
+          return "pro";
+        }
         return "starter";
       case "storage_gb":
-        if (projectedUsage > 1000) return "enterprise";
-        if (projectedUsage > 100) return "pro";
+        if (projectedUsage > 1000) {
+          return "enterprise";
+        }
+        if (projectedUsage > 100) {
+          return "pro";
+        }
         return "starter";
       default:
         return "pro";
@@ -361,7 +369,9 @@ export class UsageService {
   }
 
   private static calculateTrend(values: number[]): number {
-    if (values.length < 2) return 0;
+    if (values.length < 2) {
+      return 0;
+    }
 
     const n = values.length;
     const sumX = (n * (n - 1)) / 2; // Sum of indices
@@ -374,12 +384,13 @@ export class UsageService {
   }
 
   private static calculateConfidence(values: number[]): number {
-    if (values.length < 3) return 0.5;
+    if (values.length < 3) {
+      return 0.5;
+    }
 
     const mean = values.reduce((sum, val) => sum + val, 0) / values.length;
     const variance =
-      values.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) /
-      values.length;
+      values.reduce((sum, val) => sum + (val - mean) ** 2, 0) / values.length;
     const standardDeviation = Math.sqrt(variance);
 
     // Lower coefficient of variation = higher confidence
@@ -432,7 +443,7 @@ export class UsageService {
     quotaStatuses: QuotaStatus[],
     overageRates: Record<UsageMetricType, number>
   ): UsageCostAnalysis {
-    let currentPeriodCost = 0;
+    const currentPeriodCost = 0;
     let overageCost = 0;
 
     quotaStatuses.forEach((quota) => {
@@ -474,13 +485,13 @@ export class UsageService {
   ): string {
     switch (metricType) {
       case "api_calls":
-        return amount.toLocaleString() + " calls";
+        return `${amount.toLocaleString()} calls`;
       case "storage_gb":
-        return amount.toFixed(2) + " GB";
+        return `${amount.toFixed(2)} GB`;
       case "email_sends":
-        return amount.toLocaleString() + " emails";
+        return `${amount.toLocaleString()} emails`;
       case "active_users":
-        return amount.toLocaleString() + " users";
+        return `${amount.toLocaleString()} users`;
       default:
         return amount.toString();
     }

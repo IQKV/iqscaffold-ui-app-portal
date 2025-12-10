@@ -30,7 +30,9 @@ export class PaymentMethodService {
    * Initialize payment providers
    */
   static async initialize() {
-    if (this.initialized) return;
+    if (this.initialized) {
+      return;
+    }
 
     // Register payment providers
     PaymentProviderFactory.registerProvider(
@@ -351,7 +353,7 @@ export class PaymentMethodService {
     }
 
     let formatted = "";
-    let index = 0;
+    const index = 0;
 
     for (let i = 0; i < cleanNumber.length; i++) {
       if (detectedBrand.gaps.includes(i) && i > 0) {
@@ -436,7 +438,9 @@ export class PaymentMethodService {
   // Security helpers
   static maskCardNumber(cardNumber: string): string {
     const cleanNumber = cardNumber.replace(/\D/g, "");
-    if (cleanNumber.length < 4) return cleanNumber;
+    if (cleanNumber.length < 4) {
+      return cleanNumber;
+    }
 
     const lastFour = cleanNumber.slice(-4);
     const masked = "*".repeat(cleanNumber.length - 4);

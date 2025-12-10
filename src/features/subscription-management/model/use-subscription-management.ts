@@ -33,20 +33,14 @@ export const useSubscriptionManagement = () => {
   });
 
   // Fetch current plan details
-  const {
-    data: currentPlan,
-    isLoading: planLoading,
-  } = useQuery({
+  const { data: currentPlan, isLoading: planLoading } = useQuery({
     queryKey: ["plan", subscription?.planId],
     queryFn: () => planApi.getPlanById(subscription!.planId),
     enabled: !!subscription?.planId,
   });
 
   // Fetch available plans for upgrade
-  const {
-    data: availablePlans = [],
-    isLoading: plansLoading,
-  } = useQuery({
+  const { data: availablePlans = [], isLoading: plansLoading } = useQuery({
     queryKey: ["plans", "available", subscription?.planId],
     queryFn: () => planApi.getUpgradeOptions(subscription!.planId),
     enabled: !!subscription?.planId,

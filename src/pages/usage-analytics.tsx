@@ -92,10 +92,7 @@ function UsageAnalyticsPage() {
       <Container size="xl" px={0}>
         <Stack gap="xl">
           {/* Current Usage Metrics */}
-          <UsageMetricsGrid
-            usageMetrics={usageMetrics}
-            loading={isLoading}
-          />
+          <UsageMetricsGrid usageMetrics={usageMetrics} loading={isLoading} />
 
           {/* Usage Trends and Quota Utilization */}
           <Grid>
