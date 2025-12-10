@@ -200,7 +200,6 @@ export const UsageProgressBar: React.FC<UsageProgressBarProps> = ({
         <Alert
           color={getProgressColor()}
           icon={getStatusIcon()}
-          size="sm"
           className={classes.usageAlert}
         >
           <Text size="sm">

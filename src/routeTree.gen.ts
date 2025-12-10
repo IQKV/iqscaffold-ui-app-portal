@@ -11,9 +11,17 @@
 import { Route as rootRouteImport } from "./pages/__root"
 import { Route as UsersRouteImport } from "./pages/users"
 import { Route as UserPreferencesRouteImport } from "./pages/user-preferences"
+import { Route as UsageAnalyticsRouteImport } from "./pages/usage-analytics"
+import { Route as SupportBillingToolsRouteImport } from "./pages/support-billing-tools"
+import { Route as SubscriptionManagementRouteImport } from "./pages/subscription-management"
 import { Route as PreferencesDemoRouteImport } from "./pages/preferences-demo"
+import { Route as PaymentMethodsRouteImport } from "./pages/payment-methods"
+import { Route as InvoiceManagementRouteImport } from "./pages/invoice-management"
 import { Route as ExamplesRouteImport } from "./pages/examples"
 import { Route as DashboardRouteImport } from "./pages/dashboard"
+import { Route as BillingOverviewRouteImport } from "./pages/billing-overview"
+import { Route as BillingAuthorityDemoRouteImport } from "./pages/billing-authority-demo"
+import { Route as AdminRevenueDashboardRouteImport } from "./pages/admin-revenue-dashboard"
 import { Route as AboutRouteImport } from "./pages/about"
 import { Route as R404RouteImport } from "./pages/404"
 import { Route as IndexRouteImport } from "./pages/index"
@@ -28,9 +36,34 @@ const UserPreferencesRoute = UserPreferencesRouteImport.update({
   path: "/user-preferences",
   getParentRoute: () => rootRouteImport,
 } as any)
+const UsageAnalyticsRoute = UsageAnalyticsRouteImport.update({
+  id: "/usage-analytics",
+  path: "/usage-analytics",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupportBillingToolsRoute = SupportBillingToolsRouteImport.update({
+  id: "/support-billing-tools",
+  path: "/support-billing-tools",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubscriptionManagementRoute = SubscriptionManagementRouteImport.update({
+  id: "/subscription-management",
+  path: "/subscription-management",
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PreferencesDemoRoute = PreferencesDemoRouteImport.update({
   id: "/preferences-demo",
   path: "/preferences-demo",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentMethodsRoute = PaymentMethodsRouteImport.update({
+  id: "/payment-methods",
+  path: "/payment-methods",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvoiceManagementRoute = InvoiceManagementRouteImport.update({
+  id: "/invoice-management",
+  path: "/invoice-management",
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExamplesRoute = ExamplesRouteImport.update({
@@ -41,6 +74,21 @@ const ExamplesRoute = ExamplesRouteImport.update({
 const DashboardRoute = DashboardRouteImport.update({
   id: "/dashboard",
   path: "/dashboard",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BillingOverviewRoute = BillingOverviewRouteImport.update({
+  id: "/billing-overview",
+  path: "/billing-overview",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BillingAuthorityDemoRoute = BillingAuthorityDemoRouteImport.update({
+  id: "/billing-authority-demo",
+  path: "/billing-authority-demo",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRevenueDashboardRoute = AdminRevenueDashboardRouteImport.update({
+  id: "/admin-revenue-dashboard",
+  path: "/admin-revenue-dashboard",
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -63,9 +111,17 @@ export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
   "/404": typeof R404Route
   "/about": typeof AboutRoute
+  "/admin-revenue-dashboard": typeof AdminRevenueDashboardRoute
+  "/billing-authority-demo": typeof BillingAuthorityDemoRoute
+  "/billing-overview": typeof BillingOverviewRoute
   "/dashboard": typeof DashboardRoute
   "/examples": typeof ExamplesRoute
+  "/invoice-management": typeof InvoiceManagementRoute
+  "/payment-methods": typeof PaymentMethodsRoute
   "/preferences-demo": typeof PreferencesDemoRoute
+  "/subscription-management": typeof SubscriptionManagementRoute
+  "/support-billing-tools": typeof SupportBillingToolsRoute
+  "/usage-analytics": typeof UsageAnalyticsRoute
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
 }
@@ -73,9 +129,17 @@ export interface FileRoutesByTo {
   "/": typeof IndexRoute
   "/404": typeof R404Route
   "/about": typeof AboutRoute
+  "/admin-revenue-dashboard": typeof AdminRevenueDashboardRoute
+  "/billing-authority-demo": typeof BillingAuthorityDemoRoute
+  "/billing-overview": typeof BillingOverviewRoute
   "/dashboard": typeof DashboardRoute
   "/examples": typeof ExamplesRoute
+  "/invoice-management": typeof InvoiceManagementRoute
+  "/payment-methods": typeof PaymentMethodsRoute
   "/preferences-demo": typeof PreferencesDemoRoute
+  "/subscription-management": typeof SubscriptionManagementRoute
+  "/support-billing-tools": typeof SupportBillingToolsRoute
+  "/usage-analytics": typeof UsageAnalyticsRoute
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
 }
@@ -84,9 +148,17 @@ export interface FileRoutesById {
   "/": typeof IndexRoute
   "/404": typeof R404Route
   "/about": typeof AboutRoute
+  "/admin-revenue-dashboard": typeof AdminRevenueDashboardRoute
+  "/billing-authority-demo": typeof BillingAuthorityDemoRoute
+  "/billing-overview": typeof BillingOverviewRoute
   "/dashboard": typeof DashboardRoute
   "/examples": typeof ExamplesRoute
+  "/invoice-management": typeof InvoiceManagementRoute
+  "/payment-methods": typeof PaymentMethodsRoute
   "/preferences-demo": typeof PreferencesDemoRoute
+  "/subscription-management": typeof SubscriptionManagementRoute
+  "/support-billing-tools": typeof SupportBillingToolsRoute
+  "/usage-analytics": typeof UsageAnalyticsRoute
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
 }
@@ -96,9 +168,17 @@ export interface FileRouteTypes {
     | "/"
     | "/404"
     | "/about"
+    | "/admin-revenue-dashboard"
+    | "/billing-authority-demo"
+    | "/billing-overview"
     | "/dashboard"
     | "/examples"
+    | "/invoice-management"
+    | "/payment-methods"
     | "/preferences-demo"
+    | "/subscription-management"
+    | "/support-billing-tools"
+    | "/usage-analytics"
     | "/user-preferences"
     | "/users"
   fileRoutesByTo: FileRoutesByTo
@@ -106,9 +186,17 @@ export interface FileRouteTypes {
     | "/"
     | "/404"
     | "/about"
+    | "/admin-revenue-dashboard"
+    | "/billing-authority-demo"
+    | "/billing-overview"
     | "/dashboard"
     | "/examples"
+    | "/invoice-management"
+    | "/payment-methods"
     | "/preferences-demo"
+    | "/subscription-management"
+    | "/support-billing-tools"
+    | "/usage-analytics"
     | "/user-preferences"
     | "/users"
   id:
@@ -116,9 +204,17 @@ export interface FileRouteTypes {
     | "/"
     | "/404"
     | "/about"
+    | "/admin-revenue-dashboard"
+    | "/billing-authority-demo"
+    | "/billing-overview"
     | "/dashboard"
     | "/examples"
+    | "/invoice-management"
+    | "/payment-methods"
     | "/preferences-demo"
+    | "/subscription-management"
+    | "/support-billing-tools"
+    | "/usage-analytics"
     | "/user-preferences"
     | "/users"
   fileRoutesById: FileRoutesById
@@ -127,9 +223,17 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
   AboutRoute: typeof AboutRoute
+  AdminRevenueDashboardRoute: typeof AdminRevenueDashboardRoute
+  BillingAuthorityDemoRoute: typeof BillingAuthorityDemoRoute
+  BillingOverviewRoute: typeof BillingOverviewRoute
   DashboardRoute: typeof DashboardRoute
   ExamplesRoute: typeof ExamplesRoute
+  InvoiceManagementRoute: typeof InvoiceManagementRoute
+  PaymentMethodsRoute: typeof PaymentMethodsRoute
   PreferencesDemoRoute: typeof PreferencesDemoRoute
+  SubscriptionManagementRoute: typeof SubscriptionManagementRoute
+  SupportBillingToolsRoute: typeof SupportBillingToolsRoute
+  UsageAnalyticsRoute: typeof UsageAnalyticsRoute
   UserPreferencesRoute: typeof UserPreferencesRoute
   UsersRoute: typeof UsersRoute
 }
@@ -150,11 +254,46 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof UserPreferencesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    "/usage-analytics": {
+      id: "/usage-analytics"
+      path: "/usage-analytics"
+      fullPath: "/usage-analytics"
+      preLoaderRoute: typeof UsageAnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/support-billing-tools": {
+      id: "/support-billing-tools"
+      path: "/support-billing-tools"
+      fullPath: "/support-billing-tools"
+      preLoaderRoute: typeof SupportBillingToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/subscription-management": {
+      id: "/subscription-management"
+      path: "/subscription-management"
+      fullPath: "/subscription-management"
+      preLoaderRoute: typeof SubscriptionManagementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     "/preferences-demo": {
       id: "/preferences-demo"
       path: "/preferences-demo"
       fullPath: "/preferences-demo"
       preLoaderRoute: typeof PreferencesDemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/payment-methods": {
+      id: "/payment-methods"
+      path: "/payment-methods"
+      fullPath: "/payment-methods"
+      preLoaderRoute: typeof PaymentMethodsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/invoice-management": {
+      id: "/invoice-management"
+      path: "/invoice-management"
+      fullPath: "/invoice-management"
+      preLoaderRoute: typeof InvoiceManagementRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/examples": {
@@ -169,6 +308,27 @@ declare module "@tanstack/react-router" {
       path: "/dashboard"
       fullPath: "/dashboard"
       preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/billing-overview": {
+      id: "/billing-overview"
+      path: "/billing-overview"
+      fullPath: "/billing-overview"
+      preLoaderRoute: typeof BillingOverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/billing-authority-demo": {
+      id: "/billing-authority-demo"
+      path: "/billing-authority-demo"
+      fullPath: "/billing-authority-demo"
+      preLoaderRoute: typeof BillingAuthorityDemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/admin-revenue-dashboard": {
+      id: "/admin-revenue-dashboard"
+      path: "/admin-revenue-dashboard"
+      fullPath: "/admin-revenue-dashboard"
+      preLoaderRoute: typeof AdminRevenueDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/about": {
@@ -199,9 +359,17 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R404Route: R404Route,
   AboutRoute: AboutRoute,
+  AdminRevenueDashboardRoute: AdminRevenueDashboardRoute,
+  BillingAuthorityDemoRoute: BillingAuthorityDemoRoute,
+  BillingOverviewRoute: BillingOverviewRoute,
   DashboardRoute: DashboardRoute,
   ExamplesRoute: ExamplesRoute,
+  InvoiceManagementRoute: InvoiceManagementRoute,
+  PaymentMethodsRoute: PaymentMethodsRoute,
   PreferencesDemoRoute: PreferencesDemoRoute,
+  SubscriptionManagementRoute: SubscriptionManagementRoute,
+  SupportBillingToolsRoute: SupportBillingToolsRoute,
+  UsageAnalyticsRoute: UsageAnalyticsRoute,
   UserPreferencesRoute: UserPreferencesRoute,
   UsersRoute: UsersRoute,
 }

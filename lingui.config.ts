@@ -25,9 +25,6 @@ const config: LinguiConfig = {
     ja: "en",
   },
   compileNamespace: "ts",
-  extractBabelOptions: {
-    presets: ["@babel/preset-typescript", "@babel/preset-react"],
-  },
 };
 
 export default config;

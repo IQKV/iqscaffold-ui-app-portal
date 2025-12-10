@@ -140,22 +140,18 @@ export class LocalizedNotifications {
     const configs = {
       success: {
         color: "green",
-        icon: IconCheck,
         autoClose: 4000,
       },
       error: {
         color: "red",
-        icon: IconX,
         autoClose: 6000,
       },
       warning: {
         color: "yellow",
-        icon: IconAlertTriangle,
         autoClose: 5000,
       },
       info: {
         color: "blue",
-        icon: IconInfoCircle,
         autoClose: 4000,
       },
     };

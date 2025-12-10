@@ -204,7 +204,7 @@ export const BillingModal: React.FC<BillingModalProps> = ({
     >
       <Stack gap="md" className={classes.modalStack}>
         {scrollable ? (
-          <ScrollArea.Autosize maxHeight={`calc(${maxHeight} - 120px)`}>
+          <ScrollArea.Autosize mah={`calc(${maxHeight} - 120px)`}>
             {modalContent}
           </ScrollArea.Autosize>
         ) : (

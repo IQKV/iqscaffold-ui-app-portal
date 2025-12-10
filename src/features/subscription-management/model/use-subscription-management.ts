@@ -18,7 +18,7 @@ import type {
 
 export const useSubscriptionManagement = () => {
   const queryClient = useQueryClient();
-  const { currentTenant } = useCurrentTenant();
+  const currentTenant = useCurrentTenant();
   const [selectedPlanId, setSelectedPlanId] = useState<string>("");
 
   // Fetch current subscription
@@ -27,9 +27,9 @@ export const useSubscriptionManagement = () => {
     isLoading: subscriptionLoading,
     error: subscriptionError,
   } = useQuery({
-    queryKey: ["subscription", currentTenant?.id],
-    queryFn: () => subscriptionApi.getActiveSubscription(currentTenant!.id),
-    enabled: !!currentTenant?.id,
+    queryKey: ["subscription", currentTenant?.tenantId],
+    queryFn: () => subscriptionApi.getActiveSubscription(currentTenant!.tenantId),
+    enabled: !!currentTenant?.tenantId,
   });
 
   // Fetch current plan details

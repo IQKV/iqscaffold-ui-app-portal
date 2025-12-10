@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useUsageStore } from "./usage-store";
 import { QuotaEnforcementService } from "../services/quota-enforcement-service";
+import { UsageService } from "../services/usage-service";
 import type {
   UsageMetricType,
   QuotaCheckResult,
@@ -174,7 +175,7 @@ export const useQuotaEnforcement = (tenantId: string) => {
             allowed: false,
             reason: `Operation would exceed ${metricType} quota`,
             upgradeInfo: {
-              suggestedPlan: QuotaEnforcementService.getSuggestedPlan(
+              suggestedPlan: UsageService.getSuggestedPlan(
                 metricType,
                 result.quotaStatus.current + amount
               ),
@@ -208,7 +209,7 @@ export const useQuotaEnforcement = (tenantId: string) => {
       if (status) {
         suggestions.push({
           metricType,
-          suggestedPlan: QuotaEnforcementService.getSuggestedPlan(
+          suggestedPlan: UsageService.getSuggestedPlan(
             metricType,
             status.current
           ),

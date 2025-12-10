@@ -48,7 +48,7 @@ export const createEntityStore = <T extends { id: string; tenantId?: string }>(
 
           setItems: (items: T[]) =>
             set((state) => {
-              state.items = items;
+              state.items = items as any;
               state.error = null;
             }),
 
@@ -58,9 +58,9 @@ export const createEntityStore = <T extends { id: string; tenantId?: string }>(
                 (i) => i.id === item.id
               );
               if (existingIndex >= 0) {
-                state.items[existingIndex] = item;
+                state.items[existingIndex] = item as any;
               } else {
-                state.items.push(item);
+                state.items.push(item as any);
               }
               state.error = null;
             }),
@@ -75,7 +75,7 @@ export const createEntityStore = <T extends { id: string; tenantId?: string }>(
 
           removeItem: (id: string) =>
             set((state) => {
-              state.items = state.items.filter((item) => item.id !== id);
+              state.items = state.items.filter((item) => item.id !== id) as any;
             }),
 
           setLoading: (loading: boolean) =>
@@ -91,7 +91,7 @@ export const createEntityStore = <T extends { id: string; tenantId?: string }>(
 
           reset: () =>
             set((state) => {
-              state.items = [];
+              state.items = [] as any;
               state.loading = false;
               state.error = null;
             }),

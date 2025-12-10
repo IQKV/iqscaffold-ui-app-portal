@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 import { PaymentMethodService } from "./payment-method-service";
 import type { PaymentMethodData } from "../types/payment-method-types";
+import { PaymentMethodType } from "@/shared/types";
 
 describe("PaymentMethodService", () => {
   describe("Card brand detection", () => {
@@ -108,7 +109,7 @@ describe("PaymentMethodService", () => {
 
   describe("Payment method validation", () => {
     const validPaymentMethodData: PaymentMethodData = {
-      type: "card",
+      type: PaymentMethodType.CARD,
       cardNumber: "4242424242424242",
       expiryMonth: "12",
       expiryYear: "2025",

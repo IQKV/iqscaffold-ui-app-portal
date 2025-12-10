@@ -3,7 +3,7 @@ import { Badge, Tooltip, Group, Text } from "@mantine/core";
 import {
   IconCheck,
   IconClock,
-  IconExclamationTriangle,
+  IconAlertTriangle,
   IconX,
   IconCreditCardOff,
 } from "@tabler/icons-react";
@@ -45,7 +45,7 @@ const STATUS_CONFIG: Record<
   },
   [SubscriptionStatus.PAST_DUE]: {
     color: "orange",
-    icon: <IconExclamationTriangle size={12} />,
+    icon: <IconAlertTriangle size={12} />,
     label: "Past Due",
     description: "Payment is overdue but service is still active",
   },

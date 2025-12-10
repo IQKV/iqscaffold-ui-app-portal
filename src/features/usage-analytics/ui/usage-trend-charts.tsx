@@ -11,7 +11,6 @@ import {
   Stack,
   Select,
   MultiSelect,
-  DatePickerInput,
   Skeleton,
   Box,
   Badge,
@@ -193,18 +192,19 @@ export const UsageTrendCharts: React.FC<UsageTrendChartsProps> = ({
             w={250}
           />
 
-          <DatePickerInput
+          {/* Date range picker - requires @mantine/dates package */}
+          {/* <DatePickerInput
             type="range"
             label="Date Range"
             leftSection={<IconCalendar size={16} />}
             value={[dateRange.start, dateRange.end]}
-            onChange={(value) => {
+            onChange={(value: [Date | null, Date | null]) => {
               if (value[0] && value[1]) {
                 onDateRangeChange({ start: value[0], end: value[1] });
               }
             }}
             w={200}
-          />
+          /> */}
         </Group>
 
         {/* Chart */}

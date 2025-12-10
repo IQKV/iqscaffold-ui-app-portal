@@ -115,7 +115,7 @@ function InvoiceManagementPage() {
 
           {/* Invoices List */}
           <InvoicesList
-            invoices={Array.isArray(invoices) ? invoices : invoices?.data || []}
+            invoices={Array.isArray(invoices) ? invoices : (invoices as any)?.data || []}
             selectedInvoices={selectedInvoices}
             onSelectionChange={setSelectedInvoices}
             onDownload={downloadInvoice}

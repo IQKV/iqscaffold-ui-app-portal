@@ -1,11 +1,11 @@
 import type {
   UsageMetric as BaseUsageMetric,
-  UsageMetricType,
   QuotaStatus as BaseQuotaStatus,
 } from "@/shared/types/billing";
+import { UsageMetricType } from "@/shared/types/billing";
 
 // Re-export base types
-export type { UsageMetricType };
+export { UsageMetricType };
 export type UsageMetric = BaseUsageMetric;
 export type QuotaStatus = BaseQuotaStatus;
 

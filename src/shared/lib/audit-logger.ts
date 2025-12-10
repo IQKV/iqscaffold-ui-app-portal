@@ -216,7 +216,7 @@ class SecurityAuditLogger implements AuditLogger {
   private getStoredAuditLogs(): AuditEvent[] {
     try {
       const stored = localStorage.getItem("audit_logs");
-      return stored ? JSON.parse(stored) : [];
+      return stored ? (JSON.parse(stored) as AuditEvent[]) : [];
     } catch {
       return [];
     }

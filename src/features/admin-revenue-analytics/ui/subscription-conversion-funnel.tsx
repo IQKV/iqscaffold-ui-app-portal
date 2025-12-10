@@ -15,7 +15,7 @@ import {
   Skeleton,
   ThemeIcon,
 } from "@mantine/core";
-import { IconFunnel } from "@tabler/icons-react";
+import { IconChartBar } from "@tabler/icons-react";
 
 interface ConversionFunnelData {
   stage: string;
@@ -58,7 +58,7 @@ export const SubscriptionConversionFunnel: React.FC<
         <Group justify="space-between" align="center">
           <Group gap="sm" align="center">
             <ThemeIcon variant="light" size="sm" color="blue">
-              <IconFunnel size={14} />
+              <IconChartBar size={14} />
             </ThemeIcon>
             <Text size="lg" fw={600}>
               Conversion Funnel

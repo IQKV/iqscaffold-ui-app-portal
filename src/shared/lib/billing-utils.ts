@@ -277,7 +277,7 @@ export class SubscriptionUtils {
   static isInTrial(subscription: Subscription): boolean {
     return (
       subscription.status === "trialing" &&
-      subscription.trialEnd &&
+      !!subscription.trialEnd &&
       new Date(subscription.trialEnd) > new Date()
     );
   }

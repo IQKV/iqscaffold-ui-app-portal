@@ -120,7 +120,6 @@ export const QuotaStatusIndicator: React.FC<QuotaStatusIndicatorProps> = ({
           title={
             quotaStatus.withinGrace ? "Grace Period Active" : "Quota Exceeded"
           }
-          size="sm"
         >
           {quotaStatus.withinGrace
             ? `You've exceeded your ${getMetricDisplayName().toLowerCase()} limit but are within the grace period. Consider upgrading your plan.`

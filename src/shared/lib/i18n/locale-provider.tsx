@@ -3,20 +3,20 @@ import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { LocaleUtils } from "./locale-formatting";
 
-// Import locale catalogs
-import { messages as enMessages } from "../../../locales/en";
+// Import locale catalogs with type assertion
+const enMessages = require("../../../locales/en").messages;
 
 // Lazy load other locale messages
 const loadLocaleMessages = async (locale: string) => {
   switch (locale) {
     case "es":
-      return (await import("../../../locales/es")).messages;
+      return require("../../../locales/es").messages;
     case "fr":
-      return (await import("../../../locales/fr")).messages;
+      return require("../../../locales/fr").messages;
     case "de":
-      return (await import("../../../locales/de")).messages;
+      return require("../../../locales/de").messages;
     case "ja":
-      return (await import("../../../locales/ja")).messages;
+      return require("../../../locales/ja").messages;
     default:
       return enMessages;
   }

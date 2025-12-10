@@ -122,12 +122,12 @@ export const PlanSelector: React.FC<PlanSelectorProps> = ({
         <Radio.Group
           value={billingCycle}
           onChange={(value) => onBillingCycleChange(value as BillingCycle)}
-          disabled={disabled}
         >
           <Group>
-            <Radio value="monthly" label="Monthly" />
+            <Radio value="monthly" label="Monthly" disabled={disabled} />
             <Radio
               value="yearly"
+              disabled={disabled}
               label={
                 <Group gap="xs">
                   <Text>Yearly</Text>

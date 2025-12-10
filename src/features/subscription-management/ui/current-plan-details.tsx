@@ -105,7 +105,7 @@ export const CurrentPlanDetails: React.FC<CurrentPlanDetailsProps> = ({
               Current subscription plan
             </Text>
           </Box>
-          <SubscriptionStatusBadge status={subscription.status} />
+          <SubscriptionStatusBadge subscription={subscription} />
         </Group>
 
         <Divider />

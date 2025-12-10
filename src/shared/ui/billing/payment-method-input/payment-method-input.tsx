@@ -88,7 +88,7 @@ export const PaymentMethodInput: React.FC<PaymentMethodInputProps> = ({
       },
       ...value,
     },
-    validate: zodResolver(paymentMethodFormSchema),
+    validate: zodResolver(paymentMethodFormSchema) as any,
     onValuesChange: (values) => {
       onChange(values);
 
@@ -344,9 +344,9 @@ export const PaymentMethodInput: React.FC<PaymentMethodInputProps> = ({
             <Switch
               label="Set as default payment method"
               description="Use this payment method for future charges"
-              checked={form.values.setAsDefault || false}
+              checked={(form.values as any).setAsDefault || false}
               onChange={(event) =>
-                form.setFieldValue("setAsDefault", event.currentTarget.checked)
+                form.setFieldValue("setAsDefault" as any, event.currentTarget.checked)
               }
               disabled={disabled}
             />

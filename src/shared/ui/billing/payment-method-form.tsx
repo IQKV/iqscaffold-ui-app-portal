@@ -29,9 +29,9 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import type {
   PaymentMethodFormData,
-  PaymentProvider,
   PaymentMethodType,
 } from "@/entities/payment-method/types/payment-method-types";
+import { PaymentProvider, PaymentMethodType as PMType } from "@/shared/types";
 import { PaymentMethodService } from "@/entities/payment-method/services/payment-method-service";
 
 // Initialize Stripe
@@ -70,14 +70,14 @@ export const PaymentMethodForm: React.FC<PaymentMethodFormProps> = ({
   initialData,
 }) => {
   const [selectedProvider, setSelectedProvider] =
-    useState<PaymentProvider>("stripe");
+    useState<PaymentProvider>(PaymentProvider.STRIPE);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [isValidating, setIsValidating] = useState(false);
 
   const form = useForm({
     initialValues: {
-      type: "card" as PaymentMethodType,
-      provider: "stripe" as PaymentProvider,
+      type: PMType.CARD,
+      provider: PaymentProvider.STRIPE,
       cardholderName: "",
       billingAddress: {
         line1: "",
@@ -134,16 +134,16 @@ export const PaymentMethodForm: React.FC<PaymentMethodFormProps> = ({
               <Text fw={500}>Payment Provider</Text>
               <Group>
                 <Button
-                  variant={selectedProvider === "stripe" ? "filled" : "outline"}
+                  variant={selectedProvider === PaymentProvider.STRIPE ? "filled" : "outline"}
                   leftSection={<IconCreditCard size={16} />}
-                  onClick={() => setSelectedProvider("stripe")}
+                  onClick={() => setSelectedProvider(PaymentProvider.STRIPE)}
                 >
                   Credit Card (Stripe)
                 </Button>
                 <Button
-                  variant={selectedProvider === "paypal" ? "filled" : "outline"}
+                  variant={selectedProvider === PaymentProvider.PAYPAL ? "filled" : "outline"}
                   leftSection={<IconBrandPaypal size={16} />}
-                  onClick={() => setSelectedProvider("paypal")}
+                  onClick={() => setSelectedProvider(PaymentProvider.PAYPAL)}
                 >
                   PayPal
                 </Button>
@@ -152,14 +152,14 @@ export const PaymentMethodForm: React.FC<PaymentMethodFormProps> = ({
           </Card>
 
           {/* Payment Method Details */}
-          {selectedProvider === "stripe" && (
+          {selectedProvider === PaymentProvider.STRIPE && (
             <StripePaymentMethodForm
               form={form}
               onValidationError={setValidationErrors}
             />
           )}
 
-          {selectedProvider === "paypal" && (
+          {selectedProvider === PaymentProvider.PAYPAL && (
             <PayPalPaymentMethodForm
               form={form}
               onValidationError={setValidationErrors}
@@ -324,7 +324,7 @@ const PayPalPaymentMethodForm: React.FC<{
     // Load PayPal SDK
     const loadPayPal = async () => {
       try {
-        const provider = await PaymentMethodService.getProvider("paypal");
+        const provider = await PaymentMethodService.getProvider(PaymentProvider.PAYPAL);
         setPaypalLoaded(true);
       } catch (error) {
         onValidationError(["Failed to load PayPal"]);

@@ -107,13 +107,13 @@ function SubscriptionManagementPage() {
             <Grid.Col span={{ base: 12, lg: 6 }}>
               <CurrentPlanDetails
                 subscription={subscription || null}
-                plan={currentPlan}
+                plan={currentPlan ?? null}
                 loading={isLoading}
               />
             </Grid.Col>
             <Grid.Col span={{ base: 12, lg: 6 }}>
               <PlanUpgradeOptions
-                currentPlan={currentPlan}
+                currentPlan={currentPlan ?? null}
                 availablePlans={availablePlans}
                 onUpgrade={upgradeSubscription}
                 loading={isUpgrading}
@@ -133,7 +133,7 @@ function SubscriptionManagementPage() {
   );
 }
 
-export const Route = createFileRoute("/billing/subscription")({
+export const Route = createFileRoute("/subscription-management")({
   component: () => (
     <AuthorityProtectedRoute
       authorities={[

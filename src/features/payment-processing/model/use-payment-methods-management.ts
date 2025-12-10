@@ -11,6 +11,7 @@ import type {
   PaymentMethod,
   PaymentMethodData,
 } from "@/entities/payment-method/types/payment-method-types";
+import { PaymentProvider } from "@/shared/types";
 
 interface PaymentTransaction {
   id: string;
@@ -35,7 +36,7 @@ interface FailedPayment {
 
 export const usePaymentMethodsManagement = () => {
   const queryClient = useQueryClient();
-  const { currentTenant } = useCurrentTenant();
+  const currentTenant = useCurrentTenant();
 
   // Fetch payment methods
   const {
@@ -43,14 +44,14 @@ export const usePaymentMethodsManagement = () => {
     isLoading: paymentMethodsLoading,
     error: paymentMethodsError,
   } = useQuery({
-    queryKey: ["paymentMethods", currentTenant?.id],
-    queryFn: () => paymentMethodApi.getByTenant(currentTenant!.id),
-    enabled: !!currentTenant?.id,
+    queryKey: ["paymentMethods", currentTenant?.tenantId],
+    queryFn: () => paymentMethodApi.getByTenant(currentTenant!.tenantId),
+    enabled: !!currentTenant?.tenantId,
   });
 
   // Fetch payment history
   const { data: paymentHistory = [], isLoading: historyLoading } = useQuery({
-    queryKey: ["paymentHistory", currentTenant?.id],
+    queryKey: ["paymentHistory", currentTenant?.tenantId],
     queryFn: async (): Promise<PaymentTransaction[]> => {
       // Mock payment history - in real app this would come from API
       return [
@@ -73,13 +74,13 @@ export const usePaymentMethodsManagement = () => {
         },
       ];
     },
-    enabled: !!currentTenant?.id && paymentMethods.length > 0,
+    enabled: !!currentTenant?.tenantId && paymentMethods.length > 0,
   });
 
   // Fetch failed payments
   const { data: failedPayments = [], isLoading: failedPaymentsLoading } =
     useQuery({
-      queryKey: ["failedPayments", currentTenant?.id],
+      queryKey: ["failedPayments", currentTenant?.tenantId],
       queryFn: async (): Promise<FailedPayment[]> => {
         // Mock failed payments - in real app this would come from API
         return [
@@ -94,13 +95,13 @@ export const usePaymentMethodsManagement = () => {
           },
         ];
       },
-      enabled: !!currentTenant?.id && paymentMethods.length > 0,
+      enabled: !!currentTenant?.tenantId && paymentMethods.length > 0,
     });
 
   // Add payment method mutation
   const addPaymentMethodMutation = useMutation({
     mutationFn: (data: PaymentMethodData) =>
-      paymentMethodApi.add({ ...data, tenantId: currentTenant!.id }),
+      paymentMethodApi.add({ ...data, tenantId: currentTenant!.tenantId, provider: data.provider || PaymentProvider.STRIPE } as any),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["paymentMethods"] });
       notifications.show({
@@ -167,7 +168,7 @@ export const usePaymentMethodsManagement = () => {
   // Set default payment method mutation
   const setDefaultMutation = useMutation({
     mutationFn: (paymentMethodId: string) =>
-      paymentMethodApi.setDefault(currentTenant!.id, paymentMethodId),
+      paymentMethodApi.setDefault(currentTenant!.tenantId, paymentMethodId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["paymentMethods"] });
       notifications.show({

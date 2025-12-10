@@ -129,9 +129,9 @@ export const useInvoiceStore = create<InvoiceStore>()(
                 const paginatedResponse =
                   response as GenericPaginatedResponse<Invoice>;
                 state.invoices = paginatedResponse.data;
-                state.currentPage = paginatedResponse.page;
-                state.totalPages = paginatedResponse.totalPages;
-                state.totalCount = paginatedResponse.totalCount;
+                state.currentPage = paginatedResponse.meta.current_page;
+                state.totalPages = paginatedResponse.meta.last_page;
+                state.totalCount = paginatedResponse.meta.total;
               } else {
                 // Simple array response
                 state.invoices = response as Invoice[];

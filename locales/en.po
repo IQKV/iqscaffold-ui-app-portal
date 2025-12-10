@@ -40,7 +40,7 @@ msgstr "About This Template"
 
 #: src/features/users/components/users-data-grid.tsx:169
 #: src/pages/examples.tsx:133
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:180
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:194
 msgid "Actions"
 msgstr "Actions"
 
@@ -70,6 +70,7 @@ msgid "Add User"
 msgstr "Add User"
 
 #: src/shared/lib/i18n/billing-translations.ts:184
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:219
 msgid "Address"
 msgstr "Address"
 
@@ -78,15 +79,16 @@ msgid "Admin"
 msgstr "Admin"
 
 #: src/shared/lib/i18n/billing-translations.ts:95
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:178
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:298
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:188
 msgid "Amount"
 msgstr "Amount"
 
-#: src/shared/lib/i18n/localized-validation.ts:236
+#: src/shared/lib/i18n/localized-validation.ts:289
 msgid "Amount cannot exceed {max}"
 msgstr "Amount cannot exceed {max}"
 
-#: src/shared/lib/i18n/localized-validation.ts:235
+#: src/shared/lib/i18n/localized-validation.ts:288
 msgid "Amount must be at least {min}"
 msgstr "Amount must be at least {min}"
 
@@ -137,6 +139,7 @@ msgid "Bank Account"
 msgstr "Bank Account"
 
 #: src/shared/lib/i18n/billing-translations.ts:61
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:215
 msgid "Billing Address"
 msgstr "Billing Address"
 
@@ -144,15 +147,19 @@ msgstr "Billing Address"
 msgid "Billing Cycle"
 msgstr "Billing Cycle"
 
-#: src/shared/lib/i18n/localized-notifications.ts:312
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:163
+msgid "Billing Information"
+msgstr "Billing Information"
+
+#: src/shared/lib/i18n/localized-notifications.ts:318
 msgid "Billing information updated successfully"
 msgstr "Billing information updated successfully"
 
-#: src/shared/lib/i18n/localized-notifications.ts:318
+#: src/shared/lib/i18n/localized-notifications.ts:324
 msgid "Billing Update Failed"
 msgstr "Billing Update Failed"
 
-#: src/shared/lib/i18n/localized-notifications.ts:311
+#: src/shared/lib/i18n/localized-notifications.ts:317
 msgid "Billing Updated"
 msgstr "Billing Updated"
 
@@ -183,6 +190,7 @@ msgid "Canceled"
 msgstr "Canceled"
 
 #: src/shared/lib/i18n/billing-translations.ts:57
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:266
 msgid "Card Number"
 msgstr "Card Number"
 
@@ -190,7 +198,7 @@ msgstr "Card Number"
 msgid "Cardholder Name"
 msgstr "Cardholder Name"
 
-#: src/shared/ui/locale-selector/locale-selector.tsx:42
+#: src/shared/ui/locale-selector/locale-selector.tsx:44
 msgid "Change Language"
 msgstr "Change Language"
 
@@ -216,6 +224,7 @@ msgid "Checking email status..."
 msgstr "Checking email status..."
 
 #: src/shared/lib/i18n/billing-translations.ts:185
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:227
 msgid "City"
 msgstr "City"
 
@@ -232,6 +241,7 @@ msgid "Code Quality:"
 msgstr "Code Quality:"
 
 #: src/shared/lib/i18n/billing-translations.ts:183
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:204
 msgid "Company"
 msgstr "Company"
 
@@ -277,6 +287,7 @@ msgstr "Consider upgrading your plan"
 #~ msgstr "Could not submit the form"
 
 #: src/shared/lib/i18n/billing-translations.ts:188
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:248
 msgid "Country"
 msgstr "Country"
 
@@ -300,6 +311,10 @@ msgstr "Created:"
 msgid "Credit Card"
 msgstr "Credit Card"
 
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:307
+msgid "Currency"
+msgstr "Currency"
+
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:105
 msgid "Current Password"
 msgstr "Current Password"
@@ -319,6 +334,7 @@ msgid "Current Usage"
 msgstr "Current Usage"
 
 #: src/shared/lib/i18n/billing-translations.ts:59
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:280
 msgid "CVV"
 msgstr "CVV"
 
@@ -339,7 +355,7 @@ msgstr "Data Table Example"
 msgid "Data Tables"
 msgstr "Data Tables"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:177
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:185
 msgid "Date"
 msgstr "Date"
 
@@ -394,7 +410,7 @@ msgstr "Downgrade to {planName}"
 msgid "Download Invoice"
 msgstr "Download Invoice"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:243
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:261
 msgid "Download PDF"
 msgstr "Download PDF"
 
@@ -406,7 +422,7 @@ msgstr "Draft"
 msgid "Due Date"
 msgstr "Due Date"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:197
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:212
 msgid "Due:"
 msgstr "Due:"
 
@@ -436,6 +452,7 @@ msgstr "Email"
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:63
 #: src/shared/lib/i18n/billing-translations.ts:180
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:196
 msgid "Email Address"
 msgstr "Email Address"
 
@@ -469,6 +486,14 @@ msgstr "Enabled"
 msgid "End-to-end type safety from API to UI components"
 msgstr "End-to-end type safety from API to UI components"
 
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:299
+msgid "Enter amount"
+msgstr "Enter amount"
+
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:281
+msgid "Enter CVV"
+msgstr "Enter CVV"
+
 #: src/features/users/components/user-form-modal.tsx:217
 msgid "Enter email address"
 msgstr "Enter email address"
@@ -489,6 +514,18 @@ msgstr "Enter password"
 msgid "Enter username"
 msgstr "Enter username"
 
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:267
+msgid "Enter your card number"
+msgstr "Enter your card number"
+
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:228
+msgid "Enter your city"
+msgstr "Enter your city"
+
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:205
+msgid "Enter your company name (optional)"
+msgstr "Enter your company name (optional)"
+
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:106
 msgid "Enter your current password"
 msgstr "Enter your current password"
@@ -497,6 +534,18 @@ msgstr "Enter your current password"
 #~ msgid "Enter your email"
 #~ msgstr "Enter your email"
 
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:197
+msgid "Enter your email address"
+msgstr "Enter your email address"
+
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:183
+msgid "Enter your first name"
+msgstr "Enter your first name"
+
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:189
+msgid "Enter your last name"
+msgstr "Enter your last name"
+
 #: src/features/sample-form/ui/sample-form-feature.tsx:77
 #~ msgid "Enter your name"
 #~ msgstr "Enter your name"
@@ -504,6 +553,18 @@ msgstr "Enter your current password"
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:115
 msgid "Enter your new password"
 msgstr "Enter your new password"
+
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:234
+msgid "Enter your state or province"
+msgstr "Enter your state or province"
+
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:220
+msgid "Enter your street address"
+msgstr "Enter your street address"
+
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:243
+msgid "Enter your ZIP or postal code"
+msgstr "Enter your ZIP or postal code"
 
 #: src/shared/lib/i18n/billing-translations.ts:145
 msgid "Enterprise"
@@ -543,6 +604,7 @@ msgid "Examples"
 msgstr "Examples"
 
 #: src/shared/lib/i18n/billing-translations.ts:58
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:274
 msgid "Expiry Date"
 msgstr "Expiry Date"
 
@@ -602,7 +664,7 @@ msgstr "Failed to download invoice"
 msgid "Failed to logout from all devices"
 msgstr "Failed to logout from all devices"
 
-#: src/shared/lib/i18n/localized-notifications.ts:260
+#: src/shared/lib/i18n/localized-notifications.ts:266
 msgid "Failed to process invoice. Please try again."
 msgstr "Failed to process invoice. Please try again."
 
@@ -634,7 +696,7 @@ msgstr "Failed to Send Reset Link"
 msgid "Failed to send verification email"
 msgstr "Failed to send verification email"
 
-#: src/shared/lib/i18n/localized-notifications.ts:319
+#: src/shared/lib/i18n/localized-notifications.ts:326
 msgid "Failed to update billing information. Please try again."
 msgstr "Failed to update billing information. Please try again."
 
@@ -642,11 +704,11 @@ msgstr "Failed to update billing information. Please try again."
 msgid "Failed to update payment method"
 msgstr "Failed to update payment method"
 
-#: src/shared/lib/i18n/localized-notifications.ts:238
+#: src/shared/lib/i18n/localized-notifications.ts:244
 msgid "Failed to update payment method. Please try again."
 msgstr "Failed to update payment method. Please try again."
 
-#: src/shared/lib/i18n/localized-notifications.ts:195
+#: src/shared/lib/i18n/localized-notifications.ts:199
 msgid "Failed to update subscription. Please try again."
 msgstr "Failed to update subscription. Please try again."
 
@@ -688,6 +750,7 @@ msgstr "Filter"
 
 #: src/features/users/components/user-form-modal.tsx:226
 #: src/shared/lib/i18n/billing-translations.ts:181
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:182
 msgid "First Name"
 msgstr "First Name"
 
@@ -739,7 +802,7 @@ msgstr "Grace Period"
 msgid "Grace period active"
 msgstr "Grace period active"
 
-#: src/shared/lib/i18n/localized-notifications.ts:281
+#: src/shared/lib/i18n/localized-notifications.ts:287
 msgid "Grace Period Active"
 msgstr "Grace Period Active"
 
@@ -767,7 +830,7 @@ msgstr "Info notification!"
 msgid "Information"
 msgstr "Information"
 
-#: src/shared/lib/i18n/localized-validation.ts:231
+#: src/shared/lib/i18n/localized-validation.ts:284
 msgid "Insufficient funds for this transaction"
 msgstr "Insufficient funds for this transaction"
 
@@ -792,24 +855,24 @@ msgstr "Invalid phone number"
 msgid "Invalid URL"
 msgstr "Invalid URL"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:176
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:182
 msgid "Invoice"
 msgstr "Invoice"
 
-#: src/shared/lib/i18n/localized-notifications.ts:253
+#: src/shared/lib/i18n/localized-notifications.ts:259
 msgid "Invoice {invoiceNumber} has been paid"
 msgstr "Invoice {invoiceNumber} has been paid"
 
-#: src/shared/lib/i18n/localized-notifications.ts:245
+#: src/shared/lib/i18n/localized-notifications.ts:251
 msgid "Invoice Downloaded"
 msgstr "Invoice Downloaded"
 
 #: src/shared/lib/i18n/billing-translations.ts:104
-#: src/shared/lib/i18n/localized-notifications.ts:246
+#: src/shared/lib/i18n/localized-notifications.ts:252
 msgid "Invoice downloaded successfully"
 msgstr "Invoice downloaded successfully"
 
-#: src/shared/lib/i18n/localized-notifications.ts:259
+#: src/shared/lib/i18n/localized-notifications.ts:265
 msgid "Invoice Error"
 msgstr "Invoice Error"
 
@@ -817,7 +880,7 @@ msgstr "Invoice Error"
 msgid "Invoice Number"
 msgstr "Invoice Number"
 
-#: src/shared/lib/i18n/localized-notifications.ts:252
+#: src/shared/lib/i18n/localized-notifications.ts:258
 msgid "Invoice Paid"
 msgstr "Invoice Paid"
 
@@ -825,21 +888,22 @@ msgstr "Invoice Paid"
 msgid "Invoice paid successfully"
 msgstr "Invoice paid successfully"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:169
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:174
 msgid "Invoices and payment history will appear here"
 msgstr "Invoices and payment history will appear here"
 
 #: src/pages/__root.tsx:26
-#: src/widgets/header/ui/header.tsx:10
+#: src/widgets/header/ui/header.tsx:13
 msgid "IQ Scaffold Platform"
 msgstr "IQ Scaffold Platform"
 
-#: src/shared/ui/locale-selector/locale-selector.tsx:64
+#: src/shared/ui/locale-selector/locale-selector.tsx:68
 msgid "Language:"
 msgstr "Language:"
 
 #: src/features/users/components/user-form-modal.tsx:235
 #: src/shared/lib/i18n/billing-translations.ts:182
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:188
 msgid "Last Name"
 msgstr "Last Name"
 
@@ -847,7 +911,7 @@ msgstr "Last Name"
 msgid "Last name must be at least 2 characters"
 msgstr "Last name must be at least 2 characters"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:115
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:118
 msgid "Latest invoices and payment history"
 msgstr "Latest invoices and payment history"
 
@@ -879,11 +943,11 @@ msgstr "Limit Exceeded"
 msgid "Line Items"
 msgstr "Line Items"
 
-#: src/shared/lib/i18n/localized-notifications.ts:345
+#: src/shared/lib/i18n/localized-notifications.ts:352
 msgid "Loading"
 msgstr "Loading"
 
-#: src/shared/lib/i18n/localized-notifications.ts:346
+#: src/shared/lib/i18n/localized-notifications.ts:353
 msgid "Loading billing information..."
 msgstr "Loading billing information..."
 
@@ -934,6 +998,10 @@ msgstr "Mark as Paid"
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:116
 msgid "Min 8 characters with uppercase, lowercase, number, and special character"
 msgstr "Min 8 characters with uppercase, lowercase, number, and special character"
+
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:275
+msgid "MM/YY"
+msgstr "MM/YY"
 
 #: src/pages/about.tsx:49
 msgid "Modern"
@@ -1006,7 +1074,7 @@ msgstr "New password must be different from current password"
 msgid "Next"
 msgstr "Next"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:291
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:310
 msgid "Next billing:"
 msgstr "Next billing:"
 
@@ -1014,7 +1082,7 @@ msgstr "Next billing:"
 msgid "Next Payment"
 msgstr "Next Payment"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:166
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:171
 msgid "No billing activity yet"
 msgstr "No billing activity yet"
 
@@ -1052,11 +1120,11 @@ msgid "Overage"
 msgstr "Overage"
 
 #: src/shared/lib/i18n/billing-translations.ts:84
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:224
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:242
 msgid "Overdue"
 msgstr "Overdue"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:136
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:139
 msgid "Overdue Invoices"
 msgstr "Overdue Invoices"
 
@@ -1150,7 +1218,11 @@ msgstr "Past Due"
 msgid "Pay Now"
 msgstr "Pay Now"
 
-#: src/shared/lib/i18n/localized-notifications.ts:210
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:293
+msgid "Payment Amount"
+msgstr "Payment Amount"
+
+#: src/shared/lib/i18n/localized-notifications.ts:216
 msgid "Payment could not be processed. Please check your payment method."
 msgstr "Payment could not be processed. Please check your payment method."
 
@@ -1158,20 +1230,24 @@ msgstr "Payment could not be processed. Please check your payment method."
 msgid "Payment failed"
 msgstr "Payment failed"
 
-#: src/shared/lib/i18n/localized-notifications.ts:209
+#: src/shared/lib/i18n/localized-notifications.ts:213
 msgid "Payment Failed"
 msgstr "Payment Failed"
 
-#: src/shared/lib/i18n/localized-notifications.ts:216
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:262
+msgid "Payment Information"
+msgstr "Payment Information"
+
+#: src/shared/lib/i18n/localized-notifications.ts:222
 msgid "Payment Method Added"
 msgstr "Payment Method Added"
 
 #: src/shared/lib/i18n/billing-translations.ts:65
-#: src/shared/lib/i18n/localized-notifications.ts:217
+#: src/shared/lib/i18n/localized-notifications.ts:223
 msgid "Payment method added successfully"
 msgstr "Payment method added successfully"
 
-#: src/shared/lib/i18n/localized-notifications.ts:230
+#: src/shared/lib/i18n/localized-notifications.ts:236
 msgid "Payment Method Deleted"
 msgstr "Payment Method Deleted"
 
@@ -1179,24 +1255,24 @@ msgstr "Payment Method Deleted"
 msgid "Payment method deleted successfully"
 msgstr "Payment method deleted successfully"
 
-#: src/shared/lib/i18n/localized-notifications.ts:237
+#: src/shared/lib/i18n/localized-notifications.ts:243
 msgid "Payment Method Error"
 msgstr "Payment Method Error"
 
-#: src/shared/lib/i18n/localized-notifications.ts:231
+#: src/shared/lib/i18n/localized-notifications.ts:237
 msgid "Payment method removed successfully"
 msgstr "Payment method removed successfully"
 
-#: src/shared/lib/i18n/localized-notifications.ts:223
+#: src/shared/lib/i18n/localized-notifications.ts:229
 msgid "Payment Method Updated"
 msgstr "Payment Method Updated"
 
 #: src/shared/lib/i18n/billing-translations.ts:66
-#: src/shared/lib/i18n/localized-notifications.ts:224
+#: src/shared/lib/i18n/localized-notifications.ts:230
 msgid "Payment method updated successfully"
 msgstr "Payment method updated successfully"
 
-#: src/shared/lib/i18n/localized-notifications.ts:203
+#: src/shared/lib/i18n/localized-notifications.ts:207
 msgid "Payment of {amount} processed successfully"
 msgstr "Payment of {amount} processed successfully"
 
@@ -1208,13 +1284,17 @@ msgstr "Payment processed successfully"
 msgid "Payment retry initiated"
 msgstr "Payment retry initiated"
 
-#: src/shared/lib/i18n/localized-notifications.ts:202
+#: src/shared/lib/i18n/localized-notifications.ts:206
 msgid "Payment Successful"
 msgstr "Payment Successful"
 
 #: src/shared/lib/i18n/billing-translations.ts:47
 msgid "PayPal"
 msgstr "PayPal"
+
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:177
+msgid "Personal Information"
+msgstr "Personal Information"
 
 #: src/shared/lib/i18n/billing-translations.ts:214
 msgid "Plan changed successfully"
@@ -1241,7 +1321,7 @@ msgstr "Please check your inbox for the verification link"
 msgid "Please confirm your new password"
 msgstr "Please confirm your new password"
 
-#: src/shared/lib/i18n/localized-validation.ts:234
+#: src/shared/lib/i18n/localized-validation.ts:287
 msgid "Please enter a valid amount"
 msgstr "Please enter a valid amount"
 
@@ -1284,7 +1364,7 @@ msgstr "Please enter a valid phone number"
 msgid "Please enter a valid postal code"
 msgstr "Please enter a valid postal code"
 
-#: src/shared/lib/i18n/localized-validation.ts:237
+#: src/shared/lib/i18n/localized-validation.ts:290
 msgid "Please enter a valid tax ID"
 msgstr "Please enter a valid tax ID"
 
@@ -1292,27 +1372,31 @@ msgstr "Please enter a valid tax ID"
 msgid "Please enter a valid URL"
 msgstr "Please enter a valid URL"
 
-#: src/shared/lib/i18n/localized-validation.ts:238
+#: src/shared/lib/i18n/localized-validation.ts:291
 msgid "Please enter a valid VAT number"
 msgstr "Please enter a valid VAT number"
 
-#: src/shared/lib/i18n/localized-validation.ts:229
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:166
+msgid "Please provide your billing details and payment information"
+msgstr "Please provide your billing details and payment information"
+
+#: src/shared/lib/i18n/localized-validation.ts:282
 msgid "Please select a billing cycle"
 msgstr "Please select a billing cycle"
 
-#: src/shared/lib/i18n/localized-validation.ts:230
+#: src/shared/lib/i18n/localized-validation.ts:283
 msgid "Please select a payment method"
 msgstr "Please select a payment method"
 
-#: src/shared/lib/i18n/localized-validation.ts:228
+#: src/shared/lib/i18n/localized-validation.ts:281
 msgid "Please select a valid plan"
 msgstr "Please select a valid plan"
 
-#: src/shared/lib/i18n/localized-notifications.ts:328
+#: src/shared/lib/i18n/localized-notifications.ts:335
 msgid "Please wait while we process your payment..."
 msgstr "Please wait while we process your payment..."
 
-#: src/shared/lib/i18n/localized-notifications.ts:337
+#: src/shared/lib/i18n/localized-notifications.ts:344
 msgid "Please wait while we update your subscription..."
 msgstr "Please wait while we update your subscription..."
 
@@ -1332,7 +1416,7 @@ msgstr "Price"
 msgid "Pro"
 msgstr "Pro"
 
-#: src/shared/lib/i18n/localized-notifications.ts:327
+#: src/shared/lib/i18n/localized-notifications.ts:334
 msgid "Processing Payment"
 msgstr "Processing Payment"
 
@@ -1348,7 +1432,7 @@ msgstr "Reactivate Subscription"
 msgid "Ready to start building? Check out the documentation and source code."
 msgstr "Ready to start building? Check out the documentation and source code."
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:112
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:115
 msgid "Recent Billing Activity"
 msgstr "Recent Billing Activity"
 
@@ -1368,6 +1452,10 @@ msgstr "Remaining"
 msgid "Renews On"
 msgstr "Renews On"
 
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:335
+msgid "Reset"
+msgstr "Reset"
+
 #: src/shared/lib/use-auth-api.ts:149
 msgid "Reset Link Sent"
 msgstr "Reset Link Sent"
@@ -1380,7 +1468,7 @@ msgstr "Response delay (ms)"
 msgid "Retry"
 msgstr "Retry"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:255
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:273
 msgid "Retry payment"
 msgstr "Retry payment"
 
@@ -1450,7 +1538,11 @@ msgstr "Search users..."
 msgid "Security Settings"
 msgstr "Security Settings"
 
-#: src/shared/ui/locale-selector/locale-selector.tsx:97
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:308
+msgid "Select currency"
+msgstr "Select currency"
+
+#: src/shared/ui/locale-selector/locale-selector.tsx:103
 msgid "Select language"
 msgstr "Select language"
 
@@ -1466,6 +1558,10 @@ msgstr "Select Plan"
 msgid "Select user roles"
 msgstr "Select user roles"
 
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:249
+msgid "Select your country"
+msgstr "Select your country"
+
 #: src/shared/lib/i18n/billing-translations.ts:91
 msgid "Send Reminder"
 msgstr "Send Reminder"
@@ -1479,10 +1575,14 @@ msgid "Set as Default"
 msgstr "Set as Default"
 
 #. placeholder {0}: invoices.length
-#. placeholder {1}: invoices.length > 1 ? "s" : ""
+#. placeholder {1}: invoices.length > 1 ? "invoices" : "invoice"
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:299
+msgid "Showing {0} recent {1}"
+msgstr "Showing {0} recent {1}"
+
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:281
-msgid "Showing {0} recent invoice{1}"
-msgstr "Showing {0} recent invoice{1}"
+#~ msgid "Showing {0} recent invoice{1}"
+#~ msgstr "Showing {0} recent invoice{1}"
 
 #: src/shared/ui/msw-dev-tools.tsx:108
 msgid "Simulate network latency"
@@ -1512,10 +1612,14 @@ msgstr "Start Free Trial"
 msgid "State"
 msgstr "State"
 
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:233
+msgid "State/Province"
+msgstr "State/Province"
+
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:72
 #: src/features/users/components/users-data-grid.tsx:138
 #: src/pages/examples.tsx:124
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:179
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:191
 msgid "Status"
 msgstr "Status"
 
@@ -1539,11 +1643,15 @@ msgstr "Submit"
 #~ msgid "Submit Failed"
 #~ msgstr "Submit Failed"
 
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:338
+msgid "Submit Payment"
+msgstr "Submit Payment"
+
 #: src/shared/lib/i18n/billing-translations.ts:213
 msgid "Subscription canceled"
 msgstr "Subscription canceled"
 
-#: src/shared/lib/i18n/localized-notifications.ts:180
+#: src/shared/lib/i18n/localized-notifications.ts:184
 msgid "Subscription Canceled"
 msgstr "Subscription Canceled"
 
@@ -1551,16 +1659,16 @@ msgstr "Subscription Canceled"
 msgid "Subscription canceled successfully"
 msgstr "Subscription canceled successfully"
 
-#: src/shared/lib/i18n/localized-notifications.ts:194
+#: src/shared/lib/i18n/localized-notifications.ts:198
 msgid "Subscription Error"
 msgstr "Subscription Error"
 
-#: src/shared/lib/i18n/localized-notifications.ts:187
+#: src/shared/lib/i18n/localized-notifications.ts:191
 msgid "Subscription Reactivated"
 msgstr "Subscription Reactivated"
 
-#: src/shared/lib/i18n/localized-notifications.ts:166
-#: src/shared/lib/i18n/localized-notifications.ts:173
+#: src/shared/lib/i18n/localized-notifications.ts:170
+#: src/shared/lib/i18n/localized-notifications.ts:177
 msgid "Subscription Updated"
 msgstr "Subscription Updated"
 
@@ -1580,11 +1688,11 @@ msgstr "Success"
 msgid "Success notification!"
 msgstr "Success notification!"
 
-#: src/shared/lib/i18n/localized-notifications.ts:174
+#: src/shared/lib/i18n/localized-notifications.ts:178
 msgid "Successfully downgraded to {planName}"
 msgstr "Successfully downgraded to {planName}"
 
-#: src/shared/lib/i18n/localized-notifications.ts:167
+#: src/shared/lib/i18n/localized-notifications.ts:171
 msgid "Successfully upgraded to {planName}"
 msgstr "Successfully upgraded to {planName}"
 
@@ -1678,6 +1786,10 @@ msgstr "Total Orders"
 msgid "Total Users"
 msgstr "Total Users"
 
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:317
+msgid "Total:"
+msgstr "Total:"
+
 #: src/shared/lib/i18n/billing-translations.ts:13
 msgid "Trial"
 msgstr "Trial"
@@ -1686,11 +1798,11 @@ msgstr "Trial"
 msgid "Trial Ends"
 msgstr "Trial Ends"
 
-#: src/shared/lib/i18n/localized-notifications.ts:296
+#: src/shared/lib/i18n/localized-notifications.ts:302
 msgid "Trial Expired"
 msgstr "Trial Expired"
 
-#: src/shared/lib/i18n/localized-notifications.ts:289
+#: src/shared/lib/i18n/localized-notifications.ts:295
 msgid "Trial Expiring"
 msgstr "Trial Expiring"
 
@@ -1698,7 +1810,7 @@ msgstr "Trial Expiring"
 msgid "Trial expiring soon"
 msgstr "Trial expiring soon"
 
-#: src/shared/lib/i18n/localized-notifications.ts:303
+#: src/shared/lib/i18n/localized-notifications.ts:309
 msgid "Trial Extended"
 msgstr "Trial Extended"
 
@@ -1759,7 +1871,7 @@ msgstr "Update your password to keep your account secure."
 msgid "Updated:"
 msgstr "Updated:"
 
-#: src/shared/lib/i18n/localized-notifications.ts:336
+#: src/shared/lib/i18n/localized-notifications.ts:343
 msgid "Updating Subscription"
 msgstr "Updating Subscription"
 
@@ -1775,7 +1887,7 @@ msgstr "Upgrade to {planName}"
 msgid "Usage limit exceeded"
 msgstr "Usage limit exceeded"
 
-#: src/shared/lib/i18n/localized-notifications.ts:274
+#: src/shared/lib/i18n/localized-notifications.ts:280
 msgid "Usage Limit Exceeded"
 msgstr "Usage Limit Exceeded"
 
@@ -1783,7 +1895,7 @@ msgstr "Usage Limit Exceeded"
 msgid "Usage Percentage"
 msgstr "Usage Percentage"
 
-#: src/shared/lib/i18n/localized-notifications.ts:267
+#: src/shared/lib/i18n/localized-notifications.ts:273
 msgid "Usage Warning"
 msgstr "Usage Warning"
 
@@ -1857,7 +1969,7 @@ msgstr "Verified"
 msgid "Very Weak"
 msgstr "Very Weak"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:127
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:130
 msgid "View All Invoices"
 msgstr "View All Invoices"
 
@@ -1865,7 +1977,7 @@ msgstr "View All Invoices"
 msgid "View Details"
 msgstr "View Details"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:232
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:250
 msgid "View invoice details"
 msgstr "View invoice details"
 
@@ -1922,25 +2034,29 @@ msgstr "Yearly"
 msgid "You are approaching your usage limit"
 msgstr "You are approaching your usage limit"
 
-#: src/shared/lib/i18n/localized-notifications.ts:282
+#: src/shared/lib/i18n/localized-notifications.ts:288
 msgid "You are in the grace period for {metricName}. Please upgrade soon."
 msgstr "You are in the grace period for {metricName}. Please upgrade soon."
 
 #. placeholder {0}: overdueInvoices.length
-#. placeholder {1}: overdueInvoices.length > 1 ? "s" : ""
+#. placeholder {1}: overdueInvoices.length > 1 ? "invoices" : "invoice"
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:142
+msgid "You have {0} overdue {1} requiring immediate attention."
+msgstr "You have {0} overdue {1} requiring immediate attention."
+
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:139
-msgid "You have {0} overdue invoice{1} requiring immediate attention."
-msgstr "You have {0} overdue invoice{1} requiring immediate attention."
+#~ msgid "You have {0} overdue invoice{1} requiring immediate attention."
+#~ msgstr "You have {0} overdue invoice{1} requiring immediate attention."
 
 #: src/shared/lib/use-auth-api.ts:67
 msgid "You have been logged out from all devices"
 msgstr "You have been logged out from all devices"
 
-#: src/shared/lib/i18n/localized-notifications.ts:275
+#: src/shared/lib/i18n/localized-notifications.ts:281
 msgid "You have exceeded your {metricName} quota. Consider upgrading your plan."
 msgstr "You have exceeded your {metricName} quota. Consider upgrading your plan."
 
-#: src/shared/lib/i18n/localized-notifications.ts:268
+#: src/shared/lib/i18n/localized-notifications.ts:274
 msgid "You have used {percentage}% of your {metricName} quota"
 msgstr "You have used {percentage}% of your {metricName} quota"
 
@@ -1948,11 +2064,11 @@ msgstr "You have used {percentage}% of your {metricName} quota"
 msgid "You will need to sign in again on all devices."
 msgstr "You will need to sign in again on all devices."
 
-#: src/shared/lib/i18n/localized-validation.ts:233
+#: src/shared/lib/i18n/localized-validation.ts:286
 msgid "Your card has expired"
 msgstr "Your card has expired"
 
-#: src/shared/lib/i18n/localized-validation.ts:232
+#: src/shared/lib/i18n/localized-validation.ts:285
 msgid "Your card was declined"
 msgstr "Your card was declined"
 
@@ -1968,26 +2084,30 @@ msgstr "Your password has been successfully changed"
 msgid "Your password has been successfully reset"
 msgstr "Your password has been successfully reset"
 
-#: src/shared/lib/i18n/localized-notifications.ts:181
+#: src/shared/lib/i18n/localized-notifications.ts:185
 msgid "Your subscription has been canceled successfully"
 msgstr "Your subscription has been canceled successfully"
 
-#: src/shared/lib/i18n/localized-notifications.ts:188
+#: src/shared/lib/i18n/localized-notifications.ts:192
 msgid "Your subscription has been reactivated"
 msgstr "Your subscription has been reactivated"
 
-#: src/shared/lib/i18n/localized-notifications.ts:290
+#: src/shared/lib/i18n/localized-notifications.ts:296
 msgid "Your trial expires in {daysLeft} days. Upgrade to continue service."
 msgstr "Your trial expires in {daysLeft} days. Upgrade to continue service."
 
-#: src/shared/lib/i18n/localized-notifications.ts:304
+#: src/shared/lib/i18n/localized-notifications.ts:310
 msgid "Your trial has been extended until {newEndDate}"
 msgstr "Your trial has been extended until {newEndDate}"
 
-#: src/shared/lib/i18n/localized-notifications.ts:297
+#: src/shared/lib/i18n/localized-notifications.ts:303
 msgid "Your trial has expired. Please upgrade to continue using the service."
 msgstr "Your trial has expired. Please upgrade to continue using the service."
 
 #: src/shared/lib/i18n/billing-translations.ts:187
 msgid "ZIP Code"
 msgstr "ZIP Code"
+
+#: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:242
+msgid "ZIP/Postal Code"
+msgstr "ZIP/Postal Code"

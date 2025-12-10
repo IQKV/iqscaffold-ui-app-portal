@@ -133,7 +133,7 @@ function PaymentMethodsPage() {
   );
 }
 
-export const Route = createFileRoute("/billing/payment-methods")({
+export const Route = createFileRoute("/payment-methods")({
   component: () => (
     <AuthorityProtectedRoute
       authorities={[

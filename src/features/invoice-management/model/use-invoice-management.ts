@@ -25,9 +25,9 @@ export const useInvoiceManagement = () => {
     isLoading: invoicesLoading,
     error: invoicesError,
   } = useQuery({
-    queryKey: ["invoices", currentTenant?.id, filters],
-    queryFn: () => invoiceApi.getByTenant(currentTenant!.id, filters),
-    enabled: !!currentTenant?.id,
+    queryKey: ["invoices", currentTenant?.tenantId, filters],
+    queryFn: () => invoiceApi.getByTenant(currentTenant!.tenantId, filters),
+    enabled: !!currentTenant?.tenantId,
   });
 
   // Extract invoices array from response
@@ -37,8 +37,8 @@ export const useInvoiceManagement = () => {
 
   // Calculate overdue invoices
   const overdueInvoices = Array.isArray(invoices)
-    ? invoices.filter(
-        (invoice: Invoice) =>
+    ? (invoices as Invoice[]).filter(
+        (invoice) =>
           invoice.status === "open" && new Date(invoice.dueDate) < new Date()
       )
     : [];

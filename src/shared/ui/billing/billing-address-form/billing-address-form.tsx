@@ -143,7 +143,7 @@ export const BillingAddressForm: React.FC<BillingAddressFormProps> = ({
       sameAsShipping: false,
       ...value,
     },
-    validate: zodResolver(billingAddressFormSchema),
+    validate: zodResolver(billingAddressFormSchema) as any,
     onValuesChange: (values) => {
       const { sameAsShipping, ...address } = values;
       onChange(address);
