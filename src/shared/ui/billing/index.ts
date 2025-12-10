@@ -40,3 +40,7 @@ export type { BillingModalProps } from "./billing-modal/billing-modal";
 
 export { BillingCard } from "./billing-card/billing-card";
 export type { BillingCardProps, CardAction } from "./billing-card/billing-card";
+
+// Payment Method Components
+export { PaymentMethodForm } from "./payment-method-form";
+export { PaymentMethodList } from "./payment-method-list";

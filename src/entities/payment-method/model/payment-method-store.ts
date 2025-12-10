@@ -6,6 +6,7 @@ import type {
   PaymentMethodState,
   PaymentMethodData,
   PaymentMethodMetrics,
+  PaymentProvider,
 } from "../types/payment-method-types";
 import { PaymentMethodService } from "../services/payment-method-service";
 import { paymentMethodApi } from "../api/payment-method-api";
@@ -26,7 +27,7 @@ interface PaymentMethodStore extends PaymentMethodState {
   // Business Operations
   fetchPaymentMethods: (tenantId: string) => Promise<void>;
   addPaymentMethod: (
-    data: PaymentMethodData & { tenantId: string }
+    data: PaymentMethodData & { tenantId: string; provider: PaymentProvider }
   ) => Promise<PaymentMethod>;
   updatePaymentMethod: (
     id: string,
@@ -140,7 +141,7 @@ export const usePaymentMethodStore = create<PaymentMethodStore>()(
         },
 
         addPaymentMethod: async (
-          data: PaymentMethodData & { tenantId: string }
+          data: PaymentMethodData & { tenantId: string; provider: PaymentProvider }
         ) => {
           set((state) => {
             state.validatingPaymentMethod = true;

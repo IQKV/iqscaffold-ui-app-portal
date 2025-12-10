@@ -110,6 +110,10 @@ export interface PaymentMethodFormData {
   // Billing address
   billingAddress: BillingAddress;
 
+  // Provider-specific data
+  providerPaymentMethodId?: string;
+  metadata?: PaymentMethodMetadata;
+
   // Options
   setAsDefault: boolean;
   saveForFuture: boolean;

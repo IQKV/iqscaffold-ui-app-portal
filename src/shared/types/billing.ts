@@ -189,11 +189,15 @@ export interface AuthorityCheck {
 // Form-related types
 export interface PaymentMethodData {
   type: PaymentMethodType;
+  provider?: PaymentProvider;
   cardNumber?: string;
   expiryMonth?: string;
   expiryYear?: string;
   cvv?: string;
   billingAddress: BillingAddress;
+  providerPaymentMethodId?: string;
+  metadata?: PaymentMethodMetadata;
+  tenantId?: string;
 }
 
 export interface BillingAddress {

@@ -4,15 +4,164 @@ import type {
   ValidationResult,
   PaymentMethodValidation,
   PaymentMethodMetrics,
+  PaymentMethodMetadata,
   CardBrand,
+  TokenizationResult,
 } from "../types/payment-method-types";
+import { PaymentProvider } from "@/shared/types/billing";
 import { ValidationUtils } from "@/shared/lib/billing-utils";
+import {
+  PaymentProviderFactory,
+  PaymentRetryService,
+  DEFAULT_RETRY_CONFIG,
+} from "./payment-provider-interface";
+import { StripePaymentProvider } from "./stripe-provider";
+import { PayPalPaymentProvider } from "./paypal-provider";
 
 /**
  * Payment Method business logic service
  * Contains all payment method-related business rules and validations
+ * Integrates with multiple payment providers through abstraction layer
  */
 export class PaymentMethodService {
+  private static initialized = false;
+
+  /**
+   * Initialize payment providers
+   */
+  static async initialize() {
+    if (this.initialized) return;
+
+    // Register payment providers
+    PaymentProviderFactory.registerProvider(
+      PaymentProvider.STRIPE,
+      new StripePaymentProvider()
+    );
+    PaymentProviderFactory.registerProvider(
+      PaymentProvider.PAYPAL,
+      new PayPalPaymentProvider()
+    );
+
+    // Initialize providers with configuration
+    const stripeProvider = PaymentProviderFactory.getProvider(PaymentProvider.STRIPE);
+    const paypalProvider = PaymentProviderFactory.getProvider(PaymentProvider.PAYPAL);
+
+    try {
+      await stripeProvider.initialize({
+        apiKey: import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || "",
+        environment: import.meta.env.VITE_ENVIRONMENT === "production" ? "production" : "sandbox",
+      });
+
+      await paypalProvider.initialize({
+        apiKey: import.meta.env.VITE_PAYPAL_CLIENT_ID || "",
+        secretKey: import.meta.env.VITE_PAYPAL_CLIENT_SECRET || "",
+        environment: import.meta.env.VITE_ENVIRONMENT === "production" ? "production" : "sandbox",
+      });
+
+      this.initialized = true;
+    } catch (error) {
+      console.error("Failed to initialize payment providers:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * Validate and tokenize payment method using the appropriate provider
+   */
+  static async validateAndTokenizePaymentMethod(
+    data: PaymentMethodData,
+    provider: PaymentProvider
+  ): Promise<{ validation: ValidationResult; tokenization?: TokenizationResult }> {
+    await this.initialize();
+
+    const providerInstance = PaymentProviderFactory.getProvider(provider);
+
+    // First validate the payment method
+    const validation = await PaymentRetryService.executeWithRetry(
+      () => providerInstance.validatePaymentMethod(data),
+      DEFAULT_RETRY_CONFIG
+    );
+
+    if (!validation.isValid) {
+      return { validation };
+    }
+
+    // If validation passes, tokenize the payment method
+    try {
+      const tokenization = await PaymentRetryService.executeWithRetry(
+        () => providerInstance.tokenizePaymentMethod(data),
+        DEFAULT_RETRY_CONFIG
+      );
+
+      return { validation, tokenization };
+    } catch (error) {
+      return {
+        validation: {
+          isValid: false,
+          errors: [
+            error instanceof Error ? error.message : "Tokenization failed",
+          ],
+          warnings: validation.warnings,
+        },
+      };
+    }
+  }
+
+  /**
+   * Update payment method through provider
+   */
+  static async updatePaymentMethodWithProvider(
+    paymentMethod: PaymentMethod,
+    updates: Partial<PaymentMethodData>
+  ): Promise<PaymentMethodMetadata> {
+    await this.initialize();
+
+    const providerInstance = PaymentProviderFactory.getProvider(paymentMethod.provider);
+
+    return PaymentRetryService.executeWithRetry(
+      () => providerInstance.updatePaymentMethod(
+        paymentMethod.providerPaymentMethodId,
+        updates
+      ),
+      DEFAULT_RETRY_CONFIG
+    );
+  }
+
+  /**
+   * Delete payment method through provider
+   */
+  static async deletePaymentMethodWithProvider(
+    paymentMethod: PaymentMethod
+  ): Promise<void> {
+    await this.initialize();
+
+    const providerInstance = PaymentProviderFactory.getProvider(paymentMethod.provider);
+
+    return PaymentRetryService.executeWithRetry(
+      () => providerInstance.deletePaymentMethod(
+        paymentMethod.providerPaymentMethodId
+      ),
+      DEFAULT_RETRY_CONFIG
+    );
+  }
+
+  /**
+   * Get supported providers and their capabilities
+   */
+  static getSupportedProviders() {
+    return PaymentProviderFactory.getSupportedProviders().map(provider => ({
+      provider,
+      capabilities: PaymentProviderFactory.getProviderCapabilities(provider),
+    }));
+  }
+
+  /**
+   * Get provider instance for advanced operations
+   */
+  static async getProvider(provider: PaymentProvider) {
+    await this.initialize();
+    return PaymentProviderFactory.getProvider(provider);
+  }
   // Card brand detection
   private static cardBrands: CardBrand[] = [
     {
