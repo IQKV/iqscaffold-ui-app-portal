@@ -52,6 +52,14 @@ export class InvoiceApiClient {
     return Promise.all(retries);
   }
 
+  // Invoice generation
+  async generateInvoice(
+    subscriptionId: string,
+    periodEnd: Date
+  ): Promise<Invoice> {
+    return billingApi.generateInvoice(subscriptionId, periodEnd);
+  }
+
   // Search and filtering
   async searchInvoices(
     tenantId: string,

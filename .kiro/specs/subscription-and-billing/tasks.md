@@ -55,7 +55,7 @@
   - Add PDF generation and download functionality
   - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5_
 
-- [ ]\* 2.6 Write property test for invoice generation
+- [x] 2.6 Write property test for invoice generation
   - **Property 21: Automatic Invoice Generation**
   - **Validates: Requirements 5.1**
 

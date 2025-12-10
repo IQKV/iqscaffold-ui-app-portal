@@ -348,4 +348,30 @@ export class InvoiceService {
       );
     }
   }
+
+  // Invoice generation
+  static async generateInvoice(
+    subscriptionId: string,
+    periodEnd: Date
+  ): Promise<Invoice> {
+    if (!subscriptionId) {
+      throw new Error("Subscription ID is required");
+    }
+
+    if (!periodEnd) {
+      throw new Error("Period end date is required");
+    }
+
+    if (periodEnd <= new Date()) {
+      throw new Error("Period end date must be in the future");
+    }
+
+    try {
+      return await invoiceApi.generateInvoice(subscriptionId, periodEnd);
+    } catch (error) {
+      throw new Error(
+        `Failed to generate invoice: ${error instanceof Error ? error.message : "Unknown error"}`
+      );
+    }
+  }
 }

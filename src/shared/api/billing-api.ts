@@ -154,6 +154,17 @@ export class BillingApiClient {
     });
   }
 
+  async generateInvoice(
+    subscriptionId: string,
+    periodEnd: Date
+  ): Promise<Invoice> {
+    return apiRequest<Invoice>({
+      method: "POST",
+      url: `${this.baseUrl}/invoices/generate`,
+      data: { subscriptionId, periodEnd: periodEnd.toISOString() },
+    });
+  }
+
   // Payment Method endpoints
   async getPaymentMethods(tenantId: string): Promise<PaymentMethod[]> {
     return apiRequest<PaymentMethod[]>({
@@ -378,6 +389,7 @@ export const {
   downloadInvoicePDF,
   retryInvoicePayment,
   voidInvoice,
+  generateInvoice,
   getPaymentMethods,
   addPaymentMethod,
   updatePaymentMethod,
