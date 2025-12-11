@@ -216,6 +216,7 @@ export const BillingCard: React.FC<BillingCardProps> = ({
             <Divider />
             <Group justify="flex-end" className={classes.cardFooter}>
               <button
+                type="button"
                 className={classes.primaryActionButton}
                 onClick={primaryAction.onClick}
                 disabled={primaryAction.disabled}

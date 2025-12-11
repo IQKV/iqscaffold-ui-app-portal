@@ -9,8 +9,7 @@ import {
   IconCreditCardOff,
 } from "@tabler/icons-react";
 import { BillingDateUtils } from "@/shared/lib/billing-utils";
-import type { Invoice } from "@/shared/types/billing";
-import { InvoiceStatus } from "@/shared/types/billing";
+import { InvoiceStatus, type Invoice } from "@/shared/types/billing";
 import classes from "./invoice-status-indicator.module.css";
 
 export interface InvoiceStatusIndicatorProps {

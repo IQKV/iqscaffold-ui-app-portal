@@ -2,21 +2,23 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { LocaleUtils } from "./locale-formatting";
-
-// Import locale catalogs with type assertion
-const enMessages = require("../../../locales/en").messages;
+import { messages as enMessages } from "../../../locales/en";
+import { messages as esMessages } from "../../../locales/es";
+import { messages as frMessages } from "../../../locales/fr";
+import { messages as deMessages } from "../../../locales/de";
+import { messages as jaMessages } from "../../../locales/ja";
 
 // Lazy load other locale messages
 const loadLocaleMessages = async (locale: string) => {
   switch (locale) {
     case "es":
-      return require("../../../locales/es").messages;
+      return esMessages;
     case "fr":
-      return require("../../../locales/fr").messages;
+      return frMessages;
     case "de":
-      return require("../../../locales/de").messages;
+      return deMessages;
     case "ja":
-      return require("../../../locales/ja").messages;
+      return jaMessages;
     default:
       return enMessages;
   }

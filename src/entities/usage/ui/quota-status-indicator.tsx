@@ -6,7 +6,6 @@ import {
   IconExclamationMark,
 } from "@tabler/icons-react";
 import type { QuotaStatus } from "../types/usage-types";
-import { UsageMetricType } from "../types/usage-types";
 import { UsageService } from "../services/usage-service";
 
 interface QuotaStatusIndicatorProps {

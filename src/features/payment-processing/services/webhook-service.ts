@@ -10,8 +10,8 @@ import {
   WebhookEventType,
   PaymentProvider,
   SubscriptionStatus,
+  type WebhookEvent,
 } from "@/shared/types/billing";
-import type { WebhookEvent } from "@/shared/types/billing";
 
 export interface WebhookProcessingResult {
   eventId: string;

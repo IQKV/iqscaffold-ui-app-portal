@@ -242,7 +242,7 @@ export class PaymentRetryService {
       }
     }
 
-    throw lastError!;
+    throw new Error(lastError?.message || "Payment operation failed after retries");
   }
 
   private static isNonRetryableError(error: any): boolean {

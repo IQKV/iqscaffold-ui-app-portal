@@ -30,8 +30,11 @@ import {
   LocaleDateUtils,
   useBillingNotifications,
 } from "@/shared/lib/i18n";
-import type { Invoice, Subscription } from "@/shared/types/billing";
-import { InvoiceStatus } from "@/shared/types/billing";
+import {
+  InvoiceStatus,
+  type Invoice,
+  type Subscription,
+} from "@/shared/types/billing";
 
 export interface RecentBillingActivityProps {
   invoices: Invoice[];
@@ -138,13 +141,17 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
             icon={<IconCreditCard size={16} />}
             title={_(msg`Overdue Invoices`)}
           >
-            <Text size="sm" mb="xs">
-              <Trans>
-                You have {overdueInvoices.length} overdue{" "}
-                {overdueInvoices.length > 1 ? "invoices" : "invoice"} requiring
-                immediate attention.
-              </Trans>
-            </Text>
+            {(() => {
+              const count = overdueInvoices.length;
+              const invoiceText = count > 1 ? "invoices" : "invoice";
+              return (
+                <Text size="sm" mb="xs">
+                  <Trans>
+                    You have {count} overdue {invoiceText} requiring immediate attention.
+                  </Trans>
+                </Text>
+              );
+            })()}
             <Group gap="xs">
               {overdueInvoices.slice(0, 2).map((invoice) => (
                 <Badge key={invoice.id} color="red" variant="light" size="sm">
@@ -295,12 +302,17 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
           <>
             <Divider />
             <Group justify="space-between">
-              <Text size="sm" c="dimmed">
-                <Trans>
-                  Showing {invoices.length} recent{" "}
-                  {invoices.length > 1 ? "invoices" : "invoice"}
-                </Trans>
-              </Text>
+              {(() => {
+                const count = invoices.length;
+                const invoiceText = count > 1 ? "invoices" : "invoice";
+                return (
+                  <Text size="sm" c="dimmed">
+                    <Trans>
+                      Showing {count} recent {invoiceText}
+                    </Trans>
+                  </Text>
+                );
+              })()}
 
               {subscription && (
                 <Group gap="md">

@@ -52,9 +52,11 @@ type Period = "7d" | "30d" | "90d" | "1y";
 
 export const useAdminRevenueAnalytics = () => {
   const queryClient = useQueryClient();
+  const now = new Date();
+  const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
   const [dateRange, setDateRange] = useState<DateRange>({
-    start: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000), // 30 days ago
-    end: new Date(),
+    start: thirtyDaysAgo, // 30 days ago
+    end: now,
   });
   const [selectedPeriod, setSelectedPeriod] = useState<Period>("30d");
 

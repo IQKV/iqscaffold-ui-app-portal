@@ -23,7 +23,7 @@ export const currencySchema = z
 export const emailSchema = z.string().email("Invalid email format");
 export const phoneSchema = z
   .string()
-  .regex(/^\+?[\d\s\-\(\)]+$/, "Invalid phone format");
+  .regex(/^\+?[\d\s\-()]+$/, "Invalid phone format");
 
 // Currency amount validation
 export const currencyAmountSchema = z

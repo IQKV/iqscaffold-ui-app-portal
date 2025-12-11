@@ -33,9 +33,11 @@ interface BillingProjection {
 export const useUsageAnalytics = () => {
   const queryClient = useQueryClient();
   const currentTenantId = useCurrentTenantId();
+  const now = new Date();
+  const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
   const [dateRange, setDateRange] = useState<DateRange>({
-    start: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000), // 30 days ago
-    end: new Date(),
+    start: thirtyDaysAgo, // 30 days ago
+    end: now,
   });
   const [selectedMetrics, setSelectedMetrics] = useState<UsageMetricType[]>([
     "api_calls" as UsageMetricType,
@@ -72,21 +74,22 @@ export const useUsageAnalytics = () => {
   });
 
   // Mock usage trends data
+  const today = new Date();
   const usageTrends: UsageTrendData[] = usageAnalytics?.usageTrends || [
     {
-      date: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
+      date: new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000),
       metricType: "api_calls" as UsageMetricType,
       value: 1250,
       period: "day",
     },
     {
-      date: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000),
+      date: new Date(today.getTime() - 6 * 24 * 60 * 60 * 1000),
       metricType: "api_calls",
       value: 1380,
       period: "day",
     },
     {
-      date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
+      date: new Date(today.getTime() - 5 * 24 * 60 * 60 * 1000),
       metricType: "api_calls",
       value: 1420,
       period: "day",

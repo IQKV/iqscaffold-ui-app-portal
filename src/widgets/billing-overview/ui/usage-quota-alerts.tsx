@@ -21,8 +21,7 @@ import {
 } from "@tabler/icons-react";
 import { UsageProgressBar } from "@/shared/ui/billing";
 import { UsageUtils } from "@/shared/lib/billing-utils";
-import type { QuotaStatus } from "@/shared/types/billing";
-import { UsageMetricType } from "@/shared/types/billing";
+import { UsageMetricType, type QuotaStatus } from "@/shared/types/billing";
 
 export interface UsageQuotaAlertsProps {
   usage: QuotaStatus[];

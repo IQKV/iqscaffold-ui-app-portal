@@ -6,8 +6,12 @@
 import { PaymentProviderFactory } from "@/entities/payment-method/services/payment-provider-interface";
 import { billingApi } from "@/shared/api/billing-api";
 import { notifications } from "@mantine/notifications";
-import { PaymentProvider, PaymentMethodType } from "@/shared/types/billing";
-import type { PaymentMethod, PaymentMethodData } from "@/shared/types/billing";
+import {
+  PaymentProvider,
+  PaymentMethodType,
+  type PaymentMethod,
+  type PaymentMethodData,
+} from "@/shared/types/billing";
 
 export interface PaymentMethodCreationOptions {
   tenantId: string;
@@ -312,8 +316,8 @@ export class PaymentMethodService {
         } else {
           const currentDate = new Date();
           const expiryDate = new Date(
-            parseInt(paymentMethodData.expiryYear),
-            parseInt(paymentMethodData.expiryMonth) - 1
+            parseInt(paymentMethodData.expiryYear, 10),
+            parseInt(paymentMethodData.expiryMonth, 10) - 1
           );
 
           if (expiryDate < currentDate) {

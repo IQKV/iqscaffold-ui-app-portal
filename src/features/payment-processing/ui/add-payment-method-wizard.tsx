@@ -199,12 +199,18 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
 
   const handleSubmit = async () => {
     const validation = form.validate();
-    if (validation.hasErrors) return;
+    if (validation.hasErrors) {
+      return;
+    }
 
     if (selectedProvider === "stripe") {
-      if (!stripe || !elements) return;
+      if (!stripe || !elements) {
+        return;
+      }
       const card = elements.getElement(CardElement);
-      if (!card) return;
+      if (!card) {
+        return;
+      }
 
       const { error, paymentMethod } = await stripe.createPaymentMethod({
         type: "card",
@@ -346,7 +352,9 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
                       // Prefer data.billingToken when vaulting; fall back to data.orderID
                       const token =
                         (data as any).billingToken || (data as any).orderID;
-                      if (token) setPaypalToken(token);
+                      if (token) {
+                        setPaypalToken(token);
+                      }
                     }}
                   />
                 </Stack>

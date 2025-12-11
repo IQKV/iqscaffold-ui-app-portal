@@ -48,6 +48,7 @@ export const useSubscriptionManagement = () => {
   });
 
   // Calculate trial information
+  const now = new Date();
   const trialInfo: TrialInfo | null = subscription
     ? {
         isInTrial: subscription.status === "trialing",
@@ -55,7 +56,7 @@ export const useSubscriptionManagement = () => {
           ? Math.max(
               0,
               Math.ceil(
-                (new Date(subscription.trialEnd).getTime() - Date.now()) /
+                (new Date(subscription.trialEnd).getTime() - now.getTime()) /
                   (1000 * 60 * 60 * 24)
               )
             )

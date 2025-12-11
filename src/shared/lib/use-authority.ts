@@ -15,42 +15,43 @@ import { billingSecurityGuard } from "./security-guard";
  */
 export function useAuthorities(): Authority[] {
   const { user } = useAuth();
+  const userRoles = user?.roles;
 
   return useMemo(() => {
-    if (!user?.roles) {
+    if (!userRoles) {
       return [];
     }
 
     const authorities: Authority[] = [];
 
     // Map existing roles to billing authorities
-    if (user.roles.includes("ADMIN") || user.roles.includes("TENANT_ADMIN")) {
+    if (userRoles.includes("ADMIN") || userRoles.includes("TENANT_ADMIN")) {
       authorities.push(Authority.TENANT_ADMIN);
     }
 
     if (
-      user.roles.includes("SUPER_ADMIN") ||
-      user.roles.includes("PLATFORM_ADMIN")
+      userRoles.includes("SUPER_ADMIN") ||
+      userRoles.includes("PLATFORM_ADMIN")
     ) {
       authorities.push(Authority.PLATFORM_ADMIN);
     }
 
     if (
-      user.roles.includes("SUPPORT") ||
-      user.roles.includes("SUPPORT_AGENT")
+      userRoles.includes("SUPPORT") ||
+      userRoles.includes("SUPPORT_AGENT")
     ) {
       authorities.push(Authority.SUPPORT_AGENT);
     }
 
     if (
-      user.roles.includes("BILLING_VIEWER") ||
-      user.roles.includes("VIEWER")
+      userRoles.includes("BILLING_VIEWER") ||
+      userRoles.includes("VIEWER")
     ) {
       authorities.push(Authority.BILLING_VIEWER);
     }
 
     return authorities;
-  }, [user?.roles]);
+  }, [userRoles]);
 }
 
 /**

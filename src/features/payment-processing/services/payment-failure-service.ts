@@ -180,7 +180,6 @@ export class PaymentFailureService {
     let title: string;
     let message: string;
     let urgency: PaymentFailureNotification["urgency"];
-    let actions: NotificationAction[];
 
     if (attemptNumber === 1) {
       type = "immediate";
@@ -200,7 +199,7 @@ export class PaymentFailureService {
     }
 
     // Create actions based on resolution
-    actions = this.createNotificationActions(resolution);
+    const actions = this.createNotificationActions(resolution);
 
     return {
       type,
@@ -356,7 +355,7 @@ export class PaymentFailureService {
   ): Promise<{ success: boolean; message: string }> {
     try {
       switch (action) {
-        case "retry_payment":
+        case "retry_payment": {
           const invoice = await billingApi.getInvoice(invoiceId);
           await billingApi.retryInvoicePayment(invoiceId);
 
@@ -364,6 +363,7 @@ export class PaymentFailureService {
             success: true,
             message: "Payment retry initiated successfully.",
           };
+        }
 
         case "update_payment_method":
           return {

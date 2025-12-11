@@ -155,8 +155,8 @@ export class PaymentMethodApiClient {
       metadata: {
         last4: data.cardNumber?.slice(-4),
         brand: "visa", // Would be detected
-        expiryMonth: parseInt(data.expiryMonth || "0"),
-        expiryYear: parseInt(data.expiryYear || "0"),
+        expiryMonth: parseInt(data.expiryMonth || "0", 10),
+        expiryYear: parseInt(data.expiryYear || "0", 10),
       },
     };
   }

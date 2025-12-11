@@ -9,8 +9,11 @@ import {
 } from "@/entities/payment-method/services/payment-provider-interface";
 import { billingApi } from "@/shared/api/billing-api";
 import { notifications } from "@mantine/notifications";
-import { PaymentStatus } from "@/shared/types/billing";
-import type { PaymentAttempt, Invoice } from "@/shared/types/billing";
+import {
+  PaymentStatus,
+  type PaymentAttempt,
+  type Invoice,
+} from "@/shared/types/billing";
 
 export interface PaymentRetryOptions {
   invoiceId: string;

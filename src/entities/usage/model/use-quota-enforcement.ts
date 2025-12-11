@@ -31,8 +31,7 @@ export const useQuotaEnforcement = (tenantId: string) => {
 
   // Initialize quota monitoring
   useEffect(() => {
-    if (tenantId && !isMonitoring) {
-      setIsMonitoring(true);
+    if (tenantId) {
       fetchQuotaStatus(tenantId);
 
       // Set up periodic monitoring
@@ -42,10 +41,9 @@ export const useQuotaEnforcement = (tenantId: string) => {
 
       return () => {
         clearInterval(monitoringInterval);
-        setIsMonitoring(false);
       };
     }
-  }, [tenantId, isMonitoring, fetchQuotaStatus, monitorUsageThresholds]);
+  }, [tenantId, fetchQuotaStatus, monitorUsageThresholds]);
 
   // Real-time quota checking
   const checkQuota = useCallback(
