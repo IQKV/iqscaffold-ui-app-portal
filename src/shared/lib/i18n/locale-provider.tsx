@@ -1,29 +1,28 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { i18n } from "@lingui/core";
+import { i18n, type Messages } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { LocaleUtils } from "./locale-formatting";
-import type { Messages } from "@lingui/core";
 
-// Import locale messages - TypeScript will treat .ts files as modules
-const enMessages: Messages = require("../../../locales/en").messages;
-const esMessages: Messages = require("../../../locales/es").messages;
-const frMessages: Messages = require("../../../locales/fr").messages;
-const deMessages: Messages = require("../../../locales/de").messages;
-const jaMessages: Messages = require("../../../locales/ja").messages;
+// Dynamically load locale messages
+const localeMessageCache: Record<string, Messages> = {};
 
-// Lazy load other locale messages
+const loadLocaleFile = async (locale: string): Promise<Messages> => {
+  if (localeMessageCache[locale]) {
+    return localeMessageCache[locale];
+  }
+  
+  const module = await import(`../../../locales/${locale}.ts`);
+  localeMessageCache[locale] = module.messages;
+  return module.messages;
+};
+
 const loadLocaleMessages = async (locale: string): Promise<Messages> => {
-  switch (locale) {
-    case "es":
-      return esMessages;
-    case "fr":
-      return frMessages;
-    case "de":
-      return deMessages;
-    case "ja":
-      return jaMessages;
-    default:
-      return enMessages;
+  try {
+    return await loadLocaleFile(locale);
+  } catch (error) {
+    console.error(`Failed to load locale ${locale}:`, error);
+    // Fallback to English
+    return await loadLocaleFile("en");
   }
 };
 
@@ -76,7 +75,8 @@ export const LocaleProvider: React.FC<LocaleProviderProps> = ({
         console.error("Failed to initialize i18n:", error);
 
         // Fallback to English
-        i18n.load("en", enMessages);
+        const fallbackMessages = await loadLocaleFile("en");
+        i18n.load("en", fallbackMessages);
         i18n.activate("en");
         setLocaleState("en");
         setIsLoading(false);

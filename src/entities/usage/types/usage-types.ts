@@ -1,8 +1,8 @@
-import type {
-  UsageMetric as BaseUsageMetric,
-  QuotaStatus as BaseQuotaStatus,
+import {
+  UsageMetricType,
+  type UsageMetric as BaseUsageMetric,
+  type QuotaStatus as BaseQuotaStatus,
 } from "@/shared/types/billing";
-import { UsageMetricType } from "@/shared/types/billing";
 
 export { UsageMetricType };
 

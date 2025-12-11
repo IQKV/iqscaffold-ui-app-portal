@@ -1,10 +1,11 @@
-import type {
-  PaymentMethod as BasePaymentMethod,
-  PaymentMethodData as BasePaymentMethodData,
-  PaymentMethodMetadata,
-  BillingAddress,
+import {
+  PaymentMethodType,
+  PaymentProvider,
+  type PaymentMethod as BasePaymentMethod,
+  type PaymentMethodData as BasePaymentMethodData,
+  type PaymentMethodMetadata,
+  type BillingAddress,
 } from "@/shared/types/billing";
-import { PaymentMethodType, PaymentProvider } from "@/shared/types/billing";
 
 // Re-export base types
 export { PaymentMethodType, PaymentProvider };

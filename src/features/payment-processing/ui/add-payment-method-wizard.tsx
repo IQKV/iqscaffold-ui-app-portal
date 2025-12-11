@@ -27,10 +27,10 @@ import {
   IconInfoCircle,
 } from "@tabler/icons-react";
 import { useForm } from "@mantine/form";
-import type { PaymentMethodData } from "@/entities/payment-method/types/payment-method-types";
 import {
   PaymentMethodType,
   PaymentProvider,
+  type PaymentMethodData,
 } from "@/entities/payment-method/types/payment-method-types";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { PayPalButtons } from "@paypal/react-paypal-js";
