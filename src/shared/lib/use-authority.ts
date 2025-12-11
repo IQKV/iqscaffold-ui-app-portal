@@ -36,17 +36,11 @@ export function useAuthorities(): Authority[] {
       authorities.push(Authority.PLATFORM_ADMIN);
     }
 
-    if (
-      userRoles.includes("SUPPORT") ||
-      userRoles.includes("SUPPORT_AGENT")
-    ) {
+    if (userRoles.includes("SUPPORT") || userRoles.includes("SUPPORT_AGENT")) {
       authorities.push(Authority.SUPPORT_AGENT);
     }
 
-    if (
-      userRoles.includes("BILLING_VIEWER") ||
-      userRoles.includes("VIEWER")
-    ) {
+    if (userRoles.includes("BILLING_VIEWER") || userRoles.includes("VIEWER")) {
       authorities.push(Authority.BILLING_VIEWER);
     }
 

@@ -1,6 +1,5 @@
 import type {
   UsageMetric,
-  UsageMetricType,
   QuotaStatus,
   QuotaCheckResult,
   QuotaValidation,
@@ -9,6 +8,7 @@ import type {
   UsageProjection,
   UsageCostAnalysis,
 } from "../types/usage-types";
+import { UsageMetricType } from "../types/usage-types";
 import { UsageUtils } from "@/shared/lib/billing-utils";
 
 /**
@@ -484,13 +484,13 @@ export class UsageService {
     metricType: UsageMetricType
   ): string {
     switch (metricType) {
-      case "api_calls":
+      case UsageMetricType.API_CALLS:
         return `${amount.toLocaleString()} calls`;
-      case "storage_gb":
+      case UsageMetricType.STORAGE_GB:
         return `${amount.toFixed(2)} GB`;
-      case "email_sends":
+      case UsageMetricType.EMAIL_SENDS:
         return `${amount.toLocaleString()} emails`;
-      case "active_users":
+      case UsageMetricType.ACTIVE_USERS:
         return `${amount.toLocaleString()} users`;
       default:
         return amount.toString();
@@ -499,13 +499,13 @@ export class UsageService {
 
   static getMetricDisplayName(metricType: UsageMetricType): string {
     switch (metricType) {
-      case "api_calls":
+      case UsageMetricType.API_CALLS:
         return "API Calls";
-      case "storage_gb":
+      case UsageMetricType.STORAGE_GB:
         return "Storage";
-      case "email_sends":
+      case UsageMetricType.EMAIL_SENDS:
         return "Email Sends";
-      case "active_users":
+      case UsageMetricType.ACTIVE_USERS:
         return "Active Users";
       default:
         return metricType;
@@ -514,13 +514,13 @@ export class UsageService {
 
   static getMetricUnit(metricType: UsageMetricType): string {
     switch (metricType) {
-      case "api_calls":
+      case UsageMetricType.API_CALLS:
         return "calls";
-      case "storage_gb":
+      case UsageMetricType.STORAGE_GB:
         return "GB";
-      case "email_sends":
+      case UsageMetricType.EMAIL_SENDS:
         return "emails";
-      case "active_users":
+      case UsageMetricType.ACTIVE_USERS:
         return "users";
       default:
         return "units";
@@ -549,12 +549,12 @@ export class UsageService {
 
     // Metric-specific validations
     switch (metricType) {
-      case "storage_gb":
+      case UsageMetricType.STORAGE_GB:
         if (amount > 10000) {
           errors.push("Storage usage exceeds reasonable limits");
         }
         break;
-      case "active_users":
+      case UsageMetricType.ACTIVE_USERS:
         if (amount % 1 !== 0) {
           errors.push("Active users must be a whole number");
         }

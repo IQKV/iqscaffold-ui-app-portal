@@ -147,7 +147,8 @@ export const RecentBillingActivity: React.FC<RecentBillingActivityProps> = ({
               return (
                 <Text size="sm" mb="xs">
                   <Trans>
-                    You have {count} overdue {invoiceText} requiring immediate attention.
+                    You have {count} overdue {invoiceText} requiring immediate
+                    attention.
                   </Trans>
                 </Text>
               );

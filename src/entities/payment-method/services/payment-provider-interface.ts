@@ -212,7 +212,7 @@ export class PaymentRetryService {
     operation: () => Promise<T>,
     config: RetryConfig = DEFAULT_RETRY_CONFIG
   ): Promise<T> {
-    let lastError: Error;
+    let lastError: Error | undefined;
     let delay = config.baseDelayMs;
 
     for (let attempt = 1; attempt <= config.maxAttempts; attempt++) {
@@ -242,7 +242,9 @@ export class PaymentRetryService {
       }
     }
 
-    throw new Error(lastError?.message || "Payment operation failed after retries");
+    throw new Error(
+      lastError?.message || "Payment operation failed after retries"
+    );
   }
 
   private static isNonRetryableError(error: any): boolean {

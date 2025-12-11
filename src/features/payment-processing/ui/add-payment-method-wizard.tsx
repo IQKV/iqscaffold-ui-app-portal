@@ -27,8 +27,8 @@ import {
   IconInfoCircle,
 } from "@tabler/icons-react";
 import { useForm } from "@mantine/form";
-import type {
-  PaymentMethodData,
+import type { PaymentMethodData } from "@/entities/payment-method/types/payment-method-types";
+import {
   PaymentMethodType,
   PaymentProvider,
 } from "@/entities/payment-method/types/payment-method-types";
@@ -235,7 +235,7 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
 
       onAdd({
         ...form.values,
-        provider: "stripe",
+        provider: PaymentProvider.STRIPE,
         providerPaymentMethodId: paymentMethod.id,
         // clear raw fields as we used Elements
         cardNumber: undefined,
@@ -250,8 +250,8 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
       }
       onAdd({
         ...form.values,
-        provider: "paypal",
-        type: "bank_account", // or "card" depending on PayPal funding source
+        provider: PaymentProvider.PAYPAL,
+        type: PaymentMethodType.BANK_ACCOUNT, // or "card" depending on PayPal funding source
         providerPaymentMethodId: paypalToken,
       });
     }
@@ -348,7 +348,7 @@ export const AddPaymentMethodWizard: React.FC<AddPaymentMethodWizardProps> = ({
                   <PayPalButtons
                     style={{ layout: "vertical" }}
                     // Use advanced vault setup via onClick delegating to server if needed. For now, rely on billing token from onApprove
-                    onApprove={(data: any) => {
+                    onApprove={async (data: any) => {
                       // Prefer data.billingToken when vaulting; fall back to data.orderID
                       const token =
                         (data as any).billingToken || (data as any).orderID;

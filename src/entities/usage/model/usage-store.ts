@@ -355,7 +355,7 @@ export const useUsageStore = create<UsageStore>()(
         clearQuotaExceeded: (metricType: UsageMetricType) =>
           set((state) => {
             state.quotaExceeded = state.quotaExceeded.filter(
-              (m) => m !== metricType
+              (m: UsageMetricType) => m !== metricType
             );
           }),
 

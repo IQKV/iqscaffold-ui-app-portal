@@ -217,7 +217,8 @@ export const TrialStatusTracker: React.FC<TrialStatusTrackerProps> = ({
                 <Text size="sm">Current trial ends:</Text>
                 <Text size="sm" fw={500}>
                   {new Date(
-                    new Date().getTime() + trialInfo.daysRemaining * 24 * 60 * 60 * 1000
+                    new Date().getTime() +
+                      trialInfo.daysRemaining * 24 * 60 * 60 * 1000
                   ).toLocaleDateString()}
                 </Text>
               </Group>

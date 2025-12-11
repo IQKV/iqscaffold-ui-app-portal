@@ -11,10 +11,7 @@ import {
   SubscriptionUtils,
   BillingDateUtils,
 } from "@/shared/lib/billing-utils";
-import {
-  SubscriptionStatus,
-  type Subscription,
-} from "@/shared/types/billing";
+import { SubscriptionStatus, type Subscription } from "@/shared/types/billing";
 import classes from "./subscription-status-badge.module.css";
 
 export interface SubscriptionStatusBadgeProps {

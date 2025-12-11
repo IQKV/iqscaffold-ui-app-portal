@@ -60,7 +60,7 @@ export function App() {
   );
 
   const paypalOptions = {
-    "client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID || "",
+    clientId: import.meta.env.VITE_PAYPAL_CLIENT_ID || "",
     components: "buttons",
     intent: "authorize",
     vault: true,

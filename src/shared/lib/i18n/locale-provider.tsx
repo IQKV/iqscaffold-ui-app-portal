@@ -2,14 +2,17 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { LocaleUtils } from "./locale-formatting";
-import { messages as enMessages } from "../../../locales/en";
-import { messages as esMessages } from "../../../locales/es";
-import { messages as frMessages } from "../../../locales/fr";
-import { messages as deMessages } from "../../../locales/de";
-import { messages as jaMessages } from "../../../locales/ja";
+import type { Messages } from "@lingui/core";
+
+// Import locale messages - TypeScript will treat .ts files as modules
+const enMessages: Messages = require("../../../locales/en").messages;
+const esMessages: Messages = require("../../../locales/es").messages;
+const frMessages: Messages = require("../../../locales/fr").messages;
+const deMessages: Messages = require("../../../locales/de").messages;
+const jaMessages: Messages = require("../../../locales/ja").messages;
 
 // Lazy load other locale messages
-const loadLocaleMessages = async (locale: string) => {
+const loadLocaleMessages = async (locale: string): Promise<Messages> => {
   switch (locale) {
     case "es":
       return esMessages;

@@ -32,7 +32,7 @@ interface QuotaUtilizationHeatmapProps {
   loading?: boolean;
 }
 
-const METRIC_LABELS = {
+const METRIC_LABELS: Record<string, string> = {
   api_calls: "API Calls",
   storage_gb: "Storage",
   email_sends: "Email Sends",
@@ -190,7 +190,7 @@ export const QuotaUtilizationHeatmap: React.FC<
               <Group justify="space-between" mb="xs">
                 <Group gap="sm" align="center">
                   <Text size="sm" fw={500}>
-                    {METRIC_LABELS[data.metricType]}
+                    {METRIC_LABELS[data.metricType as string]}
                   </Text>
                   <ThemeIcon
                     variant="light"
@@ -232,11 +232,11 @@ export const QuotaUtilizationHeatmap: React.FC<
             {Object.keys(METRIC_LABELS).map((metric) => (
               <Box key={metric}>
                 <Text size="xs" c="dimmed" mb="xs">
-                  {METRIC_LABELS[metric as UsageMetricType]}
+                  {METRIC_LABELS[metric]}
                 </Text>
                 <Group gap="xs">
                   {weeklyData.map((day) => {
-                    const value = day[metric as UsageMetricType];
+                    const value = (day as any)[metric];
                     return (
                       <Box
                         key={`${metric}-${day.day}`}
@@ -333,7 +333,8 @@ export const QuotaUtilizationHeatmap: React.FC<
               .filter((data) => data.utilization >= 75)
               .map((data) => (
                 <Text key={data.metricType} size="xs" c="dimmed">
-                  • Consider upgrading {METRIC_LABELS[data.metricType]} limit
+                  • Consider upgrading{" "}
+                  {METRIC_LABELS[data.metricType as string]} limit
                 </Text>
               ))}
             {quotaUtilization.every((data) => data.utilization < 75) && (

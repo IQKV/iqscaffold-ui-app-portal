@@ -40,7 +40,7 @@ msgstr "About This Template"
 
 #: src/features/users/components/users-data-grid.tsx:169
 #: src/pages/examples.tsx:133
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:194
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:201
 msgid "Actions"
 msgstr "Actions"
 
@@ -80,7 +80,7 @@ msgstr "Admin"
 
 #: src/shared/lib/i18n/billing-translations.ts:95
 #: src/shared/ui/billing/localized-billing-form/localized-billing-form.tsx:298
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:188
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:195
 msgid "Amount"
 msgstr "Amount"
 
@@ -355,7 +355,7 @@ msgstr "Data Table Example"
 msgid "Data Tables"
 msgstr "Data Tables"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:185
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:192
 msgid "Date"
 msgstr "Date"
 
@@ -410,7 +410,7 @@ msgstr "Downgrade to {planName}"
 msgid "Download Invoice"
 msgstr "Download Invoice"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:261
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:268
 msgid "Download PDF"
 msgstr "Download PDF"
 
@@ -422,7 +422,7 @@ msgstr "Draft"
 msgid "Due Date"
 msgstr "Due Date"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:212
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:219
 msgid "Due:"
 msgstr "Due:"
 
@@ -855,7 +855,7 @@ msgstr "Invalid phone number"
 msgid "Invalid URL"
 msgstr "Invalid URL"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:182
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:189
 msgid "Invoice"
 msgstr "Invoice"
 
@@ -888,7 +888,7 @@ msgstr "Invoice Paid"
 msgid "Invoice paid successfully"
 msgstr "Invoice paid successfully"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:174
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:181
 msgid "Invoices and payment history will appear here"
 msgstr "Invoices and payment history will appear here"
 
@@ -911,7 +911,7 @@ msgstr "Last Name"
 msgid "Last name must be at least 2 characters"
 msgstr "Last name must be at least 2 characters"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:118
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:121
 msgid "Latest invoices and payment history"
 msgstr "Latest invoices and payment history"
 
@@ -1074,7 +1074,7 @@ msgstr "New password must be different from current password"
 msgid "Next"
 msgstr "Next"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:310
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:322
 msgid "Next billing:"
 msgstr "Next billing:"
 
@@ -1082,7 +1082,7 @@ msgstr "Next billing:"
 msgid "Next Payment"
 msgstr "Next Payment"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:171
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:178
 msgid "No billing activity yet"
 msgstr "No billing activity yet"
 
@@ -1120,11 +1120,11 @@ msgid "Overage"
 msgstr "Overage"
 
 #: src/shared/lib/i18n/billing-translations.ts:84
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:242
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:249
 msgid "Overdue"
 msgstr "Overdue"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:139
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:142
 msgid "Overdue Invoices"
 msgstr "Overdue Invoices"
 
@@ -1432,7 +1432,7 @@ msgstr "Reactivate Subscription"
 msgid "Ready to start building? Check out the documentation and source code."
 msgstr "Ready to start building? Check out the documentation and source code."
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:115
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:118
 msgid "Recent Billing Activity"
 msgstr "Recent Billing Activity"
 
@@ -1468,7 +1468,7 @@ msgstr "Response delay (ms)"
 msgid "Retry"
 msgstr "Retry"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:273
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:280
 msgid "Retry payment"
 msgstr "Retry payment"
 
@@ -1574,15 +1574,17 @@ msgstr "Server is temporarily unavailable. Please try again"
 msgid "Set as Default"
 msgstr "Set as Default"
 
-#. placeholder {0}: invoices.length
-#. placeholder {1}: invoices.length > 1 ? "invoices" : "invoice"
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:299
-msgid "Showing {0} recent {1}"
-msgstr "Showing {0} recent {1}"
+#~ msgid "Showing {0} recent {1}"
+#~ msgstr "Showing {0} recent {1}"
 
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:281
 #~ msgid "Showing {0} recent invoice{1}"
 #~ msgstr "Showing {0} recent invoice{1}"
+
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:310
+msgid "Showing {count} recent {invoiceText}"
+msgstr "Showing {count} recent {invoiceText}"
 
 #: src/shared/ui/msw-dev-tools.tsx:108
 msgid "Simulate network latency"
@@ -1619,7 +1621,7 @@ msgstr "State/Province"
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:72
 #: src/features/users/components/users-data-grid.tsx:138
 #: src/pages/examples.tsx:124
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:191
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:198
 msgid "Status"
 msgstr "Status"
 
@@ -1969,7 +1971,7 @@ msgstr "Verified"
 msgid "Very Weak"
 msgstr "Very Weak"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:130
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:133
 msgid "View All Invoices"
 msgstr "View All Invoices"
 
@@ -1977,7 +1979,7 @@ msgstr "View All Invoices"
 msgid "View Details"
 msgstr "View Details"
 
-#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:250
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:257
 msgid "View invoice details"
 msgstr "View invoice details"
 
@@ -2038,15 +2040,17 @@ msgstr "You are approaching your usage limit"
 msgid "You are in the grace period for {metricName}. Please upgrade soon."
 msgstr "You are in the grace period for {metricName}. Please upgrade soon."
 
-#. placeholder {0}: overdueInvoices.length
-#. placeholder {1}: overdueInvoices.length > 1 ? "invoices" : "invoice"
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:142
-msgid "You have {0} overdue {1} requiring immediate attention."
-msgstr "You have {0} overdue {1} requiring immediate attention."
+#~ msgid "You have {0} overdue {1} requiring immediate attention."
+#~ msgstr "You have {0} overdue {1} requiring immediate attention."
 
 #: src/widgets/billing-overview/ui/recent-billing-activity.tsx:139
 #~ msgid "You have {0} overdue invoice{1} requiring immediate attention."
 #~ msgstr "You have {0} overdue invoice{1} requiring immediate attention."
+
+#: src/widgets/billing-overview/ui/recent-billing-activity.tsx:149
+msgid "You have {count} overdue {invoiceText} requiring immediate attention."
+msgstr "You have {count} overdue {invoiceText} requiring immediate attention."
 
 #: src/shared/lib/use-auth-api.ts:67
 msgid "You have been logged out from all devices"
