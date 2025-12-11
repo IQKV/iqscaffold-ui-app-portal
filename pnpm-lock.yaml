@@ -195,8 +195,8 @@ importers:
         specifier: ^5.5.0
         version: 5.5.0(react@19.2.0)
       react-infinite-scroll-component:
-        specifier: ^6.1.0
-        version: 6.1.0(react@19.2.0)
+        specifier: ^6.1.1
+        version: 6.1.1(react@19.2.0)
       react-lottie:
         specifier: ^1.2.10
         version: 1.2.10(react@19.2.0)
@@ -6279,8 +6279,8 @@ packages:
     peerDependencies:
       react: '*'
 
-  react-infinite-scroll-component@6.1.0:
-    resolution: {integrity: sha512-SQu5nCqy8DxQWpnUVLx7V7b7LcA37aM7tvoWjTLZp1dk6EJibM5/4EJKzOnl07/BsM1Y40sKLuqjCwwH/xV0TQ==}
+  react-infinite-scroll-component@6.1.1:
+    resolution: {integrity: sha512-R8YoOyiNDynSWmfVme5LHslsKrP+/xcRUWR2ies8UgUab9dtyw5ECnMCVPPmnmjjF4MWQmfVdRwRWcWaDgeyMA==}
     peerDependencies:
       react: '>=16.0.0'
 
@@ -14066,7 +14066,7 @@ snapshots:
     dependencies:
       react: 19.2.0
 
-  react-infinite-scroll-component@6.1.0(react@19.2.0):
+  react-infinite-scroll-component@6.1.1(react@19.2.0):
     dependencies:
       react: 19.2.0
       throttle-debounce: 2.3.0
