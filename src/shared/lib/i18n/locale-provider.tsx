@@ -10,7 +10,7 @@ const loadLocaleFile = async (locale: string): Promise<Messages> => {
   if (localeMessageCache[locale]) {
     return localeMessageCache[locale];
   }
-  
+
   const module = await import(`../../../locales/${locale}.ts`);
   localeMessageCache[locale] = module.messages;
   return module.messages;
