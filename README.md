@@ -119,7 +119,7 @@ src/
 > #### Install Prerequisites:
 >
 > - [Node.js](https://nodejs.org/) >= 22.0.0 (LTS)
-> - [pnpm](https://pnpm.io/installation) >= 10.23.0
+> - [pnpm](https://pnpm.io/installation) >= 10.27.0
 > - [Git](https://git-scm.com/)
 > - [Docker](https://www.docker.com/get-started/) (optional, for local services)
 > - [Docker Compose](https://docs.docker.com/compose/) (optional)
