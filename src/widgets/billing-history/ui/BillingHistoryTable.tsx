@@ -7,6 +7,7 @@ import {
   Payment,
 } from "@/entities/billing";
 import { Stack, Text, Title, Group, ActionIcon, Tooltip } from "@mantine/core";
+import { modals } from "@mantine/modals";
 import { IconRotate2 } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
 import dayjs from "dayjs";
@@ -25,24 +26,32 @@ export const BillingHistoryTable = () => {
   const queryClient = useQueryClient();
   const refundMutation = useRefundPayment();
 
-  const handleRefund = async (id: string) => {
-    if (!window.confirm(t`Are you sure you want to refund this payment?`)) {
-      return;
-    }
-
-    try {
-      await refundMutation.mutateAsync(id);
-      notificationService.success({
-        title: t`Refund Initiated`,
-        message: t`The payment is being refunded.`,
-      });
-      queryClient.invalidateQueries({ queryKey: billingKeys.payments() });
-    } catch (error) {
-      notificationService.error({
-        title: t`Refund Failed`,
-        message: t`Could not process refund. Please try again.`,
-      });
-    }
+  const handleRefund = (id: string) => {
+    modals.openConfirmModal({
+      title: t`Confirm Refund`,
+      children: (
+        <Text size="sm">
+          {t`Are you sure you want to refund this payment? This action cannot be undone.`}
+        </Text>
+      ),
+      labels: { confirm: t`Refund`, cancel: t`Cancel` },
+      confirmProps: { color: "red" },
+      onConfirm: async () => {
+        try {
+          await refundMutation.mutateAsync(id);
+          notificationService.success({
+            title: t`Refund Initiated`,
+            message: t`The payment is being refunded.`,
+          });
+          queryClient.invalidateQueries({ queryKey: billingKeys.payments() });
+        } catch (error) {
+          notificationService.error({
+            title: t`Refund Failed`,
+            message: t`Could not process refund. Please try again.`,
+          });
+        }
+      },
+    });
   };
 
   return (

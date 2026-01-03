@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useSearch } from "@tanstack/react-router";
 import {
   Container,
   Paper,
@@ -11,7 +11,6 @@ import {
 import { AuthGuard } from "@/processes/auth";
 import { StripePaymentWidget } from "@/widgets/stripe-payment-widget/ui/StripePaymentWidget";
 import { t } from "@lingui/macro";
-import { useSearch } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/checkout")({
   component: CheckoutPage,
