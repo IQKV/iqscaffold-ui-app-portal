@@ -3,6 +3,7 @@ import { Container, Stack, Title, Grid, Skeleton } from "@mantine/core";
 import { AuthGuard, AdminGuard } from "@/processes/auth";
 import { BillingHistoryTable } from "@/widgets/billing-history/ui/BillingHistoryTable";
 import { MerchantStatusCard } from "@/widgets/merchant-status-card/ui/MerchantStatusCard";
+import { usePayments, useMerchantStatus } from "@/entities/billing";
 import { t } from "@lingui/macro";
 
 export const Route = createFileRoute("/billing")({
@@ -10,6 +11,14 @@ export const Route = createFileRoute("/billing")({
 });
 
 function BillingPage() {
+  const { data: merchantStatus, isLoading: isStatusLoading } = useMerchantStatus();
+
+  const onboardingStatus = !merchantStatus
+    ? "NONE"
+    : (merchantStatus.chargesEnabled && merchantStatus.payoutsEnabled)
+      ? "COMPLETED"
+      : "PENDING";
+
   return (
     <AuthGuard>
       <Container size="xl" py="xl" data-testid="page-billing">
@@ -19,10 +28,14 @@ function BillingPage() {
           <Grid>
             <Grid.Col span={{ base: 12, md: 4 }}>
               <AdminGuard>
-                <MerchantStatusCard
-                  isConfigured={false}
-                  onboardingStatus="PENDING"
-                />
+                {isStatusLoading ? (
+                  <Skeleton height={200} radius="md" />
+                ) : (
+                  <MerchantStatusCard
+                    isConfigured={!!merchantStatus}
+                    onboardingStatus={onboardingStatus}
+                  />
+                )}
               </AdminGuard>
             </Grid.Col>
 

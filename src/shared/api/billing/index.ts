@@ -40,4 +40,22 @@ export const billingApi = {
       method: "POST",
       data: request,
     }),
+
+  /**
+   * Refund a payment
+   */
+  refundPayment: (id: string) =>
+    apiRequest<void>({
+      url: `/api/v1/billing/payments/${id}/refund`,
+      method: "POST",
+    }),
+
+  /**
+   * Get merchant onboarding status
+   */
+  getMerchantStatus: () =>
+    apiRequest<Types.MerchantStatus>({
+      url: "/api/v1/admin/billing/merchants/status",
+      method: "GET",
+    }),
 };
