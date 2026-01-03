@@ -30,7 +30,7 @@ msgstr "{userName} deleted successfully"
 msgid "%s | IQ Scaffold Platform"
 msgstr "%s | IQ Scaffold Platform"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:32
+#: src/widgets/sidebar/ui/sidebar.tsx:33
 msgid "About"
 msgstr "About"
 
@@ -42,6 +42,10 @@ msgstr "About This Template"
 #: src/pages/examples.tsx:133
 msgid "Actions"
 msgstr "Actions"
+
+#: src/widgets/merchant-status-card/ui/MerchantStatusCard.tsx:22
+msgid "Active"
+msgstr "Active"
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:80
 msgid "Active Sessions"
@@ -59,6 +63,20 @@ msgstr "Add User"
 #: src/features/users/components/user-form-modal.tsx:43
 msgid "Admin"
 msgstr "Admin"
+
+#: src/widgets/billing-history/ui/BillingHistoryTable.tsx:46
+msgid "Amount"
+msgstr "Amount"
+
+#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:61
+#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:62
+msgid "An error occurred"
+msgstr "An error occurred"
+
+#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:64
+#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:65
+msgid "An unexpected error occurred."
+msgstr "An unexpected error occurred."
 
 #: src/pages/about.tsx:93
 msgid "Architecture"
@@ -81,6 +99,14 @@ msgstr "Are you sure you want to proceed?"
 #: src/features/users/components/user-form-modal.tsx:27
 msgid "At least one role is required"
 msgstr "At least one role is required"
+
+#: src/widgets/sidebar/ui/sidebar.tsx:60
+msgid "Billing"
+msgstr "Billing"
+
+#: src/pages/billing.tsx:17
+msgid "Billing & Payments"
+msgstr "Billing & Payments"
 
 #: src/pages/about.tsx:100
 msgid "Built following Feature-Sliced Design methodology for maintainable and scalable frontend architecture."
@@ -115,6 +141,10 @@ msgstr "Check your internet connection and try again"
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:42
 msgid "Checking email status..."
 msgstr "Checking email status..."
+
+#: src/pages/checkout.tsx:41
+msgid "Checkout"
+msgstr "Checkout"
 
 #: src/features/sample-form/ui/sample-form-feature.tsx:66
 #~ msgid "Click the plus button to open a modal with a sample form using Mantine components. This demonstrates Feature-Sliced Design architecture."
@@ -152,9 +182,17 @@ msgstr "Confirm your new password"
 msgid "Confirmation modals, notifications, loading states, and error boundaries."
 msgstr "Confirmation modals, notifications, loading states, and error boundaries."
 
+#: src/features/merchant-onboarding/ui/StripeConnectButton.tsx:49
+msgid "Connect with Stripe"
+msgstr "Connect with Stripe"
+
 #: src/shared/ui/loading-state/loading-state.tsx:202
 msgid "Connection Issue"
 msgstr "Connection Issue"
+
+#: src/features/merchant-onboarding/ui/StripeConnectButton.tsx:33
+msgid "Could not initiate Stripe onboarding. Please try again later."
+msgstr "Could not initiate Stripe onboarding. Please try again later."
 
 #: src/features/sample-form/ui/sample-form-feature.tsx:43
 #~ msgid "Could not submit the form"
@@ -190,7 +228,7 @@ msgid "Dark mode"
 msgstr "Dark mode"
 
 #: src/features/dashboard/ui/dashboard-feature.tsx:15
-#: src/widgets/sidebar/ui/sidebar.tsx:59
+#: src/widgets/sidebar/ui/sidebar.tsx:69
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -201,6 +239,10 @@ msgstr "Data Table Example"
 #: src/pages/examples.tsx:231
 msgid "Data Tables"
 msgstr "Data Tables"
+
+#: src/widgets/billing-history/ui/BillingHistoryTable.tsx:41
+msgid "Date"
+msgstr "Date"
 
 #: src/features/users/components/users-data-grid.tsx:61
 #: src/pages/examples.tsx:49
@@ -342,7 +384,7 @@ msgstr "Error notification!"
 msgid "ESLint, Prettier, and automated quality checks"
 msgstr "ESLint, Prettier, and automated quality checks"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:50
+#: src/widgets/sidebar/ui/sidebar.tsx:51
 msgid "Examples"
 msgstr "Examples"
 
@@ -466,7 +508,7 @@ msgstr "Good"
 msgid "Growth"
 msgstr "Growth"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:23
+#: src/widgets/sidebar/ui/sidebar.tsx:24
 msgid "Home"
 msgstr "Home"
 
@@ -489,6 +531,10 @@ msgstr "Interactive"
 #: src/pages/examples.tsx:279
 msgid "Interactive data table with sorting, actions, and custom rendering"
 msgstr "Interactive data table with sorting, actions, and custom rendering"
+
+#: src/pages/checkout.tsx:27
+msgid "Invalid Checkout"
+msgstr "Invalid Checkout"
 
 #: src/entities/form/model/validation-rules.ts:13
 #: src/features/users/components/user-form-modal.tsx:20
@@ -571,6 +617,10 @@ msgstr "Manage your account security and active sessions."
 msgid "Mantine UI:"
 msgstr "Mantine UI:"
 
+#: src/widgets/merchant-status-card/ui/MerchantStatusCard.tsx:17
+msgid "Merchant Account"
+msgstr "Merchant Account"
+
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:116
 msgid "Min 8 characters with uppercase, lowercase, number, and special character"
 msgstr "Min 8 characters with uppercase, lowercase, number, and special character"
@@ -607,7 +657,7 @@ msgstr "Must contain only letters and numbers"
 #~ msgid "Name"
 #~ msgstr "Name"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:17
+#: src/widgets/sidebar/ui/sidebar.tsx:18
 msgid "Navigation"
 msgstr "Navigation"
 
@@ -619,6 +669,10 @@ msgstr "New Password"
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:42
 msgid "New password must be different from current password"
 msgstr "New password must be different from current password"
+
+#: src/widgets/billing-history/ui/BillingHistoryTable.tsx:55
+msgid "No payments found"
+msgstr "No payments found"
 
 #: src/features/users/components/users-data-grid.tsx:257
 #: src/pages/examples.tsx:296
@@ -632,6 +686,14 @@ msgstr "Not Verified"
 #: src/pages/examples.tsx:308
 msgid "Notification Examples"
 msgstr "Notification Examples"
+
+#: src/features/merchant-onboarding/ui/StripeConnectButton.tsx:32
+msgid "Onboarding Failed"
+msgstr "Onboarding Failed"
+
+#: src/widgets/merchant-status-card/ui/MerchantStatusCard.tsx:41
+msgid "Open Stripe Dashboard"
+msgstr "Open Stripe Dashboard"
 
 #: src/pages/about.tsx:106
 msgid "Organized by business features rather than technical layers"
@@ -705,6 +767,26 @@ msgstr "Password strength"
 msgid "Passwords do not match"
 msgstr "Passwords do not match"
 
+#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:91
+msgid "Pay now"
+msgstr "Pay now"
+
+#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:74
+msgid "Payment Details"
+msgstr "Payment Details"
+
+#: src/widgets/billing-history/ui/BillingHistoryTable.tsx:18
+msgid "Payment History"
+msgstr "Payment History"
+
+#: src/widgets/billing-history/ui/BillingHistoryTable.tsx:36
+msgid "Payment ID"
+msgstr "Payment ID"
+
+#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:30
+msgid "Payment succeeded!"
+msgstr "Payment succeeded!"
+
 #: src/shared/lib/use-auth-api.ts:150
 msgid "Please check your email for the password reset link"
 msgstr "Please check your email for the password reset link"
@@ -730,9 +812,17 @@ msgstr "React 19:"
 msgid "Ready to start building? Check out the documentation and source code."
 msgstr "Ready to start building? Check out the documentation and source code."
 
+#: src/features/merchant-onboarding/ui/StripeConnectButton.tsx:25
+msgid "Redirecting"
+msgstr "Redirecting"
+
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:91
 msgid "Registered"
 msgstr "Registered"
+
+#: src/pages/checkout.tsx:28
+msgid "Required payment information is missing."
+msgstr "Required payment information is missing."
 
 #: src/shared/lib/use-auth-api.ts:149
 msgid "Reset Link Sent"
@@ -808,9 +898,17 @@ msgstr "Select user roles"
 msgid "Server is temporarily unavailable. Please try again"
 msgstr "Server is temporarily unavailable. Please try again"
 
+#: src/widgets/merchant-status-card/ui/MerchantStatusCard.tsx:22
+msgid "Setup Required"
+msgstr "Setup Required"
+
 #: src/shared/ui/msw-dev-tools.tsx:108
 msgid "Simulate network latency"
 msgstr "Simulate network latency"
+
+#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:40
+msgid "Something went wrong."
+msgstr "Something went wrong."
 
 #: src/shared/ui/loading-state/loading-state.tsx:191
 msgid "Something went wrong. Please try again"
@@ -827,6 +925,7 @@ msgstr "Sorting by {key} in {direction} order"
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:72
 #: src/features/users/components/users-data-grid.tsx:138
 #: src/pages/examples.tsx:124
+#: src/widgets/billing-history/ui/BillingHistoryTable.tsx:51
 msgid "Status"
 msgstr "Status"
 
@@ -921,6 +1020,10 @@ msgstr "This template is built with cutting-edge technologies for optimal develo
 msgid "This will log you out from all devices where you're currently signed in, including this device."
 msgstr "This will log you out from all devices where you're currently signed in, including this device."
 
+#: src/widgets/merchant-status-card/ui/MerchantStatusCard.tsx:29
+msgid "To start receiving payments from your customers, you need to connect your Stripe account."
+msgstr "To start receiving payments from your customers, you need to connect your Stripe account."
+
 #: src/shared/ui/msw-dev-tools.tsx:63
 msgid "Toggle MSW settings"
 msgstr "Toggle MSW settings"
@@ -1001,7 +1104,7 @@ msgid "User deleted successfully"
 msgstr "User deleted successfully"
 
 #: src/features/users/components/users-data-grid.tsx:226
-#: src/widgets/sidebar/ui/sidebar.tsx:41
+#: src/widgets/sidebar/ui/sidebar.tsx:42
 msgid "User Management"
 msgstr "User Management"
 
@@ -1079,6 +1182,10 @@ msgstr "Warning notification!"
 msgid "Weak"
 msgstr "Weak"
 
+#: src/features/merchant-onboarding/ui/StripeConnectButton.tsx:26
+msgid "You are being redirected to Stripe to complete your setup."
+msgstr "You are being redirected to Stripe to complete your setup."
+
 #: src/shared/lib/use-auth-api.ts:67
 msgid "You have been logged out from all devices"
 msgstr "You have been logged out from all devices"
@@ -1098,3 +1205,15 @@ msgstr "Your password has been successfully changed"
 #: src/shared/lib/use-auth-api.ts:179
 msgid "Your password has been successfully reset"
 msgstr "Your password has been successfully reset"
+
+#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:34
+msgid "Your payment is processing."
+msgstr "Your payment is processing."
+
+#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:37
+msgid "Your payment was not successful, please try again."
+msgstr "Your payment was not successful, please try again."
+
+#: src/widgets/merchant-status-card/ui/MerchantStatusCard.tsx:28
+msgid "Your Stripe Connect account is fully configured. You can now receive payments."
+msgstr "Your Stripe Connect account is fully configured. You can now receive payments."

@@ -14,6 +14,8 @@ import { Route as UserPreferencesRouteImport } from "./pages/user-preferences"
 import { Route as PreferencesDemoRouteImport } from "./pages/preferences-demo"
 import { Route as ExamplesRouteImport } from "./pages/examples"
 import { Route as DashboardRouteImport } from "./pages/dashboard"
+import { Route as CheckoutRouteImport } from "./pages/checkout"
+import { Route as BillingRouteImport } from "./pages/billing"
 import { Route as AboutRouteImport } from "./pages/about"
 import { Route as R404RouteImport } from "./pages/404"
 import { Route as IndexRouteImport } from "./pages/index"
@@ -43,6 +45,16 @@ const DashboardRoute = DashboardRouteImport.update({
   path: "/dashboard",
   getParentRoute: () => rootRouteImport,
 } as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: "/checkout",
+  path: "/checkout",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BillingRoute = BillingRouteImport.update({
+  id: "/billing",
+  path: "/billing",
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: "/about",
   path: "/about",
@@ -63,6 +75,8 @@ export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
   "/404": typeof R404Route
   "/about": typeof AboutRoute
+  "/billing": typeof BillingRoute
+  "/checkout": typeof CheckoutRoute
   "/dashboard": typeof DashboardRoute
   "/examples": typeof ExamplesRoute
   "/preferences-demo": typeof PreferencesDemoRoute
@@ -73,6 +87,8 @@ export interface FileRoutesByTo {
   "/": typeof IndexRoute
   "/404": typeof R404Route
   "/about": typeof AboutRoute
+  "/billing": typeof BillingRoute
+  "/checkout": typeof CheckoutRoute
   "/dashboard": typeof DashboardRoute
   "/examples": typeof ExamplesRoute
   "/preferences-demo": typeof PreferencesDemoRoute
@@ -84,6 +100,8 @@ export interface FileRoutesById {
   "/": typeof IndexRoute
   "/404": typeof R404Route
   "/about": typeof AboutRoute
+  "/billing": typeof BillingRoute
+  "/checkout": typeof CheckoutRoute
   "/dashboard": typeof DashboardRoute
   "/examples": typeof ExamplesRoute
   "/preferences-demo": typeof PreferencesDemoRoute
@@ -96,6 +114,8 @@ export interface FileRouteTypes {
     | "/"
     | "/404"
     | "/about"
+    | "/billing"
+    | "/checkout"
     | "/dashboard"
     | "/examples"
     | "/preferences-demo"
@@ -106,6 +126,8 @@ export interface FileRouteTypes {
     | "/"
     | "/404"
     | "/about"
+    | "/billing"
+    | "/checkout"
     | "/dashboard"
     | "/examples"
     | "/preferences-demo"
@@ -116,6 +138,8 @@ export interface FileRouteTypes {
     | "/"
     | "/404"
     | "/about"
+    | "/billing"
+    | "/checkout"
     | "/dashboard"
     | "/examples"
     | "/preferences-demo"
@@ -127,6 +151,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
   AboutRoute: typeof AboutRoute
+  BillingRoute: typeof BillingRoute
+  CheckoutRoute: typeof CheckoutRoute
   DashboardRoute: typeof DashboardRoute
   ExamplesRoute: typeof ExamplesRoute
   PreferencesDemoRoute: typeof PreferencesDemoRoute
@@ -171,6 +197,20 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    "/checkout": {
+      id: "/checkout"
+      path: "/checkout"
+      fullPath: "/checkout"
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/billing": {
+      id: "/billing"
+      path: "/billing"
+      fullPath: "/billing"
+      preLoaderRoute: typeof BillingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     "/about": {
       id: "/about"
       path: "/about"
@@ -199,6 +239,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R404Route: R404Route,
   AboutRoute: AboutRoute,
+  BillingRoute: BillingRoute,
+  CheckoutRoute: CheckoutRoute,
   DashboardRoute: DashboardRoute,
   ExamplesRoute: ExamplesRoute,
   PreferencesDemoRoute: PreferencesDemoRoute,
