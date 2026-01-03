@@ -9,7 +9,7 @@ import {
   Alert,
 } from "@mantine/core";
 import { AuthGuard } from "@/processes/auth";
-import { StripePaymentWidget } from "@/widgets/stripe-payment-widget/ui/StripePaymentWidget";
+import { StripePaymentWidget } from "@/widgets/stripe-payment-widget";
 import { t } from "@lingui/macro";
 
 export const Route = createFileRoute("/checkout")({

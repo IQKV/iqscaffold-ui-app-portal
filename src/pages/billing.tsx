@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Container, Stack, Title, Grid, Skeleton } from "@mantine/core";
 import { AuthGuard, AdminGuard } from "@/processes/auth";
-import { BillingHistoryTable } from "@/widgets/billing-history/ui/BillingHistoryTable";
-import { MerchantStatusCard } from "@/widgets/merchant-status-card/ui/MerchantStatusCard";
+import { BillingHistoryTable } from "@/widgets/billing-history";
+import { MerchantStatusCard } from "@/widgets/merchant-status-card";
 import { usePayments, useMerchantStatus } from "@/entities/billing";
 import { t } from "@lingui/macro";
 
