@@ -11,11 +11,12 @@ export const Route = createFileRoute("/billing")({
 });
 
 function BillingPage() {
-  const { data: merchantStatus, isLoading: isStatusLoading } = useMerchantStatus();
+  const { data: merchantStatus, isLoading: isStatusLoading } =
+    useMerchantStatus();
 
   const onboardingStatus = !merchantStatus
     ? "NONE"
-    : (merchantStatus.chargesEnabled && merchantStatus.payoutsEnabled)
+    : merchantStatus.chargesEnabled && merchantStatus.payoutsEnabled
       ? "COMPLETED"
       : "PENDING";
 
