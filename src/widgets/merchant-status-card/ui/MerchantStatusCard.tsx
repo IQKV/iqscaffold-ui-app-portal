@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Text, Title, Stack, Group, Badge, Anchor } from "@mantine/core";
-import { StripeConnectButton } from "@/features/merchant-onboarding/ui/StripeConnectButton";
+import { StripeConnectButton } from "@/features/merchant-onboarding";
 import { t } from "@lingui/macro";
 import {
   IconAlertCircle,

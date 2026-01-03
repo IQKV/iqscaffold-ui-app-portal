@@ -1,6 +1,6 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { getStripe } from "@/shared/lib/stripe";
-import { StripeCheckoutForm } from "@/features/payment-checkout/ui/StripeCheckoutForm";
+import { StripeCheckoutForm } from "@/features/payment-checkout";
 import { Skeleton, useMantineColorScheme } from "@mantine/core";
 import { useEffect, useState } from "react";
 import type { Stripe } from "@stripe/stripe-js";
