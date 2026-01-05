@@ -12,6 +12,8 @@ An application portal that demonstrates:
 - **Email Verification** - Email status checking and verification workflow
 - **Profile Management** - User profile and account settings
 - **Multi-Language Support** - Internationalization with Lingui
+- **Billing & Payments** - Stripe integration for modern payment processing
+- **Merchant Ecosystem** - Stripe Connect onboarding for marketplace/multi-tenant sellers
 - **SaaS Frontend Patterns** - Patterns for building multi-tenant SaaS frontends
 
 Reference implementation for building microservices-based SaaS applications, demonstrating frontend architecture, authentication integration, and common application patterns.
@@ -85,6 +87,14 @@ Starting point for microservices frontend development, demonstrating scalable Sa
 - Responsive grid layout
 - Icon-based visual indicators
 - Percentage change tracking
+
+### 💳 Billing & Payments
+
+- Theme-aware Stripe Elements integration
+- Flexible checkout supporting 20+ payment methods
+- Merchant onboarding with Stripe Connect status tracking
+- Paginated billing history with administrative refunds
+- Locale-aware currency formatting at scale
 
 ### 🌍 Internationalization
 
@@ -213,6 +223,23 @@ src/
 - Email verification status display
 - Role-based access control enforcement
 
+### 💳 Billing & Payments
+
+- Stripe checkout flow with client-side validation
+- Modern PaymentElement integration for various methods
+- Theme-aware appearance (Light/Dark mode sync)
+- Paginated billing history with status visualization
+- Administrative payment refund workflow
+- Multi-currency support with locale intelligence
+
+### 🏦 Merchant Onboarding
+
+- Stripe Connect account link generation
+- Automated redirect to onboarding portal
+- Onboarding completeness status tracking
+- Direct access to Stripe Dashboard for configured accounts
+- Environment-specific return/refresh URL handling
+
 ### Security Management
 
 - Password change with validation
@@ -279,6 +306,14 @@ The application integrates with the User Service API:
 - `GET /api/v1/auth/email/status` - Get email verification status
 - `POST /api/v1/auth/email/resend` - Resend verification email
 
+**Billing & Merchant Endpoints:**
+
+- `POST /api/v1/billing/payments/intent` - Create Stripe Payment Intent
+- `GET /api/v1/billing/payments` - List payments with pagination
+- `POST /api/v1/billing/payments/{id}/refund` - Refund payment (Admin only)
+- `POST /api/v1/admin/billing/merchants/onboard` - Initiate Stripe Connect onboarding
+- `GET /api/v1/admin/billing/merchants/status` - Get merchant onboarding status
+
 ### Configuration
 
 Environment variables for API integration:
@@ -289,6 +324,7 @@ Environment variables for API integration:
 - `VITE_AUTH_REDIRECT_AFTER_LOGIN` - Post-login redirect URL (default: /dashboard)
 - `VITE_AUTH_REDIRECT_AFTER_LOGOUT` - Post-logout redirect URL (default: /)
 - `VITE_ENABLE_MSW` - Enable Mock Service Worker for development
+- `VITE_STRIPE_PUBLIC_KEY` - Stripe publishable key for frontend elements
 - `VITE_LOG_LEVEL` - Console logging verbosity (silent/info/debug)
 
 ## Learning Points
@@ -317,7 +353,7 @@ Starting point for building microservices frontends for SaaS applications:
 - **Multi-Tenant Architecture** - Tenant context propagation and isolation patterns
 - **Authentication Integration** - Seamless integration with centralized auth services
 - **Role-Based Access Control** - Admin, user, and custom role management
-- **Subscription-Ready** - Foundation for adding subscription and billing features
+- **Billing & Payments** - Production-ready Stripe integration with Connect support
 - **Scalable Architecture** - Feature-Sliced Design for growing codebases
 
 ### Reusable Patterns for Microservices

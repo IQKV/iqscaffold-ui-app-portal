@@ -69,6 +69,12 @@ Modern React Application with Feature-Sliced Design Architecture
 - 🐳 **Docker Compose** - Local development environment setup
 - 📊 **SonarQube** - Code quality and security analysis
 
+### 💳 **Billing & Payments**
+
+- 💳 **Stripe Integration** - Modern payment processing with Stripe Elements and Connect
+- 🏦 **Merchant Onboarding** - Automated Stripe Connect onboarding flow for sellers
+- 📜 **Billing History** - Paginated transaction history with status tracking and refunds
+
 ### 🏗️ **Architecture & Patterns**
 
 - 🏗️ **Feature-Sliced Design** - Scalable frontend architecture methodology with strict layer hierarchy
@@ -89,6 +95,9 @@ Modern React Application with Feature-Sliced Design Architecture
 - **User Preferences** - Theme switching, locale selection, and profile management
 - **Route Protection** - Declarative guards for authentication and authorization
 - **Multi-Tenant Architecture** - Tenant context propagation with automatic header injection
+- **Stripe Checkout Flow** - Dynamic payment processing with theme-aware Stripe Elements
+- **Merchant Onboarding** - Stripe Connect integration for multi-tenant payment routing
+- **Refund Management** - Administrative workflow for processing payment reversals
 
 ### Architecture Highlights
 
@@ -110,7 +119,7 @@ src/
 > #### Install Prerequisites:
 >
 > - [Node.js](https://nodejs.org/) >= 22.0.0 (LTS)
-> - [pnpm](https://pnpm.io/installation) >= 10.23.0
+> - [pnpm](https://pnpm.io/installation) >= 10.27.0
 > - [Git](https://git-scm.com/)
 > - [Docker](https://www.docker.com/get-started/) (optional, for local services)
 > - [Docker Compose](https://docs.docker.com/compose/) (optional)
@@ -313,6 +322,7 @@ Run `pnpm test:arch` to verify FSD compliance (layer structure, public APIs, nam
 | `VITE_AUTH_REDIRECT_AFTER_LOGOUT` | Redirect URL after logout                     | `/`                           | No       |
 | `VITE_AUTH_REDIRECT_AFTER_SIGNUP` | Redirect URL after signup                     | `/verify-email`               | No       |
 | `VITE_ENABLE_MSW`                 | Enable Mock Service Worker for API mocking    | `true`                        | No       |
+| `VITE_STRIPE_PUBLIC_KEY`          | Stripe Publishable Key                        | `pk_test_...`                 | Yes      |
 | `VITE_LOG_LEVEL`                  | Console logging verbosity (silent/info/debug) | `info`                        | No       |
 | `TZ`                              | Defines timezone                              | `UTC`                         | No       |
 | `NODE_ENV`                        | Defines nodejs environment                    | `development`                 | No       |
@@ -351,6 +361,15 @@ The application connects to the following backend endpoints (configured via `VIT
 
 - `GET /api/v1/users/me/preferences` - Get user preferences
 - `PUT /api/v1/users/me/preferences` - Update user preferences
+
+**Billing & Merchant Endpoints:**
+
+- `POST /api/v1/billing/payments/intent` - Create Stripe Payment Intent
+- `GET /api/v1/billing/payments/{id}` - Get payment details
+- `GET /api/v1/billing/payments` - List payments with pagination
+- `POST /api/v1/billing/payments/{id}/refund` - Refund payment (Admin only)
+- `POST /api/v1/admin/billing/merchants/onboard` - Initiate Stripe Connect onboarding
+- `GET /api/v1/admin/billing/merchants/status` - Get merchant onboarding status
 
 ### 🤖 AI Agent Development Support
 
@@ -482,6 +501,17 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
+```
+
+#### Currency Utility
+
+Locale-aware currency formatting and cents-to-dollars conversion:
+
+```typescript
+import { formatCurrency } from "@/shared/lib/currency";
+
+// Automatically handles locale, currency symbol, and cent conversion
+const formatted = formatCurrency(2000, "USD"); // "$20.00"
 ```
 
 ---

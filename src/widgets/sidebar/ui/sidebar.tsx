@@ -4,6 +4,7 @@ import {
   IconHome,
   IconInfoCircle,
   IconUsers,
+  IconCreditCard,
 } from "@tabler/icons-react";
 import { Link, useLocation } from "@tanstack/react-router";
 import { t } from "@lingui/core/macro";
@@ -51,6 +52,15 @@ export function Sidebar() {
         leftSection={<IconExposure size="1rem" />}
         active={location.pathname === "/examples"}
         data-testid="nav-examples"
+      />
+
+      <NavLink
+        component={Link}
+        to="/billing"
+        label={t`Billing`}
+        leftSection={<IconCreditCard size="1rem" />}
+        active={location.pathname === "/billing"}
+        data-testid="nav-billing"
       />
 
       <NavLink
