@@ -1,10 +1,18 @@
 /**
  * Locale Preference Management
  *
- * Manages user locale preferences with support for:
- * - Local storage persistence
- * - Backend synchronization
- * - Fallback to browser locale
+ * Local storage management for user locale preferences.
+ * Works in conjunction with backend user preferences API.
+ *
+ * STORAGE STRATEGY:
+ * - Local storage provides immediate access for API headers
+ * - Backend database is source of truth (synced across devices)
+ * - Local storage updated after successful backend update
+ *
+ * USAGE IN API REQUESTS:
+ * - X-User-Locale header sent when preference exists
+ * - Backend LocaleResolver prioritizes X-User-Locale over Accept-Language
+ * - Ensures consistent locale for API responses, errors, and emails
  */
 
 const LOCALE_PREFERENCE_KEY = "userLocalePreference";

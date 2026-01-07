@@ -47,16 +47,21 @@ apiClient.interceptors.request.use((config) => {
     (config.headers as any)["X-Tenant-ID"] = tenantId;
   }
 
-  // Add locale headers for backend i18n support
-  // Priority: User preference > Current active locale > Browser locale
+  // Add locale headers for unified backend i18n support
+  // Backend LocaleResolver priority: X-User-Locale > Accept-Language > Default
   config.headers = config.headers ?? {};
 
-  // Always send Accept-Language header (browser standard)
+  // Always send Accept-Language header (RFC 7231 standard)
+  // Used by backend as fallback when X-User-Locale is not present
   const currentLocale = i18n.locale || getClientLocale();
   (config.headers as any)["Accept-Language"] = currentLocale;
 
   // Send X-User-Locale header if user has explicit preference
-  // This takes priority over Accept-Language in backend services
+  // Backend prioritizes this over Accept-Language for:
+  // - API response messages
+  // - Validation error messages
+  // - Email notifications
+  // - Any localized content
   const userPreference = getUserLocalePreference();
   if (userPreference) {
     (config.headers as any)["X-User-Locale"] = userPreference;

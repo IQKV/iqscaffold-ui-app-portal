@@ -1,11 +1,26 @@
 /**
  * Locale Manager
  *
- * Centralized locale management that coordinates:
- * - Frontend UI locale (Lingui)
- * - Backend API locale headers
- * - User preference persistence
- * - Query cache invalidation
+ * Unified i18n approach that coordinates frontend and backend:
+ *
+ * BACKEND LOCALE RESOLUTION (Spring Boot):
+ * Priority: X-User-Locale header > Accept-Language header > Default locale
+ * - Custom LocaleResolver checks X-User-Locale first (user preference)
+ * - Falls back to Accept-Language (browser/current locale)
+ * - MessageSource provides localized messages from i18n/messages*.properties
+ *
+ * FRONTEND LOCALE MANAGEMENT (React + Lingui):
+ * - Lingui i18n for UI translations
+ * - API client sends both Accept-Language and X-User-Locale headers
+ * - Local storage caches user preference
+ * - Query cache invalidation ensures fresh localized data
+ *
+ * UNIFIED FLOW:
+ * 1. User changes locale → Update frontend UI (Lingui)
+ * 2. Update backend user preference via API
+ * 3. Store preference locally for immediate use
+ * 4. Subsequent API calls include X-User-Locale header
+ * 5. Backend returns localized responses (errors, validation, emails)
  */
 
 import { i18n } from "@lingui/core";
