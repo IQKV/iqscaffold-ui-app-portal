@@ -9,6 +9,9 @@ import {
   clearTokens,
 } from "@/shared/lib/auth-tokens";
 import { useTenantStore } from "@/processes/tenant";
+import { i18n } from "@lingui/core";
+import { getUserLocalePreference } from "@/shared/lib/locale-preference";
+import { getClientLocale } from "@/shared/locales";
 
 const BASE_URL = getConfig("VITE_API_URL_SERVER");
 
@@ -28,7 +31,7 @@ export const apiClient: AxiosInstance = axios.create({
 // Ensure cookies are sent globally
 axios.defaults.withCredentials = true;
 
-// Attach Authorization header from token storage and tenant header
+// Attach Authorization header from token storage, tenant header, and locale headers
 apiClient.interceptors.request.use((config) => {
   const token = getAccessToken();
   if (token) {
@@ -42,6 +45,21 @@ apiClient.interceptors.request.use((config) => {
   if (tenantId && !config.headers?.["X-Tenant-ID"]) {
     config.headers = config.headers ?? {};
     (config.headers as any)["X-Tenant-ID"] = tenantId;
+  }
+
+  // Add locale headers for backend i18n support
+  // Priority: User preference > Current active locale > Browser locale
+  config.headers = config.headers ?? {};
+
+  // Always send Accept-Language header (browser standard)
+  const currentLocale = i18n.locale || getClientLocale();
+  (config.headers as any)["Accept-Language"] = currentLocale;
+
+  // Send X-User-Locale header if user has explicit preference
+  // This takes priority over Accept-Language in backend services
+  const userPreference = getUserLocalePreference();
+  if (userPreference) {
+    (config.headers as any)["X-User-Locale"] = userPreference;
   }
 
   return config;

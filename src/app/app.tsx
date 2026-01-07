@@ -19,7 +19,7 @@ import { TenantProvider } from "@/processes/tenant";
 
 import { ErrorBoundary } from "@/shared/ui";
 import { MSWDevTools } from "@/shared/ui/msw-dev-tools";
-import { dynamicActivateLocale, getClientLocale } from "@/shared/locales";
+import { initializeLocale } from "@/shared/lib/locale-manager";
 import { ConfirmContextModal } from "@/shared/ui/confirmation-modal";
 
 // MSW setup
@@ -48,8 +48,11 @@ declare module "@tanstack/react-router" {
 
 export function App() {
   useEffect(() => {
-    // Activate locale based on cookie or browser
-    dynamicActivateLocale(getClientLocale());
+    // Initialize locale with unified approach
+    // Priority: Backend user preference > Local storage > Browser locale
+    initializeLocale().catch((error) => {
+      console.error("Failed to initialize locale:", error);
+    });
 
     // Start MSW if enabled
     if (typeof window !== "undefined") {

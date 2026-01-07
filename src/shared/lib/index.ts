@@ -19,3 +19,7 @@ export { useMSWControl } from "./use-msw-control";
 
 // Tenant utilities
 export * from "./tenant-utils";
+
+// Locale management
+export * from "./locale-preference";
+export * from "./locale-manager";

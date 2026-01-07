@@ -13,6 +13,47 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#. js-lingui-explicit-id
+#: src/shared/ui/locale-switcher.tsx:67
+msgid "Language changed"
+msgstr "Language changed"
+
+#. js-lingui-explicit-id
+#: src/shared/ui/locale-switcher.tsx:68
+msgid "Your language preference has been updated"
+msgstr "Your language preference has been updated"
+
+#. js-lingui-explicit-id
+#: src/shared/ui/locale-switcher.tsx:74
+msgid "Language change failed"
+msgstr "Language change failed"
+
+#. js-lingui-explicit-id
+#: src/shared/ui/locale-switcher.tsx:75
+msgid "Failed to update language preference. Please try again."
+msgstr "Failed to update language preference. Please try again."
+
+#. js-lingui-explicit-id
+#: src/shared/ui/locale-switcher.tsx:84
+msgid "Language"
+msgstr "Language"
+
+#. js-lingui-explicit-id
+#: src/shared/ui/locale-switcher.tsx:85
+#: src/shared/ui/locale-switcher.tsx:149
+msgid "Select language"
+msgstr "Select language"
+
+#. js-lingui-explicit-id
+#: src/shared/ui/locale-switcher.tsx:126
+msgid "Language changed successfully"
+msgstr "Language changed successfully"
+
+#. js-lingui-explicit-id
+#: src/shared/ui/locale-switcher.tsx:132
+msgid "Failed to change language"
+msgstr "Failed to change language"
+
 #. placeholder {0}: localeToNameMap[locale]
 #: src/shared/locales/index.ts:18
 msgid "{0}"
@@ -38,15 +79,23 @@ msgstr "About"
 msgid "About This Template"
 msgstr "About This Template"
 
+#: src/features/locale-demo/locale-demo.tsx:156
+msgid "Accept-Language header (from browser)"
+msgstr "Accept-Language header (from browser)"
+
 #: src/features/users/components/users-data-grid.tsx:169
 #: src/pages/examples.tsx:133
-#: src/widgets/billing-history/ui/BillingHistoryTable.tsx:89
+#: src/widgets/billing-history/ui/billing-history-table.tsx:103
 msgid "Actions"
 msgstr "Actions"
 
-#: src/widgets/merchant-status-card/ui/MerchantStatusCard.tsx:35
+#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:35
 msgid "Active"
 msgstr "Active"
+
+#: src/features/locale-demo/locale-demo.tsx:112
+msgid "Active Locale"
+msgstr "Active Locale"
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:80
 msgid "Active Sessions"
@@ -65,19 +114,27 @@ msgstr "Add User"
 msgid "Admin"
 msgstr "Admin"
 
-#: src/widgets/billing-history/ui/BillingHistoryTable.tsx:79
+#: src/features/locale-demo/locale-demo.tsx:68
+msgid "All API requests include Accept-Language and X-User-Locale headers"
+msgstr "All API requests include Accept-Language and X-User-Locale headers"
+
+#: src/widgets/billing-history/ui/billing-history-table.tsx:93
 msgid "Amount"
 msgstr "Amount"
 
-#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:75
-#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:76
+#: src/features/payment-checkout/ui/stripe-checkout-form.tsx:75
+#: src/features/payment-checkout/ui/stripe-checkout-form.tsx:76
 msgid "An error occurred"
 msgstr "An error occurred"
 
-#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:78
-#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:79
+#: src/features/payment-checkout/ui/stripe-checkout-form.tsx:78
+#: src/features/payment-checkout/ui/stripe-checkout-form.tsx:79
 msgid "An unexpected error occurred."
 msgstr "An unexpected error occurred."
+
+#: src/features/locale-demo/locale-demo.tsx:135
+msgid "API Request Headers"
+msgstr "API Request Headers"
 
 #: src/pages/about.tsx:93
 msgid "Architecture"
@@ -98,18 +155,34 @@ msgid "Are you sure you want to proceed?"
 msgstr "Are you sure you want to proceed?"
 
 #: src/widgets/billing-history/ui/BillingHistoryTable.tsx:24
-msgid "Are you sure you want to refund this payment?"
-msgstr "Are you sure you want to refund this payment?"
+#~ msgid "Are you sure you want to refund this payment?"
+#~ msgstr "Are you sure you want to refund this payment?"
+
+#: src/widgets/billing-history/ui/billing-history-table.tsx:34
+msgid "Are you sure you want to refund this payment? This action cannot be undone."
+msgstr "Are you sure you want to refund this payment? This action cannot be undone."
 
 #: src/features/users/components/user-form-modal.tsx:27
 msgid "At least one role is required"
 msgstr "At least one role is required"
 
+#: src/features/locale-demo/locale-demo.tsx:144
+msgid "Backend Locale Resolution Priority"
+msgstr "Backend Locale Resolution Priority"
+
+#: src/features/locale-demo/locale-demo.tsx:73
+msgid "Backend responses (errors, validation messages) are in your language"
+msgstr "Backend responses (errors, validation messages) are in your language"
+
+#: src/features/locale-demo/locale-demo.tsx:63
+msgid "Backend user preference is updated via API"
+msgstr "Backend user preference is updated via API"
+
 #: src/widgets/sidebar/ui/sidebar.tsx:60
 msgid "Billing"
 msgstr "Billing"
 
-#: src/pages/billing.tsx:26
+#: src/pages/billing.tsx:27
 msgid "Billing & Payments"
 msgstr "Billing & Payments"
 
@@ -127,6 +200,7 @@ msgstr "Bypass (allow through)"
 #: src/shared/ui/confirmation-modal/confirm-context-modal.tsx:25
 #: src/shared/ui/confirmation-modal/confirmation-modal.tsx:25
 #: src/shared/ui/confirmation-modal/open-confirm.ts:18
+#: src/widgets/billing-history/ui/billing-history-table.tsx:37
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -147,7 +221,7 @@ msgstr "Check your internet connection and try again"
 msgid "Checking email status..."
 msgstr "Checking email status..."
 
-#: src/pages/checkout.tsx:51
+#: src/pages/checkout.tsx:50
 msgid "Checkout"
 msgstr "Checkout"
 
@@ -179,6 +253,10 @@ msgstr "Confirm Action"
 msgid "Confirm New Password"
 msgstr "Confirm New Password"
 
+#: src/widgets/billing-history/ui/billing-history-table.tsx:31
+msgid "Confirm Refund"
+msgstr "Confirm Refund"
+
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:126
 msgid "Confirm your new password"
 msgstr "Confirm your new password"
@@ -187,7 +265,7 @@ msgstr "Confirm your new password"
 msgid "Confirmation modals, notifications, loading states, and error boundaries."
 msgstr "Confirmation modals, notifications, loading states, and error boundaries."
 
-#: src/features/merchant-onboarding/ui/StripeConnectButton.tsx:52
+#: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:52
 msgid "Connect with Stripe"
 msgstr "Connect with Stripe"
 
@@ -195,11 +273,11 @@ msgstr "Connect with Stripe"
 msgid "Connection Issue"
 msgstr "Connection Issue"
 
-#: src/features/merchant-onboarding/ui/StripeConnectButton.tsx:36
+#: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:36
 msgid "Could not initiate Stripe onboarding. Please try again later."
 msgstr "Could not initiate Stripe onboarding. Please try again later."
 
-#: src/widgets/billing-history/ui/BillingHistoryTable.tsx:38
+#: src/widgets/billing-history/ui/billing-history-table.tsx:50
 msgid "Could not process refund. Please try again."
 msgstr "Could not process refund. Please try again."
 
@@ -222,6 +300,10 @@ msgstr "Created"
 #: src/features/users/components/user-form-modal.tsx:285
 msgid "Created:"
 msgstr "Created:"
+
+#: src/features/locale-demo/locale-demo.tsx:106
+msgid "Current Locale Status"
+msgstr "Current Locale Status"
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:105
 msgid "Current Password"
@@ -249,9 +331,17 @@ msgstr "Data Table Example"
 msgid "Data Tables"
 msgstr "Data Tables"
 
-#: src/widgets/billing-history/ui/BillingHistoryTable.tsx:73
+#: src/widgets/billing-history/ui/billing-history-table.tsx:87
 msgid "Date"
 msgstr "Date"
+
+#: src/features/locale-demo/locale-demo.tsx:187
+msgid "Date Formatting"
+msgstr "Date Formatting"
+
+#: src/features/locale-demo/locale-demo.tsx:162
+msgid "Default locale (English)"
+msgstr "Default locale (English)"
 
 #: src/features/users/components/users-data-grid.tsx:61
 #: src/pages/examples.tsx:49
@@ -302,6 +392,10 @@ msgstr "Email"
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:63
 msgid "Email Address"
 msgstr "Email Address"
+
+#: src/features/locale-demo/locale-demo.tsx:78
+msgid "Email notifications are sent in your preferred language"
+msgstr "Email notifications are sent in your preferred language"
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:33
 msgid "Email Verification Status"
@@ -493,6 +587,10 @@ msgstr "For additional security, we recommend changing your password regularly a
 msgid "Forms"
 msgstr "Forms"
 
+#: src/features/locale-demo/locale-demo.tsx:58
+msgid "Frontend UI updates to the selected language"
+msgstr "Frontend UI updates to the selected language"
+
 #: src/pages/examples.tsx:237
 msgid "Functional"
 msgstr "Functional"
@@ -521,6 +619,10 @@ msgstr "Growth"
 msgid "Home"
 msgstr "Home"
 
+#: src/features/locale-demo/locale-demo.tsx:50
+msgid "How it works"
+msgstr "How it works"
+
 #: src/shared/ui/msw-dev-tools.tsx:94
 msgid "How to handle requests without mocks"
 msgstr "How to handle requests without mocks"
@@ -541,7 +643,11 @@ msgstr "Interactive"
 msgid "Interactive data table with sorting, actions, and custom rendering"
 msgstr "Interactive data table with sorting, actions, and custom rendering"
 
-#: src/pages/checkout.tsx:37
+#: src/features/locale-demo/locale-demo.tsx:43
+msgid "Internationalization (i18n) Demo"
+msgstr "Internationalization (i18n) Demo"
+
+#: src/pages/checkout.tsx:36
 msgid "Invalid Checkout"
 msgstr "Invalid Checkout"
 
@@ -592,6 +698,10 @@ msgstr "Lightning-fast development server with instant HMR"
 msgid "Loading..."
 msgstr "Loading..."
 
+#: src/features/locale-demo/locale-demo.tsx:173
+msgid "Localized Content Examples"
+msgstr "Localized Content Examples"
+
 #: src/shared/ui/msw-dev-tools.tsx:87
 msgid "Log MSW requests to console"
 msgstr "Log MSW requests to console"
@@ -626,7 +736,7 @@ msgstr "Manage your account security and active sessions."
 msgid "Mantine UI:"
 msgstr "Mantine UI:"
 
-#: src/widgets/merchant-status-card/ui/MerchantStatusCard.tsx:24
+#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:24
 msgid "Merchant Account"
 msgstr "Merchant Account"
 
@@ -679,7 +789,7 @@ msgstr "New Password"
 msgid "New password must be different from current password"
 msgstr "New password must be different from current password"
 
-#: src/widgets/billing-history/ui/BillingHistoryTable.tsx:109
+#: src/widgets/billing-history/ui/billing-history-table.tsx:126
 msgid "No payments found"
 msgstr "No payments found"
 
@@ -687,6 +797,10 @@ msgstr "No payments found"
 #: src/pages/examples.tsx:296
 msgid "No users found"
 msgstr "No users found"
+
+#: src/features/locale-demo/locale-demo.tsx:128
+msgid "Not Set"
+msgstr "Not Set"
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:85
 msgid "Not Verified"
@@ -696,11 +810,15 @@ msgstr "Not Verified"
 msgid "Notification Examples"
 msgstr "Notification Examples"
 
-#: src/features/merchant-onboarding/ui/StripeConnectButton.tsx:35
+#: src/features/locale-demo/locale-demo.tsx:201
+msgid "Number Formatting"
+msgstr "Number Formatting"
+
+#: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:35
 msgid "Onboarding Failed"
 msgstr "Onboarding Failed"
 
-#: src/widgets/merchant-status-card/ui/MerchantStatusCard.tsx:53
+#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:53
 msgid "Open Stripe Dashboard"
 msgstr "Open Stripe Dashboard"
 
@@ -776,23 +894,23 @@ msgstr "Password strength"
 msgid "Passwords do not match"
 msgstr "Passwords do not match"
 
-#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:105
+#: src/features/payment-checkout/ui/stripe-checkout-form.tsx:105
 msgid "Pay now"
 msgstr "Pay now"
 
-#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:88
+#: src/features/payment-checkout/ui/stripe-checkout-form.tsx:88
 msgid "Payment Details"
 msgstr "Payment Details"
 
-#: src/widgets/billing-history/ui/BillingHistoryTable.tsx:46
+#: src/widgets/billing-history/ui/billing-history-table.tsx:60
 msgid "Payment History"
 msgstr "Payment History"
 
-#: src/widgets/billing-history/ui/BillingHistoryTable.tsx:64
+#: src/widgets/billing-history/ui/billing-history-table.tsx:78
 msgid "Payment ID"
 msgstr "Payment ID"
 
-#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:42
+#: src/features/payment-checkout/ui/stripe-checkout-form.tsx:42
 msgid "Payment succeeded!"
 msgstr "Payment succeeded!"
 
@@ -821,19 +939,23 @@ msgstr "React 19:"
 msgid "Ready to start building? Check out the documentation and source code."
 msgstr "Ready to start building? Check out the documentation and source code."
 
-#: src/features/merchant-onboarding/ui/StripeConnectButton.tsx:28
+#: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:28
 msgid "Redirecting"
 msgstr "Redirecting"
 
-#: src/widgets/billing-history/ui/BillingHistoryTable.tsx:37
+#: src/widgets/billing-history/ui/billing-history-table.tsx:37
+msgid "Refund"
+msgstr "Refund"
+
+#: src/widgets/billing-history/ui/billing-history-table.tsx:49
 msgid "Refund Failed"
 msgstr "Refund Failed"
 
-#: src/widgets/billing-history/ui/BillingHistoryTable.tsx:31
+#: src/widgets/billing-history/ui/billing-history-table.tsx:43
 msgid "Refund Initiated"
 msgstr "Refund Initiated"
 
-#: src/widgets/billing-history/ui/BillingHistoryTable.tsx:94
+#: src/widgets/billing-history/ui/billing-history-table.tsx:108
 msgid "Refund Payment"
 msgstr "Refund Payment"
 
@@ -841,13 +963,17 @@ msgstr "Refund Payment"
 msgid "Registered"
 msgstr "Registered"
 
-#: src/pages/checkout.tsx:38
+#: src/pages/checkout.tsx:37
 msgid "Required payment information is missing."
 msgstr "Required payment information is missing."
 
 #: src/shared/lib/use-auth-api.ts:149
 msgid "Reset Link Sent"
 msgstr "Reset Link Sent"
+
+#: src/features/locale-demo/locale-demo.tsx:97
+msgid "Reset to Browser Default"
+msgstr "Reset to Browser Default"
 
 #: src/shared/ui/msw-dev-tools.tsx:107
 msgid "Response delay (ms)"
@@ -919,7 +1045,7 @@ msgstr "Select user roles"
 msgid "Server is temporarily unavailable. Please try again"
 msgstr "Server is temporarily unavailable. Please try again"
 
-#: src/widgets/merchant-status-card/ui/MerchantStatusCard.tsx:35
+#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:35
 msgid "Setup Required"
 msgstr "Setup Required"
 
@@ -927,7 +1053,7 @@ msgstr "Setup Required"
 msgid "Simulate network latency"
 msgstr "Simulate network latency"
 
-#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:52
+#: src/features/payment-checkout/ui/stripe-checkout-form.tsx:52
 msgid "Something went wrong."
 msgstr "Something went wrong."
 
@@ -946,7 +1072,7 @@ msgstr "Sorting by {key} in {direction} order"
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:72
 #: src/features/users/components/users-data-grid.tsx:138
 #: src/pages/examples.tsx:124
-#: src/widgets/billing-history/ui/BillingHistoryTable.tsx:84
+#: src/widgets/billing-history/ui/billing-history-table.tsx:98
 msgid "Status"
 msgstr "Status"
 
@@ -1017,7 +1143,7 @@ msgstr "testing setup with Vitest and Playwright"
 msgid "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
 msgstr "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
 
-#: src/widgets/billing-history/ui/BillingHistoryTable.tsx:32
+#: src/widgets/billing-history/ui/billing-history-table.tsx:44
 msgid "The payment is being refunded."
 msgstr "The payment is being refunded."
 
@@ -1028,6 +1154,10 @@ msgstr "The request timed out. Please try again"
 #: src/features/users/components/users-data-grid.tsx:58
 msgid "This action cannot be undone."
 msgstr "This action cannot be undone."
+
+#: src/features/locale-demo/locale-demo.tsx:46
+msgid "This demo shows the unified i18n approach across frontend and backend"
+msgstr "This demo shows the unified i18n approach across frontend and backend"
 
 #: src/pages/examples.tsx:253
 #~ msgid "This demonstrates a complete feature implementation following Feature-Sliced Design principles."
@@ -1045,7 +1175,7 @@ msgstr "This template is built with cutting-edge technologies for optimal develo
 msgid "This will log you out from all devices where you're currently signed in, including this device."
 msgstr "This will log you out from all devices where you're currently signed in, including this device."
 
-#: src/widgets/merchant-status-card/ui/MerchantStatusCard.tsx:42
+#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:42
 msgid "To start receiving payments from your customers, you need to connect your Stripe account."
 msgstr "To start receiving payments from your customers, you need to connect your Stripe account."
 
@@ -1133,6 +1263,10 @@ msgstr "User deleted successfully"
 msgid "User Management"
 msgstr "User Management"
 
+#: src/features/locale-demo/locale-demo.tsx:121
+msgid "User Preference"
+msgstr "User Preference"
+
 #: src/features/users/components/user-form-modal.tsx:129
 msgid "User updated successfully"
 msgstr "User updated successfully"
@@ -1207,7 +1341,23 @@ msgstr "Warning notification!"
 msgid "Weak"
 msgstr "Weak"
 
-#: src/features/merchant-onboarding/ui/StripeConnectButton.tsx:29
+#: src/features/locale-demo/locale-demo.tsx:178
+msgid "Welcome Message"
+msgstr "Welcome Message"
+
+#: src/features/locale-demo/locale-demo.tsx:181
+msgid "Welcome to IQ Scaffold! Your language preference is active."
+msgstr "Welcome to IQ Scaffold! Your language preference is active."
+
+#: src/features/locale-demo/locale-demo.tsx:53
+msgid "When you change the language, the following happens:"
+msgstr "When you change the language, the following happens:"
+
+#: src/features/locale-demo/locale-demo.tsx:150
+msgid "X-User-Locale header (from user preference)"
+msgstr "X-User-Locale header (from user preference)"
+
+#: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:29
 msgid "You are being redirected to Stripe to complete your setup."
 msgstr "You are being redirected to Stripe to complete your setup."
 
@@ -1223,6 +1373,10 @@ msgstr "You will need to sign in again on all devices."
 msgid "Your email has been successfully verified"
 msgstr "Your email has been successfully verified"
 
+#: src/features/locale-demo/locale-demo.tsx:215
+msgid "Your language preference is synchronized across all devices when you're logged in. Backend services will send emails and API responses in your preferred language."
+msgstr "Your language preference is synchronized across all devices when you're logged in. Backend services will send emails and API responses in your preferred language."
+
 #: src/shared/lib/use-auth-api.ts:42
 msgid "Your password has been successfully changed"
 msgstr "Your password has been successfully changed"
@@ -1231,14 +1385,14 @@ msgstr "Your password has been successfully changed"
 msgid "Your password has been successfully reset"
 msgstr "Your password has been successfully reset"
 
-#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:46
+#: src/features/payment-checkout/ui/stripe-checkout-form.tsx:46
 msgid "Your payment is processing."
 msgstr "Your payment is processing."
 
-#: src/features/payment-checkout/ui/StripeCheckoutForm.tsx:49
+#: src/features/payment-checkout/ui/stripe-checkout-form.tsx:49
 msgid "Your payment was not successful, please try again."
 msgstr "Your payment was not successful, please try again."
 
-#: src/widgets/merchant-status-card/ui/MerchantStatusCard.tsx:41
+#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:41
 msgid "Your Stripe Connect account is fully configured. You can now receive payments."
 msgstr "Your Stripe Connect account is fully configured. You can now receive payments."
