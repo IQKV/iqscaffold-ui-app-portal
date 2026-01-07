@@ -56,3 +56,19 @@ export interface PaginatedResponse<T> {
   size: number;
   number: number;
 }
+
+export interface PayoutResponse {
+  id: string;
+  amount: number;
+  currency: string;
+  status: PayoutStatus;
+  arrivalDate: string;
+  merchantAccountId: string;
+}
+
+export type PayoutStatus =
+  | "paid"
+  | "pending"
+  | "in_transit"
+  | "canceled"
+  | "failed";

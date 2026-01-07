@@ -9,6 +9,10 @@ export const billingKeys = {
   history: (params: BillingHistoryParams) =>
     [...billingKeys.payments(), "history", params] as const,
   merchantStatus: () => [...billingKeys.all, "merchant-status"] as const,
+  payouts: () => [...billingKeys.all, "payouts"] as const,
+  payout: (id: string) => [...billingKeys.payouts(), id] as const,
+  payoutHistory: (params: BillingHistoryParams) =>
+    [...billingKeys.payouts(), "history", params] as const,
 };
 
 export const usePayments = (params?: BillingHistoryParams) => {
@@ -36,5 +40,20 @@ export const useMerchantStatus = () => {
 export const useRefundPayment = () => {
   return useMutation({
     mutationFn: (id: string) => billingApi.refundPayment(id),
+  });
+};
+
+export const usePayouts = (params?: BillingHistoryParams) => {
+  return useQuery({
+    queryKey: billingKeys.payoutHistory(params || {}),
+    queryFn: () => billingApi.listPayouts(params),
+  });
+};
+
+export const usePayout = (id: string) => {
+  return useQuery({
+    queryKey: billingKeys.payout(id),
+    queryFn: () => billingApi.getPayout(id),
+    enabled: !!id,
   });
 };

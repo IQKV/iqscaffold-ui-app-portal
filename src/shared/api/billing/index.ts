@@ -58,4 +58,23 @@ export const billingApi = {
       url: "/api/v1/admin/billing/merchants/status",
       method: "GET",
     }),
+
+  /**
+   * List payouts with pagination
+   */
+  listPayouts: (params?: Types.BillingHistoryParams) =>
+    apiRequest<Types.PaginatedResponse<Types.PayoutResponse>>({
+      url: "/api/v1/billing/payouts",
+      method: "GET",
+      params,
+    }),
+
+  /**
+   * Get payout details
+   */
+  getPayout: (id: string) =>
+    apiRequest<Types.PayoutResponse>({
+      url: `/api/v1/billing/payouts/${id}`,
+      method: "GET",
+    }),
 };
