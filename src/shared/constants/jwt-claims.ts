@@ -15,11 +15,13 @@ export const JWT_CLAIM_TYPE = "type";
 export const JWT_CLAIM_USER_ID = "userId";
 export const JWT_CLAIM_USERNAME = "username";
 export const JWT_CLAIM_EMAIL = "email";
-export const JWT_CLAIM_ROLES = "roles";
+export const JWT_CLAIM_AUTHORITIES = "authorities";
 export const JWT_CLAIM_PERMISSIONS = "permissions";
 export const JWT_CLAIM_FIRST_NAME = "firstName";
 export const JWT_CLAIM_LAST_NAME = "lastName";
 export const JWT_CLAIM_TENANT_ID = "tenant_id";
+export const JWT_CLAIM_ORGANIZATION_ID = "organizationId";
+export const JWT_CLAIM_PREFERRED_LOCALE = "preferred_locale";
 export const JWT_CLAIM_CUSTOM_CLAIMS = "customClaims";
 
 // Token types

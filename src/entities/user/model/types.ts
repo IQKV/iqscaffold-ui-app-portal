@@ -12,6 +12,7 @@ export interface User {
   roles: string[];
   permissions: string[];
   tenantId: string | null;
+  organizationId: number | null;
   emailVerified?: boolean;
   customClaims: Record<string, unknown>;
 }
@@ -25,6 +26,7 @@ export interface UserContext {
   firstName: string;
   lastName: string;
   tenantId: string | null;
+  organizationId: number | null;
   customClaims: Record<string, unknown>;
 }
 

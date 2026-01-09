@@ -5,11 +5,13 @@ import {
   JWT_CLAIM_USER_ID,
   JWT_CLAIM_USERNAME,
   JWT_CLAIM_EMAIL,
-  JWT_CLAIM_ROLES,
+  JWT_CLAIM_AUTHORITIES,
   JWT_CLAIM_PERMISSIONS,
   JWT_CLAIM_FIRST_NAME,
   JWT_CLAIM_LAST_NAME,
   JWT_CLAIM_TENANT_ID,
+  JWT_CLAIM_ORGANIZATION_ID,
+  JWT_CLAIM_PREFERRED_LOCALE,
   JWT_CLAIM_CUSTOM_CLAIMS,
   JWT_CLAIM_EXPIRATION,
   JWT_CLAIM_ISSUED_AT,
@@ -20,11 +22,13 @@ interface JWTPayload {
   [JWT_CLAIM_USER_ID]: number;
   [JWT_CLAIM_USERNAME]: string;
   [JWT_CLAIM_EMAIL]: string;
-  [JWT_CLAIM_ROLES]: string[];
+  [JWT_CLAIM_AUTHORITIES]: string[];
   [JWT_CLAIM_PERMISSIONS]: string[];
   [JWT_CLAIM_FIRST_NAME]: string;
   [JWT_CLAIM_LAST_NAME]: string;
   [JWT_CLAIM_TENANT_ID]: string;
+  [JWT_CLAIM_ORGANIZATION_ID]: number;
+  [JWT_CLAIM_PREFERRED_LOCALE]: string;
   [JWT_CLAIM_CUSTOM_CLAIMS]: Record<string, unknown>;
   [JWT_CLAIM_EXPIRATION]: number;
   [JWT_CLAIM_ISSUED_AT]: number;
@@ -49,12 +53,16 @@ export function decodeUser(token: string): {
         userId: decoded[JWT_CLAIM_USER_ID],
         username: decoded[JWT_CLAIM_USERNAME],
         email: decoded[JWT_CLAIM_EMAIL],
-        roles: decoded[JWT_CLAIM_ROLES] || [],
+        roles: decoded[JWT_CLAIM_AUTHORITIES] || [],
         permissions: decoded[JWT_CLAIM_PERMISSIONS] || [],
         firstName: decoded[JWT_CLAIM_FIRST_NAME],
         lastName: decoded[JWT_CLAIM_LAST_NAME],
         tenantId: decoded[JWT_CLAIM_TENANT_ID],
-        customClaims: decoded[JWT_CLAIM_CUSTOM_CLAIMS] || {},
+        organizationId: decoded[JWT_CLAIM_ORGANIZATION_ID] || null,
+        customClaims: {
+          ...(decoded[JWT_CLAIM_CUSTOM_CLAIMS] || {}),
+          preferredLocale: decoded[JWT_CLAIM_PREFERRED_LOCALE],
+        },
       },
       exp: exp * 1000,
     };
