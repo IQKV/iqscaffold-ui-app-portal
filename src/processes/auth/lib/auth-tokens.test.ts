@@ -6,13 +6,23 @@ import {
   setTokens,
   clearTokens,
   subscribe,
-  type TokenPair,
 } from "./auth-tokens";
+
+// Mock auth config
+vi.mock("@/app/config", () => ({
+  getAuthConfig: () => ({
+    tokenStorage: {
+      accessTokenKey: "test_access_token",
+      refreshTokenKey: "test_refresh_token",
+    },
+  }),
+}));
 
 describe("Auth Tokens", () => {
   beforeEach(() => {
     localStorage.clear();
     clearTokens();
+    vi.clearAllMocks();
   });
 
   describe("getTokens", () => {
@@ -22,19 +32,16 @@ describe("Auth Tokens", () => {
       expect(tokens.refreshToken).toBeNull();
     });
 
-    it("returns stored tokens after setting", () => {
-      const testTokens: TokenPair = {
-        accessToken: "access-123",
-        refreshToken: "refresh-456",
+    it("returns stored tokens", () => {
+      setTokens({
+        accessToken: "access_123",
+        refreshToken: "refresh_456",
         expiresAt: Date.now() + 3600000,
-      };
+      });
 
-      setTokens(testTokens);
       const tokens = getTokens();
-
-      expect(tokens.accessToken).toBe("access-123");
-      expect(tokens.refreshToken).toBe("refresh-456");
-      expect(tokens.expiresAt).toBe(testTokens.expiresAt);
+      expect(tokens.accessToken).toBe("access_123");
+      expect(tokens.refreshToken).toBe("refresh_456");
     });
   });
 
@@ -45,10 +52,12 @@ describe("Auth Tokens", () => {
 
     it("returns access token when set", () => {
       setTokens({
-        accessToken: "access-token",
-        refreshToken: "refresh-token",
+        accessToken: "access_123",
+        refreshToken: "refresh_456",
+        expiresAt: null,
       });
-      expect(getAccessToken()).toBe("access-token");
+
+      expect(getAccessToken()).toBe("access_123");
     });
   });
 
@@ -59,101 +68,107 @@ describe("Auth Tokens", () => {
 
     it("returns refresh token when set", () => {
       setTokens({
-        accessToken: "access-token",
-        refreshToken: "refresh-token",
+        accessToken: "access_123",
+        refreshToken: "refresh_456",
+        expiresAt: null,
       });
-      expect(getRefreshToken()).toBe("refresh-token");
+
+      expect(getRefreshToken()).toBe("refresh_456");
     });
   });
 
   describe("setTokens", () => {
     it("stores tokens in memory", () => {
-      const tokens: TokenPair = {
-        accessToken: "new-access",
-        refreshToken: "new-refresh",
-        expiresAt: Date.now() + 3600000,
-      };
+      setTokens({
+        accessToken: "access_123",
+        refreshToken: "refresh_456",
+        expiresAt: 1234567890,
+      });
 
-      setTokens(tokens);
-
-      expect(getAccessToken()).toBe("new-access");
-      expect(getRefreshToken()).toBe("new-refresh");
+      const tokens = getTokens();
+      expect(tokens.accessToken).toBe("access_123");
+      expect(tokens.refreshToken).toBe("refresh_456");
+      expect(tokens.expiresAt).toBe(1234567890);
     });
 
-    it("persists tokens to localStorage", () => {
-      const tokens: TokenPair = {
-        accessToken: "persist-access",
-        refreshToken: "persist-refresh",
-        expiresAt: Date.now() + 3600000,
-      };
+    it("stores tokens in localStorage", () => {
+      setTokens({
+        accessToken: "access_123",
+        refreshToken: "refresh_456",
+        expiresAt: 1234567890,
+      });
 
-      setTokens(tokens);
-
-      expect(localStorage.getItem("accessToken")).toBe("persist-access");
-      expect(localStorage.getItem("refreshToken")).toBe("persist-refresh");
+      expect(localStorage.getItem("test_access_token")).toBe("access_123");
+      expect(localStorage.getItem("test_refresh_token")).toBe("refresh_456");
+      expect(localStorage.getItem("test_access_token:exp")).toBe("1234567890");
     });
 
-    it("notifies subscribers when tokens change", () => {
+    it("notifies subscribers", () => {
       const listener = vi.fn();
       subscribe(listener);
 
-      const tokens: TokenPair = {
-        accessToken: "notify-access",
-        refreshToken: "notify-refresh",
-      };
+      setTokens({
+        accessToken: "access_123",
+        refreshToken: "refresh_456",
+        expiresAt: null,
+      });
 
-      setTokens(tokens);
-
-      expect(listener).toHaveBeenCalledWith(
-        expect.objectContaining({
-          accessToken: "notify-access",
-          refreshToken: "notify-refresh",
-        })
-      );
+      expect(listener).toHaveBeenCalledWith({
+        accessToken: "access_123",
+        refreshToken: "refresh_456",
+        expiresAt: null,
+      });
     });
   });
 
   describe("clearTokens", () => {
     it("clears tokens from memory", () => {
       setTokens({
-        accessToken: "clear-access",
-        refreshToken: "clear-refresh",
+        accessToken: "access_123",
+        refreshToken: "refresh_456",
+        expiresAt: null,
       });
 
       clearTokens();
 
-      expect(getAccessToken()).toBeNull();
-      expect(getRefreshToken()).toBeNull();
+      const tokens = getTokens();
+      expect(tokens.accessToken).toBeNull();
+      expect(tokens.refreshToken).toBeNull();
+      expect(tokens.expiresAt).toBeNull();
     });
 
-    it("removes tokens from localStorage", () => {
+    it("clears tokens from localStorage", () => {
       setTokens({
-        accessToken: "remove-access",
-        refreshToken: "remove-refresh",
+        accessToken: "access_123",
+        refreshToken: "refresh_456",
+        expiresAt: 1234567890,
       });
 
       clearTokens();
 
-      expect(localStorage.getItem("accessToken")).toBeNull();
-      expect(localStorage.getItem("refreshToken")).toBeNull();
+      expect(localStorage.getItem("test_access_token")).toBeNull();
+      expect(localStorage.getItem("test_refresh_token")).toBeNull();
+      expect(localStorage.getItem("test_access_token:exp")).toBeNull();
     });
 
-    it("notifies subscribers when tokens are cleared", () => {
+    it("notifies subscribers", () => {
       const listener = vi.fn();
+      subscribe(listener);
+
       setTokens({
-        accessToken: "test-access",
-        refreshToken: "test-refresh",
+        accessToken: "access_123",
+        refreshToken: "refresh_456",
+        expiresAt: null,
       });
 
-      subscribe(listener);
+      listener.mockClear();
       clearTokens();
 
-      expect(listener).toHaveBeenCalledWith(
-        expect.objectContaining({
-          accessToken: null,
-          refreshToken: null,
-        })
-      );
+      expect(listener).toHaveBeenCalledWith({
+        accessToken: null,
+        refreshToken: null,
+        expiresAt: null,
+      });
     });
   });
 
@@ -163,8 +178,9 @@ describe("Auth Tokens", () => {
       subscribe(listener);
 
       setTokens({
-        accessToken: "sub-access",
-        refreshToken: "sub-refresh",
+        accessToken: "access_123",
+        refreshToken: "refresh_456",
+        expiresAt: null,
       });
 
       expect(listener).toHaveBeenCalled();
@@ -177,8 +193,9 @@ describe("Auth Tokens", () => {
       unsubscribe();
 
       setTokens({
-        accessToken: "unsub-access",
-        refreshToken: "unsub-refresh",
+        accessToken: "access_123",
+        refreshToken: "refresh_456",
+        expiresAt: null,
       });
 
       expect(listener).not.toHaveBeenCalled();
@@ -192,8 +209,9 @@ describe("Auth Tokens", () => {
       subscribe(listener2);
 
       setTokens({
-        accessToken: "multi-access",
-        refreshToken: "multi-refresh",
+        accessToken: "access_123",
+        refreshToken: "refresh_456",
+        expiresAt: null,
       });
 
       expect(listener1).toHaveBeenCalled();
