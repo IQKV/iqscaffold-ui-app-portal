@@ -29,6 +29,7 @@ describe("Auth Utils", () => {
     roles: ["USER", "ADMIN"],
     permissions: ["read:users", "write:users"],
     tenantId: "tenant-123",
+    organizationId: null,
     customClaims: {},
   };
 

@@ -13,6 +13,7 @@ describe("User entity types", () => {
         roles: ["USER"],
         permissions: ["READ_PROFILE"],
         tenantId: "default",
+        organizationId: null,
         emailVerified: true,
         customClaims: {},
       };
@@ -33,6 +34,7 @@ describe("User entity types", () => {
         roles: ["USER"],
         permissions: [],
         tenantId: "default",
+        organizationId: null,
         customClaims: {},
       };
 
@@ -49,6 +51,7 @@ describe("User entity types", () => {
         roles: ["USER", "ADMIN"],
         permissions: ["READ_PROFILE", "WRITE_PROFILE"],
         tenantId: "default",
+        organizationId: null,
         customClaims: {},
       };
 
@@ -66,6 +69,7 @@ describe("User entity types", () => {
         roles: ["USER"],
         permissions: [],
         tenantId: "default",
+        organizationId: null,
         customClaims: {
           department: "Engineering",
           level: 5,
@@ -88,6 +92,7 @@ describe("User entity types", () => {
         firstName: "Test",
         lastName: "User",
         tenantId: "default",
+        organizationId: null,
         customClaims: {},
       };
 
@@ -193,6 +198,7 @@ describe("User entity types", () => {
         roles: ["USER"],
         permissions: [],
         tenantId: "default",
+        organizationId: null,
         customClaims: {},
       };
 
@@ -206,6 +212,7 @@ describe("User entity types", () => {
         firstName: user.firstName,
         lastName: user.lastName,
         tenantId: user.tenantId,
+        organizationId: user.organizationId,
         customClaims: user.customClaims,
       };
 

@@ -10,5 +10,6 @@ export const defaultMockUser: UserContext = {
   firstName: "Test",
   lastName: "User",
   tenantId: "test-tenant",
+  organizationId: null,
   customClaims: {},
 };

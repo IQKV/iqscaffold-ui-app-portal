@@ -14,43 +14,43 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/shared/ui/locale-switcher.tsx:67
+#: src/shared/ui/locale-switcher.tsx:64
 msgid "Language changed"
 msgstr "Language changed"
 
 #. js-lingui-explicit-id
-#: src/shared/ui/locale-switcher.tsx:68
+#: src/shared/ui/locale-switcher.tsx:65
 msgid "Your language preference has been updated"
 msgstr "Your language preference has been updated"
 
 #. js-lingui-explicit-id
-#: src/shared/ui/locale-switcher.tsx:74
+#: src/shared/ui/locale-switcher.tsx:71
 msgid "Language change failed"
 msgstr "Language change failed"
 
 #. js-lingui-explicit-id
-#: src/shared/ui/locale-switcher.tsx:75
+#: src/shared/ui/locale-switcher.tsx:72
 msgid "Failed to update language preference. Please try again."
 msgstr "Failed to update language preference. Please try again."
 
 #. js-lingui-explicit-id
-#: src/shared/ui/locale-switcher.tsx:84
+#: src/shared/ui/locale-switcher.tsx:83
 msgid "Language"
 msgstr "Language"
 
 #. js-lingui-explicit-id
-#: src/shared/ui/locale-switcher.tsx:85
-#: src/shared/ui/locale-switcher.tsx:149
+#: src/shared/ui/locale-switcher.tsx:84
+#: src/shared/ui/locale-switcher.tsx:148
 msgid "Select language"
 msgstr "Select language"
 
 #. js-lingui-explicit-id
-#: src/shared/ui/locale-switcher.tsx:126
+#: src/shared/ui/locale-switcher.tsx:125
 msgid "Language changed successfully"
 msgstr "Language changed successfully"
 
 #. js-lingui-explicit-id
-#: src/shared/ui/locale-switcher.tsx:132
+#: src/shared/ui/locale-switcher.tsx:131
 msgid "Failed to change language"
 msgstr "Failed to change language"
 
@@ -79,7 +79,7 @@ msgstr "About"
 msgid "About This Template"
 msgstr "About This Template"
 
-#: src/features/locale-demo/locale-demo.tsx:156
+#: src/features/locale-demo/locale-demo.tsx:177
 msgid "Accept-Language header (from browser)"
 msgstr "Accept-Language header (from browser)"
 
@@ -93,7 +93,7 @@ msgstr "Actions"
 msgid "Active"
 msgstr "Active"
 
-#: src/features/locale-demo/locale-demo.tsx:112
+#: src/features/locale-demo/locale-demo.tsx:127
 msgid "Active Locale"
 msgstr "Active Locale"
 
@@ -114,7 +114,7 @@ msgstr "Add User"
 msgid "Admin"
 msgstr "Admin"
 
-#: src/features/locale-demo/locale-demo.tsx:68
+#: src/features/locale-demo/locale-demo.tsx:80
 msgid "All API requests include Accept-Language and X-User-Locale headers"
 msgstr "All API requests include Accept-Language and X-User-Locale headers"
 
@@ -132,7 +132,7 @@ msgstr "An error occurred"
 msgid "An unexpected error occurred."
 msgstr "An unexpected error occurred."
 
-#: src/features/locale-demo/locale-demo.tsx:135
+#: src/features/locale-demo/locale-demo.tsx:152
 msgid "API Request Headers"
 msgstr "API Request Headers"
 
@@ -166,15 +166,15 @@ msgstr "Are you sure you want to refund this payment? This action cannot be undo
 msgid "At least one role is required"
 msgstr "At least one role is required"
 
-#: src/features/locale-demo/locale-demo.tsx:144
+#: src/features/locale-demo/locale-demo.tsx:161
 msgid "Backend Locale Resolution Priority"
 msgstr "Backend Locale Resolution Priority"
 
-#: src/features/locale-demo/locale-demo.tsx:73
+#: src/features/locale-demo/locale-demo.tsx:87
 msgid "Backend responses (errors, validation messages) are in your language"
 msgstr "Backend responses (errors, validation messages) are in your language"
 
-#: src/features/locale-demo/locale-demo.tsx:63
+#: src/features/locale-demo/locale-demo.tsx:74
 msgid "Backend user preference is updated via API"
 msgstr "Backend user preference is updated via API"
 
@@ -301,7 +301,7 @@ msgstr "Created"
 msgid "Created:"
 msgstr "Created:"
 
-#: src/features/locale-demo/locale-demo.tsx:106
+#: src/features/locale-demo/locale-demo.tsx:122
 msgid "Current Locale Status"
 msgstr "Current Locale Status"
 
@@ -335,11 +335,11 @@ msgstr "Data Tables"
 msgid "Date"
 msgstr "Date"
 
-#: src/features/locale-demo/locale-demo.tsx:187
+#: src/features/locale-demo/locale-demo.tsx:208
 msgid "Date Formatting"
 msgstr "Date Formatting"
 
-#: src/features/locale-demo/locale-demo.tsx:162
+#: src/features/locale-demo/locale-demo.tsx:184
 msgid "Default locale (English)"
 msgstr "Default locale (English)"
 
@@ -393,7 +393,7 @@ msgstr "Email"
 msgid "Email Address"
 msgstr "Email Address"
 
-#: src/features/locale-demo/locale-demo.tsx:78
+#: src/features/locale-demo/locale-demo.tsx:94
 msgid "Email notifications are sent in your preferred language"
 msgstr "Email notifications are sent in your preferred language"
 
@@ -587,7 +587,7 @@ msgstr "For additional security, we recommend changing your password regularly a
 msgid "Forms"
 msgstr "Forms"
 
-#: src/features/locale-demo/locale-demo.tsx:58
+#: src/features/locale-demo/locale-demo.tsx:69
 msgid "Frontend UI updates to the selected language"
 msgstr "Frontend UI updates to the selected language"
 
@@ -619,7 +619,7 @@ msgstr "Growth"
 msgid "Home"
 msgstr "Home"
 
-#: src/features/locale-demo/locale-demo.tsx:50
+#: src/features/locale-demo/locale-demo.tsx:59
 msgid "How it works"
 msgstr "How it works"
 
@@ -643,7 +643,7 @@ msgstr "Interactive"
 msgid "Interactive data table with sorting, actions, and custom rendering"
 msgstr "Interactive data table with sorting, actions, and custom rendering"
 
-#: src/features/locale-demo/locale-demo.tsx:43
+#: src/features/locale-demo/locale-demo.tsx:49
 msgid "Internationalization (i18n) Demo"
 msgstr "Internationalization (i18n) Demo"
 
@@ -698,7 +698,7 @@ msgstr "Lightning-fast development server with instant HMR"
 msgid "Loading..."
 msgstr "Loading..."
 
-#: src/features/locale-demo/locale-demo.tsx:173
+#: src/features/locale-demo/locale-demo.tsx:193
 msgid "Localized Content Examples"
 msgstr "Localized Content Examples"
 
@@ -798,7 +798,7 @@ msgstr "No payments found"
 msgid "No users found"
 msgstr "No users found"
 
-#: src/features/locale-demo/locale-demo.tsx:128
+#: src/features/locale-demo/locale-demo.tsx:145
 msgid "Not Set"
 msgstr "Not Set"
 
@@ -810,7 +810,7 @@ msgstr "Not Verified"
 msgid "Notification Examples"
 msgstr "Notification Examples"
 
-#: src/features/locale-demo/locale-demo.tsx:201
+#: src/features/locale-demo/locale-demo.tsx:222
 msgid "Number Formatting"
 msgstr "Number Formatting"
 
@@ -971,7 +971,7 @@ msgstr "Required payment information is missing."
 msgid "Reset Link Sent"
 msgstr "Reset Link Sent"
 
-#: src/features/locale-demo/locale-demo.tsx:97
+#: src/features/locale-demo/locale-demo.tsx:114
 msgid "Reset to Browser Default"
 msgstr "Reset to Browser Default"
 
@@ -1155,7 +1155,7 @@ msgstr "The request timed out. Please try again"
 msgid "This action cannot be undone."
 msgstr "This action cannot be undone."
 
-#: src/features/locale-demo/locale-demo.tsx:46
+#: src/features/locale-demo/locale-demo.tsx:52
 msgid "This demo shows the unified i18n approach across frontend and backend"
 msgstr "This demo shows the unified i18n approach across frontend and backend"
 
@@ -1263,7 +1263,7 @@ msgstr "User deleted successfully"
 msgid "User Management"
 msgstr "User Management"
 
-#: src/features/locale-demo/locale-demo.tsx:121
+#: src/features/locale-demo/locale-demo.tsx:136
 msgid "User Preference"
 msgstr "User Preference"
 
@@ -1341,19 +1341,19 @@ msgstr "Warning notification!"
 msgid "Weak"
 msgstr "Weak"
 
-#: src/features/locale-demo/locale-demo.tsx:178
+#: src/features/locale-demo/locale-demo.tsx:197
 msgid "Welcome Message"
 msgstr "Welcome Message"
 
-#: src/features/locale-demo/locale-demo.tsx:181
+#: src/features/locale-demo/locale-demo.tsx:201
 msgid "Welcome to IQ Scaffold! Your language preference is active."
 msgstr "Welcome to IQ Scaffold! Your language preference is active."
 
-#: src/features/locale-demo/locale-demo.tsx:53
+#: src/features/locale-demo/locale-demo.tsx:64
 msgid "When you change the language, the following happens:"
 msgstr "When you change the language, the following happens:"
 
-#: src/features/locale-demo/locale-demo.tsx:150
+#: src/features/locale-demo/locale-demo.tsx:169
 msgid "X-User-Locale header (from user preference)"
 msgstr "X-User-Locale header (from user preference)"
 
@@ -1373,7 +1373,7 @@ msgstr "You will need to sign in again on all devices."
 msgid "Your email has been successfully verified"
 msgstr "Your email has been successfully verified"
 
-#: src/features/locale-demo/locale-demo.tsx:215
+#: src/features/locale-demo/locale-demo.tsx:237
 msgid "Your language preference is synchronized across all devices when you're logged in. Backend services will send emails and API responses in your preferred language."
 msgstr "Your language preference is synchronized across all devices when you're logged in. Backend services will send emails and API responses in your preferred language."
 
