@@ -23,7 +23,10 @@ describe("Query Client Configuration", () => {
 
   it("has custom retry logic for queries", () => {
     const defaultOptions = queryClient.getDefaultOptions();
-    const retryFn = defaultOptions.queries?.retry as Function;
+    const retryFn = defaultOptions.queries?.retry as (
+      failureCount: number,
+      error: any
+    ) => boolean;
 
     expect(typeof retryFn).toBe("function");
 
