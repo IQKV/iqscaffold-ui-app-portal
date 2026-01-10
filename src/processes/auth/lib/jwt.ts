@@ -53,7 +53,7 @@ export function decodeUser(token: string): {
         userId: decoded[JWT_CLAIM_USER_ID],
         username: decoded[JWT_CLAIM_USERNAME],
         email: decoded[JWT_CLAIM_EMAIL],
-        roles: decoded[JWT_CLAIM_AUTHORITIES] || [],
+        authorities: decoded[JWT_CLAIM_AUTHORITIES] || [],
         permissions: decoded[JWT_CLAIM_PERMISSIONS] || [],
         firstName: decoded[JWT_CLAIM_FIRST_NAME],
         lastName: decoded[JWT_CLAIM_LAST_NAME],

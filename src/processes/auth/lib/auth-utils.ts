@@ -5,28 +5,33 @@ import type { UserContext } from "@/entities/user";
  */
 
 /**
- * Check if user has a specific role
+ * Check if user has a specific authority
  */
-export function hasRole(user: UserContext | null, role: string): boolean {
-  return user?.roles?.includes(role) ?? false;
+export function hasAuthority(user: UserContext | null, authority: string): boolean {
+  return user?.authorities?.includes(authority) ?? false;
 }
 
 /**
- * Check if user has any of the specified roles
+ * Check if user has any of the specified authorities
  */
-export function hasAnyRole(user: UserContext | null, roles: string[]): boolean {
-  return roles.some((role) => hasRole(user, role));
+export function hasAnyAuthority(user: UserContext | null, authorities: string[]): boolean {
+  return authorities.some((authority) => hasAuthority(user, authority));
 }
 
 /**
- * Check if user has all of the specified roles
+ * Check if user has all of the specified authorities
  */
-export function hasAllRoles(
+export function hasAllAuthorities(
   user: UserContext | null,
-  roles: string[]
+  authorities: string[]
 ): boolean {
-  return roles.every((role) => hasRole(user, role));
+  return authorities.every((authority) => hasAuthority(user, authority));
 }
+
+// Backward compatibility aliases
+export const hasRole = hasAuthority;
+export const hasAnyRole = hasAnyAuthority;
+export const hasAllRoles = hasAllAuthorities;
 
 /**
  * Check if user has a specific permission
@@ -59,14 +64,14 @@ export function hasAllPermissions(
 }
 
 /**
- * Check if user is an admin (has ADMIN, TENANT_OWNER, or SUPER_ADMIN role)
- * Note: ADMIN role does NOT have billing access - use billing-permissions for that
+ * Check if user is an admin (has ADMIN, TENANT_OWNER, or SUPER_ADMIN authority)
+ * Note: ADMIN authority does NOT have billing access - use billing-permissions for that
  */
 export function isAdmin(user: UserContext | null): boolean {
   return (
-    hasRole(user, "ADMIN") ||
-    hasRole(user, "TENANT_OWNER") ||
-    hasRole(user, "SUPER_ADMIN")
+    hasAuthority(user, "ADMIN") ||
+    hasAuthority(user, "TENANT_OWNER") ||
+    hasAuthority(user, "SUPER_ADMIN")
   );
 }
 
@@ -74,14 +79,14 @@ export function isAdmin(user: UserContext | null): boolean {
  * Check if user is a super admin
  */
 export function isSuperAdmin(user: UserContext | null): boolean {
-  return hasRole(user, "SUPER_ADMIN");
+  return hasAuthority(user, "SUPER_ADMIN");
 }
 
 /**
  * Check if user is a tenant owner
  */
 export function isTenantOwner(user: UserContext | null): boolean {
-  return hasRole(user, "TENANT_OWNER");
+  return hasAuthority(user, "TENANT_OWNER");
 }
 
 // Permission helpers are defined in ./permissions and exported via processes/auth public API
@@ -139,27 +144,30 @@ export function belongsToTenant(
 }
 
 /**
- * Get user's roles as a formatted string
+ * Get user's authorities as a formatted string
  */
-export function formatUserRoles(user: UserContext | null): string {
-  if (!user?.roles || user.roles.length === 0) {
-    return "No roles";
+export function formatUserAuthorities(user: UserContext | null): string {
+  if (!user?.authorities || user.authorities.length === 0) {
+    return "No authorities";
   }
 
-  return user.roles.join(", ");
+  return user.authorities.join(", ");
 }
 
+// Backward compatibility alias
+export const formatUserRoles = formatUserAuthorities;
+
 /**
- * Check if user account is active (has basic USER role at minimum)
+ * Check if user account is active (has basic USER authority at minimum)
  */
 export function isActiveUser(user: UserContext | null): boolean {
-  return hasRole(user, "USER") || isAdmin(user);
+  return hasAuthority(user, "USER") || isAdmin(user);
 }
 
 /**
- * Role hierarchy check - useful for role-based UI rendering
+ * Authority hierarchy check - useful for authority-based UI rendering
  */
-export const ROLE_HIERARCHY = {
+export const AUTHORITY_HIERARCHY = {
   USER: 1,
   FINANCE_VIEWER: 2,
   BILLING_ADMIN: 3,
@@ -168,17 +176,20 @@ export const ROLE_HIERARCHY = {
   SUPER_ADMIN: 6,
 } as const;
 
+// Backward compatibility alias
+export const ROLE_HIERARCHY = AUTHORITY_HIERARCHY;
+
 /**
- * Get user's highest role level
+ * Get user's highest authority level
  */
-export function getUserRoleLevel(user: UserContext | null): number {
-  if (!user?.roles) {
+export function getUserAuthorityLevel(user: UserContext | null): number {
+  if (!user?.authorities) {
     return 0;
   }
 
   let maxLevel = 0;
-  for (const role of user.roles) {
-    const level = ROLE_HIERARCHY[role as keyof typeof ROLE_HIERARCHY];
+  for (const authority of user.authorities) {
+    const level = AUTHORITY_HIERARCHY[authority as keyof typeof AUTHORITY_HIERARCHY];
     if (level && level > maxLevel) {
       maxLevel = level;
     }
@@ -188,11 +199,15 @@ export function getUserRoleLevel(user: UserContext | null): number {
 }
 
 /**
- * Check if user has role level equal or higher than specified
+ * Check if user has authority level equal or higher than specified
  */
-export function hasRoleLevel(
+export function hasAuthorityLevel(
   user: UserContext | null,
   minLevel: number
 ): boolean {
-  return getUserRoleLevel(user) >= minLevel;
+  return getUserAuthorityLevel(user) >= minLevel;
 }
+
+// Backward compatibility aliases
+export const getUserRoleLevel = getUserAuthorityLevel;
+export const hasRoleLevel = hasAuthorityLevel;

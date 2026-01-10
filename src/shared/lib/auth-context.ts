@@ -5,9 +5,9 @@ export interface AuthContextType {
   user: UserContext | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  hasRole: (role: string) => boolean;
-  hasAnyRole: (roles: string[]) => boolean;
-  hasAllRoles: (roles: string[]) => boolean;
+  hasAuthority: (authority: string) => boolean;
+  hasAnyAuthority: (authorities: string[]) => boolean;
+  hasAllAuthorities: (authorities: string[]) => boolean;
   hasPermission: (permission: string) => boolean;
   isAdmin: () => boolean;
   isSuperAdmin: () => boolean;

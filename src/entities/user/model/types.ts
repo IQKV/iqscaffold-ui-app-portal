@@ -9,7 +9,7 @@ export interface User {
   email: string;
   firstName: string;
   lastName: string;
-  roles: string[];
+  authorities: string[];
   permissions: string[];
   tenantId: string | null;
   organizationId: number | null;
@@ -21,7 +21,7 @@ export interface UserContext {
   userId: number;
   username: string;
   email: string;
-  roles: string[];
+  authorities: string[];
   permissions: string[];
   firstName: string;
   lastName: string;

@@ -1,5 +1,5 @@
 import type { UserContext } from "@/entities/user";
-import { hasAnyRole } from "./auth-utils";
+import { hasAnyAuthority } from "./auth-utils";
 import {
   BILLING_WRITE_AUTHORITIES,
   BILLING_READ_AUTHORITIES,
@@ -20,7 +20,7 @@ import {
  */
 export function hasBillingAccess(user: UserContext | null): boolean {
   if (!user) return false;
-  return hasAnyRole(user, [...BILLING_READ_AUTHORITIES]);
+  return hasAnyAuthority(user, [...BILLING_READ_AUTHORITIES]);
 }
 
 /**
@@ -30,7 +30,7 @@ export function hasBillingAccess(user: UserContext | null): boolean {
  */
 export function canModifyBilling(user: UserContext | null): boolean {
   if (!user) return false;
-  return hasAnyRole(user, [...BILLING_WRITE_AUTHORITIES]);
+  return hasAnyAuthority(user, [...BILLING_WRITE_AUTHORITIES]);
 }
 
 /**
@@ -40,7 +40,7 @@ export function canModifyBilling(user: UserContext | null): boolean {
 export function hasReadOnlyBillingAccess(user: UserContext | null): boolean {
   if (!user) return false;
   return (
-    user.roles.includes(AUTHORITY_FINANCE_VIEWER) && !canModifyBilling(user)
+    user.authorities.includes(AUTHORITY_FINANCE_VIEWER) && !canModifyBilling(user)
   );
 }
 
@@ -81,7 +81,7 @@ export function canViewPayouts(user: UserContext | null): boolean {
  */
 export function isTenantOwner(user: UserContext | null): boolean {
   if (!user) return false;
-  return user.roles.includes(AUTHORITY_TENANT_OWNER);
+  return user.authorities.includes(AUTHORITY_TENANT_OWNER);
 }
 
 /**
@@ -89,7 +89,7 @@ export function isTenantOwner(user: UserContext | null): boolean {
  */
 export function isBillingAdmin(user: UserContext | null): boolean {
   if (!user) return false;
-  return user.roles.includes(AUTHORITY_BILLING_ADMIN);
+  return user.authorities.includes(AUTHORITY_BILLING_ADMIN);
 }
 
 /**
@@ -97,27 +97,30 @@ export function isBillingAdmin(user: UserContext | null): boolean {
  */
 export function isFinanceViewer(user: UserContext | null): boolean {
   if (!user) return false;
-  return user.roles.includes(AUTHORITY_FINANCE_VIEWER);
+  return user.authorities.includes(AUTHORITY_FINANCE_VIEWER);
 }
 
 /**
- * Get user's billing role description for UI display
+ * Get user's billing authority description for UI display
  */
-export function getBillingRoleDescription(user: UserContext | null): string {
+export function getBillingAuthorityDescription(user: UserContext | null): string {
   if (!user) return "No access";
 
-  if (user.roles.includes(AUTHORITY_SUPER_ADMIN)) {
+  if (user.authorities.includes(AUTHORITY_SUPER_ADMIN)) {
     return "Platform Administrator";
   }
-  if (user.roles.includes(AUTHORITY_TENANT_OWNER)) {
+  if (user.authorities.includes(AUTHORITY_TENANT_OWNER)) {
     return "Organization Owner";
   }
-  if (user.roles.includes(AUTHORITY_BILLING_ADMIN)) {
+  if (user.authorities.includes(AUTHORITY_BILLING_ADMIN)) {
     return "Billing Administrator";
   }
-  if (user.roles.includes(AUTHORITY_FINANCE_VIEWER)) {
+  if (user.authorities.includes(AUTHORITY_FINANCE_VIEWER)) {
     return "Finance Viewer (Read-only)";
   }
 
   return "No billing access";
 }
+
+// Backward compatibility alias
+export const getBillingRoleDescription = getBillingAuthorityDescription;

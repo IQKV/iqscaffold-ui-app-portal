@@ -14,15 +14,15 @@ export function useAuth() {
   const refresh = useAuthStore((s) => s.refresh);
 
   const helpers = useMemo(() => {
-    const roles = user?.roles ?? [];
+    const authorities = user?.authorities ?? [];
     const permissions = user?.permissions ?? [];
 
-    const hasRole = (role: string) => roles.includes(role);
-    const hasAnyRole = (r: string[]) => r.some((x) => roles.includes(x));
-    const hasAllRoles = (r: string[]) => r.every((x) => roles.includes(x));
+    const hasAuthority = (authority: string) => authorities.includes(authority);
+    const hasAnyAuthority = (a: string[]) => a.some((x) => authorities.includes(x));
+    const hasAllAuthorities = (a: string[]) => a.every((x) => authorities.includes(x));
     const hasPermission = (p: string) => permissions.includes(p);
-    const isAdmin = () => hasRole("ADMIN") || hasRole("SUPER_ADMIN");
-    const isSuperAdmin = () => hasRole("SUPER_ADMIN");
+    const isAdmin = () => hasAuthority("ADMIN") || hasAuthority("TENANT_OWNER") || hasAuthority("SUPER_ADMIN");
+    const isSuperAdmin = () => hasAuthority("SUPER_ADMIN");
     const isTenantOwner = () => billingPerms.isTenantOwner(user);
     const canManageUsers = () => isAdmin();
 
@@ -38,9 +38,9 @@ export function useAuth() {
     const isFinanceViewer = () => billingPerms.isFinanceViewer(user);
 
     return {
-      hasRole,
-      hasAnyRole,
-      hasAllRoles,
+      hasAuthority,
+      hasAnyAuthority,
+      hasAllAuthorities,
       hasPermission,
       isAdmin,
       isSuperAdmin,
