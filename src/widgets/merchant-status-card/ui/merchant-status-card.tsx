@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Text, Title, Stack, Group, Badge, Anchor } from "@mantine/core";
 import { StripeConnectButton } from "@/features/merchant-onboarding";
+import { useAuth } from "@/processes/auth";
 import { t } from "@lingui/macro";
 import {
   IconAlertCircle,
@@ -17,6 +18,11 @@ export const MerchantStatusCard = ({
   isConfigured,
   onboardingStatus = "NONE",
 }: MerchantStatusCardProps) => {
+  const { canManageMerchants } = useAuth();
+  
+  const showOnboardingButton = canManageMerchants() && 
+                               !isConfigured && 
+                               onboardingStatus !== "COMPLETED";
   return (
     <Card withBorder padding="xl" radius="md">
       <Stack gap="md">
@@ -56,7 +62,7 @@ export const MerchantStatusCard = ({
           </Anchor>
         )}
 
-        {!isConfigured && onboardingStatus !== "COMPLETED" && (
+        {showOnboardingButton && (
           <StripeConnectButton
             refreshUrl={`${window.location.origin}/billing?status=refresh`}
             returnUrl={`${window.location.origin}/billing?status=success`}

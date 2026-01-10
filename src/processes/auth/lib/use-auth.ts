@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useAuthStore } from "@/processes/auth";
+import * as billingPerms from "./billing-permissions";
 
 /**
  * Auth hook built on top of the centralized processes/auth store.
@@ -22,7 +23,19 @@ export function useAuth() {
     const hasPermission = (p: string) => permissions.includes(p);
     const isAdmin = () => hasRole("ADMIN") || hasRole("SUPER_ADMIN");
     const isSuperAdmin = () => hasRole("SUPER_ADMIN");
+    const isTenantOwner = () => billingPerms.isTenantOwner(user);
     const canManageUsers = () => isAdmin();
+
+    // Billing permissions
+    const hasBillingAccess = () => billingPerms.hasBillingAccess(user);
+    const canModifyBilling = () => billingPerms.canModifyBilling(user);
+    const hasReadOnlyBillingAccess = () => billingPerms.hasReadOnlyBillingAccess(user);
+    const canProcessRefunds = () => billingPerms.canProcessRefunds(user);
+    const canManageMerchants = () => billingPerms.canManageMerchants(user);
+    const canViewPayments = () => billingPerms.canViewPayments(user);
+    const canViewPayouts = () => billingPerms.canViewPayouts(user);
+    const isBillingAdmin = () => billingPerms.isBillingAdmin(user);
+    const isFinanceViewer = () => billingPerms.isFinanceViewer(user);
 
     return {
       hasRole,
@@ -31,7 +44,17 @@ export function useAuth() {
       hasPermission,
       isAdmin,
       isSuperAdmin,
+      isTenantOwner,
       canManageUsers,
+      hasBillingAccess,
+      canModifyBilling,
+      hasReadOnlyBillingAccess,
+      canProcessRefunds,
+      canManageMerchants,
+      canViewPayments,
+      canViewPayouts,
+      isBillingAdmin,
+      isFinanceViewer,
     };
   }, [user]);
 

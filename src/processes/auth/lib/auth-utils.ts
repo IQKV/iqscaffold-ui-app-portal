@@ -59,10 +59,15 @@ export function hasAllPermissions(
 }
 
 /**
- * Check if user is an admin (has ADMIN or SUPER_ADMIN role)
+ * Check if user is an admin (has ADMIN, TENANT_OWNER, or SUPER_ADMIN role)
+ * Note: ADMIN role does NOT have billing access - use billing-permissions for that
  */
 export function isAdmin(user: UserContext | null): boolean {
-  return hasRole(user, "ADMIN") || hasRole(user, "SUPER_ADMIN");
+  return (
+    hasRole(user, "ADMIN") ||
+    hasRole(user, "TENANT_OWNER") ||
+    hasRole(user, "SUPER_ADMIN")
+  );
 }
 
 /**
@@ -70,6 +75,13 @@ export function isAdmin(user: UserContext | null): boolean {
  */
 export function isSuperAdmin(user: UserContext | null): boolean {
   return hasRole(user, "SUPER_ADMIN");
+}
+
+/**
+ * Check if user is a tenant owner
+ */
+export function isTenantOwner(user: UserContext | null): boolean {
+  return hasRole(user, "TENANT_OWNER");
 }
 
 // Permission helpers are defined in ./permissions and exported via processes/auth public API
@@ -149,8 +161,11 @@ export function isActiveUser(user: UserContext | null): boolean {
  */
 export const ROLE_HIERARCHY = {
   USER: 1,
-  ADMIN: 2,
-  SUPER_ADMIN: 3,
+  FINANCE_VIEWER: 2,
+  BILLING_ADMIN: 3,
+  ADMIN: 4,
+  TENANT_OWNER: 5,
+  SUPER_ADMIN: 6,
 } as const;
 
 /**

@@ -7,10 +7,12 @@ import {
   IconCreditCard,
 } from "@tabler/icons-react";
 import { Link, useLocation } from "@tanstack/react-router";
+import { useAuth } from "@/processes/auth";
 import { t } from "@lingui/core/macro";
 
 export function Sidebar() {
   const location = useLocation();
+  const { hasBillingAccess } = useAuth();
 
   return (
     <Stack gap="md" data-testid="widget-sidebar">
@@ -54,14 +56,16 @@ export function Sidebar() {
         data-testid="nav-examples"
       />
 
-      <NavLink
-        component={Link}
-        to="/billing"
-        label={t`Billing`}
-        leftSection={<IconCreditCard size="1rem" />}
-        active={location.pathname === "/billing"}
-        data-testid="nav-billing"
-      />
+      {hasBillingAccess() && (
+        <NavLink
+          component={Link}
+          to="/billing"
+          label={t`Billing`}
+          leftSection={<IconCreditCard size="1rem" />}
+          active={location.pathname === "/billing"}
+          data-testid="nav-billing"
+        />
+      )}
 
       <NavLink
         component={Link}

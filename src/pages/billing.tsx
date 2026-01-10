@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Container, Stack, Title, Grid, Skeleton } from "@mantine/core";
-import { AuthGuard, AdminGuard } from "@/processes/auth";
+import { Container, Stack, Title, Grid, Skeleton, Alert } from "@mantine/core";
+import { AuthGuard } from "@/processes/auth";
+import { useAuth } from "@/processes/auth";
 import { BillingHistoryTable } from "@/widgets/billing-history";
 import { MerchantStatusCard } from "@/widgets/merchant-status-card";
-import { usePayments, useMerchantStatus } from "@/entities/billing";
+import { useMerchantStatus } from "@/entities/billing";
 import { t } from "@lingui/macro";
 
 export const Route = createFileRoute("/billing")({
@@ -11,6 +12,7 @@ export const Route = createFileRoute("/billing")({
 });
 
 function BillingPage() {
+  const { hasBillingAccess, hasReadOnlyBillingAccess, canManageMerchants } = useAuth();
   const { data: merchantStatus, isLoading: isStatusLoading } =
     useMerchantStatus();
 
@@ -20,24 +22,44 @@ function BillingPage() {
       ? "COMPLETED"
       : "PENDING";
 
+  if (!hasBillingAccess()) {
+    return (
+      <AuthGuard>
+        <Container size="xl" py="xl" data-testid="page-billing">
+          <Alert color="red" title={t`Access Denied`}>
+            {t`You don't have permission to access billing information. Please contact your administrator.`}
+          </Alert>
+        </Container>
+      </AuthGuard>
+    );
+  }
+
   return (
     <AuthGuard>
       <Container size="xl" py="xl" data-testid="page-billing">
         <Stack gap="xl">
           <Title order={2}>{t`Billing & Payments`}</Title>
 
+          {hasReadOnlyBillingAccess() && (
+            <Alert color="blue">
+              {t`You have read-only access to billing information.`}
+            </Alert>
+          )}
+
           <Grid>
             <Grid.Col span={{ base: 12, md: 4 }}>
-              <AdminGuard>
-                {isStatusLoading ? (
-                  <Skeleton height={200} radius="md" />
-                ) : (
-                  <MerchantStatusCard
-                    isConfigured={!!merchantStatus}
-                    onboardingStatus={onboardingStatus}
-                  />
-                )}
-              </AdminGuard>
+              {canManageMerchants() && (
+                <>
+                  {isStatusLoading ? (
+                    <Skeleton height={200} radius="md" />
+                  ) : (
+                    <MerchantStatusCard
+                      isConfigured={!!merchantStatus}
+                      onboardingStatus={onboardingStatus}
+                    />
+                  )}
+                </>
+              )}
             </Grid.Col>
 
             <Grid.Col span={{ base: 12, md: 8 }}>

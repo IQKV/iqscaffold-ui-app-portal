@@ -22,9 +22,17 @@ const PAGE_SIZE = 10;
 export const BillingHistoryTable = () => {
   const [page, setPage] = useState(1);
   const { data, isLoading } = usePayments({ page: page - 1, size: PAGE_SIZE });
-  const { isAdmin } = useAuth();
+  const { canProcessRefunds, canViewPayments } = useAuth();
   const queryClient = useQueryClient();
   const refundMutation = useRefundPayment();
+
+  if (!canViewPayments()) {
+    return (
+      <Stack gap="md">
+        <Text c="dimmed">{t`You don't have permission to view payment history.`}</Text>
+      </Stack>
+    );
+  }
 
   const handleRefund = (id: string) => {
     modals.openConfirmModal({
@@ -104,7 +112,7 @@ export const BillingHistoryTable = () => {
             textAlign: "right",
             render: (record: Payment) => (
               <Group justify="flex-end" gap={4} wrap="nowrap">
-                {isAdmin() && record.status === "SUCCEEDED" && (
+                {canProcessRefunds() && record.status === "SUCCEEDED" && (
                   <Tooltip label={t`Refund Payment`}>
                     <ActionIcon
                       color="red"
