@@ -112,7 +112,9 @@ export function MSWDemoPage() {
                       </Text>
                     </div>
                     <Badge
-                      color={user.authorities.includes("ADMIN") ? "red" : "blue"}
+                      color={
+                        user.authorities.includes("ADMIN") ? "red" : "blue"
+                      }
                       variant="light"
                     >
                       {user.authorities.join(", ")}

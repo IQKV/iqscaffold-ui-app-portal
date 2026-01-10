@@ -48,7 +48,9 @@ export function RoleGuard({
 }) {
   const { hasAnyAuthority, hasAllAuthorities } = useAuth();
   const roleArray = Array.isArray(roles) ? roles : [roles];
-  const hasAccess = requireAll ? hasAllAuthorities(roleArray) : hasAnyAuthority(roleArray);
+  const hasAccess = requireAll
+    ? hasAllAuthorities(roleArray)
+    : hasAnyAuthority(roleArray);
   if (!hasAccess) {
     return (
       (fallback as any) || (

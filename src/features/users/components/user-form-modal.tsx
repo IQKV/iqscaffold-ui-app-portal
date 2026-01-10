@@ -24,7 +24,9 @@ const createUserFormSchema = () =>
       .string()
       .min(8, t`Password must be at least 8 characters`)
       .optional(),
-    authorities: z.array(z.string()).min(1, t`At least one authority is required`),
+    authorities: z
+      .array(z.string())
+      .min(1, t`At least one authority is required`),
     enabled: z.boolean(),
     emailVerified: z.boolean(),
   });

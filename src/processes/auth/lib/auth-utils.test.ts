@@ -256,7 +256,10 @@ describe("Auth Utils", () => {
     });
 
     it("returns highest level when user has multiple authorities", () => {
-      const user = { ...mockUser, authorities: ["USER", "ADMIN", "SUPER_ADMIN"] };
+      const user = {
+        ...mockUser,
+        authorities: ["USER", "ADMIN", "SUPER_ADMIN"],
+      };
       expect(getUserRoleLevel(user)).toBe(ROLE_HIERARCHY.SUPER_ADMIN);
     });
 

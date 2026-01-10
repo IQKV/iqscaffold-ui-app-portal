@@ -93,7 +93,9 @@ export const usersHandlers = [
           user.lastName.toLowerCase().includes(searchLower) ||
           user.username.toLowerCase().includes(searchLower) ||
           user.email.toLowerCase().includes(searchLower) ||
-          user.authorities.some((authority) => authority.toLowerCase().includes(searchLower))
+          user.authorities.some((authority) =>
+            authority.toLowerCase().includes(searchLower)
+          )
       );
     }
 
