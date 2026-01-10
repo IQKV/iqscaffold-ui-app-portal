@@ -219,13 +219,13 @@ describe("Auth Utils", () => {
       expect(formatUserRoles(mockUser)).toBe("USER, ADMIN");
     });
 
-    it("returns No roles for user without authorities", () => {
+    it("returns No authorities for user without authorities", () => {
       const user = { ...mockUser, authorities: [] };
-      expect(formatUserRoles(user)).toBe("No roles");
+      expect(formatUserRoles(user)).toBe("No authorities");
     });
 
-    it("returns No roles for null user", () => {
-      expect(formatUserRoles(null)).toBe("No roles");
+    it("returns No authorities for null user", () => {
+      expect(formatUserRoles(null)).toBe("No authorities");
     });
   });
 
