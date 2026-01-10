@@ -18,10 +18,15 @@ export function useAuth() {
     const permissions = user?.permissions ?? [];
 
     const hasAuthority = (authority: string) => authorities.includes(authority);
-    const hasAnyAuthority = (a: string[]) => a.some((x) => authorities.includes(x));
-    const hasAllAuthorities = (a: string[]) => a.every((x) => authorities.includes(x));
+    const hasAnyAuthority = (a: string[]) =>
+      a.some((x) => authorities.includes(x));
+    const hasAllAuthorities = (a: string[]) =>
+      a.every((x) => authorities.includes(x));
     const hasPermission = (p: string) => permissions.includes(p);
-    const isAdmin = () => hasAuthority("ADMIN") || hasAuthority("TENANT_OWNER") || hasAuthority("SUPER_ADMIN");
+    const isAdmin = () =>
+      hasAuthority("ADMIN") ||
+      hasAuthority("TENANT_OWNER") ||
+      hasAuthority("SUPER_ADMIN");
     const isSuperAdmin = () => hasAuthority("SUPER_ADMIN");
     const isTenantOwner = () => billingPerms.isTenantOwner(user);
     const canManageUsers = () => isAdmin();
@@ -29,7 +34,8 @@ export function useAuth() {
     // Billing permissions
     const hasBillingAccess = () => billingPerms.hasBillingAccess(user);
     const canModifyBilling = () => billingPerms.canModifyBilling(user);
-    const hasReadOnlyBillingAccess = () => billingPerms.hasReadOnlyBillingAccess(user);
+    const hasReadOnlyBillingAccess = () =>
+      billingPerms.hasReadOnlyBillingAccess(user);
     const canProcessRefunds = () => billingPerms.canProcessRefunds(user);
     const canManageMerchants = () => billingPerms.canManageMerchants(user);
     const canViewPayments = () => billingPerms.canViewPayments(user);

@@ -7,14 +7,20 @@ import type { UserContext } from "@/entities/user";
 /**
  * Check if user has a specific authority
  */
-export function hasAuthority(user: UserContext | null, authority: string): boolean {
+export function hasAuthority(
+  user: UserContext | null,
+  authority: string
+): boolean {
   return user?.authorities?.includes(authority) ?? false;
 }
 
 /**
  * Check if user has any of the specified authorities
  */
-export function hasAnyAuthority(user: UserContext | null, authorities: string[]): boolean {
+export function hasAnyAuthority(
+  user: UserContext | null,
+  authorities: string[]
+): boolean {
   return authorities.some((authority) => hasAuthority(user, authority));
 }
 
@@ -189,7 +195,8 @@ export function getUserAuthorityLevel(user: UserContext | null): number {
 
   let maxLevel = 0;
   for (const authority of user.authorities) {
-    const level = AUTHORITY_HIERARCHY[authority as keyof typeof AUTHORITY_HIERARCHY];
+    const level =
+      AUTHORITY_HIERARCHY[authority as keyof typeof AUTHORITY_HIERARCHY];
     if (level && level > maxLevel) {
       maxLevel = level;
     }

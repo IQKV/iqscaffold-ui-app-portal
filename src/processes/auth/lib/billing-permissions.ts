@@ -40,7 +40,8 @@ export function canModifyBilling(user: UserContext | null): boolean {
 export function hasReadOnlyBillingAccess(user: UserContext | null): boolean {
   if (!user) return false;
   return (
-    user.authorities.includes(AUTHORITY_FINANCE_VIEWER) && !canModifyBilling(user)
+    user.authorities.includes(AUTHORITY_FINANCE_VIEWER) &&
+    !canModifyBilling(user)
   );
 }
 
@@ -103,7 +104,9 @@ export function isFinanceViewer(user: UserContext | null): boolean {
 /**
  * Get user's billing authority description for UI display
  */
-export function getBillingAuthorityDescription(user: UserContext | null): string {
+export function getBillingAuthorityDescription(
+  user: UserContext | null
+): string {
   if (!user) return "No access";
 
   if (user.authorities.includes(AUTHORITY_SUPER_ADMIN)) {

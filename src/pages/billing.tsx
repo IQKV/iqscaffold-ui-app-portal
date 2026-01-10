@@ -12,7 +12,8 @@ export const Route = createFileRoute("/billing")({
 });
 
 function BillingPage() {
-  const { hasBillingAccess, hasReadOnlyBillingAccess, canManageMerchants } = useAuth();
+  const { hasBillingAccess, hasReadOnlyBillingAccess, canManageMerchants } =
+    useAuth();
   const { data: merchantStatus, isLoading: isStatusLoading } =
     useMerchantStatus();
 

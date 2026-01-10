@@ -19,10 +19,9 @@ export const MerchantStatusCard = ({
   onboardingStatus = "NONE",
 }: MerchantStatusCardProps) => {
   const { canManageMerchants } = useAuth();
-  
-  const showOnboardingButton = canManageMerchants() && 
-                               !isConfigured && 
-                               onboardingStatus !== "COMPLETED";
+
+  const showOnboardingButton =
+    canManageMerchants() && !isConfigured && onboardingStatus !== "COMPLETED";
   return (
     <Card withBorder padding="xl" radius="md">
       <Stack gap="md">
