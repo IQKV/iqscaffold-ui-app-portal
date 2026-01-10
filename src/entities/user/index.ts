@@ -28,3 +28,20 @@ export {
   useNotificationSettings,
   useTwoFactorStatus,
 } from "./model/use-preference-value";
+
+// User Management (Admin operations)
+export type {
+  UserDto,
+  CreateUserRequest,
+  UpdateUserRequest,
+  UserPageResponse,
+} from "@/shared/api/user-management-api";
+
+export {
+  useUsers,
+  useUser,
+  useCreateUser,
+  useUpdateUser,
+  useDeleteUser,
+  USER_MANAGEMENT_QUERY_KEY,
+} from "./model/use-user-management";

@@ -5,7 +5,7 @@ export const defaultMockUser: UserContext = {
   userId: 1,
   username: "testuser",
   email: "test@example.com",
-  roles: ["ADMIN"],
+  authorities: ["ADMIN"],
   permissions: ["users:read", "users:write", "users:delete"],
   firstName: "Test",
   lastName: "User",

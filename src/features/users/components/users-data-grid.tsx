@@ -84,24 +84,24 @@ export function UsersDataGrid({
     [deleteUserMutation]
   );
 
-  const getRoleBadgeColor = (roles: string[]) => {
-    if (roles.includes("SUPER_ADMIN")) {
+  const getRoleBadgeColor = (authorities: string[]) => {
+    if (authorities.includes("SUPER_ADMIN")) {
       return "red";
     }
-    if (roles.includes("ADMIN")) {
+    if (authorities.includes("ADMIN")) {
       return "orange";
     }
-    if (roles.includes("USER")) {
+    if (authorities.includes("USER")) {
       return "blue";
     }
     return "gray";
   };
 
-  const formatRoles = (roles: string[]) => {
-    if (!roles || roles.length === 0) {
-      return "No roles";
+  const formatRoles = (authorities: string[]) => {
+    if (!authorities || authorities.length === 0) {
+      return "No authorities";
     }
-    return roles.join(", ");
+    return authorities.join(", ");
   };
 
   const columns = useMemo<DataTableColumn<User>[]>(
@@ -125,11 +125,11 @@ export function UsersDataGrid({
       },
       {
         key: "roles",
-        title: t`Roles`,
+        title: t`Authorities`,
         sortable: true,
         render: (_, user: User) => (
-          <Badge color={getRoleBadgeColor(user.roles)} variant="light">
-            {formatRoles(user.roles)}
+          <Badge color={getRoleBadgeColor(user.authorities)} variant="light">
+            {formatRoles(user.authorities)}
           </Badge>
         ),
       },

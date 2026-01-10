@@ -24,7 +24,7 @@ const createUserFormSchema = () =>
       .string()
       .min(8, t`Password must be at least 8 characters`)
       .optional(),
-    roles: z.array(z.string()).min(1, t`At least one role is required`),
+    authorities: z.array(z.string()).min(1, t`At least one authority is required`),
     enabled: z.boolean(),
     emailVerified: z.boolean(),
   });
@@ -66,7 +66,7 @@ export function UserFormModal({
       firstName: "",
       lastName: "",
       password: "",
-      roles: ["USER"],
+      authorities: ["USER"],
       enabled: true,
       emailVerified: false,
     },
@@ -79,7 +79,7 @@ export function UserFormModal({
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
-        roles: user.roles || ["USER"],
+        authorities: user.authorities || ["USER"],
         enabled: user.enabled,
         emailVerified: user.emailVerified,
         password: "", // Don't populate password for editing
@@ -115,7 +115,7 @@ export function UserFormModal({
         email: values.email,
         firstName: values.firstName,
         lastName: values.lastName,
-        roles: values.roles,
+        authorities: values.authorities,
         enabled: values.enabled,
         emailVerified: values.emailVerified,
       };
@@ -157,7 +157,7 @@ export function UserFormModal({
         firstName: values.firstName,
         lastName: values.lastName,
         password: values.password,
-        roles: values.roles,
+        authorities: values.authorities,
       };
 
       createUserMutation.mutate(createData, {
@@ -253,9 +253,9 @@ export function UserFormModal({
 
           <FormField
             type="multiselect"
-            name="roles"
-            label={t`Roles`}
-            placeholder={t`Select user roles`}
+            name="authorities"
+            label={t`Authorities`}
+            placeholder={t`Select user authorities`}
             data={getRoleOptions()}
             form={form}
             withAsterisk

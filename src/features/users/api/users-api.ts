@@ -9,7 +9,7 @@ export interface User {
   lastName: string;
   enabled: boolean;
   emailVerified: boolean;
-  roles: string[];
+  authorities: string[];
   tenantId: string;
   createdAt: string;
   updatedAt?: string;
@@ -21,7 +21,7 @@ export interface CreateUserRequest {
   password: string;
   firstName: string;
   lastName: string;
-  roles?: string[];
+  authorities?: string[];
   tenantId?: string;
 }
 
@@ -32,7 +32,7 @@ export interface UpdateUserRequest {
   lastName?: string;
   enabled?: boolean;
   emailVerified?: boolean;
-  roles?: string[];
+  authorities?: string[];
 }
 
 export interface UsersResponse {

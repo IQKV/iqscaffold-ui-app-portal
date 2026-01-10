@@ -14,7 +14,7 @@ const mockUsers: User[] = [
     firstName: "John",
     lastName: "Doe",
     enabled: true,
-    roles: ["ADMIN", "USER"],
+    authorities: ["ADMIN", "USER"],
     emailVerified: true,
     tenantId: "default",
     createdAt: "2024-01-15T10:30:00Z",
@@ -27,7 +27,7 @@ const mockUsers: User[] = [
     firstName: "Jane",
     lastName: "Smith",
     enabled: true,
-    roles: ["USER"],
+    authorities: ["USER"],
     emailVerified: true,
     tenantId: "default",
     createdAt: "2024-01-16T09:15:00Z",
@@ -40,7 +40,7 @@ const mockUsers: User[] = [
     firstName: "Bob",
     lastName: "Wilson",
     enabled: true,
-    roles: ["USER"],
+    authorities: ["USER"],
     emailVerified: false,
     tenantId: "default",
     createdAt: "2024-01-17T16:45:00Z",
@@ -52,7 +52,7 @@ const mockUsers: User[] = [
     firstName: "Alice",
     lastName: "Brown",
     enabled: true,
-    roles: ["USER"],
+    authorities: ["USER"],
     emailVerified: true,
     tenantId: "default",
     createdAt: "2024-01-18T08:30:00Z",
@@ -64,7 +64,7 @@ const mockUsers: User[] = [
     firstName: "Charlie",
     lastName: "Davis",
     enabled: true,
-    roles: ["SUPER_ADMIN"],
+    authorities: ["SUPER_ADMIN"],
     emailVerified: true,
     tenantId: "default",
     createdAt: "2024-01-19T13:20:00Z",
@@ -93,7 +93,7 @@ export const usersHandlers = [
           user.lastName.toLowerCase().includes(searchLower) ||
           user.username.toLowerCase().includes(searchLower) ||
           user.email.toLowerCase().includes(searchLower) ||
-          user.roles.some((role) => role.toLowerCase().includes(searchLower))
+          user.authorities.some((authority) => authority.toLowerCase().includes(searchLower))
       );
     }
 
@@ -154,7 +154,7 @@ export const usersHandlers = [
       firstName: body.firstName,
       lastName: body.lastName,
       enabled: true,
-      roles: body.roles || ["USER"],
+      authorities: body.authorities || ["USER"],
       emailVerified: false,
       tenantId: body.tenantId || "default",
       createdAt: new Date().toISOString(),
@@ -199,7 +199,7 @@ export const usersHandlers = [
     const updatedUser: User = {
       ...users[userIndex],
       ...body,
-      roles: body.roles || users[userIndex].roles,
+      authorities: body.authorities || users[userIndex].authorities,
       updatedAt: new Date().toISOString(),
     };
 

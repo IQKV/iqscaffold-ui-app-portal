@@ -13,7 +13,7 @@ const mockUser: User = {
   firstName: "John",
   lastName: "Doe",
   enabled: true,
-  roles: ["ADMIN", "USER"],
+  authorities: ["ADMIN", "USER"],
   emailVerified: true,
   tenantId: "default",
   createdAt: "2024-01-15T10:30:00Z",

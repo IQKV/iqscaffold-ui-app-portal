@@ -10,5 +10,22 @@ export type {
 } from "./tenant-api";
 
 export { userPreferenceApi } from "./user-preference-api";
+
 export { billingApi } from "./billing";
 export type * from "./billing/types";
+
+export { organizationApi } from "./organization-api";
+export type {
+  OrganizationDto,
+  CreateOrganizationRequest,
+  UpdateOrganizationRequest,
+  OrganizationPageResponse,
+} from "./organization-api";
+
+export { userManagementApi } from "./user-management-api";
+export type {
+  UserDto,
+  CreateUserRequest,
+  UpdateUserRequest,
+  UserPageResponse,
+} from "./user-management-api";

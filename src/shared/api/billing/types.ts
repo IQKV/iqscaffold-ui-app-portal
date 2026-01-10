@@ -42,9 +42,16 @@ export interface BillingHistoryParams {
   sort?: string[];
 }
 
+export enum PaymentGatewayProvider {
+  STRIPE = "STRIPE",
+  PAYPAL = "PAYPAL",
+  SQUARE = "SQUARE",
+}
+
 export interface MerchantStatus {
   id: string;
-  stripeAccountId: string;
+  paymentGatewayAccountId: string;
+  paymentGatewayProvider: PaymentGatewayProvider;
   chargesEnabled: boolean;
   payoutsEnabled: boolean;
 }

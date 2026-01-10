@@ -46,14 +46,14 @@ export function RoleGuard({
   requireAll?: boolean;
   fallback?: ReactNode;
 }) {
-  const { hasAnyRole, hasAllRoles } = useAuth();
+  const { hasAnyAuthority, hasAllAuthorities } = useAuth();
   const roleArray = Array.isArray(roles) ? roles : [roles];
-  const hasAccess = requireAll ? hasAllRoles(roleArray) : hasAnyRole(roleArray);
+  const hasAccess = requireAll ? hasAllAuthorities(roleArray) : hasAnyAuthority(roleArray);
   if (!hasAccess) {
     return (
       (fallback as any) || (
         <DefaultUnauthorizedFallback
-          message={`You need ${requireAll ? "all of these" : "one of these"} roles: ${roleArray.join(", ")}`}
+          message={`You need ${requireAll ? "all of these" : "one of these"} authorities: ${roleArray.join(", ")}`}
         />
       )
     );

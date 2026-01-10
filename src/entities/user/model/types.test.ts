@@ -10,7 +10,7 @@ describe("User entity types", () => {
         email: "test@example.com",
         firstName: "Test",
         lastName: "User",
-        roles: ["USER"],
+        authorities: ["USER"],
         permissions: ["READ_PROFILE"],
         tenantId: "default",
         organizationId: null,
@@ -21,7 +21,7 @@ describe("User entity types", () => {
       expect(user.userId).toBe(1);
       expect(user.username).toBe("testuser");
       expect(user.email).toBe("test@example.com");
-      expect(user.roles).toContain("USER");
+      expect(user.authorities).toContain("USER");
     });
 
     it("should allow emailVerified to be optional", () => {
@@ -31,7 +31,7 @@ describe("User entity types", () => {
         email: "test@example.com",
         firstName: "Test",
         lastName: "User",
-        roles: ["USER"],
+        authorities: ["USER"],
         permissions: [],
         tenantId: "default",
         organizationId: null,
@@ -41,22 +41,22 @@ describe("User entity types", () => {
       expect(user.emailVerified).toBeUndefined();
     });
 
-    it("should allow multiple roles", () => {
+    it("should allow multiple authorities", () => {
       const user: User = {
         userId: 1,
         username: "admin",
         email: "admin@example.com",
         firstName: "Admin",
         lastName: "User",
-        roles: ["USER", "ADMIN"],
+        authorities: ["USER", "ADMIN"],
         permissions: ["READ_PROFILE", "WRITE_PROFILE"],
         tenantId: "default",
         organizationId: null,
         customClaims: {},
       };
 
-      expect(user.roles).toHaveLength(2);
-      expect(user.roles).toContain("ADMIN");
+      expect(user.authorities).toHaveLength(2);
+      expect(user.authorities).toContain("ADMIN");
     });
 
     it("should allow custom claims", () => {
@@ -66,7 +66,7 @@ describe("User entity types", () => {
         email: "test@example.com",
         firstName: "Test",
         lastName: "User",
-        roles: ["USER"],
+        authorities: ["USER"],
         permissions: [],
         tenantId: "default",
         organizationId: null,
@@ -87,7 +87,7 @@ describe("User entity types", () => {
         userId: 1,
         username: "testuser",
         email: "test@example.com",
-        roles: ["USER"],
+        authorities: ["USER"],
         permissions: ["READ_PROFILE"],
         firstName: "Test",
         lastName: "User",
@@ -195,7 +195,7 @@ describe("User entity types", () => {
         email: "test@example.com",
         firstName: "Test",
         lastName: "User",
-        roles: ["USER"],
+        authorities: ["USER"],
         permissions: [],
         tenantId: "default",
         organizationId: null,
@@ -207,7 +207,7 @@ describe("User entity types", () => {
         userId: user.userId,
         username: user.username,
         email: user.email,
-        roles: user.roles,
+        authorities: user.authorities,
         permissions: user.permissions,
         firstName: user.firstName,
         lastName: user.lastName,

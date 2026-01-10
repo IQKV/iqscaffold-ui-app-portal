@@ -40,7 +40,7 @@ export function canModifyBilling(user: UserContext | null): boolean {
 export function hasReadOnlyBillingAccess(user: UserContext | null): boolean {
   if (!user) return false;
   return (
-    user.authorities.includes(AUTHORITY_FINANCE_VIEWER) &&
+    (user.authorities?.includes(AUTHORITY_FINANCE_VIEWER) ?? false) &&
     !canModifyBilling(user)
   );
 }
@@ -82,7 +82,7 @@ export function canViewPayouts(user: UserContext | null): boolean {
  */
 export function isTenantOwner(user: UserContext | null): boolean {
   if (!user) return false;
-  return user.authorities.includes(AUTHORITY_TENANT_OWNER);
+  return user.authorities?.includes(AUTHORITY_TENANT_OWNER) ?? false;
 }
 
 /**
@@ -90,7 +90,7 @@ export function isTenantOwner(user: UserContext | null): boolean {
  */
 export function isBillingAdmin(user: UserContext | null): boolean {
   if (!user) return false;
-  return user.authorities.includes(AUTHORITY_BILLING_ADMIN);
+  return user.authorities?.includes(AUTHORITY_BILLING_ADMIN) ?? false;
 }
 
 /**
@@ -98,7 +98,7 @@ export function isBillingAdmin(user: UserContext | null): boolean {
  */
 export function isFinanceViewer(user: UserContext | null): boolean {
   if (!user) return false;
-  return user.authorities.includes(AUTHORITY_FINANCE_VIEWER);
+  return user.authorities?.includes(AUTHORITY_FINANCE_VIEWER) ?? false;
 }
 
 /**
@@ -109,16 +109,16 @@ export function getBillingAuthorityDescription(
 ): string {
   if (!user) return "No access";
 
-  if (user.authorities.includes(AUTHORITY_SUPER_ADMIN)) {
+  if (user.authorities?.includes(AUTHORITY_SUPER_ADMIN)) {
     return "Platform Administrator";
   }
-  if (user.authorities.includes(AUTHORITY_TENANT_OWNER)) {
+  if (user.authorities?.includes(AUTHORITY_TENANT_OWNER)) {
     return "Organization Owner";
   }
-  if (user.authorities.includes(AUTHORITY_BILLING_ADMIN)) {
+  if (user.authorities?.includes(AUTHORITY_BILLING_ADMIN)) {
     return "Billing Administrator";
   }
-  if (user.authorities.includes(AUTHORITY_FINANCE_VIEWER)) {
+  if (user.authorities?.includes(AUTHORITY_FINANCE_VIEWER)) {
     return "Finance Viewer (Read-only)";
   }
 

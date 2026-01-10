@@ -112,10 +112,10 @@ export function MSWDemoPage() {
                       </Text>
                     </div>
                     <Badge
-                      color={user.roles.includes("ADMIN") ? "red" : "blue"}
+                      color={user.authorities.includes("ADMIN") ? "red" : "blue"}
                       variant="light"
                     >
-                      {user.roles.join(", ")}
+                      {user.authorities.join(", ")}
                     </Badge>
                   </Group>
                 </Card>

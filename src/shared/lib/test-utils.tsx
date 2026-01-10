@@ -32,22 +32,32 @@ export function TestWrapper({
     user: mockUser,
     isAuthenticated: !!mockUser,
     isLoading: false,
-    hasRole: (role: string) => mockUser?.roles?.includes(role) ?? false,
-    hasAnyRole: (roles: string[]) =>
-      roles.some((role) => mockUser?.roles?.includes(role) ?? false),
-    hasAllRoles: (roles: string[]) =>
-      roles.every((role) => mockUser?.roles?.includes(role) ?? false),
+    hasAuthority: (authority: string) => mockUser?.authorities?.includes(authority) ?? false,
+    hasAnyAuthority: (authorities: string[]) =>
+      authorities.some((authority) => mockUser?.authorities?.includes(authority) ?? false),
+    hasAllAuthorities: (authorities: string[]) =>
+      authorities.every((authority) => mockUser?.authorities?.includes(authority) ?? false),
     hasPermission: (permission: string) =>
       mockUser?.permissions?.includes(permission) ?? false,
     isAdmin: () =>
-      mockUser?.roles?.includes("ADMIN") ||
-      mockUser?.roles?.includes("SUPER_ADMIN") ||
+      mockUser?.authorities?.includes("ADMIN") ||
+      mockUser?.authorities?.includes("SUPER_ADMIN") ||
       false,
-    isSuperAdmin: () => mockUser?.roles?.includes("SUPER_ADMIN") || false,
+    isSuperAdmin: () => mockUser?.authorities?.includes("SUPER_ADMIN") || false,
+    isTenantOwner: () => mockUser?.authorities?.includes("TENANT_OWNER") || false,
     canManageUsers: () =>
-      mockUser?.roles?.includes("ADMIN") ||
-      mockUser?.roles?.includes("SUPER_ADMIN") ||
+      mockUser?.authorities?.includes("ADMIN") ||
+      mockUser?.authorities?.includes("SUPER_ADMIN") ||
       false,
+    hasBillingAccess: () => true,
+    canModifyBilling: () => true,
+    hasReadOnlyBillingAccess: () => false,
+    canProcessRefunds: () => true,
+    canManageMerchants: () => true,
+    canViewPayments: () => true,
+    canViewPayouts: () => true,
+    isBillingAdmin: () => true,
+    isFinanceViewer: () => false,
     login: () => {},
     logout: () => {},
     refreshUser: () => {},

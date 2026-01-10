@@ -26,7 +26,7 @@ describe("Auth Utils", () => {
     email: "john@example.com",
     firstName: "John",
     lastName: "Doe",
-    roles: ["USER", "ADMIN"],
+    authorities: ["USER", "ADMIN"],
     permissions: ["read:users", "write:users"],
     tenantId: "tenant-123",
     organizationId: null,
@@ -124,19 +124,19 @@ describe("Auth Utils", () => {
     });
 
     it("returns true for SUPER_ADMIN role", () => {
-      const superAdmin = { ...mockUser, roles: ["SUPER_ADMIN"] };
+      const superAdmin = { ...mockUser, authorities: ["SUPER_ADMIN"] };
       expect(isAdmin(superAdmin)).toBe(true);
     });
 
     it("returns false for regular user", () => {
-      const regularUser = { ...mockUser, roles: ["USER"] };
+      const regularUser = { ...mockUser, authorities: ["USER"] };
       expect(isAdmin(regularUser)).toBe(false);
     });
   });
 
   describe("isSuperAdmin", () => {
     it("returns true for SUPER_ADMIN role", () => {
-      const superAdmin = { ...mockUser, roles: ["SUPER_ADMIN"] };
+      const superAdmin = { ...mockUser, authorities: ["SUPER_ADMIN"] };
       expect(isSuperAdmin(superAdmin)).toBe(true);
     });
 
@@ -215,12 +215,12 @@ describe("Auth Utils", () => {
   });
 
   describe("formatUserRoles", () => {
-    it("formats roles as comma-separated string", () => {
+    it("formats authorities as comma-separated string", () => {
       expect(formatUserRoles(mockUser)).toBe("USER, ADMIN");
     });
 
-    it("returns No roles for user without roles", () => {
-      const user = { ...mockUser, roles: [] };
+    it("returns No roles for user without authorities", () => {
+      const user = { ...mockUser, authorities: [] };
       expect(formatUserRoles(user)).toBe("No roles");
     });
 
@@ -231,7 +231,7 @@ describe("Auth Utils", () => {
 
   describe("isActiveUser", () => {
     it("returns true for user with USER role", () => {
-      const user = { ...mockUser, roles: ["USER"] };
+      const user = { ...mockUser, authorities: ["USER"] };
       expect(isActiveUser(user)).toBe(true);
     });
 
@@ -240,14 +240,14 @@ describe("Auth Utils", () => {
     });
 
     it("returns false for user without USER role", () => {
-      const user = { ...mockUser, roles: ["GUEST"] };
+      const user = { ...mockUser, authorities: ["GUEST"] };
       expect(isActiveUser(user)).toBe(false);
     });
   });
 
   describe("getUserRoleLevel", () => {
     it("returns correct level for USER", () => {
-      const user = { ...mockUser, roles: ["USER"] };
+      const user = { ...mockUser, authorities: ["USER"] };
       expect(getUserRoleLevel(user)).toBe(ROLE_HIERARCHY.USER);
     });
 
@@ -255,13 +255,13 @@ describe("Auth Utils", () => {
       expect(getUserRoleLevel(mockUser)).toBe(ROLE_HIERARCHY.ADMIN);
     });
 
-    it("returns highest level when user has multiple roles", () => {
-      const user = { ...mockUser, roles: ["USER", "ADMIN", "SUPER_ADMIN"] };
+    it("returns highest level when user has multiple authorities", () => {
+      const user = { ...mockUser, authorities: ["USER", "ADMIN", "SUPER_ADMIN"] };
       expect(getUserRoleLevel(user)).toBe(ROLE_HIERARCHY.SUPER_ADMIN);
     });
 
-    it("returns 0 for user without recognized roles", () => {
-      const user = { ...mockUser, roles: ["GUEST"] };
+    it("returns 0 for user without recognized authorities", () => {
+      const user = { ...mockUser, authorities: ["GUEST"] };
       expect(getUserRoleLevel(user)).toBe(0);
     });
 

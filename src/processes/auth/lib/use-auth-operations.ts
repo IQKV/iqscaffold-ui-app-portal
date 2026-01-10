@@ -22,9 +22,9 @@ export function useAuthOperations() {
     canManageUsers: canManageUsersUtil(user),
 
     // Quick role checks
-    isUser: user?.roles?.includes("USER") ?? false,
-    isAdmin: user?.roles?.includes("ADMIN") ?? false,
-    isSuperAdmin: user?.roles?.includes("SUPER_ADMIN") ?? false,
+    isUser: user?.authorities?.includes("USER") ?? false,
+    isAdmin: user?.authorities?.includes("ADMIN") ?? false,
+    isSuperAdmin: user?.authorities?.includes("SUPER_ADMIN") ?? false,
 
     // Current user info
     currentUser: user,
