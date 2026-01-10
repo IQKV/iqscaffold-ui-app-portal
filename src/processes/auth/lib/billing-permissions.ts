@@ -19,7 +19,9 @@ import {
  * Includes: SUPER_ADMIN, TENANT_OWNER, BILLING_ADMIN, FINANCE_VIEWER
  */
 export function hasBillingAccess(user: UserContext | null): boolean {
-  if (!user) return false;
+  if (!user) {
+    return false;
+  }
   return hasAnyAuthority(user, [...BILLING_READ_AUTHORITIES]);
 }
 
@@ -29,7 +31,9 @@ export function hasBillingAccess(user: UserContext | null): boolean {
  * Excludes: FINANCE_VIEWER (read-only), ADMIN (no billing access)
  */
 export function canModifyBilling(user: UserContext | null): boolean {
-  if (!user) return false;
+  if (!user) {
+    return false;
+  }
   return hasAnyAuthority(user, [...BILLING_WRITE_AUTHORITIES]);
 }
 
@@ -38,7 +42,9 @@ export function canModifyBilling(user: UserContext | null): boolean {
  * True only if user is FINANCE_VIEWER without write authorities
  */
 export function hasReadOnlyBillingAccess(user: UserContext | null): boolean {
-  if (!user) return false;
+  if (!user) {
+    return false;
+  }
   return (
     (user.authorities?.includes(AUTHORITY_FINANCE_VIEWER) ?? false) &&
     !canModifyBilling(user)
@@ -81,7 +87,9 @@ export function canViewPayouts(user: UserContext | null): boolean {
  * Check if user is a tenant owner
  */
 export function isTenantOwner(user: UserContext | null): boolean {
-  if (!user) return false;
+  if (!user) {
+    return false;
+  }
   return user.authorities?.includes(AUTHORITY_TENANT_OWNER) ?? false;
 }
 
@@ -89,7 +97,9 @@ export function isTenantOwner(user: UserContext | null): boolean {
  * Check if user is a billing admin
  */
 export function isBillingAdmin(user: UserContext | null): boolean {
-  if (!user) return false;
+  if (!user) {
+    return false;
+  }
   return user.authorities?.includes(AUTHORITY_BILLING_ADMIN) ?? false;
 }
 
@@ -97,7 +107,9 @@ export function isBillingAdmin(user: UserContext | null): boolean {
  * Check if user is a finance viewer
  */
 export function isFinanceViewer(user: UserContext | null): boolean {
-  if (!user) return false;
+  if (!user) {
+    return false;
+  }
   return user.authorities?.includes(AUTHORITY_FINANCE_VIEWER) ?? false;
 }
 
@@ -107,7 +119,9 @@ export function isFinanceViewer(user: UserContext | null): boolean {
 export function getBillingAuthorityDescription(
   user: UserContext | null
 ): string {
-  if (!user) return "No access";
+  if (!user) {
+    return "No access";
+  }
 
   if (user.authorities?.includes(AUTHORITY_SUPER_ADMIN)) {
     return "Platform Administrator";

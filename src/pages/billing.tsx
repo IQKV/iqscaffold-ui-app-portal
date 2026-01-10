@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Container, Stack, Title, Grid, Skeleton, Alert } from "@mantine/core";
-import { AuthGuard } from "@/processes/auth";
-import { useAuth } from "@/processes/auth";
+import { AuthGuard, useAuth } from "@/processes/auth";
 import { BillingHistoryTable } from "@/widgets/billing-history";
 import { MerchantStatusCard } from "@/widgets/merchant-status-card";
 import { useMerchantStatus } from "@/entities/billing";
