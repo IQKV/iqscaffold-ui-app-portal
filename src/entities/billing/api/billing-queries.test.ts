@@ -33,6 +33,15 @@ describe("Billing Query Keys", () => {
       expect(billingKeys.merchantStatus()).toEqual([
         "billing",
         "merchant-status",
+        undefined,
+      ]);
+    });
+
+    it("generates correct merchant status key with organizationId", () => {
+      expect(billingKeys.merchantStatus(123)).toEqual([
+        "billing",
+        "merchant-status",
+        123,
       ]);
     });
 
