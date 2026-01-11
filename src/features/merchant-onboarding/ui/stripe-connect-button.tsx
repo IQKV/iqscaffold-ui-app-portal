@@ -4,13 +4,19 @@ import { IconBrandStripe } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
 import { billingApi } from "@/shared/api/billing";
 import { notificationService } from "@/shared/lib/notifications";
+import { PaymentGatewayProvider } from "@/shared/api/billing/types";
 
 interface StripeConnectButtonProps {
+  organizationId: number;
   refreshUrl: string;
   returnUrl: string;
 }
 
+/**
+ * @deprecated Use MerchantOnboardingWizard instead
+ */
 export const StripeConnectButton = ({
+  organizationId,
   refreshUrl,
   returnUrl,
 }: StripeConnectButtonProps) => {
@@ -20,6 +26,8 @@ export const StripeConnectButton = ({
     setIsLoading(true);
     try {
       const response = await billingApi.initiateOnboarding({
+        organizationId,
+        gatewayProvider: PaymentGatewayProvider.STRIPE,
         refreshUrl,
         returnUrl,
       });

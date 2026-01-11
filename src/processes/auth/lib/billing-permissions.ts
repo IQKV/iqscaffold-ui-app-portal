@@ -84,6 +84,22 @@ export function canViewPayouts(user: UserContext | null): boolean {
 }
 
 /**
+ * Check if user can manage gateway configurations (CRUD operations)
+ * Requires: SUPER_ADMIN, TENANT_OWNER, or BILLING_ADMIN
+ */
+export function canManageGatewayConfigs(user: UserContext | null): boolean {
+  return canModifyBilling(user);
+}
+
+/**
+ * Check if user can view gateway configurations
+ * Requires: Any billing access (including read-only)
+ */
+export function canViewGatewayConfigs(user: UserContext | null): boolean {
+  return hasBillingAccess(user);
+}
+
+/**
  * Check if user is a tenant owner
  */
 export function isTenantOwner(user: UserContext | null): boolean {

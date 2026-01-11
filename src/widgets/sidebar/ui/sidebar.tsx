@@ -5,14 +5,16 @@ import {
   IconInfoCircle,
   IconUsers,
   IconCreditCard,
+  IconSettings,
 } from "@tabler/icons-react";
 import { Link, useLocation } from "@tanstack/react-router";
 import { useAuth } from "@/processes/auth";
+import { canManageGatewayConfigs } from "@/processes/auth/lib/billing-permissions";
 import { t } from "@lingui/core/macro";
 
 export function Sidebar() {
   const location = useLocation();
-  const { hasBillingAccess } = useAuth();
+  const { hasBillingAccess, user } = useAuth();
 
   return (
     <Stack gap="md" data-testid="widget-sidebar">
@@ -57,14 +59,26 @@ export function Sidebar() {
       />
 
       {hasBillingAccess() && (
-        <NavLink
-          component={Link}
-          to="/billing"
-          label={t`Billing`}
-          leftSection={<IconCreditCard size="1rem" />}
-          active={location.pathname === "/billing"}
-          data-testid="nav-billing"
-        />
+        <>
+          <NavLink
+            component={Link}
+            to="/billing"
+            label={t`Billing`}
+            leftSection={<IconCreditCard size="1rem" />}
+            active={location.pathname === "/billing"}
+            data-testid="nav-billing"
+          />
+          {canManageGatewayConfigs(user) && (
+            <NavLink
+              component={Link}
+              to="/gateway-config"
+              label={t`Gateway Config`}
+              leftSection={<IconSettings size="1rem" />}
+              active={location.pathname === "/gateway-config"}
+              data-testid="nav-gateway-config"
+            />
+          )}
+        </>
       )}
 
       <NavLink

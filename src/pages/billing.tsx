@@ -1,26 +1,42 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Container, Stack, Title, Grid, Skeleton, Alert } from "@mantine/core";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import {
+  Container,
+  Stack,
+  Title,
+  Grid,
+  Alert,
+  Button,
+  Group,
+} from "@mantine/core";
+import { IconSettings } from "@tabler/icons-react";
 import { AuthGuard, useAuth } from "@/processes/auth";
 import { BillingHistoryTable } from "@/widgets/billing-history";
 import { MerchantStatusCard } from "@/widgets/merchant-status-card";
-import { useMerchantStatus } from "@/entities/billing";
+import { organizationApi } from "@/shared/api/organization-api";
 import { t } from "@lingui/macro";
+import { useQuery } from "@tanstack/react-query";
+import { canManageGatewayConfigs } from "@/processes/auth/lib/billing-permissions";
 
 export const Route = createFileRoute("/billing")({
   component: BillingPage,
 });
 
 function BillingPage() {
-  const { hasBillingAccess, hasReadOnlyBillingAccess, canManageMerchants } =
-    useAuth();
-  const { data: merchantStatus, isLoading: isStatusLoading } =
-    useMerchantStatus();
+  const {
+    hasBillingAccess,
+    hasReadOnlyBillingAccess,
+    canManageMerchants,
+    user,
+  } = useAuth();
 
-  const onboardingStatus = !merchantStatus
-    ? "NONE"
-    : merchantStatus.chargesEnabled && merchantStatus.payoutsEnabled
-      ? "COMPLETED"
-      : "PENDING";
+  const { data: orgsData } = useQuery({
+    queryKey: ["organizations"],
+    queryFn: () => organizationApi.getAllOrganizations({ page: 0, size: 100 }),
+    enabled: hasBillingAccess(),
+  });
+
+  const organizations =
+    orgsData?.content.map((org) => ({ id: org.id, name: org.name })) || [];
 
   if (!hasBillingAccess()) {
     return (
@@ -38,7 +54,19 @@ function BillingPage() {
     <AuthGuard>
       <Container size="xl" py="xl" data-testid="page-billing">
         <Stack gap="xl">
-          <Title order={2}>{t`Billing & Payments`}</Title>
+          <Group justify="space-between">
+            <Title order={2}>{t`Billing & Payments`}</Title>
+            {canManageGatewayConfigs(user) && (
+              <Button
+                component={Link}
+                to="/gateway-config"
+                leftSection={<IconSettings size={18} />}
+                variant="light"
+              >
+                {t`Gateway Configuration`}
+              </Button>
+            )}
+          </Group>
 
           {hasReadOnlyBillingAccess() && (
             <Alert color="blue">
@@ -48,17 +76,8 @@ function BillingPage() {
 
           <Grid>
             <Grid.Col span={{ base: 12, md: 4 }}>
-              {canManageMerchants() && (
-                <>
-                  {isStatusLoading ? (
-                    <Skeleton height={200} radius="md" />
-                  ) : (
-                    <MerchantStatusCard
-                      isConfigured={!!merchantStatus}
-                      onboardingStatus={onboardingStatus}
-                    />
-                  )}
-                </>
+              {canManageMerchants() && organizations.length > 0 && (
+                <MerchantStatusCard organizations={organizations} />
               )}
             </Grid.Col>
 

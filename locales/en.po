@@ -71,7 +71,7 @@ msgstr "{userName} deleted successfully"
 msgid "%s | IQ Scaffold Platform"
 msgstr "%s | IQ Scaffold Platform"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:35
+#: src/widgets/sidebar/ui/sidebar.tsx:37
 msgid "About"
 msgstr "About"
 
@@ -83,9 +83,14 @@ msgstr "About This Template"
 msgid "Accept-Language header (from browser)"
 msgstr "Accept-Language header (from browser)"
 
-#: src/pages/billing.tsx:30
+#: src/pages/billing.tsx:45
+#: src/pages/gateway-config.tsx:141
 msgid "Access Denied"
 msgstr "Access Denied"
+
+#: src/features/gateway-config/ui/square-config-form.tsx:19
+msgid "Access Token"
+msgstr "Access Token"
 
 #: src/features/users/components/users-data-grid.tsx:169
 #: src/pages/examples.tsx:133
@@ -93,7 +98,16 @@ msgstr "Access Denied"
 msgid "Actions"
 msgstr "Actions"
 
-#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:40
+#: src/features/gateway-config/ui/gateway-config-list.tsx:155
+msgid "Activate"
+msgstr "Activate"
+
+#: src/features/gateway-config/ui/gateway-config-form.tsx:174
+msgid "Activate immediately"
+msgstr "Activate immediately"
+
+#: src/features/gateway-config/ui/gateway-status-badge.tsx:28
+#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:60
 msgid "Active"
 msgstr "Active"
 
@@ -105,16 +119,29 @@ msgstr "Active Locale"
 msgid "Active Sessions"
 msgstr "Active Sessions"
 
+#: src/features/gateway-config/ui/gateway-config-form.tsx:193
+#: src/pages/gateway-config.tsx:167
+msgid "Add Gateway"
+msgstr "Add Gateway"
+
 #: src/pages/examples.tsx:285
 msgid "Add new user clicked"
 msgstr "Add new user clicked"
+
+#: src/features/gateway-config/ui/gateway-config-form.tsx:128
+msgid "Add Payment Gateway"
+msgstr "Add Payment Gateway"
 
 #: src/features/users/components/users-data-grid.tsx:233
 #: src/pages/examples.tsx:288
 msgid "Add User"
 msgstr "Add User"
 
-#: src/features/users/components/user-form-modal.tsx:43
+#: src/features/gateway-config/ui/gateway-config-form.tsx:167
+msgid "Additional notes..."
+msgstr "Additional notes..."
+
+#: src/features/users/components/user-form-modal.tsx:45
 msgid "Admin"
 msgstr "Admin"
 
@@ -136,13 +163,29 @@ msgstr "An error occurred"
 msgid "An unexpected error occurred."
 msgstr "An unexpected error occurred."
 
+#: src/features/gateway-config/ui/stripe-config-form.tsx:19
+msgid "API Key"
+msgstr "API Key"
+
 #: src/features/locale-demo/locale-demo.tsx:152
 msgid "API Request Headers"
 msgstr "API Request Headers"
 
+#: src/features/gateway-config/ui/square-config-form.tsx:51
+msgid "Application ID"
+msgstr "Application ID"
+
+#: src/features/gateway-config/ui/square-config-form.tsx:58
+msgid "Application ID for frontend use (optional)"
+msgstr "Application ID for frontend use (optional)"
+
 #: src/pages/about.tsx:93
 msgid "Architecture"
 msgstr "Architecture"
+
+#: src/pages/gateway-config.tsx:117
+msgid "Are you sure you want to delete this gateway configuration?"
+msgstr "Are you sure you want to delete this gateway configuration?"
 
 #: src/pages/examples.tsx:48
 msgid "Are you sure you want to delete this user? This action cannot be undone."
@@ -151,6 +194,10 @@ msgstr "Are you sure you want to delete this user? This action cannot be undone.
 #: src/features/users/components/users-data-grid.tsx:54
 msgid "Are you sure you want to delete user"
 msgstr "Are you sure you want to delete user"
+
+#: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:61
+msgid "Are you sure you want to proceed with this refund?"
+msgstr "Are you sure you want to proceed with this refund?"
 
 #: src/shared/ui/confirmation-modal/confirm-context-modal.tsx:23
 #: src/shared/ui/confirmation-modal/confirmation-modal.tsx:23
@@ -166,7 +213,7 @@ msgstr "Are you sure you want to proceed?"
 msgid "Are you sure you want to refund this payment? This action cannot be undone."
 msgstr "Are you sure you want to refund this payment? This action cannot be undone."
 
-#: src/features/users/components/user-form-modal.tsx:27
+#: src/features/users/components/user-form-modal.tsx:29
 msgid "At least one authority is required"
 msgstr "At least one authority is required"
 
@@ -174,10 +221,14 @@ msgstr "At least one authority is required"
 #~ msgid "At least one role is required"
 #~ msgstr "At least one role is required"
 
-#: src/features/users/components/user-form-modal.tsx:257
+#: src/features/users/components/user-form-modal.tsx:259
 #: src/features/users/components/users-data-grid.tsx:128
 msgid "Authorities"
 msgstr "Authorities"
+
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:171
+msgid "Back"
+msgstr "Back"
 
 #: src/features/locale-demo/locale-demo.tsx:161
 msgid "Backend Locale Resolution Priority"
@@ -191,11 +242,11 @@ msgstr "Backend responses (errors, validation messages) are in your language"
 msgid "Backend user preference is updated via API"
 msgstr "Backend user preference is updated via API"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:63
+#: src/widgets/sidebar/ui/sidebar.tsx:66
 msgid "Billing"
 msgstr "Billing"
 
-#: src/pages/billing.tsx:42
+#: src/pages/billing.tsx:58
 msgid "Billing & Payments"
 msgstr "Billing & Payments"
 
@@ -207,8 +258,11 @@ msgstr "Built following Feature-Sliced Design methodology for maintainable and s
 msgid "Bypass (allow through)"
 msgstr "Bypass (allow through)"
 
+#: src/features/gateway-config/ui/gateway-config-form.tsx:190
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:166
+#: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:66
 #: src/features/security-settings/ui/security-settings-feature.tsx:41
-#: src/features/users/components/user-form-modal.tsx:301
+#: src/features/users/components/user-form-modal.tsx:303
 #: src/features/users/components/users-data-grid.tsx:61
 #: src/shared/ui/confirmation-modal/confirm-context-modal.tsx:25
 #: src/shared/ui/confirmation-modal/confirmation-modal.tsx:25
@@ -238,9 +292,30 @@ msgstr "Checking email status..."
 msgid "Checkout"
 msgstr "Checkout"
 
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:94
+msgid "Choose the organization to onboard as a merchant."
+msgstr "Choose the organization to onboard as a merchant."
+
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:115
+msgid "Choose the payment gateway for merchant onboarding."
+msgstr "Choose the payment gateway for merchant onboarding."
+
 #: src/features/sample-form/ui/sample-form-feature.tsx:66
 #~ msgid "Click the plus button to open a modal with a sample form using Mantine components. This demonstrates Feature-Sliced Design architecture."
 #~ msgstr "Click the plus button to open a modal with a sample form using Mantine components. This demonstrates Feature-Sliced Design architecture."
+
+#: src/features/gateway-config/ui/paypal-config-form.tsx:19
+#: src/features/gateway-config/ui/stripe-config-form.tsx:39
+msgid "Client ID"
+msgstr "Client ID"
+
+#: src/features/gateway-config/ui/stripe-config-form.tsx:46
+msgid "Client ID for Stripe Connect (optional)"
+msgstr "Client ID for Stripe Connect (optional)"
+
+#: src/features/gateway-config/ui/paypal-config-form.tsx:30
+msgid "Client Secret"
+msgstr "Client Secret"
 
 #: src/pages/about.tsx:117
 msgid "Code Quality:"
@@ -266,6 +341,7 @@ msgstr "Confirm Action"
 msgid "Confirm New Password"
 msgstr "Confirm New Password"
 
+#: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:25
 #: src/widgets/billing-history/ui/billing-history-table.tsx:39
 msgid "Confirm Refund"
 msgstr "Confirm Refund"
@@ -278,7 +354,7 @@ msgstr "Confirm your new password"
 msgid "Confirmation modals, notifications, loading states, and error boundaries."
 msgstr "Confirmation modals, notifications, loading states, and error boundaries."
 
-#: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:52
+#: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:60
 msgid "Connect with Stripe"
 msgstr "Connect with Stripe"
 
@@ -286,7 +362,15 @@ msgstr "Connect with Stripe"
 msgid "Connection Issue"
 msgstr "Connection Issue"
 
-#: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:36
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:186
+msgid "Continue to Gateway"
+msgstr "Continue to Gateway"
+
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:66
+msgid "Could not initiate merchant onboarding. Please try again."
+msgstr "Could not initiate merchant onboarding. Please try again."
+
+#: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:44
 msgid "Could not initiate Stripe onboarding. Please try again later."
 msgstr "Could not initiate Stripe onboarding. Please try again later."
 
@@ -298,7 +382,7 @@ msgstr "Could not process refund. Please try again."
 #~ msgid "Could not submit the form"
 #~ msgstr "Could not submit the form"
 
-#: src/features/users/components/user-form-modal.tsx:308
+#: src/features/users/components/user-form-modal.tsx:310
 msgid "Create"
 msgstr "Create"
 
@@ -310,7 +394,7 @@ msgstr "Create New User"
 msgid "Created"
 msgstr "Created"
 
-#: src/features/users/components/user-form-modal.tsx:285
+#: src/features/users/components/user-form-modal.tsx:287
 msgid "Created:"
 msgstr "Created:"
 
@@ -332,7 +416,7 @@ msgid "Dark mode"
 msgstr "Dark mode"
 
 #: src/features/dashboard/ui/dashboard-feature.tsx:15
-#: src/widgets/sidebar/ui/sidebar.tsx:73
+#: src/widgets/sidebar/ui/sidebar.tsx:87
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -352,10 +436,15 @@ msgstr "Date"
 msgid "Date Formatting"
 msgstr "Date Formatting"
 
+#: src/features/gateway-config/ui/gateway-config-list.tsx:148
+msgid "Deactivate"
+msgstr "Deactivate"
+
 #: src/features/locale-demo/locale-demo.tsx:184
 msgid "Default locale (English)"
 msgstr "Default locale (English)"
 
+#: src/features/gateway-config/ui/gateway-config-list.tsx:164
 #: src/features/users/components/users-data-grid.tsx:61
 #: src/pages/examples.tsx:49
 msgid "Delete"
@@ -370,6 +459,10 @@ msgstr "Delete user"
 msgid "Delete User"
 msgstr "Delete User"
 
+#: src/features/gateway-config/ui/gateway-config-form.tsx:166
+msgid "Description"
+msgstr "Description"
+
 #: src/shared/ui/msw-dev-tools.tsx:79
 msgid "Disable MSW"
 msgstr "Disable MSW"
@@ -377,6 +470,10 @@ msgstr "Disable MSW"
 #: src/features/users/components/users-data-grid.tsx:147
 msgid "Disabled"
 msgstr "Disabled"
+
+#: src/features/gateway-config/ui/gateway-config-form.tsx:158
+msgid "Display Name"
+msgstr "Display Name"
 
 #: src/pages/about.tsx:133
 msgid "Easy"
@@ -398,7 +495,7 @@ msgstr "Edit User"
 msgid "Editing {userName}"
 msgstr "Editing {userName}"
 
-#: src/features/users/components/user-form-modal.tsx:216
+#: src/features/users/components/user-form-modal.tsx:218
 msgid "Email"
 msgstr "Email"
 
@@ -414,7 +511,7 @@ msgstr "Email notifications are sent in your preferred language"
 msgid "Email Verification Status"
 msgstr "Email Verification Status"
 
-#: src/features/users/components/user-form-modal.tsx:276
+#: src/features/users/components/user-form-modal.tsx:278
 #: src/shared/lib/use-auth-api.ts:124
 msgid "Email Verified"
 msgstr "Email Verified"
@@ -427,7 +524,7 @@ msgstr "Enable logging"
 msgid "Enable MSW"
 msgstr "Enable MSW"
 
-#: src/features/users/components/user-form-modal.tsx:269
+#: src/features/users/components/user-form-modal.tsx:271
 #: src/features/users/components/users-data-grid.tsx:147
 msgid "Enabled"
 msgstr "Enabled"
@@ -436,23 +533,23 @@ msgstr "Enabled"
 msgid "End-to-end type safety from API to UI components"
 msgstr "End-to-end type safety from API to UI components"
 
-#: src/features/users/components/user-form-modal.tsx:217
+#: src/features/users/components/user-form-modal.tsx:219
 msgid "Enter email address"
 msgstr "Enter email address"
 
-#: src/features/users/components/user-form-modal.tsx:227
+#: src/features/users/components/user-form-modal.tsx:229
 msgid "Enter first name"
 msgstr "Enter first name"
 
-#: src/features/users/components/user-form-modal.tsx:236
+#: src/features/users/components/user-form-modal.tsx:238
 msgid "Enter last name"
 msgstr "Enter last name"
 
-#: src/features/users/components/user-form-modal.tsx:247
+#: src/features/users/components/user-form-modal.tsx:249
 msgid "Enter password"
 msgstr "Enter password"
 
-#: src/features/users/components/user-form-modal.tsx:208
+#: src/features/users/components/user-form-modal.tsx:210
 msgid "Enter username"
 msgstr "Enter username"
 
@@ -472,11 +569,33 @@ msgstr "Enter your current password"
 msgid "Enter your new password"
 msgstr "Enter your new password"
 
-#: src/features/users/components/user-form-modal.tsx:137
-#: src/features/users/components/user-form-modal.tsx:147
-#: src/features/users/components/user-form-modal.tsx:175
+#: src/features/gateway-config/ui/braintree-config-form.tsx:52
+msgid "Environment"
+msgstr "Environment"
+
+#: src/features/gateway-config/ui/braintree-config-form.tsx:63
+msgid "Environment for Braintree API"
+msgstr "Environment for Braintree API"
+
+#: src/features/gateway-config/ui/paypal-config-form.tsx:62
+msgid "Environment mode for PayPal API"
+msgstr "Environment mode for PayPal API"
+
+#: src/features/gateway-config/ui/gateway-config-form.tsx:154
+msgid "Environment mode for the gateway"
+msgstr "Environment mode for the gateway"
+
+#: src/features/users/components/user-form-modal.tsx:139
+#: src/features/users/components/user-form-modal.tsx:149
+#: src/features/users/components/user-form-modal.tsx:177
 #: src/features/users/components/users-data-grid.tsx:75
 #: src/pages/examples.tsx:333
+#: src/pages/gateway-config.tsx:64
+#: src/pages/gateway-config.tsx:79
+#: src/pages/gateway-config.tsx:94
+#: src/pages/gateway-config.tsx:109
+#: src/pages/gateway-config.tsx:129
+#: src/pages/gateway-config.tsx:178
 msgid "Error"
 msgstr "Error"
 
@@ -500,13 +619,17 @@ msgstr "Error notification!"
 msgid "ESLint, Prettier, and automated quality checks"
 msgstr "ESLint, Prettier, and automated quality checks"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:53
+#: src/widgets/sidebar/ui/sidebar.tsx:55
 msgid "Examples"
 msgstr "Examples"
 
 #: src/pages/examples.tsx:190
 msgid "Explore the various components and features available in this template"
 msgstr "Explore the various components and features available in this template"
+
+#: src/pages/gateway-config.tsx:80
+msgid "Failed to activate gateway"
+msgstr "Failed to activate gateway"
 
 #: src/shared/lib/use-auth-api.ts:51
 msgid "Failed to change password. Please check your current password."
@@ -516,13 +639,25 @@ msgstr "Failed to change password. Please check your current password."
 msgid "Failed to check email status. Please try again."
 msgstr "Failed to check email status. Please try again."
 
+#: src/pages/gateway-config.tsx:65
+msgid "Failed to configure payment gateway"
+msgstr "Failed to configure payment gateway"
+
 #: src/features/users/components/user-form-modal.tsx:149
 #~ msgid "Failed to create user: {0}"
 #~ msgstr "Failed to create user: {0}"
 
-#: src/features/users/components/user-form-modal.tsx:176
+#: src/features/users/components/user-form-modal.tsx:178
 msgid "Failed to create user: {errorMessage}"
 msgstr "Failed to create user: {errorMessage}"
+
+#: src/pages/gateway-config.tsx:95
+msgid "Failed to deactivate gateway"
+msgstr "Failed to deactivate gateway"
+
+#: src/pages/gateway-config.tsx:130
+msgid "Failed to delete gateway"
+msgstr "Failed to delete gateway"
 
 #: src/features/users/components/users-data-grid.tsx:72
 #~ msgid "Failed to delete user: {0}"
@@ -532,9 +667,17 @@ msgstr "Failed to create user: {errorMessage}"
 msgid "Failed to delete user: {errorMessage}"
 msgstr "Failed to delete user: {errorMessage}"
 
+#: src/pages/gateway-config.tsx:179
+msgid "Failed to load gateway configurations"
+msgstr "Failed to load gateway configurations"
+
 #: src/shared/lib/use-auth-api.ts:74
 msgid "Failed to logout from all devices"
 msgstr "Failed to logout from all devices"
+
+#: src/features/payment-refund/ui/refund-button.tsx:39
+msgid "Failed to process the refund. Please try again."
+msgstr "Failed to process the refund. Please try again."
 
 #: src/shared/lib/use-auth-api.ts:188
 msgid "Failed to reset password. The link may be invalid or expired."
@@ -556,11 +699,15 @@ msgstr "Failed to Send Reset Link"
 msgid "Failed to send verification email"
 msgstr "Failed to send verification email"
 
+#: src/pages/gateway-config.tsx:110
+msgid "Failed to set primary gateway"
+msgstr "Failed to set primary gateway"
+
 #: src/features/users/components/user-form-modal.tsx:112
 #~ msgid "Failed to update user: {0}"
 #~ msgstr "Failed to update user: {0}"
 
-#: src/features/users/components/user-form-modal.tsx:138
+#: src/features/users/components/user-form-modal.tsx:140
 msgid "Failed to update user: {errorMessage}"
 msgstr "Failed to update user: {errorMessage}"
 
@@ -580,7 +727,7 @@ msgstr "Fair"
 msgid "Feature-Sliced Design:"
 msgstr "Feature-Sliced Design:"
 
-#: src/features/users/components/user-form-modal.tsx:226
+#: src/features/users/components/user-form-modal.tsx:228
 msgid "First Name"
 msgstr "First Name"
 
@@ -608,6 +755,34 @@ msgstr "Frontend UI updates to the selected language"
 msgid "Functional"
 msgstr "Functional"
 
+#: src/features/gateway-config/ui/gateway-config-list.tsx:178
+msgid "Gateway"
+msgstr "Gateway"
+
+#: src/pages/gateway-config.tsx:75
+msgid "Gateway activated successfully"
+msgstr "Gateway activated successfully"
+
+#: src/widgets/sidebar/ui/sidebar.tsx:75
+msgid "Gateway Config"
+msgstr "Gateway Config"
+
+#: src/pages/billing.tsx:66
+msgid "Gateway Configuration"
+msgstr "Gateway Configuration"
+
+#: src/pages/gateway-config.tsx:90
+msgid "Gateway deactivated successfully"
+msgstr "Gateway deactivated successfully"
+
+#: src/pages/gateway-config.tsx:125
+msgid "Gateway deleted successfully"
+msgstr "Gateway deleted successfully"
+
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:154
+msgid "Gateway:"
+msgstr "Gateway:"
+
 #: src/pages/about.tsx:131
 msgid "Getting Started"
 msgstr "Getting Started"
@@ -628,7 +803,7 @@ msgstr "Good"
 msgid "Growth"
 msgstr "Growth"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:26
+#: src/widgets/sidebar/ui/sidebar.tsx:28
 msgid "Home"
 msgstr "Home"
 
@@ -639,6 +814,10 @@ msgstr "How it works"
 #: src/shared/ui/msw-dev-tools.tsx:94
 msgid "How to handle requests without mocks"
 msgstr "How to handle requests without mocks"
+
+#: src/features/gateway-config/ui/gateway-status-badge.tsx:28
+msgid "Inactive"
+msgstr "Inactive"
 
 #: src/pages/examples.tsx:353
 msgid "Info"
@@ -682,7 +861,7 @@ msgstr "Invalid URL"
 msgid "IQ Scaffold Platform"
 msgstr "IQ Scaffold Platform"
 
-#: src/features/users/components/user-form-modal.tsx:235
+#: src/features/users/components/user-form-modal.tsx:237
 msgid "Last Name"
 msgstr "Last Name"
 
@@ -706,6 +885,19 @@ msgstr "Light mode"
 msgid "Lightning-fast development server with instant HMR"
 msgstr "Lightning-fast development server with instant HMR"
 
+#: src/features/gateway-config/ui/gateway-config-form.tsx:152
+#: src/features/gateway-config/ui/paypal-config-form.tsx:59
+msgid "Live (Production)"
+msgstr "Live (Production)"
+
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:119
+msgid "Loading available gateways..."
+msgstr "Loading available gateways..."
+
+#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:81
+msgid "Loading merchant status..."
+msgstr "Loading merchant status..."
+
 #: src/shared/ui/loading-state/loading-state.tsx:68
 #: src/shared/ui/loading-state/loading-state.tsx:148
 msgid "Loading..."
@@ -714,6 +906,10 @@ msgstr "Loading..."
 #: src/features/locale-demo/locale-demo.tsx:193
 msgid "Localized Content Examples"
 msgstr "Localized Content Examples"
+
+#: src/features/gateway-config/ui/square-config-form.tsx:30
+msgid "Location ID"
+msgstr "Location ID"
 
 #: src/shared/ui/msw-dev-tools.tsx:87
 msgid "Log MSW requests to console"
@@ -741,6 +937,10 @@ msgstr "Logout from all devices where you're currently signed in. This is useful
 msgid "Manage your account security and active sessions."
 msgstr "Manage your account security and active sessions."
 
+#: src/pages/gateway-config.tsx:159
+msgid "Manage your payment gateway integrations"
+msgstr "Manage your payment gateway integrations"
+
 #: src/features/users/components/user-form-modal.tsx:44
 #~ msgid "Manager"
 #~ msgstr "Manager"
@@ -749,13 +949,27 @@ msgstr "Manage your account security and active sessions."
 msgid "Mantine UI:"
 msgstr "Mantine UI:"
 
-#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:29
+#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:49
 msgid "Merchant Account"
 msgstr "Merchant Account"
+
+#: src/features/gateway-config/ui/braintree-config-form.tsx:19
+msgid "Merchant ID"
+msgstr "Merchant ID"
+
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:87
+msgid "Merchant Onboarding"
+msgstr "Merchant Onboarding"
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:116
 msgid "Min 8 characters with uppercase, lowercase, number, and special character"
 msgstr "Min 8 characters with uppercase, lowercase, number, and special character"
+
+#: src/features/gateway-config/ui/gateway-config-form.tsx:146
+#: src/features/gateway-config/ui/gateway-config-list.tsx:179
+#: src/features/gateway-config/ui/paypal-config-form.tsx:51
+msgid "Mode"
+msgstr "Mode"
 
 #: src/pages/about.tsx:49
 msgid "Modern"
@@ -785,11 +999,15 @@ msgstr "Must be no more than {max} characters"
 msgid "Must contain only letters and numbers"
 msgstr "Must contain only letters and numbers"
 
+#: src/features/gateway-config/ui/gateway-config-form.tsx:159
+msgid "My Payment Gateway"
+msgstr "My Payment Gateway"
+
 #: src/features/sample-form/ui/sample-form-feature.tsx:76
 #~ msgid "Name"
 #~ msgstr "Name"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:20
+#: src/widgets/sidebar/ui/sidebar.tsx:22
 msgid "Navigation"
 msgstr "Navigation"
 
@@ -801,6 +1019,23 @@ msgstr "New Password"
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:42
 msgid "New password must be different from current password"
 msgstr "New password must be different from current password"
+
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:176
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:181
+msgid "Next"
+msgstr "Next"
+
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:123
+msgid "No Active Gateways"
+msgstr "No Active Gateways"
+
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:126
+msgid "No active payment gateways configured. Please configure a gateway first."
+msgstr "No active payment gateways configured. Please configure a gateway first."
+
+#: src/features/gateway-config/ui/gateway-config-list.tsx:75
+msgid "No payment gateways configured yet."
+msgstr "No payment gateways configured yet."
 
 #: src/widgets/billing-history/ui/billing-history-table.tsx:134
 msgid "No payments found"
@@ -827,13 +1062,35 @@ msgstr "Notification Examples"
 msgid "Number Formatting"
 msgstr "Number Formatting"
 
-#: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:35
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:65
+#: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:43
 msgid "Onboarding Failed"
 msgstr "Onboarding Failed"
 
+#: src/features/gateway-config/ui/gateway-config-form.tsx:183
+msgid "Only one gateway can be primary at a time"
+msgstr "Only one gateway can be primary at a time"
+
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:58
-msgid "Open Stripe Dashboard"
-msgstr "Open Stripe Dashboard"
+#~ msgid "Open Stripe Dashboard"
+#~ msgstr "Open Stripe Dashboard"
+
+#: src/features/gateway-config/ui/gateway-config-form.tsx:170
+msgid "Optional description"
+msgstr "Optional description"
+
+#: src/features/gateway-config/ui/gateway-config-form.tsx:162
+msgid "Optional friendly name for this configuration"
+msgstr "Optional friendly name for this configuration"
+
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:97
+#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:66
+msgid "Organization"
+msgstr "Organization"
+
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:146
+msgid "Organization:"
+msgstr "Organization:"
 
 #: src/pages/about.tsx:106
 msgid "Organized by business features rather than technical layers"
@@ -843,7 +1100,7 @@ msgstr "Organized by business features rather than technical layers"
 msgid "Page Not Found"
 msgstr "Page Not Found"
 
-#: src/features/users/components/user-form-modal.tsx:246
+#: src/features/users/components/user-form-modal.tsx:248
 msgid "Password"
 msgstr "Password"
 
@@ -855,7 +1112,7 @@ msgstr "Password Change Failed"
 msgid "Password Changed"
 msgstr "Password Changed"
 
-#: src/features/users/components/user-form-modal.tsx:148
+#: src/features/users/components/user-form-modal.tsx:150
 msgid "Password is required for new users"
 msgstr "Password is required for new users"
 
@@ -915,10 +1172,24 @@ msgstr "Pay now"
 msgid "Payment Details"
 msgstr "Payment Details"
 
+#: src/features/gateway-config/ui/gateway-selector.tsx:73
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:132
+msgid "Payment Gateway"
+msgstr "Payment Gateway"
+
+#: src/pages/gateway-config.tsx:157
+msgid "Payment Gateway Configuration"
+msgstr "Payment Gateway Configuration"
+
+#: src/pages/gateway-config.tsx:59
+msgid "Payment gateway configured successfully"
+msgstr "Payment gateway configured successfully"
+
 #: src/widgets/billing-history/ui/billing-history-table.tsx:68
 msgid "Payment History"
 msgstr "Payment History"
 
+#: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:52
 #: src/widgets/billing-history/ui/billing-history-table.tsx:86
 msgid "Payment ID"
 msgstr "Payment ID"
@@ -940,9 +1211,41 @@ msgstr "Please check your inbox for the verification link"
 msgid "Please confirm your new password"
 msgstr "Please confirm your new password"
 
+#: src/features/gateway-config/ui/gateway-config-form.tsx:50
+msgid "Please select a gateway provider"
+msgstr "Please select a gateway provider"
+
 #: src/pages/about.tsx:80
 msgid "Powerful data synchronization and caching"
 msgstr "Powerful data synchronization and caching"
+
+#: src/features/gateway-config/ui/gateway-status-badge.tsx:17
+msgid "Primary"
+msgstr "Primary"
+
+#: src/pages/gateway-config.tsx:105
+msgid "Primary gateway updated successfully"
+msgstr "Primary gateway updated successfully"
+
+#: src/features/gateway-config/ui/braintree-config-form.tsx:41
+msgid "Private Key"
+msgstr "Private Key"
+
+#: src/features/gateway-config/ui/braintree-config-form.tsx:60
+msgid "Production (Live)"
+msgstr "Production (Live)"
+
+#: src/features/gateway-config/ui/braintree-config-form.tsx:30
+msgid "Public Key"
+msgstr "Public Key"
+
+#: src/features/gateway-config/ui/stripe-config-form.tsx:56
+msgid "Public key for frontend use (optional)"
+msgstr "Public key for frontend use (optional)"
+
+#: src/features/gateway-config/ui/stripe-config-form.tsx:49
+msgid "Publishable Key"
+msgstr "Publishable Key"
 
 #: src/pages/about.tsx:59
 msgid "React 19:"
@@ -952,14 +1255,24 @@ msgstr "React 19:"
 msgid "Ready to start building? Check out the documentation and source code."
 msgstr "Ready to start building? Check out the documentation and source code."
 
-#: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:28
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:58
+#: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:36
 msgid "Redirecting"
 msgstr "Redirecting"
+
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:59
+msgid "Redirecting to payment gateway for onboarding..."
+msgstr "Redirecting to payment gateway for onboarding..."
 
 #: src/widgets/billing-history/ui/billing-history-table.tsx:45
 msgid "Refund"
 msgstr "Refund"
 
+#: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:38
+msgid "Refund Amount"
+msgstr "Refund Amount"
+
+#: src/features/payment-refund/ui/refund-button.tsx:38
 #: src/widgets/billing-history/ui/billing-history-table.tsx:57
 msgid "Refund Failed"
 msgstr "Refund Failed"
@@ -968,9 +1281,15 @@ msgstr "Refund Failed"
 msgid "Refund Initiated"
 msgstr "Refund Initiated"
 
+#: src/features/payment-refund/ui/refund-button.tsx:46
+#: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:69
 #: src/widgets/billing-history/ui/billing-history-table.tsx:116
 msgid "Refund Payment"
 msgstr "Refund Payment"
+
+#: src/features/payment-refund/ui/refund-button.tsx:31
+msgid "Refund Processed"
+msgstr "Refund Processed"
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:91
 msgid "Registered"
@@ -1008,6 +1327,10 @@ msgstr "Reusable form components with validation, built using Mantine Form and c
 msgid "Revenue"
 msgstr "Revenue"
 
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:142
+msgid "Review your selections and click Continue to proceed with onboarding."
+msgstr "Review your selections and click Continue to proceed with onboarding."
+
 #: src/pages/examples.tsx:110
 msgid "Role"
 msgstr "Role"
@@ -1034,6 +1357,11 @@ msgstr "Running"
 #~ msgid "Sample Form Feature"
 #~ msgstr "Sample Form Feature"
 
+#: src/features/gateway-config/ui/braintree-config-form.tsx:59
+#: src/features/gateway-config/ui/paypal-config-form.tsx:58
+msgid "Sandbox (Test)"
+msgstr "Sandbox (Test)"
+
 #: src/pages/about.tsx:95
 msgid "Scalable"
 msgstr "Scalable"
@@ -1046,7 +1374,28 @@ msgstr "Search users..."
 msgid "Security Settings"
 msgstr "Security Settings"
 
-#: src/features/users/components/user-form-modal.tsx:258
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:133
+msgid "Select gateway"
+msgstr "Select gateway"
+
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:112
+msgid "Select Gateway"
+msgstr "Select Gateway"
+
+#: src/features/gateway-config/ui/gateway-selector.tsx:74
+msgid "Select gateway provider"
+msgstr "Select gateway provider"
+
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:98
+#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:67
+msgid "Select organization"
+msgstr "Select organization"
+
+#: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:91
+msgid "Select Organization"
+msgstr "Select Organization"
+
+#: src/features/users/components/user-form-modal.tsx:260
 msgid "Select user authorities"
 msgstr "Select user authorities"
 
@@ -1062,7 +1411,15 @@ msgstr "Select user authorities"
 msgid "Server is temporarily unavailable. Please try again"
 msgstr "Server is temporarily unavailable. Please try again"
 
-#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:40
+#: src/features/gateway-config/ui/gateway-config-list.tsx:126
+msgid "Set as primary"
+msgstr "Set as primary"
+
+#: src/features/gateway-config/ui/gateway-config-form.tsx:180
+msgid "Set as primary gateway"
+msgstr "Set as primary gateway"
+
+#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:60
 msgid "Setup Required"
 msgstr "Setup Required"
 
@@ -1086,7 +1443,16 @@ msgstr "Sortable, filterable data tables with pagination and custom cell renderi
 msgid "Sorting by {key} in {direction} order"
 msgstr "Sorting by {key} in {direction} order"
 
+#: src/features/gateway-config/ui/square-config-form.tsx:38
+msgid "Square location ID for payments"
+msgstr "Square location ID for payments"
+
+#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:93
+msgid "Start Onboarding"
+msgstr "Start Onboarding"
+
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:72
+#: src/features/gateway-config/ui/gateway-config-list.tsx:180
 #: src/features/users/components/users-data-grid.tsx:138
 #: src/pages/examples.tsx:124
 #: src/widgets/billing-history/ui/billing-history-table.tsx:106
@@ -1109,10 +1475,15 @@ msgstr "Strong"
 #~ msgid "Submit Failed"
 #~ msgstr "Submit Failed"
 
-#: src/features/users/components/user-form-modal.tsx:128
-#: src/features/users/components/user-form-modal.tsx:166
+#: src/features/users/components/user-form-modal.tsx:130
+#: src/features/users/components/user-form-modal.tsx:168
 #: src/features/users/components/users-data-grid.tsx:67
 #: src/pages/examples.tsx:324
+#: src/pages/gateway-config.tsx:58
+#: src/pages/gateway-config.tsx:74
+#: src/pages/gateway-config.tsx:89
+#: src/pages/gateway-config.tsx:104
+#: src/pages/gateway-config.tsx:124
 msgid "Success"
 msgstr "Success"
 
@@ -1120,7 +1491,7 @@ msgstr "Success"
 msgid "Success notification!"
 msgstr "Success notification!"
 
-#: src/features/users/components/user-form-modal.tsx:44
+#: src/features/users/components/user-form-modal.tsx:46
 msgid "Super Admin"
 msgstr "Super Admin"
 
@@ -1144,6 +1515,10 @@ msgstr "TanStack Router:"
 msgid "Technology Stack"
 msgstr "Technology Stack"
 
+#: src/features/gateway-config/ui/gateway-config-form.tsx:151
+msgid "Test"
+msgstr "Test"
+
 #: src/pages/examples.tsx:311
 msgid "Test different types of notifications"
 msgstr "Test different types of notifications"
@@ -1160,6 +1535,10 @@ msgstr "testing setup with Vitest and Playwright"
 msgid "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
 msgstr "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
 
+#: src/features/payment-refund/ui/refund-button.tsx:32
+msgid "The payment has been refunded successfully"
+msgstr "The payment has been refunded successfully"
+
 #: src/widgets/billing-history/ui/billing-history-table.tsx:52
 msgid "The payment is being refunded."
 msgstr "The payment is being refunded."
@@ -1171,6 +1550,10 @@ msgstr "The request timed out. Please try again"
 #: src/features/users/components/users-data-grid.tsx:58
 msgid "This action cannot be undone."
 msgstr "This action cannot be undone."
+
+#: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:32
+msgid "This action cannot be undone. The full payment amount will be refunded to the customer."
+msgstr "This action cannot be undone. The full payment amount will be refunded to the customer."
 
 #: src/features/locale-demo/locale-demo.tsx:52
 msgid "This demo shows the unified i18n approach across frontend and backend"
@@ -1184,6 +1567,14 @@ msgstr "This demo shows the unified i18n approach across frontend and backend"
 msgid "This field is required"
 msgstr "This field is required"
 
+#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:83
+msgid "This organization is set up to receive payments."
+msgstr "This organization is set up to receive payments."
+
+#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:84
+msgid "This organization needs to complete payment gateway onboarding."
+msgstr "This organization needs to complete payment gateway onboarding."
+
 #: src/pages/about.tsx:54
 msgid "This template is built with cutting-edge technologies for optimal developer experience and performance."
 msgstr "This template is built with cutting-edge technologies for optimal developer experience and performance."
@@ -1193,8 +1584,8 @@ msgid "This will log you out from all devices where you're currently signed in, 
 msgstr "This will log you out from all devices where you're currently signed in, including this device."
 
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:47
-msgid "To start receiving payments from your customers, you need to connect your Stripe account."
-msgstr "To start receiving payments from your customers, you need to connect your Stripe account."
+#~ msgid "To start receiving payments from your customers, you need to connect your Stripe account."
+#~ msgstr "To start receiving payments from your customers, you need to connect your Stripe account."
 
 #: src/shared/ui/msw-dev-tools.tsx:63
 msgid "Toggle MSW settings"
@@ -1244,7 +1635,7 @@ msgstr "Unhandled requests"
 msgid "Unverified"
 msgstr "Unverified"
 
-#: src/features/users/components/user-form-modal.tsx:308
+#: src/features/users/components/user-form-modal.tsx:310
 msgid "Update"
 msgstr "Update"
 
@@ -1252,22 +1643,26 @@ msgstr "Update"
 msgid "Update your password to keep your account secure."
 msgstr "Update your password to keep your account secure."
 
-#: src/features/users/components/user-form-modal.tsx:288
+#: src/features/gateway-config/ui/gateway-config-list.tsx:181
+msgid "Updated"
+msgstr "Updated"
+
+#: src/features/users/components/user-form-modal.tsx:290
 msgid "Updated:"
 msgstr "Updated:"
 
-#: src/features/users/components/user-form-modal.tsx:42
-#: src/features/users/components/user-form-modal.tsx:308
+#: src/features/users/components/user-form-modal.tsx:44
+#: src/features/users/components/user-form-modal.tsx:310
 #: src/features/users/components/users-data-grid.tsx:111
 #: src/pages/examples.tsx:88
 msgid "User"
 msgstr "User"
 
-#: src/features/users/components/user-form-modal.tsx:270
+#: src/features/users/components/user-form-modal.tsx:272
 msgid "User can log in and access the system"
 msgstr "User can log in and access the system"
 
-#: src/features/users/components/user-form-modal.tsx:167
+#: src/features/users/components/user-form-modal.tsx:169
 msgid "User created successfully"
 msgstr "User created successfully"
 
@@ -1276,7 +1671,7 @@ msgid "User deleted successfully"
 msgstr "User deleted successfully"
 
 #: src/features/users/components/users-data-grid.tsx:226
-#: src/widgets/sidebar/ui/sidebar.tsx:44
+#: src/widgets/sidebar/ui/sidebar.tsx:46
 msgid "User Management"
 msgstr "User Management"
 
@@ -1284,15 +1679,15 @@ msgstr "User Management"
 msgid "User Preference"
 msgstr "User Preference"
 
-#: src/features/users/components/user-form-modal.tsx:129
+#: src/features/users/components/user-form-modal.tsx:131
 msgid "User updated successfully"
 msgstr "User updated successfully"
 
-#: src/features/users/components/user-form-modal.tsx:277
+#: src/features/users/components/user-form-modal.tsx:279
 msgid "User's email address has been verified"
 msgstr "User's email address has been verified"
 
-#: src/features/users/components/user-form-modal.tsx:207
+#: src/features/users/components/user-form-modal.tsx:209
 msgid "Username"
 msgstr "Username"
 
@@ -1342,6 +1737,7 @@ msgstr "Vite:"
 msgid "Warn (log warning)"
 msgstr "Warn (log warning)"
 
+#: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:29
 #: src/pages/examples.tsx:344
 msgid "Warning"
 msgstr "Warning"
@@ -1357,6 +1753,30 @@ msgstr "Warning notification!"
 #: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:356
 msgid "Weak"
 msgstr "Weak"
+
+#: src/features/gateway-config/ui/paypal-config-form.tsx:41
+msgid "Webhook ID"
+msgstr "Webhook ID"
+
+#: src/features/gateway-config/ui/paypal-config-form.tsx:48
+msgid "Webhook ID for event notifications (optional)"
+msgstr "Webhook ID for event notifications (optional)"
+
+#: src/features/gateway-config/ui/stripe-config-form.tsx:28
+msgid "Webhook Secret"
+msgstr "Webhook Secret"
+
+#: src/features/gateway-config/ui/square-config-form.tsx:41
+msgid "Webhook Signature Key"
+msgstr "Webhook Signature Key"
+
+#: src/features/gateway-config/ui/square-config-form.tsx:48
+msgid "Webhook signature key for event validation (optional)"
+msgstr "Webhook signature key for event validation (optional)"
+
+#: src/features/gateway-config/ui/stripe-config-form.tsx:36
+msgid "Webhook signing secret for event validation"
+msgstr "Webhook signing secret for event validation"
 
 #: src/features/locale-demo/locale-demo.tsx:197
 msgid "Welcome Message"
@@ -1374,13 +1794,17 @@ msgstr "When you change the language, the following happens:"
 msgid "X-User-Locale header (from user preference)"
 msgstr "X-User-Locale header (from user preference)"
 
-#: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:29
+#: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:37
 msgid "You are being redirected to Stripe to complete your setup."
 msgstr "You are being redirected to Stripe to complete your setup."
 
-#: src/pages/billing.tsx:31
+#: src/pages/billing.tsx:46
 msgid "You don't have permission to access billing information. Please contact your administrator."
 msgstr "You don't have permission to access billing information. Please contact your administrator."
+
+#: src/pages/gateway-config.tsx:144
+msgid "You don't have permission to view gateway configurations."
+msgstr "You don't have permission to view gateway configurations."
 
 #: src/widgets/billing-history/ui/billing-history-table.tsx:32
 msgid "You don't have permission to view payment history."
@@ -1390,13 +1814,25 @@ msgstr "You don't have permission to view payment history."
 msgid "You have been logged out from all devices"
 msgstr "You have been logged out from all devices"
 
-#: src/pages/billing.tsx:46
+#: src/pages/billing.tsx:73
 msgid "You have read-only access to billing information."
 msgstr "You have read-only access to billing information."
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:35
 msgid "You will need to sign in again on all devices."
 msgstr "You will need to sign in again on all devices."
+
+#: src/features/gateway-config/ui/braintree-config-form.tsx:27
+msgid "Your Braintree merchant ID"
+msgstr "Your Braintree merchant ID"
+
+#: src/features/gateway-config/ui/braintree-config-form.tsx:49
+msgid "Your Braintree private key"
+msgstr "Your Braintree private key"
+
+#: src/features/gateway-config/ui/braintree-config-form.tsx:38
+msgid "Your Braintree public key"
+msgstr "Your Braintree public key"
 
 #: src/shared/lib/use-auth-api.ts:125
 msgid "Your email has been successfully verified"
@@ -1422,6 +1858,22 @@ msgstr "Your payment is processing."
 msgid "Your payment was not successful, please try again."
 msgstr "Your payment was not successful, please try again."
 
+#: src/features/gateway-config/ui/paypal-config-form.tsx:27
+msgid "Your PayPal REST API client ID"
+msgstr "Your PayPal REST API client ID"
+
+#: src/features/gateway-config/ui/paypal-config-form.tsx:38
+msgid "Your PayPal REST API client secret"
+msgstr "Your PayPal REST API client secret"
+
+#: src/features/gateway-config/ui/square-config-form.tsx:27
+msgid "Your Square API access token"
+msgstr "Your Square API access token"
+
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:46
-msgid "Your Stripe Connect account is fully configured. You can now receive payments."
-msgstr "Your Stripe Connect account is fully configured. You can now receive payments."
+#~ msgid "Your Stripe Connect account is fully configured. You can now receive payments."
+#~ msgstr "Your Stripe Connect account is fully configured. You can now receive payments."
+
+#: src/features/gateway-config/ui/stripe-config-form.tsx:25
+msgid "Your Stripe secret API key"
+msgstr "Your Stripe secret API key"

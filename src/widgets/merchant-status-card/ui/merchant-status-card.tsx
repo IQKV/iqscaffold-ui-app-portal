@@ -1,73 +1,106 @@
-import React from "react";
-import { Card, Text, Title, Stack, Group, Badge, Anchor } from "@mantine/core";
-import { StripeConnectButton } from "@/features/merchant-onboarding";
-import { useAuth } from "@/processes/auth";
-import { t } from "@lingui/macro";
+import { useState } from "react";
 import {
-  IconAlertCircle,
-  IconCheck,
-  IconExternalLink,
-} from "@tabler/icons-react";
+  Card,
+  Text,
+  Title,
+  Stack,
+  Group,
+  Badge,
+  Button,
+  Select,
+} from "@mantine/core";
+import { MerchantOnboardingWizard } from "@/features/merchant-onboarding";
+import { useAuth } from "@/processes/auth";
+import { useMerchantStatus } from "@/entities/billing";
+import { t } from "@lingui/macro";
+import { IconAlertCircle, IconCheck, IconPlus } from "@tabler/icons-react";
 
 interface MerchantStatusCardProps {
-  isConfigured: boolean;
-  onboardingStatus?: "PENDING" | "COMPLETED" | "NONE";
+  organizations: Array<{ id: number; name: string }>;
 }
 
 export const MerchantStatusCard = ({
-  isConfigured,
-  onboardingStatus = "NONE",
+  organizations,
 }: MerchantStatusCardProps) => {
   const { canManageMerchants } = useAuth();
+  const [selectedOrgId, setSelectedOrgId] = useState<number | null>(
+    organizations.length > 0 ? organizations[0].id : null
+  );
+  const [wizardOpened, setWizardOpened] = useState(false);
+
+  const { data: merchantStatus, isLoading } = useMerchantStatus(
+    selectedOrgId || 0
+  );
+
+  const onboardingStatus = !merchantStatus
+    ? "NONE"
+    : merchantStatus.chargesEnabled && merchantStatus.payoutsEnabled
+      ? "COMPLETED"
+      : "PENDING";
 
   const showOnboardingButton =
-    canManageMerchants() && !isConfigured && onboardingStatus !== "COMPLETED";
+    canManageMerchants() && onboardingStatus !== "COMPLETED" && selectedOrgId;
+
   return (
-    <Card withBorder padding="xl" radius="md">
-      <Stack gap="md">
-        <Group justify="space-between">
-          <Title order={4}>{t`Merchant Account`}</Title>
-          <Badge
-            color={onboardingStatus === "COMPLETED" ? "green" : "yellow"}
-            leftSection={
-              onboardingStatus === "COMPLETED" ? (
-                <IconCheck size={14} />
-              ) : (
-                <IconAlertCircle size={14} />
-              )
-            }
-          >
-            {onboardingStatus === "COMPLETED" ? t`Active` : t`Setup Required`}
-          </Badge>
-        </Group>
+    <>
+      <Card withBorder padding="xl" radius="md">
+        <Stack gap="md">
+          <Group justify="space-between">
+            <Title order={4}>{t`Merchant Account`}</Title>
+            <Badge
+              color={onboardingStatus === "COMPLETED" ? "green" : "yellow"}
+              leftSection={
+                onboardingStatus === "COMPLETED" ? (
+                  <IconCheck size={14} />
+                ) : (
+                  <IconAlertCircle size={14} />
+                )
+              }
+            >
+              {onboardingStatus === "COMPLETED" ? t`Active` : t`Setup Required`}
+            </Badge>
+          </Group>
 
-        <Text size="sm" c="dimmed">
-          {onboardingStatus === "COMPLETED"
-            ? t`Your Stripe Connect account is fully configured. You can now receive payments.`
-            : t`To start receiving payments from your customers, you need to connect your Stripe account.`}
-        </Text>
+          {organizations.length > 0 && (
+            <Select
+              label={t`Organization`}
+              placeholder={t`Select organization`}
+              data={organizations.map((org) => ({
+                value: org.id.toString(),
+                label: org.name,
+              }))}
+              value={selectedOrgId?.toString() || null}
+              onChange={(value) =>
+                setSelectedOrgId(value ? parseInt(value, 10) : null)
+              }
+            />
+          )}
 
-        {onboardingStatus === "COMPLETED" && (
-          <Anchor
-            href="https://dashboard.stripe.com/"
-            target="_blank"
-            size="sm"
-            fw={500}
-          >
-            <Group gap={4}>
-              {t`Open Stripe Dashboard`}
-              <IconExternalLink size={14} />
-            </Group>
-          </Anchor>
-        )}
+          <Text size="sm" c="dimmed">
+            {isLoading
+              ? t`Loading merchant status...`
+              : onboardingStatus === "COMPLETED"
+                ? t`This organization is set up to receive payments.`
+                : t`This organization needs to complete payment gateway onboarding.`}
+          </Text>
 
-        {showOnboardingButton && (
-          <StripeConnectButton
-            refreshUrl={`${window.location.origin}/billing?status=refresh`}
-            returnUrl={`${window.location.origin}/billing?status=success`}
-          />
-        )}
-      </Stack>
-    </Card>
+          {showOnboardingButton && (
+            <Button
+              leftSection={<IconPlus size={18} />}
+              onClick={() => setWizardOpened(true)}
+              variant="light"
+            >
+              {t`Start Onboarding`}
+            </Button>
+          )}
+        </Stack>
+      </Card>
+
+      <MerchantOnboardingWizard
+        opened={wizardOpened}
+        onClose={() => setWizardOpened(false)}
+        organizations={organizations}
+      />
+    </>
   );
 };

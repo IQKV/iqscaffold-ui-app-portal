@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from "./pages/__root"
 import { Route as UsersRouteImport } from "./pages/users"
 import { Route as UserPreferencesRouteImport } from "./pages/user-preferences"
 import { Route as PreferencesDemoRouteImport } from "./pages/preferences-demo"
+import { Route as GatewayConfigRouteImport } from "./pages/gateway-config"
 import { Route as ExamplesRouteImport } from "./pages/examples"
 import { Route as DashboardRouteImport } from "./pages/dashboard"
 import { Route as CheckoutRouteImport } from "./pages/checkout"
@@ -33,6 +34,11 @@ const UserPreferencesRoute = UserPreferencesRouteImport.update({
 const PreferencesDemoRoute = PreferencesDemoRouteImport.update({
   id: "/preferences-demo",
   path: "/preferences-demo",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GatewayConfigRoute = GatewayConfigRouteImport.update({
+  id: "/gateway-config",
+  path: "/gateway-config",
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExamplesRoute = ExamplesRouteImport.update({
@@ -79,6 +85,7 @@ export interface FileRoutesByFullPath {
   "/checkout": typeof CheckoutRoute
   "/dashboard": typeof DashboardRoute
   "/examples": typeof ExamplesRoute
+  "/gateway-config": typeof GatewayConfigRoute
   "/preferences-demo": typeof PreferencesDemoRoute
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
@@ -91,6 +98,7 @@ export interface FileRoutesByTo {
   "/checkout": typeof CheckoutRoute
   "/dashboard": typeof DashboardRoute
   "/examples": typeof ExamplesRoute
+  "/gateway-config": typeof GatewayConfigRoute
   "/preferences-demo": typeof PreferencesDemoRoute
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
@@ -104,6 +112,7 @@ export interface FileRoutesById {
   "/checkout": typeof CheckoutRoute
   "/dashboard": typeof DashboardRoute
   "/examples": typeof ExamplesRoute
+  "/gateway-config": typeof GatewayConfigRoute
   "/preferences-demo": typeof PreferencesDemoRoute
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
@@ -118,6 +127,7 @@ export interface FileRouteTypes {
     | "/checkout"
     | "/dashboard"
     | "/examples"
+    | "/gateway-config"
     | "/preferences-demo"
     | "/user-preferences"
     | "/users"
@@ -130,6 +140,7 @@ export interface FileRouteTypes {
     | "/checkout"
     | "/dashboard"
     | "/examples"
+    | "/gateway-config"
     | "/preferences-demo"
     | "/user-preferences"
     | "/users"
@@ -142,6 +153,7 @@ export interface FileRouteTypes {
     | "/checkout"
     | "/dashboard"
     | "/examples"
+    | "/gateway-config"
     | "/preferences-demo"
     | "/user-preferences"
     | "/users"
@@ -155,6 +167,7 @@ export interface RootRouteChildren {
   CheckoutRoute: typeof CheckoutRoute
   DashboardRoute: typeof DashboardRoute
   ExamplesRoute: typeof ExamplesRoute
+  GatewayConfigRoute: typeof GatewayConfigRoute
   PreferencesDemoRoute: typeof PreferencesDemoRoute
   UserPreferencesRoute: typeof UserPreferencesRoute
   UsersRoute: typeof UsersRoute
@@ -181,6 +194,13 @@ declare module "@tanstack/react-router" {
       path: "/preferences-demo"
       fullPath: "/preferences-demo"
       preLoaderRoute: typeof PreferencesDemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/gateway-config": {
+      id: "/gateway-config"
+      path: "/gateway-config"
+      fullPath: "/gateway-config"
+      preLoaderRoute: typeof GatewayConfigRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/examples": {
@@ -243,6 +263,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutRoute: CheckoutRoute,
   DashboardRoute: DashboardRoute,
   ExamplesRoute: ExamplesRoute,
+  GatewayConfigRoute: GatewayConfigRoute,
   PreferencesDemoRoute: PreferencesDemoRoute,
   UserPreferencesRoute: UserPreferencesRoute,
   UsersRoute: UsersRoute,
