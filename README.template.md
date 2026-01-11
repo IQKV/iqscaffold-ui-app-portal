@@ -282,37 +282,75 @@ The application integrates with the User Service API:
 
 **Authentication Endpoints:**
 
-- `POST /api/v1/auth/login` - Authenticate user (via auth portal)
+- `POST /api/v1/auth/login` - Authenticate user
+- `POST /api/v1/auth/signup` - Register new user
 - `POST /api/v1/auth/refresh` - Refresh access token
 - `POST /api/v1/auth/logout` - Logout current session
 - `POST /api/v1/auth/logout-all` - Logout all sessions
 - `POST /api/v1/auth/validate` - Validate JWT token
+- `POST /api/v1/auth/password/forgot` - Request password reset
+- `POST /api/v1/auth/password/reset` - Reset password with token
+- `POST /api/v1/auth/email/verify` - Verify email with token
+- `POST /api/v1/auth/email/resend` - Resend verification email
+- `GET /api/v1/auth/email/status` - Get email verification status
 
 **User Endpoints:**
 
-- `GET /api/v1/users/me` - Get current user profile
-- `PATCH /api/v1/users/me/password` - Change password
+- `PATCH /api/v1/users/me/password` - Change password for authenticated user
+- `GET /api/v1/users/me/preferences` - Get current user's preferences
+- `PATCH /api/v1/users/me/preferences` - Update current user's preferences
+- `DELETE /api/v1/users/me/preferences` - Delete current user's preferences
 
-**Admin Endpoints (Requires ADMIN/SUPER_ADMIN Role):**
+**User Management Endpoints (Requires ADMIN/SUPER_ADMIN Role):**
 
-- `GET /api/v1/admin/users` - List users with pagination
+- `GET /api/v1/admin/users` - List users with pagination and search
 - `GET /api/v1/admin/users/{id}` - Get user by ID
 - `POST /api/v1/admin/users` - Create new user
 - `PUT /api/v1/admin/users/{id}` - Update user
 - `DELETE /api/v1/admin/users/{id}` - Delete user
 
-**Email Verification Endpoints:**
+**Organization Management Endpoints (Requires ADMIN/SUPER_ADMIN Role):**
 
-- `GET /api/v1/auth/email/status` - Get email verification status
-- `POST /api/v1/auth/email/resend` - Resend verification email
+- `GET /api/v1/admin/organizations` - List organizations with pagination
+- `GET /api/v1/admin/organizations/{id}` - Get organization by ID
+- `POST /api/v1/admin/organizations` - Create organization (SUPER_ADMIN only)
+- `PUT /api/v1/admin/organizations/{id}` - Update organization
+- `DELETE /api/v1/admin/organizations/{id}` - Delete organization (SUPER_ADMIN only)
+- `GET /api/v1/admin/organizations/tenant/{tenantId}` - Get organization by tenant ID (SUPER_ADMIN only)
 
-**Billing & Merchant Endpoints:**
+**Tenant Management Endpoints (Requires SUPER_ADMIN Role):**
+
+- `GET /api/v1/admin/tenants` - Get all tenants
+- `GET /api/v1/admin/tenants/{tenantId}` - Get tenant by ID
+- `POST /api/v1/admin/tenants` - Create new tenant
+- `PUT /api/v1/admin/tenants/{tenantId}` - Update tenant
+- `PATCH /api/v1/admin/tenants/{tenantId}/enabled` - Enable or disable tenant
+- `DELETE /api/v1/admin/tenants/{tenantId}` - Delete tenant
+- `GET /api/v1/admin/tenants/statistics` - Get tenant statistics
+
+**Billing & Payment Endpoints:**
 
 - `POST /api/v1/billing/payments/intent` - Create Stripe Payment Intent
 - `GET /api/v1/billing/payments` - List payments with pagination
-- `POST /api/v1/billing/payments/{id}/refund` - Refund payment (Admin only)
+- `GET /api/v1/billing/payments/{id}` - Get payment details
+- `POST /api/v1/billing/payments/{id}/refund` - Refund payment
+- `GET /api/v1/billing/payouts` - List payouts with pagination
+- `GET /api/v1/billing/payouts/{id}` - Get payout details
+
+**Merchant & Gateway Configuration Endpoints (Requires ADMIN Role):**
+
 - `POST /api/v1/admin/billing/merchants/onboard` - Initiate Stripe Connect onboarding
-- `GET /api/v1/admin/billing/merchants/status` - Get merchant onboarding status
+- `GET /api/v1/admin/billing/merchants/status/{organizationId}` - Get merchant onboarding status
+- `POST /api/v1/admin/billing/gateway-config` - Create gateway configuration
+- `GET /api/v1/admin/billing/gateway-config` - List all gateway configurations
+- `GET /api/v1/admin/billing/gateway-config/active` - List active gateway configurations
+- `GET /api/v1/admin/billing/gateway-config/primary` - Get primary gateway configuration
+- `GET /api/v1/admin/billing/gateway-config/{provider}` - Get gateway configuration by provider
+- `PUT /api/v1/admin/billing/gateway-config/{provider}` - Update gateway configuration
+- `DELETE /api/v1/admin/billing/gateway-config/{provider}` - Delete gateway configuration
+- `POST /api/v1/admin/billing/gateway-config/{provider}/activate` - Activate gateway
+- `POST /api/v1/admin/billing/gateway-config/{provider}/deactivate` - Deactivate gateway
+- `POST /api/v1/admin/billing/gateway-config/{provider}/set-primary` - Set primary gateway
 
 ### Configuration
 
