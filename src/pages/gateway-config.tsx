@@ -42,7 +42,8 @@ function GatewayConfigPage() {
   const { user } = useAuth();
   const [formOpened, setFormOpened] = useState(false);
   const [deleteConfirmOpened, setDeleteConfirmOpened] = useState(false);
-  const [providerToDelete, setProviderToDelete] = useState<PaymentGatewayProvider | null>(null);
+  const [providerToDelete, setProviderToDelete] =
+    useState<PaymentGatewayProvider | null>(null);
 
   const { data: configs, isLoading, error } = useGatewayConfigs();
   const createMutation = useCreateGatewayConfig();
@@ -214,17 +215,14 @@ function GatewayConfigPage() {
           centered
         >
           <Stack gap="md">
-            <Alert
-              icon={<IconAlertCircle />}
-              title={t`Warning`}
-              color="red"
-            >
+            <Alert icon={<IconAlertCircle />} title={t`Warning`} color="red">
               {t`This action cannot be undone. All configuration data for this gateway will be permanently deleted.`}
             </Alert>
 
             {providerToDelete && (
               <Text size="sm">
-                {t`Are you sure you want to delete the`} <strong>{providerToDelete}</strong> {t`gateway configuration?`}
+                {t`Are you sure you want to delete the`}{" "}
+                <strong>{providerToDelete}</strong> {t`gateway configuration?`}
               </Text>
             )}
 
