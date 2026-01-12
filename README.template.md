@@ -2,6 +2,20 @@
 
 > Web application providing authenticated user experience, user management, dashboard analytics, and security settings with integration to the IQ Scaffold Platform. Reference implementation and starting point for developing microservices frontends for SaaS applications.
 
+## Table of Contents
+
+- [Business Purpose](#business-purpose)
+- [Overview](#overview)
+- [Use Cases Implemented](#use-cases-implemented)
+- [API Integration](#api-integration)
+- [What It Demonstrates](#what-it-demonstrates)
+- [Architecture Patterns](#architecture-patterns)
+- [Technical Highlights](#technical-highlights)
+- [Learning Points](#learning-points)
+- [Starting Point for SaaS Frontend Development](#starting-point-for-saas-frontend-development)
+- [Adapting for Your Domain](#adapting-for-your-domain)
+- [Integration with Backend Services](#integration-with-backend-services)
+
 ## Business Purpose
 
 An application portal that demonstrates:
@@ -23,184 +37,6 @@ Reference implementation for building microservices-based SaaS applications, dem
 Main application frontend for the IQ Scaffold Platform. Provides user interface for authenticated users, integrating with the User Service and Gateway for identity management, authorization, and business operations.
 
 Starting point for microservices frontend development, demonstrating scalable SaaS applications with separation of concerns, reusable patterns, and backend microservices integration.
-
-## What It Demonstrates
-
-### 🎨 Modern Frontend Architecture
-
-- Feature-Sliced Design (FSD) methodology for scalable architecture
-- React 19 with concurrent features and improved performance
-- TypeScript strict mode for enhanced type safety
-- Vite 7 for lightning-fast development and optimized builds
-- TanStack Router for type-safe routing with code splitting
-
-### 🔐 Authentication & Authorization
-
-- JWT-based authentication with automatic token refresh
-- Route protection with declarative guards (AuthGuard, UserManagementGuard)
-- Role-based access control (RBAC) for admin features
-- Permission-based access control for granular operations
-- Session management across multiple devices
-- Secure token storage and lifecycle management
-
-### 📊 Data Management
-
-- TanStack Query for server state synchronization and caching
-- Optimistic updates for improved user experience
-- Automatic cache invalidation and refetching
-- Query key management for efficient data fetching
-- Pagination and search with backend integration
-- Real-time data updates with query invalidation
-
-### 🎯 User Management
-
-- User listing with pagination and search
-- User creation with role assignment
-- User editing with validation
-- User deletion with confirmation
-- Email verification status tracking
-- Role-based access control enforcement
-
-### 🛡️ Security Features
-
-- Password change with current password validation
-- Multi-device session management
-- Logout from all devices functionality
-- Security settings dashboard
-- Account security recommendations
-- Audit trail awareness
-
-### 🎨 UI Components
-
-- Mantine UI component library
-- Responsive design for all device sizes
-- Dark mode support with theme switching
-- Accessible components (WCAG 2.1 AA compliance)
-- Loading states and error handling
-- Toast notifications for user feedback
-
-### 📈 Dashboard & Analytics
-
-- Statistics cards with trend indicators
-- Real-time metrics visualization
-- Business KPIs display (users, orders, revenue, growth)
-- Responsive grid layout
-- Icon-based visual indicators
-- Percentage change tracking
-
-### 💳 Billing & Payments
-
-- Theme-aware Stripe Elements integration
-- Flexible checkout supporting 20+ payment methods
-- Merchant onboarding with Stripe Connect status tracking
-- Paginated billing history with administrative refunds
-- Locale-aware currency formatting at scale
-
-### 🌍 Internationalization
-
-- Lingui framework with macro support
-- Message extraction and compilation
-- Pluralization and formatting
-- Language switching without page reload
-- Translation-ready component architecture
-
-### 🧪 Testing & Quality
-
-- Vitest for unit and integration testing
-- Playwright for end-to-end testing with UI mode
-- Mock Service Worker for API mocking
-- Testing Library for component testing
-- Storybook for component development and documentation
-- Coverage reporting and CI integration
-
-### 🔍 Code Quality
-
-- ESLint 9 with flat config and React rules
-- Prettier for consistent code formatting
-- Stylelint for CSS/SCSS linting
-- Husky for pre-commit validation
-- Commitlint for conventional commits
-- Knip for dead code elimination
-
-## Architecture Patterns
-
-### Feature-Sliced Design Structure
-
-```
-src/
-├── app/              # Application initialization and configuration
-├── processes/        # Complex business processes (auth flow)
-├── pages/            # Route pages and layouts
-├── widgets/          # Composite UI blocks (header, sidebar)
-├── features/         # User interactions (dashboard, users, security)
-├── entities/         # Business entities (user, form models)
-├── shared/           # Reusable infrastructure (API, UI, utils)
-└── types/            # Global type definitions
-```
-
-### Authentication Process Layer
-
-- Centralized auth state management with Zustand
-- Token lifecycle management (validation, refresh, expiration)
-- Route guards for protected pages (AuthGuard, UserManagementGuard)
-- User context selectors and utilities
-- Side effects management (token refresh, storage sync)
-- HTTP interceptors for request/response handling
-
-### API Integration Layer
-
-- Axios-based HTTP client with interceptors
-- Type-safe API contracts with TypeScript
-- Error handling with standardized responses
-- Request/response transformation
-- Authorization header injection
-- Tenant ID propagation
-
-### State Management Strategy
-
-- Server state with TanStack Query (users, dashboard data)
-- Client state with Zustand (auth, UI preferences)
-- URL state with nuqs (search params, filters)
-- Form state with React Hook Form (user forms, settings)
-- Immutable updates with Immer
-
-## Technical Highlights
-
-### Performance Optimization
-
-- Code splitting with TanStack Router
-- Lazy loading for route components
-- Bundle size optimization with Vite
-- Tree shaking for unused code elimination
-- Image optimization in production builds
-- Console statement removal in production
-
-### Security Features
-
-- JWT token validation and expiration checking
-- Secure token storage with localStorage
-- XSS prevention with input sanitization
-- CSRF protection via token-based auth
-- Role-based route protection
-- Permission-based UI rendering
-
-### Developer Experience
-
-- Hot Module Replacement for instant updates
-- TypeScript strict mode for type safety
-- Comprehensive ESLint rules for code quality
-- Prettier integration for consistent formatting
-- Storybook for component development
-- DevTools for debugging (React Query, Router)
-
-### Operational Features
-
-- Docker containerization with multi-stage builds
-- Environment-specific configuration via .env
-- Health checks and monitoring readiness
-- Structured logging for production
-- CI/CD integration with GitHub Actions
-- Automated dependency updates with Dependabot
 
 ## Use Cases Implemented
 
@@ -364,6 +200,184 @@ Environment variables for API integration:
 - `VITE_ENABLE_MSW` - Enable Mock Service Worker for development
 - `VITE_STRIPE_PUBLIC_KEY` - Stripe publishable key for frontend elements
 - `VITE_LOG_LEVEL` - Console logging verbosity (silent/info/debug)
+
+## What It Demonstrates
+
+### Modern Frontend Architecture
+
+- Feature-Sliced Design (FSD) methodology for scalable architecture
+- React 19 with concurrent features and improved performance
+- TypeScript strict mode for enhanced type safety
+- Vite 7 for lightning-fast development and optimized builds
+- TanStack Router for type-safe routing with code splitting
+
+### Authentication & Authorization
+
+- JWT-based authentication with automatic token refresh
+- Route protection with declarative guards (AuthGuard, UserManagementGuard)
+- Role-based access control (RBAC) for admin features
+- Permission-based access control for granular operations
+- Session management across multiple devices
+- Secure token storage and lifecycle management
+
+### Data Management
+
+- TanStack Query for server state synchronization and caching
+- Optimistic updates for improved user experience
+- Automatic cache invalidation and refetching
+- Query key management for efficient data fetching
+- Pagination and search with backend integration
+- Real-time data updates with query invalidation
+
+### User Management
+
+- User listing with pagination and search
+- User creation with role assignment
+- User editing with validation
+- User deletion with confirmation
+- Email verification status tracking
+- Role-based access control enforcement
+
+### Security Features
+
+- Password change with current password validation
+- Multi-device session management
+- Logout from all devices functionality
+- Security settings dashboard
+- Account security recommendations
+- Audit trail awareness
+
+### UI Components
+
+- Mantine UI component library
+- Responsive design for all device sizes
+- Dark mode support with theme switching
+- Accessible components (WCAG 2.1 AA compliance)
+- Loading states and error handling
+- Toast notifications for user feedback
+
+### Dashboard & Analytics
+
+- Statistics cards with trend indicators
+- Real-time metrics visualization
+- Business KPIs display (users, orders, revenue, growth)
+- Responsive grid layout
+- Icon-based visual indicators
+- Percentage change tracking
+
+### Billing & Payments
+
+- Theme-aware Stripe Elements integration
+- Flexible checkout supporting 20+ payment methods
+- Merchant onboarding with Stripe Connect status tracking
+- Paginated billing history with administrative refunds
+- Locale-aware currency formatting at scale
+
+### Internationalization
+
+- Lingui framework with macro support
+- Message extraction and compilation
+- Pluralization and formatting
+- Language switching without page reload
+- Translation-ready component architecture
+
+### Testing & Quality
+
+- Vitest for unit and integration testing
+- Playwright for end-to-end testing with UI mode
+- Mock Service Worker for API mocking
+- Testing Library for component testing
+- Storybook for component development and documentation
+- Coverage reporting and CI integration
+
+### Code Quality
+
+- ESLint 9 with flat config and React rules
+- Prettier for consistent code formatting
+- Stylelint for CSS/SCSS linting
+- Husky for pre-commit validation
+- Commitlint for conventional commits
+- Knip for dead code elimination
+
+## Architecture Patterns
+
+### Feature-Sliced Design Structure
+
+```
+src/
+├── app/              # Application initialization and configuration
+├── processes/        # Complex business processes (auth flow)
+├── pages/            # Route pages and layouts
+├── widgets/          # Composite UI blocks (header, sidebar)
+├── features/         # User interactions (dashboard, users, security)
+├── entities/         # Business entities (user, form models)
+├── shared/           # Reusable infrastructure (API, UI, utils)
+└── types/            # Global type definitions
+```
+
+### Authentication Process Layer
+
+- Centralized auth state management with Zustand
+- Token lifecycle management (validation, refresh, expiration)
+- Route guards for protected pages (AuthGuard, UserManagementGuard)
+- User context selectors and utilities
+- Side effects management (token refresh, storage sync)
+- HTTP interceptors for request/response handling
+
+### API Integration Layer
+
+- Axios-based HTTP client with interceptors
+- Type-safe API contracts with TypeScript
+- Error handling with standardized responses
+- Request/response transformation
+- Authorization header injection
+- Tenant ID propagation
+
+### State Management Strategy
+
+- Server state with TanStack Query (users, dashboard data)
+- Client state with Zustand (auth, UI preferences)
+- URL state with nuqs (search params, filters)
+- Form state with React Hook Form (user forms, settings)
+- Immutable updates with Immer
+
+## Technical Highlights
+
+### Performance Optimization
+
+- Code splitting with TanStack Router
+- Lazy loading for route components
+- Bundle size optimization with Vite
+- Tree shaking for unused code elimination
+- Image optimization in production builds
+- Console statement removal in production
+
+### Security Features
+
+- JWT token validation and expiration checking
+- Secure token storage with localStorage
+- XSS prevention with input sanitization
+- CSRF protection via token-based auth
+- Role-based route protection
+- Permission-based UI rendering
+
+### Developer Experience
+
+- Hot Module Replacement for instant updates
+- TypeScript strict mode for type safety
+- Comprehensive ESLint rules for code quality
+- Prettier integration for consistent formatting
+- Storybook for component development
+- DevTools for debugging (React Query, Router)
+
+### Operational Features
+
+- Docker containerization with multi-stage builds
+- Environment-specific configuration via .env
+- Health checks and monitoring readiness
+- Structured logging for production
+- CI/CD integration with GitHub Actions
+- Automated dependency updates with Dependabot
 
 ## Learning Points
 
