@@ -155,7 +155,7 @@
     "@testing-library/user-event": "^14.6.1",
     "@total-typescript/ts-reset": "^0.6.1",
     "@types/eslint": "^9.6.1",
-    "@types/node": "^25.0.3",
+    "@types/node": "^25.0.6",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react-swc": "^4.2.0",
