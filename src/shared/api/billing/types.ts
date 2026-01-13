@@ -27,6 +27,117 @@ export type PaymentStatus =
   | "REQUIRES_ACTION"
   | "CANCELED";
 
+// Subscription Management Types
+
+export interface CreateSubscriptionRequest {
+  planId: string;
+  paymentMethodId?: string;
+  trialDays?: number;
+  metadata?: Record<string, string>;
+}
+
+export interface UpdateSubscriptionRequest {
+  planId?: string;
+  paymentMethodId?: string;
+  metadata?: Record<string, string>;
+}
+
+export interface SubscriptionResponse {
+  id: string;
+  tenantId: string;
+  planId: string;
+  planName: string;
+  status: SubscriptionStatus;
+  stripeSubscriptionId?: string;
+  stripeCustomerId?: string;
+  currentPeriodStart: string;
+  currentPeriodEnd: string;
+  trialStart?: string;
+  trialEnd?: string;
+  cancelAtPeriodEnd: boolean;
+  canceledAt?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type SubscriptionStatus =
+  | "active"
+  | "trialing"
+  | "past_due"
+  | "canceled"
+  | "unpaid"
+  | "paused";
+
+// Subscription Plan Types
+
+export interface CreateSubscriptionPlanRequest {
+  name: string;
+  description?: string;
+  priceAmount: number;
+  currency: string;
+  interval: "month" | "year";
+  intervalCount: number;
+  trialDays?: number;
+  isActive: boolean;
+  features?: Record<string, any>;
+}
+
+export interface UpdateSubscriptionPlanRequest {
+  name?: string;
+  description?: string;
+  priceAmount?: number;
+  currency?: string;
+  interval?: "month" | "year";
+  intervalCount?: number;
+  trialDays?: number;
+  isActive?: boolean;
+  features?: Record<string, any>;
+}
+
+export interface SubscriptionPlanResponse {
+  id: string;
+  name: string;
+  description?: string;
+  priceAmount: number;
+  currency: string;
+  interval: string;
+  intervalCount: number;
+  trialDays?: number;
+  isActive: boolean;
+  features?: Record<string, any>;
+  stripePriceId?: string;
+  stripeProductId?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Invoice Types
+
+export interface InvoiceResponse {
+  id: string;
+  subscriptionId: string;
+  stripeInvoiceId?: string;
+  status: InvoiceStatus;
+  amountDue: number;
+  amountPaid: number;
+  currency: string;
+  dueDate?: string;
+  paidAt?: string;
+  hostedInvoiceUrl?: string;
+  invoicePdf?: string;
+  periodStart: string;
+  periodEnd: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type InvoiceStatus =
+  | "draft"
+  | "open"
+  | "paid"
+  | "uncollectible"
+  | "void";
+
 export interface OnboardRequest {
   organizationId: number;
   gatewayProvider: PaymentGatewayProvider;

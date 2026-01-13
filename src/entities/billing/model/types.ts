@@ -4,6 +4,11 @@ export type {
   OnboardResponse as MerchantAccount,
   PayoutResponse as Payout,
   PayoutStatus,
+  SubscriptionResponse as Subscription,
+  SubscriptionStatus,
+  SubscriptionPlanResponse as SubscriptionPlan,
+  InvoiceResponse as Invoice,
+  InvoiceStatus,
 } from "@/shared/api/billing/types";
 
 export interface BillingState {

@@ -5,6 +5,10 @@ import {
   PaymentGatewayProvider,
   CreateGatewayConfigRequest,
   UpdateGatewayConfigRequest,
+  CreateSubscriptionRequest,
+  UpdateSubscriptionRequest,
+  CreateSubscriptionPlanRequest,
+  UpdateSubscriptionPlanRequest,
 } from "@/shared/api/billing/types";
 
 export const billingKeys = {
@@ -26,7 +30,30 @@ export const billingKeys = {
     [...billingKeys.gatewayConfigs(), "active"] as const,
   primaryGatewayConfig: () =>
     [...billingKeys.gatewayConfigs(), "primary"] as const,
+  subscriptions: () => [...billingKeys.all, "subscriptions"] as const,
+  subscription: (id: string) => [...billingKeys.subscriptions(), id] as const,
+  activeSubscription: () => [...billingKeys.subscriptions(), "active"] as const,
+  subscriptionPlans: () => [...billingKeys.all, "subscription-plans"] as const,
+  subscriptionPlan: (id: string) =>
+    [...billingKeys.subscriptionPlans(), id] as const,
+  activeSubscriptionPlans: () =>
+    [...billingKeys.subscriptionPlans(), "active"] as const,
+  invoices: () => [...billingKeys.all, "invoices"] as const,
+  invoice: (id: string) => [...billingKeys.invoices(), id] as const,
+  invoicesBySubscription: (
+    subscriptionId: string,
+    params: BillingHistoryParams
+  ) =>
+    [
+      ...billingKeys.invoices(),
+      "subscription",
+      subscriptionId,
+      params,
+    ] as const,
+  openInvoices: () => [...billingKeys.invoices(), "open"] as const,
 };
+
+// Payment Hooks
 
 export const usePayments = (params?: BillingHistoryParams) => {
   return useQuery({
@@ -43,6 +70,249 @@ export const usePayment = (id: string) => {
   });
 };
 
+export const useRefundPayment = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => billingApi.refundPayment(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: billingKeys.payments() });
+    },
+  });
+};
+
+// Subscription Hooks
+
+export const useSubscriptions = (params?: BillingHistoryParams) => {
+  return useQuery({
+    queryKey: billingKeys.subscriptions(),
+    queryFn: () => billingApi.listSubscriptions(params),
+  });
+};
+
+export const useActiveSubscription = () => {
+  return useQuery({
+    queryKey: billingKeys.activeSubscription(),
+    queryFn: () => billingApi.getActiveSubscription(),
+  });
+};
+
+export const useSubscription = (id: string) => {
+  return useQuery({
+    queryKey: billingKeys.subscription(id),
+    queryFn: () => billingApi.getSubscription(id),
+    enabled: !!id,
+  });
+};
+
+export const useCreateSubscription = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (request: CreateSubscriptionRequest) =>
+      billingApi.createSubscription(request),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: billingKeys.subscriptions() });
+      queryClient.invalidateQueries({
+        queryKey: billingKeys.activeSubscription(),
+      });
+    },
+  });
+};
+
+export const useUpdateSubscription = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({
+      id,
+      request,
+    }: {
+      id: string;
+      request: UpdateSubscriptionRequest;
+    }) => billingApi.updateSubscription(id, request),
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: billingKeys.subscriptions() });
+      queryClient.invalidateQueries({
+        queryKey: billingKeys.subscription(variables.id),
+      });
+      queryClient.invalidateQueries({
+        queryKey: billingKeys.activeSubscription(),
+      });
+    },
+  });
+};
+
+export const useCancelSubscription = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => billingApi.cancelSubscription(id),
+    onSuccess: (_, id) => {
+      queryClient.invalidateQueries({ queryKey: billingKeys.subscriptions() });
+      queryClient.invalidateQueries({ queryKey: billingKeys.subscription(id) });
+      queryClient.invalidateQueries({
+        queryKey: billingKeys.activeSubscription(),
+      });
+    },
+  });
+};
+
+export const useCancelSubscriptionImmediately = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => billingApi.cancelSubscriptionImmediately(id),
+    onSuccess: (_, id) => {
+      queryClient.invalidateQueries({ queryKey: billingKeys.subscriptions() });
+      queryClient.invalidateQueries({ queryKey: billingKeys.subscription(id) });
+      queryClient.invalidateQueries({
+        queryKey: billingKeys.activeSubscription(),
+      });
+    },
+  });
+};
+
+export const usePauseSubscription = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => billingApi.pauseSubscription(id),
+    onSuccess: (_, id) => {
+      queryClient.invalidateQueries({ queryKey: billingKeys.subscriptions() });
+      queryClient.invalidateQueries({ queryKey: billingKeys.subscription(id) });
+      queryClient.invalidateQueries({
+        queryKey: billingKeys.activeSubscription(),
+      });
+    },
+  });
+};
+
+export const useResumeSubscription = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => billingApi.resumeSubscription(id),
+    onSuccess: (_, id) => {
+      queryClient.invalidateQueries({ queryKey: billingKeys.subscriptions() });
+      queryClient.invalidateQueries({ queryKey: billingKeys.subscription(id) });
+      queryClient.invalidateQueries({
+        queryKey: billingKeys.activeSubscription(),
+      });
+    },
+  });
+};
+
+// Subscription Plan Hooks
+
+export const useSubscriptionPlans = (params?: BillingHistoryParams) => {
+  return useQuery({
+    queryKey: billingKeys.subscriptionPlans(),
+    queryFn: () => billingApi.listSubscriptionPlans(params),
+  });
+};
+
+export const useActiveSubscriptionPlans = () => {
+  return useQuery({
+    queryKey: billingKeys.activeSubscriptionPlans(),
+    queryFn: () => billingApi.listActiveSubscriptionPlans(),
+  });
+};
+
+export const useSubscriptionPlan = (id: string) => {
+  return useQuery({
+    queryKey: billingKeys.subscriptionPlan(id),
+    queryFn: () => billingApi.getSubscriptionPlan(id),
+    enabled: !!id,
+  });
+};
+
+export const useCreateSubscriptionPlan = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (request: CreateSubscriptionPlanRequest) =>
+      billingApi.createSubscriptionPlan(request),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: billingKeys.subscriptionPlans(),
+      });
+      queryClient.invalidateQueries({
+        queryKey: billingKeys.activeSubscriptionPlans(),
+      });
+    },
+  });
+};
+
+export const useUpdateSubscriptionPlan = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({
+      id,
+      request,
+    }: {
+      id: string;
+      request: UpdateSubscriptionPlanRequest;
+    }) => billingApi.updateSubscriptionPlan(id, request),
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: billingKeys.subscriptionPlans(),
+      });
+      queryClient.invalidateQueries({
+        queryKey: billingKeys.subscriptionPlan(variables.id),
+      });
+      queryClient.invalidateQueries({
+        queryKey: billingKeys.activeSubscriptionPlans(),
+      });
+    },
+  });
+};
+
+export const useSyncSubscriptionPlan = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => billingApi.syncSubscriptionPlan(id),
+    onSuccess: (_, id) => {
+      queryClient.invalidateQueries({
+        queryKey: billingKeys.subscriptionPlans(),
+      });
+      queryClient.invalidateQueries({
+        queryKey: billingKeys.subscriptionPlan(id),
+      });
+    },
+  });
+};
+
+// Invoice Hooks
+
+export const useInvoices = (params?: BillingHistoryParams) => {
+  return useQuery({
+    queryKey: billingKeys.invoices(),
+    queryFn: () => billingApi.listInvoices(params),
+  });
+};
+
+export const useInvoice = (id: string) => {
+  return useQuery({
+    queryKey: billingKeys.invoice(id),
+    queryFn: () => billingApi.getInvoice(id),
+    enabled: !!id,
+  });
+};
+
+export const useInvoicesBySubscription = (
+  subscriptionId: string,
+  params?: BillingHistoryParams
+) => {
+  return useQuery({
+    queryKey: billingKeys.invoicesBySubscription(subscriptionId, params || {}),
+    queryFn: () =>
+      billingApi.listInvoicesBySubscription(subscriptionId, params),
+    enabled: !!subscriptionId,
+  });
+};
+
+export const useOpenInvoices = () => {
+  return useQuery({
+    queryKey: billingKeys.openInvoices(),
+    queryFn: () => billingApi.listOpenInvoices(),
+  });
+};
+
+// Merchant Hooks
+
 export const useMerchantStatus = (organizationId: number) => {
   return useQuery({
     queryKey: billingKeys.merchantStatus(organizationId),
@@ -51,11 +321,7 @@ export const useMerchantStatus = (organizationId: number) => {
   });
 };
 
-export const useRefundPayment = () => {
-  return useMutation({
-    mutationFn: (id: string) => billingApi.refundPayment(id),
-  });
-};
+// Payout Hooks
 
 export const usePayouts = (params?: BillingHistoryParams) => {
   return useQuery({
