@@ -1,3 +1,9 @@
+import {
+  VALIDATION_MESSAGES,
+  REGEX_PATTERNS,
+  DEFAULTS,
+} from "@/shared/constants";
+
 /**
  * Enhanced form field validation utilities
  */
@@ -7,16 +13,18 @@
  */
 export function useEnhancedFormValidation() {
   const validateEmail = (value: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(value) ? null : "Please enter a valid email address";
+    return REGEX_PATTERNS.EMAIL.test(value)
+      ? null
+      : VALIDATION_MESSAGES.EMAIL_INVALID;
   };
 
-  const validatePassword = (value: string, minLength = 8) => {
-    if (value.length < minLength) {
-      return `Password must be at least ${minLength} characters long`;
+  const validatePassword = (value: string, minLength?: number) => {
+    const actualMinLength = minLength ?? DEFAULTS.PASSWORD_MIN_LENGTH;
+    if (value.length < actualMinLength) {
+      return VALIDATION_MESSAGES.PASSWORD_MIN_LENGTH(actualMinLength);
     }
-    if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(value)) {
-      return "Password must contain at least one uppercase letter, one lowercase letter, and one number";
+    if (!REGEX_PATTERNS.PASSWORD_STRENGTH.test(value)) {
+      return VALIDATION_MESSAGES.PASSWORD_COMPLEXITY;
     }
     return null;
   };
@@ -28,7 +36,7 @@ export function useEnhancedFormValidation() {
       value === "" ||
       (Array.isArray(value) && value.length === 0)
     ) {
-      return `${fieldName} is required`;
+      return VALIDATION_MESSAGES.REQUIRED(fieldName);
     }
     return null;
   };
@@ -39,7 +47,7 @@ export function useEnhancedFormValidation() {
     fieldName = "This field"
   ) => {
     if (value && value.length < minLength) {
-      return `${fieldName} must be at least ${minLength} characters long`;
+      return VALIDATION_MESSAGES.MIN_LENGTH(fieldName, minLength);
     }
     return null;
   };
@@ -50,7 +58,7 @@ export function useEnhancedFormValidation() {
     fieldName = "This field"
   ) => {
     if (value && value.length > maxLength) {
-      return `${fieldName} must be no more than ${maxLength} characters long`;
+      return VALIDATION_MESSAGES.MAX_LENGTH(fieldName, maxLength);
     }
     return null;
   };
@@ -62,10 +70,10 @@ export function useEnhancedFormValidation() {
     fieldName = "This field"
   ) => {
     if (min !== undefined && value < min) {
-      return `${fieldName} must be at least ${min}`;
+      return VALIDATION_MESSAGES.MIN_VALUE(fieldName, min);
     }
     if (max !== undefined && value > max) {
-      return `${fieldName} must be no more than ${max}`;
+      return VALIDATION_MESSAGES.MAX_VALUE(fieldName, max);
     }
     return null;
   };

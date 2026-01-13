@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getConfig } from "@/app/config";
+import { ENV_KEYS } from "@/shared/constants";
 
 export const publicApi = axios.create({
   withCredentials: true,
@@ -7,7 +8,7 @@ export const publicApi = axios.create({
 
 publicApi.interceptors.request.use(
   (config) => {
-    const baseUrl = getConfig("VITE_API_URL_SERVER");
+    const baseUrl = getConfig(ENV_KEYS.API_URL_SERVER);
     config.baseURL = `${baseUrl}/public`;
     return config;
   },

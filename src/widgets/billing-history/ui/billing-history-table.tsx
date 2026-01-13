@@ -16,8 +16,14 @@ import { useAuth } from "@/processes/auth";
 import { notificationService } from "@/shared/lib/notifications";
 import { useQueryClient } from "@tanstack/react-query";
 import { billingKeys } from "@/entities/billing/api/billing-queries";
+import {
+  CONFIRMATION_MESSAGES,
+  NOTIFICATION_MESSAGES,
+  DEFAULTS,
+} from "@/shared/constants";
+import { i18n } from "@lingui/core";
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = DEFAULTS.PAGE_SIZE;
 
 export const BillingHistoryTable = () => {
   const [page, setPage] = useState(1);
@@ -37,11 +43,7 @@ export const BillingHistoryTable = () => {
   const handleRefund = (id: string) => {
     modals.openConfirmModal({
       title: t`Confirm Refund`,
-      children: (
-        <Text size="sm">
-          {t`Are you sure you want to refund this payment? This action cannot be undone.`}
-        </Text>
-      ),
+      children: <Text size="sm">{i18n._(CONFIRMATION_MESSAGES.REFUND)}</Text>,
       labels: { confirm: t`Refund`, cancel: t`Cancel` },
       confirmProps: { color: "red" },
       onConfirm: async () => {
@@ -49,13 +51,13 @@ export const BillingHistoryTable = () => {
           await refundMutation.mutateAsync(id);
           notificationService.success({
             title: t`Refund Initiated`,
-            message: t`The payment is being refunded.`,
+            message: i18n._(NOTIFICATION_MESSAGES.SUCCESS.REFUND_INITIATED),
           });
           queryClient.invalidateQueries({ queryKey: billingKeys.payments() });
         } catch (error) {
           notificationService.error({
             title: t`Refund Failed`,
-            message: t`Could not process refund. Please try again.`,
+            message: i18n._(NOTIFICATION_MESSAGES.ERROR.REFUND_FAILED),
           });
         }
       },

@@ -12,8 +12,9 @@ import { useTenantStore } from "@/processes/tenant";
 import { i18n } from "@lingui/core";
 import { getUserLocalePreference } from "@/shared/lib/locale-preference";
 import { getClientLocale } from "@/shared/locales";
+import { ENV_KEYS } from "@/shared/constants";
 
-const BASE_URL = getConfig("VITE_API_URL_SERVER");
+const BASE_URL = getConfig(ENV_KEYS.API_URL_SERVER);
 
 /**
  * Create base axios instance with common configuration

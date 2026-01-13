@@ -1,3 +1,10 @@
+import {
+  API_ENDPOINTS,
+  DEFAULTS,
+  STORAGE_KEYS,
+  ENV_KEYS,
+} from "@/shared/constants";
+
 export interface AuthEndpoints {
   login: string;
   signup: string;
@@ -30,41 +37,39 @@ export interface AuthConfig {
   };
 }
 
-// Default hardcoded values (fallbacks)
-const DEFAULT_AUTH_DOMAIN = "https://auth.iqscaffold.com";
-const DEFAULT_APP_DOMAIN = "https://app.iqscaffold.com";
-
 // Build auth configuration from environment variables with fallbacks
 const buildAuthConfig = (): AuthConfig => {
   const authDomain =
-    import.meta.env.VITE_AUTH_DOMAIN_AUTH ?? DEFAULT_AUTH_DOMAIN;
-  const appDomain = import.meta.env.VITE_AUTH_DOMAIN_APP ?? DEFAULT_APP_DOMAIN;
+    import.meta.env[ENV_KEYS.AUTH_DOMAIN_AUTH] ?? DEFAULTS.AUTH_DOMAIN;
+  const appDomain =
+    import.meta.env[ENV_KEYS.AUTH_DOMAIN_APP] ?? DEFAULTS.APP_DOMAIN;
 
   return {
     endpoints: {
-      login: "/api/v1/auth/login",
-      signup: "/api/v1/auth/signup",
-      refresh: "/api/v1/auth/refresh",
-      logout: "/api/v1/auth/logout",
-      forgotPassword: "/api/v1/auth/password/forgot",
-      resetPassword: "/api/v1/auth/password/reset",
-      verifyEmail: "/api/v1/auth/email/verify",
-      resendVerification: "/api/v1/auth/email/resend",
-      validateToken: "/api/v1/auth/validate",
-      changePassword: "/api/v1/users/me/password",
-      logoutAll: "/api/v1/auth/logout-all",
-      emailStatus: "/api/v1/auth/email/status",
+      login: API_ENDPOINTS.AUTH.LOGIN,
+      signup: API_ENDPOINTS.AUTH.SIGNUP,
+      refresh: API_ENDPOINTS.AUTH.REFRESH,
+      logout: API_ENDPOINTS.AUTH.LOGOUT,
+      forgotPassword: API_ENDPOINTS.AUTH.FORGOT_PASSWORD,
+      resetPassword: API_ENDPOINTS.AUTH.RESET_PASSWORD,
+      verifyEmail: API_ENDPOINTS.AUTH.VERIFY_EMAIL,
+      resendVerification: API_ENDPOINTS.AUTH.RESEND_VERIFICATION,
+      validateToken: API_ENDPOINTS.AUTH.VALIDATE_TOKEN,
+      changePassword: API_ENDPOINTS.USERS.CHANGE_PASSWORD,
+      logoutAll: API_ENDPOINTS.AUTH.LOGOUT_ALL,
+      emailStatus: API_ENDPOINTS.AUTH.EMAIL_STATUS,
     },
     tokenStorage: {
-      accessTokenKey: "accessToken",
-      refreshTokenKey: "refreshToken",
+      accessTokenKey: STORAGE_KEYS.ACCESS_TOKEN,
+      refreshTokenKey: STORAGE_KEYS.REFRESH_TOKEN,
     },
     redirects: {
-      afterLogin: import.meta.env.VITE_AUTH_REDIRECT_AFTER_LOGIN ?? appDomain,
+      afterLogin:
+        import.meta.env[ENV_KEYS.AUTH_REDIRECT_AFTER_LOGIN] ?? appDomain,
       afterLogout:
-        import.meta.env.VITE_AUTH_REDIRECT_AFTER_LOGOUT ?? authDomain,
+        import.meta.env[ENV_KEYS.AUTH_REDIRECT_AFTER_LOGOUT] ?? authDomain,
       afterSignup:
-        import.meta.env.VITE_AUTH_REDIRECT_AFTER_SIGNUP ?? authDomain,
+        import.meta.env[ENV_KEYS.AUTH_REDIRECT_AFTER_SIGNUP] ?? authDomain,
     },
     domains: {
       auth: authDomain,

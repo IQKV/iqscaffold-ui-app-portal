@@ -7,8 +7,10 @@ import { getConfig } from "@/app/config";
 import { normalizeAxiosError } from "./http-error";
 import { notificationService } from "./notifications";
 import { resolveTenantId } from "./tenant-utils";
+import { ENV_KEYS, NOTIFICATION_MESSAGES } from "@/shared/constants";
+import { i18n } from "@lingui/core";
 
-const BASE_URL = getConfig("VITE_API_URL_SERVER");
+const BASE_URL = getConfig(ENV_KEYS.API_URL_SERVER);
 
 export const api = axios.create({
   baseURL: BASE_URL,
@@ -52,7 +54,7 @@ api.interceptors.response.use(
       const cfg = original as any;
       if (!cfg?.__suppressGlobalError) {
         notificationService.error({
-          title: "Server error",
+          title: i18n._(NOTIFICATION_MESSAGES.ERROR.SERVER),
           message: normalized.message,
         });
       }

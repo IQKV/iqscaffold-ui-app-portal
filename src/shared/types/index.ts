@@ -1,5 +1,7 @@
+import { ENV_KEYS } from "@/shared/constants";
+
 // Shared types
-export type ConfigKeys = "VITE_API_URL_SERVER";
+export type ConfigKeys = (typeof ENV_KEYS)[keyof typeof ENV_KEYS];
 
 export interface GenericDataResponse<T> {
   data: T;

@@ -1,5 +1,6 @@
 import { loadStripe, Stripe } from "@stripe/stripe-js";
 import { getConfig } from "@/app/config";
+import { ENV_KEYS } from "@/shared/constants";
 
 let stripePromise: Promise<Stripe | null>;
 
@@ -8,7 +9,7 @@ let stripePromise: Promise<Stripe | null>;
  */
 export const getStripe = (publicKey?: string, accountId?: string) => {
   if (!stripePromise || publicKey) {
-    const key = publicKey || getConfig("VITE_STRIPE_PUBLIC_KEY");
+    const key = publicKey || getConfig(ENV_KEYS.STRIPE_PUBLIC_KEY);
     const options = accountId ? { stripeAccount: accountId } : {};
     stripePromise = loadStripe(key as string, options);
   }

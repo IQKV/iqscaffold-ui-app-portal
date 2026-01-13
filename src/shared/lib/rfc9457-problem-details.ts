@@ -1,3 +1,10 @@
+import {
+  HTTP_STATUS,
+  ERROR_TYPES,
+  PROBLEM_TYPES,
+  RETRY_CONFIG,
+} from "@/shared/constants";
+
 /**
  * RFC 9457 Problem Details for HTTP APIs
  * https://datatracker.ietf.org/doc/html/rfc9457
@@ -25,16 +32,7 @@ export interface ProblemDetail {
 /**
  * Enhanced error types with RFC 9457 compliance
  */
-export type AppErrorType =
-  | "network"
-  | "timeout"
-  | "canceled"
-  | "auth"
-  | "validation"
-  | "client"
-  | "server"
-  | "rate-limit"
-  | "unknown";
+export type AppErrorType = (typeof ERROR_TYPES)[keyof typeof ERROR_TYPES];
 
 /**
  * Enhanced AppError interface with RFC 9457 Problem Details
@@ -77,65 +75,28 @@ export interface RetryConfig {
   /** Jitter factor (0-1) to add randomness */
   jitterFactor: number;
   /** HTTP status codes that should trigger retry */
-  retryableStatusCodes: number[];
+  retryableStatusCodes: readonly number[];
 }
 
 /**
  * Default retry configurations by error type
  */
 export const DEFAULT_RETRY_CONFIGS: Record<AppErrorType, RetryConfig | null> = {
-  network: {
-    maxAttempts: 3,
-    baseDelay: 1000,
-    maxDelay: 10000,
-    backoffMultiplier: 2,
-    jitterFactor: 0.1,
-    retryableStatusCodes: [],
-  },
-  timeout: {
-    maxAttempts: 2,
-    baseDelay: 2000,
-    maxDelay: 8000,
-    backoffMultiplier: 2,
-    jitterFactor: 0.1,
-    retryableStatusCodes: [408],
-  },
-  "rate-limit": {
-    maxAttempts: 3,
-    baseDelay: 5000,
-    maxDelay: 30000,
-    backoffMultiplier: 2,
-    jitterFactor: 0.2,
-    retryableStatusCodes: [429],
-  },
-  server: {
-    maxAttempts: 2,
-    baseDelay: 1000,
-    maxDelay: 5000,
-    backoffMultiplier: 2,
-    jitterFactor: 0.1,
-    retryableStatusCodes: [500, 502, 503, 504],
-  },
-  canceled: null,
-  auth: null,
-  validation: null,
-  client: null,
-  unknown: null,
+  [ERROR_TYPES.NETWORK]: RETRY_CONFIG.NETWORK,
+  [ERROR_TYPES.TIMEOUT]: RETRY_CONFIG.TIMEOUT,
+  [ERROR_TYPES.RATE_LIMIT]: RETRY_CONFIG.RATE_LIMIT,
+  [ERROR_TYPES.SERVER]: RETRY_CONFIG.SERVER,
+  [ERROR_TYPES.CANCELED]: null,
+  [ERROR_TYPES.AUTH]: null,
+  [ERROR_TYPES.VALIDATION]: null,
+  [ERROR_TYPES.CLIENT]: null,
+  [ERROR_TYPES.UNKNOWN]: null,
 };
 
 /**
  * Standard problem types as per RFC 9457
  */
-export const PROBLEM_TYPES = {
-  VALIDATION_ERROR: "https://example.com/probs/validation-error",
-  AUTHENTICATION_REQUIRED: "https://example.com/probs/authentication-required",
-  AUTHORIZATION_FAILED: "https://example.com/probs/authorization-failed",
-  RESOURCE_NOT_FOUND: "https://example.com/probs/resource-not-found",
-  RATE_LIMIT_EXCEEDED: "https://example.com/probs/rate-limit-exceeded",
-  SERVER_ERROR: "https://example.com/probs/server-error",
-  NETWORK_ERROR: "https://example.com/probs/network-error",
-  TIMEOUT_ERROR: "https://example.com/probs/timeout-error",
-} as const;
+export { PROBLEM_TYPES } from "@/shared/constants";
 
 /**
  * Create a RFC 9457 compliant Problem Detail object
@@ -236,8 +197,8 @@ interface ErrorPattern {
 }
 
 export const ERROR_PATTERNS: Record<string, ErrorPattern> = {
-  auth: {
-    statusCodes: [401, 403] as const,
+  [ERROR_TYPES.AUTH]: {
+    statusCodes: [HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN] as const,
     messagePatterns: [
       /unauthorized/i,
       /authentication/i,
@@ -251,8 +212,11 @@ export const ERROR_PATTERNS: Record<string, ErrorPattern> = {
       PROBLEM_TYPES.AUTHORIZATION_FAILED,
     ] as const,
   },
-  validation: {
-    statusCodes: [400, 422] as const,
+  [ERROR_TYPES.VALIDATION]: {
+    statusCodes: [
+      HTTP_STATUS.BAD_REQUEST,
+      HTTP_STATUS.UNPROCESSABLE_ENTITY,
+    ] as const,
     messagePatterns: [
       /validation/i,
       /invalid.*input/i,
@@ -262,24 +226,29 @@ export const ERROR_PATTERNS: Record<string, ErrorPattern> = {
     typePatterns: [PROBLEM_TYPES.VALIDATION_ERROR] as const,
     hasFieldErrors: true,
   },
-  timeout: {
+  [ERROR_TYPES.TIMEOUT]: {
     statusCodes: [408] as const,
     messagePatterns: [/timeout/i, /timed.*out/i] as const,
     codes: ["ECONNABORTED", "ETIMEDOUT"] as const,
     typePatterns: [PROBLEM_TYPES.TIMEOUT_ERROR] as const,
   },
-  network: {
+  [ERROR_TYPES.NETWORK]: {
     messagePatterns: [/network/i, /connection/i, /econnrefused/i] as const,
     codes: ["ECONNREFUSED", "ENOTFOUND", "ECONNRESET"] as const,
     typePatterns: [PROBLEM_TYPES.NETWORK_ERROR] as const,
   },
-  "rate-limit": {
-    statusCodes: [429] as const,
+  [ERROR_TYPES.RATE_LIMIT]: {
+    statusCodes: [HTTP_STATUS.TOO_MANY_REQUESTS] as const,
     messagePatterns: [/rate.*limit/i, /too.*many.*requests/i] as const,
     typePatterns: [PROBLEM_TYPES.RATE_LIMIT_EXCEEDED] as const,
   },
-  server: {
-    statusCodes: [500, 502, 503, 504] as const,
+  [ERROR_TYPES.SERVER]: {
+    statusCodes: [
+      HTTP_STATUS.INTERNAL_SERVER_ERROR,
+      HTTP_STATUS.BAD_GATEWAY,
+      HTTP_STATUS.SERVICE_UNAVAILABLE,
+      HTTP_STATUS.GATEWAY_TIMEOUT,
+    ] as const,
     messagePatterns: [/server.*error/i, /internal.*error/i] as const,
     typePatterns: [PROBLEM_TYPES.SERVER_ERROR] as const,
   },
@@ -332,15 +301,18 @@ export function determineErrorType(
 
   // Fallback logic
   if (status) {
-    if (status >= 400 && status < 500) {
-      return "client";
+    if (
+      status >= HTTP_STATUS.BAD_REQUEST &&
+      status < HTTP_STATUS.INTERNAL_SERVER_ERROR
+    ) {
+      return ERROR_TYPES.CLIENT;
     }
-    if (status >= 500 && status < 600) {
-      return "server";
+    if (status >= HTTP_STATUS.INTERNAL_SERVER_ERROR && status < 600) {
+      return ERROR_TYPES.SERVER;
     }
   }
 
-  return "unknown";
+  return ERROR_TYPES.UNKNOWN;
 }
 
 /**
