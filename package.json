@@ -126,7 +126,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^20.3.1",
-    "@commitlint/config-conventional": "^20.3.0",
+    "@commitlint/config-conventional": "^20.3.1",
     "@eslint-react/eslint-plugin": "^2.5.1",
     "@eslint/js": "^9.39.2",
     "@lingui/cli": "^5.7.0",
