@@ -15,7 +15,7 @@ import {
 import { IconPlus, IconCreditCard, IconReceipt } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
 import { AuthGuard, useAuth } from "@/processes/auth";
-import { useActiveSubscription } from "@/entities/billing";
+import { useActiveSubscription, SubscriptionPlan } from "@/entities/billing";
 import {
   SubscriptionCard,
   SubscriptionPlansGrid,
@@ -30,7 +30,7 @@ export const Route = createFileRoute("/subscriptions")({
 function SubscriptionsPage() {
   const { hasBillingAccess, user } = useAuth();
   const [createModalOpened, setCreateModalOpened] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState(null);
+  const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan | null>(null);
 
   const {
     data: activeSubscription,
@@ -50,7 +50,7 @@ function SubscriptionsPage() {
     );
   }
 
-  const handlePlanSelect = (plan) => {
+  const handlePlanSelect = (plan: SubscriptionPlan) => {
     setSelectedPlan(plan);
     setCreateModalOpened(true);
   };

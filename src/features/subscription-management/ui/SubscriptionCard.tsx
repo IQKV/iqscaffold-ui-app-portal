@@ -56,7 +56,10 @@ export function SubscriptionCard({
 
         {isCanceled && subscription.cancelAtPeriodEnd && (
           <Alert color="red" title={t`Subscription Ending`}>
-            {t`Your subscription will end on ${formatDate(subscription.currentPeriodEnd)}.`}
+            {(() => {
+              const endDate = formatDate(subscription.currentPeriodEnd);
+              return t`Your subscription will end on ${endDate}.`;
+            })()}
           </Alert>
         )}
 
@@ -65,8 +68,15 @@ export function SubscriptionCard({
             <IconCalendar size={16} />
             <Text size="sm" c="dimmed">
               {isTrialing && subscription.trialEnd
-                ? t`Trial ends: ${formatDate(subscription.trialEnd)}`
-                : t`Current period: ${formatDate(subscription.currentPeriodStart)} - ${formatDate(subscription.currentPeriodEnd)}`}
+                ? (() => {
+                    const trialEndDate = formatDate(subscription.trialEnd);
+                    return t`Trial ends: ${trialEndDate}`;
+                  })()
+                : (() => {
+                    const periodStart = formatDate(subscription.currentPeriodStart);
+                    const periodEnd = formatDate(subscription.currentPeriodEnd);
+                    return t`Current period: ${periodStart} - ${periodEnd}`;
+                  })()}
             </Text>
           </Group>
 
@@ -74,7 +84,10 @@ export function SubscriptionCard({
             <Group>
               <IconCreditCard size={16} />
               <Text size="sm" c="dimmed">
-                {t`Customer ID: ${subscription.stripeCustomerId}`}
+                {(() => {
+                  const customerId = subscription.stripeCustomerId;
+                  return t`Customer ID: ${customerId}`;
+                })()}
               </Text>
             </Group>
           )}

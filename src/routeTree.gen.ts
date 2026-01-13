@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from "./pages/__root"
 import { Route as UsersRouteImport } from "./pages/users"
 import { Route as UserPreferencesRouteImport } from "./pages/user-preferences"
+import { Route as SubscriptionsRouteImport } from "./pages/subscriptions"
 import { Route as PreferencesDemoRouteImport } from "./pages/preferences-demo"
 import { Route as GatewayConfigRouteImport } from "./pages/gateway-config"
 import { Route as ExamplesRouteImport } from "./pages/examples"
@@ -29,6 +30,11 @@ const UsersRoute = UsersRouteImport.update({
 const UserPreferencesRoute = UserPreferencesRouteImport.update({
   id: "/user-preferences",
   path: "/user-preferences",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubscriptionsRoute = SubscriptionsRouteImport.update({
+  id: "/subscriptions",
+  path: "/subscriptions",
   getParentRoute: () => rootRouteImport,
 } as any)
 const PreferencesDemoRoute = PreferencesDemoRouteImport.update({
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   "/examples": typeof ExamplesRoute
   "/gateway-config": typeof GatewayConfigRoute
   "/preferences-demo": typeof PreferencesDemoRoute
+  "/subscriptions": typeof SubscriptionsRoute
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
 }
@@ -100,6 +107,7 @@ export interface FileRoutesByTo {
   "/examples": typeof ExamplesRoute
   "/gateway-config": typeof GatewayConfigRoute
   "/preferences-demo": typeof PreferencesDemoRoute
+  "/subscriptions": typeof SubscriptionsRoute
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
 }
@@ -114,6 +122,7 @@ export interface FileRoutesById {
   "/examples": typeof ExamplesRoute
   "/gateway-config": typeof GatewayConfigRoute
   "/preferences-demo": typeof PreferencesDemoRoute
+  "/subscriptions": typeof SubscriptionsRoute
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
 }
@@ -129,6 +138,7 @@ export interface FileRouteTypes {
     | "/examples"
     | "/gateway-config"
     | "/preferences-demo"
+    | "/subscriptions"
     | "/user-preferences"
     | "/users"
   fileRoutesByTo: FileRoutesByTo
@@ -142,6 +152,7 @@ export interface FileRouteTypes {
     | "/examples"
     | "/gateway-config"
     | "/preferences-demo"
+    | "/subscriptions"
     | "/user-preferences"
     | "/users"
   id:
@@ -155,6 +166,7 @@ export interface FileRouteTypes {
     | "/examples"
     | "/gateway-config"
     | "/preferences-demo"
+    | "/subscriptions"
     | "/user-preferences"
     | "/users"
   fileRoutesById: FileRoutesById
@@ -169,6 +181,7 @@ export interface RootRouteChildren {
   ExamplesRoute: typeof ExamplesRoute
   GatewayConfigRoute: typeof GatewayConfigRoute
   PreferencesDemoRoute: typeof PreferencesDemoRoute
+  SubscriptionsRoute: typeof SubscriptionsRoute
   UserPreferencesRoute: typeof UserPreferencesRoute
   UsersRoute: typeof UsersRoute
 }
@@ -187,6 +200,13 @@ declare module "@tanstack/react-router" {
       path: "/user-preferences"
       fullPath: "/user-preferences"
       preLoaderRoute: typeof UserPreferencesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/subscriptions": {
+      id: "/subscriptions"
+      path: "/subscriptions"
+      fullPath: "/subscriptions"
+      preLoaderRoute: typeof SubscriptionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/preferences-demo": {
@@ -265,6 +285,7 @@ const rootRouteChildren: RootRouteChildren = {
   ExamplesRoute: ExamplesRoute,
   GatewayConfigRoute: GatewayConfigRoute,
   PreferencesDemoRoute: PreferencesDemoRoute,
+  SubscriptionsRoute: SubscriptionsRoute,
   UserPreferencesRoute: UserPreferencesRoute,
   UsersRoute: UsersRoute,
 }

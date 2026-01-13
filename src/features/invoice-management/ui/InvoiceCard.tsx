@@ -39,7 +39,10 @@ export function InvoiceCard({ invoice }: InvoiceCardProps) {
         <Group justify="space-between">
           <Stack gap={4}>
             <Text fw={600} size="lg">
-              {t`Invoice ${invoice.id.slice(0, 8)}...`}
+              {(() => {
+                const invoiceId = invoice.id.slice(0, 8);
+                return t`Invoice ${invoiceId}...`;
+              })()}
             </Text>
             <InvoiceStatusBadge status={invoice.status} />
           </Stack>

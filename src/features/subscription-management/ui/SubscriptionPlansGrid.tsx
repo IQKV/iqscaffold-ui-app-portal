@@ -125,7 +125,10 @@ function PlanCard({ plan, onSelect, isCurrentPlan }: PlanCardProps) {
               <Badge color="green" variant="light" size="sm">
                 <Group gap={4}>
                   <IconStar size={12} />
-                  {t`${plan.trialDays} day trial`}
+                  {(() => {
+                    const trialDays = plan.trialDays;
+                    return t`${trialDays} day trial`;
+                  })()}
                 </Group>
               </Badge>
             )}

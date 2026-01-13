@@ -15,8 +15,8 @@ import { notifications } from "@mantine/notifications";
 import {
   SubscriptionPlan,
   useCreateSubscription,
-  CreateSubscriptionRequest,
 } from "@/entities/billing";
+import { CreateSubscriptionRequest } from "@/shared/api/billing/types";
 import { formatCurrency } from "@/shared/lib/format";
 
 interface CreateSubscriptionModalProps {
@@ -61,7 +61,10 @@ export function CreateSubscriptionModal({
       onSuccess: () => {
         notifications.show({
           title: t`Subscription Created`,
-          message: t`Your subscription to ${plan.name} has been created successfully.`,
+          message: (() => {
+            const planName = plan.name;
+            return t`Your subscription to ${planName} has been created successfully.`;
+          })(),
           color: "green",
         });
         onSuccess?.();
