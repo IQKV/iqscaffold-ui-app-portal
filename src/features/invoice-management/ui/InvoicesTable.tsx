@@ -140,7 +140,10 @@ function InvoiceRow({ invoice }: InvoiceRowProps) {
           {invoice.amountPaid > 0 && (
             <Text size="xs" c="green">
               {(() => {
-                const paidAmount = formatCurrency(invoice.amountPaid / 100, invoice.currency);
+                const paidAmount = formatCurrency(
+                  invoice.amountPaid / 100,
+                  invoice.currency
+                );
                 return t`Paid: ${paidAmount}`;
               })()}
             </Text>

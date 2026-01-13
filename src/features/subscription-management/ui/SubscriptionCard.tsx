@@ -73,7 +73,9 @@ export function SubscriptionCard({
                     return t`Trial ends: ${trialEndDate}`;
                   })()
                 : (() => {
-                    const periodStart = formatDate(subscription.currentPeriodStart);
+                    const periodStart = formatDate(
+                      subscription.currentPeriodStart
+                    );
                     const periodEnd = formatDate(subscription.currentPeriodEnd);
                     return t`Current period: ${periodStart} - ${periodEnd}`;
                   })()}

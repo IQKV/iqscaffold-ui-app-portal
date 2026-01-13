@@ -12,10 +12,7 @@ import {
 import { useForm } from "@mantine/form";
 import { t } from "@lingui/macro";
 import { notifications } from "@mantine/notifications";
-import {
-  SubscriptionPlan,
-  useCreateSubscription,
-} from "@/entities/billing";
+import { SubscriptionPlan, useCreateSubscription } from "@/entities/billing";
 import { CreateSubscriptionRequest } from "@/shared/api/billing/types";
 import { formatCurrency } from "@/shared/lib/format";
 

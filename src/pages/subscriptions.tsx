@@ -30,7 +30,9 @@ export const Route = createFileRoute("/subscriptions")({
 function SubscriptionsPage() {
   const { hasBillingAccess, user } = useAuth();
   const [createModalOpened, setCreateModalOpened] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan | null>(null);
+  const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan | null>(
+    null
+  );
 
   const {
     data: activeSubscription,
