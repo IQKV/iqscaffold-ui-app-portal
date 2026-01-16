@@ -7,3 +7,7 @@ export * from "./components/PipelineStageColumn";
 export * from "./components/PipelineMetrics";
 export * from "./components/FollowUpSection";
 export * from "./components/FollowUpList";
+export * from "./components/CRMDashboard";
+export * from "./components/DashboardStats";
+export * from "./components/ConversionChart";
+export * from "./components/DateRangeFilter";
