@@ -5,3 +5,5 @@ export * from "./components/ActivityTimeline";
 export * from "./components/PipelineView";
 export * from "./components/PipelineStageColumn";
 export * from "./components/PipelineMetrics";
+export * from "./components/FollowUpSection";
+export * from "./components/FollowUpList";
