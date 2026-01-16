@@ -2,3 +2,6 @@ export * from "./components/LeadListPage";
 export * from "./components/LeadDetailPage";
 export * from "./components/LeadNotesSection";
 export * from "./components/ActivityTimeline";
+export * from "./components/PipelineView";
+export * from "./components/PipelineStageColumn";
+export * from "./components/PipelineMetrics";
