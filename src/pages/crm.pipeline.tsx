@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AuthGuard } from "@/processes/auth";
-import { PipelineView } from "@/features/crm-leads";
+import { PipelineView, CRMLayout } from "@/features/crm-leads";
+import { t } from "@lingui/core/macro";
 
 export const Route = createFileRoute("/crm/pipeline")({
   component: PipelinePageRoute,
@@ -9,9 +10,11 @@ export const Route = createFileRoute("/crm/pipeline")({
 function PipelinePageRoute() {
   return (
     <AuthGuard>
-      <div data-testid="page-crm-pipeline">
-        <PipelineView showConversionMetrics highlightOverdueLeads />
-      </div>
+      <CRMLayout title={t`Pipeline`}>
+        <div data-testid="page-crm-pipeline">
+          <PipelineView showConversionMetrics highlightOverdueLeads />
+        </div>
+      </CRMLayout>
     </AuthGuard>
   );
 }

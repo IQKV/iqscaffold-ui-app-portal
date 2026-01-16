@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AuthGuard } from "@/processes/auth";
-import { CRMDashboard } from "@/features/crm-leads";
+import { CRMDashboard, CRMLayout } from "@/features/crm-leads";
+import { t } from "@lingui/core/macro";
 
 /**
  * CRM Dashboard Page Route
@@ -16,7 +17,9 @@ export const Route = createFileRoute("/crm/dashboard")({
 function CRMDashboardPage() {
   return (
     <AuthGuard>
-      <CRMDashboard />
+      <CRMLayout title={t`CRM Dashboard`}>
+        <CRMDashboard />
+      </CRMLayout>
     </AuthGuard>
   );
 }
