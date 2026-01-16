@@ -110,10 +110,18 @@ export const ContactForm: React.FC<ContactFormProps> = ({
   const handleSubmit = form.onSubmit((values) => {
     // Clean up empty optional fields
     const cleanedValues = { ...values };
-    if (!cleanedValues.phone) {delete cleanedValues.phone;}
-    if (!cleanedValues.jobTitle) {delete cleanedValues.jobTitle;}
-    if (!cleanedValues.companyId) {delete cleanedValues.companyId;}
-    if (!cleanedValues.notes) {delete cleanedValues.notes;}
+    if (!cleanedValues.phone) {
+      delete cleanedValues.phone;
+    }
+    if (!cleanedValues.jobTitle) {
+      delete cleanedValues.jobTitle;
+    }
+    if (!cleanedValues.companyId) {
+      delete cleanedValues.companyId;
+    }
+    if (!cleanedValues.notes) {
+      delete cleanedValues.notes;
+    }
 
     onSubmit(cleanedValues);
   });
