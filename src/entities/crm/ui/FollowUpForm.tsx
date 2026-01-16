@@ -62,7 +62,7 @@ const getFollowUpTypeOptions = () => [
 
 /**
  * FollowUpForm component for creating and editing follow-ups
- * 
+ *
  * Features:
  * - Create mode: Opens with empty form
  * - Edit mode: Pre-populates with existing follow-up data
@@ -70,7 +70,7 @@ const getFollowUpTypeOptions = () => [
  * - Date picker with past date warnings (Requirement 11.4)
  * - Priority and type selection (Requirement 5.1, 5.5)
  * - Validation and error handling (Requirement 11.4)
- * 
+ *
  * Requirements: 5.1, 5.5, 11.4
  */
 export function FollowUpForm({

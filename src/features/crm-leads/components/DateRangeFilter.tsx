@@ -12,12 +12,12 @@ interface DateRangeFilterProps {
 
 /**
  * DateRangeFilter - Date range selection for dashboard filtering
- * 
+ *
  * Features:
  * - Date range picker with start and end dates
  * - Quick preset options (Last 7 days, Last 30 days, etc.)
  * - Clear filter option
- * 
+ *
  * Requirements: 7.5
  */
 export function DateRangeFilter({ value, onChange }: DateRangeFilterProps) {
@@ -30,7 +30,7 @@ export function DateRangeFilter({ value, onChange }: DateRangeFilterProps) {
   );
 
   const handleStartDateChange = (value: string | Date | null) => {
-    if (typeof value === 'string') {
+    if (typeof value === "string") {
       setStartDate(new Date(value));
     } else {
       setStartDate(value);
@@ -38,7 +38,7 @@ export function DateRangeFilter({ value, onChange }: DateRangeFilterProps) {
   };
 
   const handleEndDateChange = (value: string | Date | null) => {
-    if (typeof value === 'string') {
+    if (typeof value === "string") {
       setEndDate(new Date(value));
     } else {
       setEndDate(value);
@@ -66,10 +66,10 @@ export function DateRangeFilter({ value, onChange }: DateRangeFilterProps) {
     const end = new Date();
     const start = new Date();
     start.setDate(start.getDate() - days);
-    
+
     setStartDate(start);
     setEndDate(end);
-    
+
     onChange({
       startDate: start.toISOString().split("T")[0],
       endDate: end.toISOString().split("T")[0],
@@ -80,7 +80,12 @@ export function DateRangeFilter({ value, onChange }: DateRangeFilterProps) {
   const hasDateRange = value?.startDate && value?.endDate;
 
   return (
-    <Popover opened={opened} onChange={setOpened} position="bottom-end" withArrow>
+    <Popover
+      opened={opened}
+      onChange={setOpened}
+      position="bottom-end"
+      withArrow
+    >
       <Popover.Target>
         <Button
           leftSection={<IconCalendar size={16} />}
@@ -110,10 +115,18 @@ export function DateRangeFilter({ value, onChange }: DateRangeFilterProps) {
               <Button size="xs" variant="light" onClick={() => handlePreset(7)}>
                 {t`Last 7 days`}
               </Button>
-              <Button size="xs" variant="light" onClick={() => handlePreset(30)}>
+              <Button
+                size="xs"
+                variant="light"
+                onClick={() => handlePreset(30)}
+              >
                 {t`Last 30 days`}
               </Button>
-              <Button size="xs" variant="light" onClick={() => handlePreset(90)}>
+              <Button
+                size="xs"
+                variant="light"
+                onClick={() => handlePreset(90)}
+              >
                 {t`Last 90 days`}
               </Button>
             </Group>

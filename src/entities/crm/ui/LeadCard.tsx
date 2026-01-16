@@ -30,10 +30,10 @@ interface LeadCardProps {
 
 /**
  * LeadCard Component
- * 
+ *
  * Business-focused card component for displaying lead information
  * with variants for different views (list, kanban, compact).
- * 
+ *
  * Features:
  * - Business-focused styling based on lead quality (score)
  * - Quick actions for common sales tasks
@@ -311,8 +311,12 @@ export const LeadCard: React.FC<LeadCardProps> = ({
  * - Low quality (0-49): Orange
  */
 function getLeadQualityColor(score: number): string {
-  if (score >= 80) return "#40c057"; // Green
-  if (score >= 50) return "#228be6"; // Blue
+  if (score >= 80) {
+    return "#40c057";
+  } // Green
+  if (score >= 50) {
+    return "#228be6";
+  } // Blue
   return "#fd7e14"; // Orange
 }
 
@@ -322,7 +326,7 @@ function getLeadQualityColor(score: number): string {
  */
 function getStageColor(stage: string): string {
   const stageLower = stage.toLowerCase();
-  
+
   if (stageLower.includes("new") || stageLower.includes("lead")) {
     return "blue";
   }
@@ -338,6 +342,6 @@ function getStageColor(stage: string): string {
   if (stageLower.includes("lost")) {
     return "red";
   }
-  
+
   return "gray";
 }

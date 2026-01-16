@@ -31,13 +31,13 @@ import { useDebouncedValue } from "@mantine/hooks";
 
 /**
  * LeadListPage Component
- * 
+ *
  * Main page for viewing and managing leads with:
  * - Pagination (20 items per page)
  * - Real-time search filtering
  * - Filter panel (source, stage, assigned user)
  * - Bulk actions and export functionality
- * 
+ *
  * Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8
  */
 export const LeadListPage: React.FC = () => {
@@ -74,7 +74,13 @@ export const LeadListPage: React.FC = () => {
     }
 
     return params;
-  }, [debouncedSearch, selectedSource, selectedStage, selectedUser, currentPage]);
+  }, [
+    debouncedSearch,
+    selectedSource,
+    selectedStage,
+    selectedUser,
+    currentPage,
+  ]);
 
   // Fetch leads with filters
   const { data, isLoading, error, refetch } = useLeads(queryParams);
@@ -301,11 +307,7 @@ export const LeadListPage: React.FC = () => {
                 {selectedLeads.length} lead(s) selected
               </Text>
               <Group>
-                <Button
-                  size="xs"
-                  variant="light"
-                  onClick={handleBulkQualify}
-                >
+                <Button size="xs" variant="light" onClick={handleBulkQualify}>
                   Qualify Selected
                 </Button>
                 <Button
@@ -352,7 +354,7 @@ export const LeadListPage: React.FC = () => {
                 <LeadCard
                   lead={lead}
                   variant="list"
-                  showQuickActions={true}
+                  showQuickActions
                   onQuickActions={{
                     qualify: () => console.log("Qualify", lead.id),
                     scheduleFollowUp: () =>

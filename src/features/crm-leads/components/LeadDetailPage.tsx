@@ -32,12 +32,12 @@ import { LeadScoreBadge, LeadSourceBadge } from "@/entities/crm/ui";
 
 /**
  * LeadDetailPage Component
- * 
+ *
  * Comprehensive lead detail view with:
  * - Tabbed interface (Overview, Notes, Activities, Follow-ups)
  * - Lead header with quick actions (qualify, convert, edit)
  * - Integration with LeadNotesSection and ActivityTimeline
- * 
+ *
  * Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7
  */
 export const LeadDetailPage: React.FC = () => {
@@ -125,10 +125,7 @@ export const LeadDetailPage: React.FC = () => {
     if (stageLower.includes("qualified") || stageLower.includes("contacted")) {
       return "cyan";
     }
-    if (
-      stageLower.includes("proposal") ||
-      stageLower.includes("negotiation")
-    ) {
+    if (stageLower.includes("proposal") || stageLower.includes("negotiation")) {
       return "grape";
     }
     if (stageLower.includes("won") || stageLower.includes("closed")) {
@@ -364,9 +361,7 @@ export const LeadDetailPage: React.FC = () => {
             <Tabs.Panel value="follow-ups">
               <Paper p="xl" withBorder>
                 <Center>
-                  <Text c="dimmed">
-                    Follow-ups section coming soon...
-                  </Text>
+                  <Text c="dimmed">Follow-ups section coming soon...</Text>
                 </Center>
               </Paper>
             </Tabs.Panel>

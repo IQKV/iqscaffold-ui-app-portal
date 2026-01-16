@@ -283,7 +283,7 @@ export const AllVariantsComparison: Story = {
             <LeadCard
               lead={mockLeadHighScore}
               variant="list"
-              showQuickActions={true}
+              showQuickActions
               onQuickActions={{
                 qualify: () => console.log("Qualify"),
                 scheduleFollowUp: () => console.log("Follow-up"),
@@ -296,7 +296,7 @@ export const AllVariantsComparison: Story = {
             <LeadCard
               lead={mockLeadHighScore}
               variant="kanban"
-              showQuickActions={true}
+              showQuickActions
               onQuickActions={{
                 qualify: () => console.log("Qualify"),
                 scheduleFollowUp: () => console.log("Follow-up"),

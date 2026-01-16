@@ -9,7 +9,12 @@ import {
   Text,
   Alert,
 } from "@mantine/core";
-import { DndContext, DragEndEvent, DragOverlay, DragStartEvent } from "@dnd-kit/core";
+import {
+  DndContext,
+  DragEndEvent,
+  DragOverlay,
+  DragStartEvent,
+} from "@dnd-kit/core";
 import { IconAlertCircle } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
 import { notifications } from "@mantine/notifications";
@@ -32,9 +37,9 @@ interface PipelineViewProps {
 
 /**
  * PipelineView Component
- * 
+ *
  * Main pipeline kanban view for visualizing and managing leads through sales stages.
- * 
+ *
  * Features:
  * - Horizontal scrollable stage columns
  * - Pipeline metrics header with conversion rates
@@ -42,7 +47,7 @@ interface PipelineViewProps {
  * - Optimistic updates for better UX
  * - Automatic activity logging on stage changes
  * - Visual emphasis for overdue leads
- * 
+ *
  * Requirements: 3.1, 3.2, 3.3, 3.4, 3.7
  */
 export const PipelineView: React.FC<PipelineViewProps> = ({
@@ -99,7 +104,9 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
 
   // Get the currently dragged lead
   const activeLead = useMemo(() => {
-    if (!activeId) return null;
+    if (!activeId) {
+      return null;
+    }
     return leads.find((lead) => lead.id === activeId);
   }, [activeId, leads]);
 
@@ -115,7 +122,9 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
 
       setActiveId(null);
 
-      if (!over) return;
+      if (!over) {
+        return;
+      }
 
       const leadId = active.id as string;
       const targetStageId = over.id as string;
@@ -124,10 +133,14 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
       const lead = leads.find((l) => l.id === leadId);
       const targetStage = stages.find((s) => s.id === targetStageId);
 
-      if (!lead || !targetStage) return;
+      if (!lead || !targetStage) {
+        return;
+      }
 
       // Don't move if already in the target stage
-      if (lead.currentStage === targetStage.name) return;
+      if (lead.currentStage === targetStage.name) {
+        return;
+      }
 
       // Move the lead
       moveLeadToStage(
@@ -201,7 +214,9 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
           title="Error Loading Pipeline"
           color="red"
         >
-          {stagesError?.message || leadsError?.message || "Failed to load pipeline data"}
+          {stagesError?.message ||
+            leadsError?.message ||
+            "Failed to load pipeline data"}
         </Alert>
       </Container>
     );
@@ -233,8 +248,8 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
               leadCount: leadsByStage[stage.id]?.length || 0,
             }))}
             conversionMetrics={conversionMetrics}
-            showVelocity={true}
-            showConversionRates={true}
+            showVelocity
+            showConversionRates
           />
         )}
 
@@ -266,7 +281,11 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
           {/* Drag Overlay - shows the dragged lead card */}
           <DragOverlay>
             {activeLead ? (
-              <LeadCard lead={activeLead} variant="kanban" showQuickActions={false} />
+              <LeadCard
+                lead={activeLead}
+                variant="kanban"
+                showQuickActions={false}
+              />
             ) : null}
           </DragOverlay>
         </DndContext>

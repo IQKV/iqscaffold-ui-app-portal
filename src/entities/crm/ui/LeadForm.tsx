@@ -16,18 +16,21 @@ const createLeadFormSchema = () =>
     email: z.string().email(t`Invalid email address`),
     phone: z.string().optional(),
     company: z.string().optional(),
-    source: z.enum([
-      "WEBSITE",
-      "REFERRAL",
-      "COLD_CALL",
-      "EMAIL_CAMPAIGN",
-      "SOCIAL_MEDIA",
-      "TRADE_SHOW",
-      "PARTNER",
-      "OTHER",
-    ] as const, {
-      errorMap: () => ({ message: t`Please select a lead source` }),
-    }),
+    source: z.enum(
+      [
+        "WEBSITE",
+        "REFERRAL",
+        "COLD_CALL",
+        "EMAIL_CAMPAIGN",
+        "SOCIAL_MEDIA",
+        "TRADE_SHOW",
+        "PARTNER",
+        "OTHER",
+      ] as const,
+      {
+        errorMap: () => ({ message: t`Please select a lead source` }),
+      }
+    ),
   });
 
 type LeadFormData = z.infer<ReturnType<typeof createLeadFormSchema>>;
@@ -53,7 +56,7 @@ const getLeadSourceOptions = () => [
 
 /**
  * LeadForm component for creating and editing leads
- * 
+ *
  * Features:
  * - Create mode: Opens with empty form
  * - Edit mode: Pre-populates with existing lead data
@@ -61,7 +64,7 @@ const getLeadSourceOptions = () => [
  * - Lead source selection dropdown
  * - Company field (for future autocomplete enhancement)
  * - Optimistic updates via TanStack Query
- * 
+ *
  * Requirements: 1.1, 1.4, 11.1, 11.2, 11.3
  */
 export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
@@ -123,13 +126,15 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
           },
           onError: (error: any) => {
             // Handle duplicate email error (Requirement 11.3)
-            const errorMessage = error?.response?.data?.message || error.message;
-            const isDuplicateEmail = errorMessage.toLowerCase().includes("duplicate") || 
-                                    errorMessage.toLowerCase().includes("already exists");
-            
+            const errorMessage =
+              error?.response?.data?.message || error.message;
+            const isDuplicateEmail =
+              errorMessage.toLowerCase().includes("duplicate") ||
+              errorMessage.toLowerCase().includes("already exists");
+
             notifications.show({
               title: t`Error`,
-              message: isDuplicateEmail 
+              message: isDuplicateEmail
                 ? t`A lead with this email already exists`
                 : t`Failed to update lead: ${errorMessage}`,
               color: "red",
@@ -158,13 +163,15 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
           },
           onError: (error: any) => {
             // Handle duplicate email error (Requirement 11.3)
-            const errorMessage = error?.response?.data?.message || error.message;
-            const isDuplicateEmail = errorMessage.toLowerCase().includes("duplicate") || 
-                                    errorMessage.toLowerCase().includes("already exists");
-            
+            const errorMessage =
+              error?.response?.data?.message || error.message;
+            const isDuplicateEmail =
+              errorMessage.toLowerCase().includes("duplicate") ||
+              errorMessage.toLowerCase().includes("already exists");
+
             notifications.show({
               title: t`Error`,
-              message: isDuplicateEmail 
+              message: isDuplicateEmail
                 ? t`A lead with this email already exists`
                 : t`Failed to create lead: ${errorMessage}`,
               color: "red",

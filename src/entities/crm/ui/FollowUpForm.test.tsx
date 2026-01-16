@@ -34,7 +34,7 @@ describe("FollowUpForm", () => {
       render(
         <TestWrapper>
           <FollowUpForm
-            opened={true}
+            opened
             onClose={mockOnClose}
             leadId={leadId}
             onSubmit={mockOnSubmit}
@@ -53,7 +53,7 @@ describe("FollowUpForm", () => {
       render(
         <TestWrapper>
           <FollowUpForm
-            opened={true}
+            opened
             onClose={mockOnClose}
             leadId={leadId}
             onSubmit={mockOnSubmit}
@@ -72,7 +72,7 @@ describe("FollowUpForm", () => {
       render(
         <TestWrapper>
           <FollowUpForm
-            opened={true}
+            opened
             onClose={mockOnClose}
             leadId={leadId}
             onSubmit={mockOnSubmit}
@@ -94,7 +94,7 @@ describe("FollowUpForm", () => {
       render(
         <TestWrapper>
           <FollowUpForm
-            opened={true}
+            opened
             onClose={mockOnClose}
             leadId={leadId}
             onSubmit={mockOnSubmit}
@@ -141,7 +141,7 @@ describe("FollowUpForm", () => {
       render(
         <TestWrapper>
           <FollowUpForm
-            opened={true}
+            opened
             onClose={mockOnClose}
             leadId={leadId}
             followUp={mockFollowUp}
@@ -160,7 +160,7 @@ describe("FollowUpForm", () => {
       render(
         <TestWrapper>
           <FollowUpForm
-            opened={true}
+            opened
             onClose={mockOnClose}
             leadId={leadId}
             followUp={mockFollowUp}
@@ -179,7 +179,7 @@ describe("FollowUpForm", () => {
       render(
         <TestWrapper>
           <FollowUpForm
-            opened={true}
+            opened
             onClose={mockOnClose}
             leadId={leadId}
             followUp={mockFollowUp}
@@ -229,7 +229,7 @@ describe("FollowUpForm", () => {
       render(
         <TestWrapper>
           <FollowUpForm
-            opened={true}
+            opened
             onClose={mockOnClose}
             leadId={leadId}
             followUp={pastFollowUp}
@@ -264,7 +264,7 @@ describe("FollowUpForm", () => {
       render(
         <TestWrapper>
           <FollowUpForm
-            opened={true}
+            opened
             onClose={mockOnClose}
             leadId={leadId}
             followUp={pastFollowUp}
@@ -291,7 +291,7 @@ describe("FollowUpForm", () => {
       render(
         <TestWrapper>
           <FollowUpForm
-            opened={true}
+            opened
             onClose={mockOnClose}
             leadId={leadId}
             onSubmit={mockOnSubmit}
@@ -309,11 +309,11 @@ describe("FollowUpForm", () => {
       render(
         <TestWrapper>
           <FollowUpForm
-            opened={true}
+            opened
             onClose={mockOnClose}
             leadId={leadId}
             onSubmit={mockOnSubmit}
-            isLoading={true}
+            isLoading
           />
         </TestWrapper>
       );
@@ -328,7 +328,7 @@ describe("FollowUpForm", () => {
       const { rerender } = render(
         <TestWrapper>
           <FollowUpForm
-            opened={true}
+            opened
             onClose={mockOnClose}
             leadId={leadId}
             onSubmit={mockOnSubmit}
@@ -355,7 +355,7 @@ describe("FollowUpForm", () => {
       rerender(
         <TestWrapper>
           <FollowUpForm
-            opened={true}
+            opened
             onClose={mockOnClose}
             leadId={leadId}
             onSubmit={mockOnSubmit}
@@ -374,7 +374,7 @@ describe("FollowUpForm", () => {
       render(
         <TestWrapper>
           <FollowUpForm
-            opened={true}
+            opened
             onClose={mockOnClose}
             leadId={leadId}
             onSubmit={mockOnSubmit}
@@ -392,7 +392,7 @@ describe("FollowUpForm", () => {
       render(
         <TestWrapper>
           <FollowUpForm
-            opened={true}
+            opened
             onClose={mockOnClose}
             leadId={leadId}
             onSubmit={mockOnSubmit}
@@ -416,7 +416,7 @@ describe("FollowUpForm", () => {
       render(
         <TestWrapper>
           <FollowUpForm
-            opened={true}
+            opened
             onClose={mockOnClose}
             leadId={leadId}
             onSubmit={mockOnSubmit}
@@ -449,7 +449,7 @@ describe("FollowUpForm", () => {
       render(
         <TestWrapper>
           <FollowUpForm
-            opened={true}
+            opened
             onClose={mockOnClose}
             leadId={leadId}
             onSubmit={mockOnSubmit}

@@ -1,5 +1,14 @@
 import React from "react";
-import { Stack, Text, Badge, Group, Card, Box, Loader, Center } from "@mantine/core";
+import {
+  Stack,
+  Text,
+  Badge,
+  Group,
+  Card,
+  Box,
+  Loader,
+  Center,
+} from "@mantine/core";
 import { useDroppable } from "@dnd-kit/core";
 import { LeadCard } from "@/entities/crm/ui";
 import type { PipelineStage, Lead } from "@/shared/api/crm/types";
@@ -15,17 +24,17 @@ interface PipelineStageColumnProps {
 
 /**
  * PipelineStageColumn Component
- * 
+ *
  * Represents a single column in the pipeline kanban view.
  * Displays stage header with metrics and lead cards with drag-and-drop support.
- * 
+ *
  * Features:
  * - Stage header with lead count and metrics
  * - Droppable area for lead cards
  * - Empty state when no leads
  * - Loading state during operations
  * - Visual emphasis for overdue leads
- * 
+ *
  * Requirements: 3.2, 3.5, 3.6
  */
 export const PipelineStageColumn: React.FC<PipelineStageColumnProps> = ({
@@ -158,7 +167,7 @@ export const PipelineStageColumn: React.FC<PipelineStageColumnProps> = ({
                   <LeadCard
                     lead={lead}
                     variant="kanban"
-                    draggable={true}
+                    draggable
                     showQuickActions={false}
                   />
                 </Box>

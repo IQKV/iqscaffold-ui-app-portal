@@ -10,10 +10,7 @@ function PipelinePageRoute() {
   return (
     <AuthGuard>
       <div data-testid="page-crm-pipeline">
-        <PipelineView
-          showConversionMetrics={true}
-          highlightOverdueLeads={true}
-        />
+        <PipelineView showConversionMetrics highlightOverdueLeads />
       </div>
     </AuthGuard>
   );

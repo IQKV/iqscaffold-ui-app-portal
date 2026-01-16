@@ -73,7 +73,7 @@ describe("LeadCard", () => {
       <LeadCard
         lead={mockLead}
         variant="list"
-        showQuickActions={true}
+        showQuickActions
         onQuickActions={mockActions}
       />
     );
@@ -107,11 +107,7 @@ describe("LeadCard", () => {
     const qualifiedLead = { ...mockLead, isQualified: true };
 
     renderWithMantine(
-      <LeadCard
-        lead={qualifiedLead}
-        variant="list"
-        showQuickActions={false}
-      />
+      <LeadCard lead={qualifiedLead} variant="list" showQuickActions={false} />
     );
 
     expect(screen.getByText("Qualified")).toBeInTheDocument();

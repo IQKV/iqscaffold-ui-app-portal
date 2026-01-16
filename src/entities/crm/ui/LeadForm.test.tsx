@@ -77,7 +77,7 @@ describe("LeadForm", () => {
     it("should render create form with empty fields", () => {
       render(
         <TestWrapper>
-          <LeadForm opened={true} onClose={mockOnClose} lead={null} />
+          <LeadForm opened onClose={mockOnClose} lead={null} />
         </TestWrapper>
       );
 
@@ -92,7 +92,7 @@ describe("LeadForm", () => {
     it("should show 'Add Lead' title by default in create mode", () => {
       render(
         <TestWrapper>
-          <LeadForm opened={true} onClose={mockOnClose} lead={null} />
+          <LeadForm opened onClose={mockOnClose} lead={null} />
         </TestWrapper>
       );
 
@@ -103,7 +103,7 @@ describe("LeadForm", () => {
       render(
         <TestWrapper>
           <LeadForm
-            opened={true}
+            opened
             onClose={mockOnClose}
             lead={null}
             title="Create New Lead"
@@ -117,7 +117,7 @@ describe("LeadForm", () => {
     it("should have required fields marked with asterisk", () => {
       render(
         <TestWrapper>
-          <LeadForm opened={true} onClose={mockOnClose} lead={null} />
+          <LeadForm opened onClose={mockOnClose} lead={null} />
         </TestWrapper>
       );
 
@@ -135,7 +135,7 @@ describe("LeadForm", () => {
     it("should render edit form with pre-populated fields (Requirement 1.4)", () => {
       render(
         <TestWrapper>
-          <LeadForm opened={true} onClose={mockOnClose} lead={mockLead} />
+          <LeadForm opened onClose={mockOnClose} lead={mockLead} />
         </TestWrapper>
       );
 
@@ -148,7 +148,7 @@ describe("LeadForm", () => {
     it("should show 'Edit Lead' title by default in edit mode", () => {
       render(
         <TestWrapper>
-          <LeadForm opened={true} onClose={mockOnClose} lead={mockLead} />
+          <LeadForm opened onClose={mockOnClose} lead={mockLead} />
         </TestWrapper>
       );
 
@@ -158,7 +158,7 @@ describe("LeadForm", () => {
     it("should show 'Update' button in edit mode", () => {
       render(
         <TestWrapper>
-          <LeadForm opened={true} onClose={mockOnClose} lead={mockLead} />
+          <LeadForm opened onClose={mockOnClose} lead={mockLead} />
         </TestWrapper>
       );
 
@@ -174,7 +174,7 @@ describe("LeadForm", () => {
 
       render(
         <TestWrapper>
-          <LeadForm opened={true} onClose={mockOnClose} lead={null} />
+          <LeadForm opened onClose={mockOnClose} lead={null} />
         </TestWrapper>
       );
 
@@ -193,7 +193,7 @@ describe("LeadForm", () => {
 
       render(
         <TestWrapper>
-          <LeadForm opened={true} onClose={mockOnClose} lead={null} />
+          <LeadForm opened onClose={mockOnClose} lead={null} />
         </TestWrapper>
       );
 
@@ -204,9 +204,7 @@ describe("LeadForm", () => {
       await user.click(submitButton);
 
       await waitFor(() => {
-        expect(
-          screen.getByText(/invalid email address/i)
-        ).toBeInTheDocument();
+        expect(screen.getByText(/invalid email address/i)).toBeInTheDocument();
       });
     });
 
@@ -215,7 +213,7 @@ describe("LeadForm", () => {
 
       render(
         <TestWrapper>
-          <LeadForm opened={true} onClose={mockOnClose} lead={null} />
+          <LeadForm opened onClose={mockOnClose} lead={null} />
         </TestWrapper>
       );
 
@@ -226,9 +224,7 @@ describe("LeadForm", () => {
       await user.click(submitButton);
 
       await waitFor(() => {
-        expect(
-          screen.getByText(/invalid email address/i)
-        ).toBeInTheDocument();
+        expect(screen.getByText(/invalid email address/i)).toBeInTheDocument();
       });
     });
 
@@ -237,7 +233,7 @@ describe("LeadForm", () => {
 
       render(
         <TestWrapper>
-          <LeadForm opened={true} onClose={mockOnClose} lead={null} />
+          <LeadForm opened onClose={mockOnClose} lead={null} />
         </TestWrapper>
       );
 
@@ -266,22 +262,26 @@ describe("LeadForm", () => {
     it("should render lead source dropdown with all options", () => {
       render(
         <TestWrapper>
-          <LeadForm opened={true} onClose={mockOnClose} lead={null} />
+          <LeadForm opened onClose={mockOnClose} lead={null} />
         </TestWrapper>
       );
 
-      const sourceSelect = screen.getByRole("textbox", { name: /lead source/i });
+      const sourceSelect = screen.getByRole("textbox", {
+        name: /lead source/i,
+      });
       expect(sourceSelect).toBeInTheDocument();
     });
 
     it("should be searchable", () => {
       render(
         <TestWrapper>
-          <LeadForm opened={true} onClose={mockOnClose} lead={null} />
+          <LeadForm opened onClose={mockOnClose} lead={null} />
         </TestWrapper>
       );
 
-      const sourceSelect = screen.getByRole("textbox", { name: /lead source/i });
+      const sourceSelect = screen.getByRole("textbox", {
+        name: /lead source/i,
+      });
       // Searchable select allows typing
       expect(sourceSelect).toBeInTheDocument();
     });
@@ -293,7 +293,7 @@ describe("LeadForm", () => {
 
       render(
         <TestWrapper>
-          <LeadForm opened={true} onClose={mockOnClose} lead={null} />
+          <LeadForm opened onClose={mockOnClose} lead={null} />
         </TestWrapper>
       );
 
@@ -308,7 +308,7 @@ describe("LeadForm", () => {
 
       render(
         <TestWrapper>
-          <LeadForm opened={true} onClose={mockOnClose} lead={null} />
+          <LeadForm opened onClose={mockOnClose} lead={null} />
         </TestWrapper>
       );
 
@@ -337,7 +337,7 @@ describe("LeadForm", () => {
     it("should render when opened is true", () => {
       render(
         <TestWrapper>
-          <LeadForm opened={true} onClose={mockOnClose} lead={null} />
+          <LeadForm opened onClose={mockOnClose} lead={null} />
         </TestWrapper>
       );
 
@@ -351,7 +351,7 @@ describe("LeadForm", () => {
 
       render(
         <TestWrapper>
-          <LeadForm opened={true} onClose={mockOnClose} lead={null} />
+          <LeadForm opened onClose={mockOnClose} lead={null} />
         </TestWrapper>
       );
 
@@ -371,7 +371,7 @@ describe("LeadForm", () => {
 
       render(
         <TestWrapper>
-          <LeadForm opened={true} onClose={mockOnClose} lead={null} />
+          <LeadForm opened onClose={mockOnClose} lead={null} />
         </TestWrapper>
       );
 

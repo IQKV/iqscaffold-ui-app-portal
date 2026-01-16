@@ -8,7 +8,7 @@ interface LeadSourceBadgeProps {
 
 /**
  * LeadSourceBadge Component
- * 
+ *
  * Visual indicator for lead source/origin.
  * Helps sales reps understand where leads came from and adjust their approach.
  */

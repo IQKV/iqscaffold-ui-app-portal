@@ -1,4 +1,13 @@
-import { Container, Title, Stack, Group, Paper, Text, Loader, Alert } from "@mantine/core";
+import {
+  Container,
+  Title,
+  Stack,
+  Group,
+  Paper,
+  Text,
+  Loader,
+  Alert,
+} from "@mantine/core";
 import { t } from "@lingui/core/macro";
 import { IconAlertCircle } from "@tabler/icons-react";
 import { useState } from "react";
@@ -6,23 +15,28 @@ import { FollowUpPanel } from "@/widgets/follow-up-panel";
 import { DashboardStats } from "./DashboardStats";
 import { ConversionChart } from "./ConversionChart";
 import { DateRangeFilter } from "./DateRangeFilter";
-import { useDashboardStats, useConversionMetrics } from "@/entities/crm/api/crm-queries";
+import {
+  useDashboardStats,
+  useConversionMetrics,
+} from "@/entities/crm/api/crm-queries";
 import type { DashboardStatsParams } from "@/shared/api/crm/types";
 
 /**
  * CRMDashboard - Main dashboard page for CRM statistics and follow-ups
- * 
+ *
  * Features:
  * - Integrate FollowUpPanel for today's reminders (Requirement 6.1-6.7)
  * - Add dashboard statistics cards and charts (Requirement 7.1-7.4)
  * - Implement date range filtering (Requirement 7.5)
  * - Show loading states and error boundaries (Requirement 7.7)
- * 
+ *
  * Requirements: 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7
  */
 export function CRMDashboard() {
   // Date range state for filtering (Requirement 7.5)
-  const [dateRange, setDateRange] = useState<DashboardStatsParams | undefined>(undefined);
+  const [dateRange, setDateRange] = useState<DashboardStatsParams | undefined>(
+    undefined
+  );
 
   // Fetch dashboard data with date range filtering
   const {
@@ -48,12 +62,9 @@ export function CRMDashboard() {
           <Title order={1} data-testid="crm-dashboard-title">
             {t`CRM Dashboard`}
           </Title>
-          
+
           {/* Date range filtering (Requirement 7.5) */}
-          <DateRangeFilter
-            value={dateRange}
-            onChange={setDateRange}
-          />
+          <DateRangeFilter value={dateRange} onChange={setDateRange} />
         </Group>
 
         {/* Error state (Requirement 7.7) */}
@@ -87,10 +98,7 @@ export function CRMDashboard() {
             <FollowUpPanel />
 
             {/* Dashboard statistics cards and charts (Requirement 7.1-7.4) */}
-            <DashboardStats
-              stats={dashboardStats}
-              dateRange={dateRange}
-            />
+            <DashboardStats stats={dashboardStats} dateRange={dateRange} />
 
             {/* Conversion metrics and charts (Requirement 7.2, 7.5, 7.6) */}
             <ConversionChart

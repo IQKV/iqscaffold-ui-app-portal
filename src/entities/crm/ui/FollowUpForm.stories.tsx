@@ -122,7 +122,7 @@ export const LoadingState: Story = {
           onClose={() => setOpened(false)}
           leadId="lead-123"
           onSubmit={mockSubmit}
-          isLoading={true}
+          isLoading
         />
       </>
     );

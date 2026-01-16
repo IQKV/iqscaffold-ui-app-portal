@@ -1,5 +1,13 @@
 import React from "react";
-import { Card, Group, Stack, Text, Badge, SimpleGrid, Tooltip } from "@mantine/core";
+import {
+  Card,
+  Group,
+  Stack,
+  Text,
+  Badge,
+  SimpleGrid,
+  Tooltip,
+} from "@mantine/core";
 import { IconTrendingUp, IconClock, IconTarget } from "@tabler/icons-react";
 import type { PipelineStage, ConversionMetrics } from "@/shared/api/crm/types";
 
@@ -12,16 +20,16 @@ interface PipelineMetricsProps {
 
 /**
  * PipelineMetrics Component
- * 
+ *
  * Displays conversion rates, stage velocity, and pipeline health indicators
  * at the top of the pipeline kanban view.
- * 
+ *
  * Features:
  * - Conversion rate from New to Won leads
  * - Stage velocity (average time in each stage)
  * - Pipeline health indicators
  * - Responsive grid layout
- * 
+ *
  * Requirements: 7.2, 7.3, 7.5
  */
 export const PipelineMetrics: React.FC<PipelineMetricsProps> = ({
@@ -31,18 +39,26 @@ export const PipelineMetrics: React.FC<PipelineMetricsProps> = ({
   showConversionRates = true,
 }) => {
   // Calculate total leads across all stages
-  const totalLeads = stages.reduce((sum, stage) => sum + (stage.leadCount || 0), 0);
+  const totalLeads = stages.reduce(
+    (sum, stage) => sum + (stage.leadCount || 0),
+    0
+  );
 
   // Calculate pipeline health score (percentage of leads in active stages)
   const activeLeads = stages
     .filter((stage) => stage.type === "ACTIVE")
     .reduce((sum, stage) => sum + (stage.leadCount || 0), 0);
-  const healthScore = totalLeads > 0 ? Math.round((activeLeads / totalLeads) * 100) : 0;
+  const healthScore =
+    totalLeads > 0 ? Math.round((activeLeads / totalLeads) * 100) : 0;
 
   // Get health color based on score
   const getHealthColor = (score: number): string => {
-    if (score >= 70) return "green";
-    if (score >= 40) return "yellow";
+    if (score >= 70) {
+      return "green";
+    }
+    if (score >= 40) {
+      return "yellow";
+    }
     return "red";
   };
 
@@ -125,24 +141,31 @@ export const PipelineMetrics: React.FC<PipelineMetricsProps> = ({
         </SimpleGrid>
 
         {/* Stage Velocity Details */}
-        {showVelocity && conversionMetrics && conversionMetrics.stageVelocity && (
-          <Card shadow="xs" padding="md" radius="md" withBorder>
-            <Stack gap="sm">
-              <Text size="sm" fw={600}>
-                Stage Velocity (Avg. Days)
-              </Text>
-              <Group gap="md">
-                {Object.entries(conversionMetrics.stageVelocity).map(([stageName, days]) => (
-                  <Tooltip key={stageName} label={`Average time in ${stageName}`}>
-                    <Badge variant="light" size="lg">
-                      {stageName}: {days}d
-                    </Badge>
-                  </Tooltip>
-                ))}
-              </Group>
-            </Stack>
-          </Card>
-        )}
+        {showVelocity &&
+          conversionMetrics &&
+          conversionMetrics.stageVelocity && (
+            <Card shadow="xs" padding="md" radius="md" withBorder>
+              <Stack gap="sm">
+                <Text size="sm" fw={600}>
+                  Stage Velocity (Avg. Days)
+                </Text>
+                <Group gap="md">
+                  {Object.entries(conversionMetrics.stageVelocity).map(
+                    ([stageName, days]) => (
+                      <Tooltip
+                        key={stageName}
+                        label={`Average time in ${stageName}`}
+                      >
+                        <Badge variant="light" size="lg">
+                          {stageName}: {days}d
+                        </Badge>
+                      </Tooltip>
+                    )
+                  )}
+                </Group>
+              </Stack>
+            </Card>
+          )}
 
         {/* Stage Distribution */}
         <Card shadow="xs" padding="md" radius="md" withBorder>

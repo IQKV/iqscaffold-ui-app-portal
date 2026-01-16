@@ -7,10 +7,10 @@ interface LeadScoreBadgeProps {
 
 /**
  * LeadScoreBadge Component
- * 
+ *
  * Visual indicator for lead quality based on qualification score (0-100).
  * Color coding helps sales reps quickly identify high-value prospects.
- * 
+ *
  * Score ranges:
  * - 80-100: High quality (Green) - Hot leads, immediate attention
  * - 50-79: Medium quality (Blue) - Warm leads, good potential
@@ -42,7 +42,7 @@ function getScoreConfig(score: number): ScoreConfig {
       tooltip: "High quality lead - immediate attention recommended",
     };
   }
-  
+
   if (score >= 50) {
     return {
       color: "blue",
@@ -50,7 +50,7 @@ function getScoreConfig(score: number): ScoreConfig {
       tooltip: "Medium quality lead - good potential",
     };
   }
-  
+
   return {
     color: "orange",
     label: "Low",

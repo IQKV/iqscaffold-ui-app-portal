@@ -114,7 +114,9 @@ export const useCreateLead = () => {
 
       // Optimistically update to the new value
       queryClient.setQueryData(crmKeys.leadsList(), (old: any) => {
-        if (!old) return old;
+        if (!old) {
+          return old;
+        }
         return {
           ...old,
           content: [
@@ -430,13 +432,8 @@ export const useUpdateFollowUp = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({
-      id,
-      data,
-    }: {
-      id: string;
-      data: UpdateFollowUpRequest;
-    }) => crmApi.updateFollowUp(id, data),
+    mutationFn: ({ id, data }: { id: string; data: UpdateFollowUpRequest }) =>
+      crmApi.updateFollowUp(id, data),
 
     onSuccess: (updatedFollowUp) => {
       queryClient.invalidateQueries({ queryKey: crmKeys.followUps() });

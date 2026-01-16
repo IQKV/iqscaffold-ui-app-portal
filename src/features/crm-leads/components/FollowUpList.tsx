@@ -47,12 +47,12 @@ import { useDebouncedValue } from "@mantine/hooks";
 
 /**
  * FollowUpList - Full follow-up management page
- * 
+ *
  * Features:
  * - Full follow-up management interface
  * - Advanced filtering and search capabilities
  * - Bulk operations for multiple follow-ups
- * 
+ *
  * Requirements: Follow-up management interface
  */
 export function FollowUpList() {
@@ -60,9 +60,13 @@ export function FollowUpList() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebouncedValue(search, 300);
-  const [completedFilter, setCompletedFilter] = useState<string | null>("pending");
+  const [completedFilter, setCompletedFilter] = useState<string | null>(
+    "pending"
+  );
   const [overdueFilter, setOverdueFilter] = useState<string | null>(null);
-  const [selectedFollowUps, setSelectedFollowUps] = useState<Set<string>>(new Set());
+  const [selectedFollowUps, setSelectedFollowUps] = useState<Set<string>>(
+    new Set()
+  );
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingFollowUp, setEditingFollowUp] = useState<FollowUp | null>(null);
 
@@ -70,12 +74,21 @@ export function FollowUpList() {
   const queryParams = {
     page: page - 1,
     size: 20,
-    completed: completedFilter === "completed" ? true : completedFilter === "pending" ? false : undefined,
+    completed:
+      completedFilter === "completed"
+        ? true
+        : completedFilter === "pending"
+          ? false
+          : undefined,
     overdue: overdueFilter === "overdue" ? true : undefined,
   };
 
   // Query hooks
-  const { data: followUpsResponse, isLoading, error } = useFollowUps(queryParams);
+  const {
+    data: followUpsResponse,
+    isLoading,
+    error,
+  } = useFollowUps(queryParams);
   const followUps = followUpsResponse?.content || [];
   const totalPages = followUpsResponse?.totalPages || 1;
 
@@ -88,7 +101,9 @@ export function FollowUpList() {
   // Filter follow-ups by search term (client-side for now)
   const filteredFollowUps = followUps.filter((followUp) =>
     debouncedSearch
-      ? followUp.description.toLowerCase().includes(debouncedSearch.toLowerCase())
+      ? followUp.description
+          .toLowerCase()
+          .includes(debouncedSearch.toLowerCase())
       : true
   );
 
@@ -111,7 +126,9 @@ export function FollowUpList() {
     priority: "LOW" | "MEDIUM" | "HIGH";
     type: "CALL" | "EMAIL" | "MEETING" | "TASK";
   }) => {
-    if (!editingFollowUp) return;
+    if (!editingFollowUp) {
+      return;
+    }
     await updateFollowUpMutation.mutateAsync({
       id: editingFollowUp.id,
       data: {
@@ -219,7 +236,9 @@ export function FollowUpList() {
   // Handle bulk complete
   const handleBulkComplete = async () => {
     const selectedIds = Array.from(selectedFollowUps);
-    if (selectedIds.length === 0) return;
+    if (selectedIds.length === 0) {
+      return;
+    }
 
     modals.openConfirmModal({
       title: t`Complete Selected Follow-ups`,
@@ -255,7 +274,9 @@ export function FollowUpList() {
   // Handle bulk delete
   const handleBulkDelete = () => {
     const selectedIds = Array.from(selectedFollowUps);
-    if (selectedIds.length === 0) return;
+    if (selectedIds.length === 0) {
+      return;
+    }
 
     modals.openConfirmModal({
       title: t`Delete Selected Follow-ups`,
@@ -395,7 +416,11 @@ export function FollowUpList() {
 
         {/* Error state */}
         {error && !isLoading && (
-          <Alert icon={<IconAlertCircle size={16} />} title={t`Error`} color="red">
+          <Alert
+            icon={<IconAlertCircle size={16} />}
+            title={t`Error`}
+            color="red"
+          >
             {t`Failed to load follow-ups. Please try again later.`}
           </Alert>
         )}
@@ -462,11 +487,7 @@ export function FollowUpList() {
         {/* Pagination */}
         {!isLoading && !error && totalPages > 1 && (
           <Group justify="center">
-            <Pagination
-              value={page}
-              onChange={setPage}
-              total={totalPages}
-            />
+            <Pagination value={page} onChange={setPage} total={totalPages} />
           </Group>
         )}
 
@@ -477,7 +498,9 @@ export function FollowUpList() {
           leadId={editingFollowUp?.leadId || ""}
           followUp={editingFollowUp}
           onSubmit={editingFollowUp ? handleUpdate : handleCreate}
-          isLoading={createFollowUpMutation.isPending || updateFollowUpMutation.isPending}
+          isLoading={
+            createFollowUpMutation.isPending || updateFollowUpMutation.isPending
+          }
         />
       </Stack>
     </Container>
@@ -573,7 +596,8 @@ function FollowUpCard({
             {/* Completed badge */}
             {isCompleted && followUp.completedAt && (
               <Badge color="green" size="xs" variant="light">
-                {t`Completed`} {new Date(followUp.completedAt).toLocaleDateString()}
+                {t`Completed`}{" "}
+                {new Date(followUp.completedAt).toLocaleDateString()}
               </Badge>
             )}
           </Group>
@@ -596,11 +620,7 @@ function FollowUpCard({
             <Badge color="blue" size="xs" variant="light">
               {followUp.type}
             </Badge>
-            <Button
-              size="xs"
-              variant="subtle"
-              onClick={onNavigateToLead}
-            >
+            <Button size="xs" variant="subtle" onClick={onNavigateToLead}>
               {t`View Lead`}
             </Button>
           </Group>
@@ -632,7 +652,10 @@ function FollowUpCard({
               </Menu.Target>
 
               <Menu.Dropdown>
-                <Menu.Item leftSection={<IconEdit size={14} />} onClick={onEdit}>
+                <Menu.Item
+                  leftSection={<IconEdit size={14} />}
+                  onClick={onEdit}
+                >
                   {t`Edit`}
                 </Menu.Item>
                 <Menu.Item

@@ -41,13 +41,13 @@ interface FollowUpSectionProps {
 
 /**
  * FollowUpSection - Component for managing follow-ups on lead detail page
- * 
+ *
  * Features:
  * - Display all follow-ups for a specific lead (Requirement 5.3)
  * - Add scheduling form with date picker (Requirement 5.2)
  * - Implement editing and completion functionality (Requirement 5.4, 5.5, 5.6)
  * - Handle deletion with confirmation dialogs (Requirement 5.7)
- * 
+ *
  * Requirements: 5.2, 5.3, 5.4, 5.5, 5.6, 5.7
  */
 export function FollowUpSection({ leadId }: FollowUpSectionProps) {
@@ -55,7 +55,11 @@ export function FollowUpSection({ leadId }: FollowUpSectionProps) {
   const [editingFollowUp, setEditingFollowUp] = useState<FollowUp | null>(null);
 
   // Query hooks
-  const { data: followUpsResponse, isLoading, error } = useFollowUps({ leadId });
+  const {
+    data: followUpsResponse,
+    isLoading,
+    error,
+  } = useFollowUps({ leadId });
   const followUps = followUpsResponse?.content || [];
 
   // Mutation hooks
@@ -83,7 +87,9 @@ export function FollowUpSection({ leadId }: FollowUpSectionProps) {
     priority: "LOW" | "MEDIUM" | "HIGH";
     type: "CALL" | "EMAIL" | "MEETING" | "TASK";
   }) => {
-    if (!editingFollowUp) return;
+    if (!editingFollowUp) {
+      return;
+    }
     await updateFollowUpMutation.mutateAsync({
       id: editingFollowUp.id,
       data: {
@@ -187,7 +193,11 @@ export function FollowUpSection({ leadId }: FollowUpSectionProps) {
 
       {/* Error state */}
       {error && !isLoading && (
-        <Alert icon={<IconAlertCircle size={16} />} title={t`Error`} color="red">
+        <Alert
+          icon={<IconAlertCircle size={16} />}
+          title={t`Error`}
+          color="red"
+        >
           {t`Failed to load follow-ups. Please try again later.`}
         </Alert>
       )}
@@ -258,7 +268,9 @@ export function FollowUpSection({ leadId }: FollowUpSectionProps) {
         leadId={leadId}
         followUp={editingFollowUp}
         onSubmit={editingFollowUp ? handleUpdate : handleCreate}
-        isLoading={createFollowUpMutation.isPending || updateFollowUpMutation.isPending}
+        isLoading={
+          createFollowUpMutation.isPending || updateFollowUpMutation.isPending
+        }
       />
     </Stack>
   );
@@ -314,7 +326,11 @@ function FollowUpCard({
       <Group justify="space-between" align="flex-start" wrap="nowrap">
         <Stack gap="xs" style={{ flex: 1, minWidth: 0 }}>
           {/* Description */}
-          <Text size="sm" fw={500} style={{ textDecoration: isCompleted ? "line-through" : undefined }}>
+          <Text
+            size="sm"
+            fw={500}
+            style={{ textDecoration: isCompleted ? "line-through" : undefined }}
+          >
             {followUp.description}
           </Text>
 
@@ -337,7 +353,8 @@ function FollowUpCard({
             {/* Completed badge */}
             {isCompleted && followUp.completedAt && (
               <Badge color="green" size="xs" variant="light">
-                {t`Completed`} {new Date(followUp.completedAt).toLocaleDateString()}
+                {t`Completed`}{" "}
+                {new Date(followUp.completedAt).toLocaleDateString()}
               </Badge>
             )}
           </Group>

@@ -30,12 +30,12 @@ interface LeadNotesSectionProps {
 
 /**
  * LeadNotesSection Component
- * 
+ *
  * Displays and manages notes for a specific lead with:
  * - Notes sorted by creation date descending
  * - Inline editing and deletion with confirmation
  * - Note creation with rich text support
- * 
+ *
  * Requirements: 4.2, 4.4, 4.5, 4.6, 4.7
  */
 export const LeadNotesSection: React.FC<LeadNotesSectionProps> = ({
@@ -197,8 +197,7 @@ export const LeadNotesSection: React.FC<LeadNotesSectionProps> = ({
 
   // Sort notes by creation date descending
   const sortedNotes = [...(notes || [])].sort(
-    (a, b) =>
-      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
 
   return (

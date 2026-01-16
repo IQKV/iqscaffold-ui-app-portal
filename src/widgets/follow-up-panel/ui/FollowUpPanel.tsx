@@ -1,26 +1,54 @@
-import { Card, Stack, Text, Group, Badge, Button, Loader, Alert, ActionIcon, Tooltip } from "@mantine/core";
+import {
+  Card,
+  Stack,
+  Text,
+  Group,
+  Badge,
+  Button,
+  Loader,
+  Alert,
+  ActionIcon,
+  Tooltip,
+} from "@mantine/core";
 import { t } from "@lingui/core/macro";
-import { IconCheck, IconClock, IconAlertCircle, IconChevronRight } from "@tabler/icons-react";
-import { useTodaysFollowUps, useOverdueFollowUps, useCompleteFollowUp } from "@/entities/crm/api/crm-queries";
+import {
+  IconCheck,
+  IconClock,
+  IconAlertCircle,
+  IconChevronRight,
+} from "@tabler/icons-react";
+import {
+  useTodaysFollowUps,
+  useOverdueFollowUps,
+  useCompleteFollowUp,
+} from "@/entities/crm/api/crm-queries";
 import type { FollowUp } from "@/shared/api/crm/types";
 import { useNavigate } from "@tanstack/react-router";
 import { notifications } from "@mantine/notifications";
 
 /**
  * FollowUpPanel - Dashboard widget for today's and overdue follow-ups
- * 
+ *
  * Features:
  * - Display today's follow-ups with due times (Requirement 6.1)
  * - Show overdue follow-ups with red styling (Requirement 6.2, 6.6)
  * - Sort by due time with overdue items first (Requirement 6.7)
  * - Add quick completion and navigation actions (Requirement 6.4, 6.3)
- * 
+ *
  * Requirements: 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7
  */
 export function FollowUpPanel() {
   const navigate = useNavigate();
-  const { data: todaysFollowUps, isLoading: loadingToday, error: errorToday } = useTodaysFollowUps();
-  const { data: overdueFollowUps, isLoading: loadingOverdue, error: errorOverdue } = useOverdueFollowUps();
+  const {
+    data: todaysFollowUps,
+    isLoading: loadingToday,
+    error: errorToday,
+  } = useTodaysFollowUps();
+  const {
+    data: overdueFollowUps,
+    isLoading: loadingOverdue,
+    error: errorOverdue,
+  } = useOverdueFollowUps();
   const completeFollowUpMutation = useCompleteFollowUp();
 
   // Combine and sort follow-ups: overdue first, then by due time (Requirement 6.7)
@@ -29,8 +57,12 @@ export function FollowUpPanel() {
     ...(todaysFollowUps || []),
   ].sort((a, b) => {
     // Overdue items first
-    if (a.isOverdue && !b.isOverdue) return -1;
-    if (!a.isOverdue && b.isOverdue) return 1;
+    if (a.isOverdue && !b.isOverdue) {
+      return -1;
+    }
+    if (!a.isOverdue && b.isOverdue) {
+      return 1;
+    }
     // Then sort by due time
     return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
   });
@@ -89,7 +121,11 @@ export function FollowUpPanel() {
 
         {/* Error state */}
         {hasError && !isLoading && (
-          <Alert icon={<IconAlertCircle size={16} />} title={t`Error`} color="red">
+          <Alert
+            icon={<IconAlertCircle size={16} />}
+            title={t`Error`}
+            color="red"
+          >
             {t`Failed to load follow-ups. Please try again later.`}
           </Alert>
         )}
@@ -132,14 +168,19 @@ interface FollowUpItemProps {
 
 /**
  * FollowUpItem - Individual follow-up item in the panel
- * 
+ *
  * Features:
  * - Display follow-up details with due time
  * - Red styling for overdue items (Requirement 6.6)
  * - Quick completion action (Requirement 6.4)
  * - Navigation to lead detail (Requirement 6.3)
  */
-function FollowUpItem({ followUp, onComplete, onNavigate, isCompleting }: FollowUpItemProps) {
+function FollowUpItem({
+  followUp,
+  onComplete,
+  onNavigate,
+  isCompleting,
+}: FollowUpItemProps) {
   const dueTime = new Date(followUp.dueDate).toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
@@ -157,7 +198,7 @@ function FollowUpItem({ followUp, onComplete, onNavigate, isCompleting }: Follow
       withBorder
       style={{
         backgroundColor: cardColor,
-        borderColor: borderColor,
+        borderColor,
         borderWidth: isOverdue ? 2 : 1,
       }}
     >
