@@ -21,6 +21,8 @@ import { Route as BillingRouteImport } from "./pages/billing"
 import { Route as AboutRouteImport } from "./pages/about"
 import { Route as R404RouteImport } from "./pages/404"
 import { Route as IndexRouteImport } from "./pages/index"
+import { Route as CrmLeadsRouteImport } from "./pages/crm.leads"
+import { Route as CrmLeadsLeadIdRouteImport } from "./pages/crm.leads.$leadId"
 
 const UsersRoute = UsersRouteImport.update({
   id: "/users",
@@ -82,6 +84,16 @@ const IndexRoute = IndexRouteImport.update({
   path: "/",
   getParentRoute: () => rootRouteImport,
 } as any)
+const CrmLeadsRoute = CrmLeadsRouteImport.update({
+  id: "/crm/leads",
+  path: "/crm/leads",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrmLeadsLeadIdRoute = CrmLeadsLeadIdRouteImport.update({
+  id: "/$leadId",
+  path: "/$leadId",
+  getParentRoute: () => CrmLeadsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
@@ -96,6 +108,8 @@ export interface FileRoutesByFullPath {
   "/subscriptions": typeof SubscriptionsRoute
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
+  "/crm/leads": typeof CrmLeadsRouteWithChildren
+  "/crm/leads/$leadId": typeof CrmLeadsLeadIdRoute
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
@@ -110,6 +124,8 @@ export interface FileRoutesByTo {
   "/subscriptions": typeof SubscriptionsRoute
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
+  "/crm/leads": typeof CrmLeadsRouteWithChildren
+  "/crm/leads/$leadId": typeof CrmLeadsLeadIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -125,6 +141,8 @@ export interface FileRoutesById {
   "/subscriptions": typeof SubscriptionsRoute
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
+  "/crm/leads": typeof CrmLeadsRouteWithChildren
+  "/crm/leads/$leadId": typeof CrmLeadsLeadIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -141,6 +159,8 @@ export interface FileRouteTypes {
     | "/subscriptions"
     | "/user-preferences"
     | "/users"
+    | "/crm/leads"
+    | "/crm/leads/$leadId"
   fileRoutesByTo: FileRoutesByTo
   to:
     | "/"
@@ -155,6 +175,8 @@ export interface FileRouteTypes {
     | "/subscriptions"
     | "/user-preferences"
     | "/users"
+    | "/crm/leads"
+    | "/crm/leads/$leadId"
   id:
     | "__root__"
     | "/"
@@ -169,6 +191,8 @@ export interface FileRouteTypes {
     | "/subscriptions"
     | "/user-preferences"
     | "/users"
+    | "/crm/leads"
+    | "/crm/leads/$leadId"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -184,6 +208,7 @@ export interface RootRouteChildren {
   SubscriptionsRoute: typeof SubscriptionsRoute
   UserPreferencesRoute: typeof UserPreferencesRoute
   UsersRoute: typeof UsersRoute
+  CrmLeadsRoute: typeof CrmLeadsRouteWithChildren
 }
 
 declare module "@tanstack/react-router" {
@@ -272,8 +297,34 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    "/crm/leads": {
+      id: "/crm/leads"
+      path: "/crm/leads"
+      fullPath: "/crm/leads"
+      preLoaderRoute: typeof CrmLeadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/crm/leads/$leadId": {
+      id: "/crm/leads/$leadId"
+      path: "/$leadId"
+      fullPath: "/crm/leads/$leadId"
+      preLoaderRoute: typeof CrmLeadsLeadIdRouteImport
+      parentRoute: typeof CrmLeadsRoute
+    }
   }
 }
+
+interface CrmLeadsRouteChildren {
+  CrmLeadsLeadIdRoute: typeof CrmLeadsLeadIdRoute
+}
+
+const CrmLeadsRouteChildren: CrmLeadsRouteChildren = {
+  CrmLeadsLeadIdRoute: CrmLeadsLeadIdRoute,
+}
+
+const CrmLeadsRouteWithChildren = CrmLeadsRoute._addFileChildren(
+  CrmLeadsRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -288,6 +339,7 @@ const rootRouteChildren: RootRouteChildren = {
   SubscriptionsRoute: SubscriptionsRoute,
   UserPreferencesRoute: UserPreferencesRoute,
   UsersRoute: UsersRoute,
+  CrmLeadsRoute: CrmLeadsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
