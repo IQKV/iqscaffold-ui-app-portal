@@ -29,6 +29,7 @@ interface LeadCardProps {
   // Keyboard navigation support
   tabIndex?: number;
   onKeyDown?: (event: React.KeyboardEvent) => void;
+  onClick?: () => void;
 }
 
 /**
@@ -53,6 +54,7 @@ export const LeadCard: React.FC<LeadCardProps> = ({
   draggable = false,
   tabIndex = 0,
   onKeyDown,
+  onClick,
 }) => {
   // Drag and drop setup for kanban view
   const { attributes, listeners, setNodeRef, transform, isDragging } =
@@ -103,6 +105,7 @@ export const LeadCard: React.FC<LeadCardProps> = ({
         padding="xs"
         data-testid="lead-card"
         onKeyDown={onKeyDown}
+        onClick={onClick}
         aria-label={ariaLabel}
         {...attributes}
         {...listeners}
@@ -140,6 +143,7 @@ export const LeadCard: React.FC<LeadCardProps> = ({
         padding="md"
         data-testid="lead-card"
         onKeyDown={onKeyDown}
+        onClick={onClick}
         aria-label={ariaLabel}
         {...attributes}
         {...listeners}
@@ -230,6 +234,7 @@ export const LeadCard: React.FC<LeadCardProps> = ({
       padding="md"
       data-testid="lead-card"
       onKeyDown={onKeyDown}
+      onClick={onClick}
       aria-label={ariaLabel}
       {...attributes}
       {...listeners}

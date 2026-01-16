@@ -149,7 +149,9 @@ export const a11yClassNames = {
  * This should be called once in the app initialization
  */
 export function applyFocusVisibleStyles() {
-  if (typeof document === "undefined") return;
+  if (typeof document === "undefined") {
+    return;
+  }
 
   const style = document.createElement("style");
   style.textContent = `
@@ -237,21 +239,29 @@ export function applyFocusVisibleStyles() {
  * Hook to detect and respond to user preferences
  */
 export function useAccessibilityPreferences() {
-  if (typeof window === "undefined") {
-    return {
-      reducedMotion: false,
-      highContrast: false,
-      darkMode: false,
-    };
-  }
+  const getInitialPreferences = () => {
+    if (typeof window === "undefined") {
+      return {
+        reducedMotion: false,
+        highContrast: false,
+        darkMode: false,
+      };
+    }
 
-  const [preferences, setPreferences] = React.useState({
-    reducedMotion: prefersReducedMotion(),
-    highContrast: prefersHighContrast(),
-    darkMode: prefersDarkMode(),
-  });
+    return {
+      reducedMotion: prefersReducedMotion(),
+      highContrast: prefersHighContrast(),
+      darkMode: prefersDarkMode(),
+    };
+  };
+
+  const [preferences, setPreferences] = React.useState(getInitialPreferences);
 
   React.useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
     const reducedMotionQuery = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     );

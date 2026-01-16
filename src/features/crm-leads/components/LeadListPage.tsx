@@ -113,7 +113,7 @@ export const LeadListPage: React.FC = () => {
   // Fetch leads with filters
   const { data, isLoading, error, refetch } = useLeads(queryParams);
 
-  const leads = data?.content || [];
+  const leads = useMemo(() => data?.content || [], [data]);
   const totalPages = data?.totalPages || 0;
   const totalElements = data?.totalElements || 0;
 
@@ -130,7 +130,9 @@ export const LeadListPage: React.FC = () => {
   }, [announce]);
 
   const handleSelectAll = useCallback(() => {
-    if (leads.length === 0) return;
+    if (leads.length === 0) {
+      return;
+    }
 
     if (selectedLeads.length === leads.length) {
       setSelectedLeads([]);
@@ -139,7 +141,7 @@ export const LeadListPage: React.FC = () => {
       setSelectedLeads(leads.map((lead) => lead.id));
       announce(`${leads.length} leads selected`, { priority: "polite" });
     }
-  }, [leads, selectedLeads.length, announce]);
+  }, [leads, selectedLeads, announce]);
 
   // Setup keyboard shortcuts
   useKeyboardNavigation({
@@ -627,12 +629,9 @@ export const LeadListPage: React.FC = () => {
             {leads.map((lead, index) => (
               <div
                 key={lead.id}
-                onClick={() => handleLeadClick(lead.id)}
-                onKeyDown={(e) => handleLeadKeyDown(e, lead.id, index)}
                 role="listitem"
                 style={{
                   cursor: "pointer",
-                  // Touch-friendly tap target
                   minHeight: isMobile ? "44px" : "auto",
                 }}
               >
@@ -642,6 +641,7 @@ export const LeadListPage: React.FC = () => {
                   showQuickActions={!isMobile}
                   tabIndex={index === focusedLeadIndex ? 0 : -1}
                   onKeyDown={(e) => handleLeadKeyDown(e, lead.id, index)}
+                  onClick={() => handleLeadClick(lead.id)}
                   onQuickActions={
                     !isMobile
                       ? {

@@ -82,10 +82,6 @@ export function useKeyboardNavigation(
       target.removeEventListener("keydown", handleKeyDown as any);
     };
   }, [handleKeyDown, enabled, scope]);
-
-  return {
-    shortcuts: shortcutsRef.current,
-  };
 }
 
 /**
