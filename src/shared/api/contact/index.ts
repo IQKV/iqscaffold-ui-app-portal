@@ -68,7 +68,10 @@ export const contactApi = {
   /**
    * Update contact lead score
    */
-  updateLeadScore: (id: string | number, request: Types.UpdateLeadScoreRequest) =>
+  updateLeadScore: (
+    id: string | number,
+    request: Types.UpdateLeadScoreRequest
+  ) =>
     apiRequest<Types.Contact>({
       url: `/api/v1/contacts/${id}/score`,
       method: "PATCH",

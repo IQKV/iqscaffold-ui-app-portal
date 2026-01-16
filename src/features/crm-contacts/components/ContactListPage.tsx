@@ -25,8 +25,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { notifications } from "@mantine/notifications";
 import { modals } from "@mantine/modals";
 import { contactApi, ContactStatus } from "@/shared/api";
-import { ContactCard } from "@/entities/crm/ui";
-import { ContactForm } from "@/entities/crm/ui";
+import { ContactCard, ContactForm } from "@/entities/crm/ui";
 
 /**
  * ContactListPage Component
@@ -127,11 +126,11 @@ export const ContactListPage: React.FC = () => {
   };
 
   const handleViewContact = (id: number) => {
-    navigate({ to: `/contacts/${id}` });
+    navigate({ to: `/crm/contacts/${id}` });
   };
 
   const handleEditContact = (id: number) => {
-    navigate({ to: `/contacts/${id}`, search: { edit: true } });
+    navigate({ to: `/crm/contacts/${id}` });
   };
 
   return (
@@ -181,11 +180,7 @@ export const ContactListPage: React.FC = () => {
 
         {/* Error state */}
         {error && (
-          <Alert
-            icon={<IconAlertCircle size={16} />}
-            title="Error"
-            color="red"
-          >
+          <Alert icon={<IconAlertCircle size={16} />} title="Error" color="red">
             Failed to load contacts. Please try again.
           </Alert>
         )}

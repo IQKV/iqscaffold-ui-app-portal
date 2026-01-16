@@ -35,8 +35,7 @@ import { useNavigate, useParams, useSearch } from "@tanstack/react-router";
 import { notifications } from "@mantine/notifications";
 import { modals } from "@mantine/modals";
 import { contactApi } from "@/shared/api";
-import { ContactForm } from "@/entities/crm/ui";
-import { LeadScoreBadge } from "@/entities/crm/ui";
+import { ContactForm, LeadScoreBadge } from "@/entities/crm/ui";
 
 /**
  * ContactDetailPage Component
@@ -99,7 +98,7 @@ export const ContactDetailPage: React.FC = () => {
         message: "Contact deleted successfully",
         color: "green",
       });
-      navigate({ to: "/contacts" });
+      navigate({ to: "/crm/contacts" });
     },
     onError: (error: any) => {
       notifications.show({
@@ -116,14 +115,14 @@ export const ContactDetailPage: React.FC = () => {
   };
 
   const handleDeleteContact = () => {
-    if (!contact) return;
+    if (!contact) {return;}
 
     modals.openConfirmModal({
       title: "Delete Contact",
       children: (
         <Text size="sm">
-          Are you sure you want to delete {contact.firstName}{" "}
-          {contact.lastName}? This action cannot be undone.
+          Are you sure you want to delete {contact.firstName} {contact.lastName}
+          ? This action cannot be undone.
         </Text>
       ),
       labels: { confirm: "Delete", cancel: "Cancel" },
@@ -158,11 +157,7 @@ export const ContactDetailPage: React.FC = () => {
   if (error) {
     return (
       <Container size="xl" py="xl">
-        <Alert
-          icon={<IconAlertCircle size={16} />}
-          title="Error"
-          color="red"
-        >
+        <Alert icon={<IconAlertCircle size={16} />} title="Error" color="red">
           Failed to load contact. Please try again.
         </Alert>
       </Container>
@@ -182,7 +177,7 @@ export const ContactDetailPage: React.FC = () => {
                 <Button
                   variant="subtle"
                   leftSection={<IconArrowLeft size={16} />}
-                  onClick={() => navigate({ to: "/contacts" })}
+                  onClick={() => navigate({ to: "/crm/contacts" })}
                 >
                   Back to Contacts
                 </Button>

@@ -59,24 +59,24 @@ export const ContactForm: React.FC<ContactFormProps> = ({
       phone: contact?.phone || "",
       jobTitle: contact?.jobTitle || "",
       companyId: contact?.companyId,
-      status: contact?.status || "ACTIVE",
+      status: contact?.status || ContactStatus.ACTIVE,
       leadScore: contact?.leadScore || 0,
       notes: contact?.notes || "",
     },
     validate: {
-      firstName: (value) =>
+      firstName: (value: string) =>
         !value || value.trim().length === 0
           ? "First name is required"
           : value.length > 50
             ? "First name must be less than 50 characters"
             : null,
-      lastName: (value) =>
+      lastName: (value: string) =>
         !value || value.trim().length === 0
           ? "Last name is required"
           : value.length > 50
             ? "Last name must be less than 50 characters"
             : null,
-      email: (value) => {
+      email: (value: string) => {
         if (!value || value.trim().length === 0) {
           return "Email is required";
         }
@@ -88,19 +88,19 @@ export const ContactForm: React.FC<ContactFormProps> = ({
         }
         return null;
       },
-      phone: (value) =>
+      phone: (value?: string) =>
         value && value.length > 20
           ? "Phone must be less than 20 characters"
           : null,
-      jobTitle: (value) =>
+      jobTitle: (value?: string) =>
         value && value.length > 100
           ? "Job title must be less than 100 characters"
           : null,
-      leadScore: (value) =>
+      leadScore: (value?: number) =>
         value !== undefined && (value < 0 || value > 100)
           ? "Lead score must be between 0 and 100"
           : null,
-      notes: (value) =>
+      notes: (value?: string) =>
         value && value.length > 1000
           ? "Notes must be less than 1000 characters"
           : null,
@@ -110,10 +110,10 @@ export const ContactForm: React.FC<ContactFormProps> = ({
   const handleSubmit = form.onSubmit((values) => {
     // Clean up empty optional fields
     const cleanedValues = { ...values };
-    if (!cleanedValues.phone) delete cleanedValues.phone;
-    if (!cleanedValues.jobTitle) delete cleanedValues.jobTitle;
-    if (!cleanedValues.companyId) delete cleanedValues.companyId;
-    if (!cleanedValues.notes) delete cleanedValues.notes;
+    if (!cleanedValues.phone) {delete cleanedValues.phone;}
+    if (!cleanedValues.jobTitle) {delete cleanedValues.jobTitle;}
+    if (!cleanedValues.companyId) {delete cleanedValues.companyId;}
+    if (!cleanedValues.notes) {delete cleanedValues.notes;}
 
     onSubmit(cleanedValues);
   });

@@ -76,7 +76,8 @@ export const ContactCard: React.FC<ContactCardProps> = ({
   }, [contact.status, onClick]);
 
   // Get initials for avatar
-  const initials = `${contact.firstName[0]}${contact.lastName[0]}`.toUpperCase();
+  const initials =
+    `${contact.firstName[0]}${contact.lastName[0]}`.toUpperCase();
 
   // ARIA label for screen readers
   const ariaLabel = `Contact: ${contact.firstName} ${contact.lastName}, ${contact.jobTitle || "No title"}, ${contact.email}, Status: ${contact.status}, Lead Score: ${contact.leadScore}`;

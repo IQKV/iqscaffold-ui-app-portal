@@ -2,17 +2,17 @@
 // Following existing CRM and billing patterns
 
 import { http, HttpResponse, delay } from "msw";
-import type {
-  Contact,
+import {
+  type Contact,
+  type CreateContactRequest,
+  type UpdateContactRequest,
+  type BulkCreateContactsRequest,
+  type BulkUpdateStatusRequest,
+  type BulkDeleteContactsRequest,
+  type BulkUpdateLeadScoresRequest,
+  type BulkOperationResponse,
+  type PaginatedResponse,
   ContactStatus,
-  CreateContactRequest,
-  UpdateContactRequest,
-  BulkCreateContactsRequest,
-  BulkUpdateStatusRequest,
-  BulkDeleteContactsRequest,
-  BulkUpdateLeadScoresRequest,
-  BulkOperationResponse,
-  PaginatedResponse,
 } from "@/shared/api/contact/types";
 
 // Mock configuration
@@ -22,7 +22,7 @@ const config = {
 };
 
 // Mock data store
-let mockContacts: Contact[] = [
+const mockContacts: Contact[] = [
   {
     id: 1,
     firstName: "John",
@@ -31,7 +31,7 @@ let mockContacts: Contact[] = [
     phone: "+1-555-0101",
     jobTitle: "CEO",
     companyId: 1,
-    status: "ACTIVE" as ContactStatus,
+    status: ContactStatus.ACTIVE,
     leadScore: 85,
     notes: "Converted from lead. High priority contact.",
     createdAt: "2024-01-15T10:00:00Z",
@@ -47,7 +47,7 @@ let mockContacts: Contact[] = [
     phone: "+1-555-0102",
     jobTitle: "CTO",
     companyId: 2,
-    status: "ACTIVE" as ContactStatus,
+    status: ContactStatus.ACTIVE,
     leadScore: 92,
     notes: "Key decision maker. Interested in enterprise plan.",
     createdAt: "2024-01-10T09:00:00Z",
@@ -63,7 +63,7 @@ let mockContacts: Contact[] = [
     phone: "+1-555-0103",
     jobTitle: "Founder",
     companyId: 3,
-    status: "ACTIVE" as ContactStatus,
+    status: ContactStatus.ACTIVE,
     leadScore: 78,
     notes: "Early stage startup. Budget constraints.",
     createdAt: "2024-01-12T11:30:00Z",
@@ -79,7 +79,7 @@ let mockContacts: Contact[] = [
     phone: "+1-555-0104",
     jobTitle: "VP of Operations",
     companyId: 4,
-    status: "INACTIVE" as ContactStatus,
+    status: ContactStatus.INACTIVE,
     leadScore: 45,
     notes: "Lost interest. Follow up in Q3.",
     createdAt: "2024-01-05T08:00:00Z",
@@ -191,7 +191,7 @@ export const contactsHandlers = [
       phone: body.phone,
       jobTitle: body.jobTitle,
       companyId: body.companyId,
-      status: body.status || "ACTIVE",
+      status: body.status || ContactStatus.ACTIVE,
       leadScore: body.leadScore || 0,
       notes: body.notes,
       createdAt: new Date().toISOString(),
@@ -354,7 +354,7 @@ export const contactsHandlers = [
         phone: contactRequest.phone,
         jobTitle: contactRequest.jobTitle,
         companyId: contactRequest.companyId,
-        status: contactRequest.status || "ACTIVE",
+        status: contactRequest.status || ContactStatus.ACTIVE,
         leadScore: contactRequest.leadScore || 0,
         notes: contactRequest.notes,
         createdAt: new Date().toISOString(),
