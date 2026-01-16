@@ -16,16 +16,19 @@ import {
   IconDatabase,
 } from "@tabler/icons-react";
 import { t } from "@lingui/core/macro";
-import { ErrorBoundary, type ErrorBoundaryProps } from "@/shared/ui/error-boundary";
+import {
+  ErrorBoundary,
+  type ErrorBoundaryProps,
+} from "@/shared/ui/error-boundary";
 import { errorFromAxios, formatErrorForDisplay } from "@/shared/lib/http-error";
 import { notificationService } from "@/shared/lib/notifications";
 
 /**
  * CRM-specific error fallback component
- * 
+ *
  * Provides business-focused error messages and recovery options
  * for CRM-related errors
- * 
+ *
  * Requirements: Error handling and user experience
  */
 interface CRMErrorFallbackProps {
@@ -38,7 +41,7 @@ function CRMErrorFallback({ error, resetError }: CRMErrorFallbackProps) {
   const displayError = formatErrorForDisplay(appError);
 
   // Determine if this is a CRM-specific business error
-  const isCRMBusinessError = 
+  const isCRMBusinessError =
     displayError.message?.toLowerCase().includes("lead") ||
     displayError.message?.toLowerCase().includes("follow-up") ||
     displayError.message?.toLowerCase().includes("pipeline") ||
@@ -61,7 +64,7 @@ function CRMErrorFallback({ error, resetError }: CRMErrorFallbackProps) {
     if (appError.errorType === "network") {
       return t`Unable to connect to CRM services. Please check your internet connection and try again.`;
     }
-    
+
     if (appError.errorType === "server") {
       return t`The CRM service is temporarily unavailable. Our team has been notified and is working on a fix.`;
     }
@@ -75,7 +78,10 @@ function CRMErrorFallback({ error, resetError }: CRMErrorFallbackProps) {
     }
 
     if (isCRMBusinessError) {
-      return displayError.message || t`An error occurred while processing your CRM request.`;
+      return (
+        displayError.message ||
+        t`An error occurred while processing your CRM request.`
+      );
     }
 
     return t`Something went wrong with the CRM system. Please try again or contact support if the problem persists.`;
@@ -111,7 +117,12 @@ function CRMErrorFallback({ error, resetError }: CRMErrorFallbackProps) {
             )}
 
             {appError.errorType && (
-              <Badge size="sm" variant="light" color="red" leftSection={<IconDatabase size={12} />}>
+              <Badge
+                size="sm"
+                variant="light"
+                color="red"
+                leftSection={<IconDatabase size={12} />}
+              >
                 {appError.errorType.toUpperCase()}
               </Badge>
             )}
@@ -123,7 +134,7 @@ function CRMErrorFallback({ error, resetError }: CRMErrorFallbackProps) {
           <Text size="sm" fw={500} ta="center" c="dimmed">
             {t`What would you like to do?`}
           </Text>
-          
+
           <Group justify="center" gap="md">
             <Button
               leftSection={<IconRefresh size="1rem" />}
@@ -143,11 +154,7 @@ function CRMErrorFallback({ error, resetError }: CRMErrorFallbackProps) {
           </Group>
 
           <Group justify="center" gap="md">
-            <Button
-              onClick={handleGoToLeads}
-              variant="subtle"
-              size="sm"
-            >
+            <Button onClick={handleGoToLeads} variant="subtle" size="sm">
               {t`View Leads`}
             </Button>
 
@@ -191,22 +198,22 @@ function CRMErrorFallback({ error, resetError }: CRMErrorFallbackProps) {
 
 /**
  * CRM Error Boundary Component
- * 
+ *
  * Wraps CRM features with business-specific error handling
  * following existing platform patterns
- * 
+ *
  * Usage:
  * ```tsx
  * <CRMErrorBoundary>
  *   <LeadListPage />
  * </CRMErrorBoundary>
  * ```
- * 
+ *
  * Requirements: Error handling and user experience
  */
-export function CRMErrorBoundary({ 
+export function CRMErrorBoundary({
   children,
-  ...props 
+  ...props
 }: Omit<ErrorBoundaryProps, "fallback" | "onError">) {
   const handleError = (error: Error, errorInfo: React.ErrorInfo) => {
     // Log CRM-specific errors for monitoring
@@ -251,12 +258,13 @@ export function CRMErrorBoundary({
 
 /**
  * Higher-order component for wrapping CRM components with error boundary
- * 
+ *
  * Usage:
  * ```tsx
  * export const LeadListPage = withCRMErrorBoundary(LeadListPageComponent);
  * ```
  */
+// eslint-disable-next-line react-refresh/only-export-components
 export function withCRMErrorBoundary<P extends object>(
   Component: React.ComponentType<P>
 ) {

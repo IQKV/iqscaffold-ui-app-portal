@@ -90,10 +90,12 @@ export function FollowUpForm({
     } else {
       form.reset();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [followUp, opened]);
 
   // Check if the selected date is in the past (Requirement 11.4)
-  const isPastDateSelected = form.values.dueDate && isPastDate(form.values.dueDate);
+  const isPastDateSelected =
+    form.values.dueDate && isPastDate(form.values.dueDate);
 
   const handleSubmit = async (values: FollowUpFormData) => {
     try {

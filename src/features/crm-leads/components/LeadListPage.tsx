@@ -30,7 +30,11 @@ import { useLeads } from "@/entities/crm/api/crm-queries";
 import { LeadCard } from "@/entities/crm/ui";
 import { LeadListParams, LeadSource } from "@/shared/api/crm/types";
 import { useNavigate } from "@tanstack/react-router";
-import { useDebouncedValue, useMediaQuery, useDisclosure } from "@mantine/hooks";
+import {
+  useDebouncedValue,
+  useMediaQuery,
+  useDisclosure,
+} from "@mantine/hooks";
 
 /**
  * LeadListPage Component
@@ -51,7 +55,10 @@ export const LeadListPage: React.FC = () => {
   const isTablet = useMediaQuery("(max-width: 1024px)");
 
   // Filter drawer state for mobile
-  const [filterDrawerOpened, { open: openFilterDrawer, close: closeFilterDrawer }] = useDisclosure(false);
+  const [
+    filterDrawerOpened,
+    { open: openFilterDrawer, close: closeFilterDrawer },
+  ] = useDisclosure(false);
 
   // Filter state
   const [searchTerm, setSearchTerm] = useState("");
@@ -174,11 +181,11 @@ export const LeadListPage: React.FC = () => {
   if (error) {
     return (
       <Container size="xl" py="xl">
-        <Alert color="red" title="Error loading leads">
+        <Alert color="red" title={t`Error loading leads`}>
           <Stack gap="sm">
-            <Text>Failed to load leads. Please try again.</Text>
+            <Text>{t`Failed to load leads. Please try again.`}</Text>
             <Button onClick={() => refetch()} variant="light">
-              Retry
+              {t`Retry`}
             </Button>
           </Stack>
         </Alert>
@@ -194,17 +201,17 @@ export const LeadListPage: React.FC = () => {
   const renderFilterControls = () => (
     <Stack gap="md">
       <Select
-        placeholder="Filter by source"
+        placeholder={t`Filter by source`}
         leftSection={<IconFilter size={16} />}
         data={[
-          { value: "WEBSITE", label: "Website" },
-          { value: "REFERRAL", label: "Referral" },
-          { value: "COLD_CALL", label: "Cold Call" },
-          { value: "EMAIL_CAMPAIGN", label: "Email Campaign" },
-          { value: "SOCIAL_MEDIA", label: "Social Media" },
-          { value: "TRADE_SHOW", label: "Trade Show" },
-          { value: "PARTNER", label: "Partner" },
-          { value: "OTHER", label: "Other" },
+          { value: "WEBSITE", label: t`Website` },
+          { value: "REFERRAL", label: t`Referral` },
+          { value: "COLD_CALL", label: t`Cold Call` },
+          { value: "EMAIL_CAMPAIGN", label: t`Email Campaign` },
+          { value: "SOCIAL_MEDIA", label: t`Social Media` },
+          { value: "TRADE_SHOW", label: t`Trade Show` },
+          { value: "PARTNER", label: t`Partner` },
+          { value: "OTHER", label: t`Other` },
         ]}
         value={selectedSource}
         onChange={setSelectedSource}
@@ -212,16 +219,16 @@ export const LeadListPage: React.FC = () => {
       />
 
       <Select
-        placeholder="Filter by stage"
+        placeholder={t`Filter by stage`}
         leftSection={<IconFilter size={16} />}
         data={[
-          { value: "New", label: "New" },
-          { value: "Contacted", label: "Contacted" },
-          { value: "Qualified", label: "Qualified" },
-          { value: "Proposal", label: "Proposal" },
-          { value: "Negotiation", label: "Negotiation" },
-          { value: "Won", label: "Won" },
-          { value: "Lost", label: "Lost" },
+          { value: "New", label: t`New` },
+          { value: "Contacted", label: t`Contacted` },
+          { value: "Qualified", label: t`Qualified` },
+          { value: "Proposal", label: t`Proposal` },
+          { value: "Negotiation", label: t`Negotiation` },
+          { value: "Won", label: t`Won` },
+          { value: "Lost", label: t`Lost` },
         ]}
         value={selectedStage}
         onChange={setSelectedStage}
@@ -229,7 +236,7 @@ export const LeadListPage: React.FC = () => {
       />
 
       <Select
-        placeholder="Filter by assigned user"
+        placeholder={t`Filter by assigned user`}
         leftSection={<IconFilter size={16} />}
         data={[
           // TODO: Fetch from users API
@@ -249,17 +256,21 @@ export const LeadListPage: React.FC = () => {
           leftSection={<IconX size={16} />}
           onClick={() => {
             handleClearFilters();
-            if (isMobile) closeFilterDrawer();
+            if (isMobile) {closeFilterDrawer();}
           }}
         >
-          Clear all filters
+          {t`Clear all filters`}
         </Button>
       )}
     </Stack>
   );
 
   return (
-    <Container size="xl" py={isMobile ? "sm" : "xl"} px={isMobile ? "xs" : "md"}>
+    <Container
+      size="xl"
+      py={isMobile ? "sm" : "xl"}
+      px={isMobile ? "xs" : "md"}
+    >
       <Stack gap="lg">
         {/* Header */}
         <Group justify="space-between" wrap={isMobile ? "wrap" : "nowrap"}>
@@ -299,7 +310,11 @@ export const LeadListPage: React.FC = () => {
             {/* Search bar - always visible */}
             <Group gap="xs" wrap="nowrap">
               <TextInput
-                placeholder={isMobile ? "Search leads..." : "Search by name, email, company, or phone..."}
+                placeholder={
+                  isMobile
+                    ? "Search leads..."
+                    : "Search by name, email, company, or phone..."
+                }
                 leftSection={<IconSearch size={16} />}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.currentTarget.value)}
@@ -322,7 +337,7 @@ export const LeadListPage: React.FC = () => {
                   },
                 }}
               />
-              
+
               {/* Mobile filter button */}
               {isMobile && (
                 <ActionIcon
@@ -340,17 +355,17 @@ export const LeadListPage: React.FC = () => {
             {!isMobile && (
               <Group>
                 <Select
-                  placeholder="Filter by source"
+                  placeholder={t`Filter by source`}
                   leftSection={<IconFilter size={16} />}
                   data={[
-                    { value: "WEBSITE", label: "Website" },
-                    { value: "REFERRAL", label: "Referral" },
-                    { value: "COLD_CALL", label: "Cold Call" },
-                    { value: "EMAIL_CAMPAIGN", label: "Email Campaign" },
-                    { value: "SOCIAL_MEDIA", label: "Social Media" },
-                    { value: "TRADE_SHOW", label: "Trade Show" },
-                    { value: "PARTNER", label: "Partner" },
-                    { value: "OTHER", label: "Other" },
+                    { value: "WEBSITE", label: t`Website` },
+                    { value: "REFERRAL", label: t`Referral` },
+                    { value: "COLD_CALL", label: t`Cold Call` },
+                    { value: "EMAIL_CAMPAIGN", label: t`Email Campaign` },
+                    { value: "SOCIAL_MEDIA", label: t`Social Media` },
+                    { value: "TRADE_SHOW", label: t`Trade Show` },
+                    { value: "PARTNER", label: t`Partner` },
+                    { value: "OTHER", label: t`Other` },
                   ]}
                   value={selectedSource}
                   onChange={setSelectedSource}
@@ -360,16 +375,16 @@ export const LeadListPage: React.FC = () => {
                 />
 
                 <Select
-                  placeholder="Filter by stage"
+                  placeholder={t`Filter by stage`}
                   leftSection={<IconFilter size={16} />}
                   data={[
-                    { value: "New", label: "New" },
-                    { value: "Contacted", label: "Contacted" },
-                    { value: "Qualified", label: "Qualified" },
-                    { value: "Proposal", label: "Proposal" },
-                    { value: "Negotiation", label: "Negotiation" },
-                    { value: "Won", label: "Won" },
-                    { value: "Lost", label: "Lost" },
+                    { value: "New", label: t`New` },
+                    { value: "Contacted", label: t`Contacted` },
+                    { value: "Qualified", label: t`Qualified` },
+                    { value: "Proposal", label: t`Proposal` },
+                    { value: "Negotiation", label: t`Negotiation` },
+                    { value: "Won", label: t`Won` },
+                    { value: "Lost", label: t`Lost` },
                   ]}
                   value={selectedStage}
                   onChange={setSelectedStage}
@@ -379,7 +394,7 @@ export const LeadListPage: React.FC = () => {
                 />
 
                 <Select
-                  placeholder="Filter by assigned user"
+                  placeholder={t`Filter by assigned user`}
                   leftSection={<IconFilter size={16} />}
                   data={[
                     // TODO: Fetch from users API
@@ -394,7 +409,7 @@ export const LeadListPage: React.FC = () => {
                 />
 
                 {hasActiveFilters && (
-                  <Tooltip label="Clear all filters">
+                  <Tooltip label={t`Clear all filters`}>
                     <ActionIcon
                       variant="light"
                       color="red"
@@ -414,7 +429,7 @@ export const LeadListPage: React.FC = () => {
         <Drawer
           opened={filterDrawerOpened}
           onClose={closeFilterDrawer}
-          title="Filter Leads"
+          title={t`Filter Leads`}
           position="right"
           size="sm"
           padding="md"
@@ -426,13 +441,17 @@ export const LeadListPage: React.FC = () => {
         {selectedLeads.length > 0 && (
           <Paper p={isMobile ? "sm" : "md"} withBorder bg="blue.0">
             <Group justify="space-between" wrap={isMobile ? "wrap" : "nowrap"}>
-              <Text size="sm" fw={500} style={{ flex: isMobile ? "1 1 100%" : "auto" }}>
+              <Text
+                size="sm"
+                fw={500}
+                style={{ flex: isMobile ? "1 1 100%" : "auto" }}
+              >
                 {selectedLeads.length} lead(s) selected
               </Text>
               <Group gap="xs" style={{ flex: isMobile ? "1 1 100%" : "auto" }}>
-                <Button 
-                  size="xs" 
-                  variant="light" 
+                <Button
+                  size="xs"
+                  variant="light"
                   onClick={handleBulkQualify}
                   fullWidth={isMobile}
                 >
@@ -461,7 +480,11 @@ export const LeadListPage: React.FC = () => {
                   No leads found
                 </Text>
                 {hasActiveFilters ? (
-                  <Button variant="light" onClick={handleClearFilters} fullWidth={isMobile}>
+                  <Button
+                    variant="light"
+                    onClick={handleClearFilters}
+                    fullWidth={isMobile}
+                  >
                     Clear filters
                   </Button>
                 ) : (
@@ -478,7 +501,15 @@ export const LeadListPage: React.FC = () => {
               <div
                 key={lead.id}
                 onClick={() => handleLeadClick(lead.id)}
-                style={{ 
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleLeadClick(lead.id);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                style={{
                   cursor: "pointer",
                   // Touch-friendly tap target
                   minHeight: isMobile ? "44px" : "auto",
@@ -488,12 +519,16 @@ export const LeadListPage: React.FC = () => {
                   lead={lead}
                   variant={isMobile ? "compact" : "list"}
                   showQuickActions={!isMobile}
-                  onQuickActions={!isMobile ? {
-                    qualify: () => console.log("Qualify", lead.id),
-                    scheduleFollowUp: () =>
-                      console.log("Schedule follow-up", lead.id),
-                    viewDetails: () => handleLeadClick(lead.id),
-                  } : undefined}
+                  onQuickActions={
+                    !isMobile
+                      ? {
+                          qualify: () => console.log("Qualify", lead.id),
+                          scheduleFollowUp: () =>
+                            console.log("Schedule follow-up", lead.id),
+                          viewDetails: () => handleLeadClick(lead.id),
+                        }
+                      : undefined
+                  }
                 />
               </div>
             ))}

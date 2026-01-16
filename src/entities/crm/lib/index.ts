@@ -1,6 +1,6 @@
 /**
  * CRM Entity Library Exports
- * 
+ *
  * Centralized exports for CRM business logic and utilities
  */
 

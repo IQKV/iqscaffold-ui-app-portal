@@ -58,7 +58,10 @@ export function ConversionChart({
   return (
     <Stack gap={isMobile ? "md" : "lg"}>
       {/* Conversion Metrics Cards (Requirement 7.2, 12.5) */}
-      <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing={isMobile ? "xs" : "lg"}>
+      <SimpleGrid
+        cols={{ base: 1, sm: 2, lg: 3 }}
+        spacing={isMobile ? "xs" : "lg"}
+      >
         <MetricCard
           title={t`Conversion Rate`}
           value={`${metrics.conversionRate.toFixed(1)}%`}
@@ -86,7 +89,10 @@ export function ConversionChart({
       </SimpleGrid>
 
       {/* Stage Velocity Chart (Requirement 7.5, 12.5) */}
-      <StageVelocityChart stageVelocity={metrics.stageVelocity} isMobile={isMobile} />
+      <StageVelocityChart
+        stageVelocity={metrics.stageVelocity}
+        isMobile={isMobile}
+      />
     </Stack>
   );
 }
@@ -121,10 +127,20 @@ function MetricCard({
     >
       <Stack gap="xs">
         <Group justify="space-between" wrap="nowrap">
-          <Text size={isMobile ? "10px" : "xs"} c="dimmed" tt="uppercase" fw={700}>
+          <Text
+            size={isMobile ? "10px" : "xs"}
+            c="dimmed"
+            tt="uppercase"
+            fw={700}
+          >
             {title}
           </Text>
-          <ThemeIcon size={isMobile ? "md" : "lg"} radius="md" variant="light" color={color}>
+          <ThemeIcon
+            size={isMobile ? "md" : "lg"}
+            radius="md"
+            variant="light"
+            color={color}
+          >
             {icon}
           </ThemeIcon>
         </Group>
@@ -149,6 +165,29 @@ interface StageVelocityChartProps {
 }
 
 /**
+ * CustomTooltip for StageVelocityChart
+ * Shows detailed stage information on hover
+ */
+const StageVelocityTooltip = ({ active, payload, isMobile }: any) => {
+  if (active && payload && payload.length) {
+    const data = payload[0];
+    return (
+      <Paper p="xs" withBorder shadow="sm">
+        <Stack gap={4}>
+          <Text size={isMobile ? "xs" : "sm"} fw={600}>
+            {data.payload.stage}
+          </Text>
+          <Text size={isMobile ? "xs" : "sm"}>
+            {t`Average Time`}: {data.value} {t`days`}
+          </Text>
+        </Stack>
+      </Paper>
+    );
+  }
+  return null;
+};
+
+/**
  * StageVelocityChart - Line chart showing average time spent in each stage
  *
  * Features:
@@ -159,32 +198,15 @@ interface StageVelocityChartProps {
  *
  * Requirements: 7.5, 7.6, 12.5
  */
-function StageVelocityChart({ stageVelocity, isMobile = false }: StageVelocityChartProps) {
+function StageVelocityChart({
+  stageVelocity,
+  isMobile = false,
+}: StageVelocityChartProps) {
   // Transform data for chart
   const chartData = Object.entries(stageVelocity).map(([stage, days]) => ({
     stage,
     days: Number(days.toFixed(1)),
   }));
-
-  // Custom tooltip with detailed information (Requirement 7.6)
-  const CustomTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
-      const data = payload[0];
-      return (
-        <Paper p="xs" withBorder shadow="sm">
-          <Stack gap={4}>
-            <Text size={isMobile ? "xs" : "sm"} fw={600}>
-              {data.payload.stage}
-            </Text>
-            <Text size={isMobile ? "xs" : "sm"}>
-              {t`Average Time`}: {data.value} {t`days`}
-            </Text>
-          </Stack>
-        </Paper>
-      );
-    }
-    return null;
-  };
 
   return (
     <Card
@@ -197,7 +219,9 @@ function StageVelocityChart({ stageVelocity, isMobile = false }: StageVelocityCh
       <Stack gap={isMobile ? "xs" : "md"}>
         <Group gap="xs">
           <IconChartLine size={isMobile ? 16 : 20} />
-          <Title order={isMobile ? 5 : 4}>{t`Stage Velocity (Average Days per Stage)`}</Title>
+          <Title
+            order={isMobile ? 5 : 4}
+          >{t`Stage Velocity (Average Days per Stage)`}</Title>
         </Group>
 
         {chartData.length === 0 ? (
@@ -208,11 +232,11 @@ function StageVelocityChart({ stageVelocity, isMobile = false }: StageVelocityCh
           <ResponsiveContainer width="100%" height={isMobile ? 200 : 300}>
             <LineChart
               data={chartData}
-              margin={{ 
-                top: 20, 
-                right: isMobile ? 10 : 30, 
-                left: isMobile ? 0 : 20, 
-                bottom: isMobile ? 60 : 60 
+              margin={{
+                top: 20,
+                right: isMobile ? 10 : 30,
+                left: isMobile ? 0 : 20,
+                bottom: isMobile ? 60 : 60,
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />
@@ -225,14 +249,18 @@ function StageVelocityChart({ stageVelocity, isMobile = false }: StageVelocityCh
                 tick={{ fontSize: isMobile ? 10 : 12 }}
               />
               <YAxis
-                label={!isMobile ? {
-                  value: t`Days`,
-                  angle: -90,
-                  position: "insideLeft",
-                } : undefined}
+                label={
+                  !isMobile
+                    ? {
+                        value: t`Days`,
+                        angle: -90,
+                        position: "insideLeft",
+                      }
+                    : undefined
+                }
                 tick={{ fontSize: isMobile ? 10 : 12 }}
               />
-              <Tooltip content={<CustomTooltip />} />
+              <Tooltip content={<StageVelocityTooltip isMobile={isMobile} />} />
               {!isMobile && <Legend />}
               <Line
                 type="monotone"
@@ -249,7 +277,11 @@ function StageVelocityChart({ stageVelocity, isMobile = false }: StageVelocityCh
 
         {/* Summary statistics - simplified on mobile */}
         {chartData.length > 0 && (
-          <Group justify="space-around" mt={isMobile ? "xs" : "md"} wrap={isMobile ? "wrap" : "nowrap"}>
+          <Group
+            justify="space-around"
+            mt={isMobile ? "xs" : "md"}
+            wrap={isMobile ? "wrap" : "nowrap"}
+          >
             <Stack gap={2} align="center">
               <Text size={isMobile ? "10px" : "xs"} c="dimmed" tt="uppercase">
                 {t`Fastest Stage`}

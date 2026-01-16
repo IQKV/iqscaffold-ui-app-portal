@@ -38,7 +38,7 @@ import type { DashboardStatsParams } from "@/shared/api/crm/types";
  */
 export function CRMDashboard() {
   const isMobile = useMediaQuery("(max-width: 768px)");
-  
+
   // Date range state for filtering (Requirement 7.5)
   const [dateRange, setDateRange] = useState<DashboardStatsParams | undefined>(
     undefined
@@ -61,16 +61,33 @@ export function CRMDashboard() {
   const hasError = statsError || metricsError;
 
   return (
-    <Container size="xl" py={isMobile ? "sm" : "xl"} px={isMobile ? "xs" : "md"} data-testid="crm-dashboard">
+    <Container
+      size="xl"
+      py={isMobile ? "sm" : "xl"}
+      px={isMobile ? "xs" : "md"}
+      data-testid="crm-dashboard"
+    >
       <Stack gap={isMobile ? "md" : "xl"}>
         {/* Header with date range filter */}
-        <Group justify="space-between" align="center" wrap={isMobile ? "wrap" : "nowrap"}>
-          <Title order={isMobile ? 2 : 1} size={isMobile ? "h3" : "h1"} data-testid="crm-dashboard-title">
+        <Group
+          justify="space-between"
+          align="center"
+          wrap={isMobile ? "wrap" : "nowrap"}
+        >
+          <Title
+            order={isMobile ? 2 : 1}
+            size={isMobile ? "h3" : "h1"}
+            data-testid="crm-dashboard-title"
+          >
             {t`CRM Dashboard`}
           </Title>
 
           {/* Date range filtering (Requirement 7.5, 12.5) */}
-          <DateRangeFilter value={dateRange} onChange={setDateRange} isMobile={isMobile} />
+          <DateRangeFilter
+            value={dateRange}
+            onChange={setDateRange}
+            isMobile={isMobile}
+          />
         </Group>
 
         {/* Error state (Requirement 7.7) */}
@@ -104,7 +121,11 @@ export function CRMDashboard() {
             <FollowUpPanel />
 
             {/* Dashboard statistics cards and charts (Requirement 7.1-7.4, 12.5) */}
-            <DashboardStats stats={dashboardStats} dateRange={dateRange} isMobile={isMobile} />
+            <DashboardStats
+              stats={dashboardStats}
+              dateRange={dateRange}
+              isMobile={isMobile}
+            />
 
             {/* Conversion metrics and charts (Requirement 7.2, 7.5, 7.6, 12.5) */}
             <ConversionChart

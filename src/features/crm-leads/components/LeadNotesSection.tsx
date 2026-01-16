@@ -189,8 +189,8 @@ export const LeadNotesSection: React.FC<LeadNotesSectionProps> = ({
   // Render error state
   if (error) {
     return (
-      <Alert color="red" title="Error loading notes">
-        Failed to load notes. Please try again.
+      <Alert color="red" title={t`Error loading notes`}>
+        {t`Failed to load notes. Please try again.`}
       </Alert>
     );
   }
@@ -205,9 +205,9 @@ export const LeadNotesSection: React.FC<LeadNotesSectionProps> = ({
       {/* Create new note */}
       <Paper p="md" withBorder>
         <Stack gap="sm">
-          <Text fw={500}>Add Note</Text>
+          <Text fw={500}>{t`Add Note`}</Text>
           <Textarea
-            placeholder="Enter note content..."
+            placeholder={t`Enter note content...`}
             value={newNoteContent}
             onChange={(e) => setNewNoteContent(e.currentTarget.value)}
             minRows={3}
@@ -252,7 +252,7 @@ export const LeadNotesSection: React.FC<LeadNotesSectionProps> = ({
                       onClick={handleCancelEdit}
                       leftSection={<IconX size={14} />}
                     >
-                      Cancel
+                      {t`Cancel`}
                     </Button>
                     <Button
                       size="xs"
@@ -260,7 +260,7 @@ export const LeadNotesSection: React.FC<LeadNotesSectionProps> = ({
                       loading={updateNote.isPending}
                       leftSection={<IconCheck size={14} />}
                     >
-                      Save
+                      {t`Save`}
                     </Button>
                   </Group>
                 </Stack>
@@ -274,11 +274,11 @@ export const LeadNotesSection: React.FC<LeadNotesSectionProps> = ({
                       </Text>
                       <Text size="xs" c="dimmed">
                         {formatDate(note.createdAt)}
-                        {note.updatedAt !== note.createdAt && " (edited)"}
+                        {note.updatedAt !== note.createdAt && t` (edited)`}
                       </Text>
                     </div>
                     <Group gap="xs">
-                      <Tooltip label="Edit note">
+                      <Tooltip label={t`Edit note`}>
                         <ActionIcon
                           variant="subtle"
                           onClick={() => handleStartEdit(note)}
@@ -286,7 +286,7 @@ export const LeadNotesSection: React.FC<LeadNotesSectionProps> = ({
                           <IconEdit size={16} />
                         </ActionIcon>
                       </Tooltip>
-                      <Tooltip label="Delete note">
+                      <Tooltip label={t`Delete note`}>
                         <ActionIcon
                           variant="subtle"
                           color="red"

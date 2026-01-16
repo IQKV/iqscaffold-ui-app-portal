@@ -3,10 +3,10 @@ import { t } from "@lingui/core/macro";
 
 /**
  * CRM-specific validation schemas
- * 
+ *
  * This module provides reusable Zod validation schemas for CRM forms
  * following the existing platform patterns from auth.iqscaffold.com
- * 
+ *
  * Requirements: 11.1, 11.2, 11.3, 11.4
  */
 
@@ -91,7 +91,9 @@ export const createCRMValidationSchemas = () => ({
 });
 
 // Lazy initialization proxy for validation schemas
-let _crmValidationSchemas: ReturnType<typeof createCRMValidationSchemas> | null = null;
+let _crmValidationSchemas: ReturnType<
+  typeof createCRMValidationSchemas
+> | null = null;
 
 export const crmValidationSchemas = new Proxy(
   {} as ReturnType<typeof createCRMValidationSchemas>,
@@ -136,7 +138,9 @@ export const createFollowUpFormSchema = () => {
   });
 };
 
-export type FollowUpFormData = z.infer<ReturnType<typeof createFollowUpFormSchema>>;
+export type FollowUpFormData = z.infer<
+  ReturnType<typeof createFollowUpFormSchema>
+>;
 
 /**
  * Note form schema
@@ -178,7 +182,9 @@ export const isToday = (date: Date): boolean => {
 /**
  * Utility to format validation errors for display
  */
-export const formatValidationError = (error: z.ZodError): Record<string, string> => {
+export const formatValidationError = (
+  error: z.ZodError
+): Record<string, string> => {
   const errors: Record<string, string> = {};
   error.errors.forEach((err) => {
     const path = err.path.join(".");
@@ -196,7 +202,8 @@ export const isDuplicateEmailError = (error: any): boolean => {
   return (
     errorMessage.toLowerCase().includes("duplicate") ||
     errorMessage.toLowerCase().includes("already exists") ||
-    errorMessage.toLowerCase().includes("email") && errorMessage.toLowerCase().includes("taken")
+    (errorMessage.toLowerCase().includes("email") &&
+      errorMessage.toLowerCase().includes("taken"))
   );
 };
 

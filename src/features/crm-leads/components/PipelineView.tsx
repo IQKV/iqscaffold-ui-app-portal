@@ -114,8 +114,10 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
   // Move lead mutation
   const { mutate: moveLeadToStage, isPending: isMoving } = useMoveLeadToStage();
 
-  // Extract leads from paginated response
-  const leads = leadsResponse?.content || [];
+  // Extract leads from paginated response - memoized to prevent dependency issues
+  const leads = useMemo(() => {
+    return leadsResponse?.content || [];
+  }, [leadsResponse?.content]);
 
   // Group leads by stage
   const leadsByStage = useMemo(() => {
@@ -247,12 +249,12 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
       <Container size="lg" py="xl">
         <Alert
           icon={<IconAlertCircle size={16} />}
-          title="Error Loading Pipeline"
+          title={t`Error Loading Pipeline`}
           color="red"
         >
           {stagesError?.message ||
             leadsError?.message ||
-            "Failed to load pipeline data"}
+            t`Failed to load pipeline data`}
         </Alert>
       </Container>
     );
@@ -264,19 +266,19 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
       <Container size="lg" py="xl">
         <Alert
           icon={<IconAlertCircle size={16} />}
-          title="No Pipeline Stages"
+          title={t`No Pipeline Stages`}
           color="blue"
         >
-          Please configure pipeline stages to start using the kanban view.
+          {t`Please configure pipeline stages to start using the kanban view.`}
         </Alert>
       </Container>
     );
   }
 
   return (
-    <Container 
-      size="100%" 
-      px={isMobile ? "xs" : "md"} 
+    <Container
+      size="100%"
+      px={isMobile ? "xs" : "md"}
       py={isMobile ? "sm" : "lg"}
       style={{ maxWidth: "100vw" }}
     >
@@ -311,12 +313,12 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
         )}
 
         {/* Pipeline Kanban Board */}
-        <DndContext 
-          onDragStart={handleDragStart} 
+        <DndContext
+          onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
           sensors={sensors}
         >
-          <ScrollArea 
+          <ScrollArea
             type="auto"
             styles={{
               viewport: {
@@ -329,8 +331,8 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
               align="flex-start"
               gap={isMobile ? "xs" : "md"}
               wrap="nowrap"
-              style={{ 
-                minWidth: "max-content", 
+              style={{
+                minWidth: "max-content",
                 paddingBottom: 16,
                 // Touch-friendly spacing
                 paddingRight: isMobile ? 8 : 0,

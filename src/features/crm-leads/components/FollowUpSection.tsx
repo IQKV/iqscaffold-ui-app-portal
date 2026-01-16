@@ -111,9 +111,10 @@ export function FollowUpSection({ leadId }: FollowUpSectionProps) {
         color: "green",
       });
     } catch (error: any) {
+      const errorMessage = error?.message || "Unknown error";
       notifications.show({
         title: t`Error`,
-        message: t`Failed to complete follow-up: ${error?.message || "Unknown error"}`,
+        message: t`Failed to complete follow-up: ${errorMessage}`,
         color: "red",
       });
     }
@@ -139,9 +140,10 @@ export function FollowUpSection({ leadId }: FollowUpSectionProps) {
             color: "green",
           });
         } catch (error: any) {
+          const errorMessage = error?.message || "Unknown error";
           notifications.show({
             title: t`Error`,
-            message: t`Failed to delete follow-up: ${error?.message || "Unknown error"}`,
+            message: t`Failed to delete follow-up: ${errorMessage}`,
             color: "red",
           });
         }

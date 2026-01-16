@@ -169,7 +169,7 @@ export const PipelineStageColumn: React.FC<PipelineStageColumnProps> = ({
                 <Box
                   key={lead.id}
                   onClick={() => onLeadClick(lead)}
-                  style={{ 
+                  style={{
                     cursor: "pointer",
                     // Touch-friendly tap target
                     minHeight: isMobile ? "44px" : "auto",

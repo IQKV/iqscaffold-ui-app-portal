@@ -150,9 +150,10 @@ export function FollowUpList() {
         color: "green",
       });
     } catch (error: any) {
+      const errorMessage = error?.message || "Unknown error";
       notifications.show({
         title: t`Error`,
-        message: t`Failed to complete follow-up: ${error?.message || "Unknown error"}`,
+        message: t`Failed to complete follow-up: ${errorMessage}`,
         color: "red",
       });
     }
@@ -184,9 +185,10 @@ export function FollowUpList() {
             return newSet;
           });
         } catch (error: any) {
+          const errorMessage = error?.message || "Unknown error";
           notifications.show({
             title: t`Error`,
-            message: t`Failed to delete follow-up: ${error?.message || "Unknown error"}`,
+            message: t`Failed to delete follow-up: ${errorMessage}`,
             color: "red",
           });
         }
@@ -240,11 +242,12 @@ export function FollowUpList() {
       return;
     }
 
+    const count = selectedIds.length;
     modals.openConfirmModal({
       title: t`Complete Selected Follow-ups`,
       children: (
         <Text size="sm">
-          {t`Are you sure you want to mark ${selectedIds.length} follow-up(s) as complete?`}
+          {t`Are you sure you want to mark ${count} follow-up(s) as complete?`}
         </Text>
       ),
       labels: { confirm: t`Complete`, cancel: t`Cancel` },
@@ -254,9 +257,10 @@ export function FollowUpList() {
           await Promise.all(
             selectedIds.map((id) => completeFollowUpMutation.mutateAsync(id))
           );
+          const completedCount = selectedIds.length;
           notifications.show({
             title: t`Success`,
-            message: t`${selectedIds.length} follow-up(s) marked as complete`,
+            message: t`${completedCount} follow-up(s) marked as complete`,
             color: "green",
           });
           setSelectedFollowUps(new Set());
@@ -278,11 +282,12 @@ export function FollowUpList() {
       return;
     }
 
+    const count = selectedIds.length;
     modals.openConfirmModal({
       title: t`Delete Selected Follow-ups`,
       children: (
         <Text size="sm">
-          {t`Are you sure you want to delete ${selectedIds.length} follow-up(s)? This action cannot be undone.`}
+          {t`Are you sure you want to delete ${count} follow-up(s)? This action cannot be undone.`}
         </Text>
       ),
       labels: { confirm: t`Delete`, cancel: t`Cancel` },
@@ -292,9 +297,10 @@ export function FollowUpList() {
           await Promise.all(
             selectedIds.map((id) => deleteFollowUpMutation.mutateAsync(id))
           );
+          const deletedCount = selectedIds.length;
           notifications.show({
             title: t`Success`,
-            message: t`${selectedIds.length} follow-up(s) deleted successfully`,
+            message: t`${deletedCount} follow-up(s) deleted successfully`,
             color: "green",
           });
           setSelectedFollowUps(new Set());
@@ -376,7 +382,7 @@ export function FollowUpList() {
                 <Divider />
                 <Group justify="space-between">
                   <Text size="sm" c="dimmed">
-                    {t`${selectedFollowUps.size} selected`}
+                    {selectedFollowUps.size} {t`selected`}
                   </Text>
                   <Group gap="xs">
                     <Button

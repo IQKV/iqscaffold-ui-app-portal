@@ -1,16 +1,19 @@
 import { useState, useCallback } from "react";
 import { notifications } from "@mantine/notifications";
 import { t } from "@lingui/core/macro";
-import { isDuplicateEmailError, getDuplicateEmailMessage } from "./validation-schemas";
+import {
+  isDuplicateEmailError,
+  getDuplicateEmailMessage,
+} from "./validation-schemas";
 
 /**
  * Form submission state management hook
- * 
+ *
  * Provides consistent handling of form submission states including:
  * - Loading states during submission (Requirement 11.5)
  * - Success notifications and form closure (Requirement 11.6)
  * - Error message display and form persistence (Requirement 11.7)
- * 
+ *
  * Requirements: 11.5, 11.6, 11.7
  */
 
@@ -32,7 +35,7 @@ export interface FormSubmissionState {
 
 /**
  * Hook for managing form submission states
- * 
+ *
  * Usage:
  * ```tsx
  * const { submit, isSubmitting, isSuccess, isError } = useFormSubmission({
@@ -102,7 +105,7 @@ export function useFormSubmission<TData = any, TResult = any>({
 
         // Determine error message
         let displayMessage = errorMessage || t`An error occurred`;
-        
+
         // Check for duplicate email error (Requirement 11.3)
         if (isDuplicateEmailError(error)) {
           displayMessage = getDuplicateEmailMessage();
@@ -188,7 +191,7 @@ export function showSuccessNotification(message: string, title?: string) {
  */
 export function showErrorNotification(error: any, context?: string) {
   const message = handleFormError(error, context);
-  
+
   notifications.show({
     title: t`Error`,
     message,

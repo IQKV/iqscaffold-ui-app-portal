@@ -67,15 +67,15 @@ export const PipelineMetrics: React.FC<PipelineMetricsProps> = ({
       <Stack gap="md">
         <Group justify="space-between">
           <Text size="lg" fw={600}>
-            Pipeline Metrics
+            {t`Pipeline Metrics`}
           </Text>
-          <Tooltip label="Pipeline health based on active leads percentage">
+          <Tooltip label={t`Pipeline health based on active leads percentage`}>
             <Badge
               size="lg"
               color={getHealthColor(healthScore)}
               leftSection={<IconTarget size={16} />}
             >
-              Health: {healthScore}%
+              {t`Health`}: {healthScore}%
             </Badge>
           </Tooltip>
         </Group>

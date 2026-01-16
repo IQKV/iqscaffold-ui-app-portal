@@ -99,15 +99,15 @@ export const LeadDetailPage: React.FC = () => {
   if (error || !lead) {
     return (
       <Container size="xl" py="xl">
-        <Alert color="red" title="Error loading lead">
+        <Alert color="red" title={t`Error loading lead`}>
           <Stack gap="sm">
             <Text>
               {error
-                ? "Failed to load lead details. Please try again."
-                : "Lead not found."}
+                ? t`Failed to load lead details. Please try again.`
+                : t`Lead not found.`}
             </Text>
             <Button onClick={handleBack} variant="light">
-              Back to Leads
+              {t`Back to Leads`}
             </Button>
           </Stack>
         </Alert>
@@ -194,12 +194,12 @@ export const LeadDetailPage: React.FC = () => {
               <LeadSourceBadge source={lead.source} />
               {lead.isQualified && (
                 <Badge color="green" variant="light">
-                  Qualified
+                  {t`Qualified`}
                 </Badge>
               )}
               {lead.isOverdue && (
                 <Badge color="red" variant="filled">
-                  Overdue
+                  {t`Overdue`}
                 </Badge>
               )}
             </Group>
@@ -209,7 +209,7 @@ export const LeadDetailPage: React.FC = () => {
               {lead.assignedToName && (
                 <Box>
                   <Text size="xs" c="dimmed">
-                    Assigned to
+                    {t`Assigned to`}
                   </Text>
                   <Text size="sm" fw={500}>
                     {lead.assignedToName}
@@ -233,7 +233,7 @@ export const LeadDetailPage: React.FC = () => {
               {lead.nextFollowUpDate && (
                 <Box>
                   <Text size="xs" c="dimmed">
-                    Next Follow-up
+                    {t`Next Follow-up`}
                   </Text>
                   <Text size="sm">{formatDate(lead.nextFollowUpDate)}</Text>
                 </Box>
@@ -248,21 +248,21 @@ export const LeadDetailPage: React.FC = () => {
                 onClick={handleQualifyLead}
                 disabled={lead.isQualified}
               >
-                {lead.isQualified ? "Qualified" : "Qualify Lead"}
+                {lead.isQualified ? t`Qualified` : t`Qualify Lead`}
               </Button>
               <Button
                 leftSection={<IconUserCheck size={16} />}
                 variant="light"
                 onClick={handleConvertLead}
               >
-                Convert to Contact
+                {t`Convert to Contact`}
               </Button>
               <Button
                 leftSection={<IconEdit size={16} />}
                 variant="outline"
                 onClick={handleEditLead}
               >
-                Edit Lead
+                {t`Edit Lead`}
               </Button>
             </Group>
           </Stack>
@@ -271,10 +271,10 @@ export const LeadDetailPage: React.FC = () => {
         {/* Tabbed content */}
         <Tabs value={activeTab} onChange={setActiveTab}>
           <Tabs.List>
-            <Tabs.Tab value="overview">Overview</Tabs.Tab>
-            <Tabs.Tab value="notes">Notes</Tabs.Tab>
-            <Tabs.Tab value="activities">Activities</Tabs.Tab>
-            <Tabs.Tab value="follow-ups">Follow-ups</Tabs.Tab>
+            <Tabs.Tab value="overview">{t`Overview`}</Tabs.Tab>
+            <Tabs.Tab value="notes">{t`Notes`}</Tabs.Tab>
+            <Tabs.Tab value="activities">{t`Activities`}</Tabs.Tab>
+            <Tabs.Tab value="follow-ups">{t`Follow-ups`}</Tabs.Tab>
           </Tabs.List>
 
           <Box mt="md">

@@ -76,9 +76,10 @@ export function FollowUpPanel() {
         color: "green",
       });
     } catch (error: any) {
+      const errorMessage = error?.message || "Unknown error";
       notifications.show({
         title: t`Error`,
-        message: t`Failed to complete follow-up: ${error?.message || "Unknown error"}`,
+        message: t`Failed to complete follow-up: ${errorMessage}`,
         color: "red",
       });
     }

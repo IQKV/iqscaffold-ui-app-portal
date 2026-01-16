@@ -78,6 +78,7 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
     } else {
       form.reset();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lead, opened]);
 
   const handleSubmit = (values: LeadFormData) => {

@@ -140,8 +140,8 @@ export const ActivityTimeline: React.FC<ActivityTimelineProps> = ({
   // Render error state
   if (error) {
     return (
-      <Alert color="red" title="Error loading activities">
-        Failed to load activity history. Please try again.
+      <Alert color="red" title={t`Error loading activities`}>
+        {t`Failed to load activity history. Please try again.`}
       </Alert>
     );
   }

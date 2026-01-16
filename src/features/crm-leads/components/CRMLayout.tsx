@@ -169,7 +169,7 @@ export function CRMLayout({
 
   // Mobile bottom navigation
   const renderBottomNav = () => {
-    if (!isMobile) return null;
+    if (!isMobile) {return null;}
 
     return (
       <Box
@@ -242,8 +242,8 @@ export function CRMLayout({
         </Drawer>
       )}
 
-      <Container 
-        size="xl" 
+      <Container
+        size="xl"
         py={isMobile ? "xs" : "md"}
         // Add bottom padding for mobile bottom nav
         pb={isMobile ? "80px" : "md"}
@@ -257,10 +257,10 @@ export function CRMLayout({
                   opened={mobileNavOpened}
                   onClick={toggleMobileNav}
                   size="sm"
-                  aria-label="Toggle navigation"
+                  aria-label={t`Toggle navigation`}
                 />
                 <Text fw={600} size="lg">
-                  {title || "CRM"}
+                  {title || t`CRM`}
                 </Text>
               </Group>
             </Group>
@@ -295,9 +295,9 @@ export function CRMLayout({
           )}
 
           {/* Page Content */}
-          <Paper 
-            shadow={isMobile ? "none" : "xs"} 
-            p={isMobile ? 0 : "md"} 
+          <Paper
+            shadow={isMobile ? "none" : "xs"}
+            p={isMobile ? 0 : "md"}
             radius={isMobile ? 0 : "md"}
             withBorder={!isMobile}
           >

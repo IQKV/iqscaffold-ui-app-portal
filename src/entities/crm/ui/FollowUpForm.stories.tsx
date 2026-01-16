@@ -36,37 +36,53 @@ const mockSubmit = async (data: any) => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
 };
 
+// Wrapper component for stories with state
+const FormWrapper = ({
+  children,
+  buttonText = "Schedule Follow-up",
+  buttonColor,
+}: {
+  children: (opened: boolean, setOpened: (opened: boolean) => void) => React.ReactNode;
+  buttonText?: string;
+  buttonColor?: string;
+}) => {
+  const [opened, setOpened] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpened(true)} color={buttonColor}>
+        {buttonText}
+      </Button>
+      {children(opened, setOpened)}
+    </>
+  );
+};
+
 /**
  * Create Mode - Empty form for scheduling a new follow-up
  */
 export const CreateMode: Story = {
-  render: () => {
-    const [opened, setOpened] = useState(false);
-
-    return (
-      <>
-        <Button onClick={() => setOpened(true)}>Schedule Follow-up</Button>
+  render: () => (
+    <FormWrapper>
+      {(opened, setOpened) => (
         <FollowUpForm
           opened={opened}
           onClose={() => setOpened(false)}
           leadId="lead-123"
           onSubmit={mockSubmit}
         />
-      </>
-    );
-  },
+      )}
+    </FormWrapper>
+  ),
 };
 
 /**
  * Edit Mode - Pre-populated form for editing an existing follow-up
  */
 export const EditMode: Story = {
-  render: () => {
-    const [opened, setOpened] = useState(false);
-
-    return (
-      <>
-        <Button onClick={() => setOpened(true)}>Edit Follow-up</Button>
+  render: () => (
+    <FormWrapper buttonText="Edit Follow-up">
+      {(opened, setOpened) => (
         <FollowUpForm
           opened={opened}
           onClose={() => setOpened(false)}
@@ -74,9 +90,9 @@ export const EditMode: Story = {
           followUp={mockFollowUp}
           onSubmit={mockSubmit}
         />
-      </>
-    );
-  },
+      )}
+    </FormWrapper>
+  ),
 };
 
 /**
@@ -84,25 +100,23 @@ export const EditMode: Story = {
  */
 export const WithPastDate: Story = {
   render: () => {
-    const [opened, setOpened] = useState(false);
     const pastFollowUp: FollowUp = {
       ...mockFollowUp,
       dueDate: "2024-01-01T10:00:00Z", // Past date
     };
 
     return (
-      <>
-        <Button onClick={() => setOpened(true)}>
-          Edit Follow-up (Past Date)
-        </Button>
-        <FollowUpForm
-          opened={opened}
-          onClose={() => setOpened(false)}
-          leadId="lead-123"
-          followUp={pastFollowUp}
-          onSubmit={mockSubmit}
-        />
-      </>
+      <FormWrapper buttonText="Edit Follow-up (Past Date)">
+        {(opened, setOpened) => (
+          <FollowUpForm
+            opened={opened}
+            onClose={() => setOpened(false)}
+            leadId="lead-123"
+            followUp={pastFollowUp}
+            onSubmit={mockSubmit}
+          />
+        )}
+      </FormWrapper>
     );
   },
 };
@@ -111,12 +125,9 @@ export const WithPastDate: Story = {
  * Loading State - Form with loading indicator
  */
 export const LoadingState: Story = {
-  render: () => {
-    const [opened, setOpened] = useState(false);
-
-    return (
-      <>
-        <Button onClick={() => setOpened(true)}>Schedule Follow-up</Button>
+  render: () => (
+    <FormWrapper>
+      {(opened, setOpened) => (
         <FollowUpForm
           opened={opened}
           onClose={() => setOpened(false)}
@@ -124,9 +135,9 @@ export const LoadingState: Story = {
           onSubmit={mockSubmit}
           isLoading
         />
-      </>
-    );
-  },
+      )}
+    </FormWrapper>
+  ),
 };
 
 /**
@@ -134,7 +145,6 @@ export const LoadingState: Story = {
  */
 export const HighPriorityCall: Story = {
   render: () => {
-    const [opened, setOpened] = useState(false);
     const urgentFollowUp: FollowUp = {
       ...mockFollowUp,
       description: "Urgent: CEO wants to discuss contract terms",
@@ -144,18 +154,17 @@ export const HighPriorityCall: Story = {
     };
 
     return (
-      <>
-        <Button onClick={() => setOpened(true)} color="red">
-          Urgent Call Follow-up
-        </Button>
-        <FollowUpForm
-          opened={opened}
-          onClose={() => setOpened(false)}
-          leadId="lead-123"
-          followUp={urgentFollowUp}
-          onSubmit={mockSubmit}
-        />
-      </>
+      <FormWrapper buttonText="Urgent Call Follow-up" buttonColor="red">
+        {(opened, setOpened) => (
+          <FollowUpForm
+            opened={opened}
+            onClose={() => setOpened(false)}
+            leadId="lead-123"
+            followUp={urgentFollowUp}
+            onSubmit={mockSubmit}
+          />
+        )}
+      </FormWrapper>
     );
   },
 };
@@ -165,7 +174,6 @@ export const HighPriorityCall: Story = {
  */
 export const MeetingFollowUp: Story = {
   render: () => {
-    const [opened, setOpened] = useState(false);
     const meetingFollowUp: FollowUp = {
       ...mockFollowUp,
       description: "Schedule product demo meeting with decision makers",
@@ -175,16 +183,17 @@ export const MeetingFollowUp: Story = {
     };
 
     return (
-      <>
-        <Button onClick={() => setOpened(true)}>Schedule Meeting</Button>
-        <FollowUpForm
-          opened={opened}
-          onClose={() => setOpened(false)}
-          leadId="lead-123"
-          followUp={meetingFollowUp}
-          onSubmit={mockSubmit}
-        />
-      </>
+      <FormWrapper buttonText="Schedule Meeting">
+        {(opened, setOpened) => (
+          <FollowUpForm
+            opened={opened}
+            onClose={() => setOpened(false)}
+            leadId="lead-123"
+            followUp={meetingFollowUp}
+            onSubmit={mockSubmit}
+          />
+        )}
+      </FormWrapper>
     );
   },
 };
@@ -194,7 +203,6 @@ export const MeetingFollowUp: Story = {
  */
 export const EmailFollowUp: Story = {
   render: () => {
-    const [opened, setOpened] = useState(false);
     const emailFollowUp: FollowUp = {
       ...mockFollowUp,
       description: "Send pricing proposal and case studies",
@@ -204,16 +212,17 @@ export const EmailFollowUp: Story = {
     };
 
     return (
-      <>
-        <Button onClick={() => setOpened(true)}>Schedule Email</Button>
-        <FollowUpForm
-          opened={opened}
-          onClose={() => setOpened(false)}
-          leadId="lead-123"
-          followUp={emailFollowUp}
-          onSubmit={mockSubmit}
-        />
-      </>
+      <FormWrapper buttonText="Schedule Email">
+        {(opened, setOpened) => (
+          <FollowUpForm
+            opened={opened}
+            onClose={() => setOpened(false)}
+            leadId="lead-123"
+            followUp={emailFollowUp}
+            onSubmit={mockSubmit}
+          />
+        )}
+      </FormWrapper>
     );
   },
 };
@@ -223,7 +232,6 @@ export const EmailFollowUp: Story = {
  */
 export const TaskFollowUp: Story = {
   render: () => {
-    const [opened, setOpened] = useState(false);
     const taskFollowUp: FollowUp = {
       ...mockFollowUp,
       description: "Research competitor pricing and prepare comparison",
@@ -233,16 +241,17 @@ export const TaskFollowUp: Story = {
     };
 
     return (
-      <>
-        <Button onClick={() => setOpened(true)}>Create Task</Button>
-        <FollowUpForm
-          opened={opened}
-          onClose={() => setOpened(false)}
-          leadId="lead-123"
-          followUp={taskFollowUp}
-          onSubmit={mockSubmit}
-        />
-      </>
+      <FormWrapper buttonText="Create Task">
+        {(opened, setOpened) => (
+          <FollowUpForm
+            opened={opened}
+            onClose={() => setOpened(false)}
+            leadId="lead-123"
+            followUp={taskFollowUp}
+            onSubmit={mockSubmit}
+          />
+        )}
+      </FormWrapper>
     );
   },
 };

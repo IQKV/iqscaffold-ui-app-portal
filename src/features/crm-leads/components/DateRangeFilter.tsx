@@ -23,7 +23,11 @@ interface DateRangeFilterProps {
  *
  * Requirements: 7.5, 12.5
  */
-export function DateRangeFilter({ value, onChange, isMobile = false }: DateRangeFilterProps) {
+export function DateRangeFilter({
+  value,
+  onChange,
+  isMobile = false,
+}: DateRangeFilterProps) {
   const [opened, setOpened] = useState(false);
   const [startDate, setStartDate] = useState<Date | null>(
     value?.startDate ? new Date(value.startDate) : null
@@ -93,7 +97,9 @@ export function DateRangeFilter({ value, onChange, isMobile = false }: DateRange
       <Popover.Target>
         <Button
           leftSection={<IconCalendar size={isMobile ? 14 : 16} />}
-          rightSection={hasDateRange ? <IconX size={isMobile ? 12 : 14} /> : undefined}
+          rightSection={
+            hasDateRange ? <IconX size={isMobile ? 12 : 14} /> : undefined
+          }
           variant={hasDateRange ? "filled" : "light"}
           onClick={() => setOpened(!opened)}
           data-testid="date-range-filter-button"
@@ -101,17 +107,20 @@ export function DateRangeFilter({ value, onChange, isMobile = false }: DateRange
           fullWidth={isMobile}
         >
           {hasDateRange
-            ? isMobile 
+            ? isMobile
               ? t`Date Range`
               : `${value.startDate} - ${value.endDate}`
             : isMobile
-            ? t`Filter`
-            : t`Select Date Range`}
+              ? t`Filter`
+              : t`Select Date Range`}
         </Button>
       </Popover.Target>
 
       <Popover.Dropdown>
-        <Stack gap={isMobile ? "sm" : "md"} style={{ minWidth: isMobile ? "auto" : 300 }}>
+        <Stack
+          gap={isMobile ? "sm" : "md"}
+          style={{ minWidth: isMobile ? "auto" : 300 }}
+        >
           <Text size="sm" fw={600}>
             {t`Filter by Date Range`}
           </Text>
@@ -122,9 +131,9 @@ export function DateRangeFilter({ value, onChange, isMobile = false }: DateRange
               {t`Quick Select`}
             </Text>
             <Group gap="xs" wrap={isMobile ? "wrap" : "nowrap"}>
-              <Button 
-                size="xs" 
-                variant="light" 
+              <Button
+                size="xs"
+                variant="light"
                 onClick={() => handlePreset(7)}
                 fullWidth={isMobile}
               >
