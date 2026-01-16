@@ -64,6 +64,9 @@ export const Other: Story = {
 };
 
 export const AllSources: Story = {
+  args: {
+    source: "WEBSITE",
+  },
   render: () => {
     const sources: LeadSource[] = [
       "WEBSITE",
@@ -92,6 +95,9 @@ export const AllSources: Story = {
 };
 
 export const Sizes: Story = {
+  args: {
+    source: "WEBSITE",
+  },
   render: () => (
     <Stack gap="md">
       <div>
@@ -129,6 +135,9 @@ export const Sizes: Story = {
 };
 
 export const InContext: Story = {
+  args: {
+    source: "WEBSITE",
+  },
   render: () => (
     <Stack gap="lg">
       <div>

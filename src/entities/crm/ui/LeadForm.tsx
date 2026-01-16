@@ -59,7 +59,7 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
     createLeadMutation.isPending || updateLeadMutation.isPending;
 
   // Focus trap for modal
-  useFocusTrap(modalRef, opened);
+  useFocusTrap(modalRef as any, opened);
 
   const form = useForm<LeadFormData>({
     validate: zodResolver(createLeadFormSchema()),

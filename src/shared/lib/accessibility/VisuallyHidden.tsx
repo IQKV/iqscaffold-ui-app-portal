@@ -9,7 +9,7 @@ import React from "react";
 
 interface VisuallyHiddenProps {
   children: React.ReactNode;
-  as?: keyof JSX.IntrinsicElements;
+  as?: React.ElementType;
 }
 
 export const VisuallyHidden: React.FC<VisuallyHiddenProps> = ({

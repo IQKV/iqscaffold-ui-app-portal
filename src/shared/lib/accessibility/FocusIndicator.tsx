@@ -15,7 +15,7 @@ import {
 
 interface FocusIndicatorProps {
   children: React.ReactNode;
-  as?: keyof JSX.IntrinsicElements;
+  as?: React.ElementType;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -31,10 +31,10 @@ export const FocusIndicator: React.FC<FocusIndicatorProps> = ({
 
   return (
     <Box
-      component={Component}
+      component={Component as any}
       className={className}
       style={style}
-      sx={(theme) => ({
+      sx={(theme: any) => ({
         "&:focus-visible": focusStyle,
         // Ensure focus is visible in high contrast mode
         ...(highContrast && {

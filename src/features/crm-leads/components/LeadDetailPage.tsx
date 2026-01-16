@@ -24,6 +24,7 @@ import {
   IconPhone,
   IconBuilding,
 } from "@tabler/icons-react";
+import { t } from "@lingui/macro";
 import { useNavigate, useParams } from "@tanstack/react-router";
 import { useLead } from "@/entities/crm/api/crm-queries";
 import { LeadNotesSection } from "./LeadNotesSection";

@@ -102,12 +102,12 @@ export const LeadCard: React.FC<LeadCardProps> = ({
         shadow="xs"
         padding="xs"
         data-testid="lead-card"
-        tabIndex={tabIndex}
         onKeyDown={onKeyDown}
-        role="article"
         aria-label={ariaLabel}
         {...attributes}
         {...listeners}
+        tabIndex={tabIndex}
+        role="article"
       >
         <Group justify="space-between" wrap="nowrap">
           <Box style={{ flex: 1, minWidth: 0 }}>
@@ -139,12 +139,12 @@ export const LeadCard: React.FC<LeadCardProps> = ({
         shadow="sm"
         padding="md"
         data-testid="lead-card"
-        tabIndex={tabIndex}
         onKeyDown={onKeyDown}
-        role="article"
         aria-label={ariaLabel}
         {...attributes}
         {...listeners}
+        tabIndex={tabIndex}
+        role="article"
       >
         <Stack gap="xs">
           {/* Lead name and stage */}
@@ -229,12 +229,12 @@ export const LeadCard: React.FC<LeadCardProps> = ({
       shadow="sm"
       padding="md"
       data-testid="lead-card"
-      tabIndex={tabIndex}
       onKeyDown={onKeyDown}
-      role="article"
       aria-label={ariaLabel}
       {...attributes}
       {...listeners}
+      tabIndex={tabIndex}
+      role="article"
     >
       <Stack gap="xs">
         {/* Lead name and stage */}

@@ -314,10 +314,6 @@ export const LeadListPage: React.FC = () => {
     );
   }
 
-  const leads = data?.content || [];
-  const totalPages = data?.totalPages || 0;
-  const totalElements = data?.totalElements || 0;
-
   // Render filter controls - extracted for reuse in drawer
   const renderFilterControls = () => (
     <Stack gap="md">

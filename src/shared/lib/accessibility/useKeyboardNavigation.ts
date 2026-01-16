@@ -228,34 +228,3 @@ export const CRM_KEYBOARD_SHORTCUTS = {
     description: "Deselect All",
   },
 };
-
-/**
- * Common keyboard shortcuts for CRM features
- */
-export const CRM_KEYBOARD_SHORTCUTS = {
-  // Navigation shortcuts
-  GOTO_LEADS: { key: "l", ctrl: true, description: "Go to Leads" },
-  GOTO_PIPELINE: { key: "p", ctrl: true, description: "Go to Pipeline" },
-  GOTO_DASHBOARD: { key: "d", ctrl: true, description: "Go to Dashboard" },
-  GOTO_FOLLOWUPS: { key: "f", ctrl: true, description: "Go to Follow-ups" },
-
-  // Action shortcuts
-  CREATE_LEAD: { key: "n", ctrl: true, description: "Create New Lead" },
-  SEARCH: { key: "k", ctrl: true, description: "Focus Search" },
-  SAVE: { key: "s", ctrl: true, description: "Save" },
-  CANCEL: { key: "Escape", description: "Cancel/Close" },
-
-  // List navigation
-  NEXT_ITEM: { key: "j", description: "Next Item" },
-  PREV_ITEM: { key: "k", description: "Previous Item" },
-  SELECT_ITEM: { key: "Enter", description: "Select Item" },
-
-  // Bulk actions
-  SELECT_ALL: { key: "a", ctrl: true, description: "Select All" },
-  DESELECT_ALL: {
-    key: "a",
-    ctrl: true,
-    shift: true,
-    description: "Deselect All",
-  },
-};

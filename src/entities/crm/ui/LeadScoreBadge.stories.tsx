@@ -33,6 +33,9 @@ export const LowQuality: Story = {
 };
 
 export const EdgeCases: Story = {
+  args: {
+    score: 0,
+  },
   render: () => (
     <Stack gap="md">
       <div>
@@ -76,6 +79,9 @@ export const EdgeCases: Story = {
 };
 
 export const Sizes: Story = {
+  args: {
+    score: 75,
+  },
   render: () => (
     <Stack gap="md">
       <div>

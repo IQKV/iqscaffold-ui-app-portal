@@ -21,6 +21,7 @@ import {
   IconStar,
   IconUserCheck,
 } from "@tabler/icons-react";
+import { t } from "@lingui/macro";
 import { useLeadActivities } from "@/entities/crm/api/crm-queries";
 import { ActivityLogEntry, ActivityType } from "@/shared/api/crm/types";
 

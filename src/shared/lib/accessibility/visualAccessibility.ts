@@ -279,6 +279,3 @@ export function useAccessibilityPreferences() {
 
   return preferences;
 }
-
-// Import React for the hook
-import React from "react";
