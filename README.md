@@ -89,6 +89,7 @@ Modern React Application with Feature-Sliced Design Architecture
 ### Core Features Implemented
 
 - **Dashboard & Analytics** - Statistics visualization with trend indicators and KPIs
+- **CRM Workspace** - Leads list, Kanban pipeline, follow-ups management, and CRM dashboard
 - **User Management** - Complete CRUD operations with pagination, search, and role-based access
 - **Security Settings** - Password change, multi-device session management, and logout functionality
 - **Email Verification** - Email status checking and verification workflow
@@ -191,8 +192,8 @@ pnpm dev
 # Start dev server with hot reload
 pnpm dev
 
-# Run tests in watch mode
-pnpm test:watch
+# Run unit tests
+pnpm test
 
 # Check code quality
 pnpm lint
@@ -240,8 +241,8 @@ After creating your project from this template, you'll want to customize it:
 
 #### 4. Customize Template Content (Optional)
 
-- [ ] Update the home page content in `src/routes/index.tsx`
-- [ ] Customize the about page in `src/routes/about.tsx`
+- [ ] Update the home page content in `src/pages/index.tsx`
+- [ ] Customize the about page in `src/pages/about.tsx`
 - [ ] Remove template-specific Storybook stories
 
 #### 5. Set Up CI/CD
