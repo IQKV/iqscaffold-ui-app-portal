@@ -2,38 +2,17 @@ import { useEffect } from "react";
 import { Modal, Button, Group, Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { zodResolver } from "mantine-form-zod-resolver";
-import { z } from "zod";
 import { t } from "@lingui/core/macro";
 import { FormField } from "@/shared/ui";
 import type { Lead, LeadSource } from "@/shared/api/crm/types";
 import { useCreateLead, useUpdateLead } from "../api/crm-queries";
 import { notifications } from "@mantine/notifications";
-
-// Validation schema for lead form
-const createLeadFormSchema = () =>
-  z.object({
-    name: z.string().min(2, t`Name must be at least 2 characters`),
-    email: z.string().email(t`Invalid email address`),
-    phone: z.string().optional(),
-    company: z.string().optional(),
-    source: z.enum(
-      [
-        "WEBSITE",
-        "REFERRAL",
-        "COLD_CALL",
-        "EMAIL_CAMPAIGN",
-        "SOCIAL_MEDIA",
-        "TRADE_SHOW",
-        "PARTNER",
-        "OTHER",
-      ] as const,
-      {
-        errorMap: () => ({ message: t`Please select a lead source` }),
-      }
-    ),
-  });
-
-type LeadFormData = z.infer<ReturnType<typeof createLeadFormSchema>>;
+import {
+  createLeadFormSchema,
+  type LeadFormData,
+  isDuplicateEmailError,
+  getDuplicateEmailMessage,
+} from "../lib/validation-schemas";
 
 interface LeadFormProps {
   opened: boolean;
@@ -128,14 +107,11 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
             // Handle duplicate email error (Requirement 11.3)
             const errorMessage =
               error?.response?.data?.message || error.message;
-            const isDuplicateEmail =
-              errorMessage.toLowerCase().includes("duplicate") ||
-              errorMessage.toLowerCase().includes("already exists");
 
             notifications.show({
               title: t`Error`,
-              message: isDuplicateEmail
-                ? t`A lead with this email already exists`
+              message: isDuplicateEmailError(error)
+                ? getDuplicateEmailMessage()
                 : t`Failed to update lead: ${errorMessage}`,
               color: "red",
             });
@@ -165,14 +141,11 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
             // Handle duplicate email error (Requirement 11.3)
             const errorMessage =
               error?.response?.data?.message || error.message;
-            const isDuplicateEmail =
-              errorMessage.toLowerCase().includes("duplicate") ||
-              errorMessage.toLowerCase().includes("already exists");
 
             notifications.show({
               title: t`Error`,
-              message: isDuplicateEmail
-                ? t`A lead with this email already exists`
+              message: isDuplicateEmailError(error)
+                ? getDuplicateEmailMessage()
                 : t`Failed to create lead: ${errorMessage}`,
               color: "red",
             });

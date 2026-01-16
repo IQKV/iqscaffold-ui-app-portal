@@ -8,8 +8,8 @@ import {
   Paper,
 } from "@mantine/core";
 import { Link, useLocation } from "@tanstack/react-router";
-import { ErrorBoundary, DefaultErrorFallback } from "@/shared/ui/error-boundary";
 import { t } from "@lingui/core/macro";
+import { CRMErrorBoundary } from "./CRMErrorBoundary";
 
 export interface CRMLayoutProps {
   children: React.ReactNode;
@@ -78,16 +78,7 @@ export function CRMLayout({
   }, [location.pathname]);
 
   return (
-    <ErrorBoundary
-      fallback={CRMErrorFallback}
-      onError={(error, errorInfo) => {
-        // Track CRM-specific errors
-        console.error("CRM Error:", error, errorInfo);
-        // You can add analytics tracking here
-      }}
-      showReportButton={true}
-      showTechnicalDetails={process.env.NODE_ENV === "development"}
-    >
+    <CRMErrorBoundary>
       <Container size="xl" py="md">
         <Stack gap="lg">
           {/* Breadcrumb Navigation */}
@@ -124,35 +115,6 @@ export function CRMLayout({
           </Paper>
         </Stack>
       </Container>
-    </ErrorBoundary>
-  );
-}
-
-/**
- * CRM-specific error fallback component
- *
- * Provides business-specific error handling and recovery options
- * for CRM features.
- */
-function CRMErrorFallback({
-  error,
-  resetError,
-  showReportButton,
-  showTechnicalDetails,
-}: {
-  error: Error;
-  resetError: () => void;
-  showReportButton?: boolean;
-  showTechnicalDetails?: boolean;
-}) {
-  return (
-    <Container size="sm" py="xl">
-      <DefaultErrorFallback
-        error={error}
-        resetError={resetError}
-        showReportButton={showReportButton}
-        showTechnicalDetails={showTechnicalDetails}
-      />
-    </Container>
+    </CRMErrorBoundary>
   );
 }

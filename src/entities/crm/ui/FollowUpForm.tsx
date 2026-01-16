@@ -2,32 +2,16 @@ import { useEffect } from "react";
 import { Modal, Button, Group, Stack, Alert } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { zodResolver } from "mantine-form-zod-resolver";
-import { z } from "zod";
 import { t } from "@lingui/core/macro";
 import { FormField } from "@/shared/ui";
 import type { FollowUp } from "@/shared/api/crm/types";
 import { notifications } from "@mantine/notifications";
 import { IconAlertCircle } from "@tabler/icons-react";
-
-// Validation schema for follow-up form
-const createFollowUpFormSchema = () =>
-  z.object({
-    description: z
-      .string()
-      .min(3, t`Description must be at least 3 characters`),
-    dueDate: z.date({
-      required_error: t`Due date is required`,
-      invalid_type_error: t`Invalid date`,
-    }),
-    priority: z.enum(["LOW", "MEDIUM", "HIGH"] as const, {
-      errorMap: () => ({ message: t`Please select a priority` }),
-    }),
-    type: z.enum(["CALL", "EMAIL", "MEETING", "TASK"] as const, {
-      errorMap: () => ({ message: t`Please select a follow-up type` }),
-    }),
-  });
-
-type FollowUpFormData = z.infer<ReturnType<typeof createFollowUpFormSchema>>;
+import {
+  createFollowUpFormSchema,
+  type FollowUpFormData,
+  isPastDate,
+} from "../lib/validation-schemas";
 
 interface FollowUpFormProps {
   opened: boolean;
@@ -109,7 +93,7 @@ export function FollowUpForm({
   }, [followUp, opened]);
 
   // Check if the selected date is in the past (Requirement 11.4)
-  const isPastDate = form.values.dueDate && form.values.dueDate < new Date();
+  const isPastDateSelected = form.values.dueDate && isPastDate(form.values.dueDate);
 
   const handleSubmit = async (values: FollowUpFormData) => {
     try {
@@ -184,7 +168,7 @@ export function FollowUpForm({
           />
 
           {/* Past date warning (Requirement 11.4) */}
-          {isPastDate && (
+          {isPastDateSelected && (
             <Alert
               icon={<IconAlertCircle size={16} />}
               title={t`Past Date Selected`}

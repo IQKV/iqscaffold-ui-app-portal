@@ -12,3 +12,4 @@ export * from "./components/DashboardStats";
 export * from "./components/ConversionChart";
 export * from "./components/DateRangeFilter";
 export * from "./components/CRMLayout";
+export * from "./components/CRMErrorBoundary";
