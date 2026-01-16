@@ -8,16 +8,23 @@ import {
   Center,
   Text,
   Alert,
+  Box,
 } from "@mantine/core";
 import {
   DndContext,
   DragEndEvent,
   DragOverlay,
   DragStartEvent,
+  TouchSensor,
+  MouseSensor,
+  useSensor,
+  useSensors,
+  PointerSensor,
 } from "@dnd-kit/core";
 import { IconAlertCircle } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
 import { notifications } from "@mantine/notifications";
+import { useMediaQuery } from "@mantine/hooks";
 import { PipelineStageColumn } from "./PipelineStageColumn";
 import { PipelineMetrics } from "./PipelineMetrics";
 import { LeadCard } from "@/entities/crm/ui";
@@ -44,11 +51,13 @@ interface PipelineViewProps {
  * - Horizontal scrollable stage columns
  * - Pipeline metrics header with conversion rates
  * - Drag-and-drop lead movement between stages
+ * - Touch-friendly drag and drop for mobile/tablet
  * - Optimistic updates for better UX
  * - Automatic activity logging on stage changes
  * - Visual emphasis for overdue leads
+ * - Responsive design with mobile optimization
  *
- * Requirements: 3.1, 3.2, 3.3, 3.4, 3.7
+ * Requirements: 3.1, 3.2, 3.3, 3.4, 3.7, 12.2, 12.4
  */
 export const PipelineView: React.FC<PipelineViewProps> = ({
   showConversionMetrics = true,
@@ -57,6 +66,33 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
 }) => {
   const navigate = useNavigate();
   const [activeId, setActiveId] = useState<string | null>(null);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isTablet = useMediaQuery("(max-width: 1024px)");
+
+  // Configure sensors for touch and mouse support
+  // Touch sensor with activation constraint to prevent accidental drags
+  const touchSensor = useSensor(TouchSensor, {
+    activationConstraint: {
+      delay: 250, // 250ms delay before drag starts
+      tolerance: 5, // 5px movement tolerance
+    },
+  });
+
+  // Mouse sensor for desktop
+  const mouseSensor = useSensor(MouseSensor, {
+    activationConstraint: {
+      distance: 10, // 10px movement before drag starts
+    },
+  });
+
+  // Pointer sensor as fallback
+  const pointerSensor = useSensor(PointerSensor, {
+    activationConstraint: {
+      distance: 8,
+    },
+  });
+
+  const sensors = useSensors(mouseSensor, touchSensor, pointerSensor);
 
   // Fetch pipeline stages
   const {
@@ -238,10 +274,15 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
   }
 
   return (
-    <Container size="100%" px="md" py="lg">
-      <Stack gap="lg">
+    <Container 
+      size="100%" 
+      px={isMobile ? "xs" : "md"} 
+      py={isMobile ? "sm" : "lg"}
+      style={{ maxWidth: "100vw" }}
+    >
+      <Stack gap={isMobile ? "md" : "lg"}>
         {/* Pipeline Metrics Header */}
-        {showConversionMetrics && (
+        {showConversionMetrics && !isMobile && (
           <PipelineMetrics
             stages={stages.map((stage) => ({
               ...stage,
@@ -253,14 +294,47 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
           />
         )}
 
+        {/* Mobile: Simplified metrics */}
+        {showConversionMetrics && isMobile && (
+          <Box>
+            <Text size="sm" fw={500} mb="xs">
+              Pipeline Overview
+            </Text>
+            <Group gap="xs">
+              {stages.slice(0, 3).map((stage) => (
+                <Text key={stage.id} size="xs" c="dimmed">
+                  {stage.name}: {leadsByStage[stage.id]?.length || 0}
+                </Text>
+              ))}
+            </Group>
+          </Box>
+        )}
+
         {/* Pipeline Kanban Board */}
-        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-          <ScrollArea>
+        <DndContext 
+          onDragStart={handleDragStart} 
+          onDragEnd={handleDragEnd}
+          sensors={sensors}
+        >
+          <ScrollArea 
+            type="auto"
+            styles={{
+              viewport: {
+                // Ensure smooth scrolling on mobile
+                WebkitOverflowScrolling: "touch",
+              },
+            }}
+          >
             <Group
               align="flex-start"
-              gap="md"
+              gap={isMobile ? "xs" : "md"}
               wrap="nowrap"
-              style={{ minWidth: "max-content", paddingBottom: 16 }}
+              style={{ 
+                minWidth: "max-content", 
+                paddingBottom: 16,
+                // Touch-friendly spacing
+                paddingRight: isMobile ? 8 : 0,
+              }}
             >
               {stages
                 .sort((a, b) => a.orderIndex - b.orderIndex)
@@ -273,19 +347,29 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
                     onLeadClick={handleLeadClick}
                     highlightOverdue={highlightOverdueLeads}
                     isMoving={isMoving}
+                    isMobile={isMobile}
                   />
                 ))}
             </Group>
           </ScrollArea>
 
           {/* Drag Overlay - shows the dragged lead card */}
-          <DragOverlay>
+          <DragOverlay dropAnimation={null}>
             {activeLead ? (
-              <LeadCard
-                lead={activeLead}
-                variant="kanban"
-                showQuickActions={false}
-              />
+              <Box
+                style={{
+                  // Make drag overlay more visible
+                  opacity: 0.9,
+                  transform: "rotate(3deg)",
+                  cursor: "grabbing",
+                }}
+              >
+                <LeadCard
+                  lead={activeLead}
+                  variant={isMobile ? "compact" : "kanban"}
+                  showQuickActions={false}
+                />
+              </Box>
             ) : null}
           </DragOverlay>
         </DndContext>

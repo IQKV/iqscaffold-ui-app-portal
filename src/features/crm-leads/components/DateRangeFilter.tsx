@@ -8,6 +8,7 @@ import type { DashboardStatsParams } from "@/shared/api/crm/types";
 interface DateRangeFilterProps {
   value?: DashboardStatsParams;
   onChange: (value: DashboardStatsParams | undefined) => void;
+  isMobile?: boolean;
 }
 
 /**
@@ -17,10 +18,12 @@ interface DateRangeFilterProps {
  * - Date range picker with start and end dates
  * - Quick preset options (Last 7 days, Last 30 days, etc.)
  * - Clear filter option
+ * - Touch-friendly date selection for mobile
+ * - Responsive popover positioning
  *
- * Requirements: 7.5
+ * Requirements: 7.5, 12.5
  */
-export function DateRangeFilter({ value, onChange }: DateRangeFilterProps) {
+export function DateRangeFilter({ value, onChange, isMobile = false }: DateRangeFilterProps) {
   const [opened, setOpened] = useState(false);
   const [startDate, setStartDate] = useState<Date | null>(
     value?.startDate ? new Date(value.startDate) : null
@@ -85,23 +88,30 @@ export function DateRangeFilter({ value, onChange }: DateRangeFilterProps) {
       onChange={setOpened}
       position="bottom-end"
       withArrow
+      width={isMobile ? "90vw" : "auto"}
     >
       <Popover.Target>
         <Button
-          leftSection={<IconCalendar size={16} />}
-          rightSection={hasDateRange ? <IconX size={14} /> : undefined}
+          leftSection={<IconCalendar size={isMobile ? 14 : 16} />}
+          rightSection={hasDateRange ? <IconX size={isMobile ? 12 : 14} /> : undefined}
           variant={hasDateRange ? "filled" : "light"}
           onClick={() => setOpened(!opened)}
           data-testid="date-range-filter-button"
+          size={isMobile ? "xs" : "sm"}
+          fullWidth={isMobile}
         >
           {hasDateRange
-            ? `${value.startDate} - ${value.endDate}`
+            ? isMobile 
+              ? t`Date Range`
+              : `${value.startDate} - ${value.endDate}`
+            : isMobile
+            ? t`Filter`
             : t`Select Date Range`}
         </Button>
       </Popover.Target>
 
       <Popover.Dropdown>
-        <Stack gap="md" style={{ minWidth: 300 }}>
+        <Stack gap={isMobile ? "sm" : "md"} style={{ minWidth: isMobile ? "auto" : 300 }}>
           <Text size="sm" fw={600}>
             {t`Filter by Date Range`}
           </Text>
@@ -111,14 +121,20 @@ export function DateRangeFilter({ value, onChange }: DateRangeFilterProps) {
             <Text size="xs" c="dimmed">
               {t`Quick Select`}
             </Text>
-            <Group gap="xs">
-              <Button size="xs" variant="light" onClick={() => handlePreset(7)}>
+            <Group gap="xs" wrap={isMobile ? "wrap" : "nowrap"}>
+              <Button 
+                size="xs" 
+                variant="light" 
+                onClick={() => handlePreset(7)}
+                fullWidth={isMobile}
+              >
                 {t`Last 7 days`}
               </Button>
               <Button
                 size="xs"
                 variant="light"
                 onClick={() => handlePreset(30)}
+                fullWidth={isMobile}
               >
                 {t`Last 30 days`}
               </Button>
@@ -126,6 +142,7 @@ export function DateRangeFilter({ value, onChange }: DateRangeFilterProps) {
                 size="xs"
                 variant="light"
                 onClick={() => handlePreset(90)}
+                fullWidth={isMobile}
               >
                 {t`Last 90 days`}
               </Button>
@@ -144,6 +161,12 @@ export function DateRangeFilter({ value, onChange }: DateRangeFilterProps) {
               onChange={handleStartDateChange}
               maxDate={endDate || new Date()}
               size="sm"
+              styles={{
+                input: {
+                  fontSize: isMobile ? "14px" : "16px",
+                  minHeight: isMobile ? "40px" : "36px",
+                },
+              }}
             />
             <DateInput
               label={t`End Date`}
@@ -153,6 +176,12 @@ export function DateRangeFilter({ value, onChange }: DateRangeFilterProps) {
               minDate={startDate || undefined}
               maxDate={new Date()}
               size="sm"
+              styles={{
+                input: {
+                  fontSize: isMobile ? "14px" : "16px",
+                  minHeight: isMobile ? "40px" : "36px",
+                },
+              }}
             />
           </Stack>
 
@@ -164,6 +193,7 @@ export function DateRangeFilter({ value, onChange }: DateRangeFilterProps) {
               color="gray"
               onClick={handleClear}
               leftSection={<IconX size={14} />}
+              fullWidth={isMobile}
             >
               {t`Clear`}
             </Button>
@@ -171,6 +201,7 @@ export function DateRangeFilter({ value, onChange }: DateRangeFilterProps) {
               size="sm"
               onClick={handleApply}
               disabled={!startDate || !endDate}
+              fullWidth={isMobile}
             >
               {t`Apply`}
             </Button>

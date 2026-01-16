@@ -38,6 +38,7 @@ import type {
 interface DashboardStatsProps {
   stats: DashboardStatsType;
   dateRange?: DashboardStatsParams;
+  isMobile?: boolean;
 }
 
 /**
@@ -47,47 +48,53 @@ interface DashboardStatsProps {
  * - Pipeline stage distribution chart (Requirement 7.1)
  * - Lead source pie chart with tooltips (Requirement 7.4, 7.6)
  * - Conversion metrics and KPI cards (Requirement 7.2, 7.3)
+ * - Mobile-optimized stacked layout (Requirement 12.5)
+ * - Simplified metrics display for mobile
  *
- * Requirements: 7.1, 7.2, 7.3, 7.4, 7.6
+ * Requirements: 7.1, 7.2, 7.3, 7.4, 7.6, 12.5
  */
-export function DashboardStats({ stats, dateRange }: DashboardStatsProps) {
+export function DashboardStats({ stats, dateRange, isMobile = false }: DashboardStatsProps) {
   return (
-    <Stack gap="xl">
-      {/* KPI Cards (Requirement 7.3) */}
-      <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }} spacing="lg">
+    <Stack gap={isMobile ? "md" : "xl"}>
+      {/* KPI Cards (Requirement 7.3, 12.5) */}
+      <SimpleGrid cols={{ base: 2, sm: 2, lg: 4 }} spacing={isMobile ? "xs" : "lg"}>
         <KPICard
           title={t`Total Leads`}
           value={stats.totalLeads}
-          icon={<IconUsers size={24} />}
+          icon={<IconUsers size={isMobile ? 20 : 24} />}
           color="blue"
+          isMobile={isMobile}
         />
         <KPICard
           title={t`Active Leads`}
           value={stats.activeLeads}
-          icon={<IconUserCheck size={24} />}
+          icon={<IconUserCheck size={isMobile ? 20 : 24} />}
           color="cyan"
+          isMobile={isMobile}
         />
         <KPICard
           title={t`Won Leads`}
           value={stats.wonLeads}
-          icon={<IconTrophy size={24} />}
+          icon={<IconTrophy size={isMobile ? 20 : 24} />}
           color="green"
+          isMobile={isMobile}
         />
         <KPICard
           title={t`Lost Leads`}
           value={stats.lostLeads}
-          icon={<IconX size={24} />}
+          icon={<IconX size={isMobile ? 20 : 24} />}
           color="red"
+          isMobile={isMobile}
         />
       </SimpleGrid>
 
-      {/* Charts */}
-      <SimpleGrid cols={{ base: 1, lg: 2 }} spacing="lg">
+      {/* Charts - Stacked on mobile (Requirement 12.5) */}
+      <SimpleGrid cols={{ base: 1, lg: 2 }} spacing={isMobile ? "md" : "lg"}>
         {/* Pipeline Stage Distribution Chart (Requirement 7.1) */}
-        <PipelineStageChart leadsByStage={stats.leadsByStage} />
+        <PipelineStageChart leadsByStage={stats.leadsByStage} isMobile={isMobile} />
 
         {/* Lead Source Pie Chart (Requirement 7.4) */}
-        <LeadSourceChart leadsBySource={stats.leadsBySource} />
+        <LeadSourceChart leadsBySource={stats.leadsBySource} isMobile={isMobile} />
       </SimpleGrid>
     </Stack>
   );
@@ -98,33 +105,35 @@ interface KPICardProps {
   value: number;
   icon: React.ReactNode;
   color: string;
+  isMobile?: boolean;
 }
 
 /**
  * KPICard - Key Performance Indicator card
  * Displays a single metric with an icon and color
+ * Mobile-optimized with smaller padding and text
  */
-function KPICard({ title, value, icon, color }: KPICardProps) {
+function KPICard({ title, value, icon, color, isMobile = false }: KPICardProps) {
   return (
     <Paper
-      p="md"
+      p={isMobile ? "xs" : "md"}
       withBorder
       data-testid={`kpi-card-${title.toLowerCase().replace(/\s+/g, "-")}`}
     >
-      <Group justify="space-between">
-        <Stack gap={4}>
-          <Text size="xs" c="dimmed" tt="uppercase" fw={700}>
+      <Group justify="space-between" wrap="nowrap">
+        <Stack gap={2}>
+          <Text size={isMobile ? "10px" : "xs"} c="dimmed" tt="uppercase" fw={700}>
             {title}
           </Text>
           <Text
-            size="xl"
+            size={isMobile ? "lg" : "xl"}
             fw={700}
             data-testid={`kpi-value-${title.toLowerCase().replace(/\s+/g, "-")}`}
           >
             {value.toLocaleString()}
           </Text>
         </Stack>
-        <ThemeIcon size="xl" radius="md" variant="light" color={color}>
+        <ThemeIcon size={isMobile ? "lg" : "xl"} radius="md" variant="light" color={color}>
           {icon}
         </ThemeIcon>
       </Group>
@@ -134,6 +143,7 @@ function KPICard({ title, value, icon, color }: KPICardProps) {
 
 interface PipelineStageChartProps {
   leadsByStage: Record<string, number>;
+  isMobile?: boolean;
 }
 
 /**
@@ -143,10 +153,11 @@ interface PipelineStageChartProps {
  * - Bar chart visualization of leads per stage
  * - Tooltips with detailed values (Requirement 7.6)
  * - Color-coded bars for visual clarity
+ * - Mobile-optimized with smaller height and rotated labels
  *
- * Requirements: 7.1, 7.6
+ * Requirements: 7.1, 7.6, 12.5
  */
-function PipelineStageChart({ leadsByStage }: PipelineStageChartProps) {
+function PipelineStageChart({ leadsByStage, isMobile = false }: PipelineStageChartProps) {
   // Transform data for chart
   const chartData = Object.entries(leadsByStage).map(([stage, count]) => ({
     stage,
@@ -159,15 +170,15 @@ function PipelineStageChart({ leadsByStage }: PipelineStageChartProps) {
   return (
     <Card
       shadow="sm"
-      padding="lg"
+      padding={isMobile ? "sm" : "lg"}
       radius="md"
       withBorder
       data-testid="pipeline-stage-chart"
     >
-      <Stack gap="md">
+      <Stack gap={isMobile ? "xs" : "md"}>
         <Group gap="xs">
-          <IconChartBar size={20} />
-          <Title order={4}>{t`Leads by Pipeline Stage`}</Title>
+          <IconChartBar size={isMobile ? 16 : 20} />
+          <Title order={isMobile ? 5 : 4}>{t`Leads by Pipeline Stage`}</Title>
         </Group>
 
         {chartData.length === 0 ? (
@@ -175,25 +186,32 @@ function PipelineStageChart({ leadsByStage }: PipelineStageChartProps) {
             {t`No pipeline data available`}
           </Text>
         ) : (
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={isMobile ? 200 : 300}>
             <BarChart
               data={chartData}
-              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+              margin={{ 
+                top: 20, 
+                right: isMobile ? 10 : 30, 
+                left: isMobile ? 0 : 20, 
+                bottom: isMobile ? 60 : 5 
+              }}
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
                 dataKey="stage"
                 angle={-45}
                 textAnchor="end"
-                height={100}
+                height={isMobile ? 80 : 100}
                 interval={0}
+                tick={{ fontSize: isMobile ? 10 : 12 }}
               />
-              <YAxis />
+              <YAxis tick={{ fontSize: isMobile ? 10 : 12 }} />
               <Tooltip
                 contentStyle={{
                   backgroundColor: "white",
                   border: "1px solid #e0e0e0",
                   borderRadius: "4px",
+                  fontSize: isMobile ? "12px" : "14px",
                 }}
                 formatter={(value: number | undefined) => [
                   value ?? 0,
@@ -218,6 +236,7 @@ function PipelineStageChart({ leadsByStage }: PipelineStageChartProps) {
 
 interface LeadSourceChartProps {
   leadsBySource: Record<string, number>;
+  isMobile?: boolean;
 }
 
 /**
@@ -228,10 +247,11 @@ interface LeadSourceChartProps {
  * - Tooltips with detailed values and percentages (Requirement 7.6)
  * - Legend for source identification
  * - Color-coded segments
+ * - Mobile-optimized with smaller size and simplified labels
  *
- * Requirements: 7.4, 7.6
+ * Requirements: 7.4, 7.6, 12.5
  */
-function LeadSourceChart({ leadsBySource }: LeadSourceChartProps) {
+function LeadSourceChart({ leadsBySource, isMobile = false }: LeadSourceChartProps) {
   // Transform data for chart
   const chartData = Object.entries(leadsBySource).map(([source, count]) => ({
     name: source,
@@ -262,13 +282,13 @@ function LeadSourceChart({ leadsBySource }: LeadSourceChartProps) {
       return (
         <Paper p="xs" withBorder shadow="sm">
           <Stack gap={4}>
-            <Text size="sm" fw={600}>
+            <Text size={isMobile ? "xs" : "sm"} fw={600}>
               {data.name}
             </Text>
-            <Text size="sm">
+            <Text size={isMobile ? "xs" : "sm"}>
               {t`Leads`}: {data.value}
             </Text>
-            <Text size="sm" c="dimmed">
+            <Text size={isMobile ? "xs" : "sm"} c="dimmed">
               {percentage}%
             </Text>
           </Stack>
@@ -281,15 +301,15 @@ function LeadSourceChart({ leadsBySource }: LeadSourceChartProps) {
   return (
     <Card
       shadow="sm"
-      padding="lg"
+      padding={isMobile ? "sm" : "lg"}
       radius="md"
       withBorder
       data-testid="lead-source-chart"
     >
-      <Stack gap="md">
+      <Stack gap={isMobile ? "xs" : "md"}>
         <Group gap="xs">
-          <IconChartPie size={20} />
-          <Title order={4}>{t`Leads by Source`}</Title>
+          <IconChartPie size={isMobile ? 16 : 20} />
+          <Title order={isMobile ? 5 : 4}>{t`Leads by Source`}</Title>
         </Group>
 
         {chartData.length === 0 ? (
@@ -297,17 +317,17 @@ function LeadSourceChart({ leadsBySource }: LeadSourceChartProps) {
             {t`No source data available`}
           </Text>
         ) : (
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={isMobile ? 200 : 300}>
             <PieChart>
               <Pie
                 data={chartData}
                 cx="50%"
                 cy="50%"
                 labelLine={false}
-                label={({ name, percent }) =>
+                label={isMobile ? false : ({ name, percent }) =>
                   `${name} (${((percent ?? 0) * 100).toFixed(0)}%)`
                 }
-                outerRadius={80}
+                outerRadius={isMobile ? 60 : 80}
                 fill="#8884d8"
                 dataKey="value"
               >
@@ -319,7 +339,7 @@ function LeadSourceChart({ leadsBySource }: LeadSourceChartProps) {
                 ))}
               </Pie>
               <Tooltip content={<CustomTooltip />} />
-              <Legend />
+              {!isMobile && <Legend wrapperStyle={{ fontSize: "12px" }} />}
             </PieChart>
           </ResponsiveContainer>
         )}

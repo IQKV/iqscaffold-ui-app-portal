@@ -20,6 +20,7 @@ interface PipelineStageColumnProps {
   onLeadClick: (lead: Lead) => void;
   highlightOverdue?: boolean;
   isMoving?: boolean;
+  isMobile?: boolean;
 }
 
 /**
@@ -34,8 +35,9 @@ interface PipelineStageColumnProps {
  * - Empty state when no leads
  * - Loading state during operations
  * - Visual emphasis for overdue leads
+ * - Responsive design with mobile optimization
  *
- * Requirements: 3.2, 3.5, 3.6
+ * Requirements: 3.2, 3.5, 3.6, 12.2
  */
 export const PipelineStageColumn: React.FC<PipelineStageColumnProps> = ({
   stage,
@@ -44,6 +46,7 @@ export const PipelineStageColumn: React.FC<PipelineStageColumnProps> = ({
   onLeadClick,
   highlightOverdue = true,
   isMoving = false,
+  isMobile = false,
 }) => {
   // Set up droppable area for this stage
   const { setNodeRef, isOver } = useDroppable({
@@ -68,31 +71,33 @@ export const PipelineStageColumn: React.FC<PipelineStageColumnProps> = ({
   return (
     <Box
       style={{
-        minWidth: 320,
-        maxWidth: 320,
+        minWidth: isMobile ? 280 : 320,
+        maxWidth: isMobile ? 280 : 320,
         height: "100%",
       }}
     >
-      <Stack gap="md" style={{ height: "100%" }}>
+      <Stack gap={isMobile ? "sm" : "md"} style={{ height: "100%" }}>
         {/* Stage Header */}
         <Card
           shadow="sm"
-          padding="md"
+          padding={isMobile ? "sm" : "md"}
           radius="md"
           withBorder
           style={{
             backgroundColor: isOver ? "#f0f0f0" : "white",
             borderColor: stage.color,
             borderWidth: 2,
+            // Touch-friendly header
+            minHeight: isMobile ? "60px" : "auto",
           }}
         >
           <Stack gap="xs">
             <Group justify="space-between" wrap="nowrap">
-              <Text fw={600} size="md" truncate>
+              <Text fw={600} size={isMobile ? "sm" : "md"} truncate>
                 {stage.name}
               </Text>
               <Badge
-                size="lg"
+                size={isMobile ? "md" : "lg"}
                 variant="filled"
                 style={{ backgroundColor: stage.color }}
               >
@@ -100,8 +105,8 @@ export const PipelineStageColumn: React.FC<PipelineStageColumnProps> = ({
               </Badge>
             </Group>
 
-            {/* Stage Metrics */}
-            {(conversionRate || avgTime) && (
+            {/* Stage Metrics - hide on mobile to save space */}
+            {!isMobile && (conversionRate || avgTime) && (
               <Group gap="xs">
                 {conversionRate && (
                   <Badge variant="light" size="sm" color="green">
@@ -118,7 +123,7 @@ export const PipelineStageColumn: React.FC<PipelineStageColumnProps> = ({
 
             {/* Overdue indicator */}
             {overdueLeads.length > 0 && (
-              <Badge variant="filled" size="sm" color="red">
+              <Badge variant="filled" size="xs" color="red">
                 {overdueLeads.length} overdue
               </Badge>
             )}
@@ -130,13 +135,15 @@ export const PipelineStageColumn: React.FC<PipelineStageColumnProps> = ({
           ref={setNodeRef}
           style={{
             flex: 1,
-            minHeight: 200,
-            padding: 8,
+            minHeight: isMobile ? 150 : 200,
+            padding: isMobile ? 4 : 8,
             borderRadius: 8,
             backgroundColor: isOver ? "#e7f5ff" : "#f8f9fa",
             border: isOver ? "2px dashed #228be6" : "2px dashed transparent",
             transition: "all 0.2s ease",
             overflowY: "auto",
+            // Smooth scrolling on mobile
+            WebkitOverflowScrolling: "touch",
           }}
         >
           {/* Loading State */}
@@ -149,24 +156,28 @@ export const PipelineStageColumn: React.FC<PipelineStageColumnProps> = ({
           {/* Empty State */}
           {!isMoving && leads.length === 0 && (
             <Center py="xl">
-              <Text size="sm" c="dimmed">
-                No leads in this stage
+              <Text size={isMobile ? "xs" : "sm"} c="dimmed">
+                No leads
               </Text>
             </Center>
           )}
 
           {/* Lead Cards */}
           {!isMoving && leads.length > 0 && (
-            <Stack gap="md">
+            <Stack gap={isMobile ? "xs" : "md"}>
               {leads.map((lead) => (
                 <Box
                   key={lead.id}
                   onClick={() => onLeadClick(lead)}
-                  style={{ cursor: "pointer" }}
+                  style={{ 
+                    cursor: "pointer",
+                    // Touch-friendly tap target
+                    minHeight: isMobile ? "44px" : "auto",
+                  }}
                 >
                   <LeadCard
                     lead={lead}
-                    variant="kanban"
+                    variant={isMobile ? "compact" : "kanban"}
                     draggable
                     showQuickActions={false}
                   />

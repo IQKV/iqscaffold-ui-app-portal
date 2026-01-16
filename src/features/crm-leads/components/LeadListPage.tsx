@@ -15,6 +15,8 @@ import {
   Center,
   Alert,
   MultiSelect,
+  Drawer,
+  Collapse,
 } from "@mantine/core";
 import {
   IconSearch,
@@ -22,12 +24,13 @@ import {
   IconDownload,
   IconFilter,
   IconX,
+  IconAdjustments,
 } from "@tabler/icons-react";
 import { useLeads } from "@/entities/crm/api/crm-queries";
 import { LeadCard } from "@/entities/crm/ui";
 import { LeadListParams, LeadSource } from "@/shared/api/crm/types";
 import { useNavigate } from "@tanstack/react-router";
-import { useDebouncedValue } from "@mantine/hooks";
+import { useDebouncedValue, useMediaQuery, useDisclosure } from "@mantine/hooks";
 
 /**
  * LeadListPage Component
@@ -37,11 +40,18 @@ import { useDebouncedValue } from "@mantine/hooks";
  * - Real-time search filtering
  * - Filter panel (source, stage, assigned user)
  * - Bulk actions and export functionality
+ * - Responsive design with mobile-optimized filters
+ * - Touch-friendly interactions
  *
- * Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8
+ * Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 12.1
  */
 export const LeadListPage: React.FC = () => {
   const navigate = useNavigate();
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isTablet = useMediaQuery("(max-width: 1024px)");
+
+  // Filter drawer state for mobile
+  const [filterDrawerOpened, { open: openFilterDrawer, close: closeFilterDrawer }] = useDisclosure(false);
 
   // Filter state
   const [searchTerm, setSearchTerm] = useState("");
@@ -180,30 +190,103 @@ export const LeadListPage: React.FC = () => {
   const totalPages = data?.totalPages || 0;
   const totalElements = data?.totalElements || 0;
 
+  // Render filter controls - extracted for reuse in drawer
+  const renderFilterControls = () => (
+    <Stack gap="md">
+      <Select
+        placeholder="Filter by source"
+        leftSection={<IconFilter size={16} />}
+        data={[
+          { value: "WEBSITE", label: "Website" },
+          { value: "REFERRAL", label: "Referral" },
+          { value: "COLD_CALL", label: "Cold Call" },
+          { value: "EMAIL_CAMPAIGN", label: "Email Campaign" },
+          { value: "SOCIAL_MEDIA", label: "Social Media" },
+          { value: "TRADE_SHOW", label: "Trade Show" },
+          { value: "PARTNER", label: "Partner" },
+          { value: "OTHER", label: "Other" },
+        ]}
+        value={selectedSource}
+        onChange={setSelectedSource}
+        clearable
+      />
+
+      <Select
+        placeholder="Filter by stage"
+        leftSection={<IconFilter size={16} />}
+        data={[
+          { value: "New", label: "New" },
+          { value: "Contacted", label: "Contacted" },
+          { value: "Qualified", label: "Qualified" },
+          { value: "Proposal", label: "Proposal" },
+          { value: "Negotiation", label: "Negotiation" },
+          { value: "Won", label: "Won" },
+          { value: "Lost", label: "Lost" },
+        ]}
+        value={selectedStage}
+        onChange={setSelectedStage}
+        clearable
+      />
+
+      <Select
+        placeholder="Filter by assigned user"
+        leftSection={<IconFilter size={16} />}
+        data={[
+          // TODO: Fetch from users API
+          { value: "user1", label: "John Doe" },
+          { value: "user2", label: "Jane Smith" },
+        ]}
+        value={selectedUser}
+        onChange={setSelectedUser}
+        clearable
+      />
+
+      {hasActiveFilters && (
+        <Button
+          variant="light"
+          color="red"
+          fullWidth
+          leftSection={<IconX size={16} />}
+          onClick={() => {
+            handleClearFilters();
+            if (isMobile) closeFilterDrawer();
+          }}
+        >
+          Clear all filters
+        </Button>
+      )}
+    </Stack>
+  );
+
   return (
-    <Container size="xl" py="xl">
+    <Container size="xl" py={isMobile ? "sm" : "xl"} px={isMobile ? "xs" : "md"}>
       <Stack gap="lg">
         {/* Header */}
-        <Group justify="space-between">
-          <div>
-            <Text size="xl" fw={700}>
+        <Group justify="space-between" wrap={isMobile ? "wrap" : "nowrap"}>
+          <div style={{ flex: isMobile ? "1 1 100%" : "auto" }}>
+            <Text size={isMobile ? "lg" : "xl"} fw={700}>
               Leads
             </Text>
             <Text size="sm" c="dimmed">
               {totalElements} total leads
             </Text>
           </div>
-          <Group>
-            <Button
-              leftSection={<IconDownload size={16} />}
-              variant="light"
-              onClick={handleExport}
-            >
-              Export
-            </Button>
+          <Group gap="xs" style={{ flex: isMobile ? "1 1 100%" : "auto" }}>
+            {!isMobile && (
+              <Button
+                leftSection={<IconDownload size={16} />}
+                variant="light"
+                onClick={handleExport}
+                size={isTablet ? "sm" : "md"}
+              >
+                Export
+              </Button>
+            )}
             <Button
               leftSection={<IconPlus size={16} />}
               onClick={handleCreateLead}
+              size={isMobile ? "sm" : isTablet ? "sm" : "md"}
+              fullWidth={isMobile}
             >
               Add Lead
             </Button>
@@ -211,103 +294,148 @@ export const LeadListPage: React.FC = () => {
         </Group>
 
         {/* Search and Filters */}
-        <Paper p="md" withBorder>
+        <Paper p={isMobile ? "sm" : "md"} withBorder>
           <Stack gap="md">
-            {/* Search bar */}
-            <TextInput
-              placeholder="Search by name, email, company, or phone..."
-              leftSection={<IconSearch size={16} />}
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.currentTarget.value)}
-              rightSection={
-                searchTerm && (
-                  <ActionIcon
-                    variant="subtle"
-                    onClick={() => setSearchTerm("")}
-                  >
-                    <IconX size={16} />
-                  </ActionIcon>
-                )
-              }
-            />
-
-            {/* Filter controls */}
-            <Group>
-              <Select
-                placeholder="Filter by source"
-                leftSection={<IconFilter size={16} />}
-                data={[
-                  { value: "WEBSITE", label: "Website" },
-                  { value: "REFERRAL", label: "Referral" },
-                  { value: "COLD_CALL", label: "Cold Call" },
-                  { value: "EMAIL_CAMPAIGN", label: "Email Campaign" },
-                  { value: "SOCIAL_MEDIA", label: "Social Media" },
-                  { value: "TRADE_SHOW", label: "Trade Show" },
-                  { value: "PARTNER", label: "Partner" },
-                  { value: "OTHER", label: "Other" },
-                ]}
-                value={selectedSource}
-                onChange={setSelectedSource}
-                clearable
+            {/* Search bar - always visible */}
+            <Group gap="xs" wrap="nowrap">
+              <TextInput
+                placeholder={isMobile ? "Search leads..." : "Search by name, email, company, or phone..."}
+                leftSection={<IconSearch size={16} />}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.currentTarget.value)}
+                rightSection={
+                  searchTerm && (
+                    <ActionIcon
+                      variant="subtle"
+                      onClick={() => setSearchTerm("")}
+                      size="sm"
+                    >
+                      <IconX size={16} />
+                    </ActionIcon>
+                  )
+                }
                 style={{ flex: 1 }}
+                styles={{
+                  input: {
+                    fontSize: isMobile ? "14px" : "16px",
+                    minHeight: isMobile ? "40px" : "36px",
+                  },
+                }}
               />
-
-              <Select
-                placeholder="Filter by stage"
-                leftSection={<IconFilter size={16} />}
-                data={[
-                  { value: "New", label: "New" },
-                  { value: "Contacted", label: "Contacted" },
-                  { value: "Qualified", label: "Qualified" },
-                  { value: "Proposal", label: "Proposal" },
-                  { value: "Negotiation", label: "Negotiation" },
-                  { value: "Won", label: "Won" },
-                  { value: "Lost", label: "Lost" },
-                ]}
-                value={selectedStage}
-                onChange={setSelectedStage}
-                clearable
-                style={{ flex: 1 }}
-              />
-
-              <Select
-                placeholder="Filter by assigned user"
-                leftSection={<IconFilter size={16} />}
-                data={[
-                  // TODO: Fetch from users API
-                  { value: "user1", label: "John Doe" },
-                  { value: "user2", label: "Jane Smith" },
-                ]}
-                value={selectedUser}
-                onChange={setSelectedUser}
-                clearable
-                style={{ flex: 1 }}
-              />
-
-              {hasActiveFilters && (
-                <Tooltip label="Clear all filters">
-                  <ActionIcon
-                    variant="light"
-                    color="red"
-                    onClick={handleClearFilters}
-                  >
-                    <IconX size={16} />
-                  </ActionIcon>
-                </Tooltip>
+              
+              {/* Mobile filter button */}
+              {isMobile && (
+                <ActionIcon
+                  variant="light"
+                  size="lg"
+                  onClick={openFilterDrawer}
+                  color={hasActiveFilters ? "blue" : "gray"}
+                >
+                  <IconAdjustments size={20} />
+                </ActionIcon>
               )}
             </Group>
+
+            {/* Desktop/Tablet filter controls */}
+            {!isMobile && (
+              <Group>
+                <Select
+                  placeholder="Filter by source"
+                  leftSection={<IconFilter size={16} />}
+                  data={[
+                    { value: "WEBSITE", label: "Website" },
+                    { value: "REFERRAL", label: "Referral" },
+                    { value: "COLD_CALL", label: "Cold Call" },
+                    { value: "EMAIL_CAMPAIGN", label: "Email Campaign" },
+                    { value: "SOCIAL_MEDIA", label: "Social Media" },
+                    { value: "TRADE_SHOW", label: "Trade Show" },
+                    { value: "PARTNER", label: "Partner" },
+                    { value: "OTHER", label: "Other" },
+                  ]}
+                  value={selectedSource}
+                  onChange={setSelectedSource}
+                  clearable
+                  style={{ flex: 1 }}
+                  size={isTablet ? "sm" : "md"}
+                />
+
+                <Select
+                  placeholder="Filter by stage"
+                  leftSection={<IconFilter size={16} />}
+                  data={[
+                    { value: "New", label: "New" },
+                    { value: "Contacted", label: "Contacted" },
+                    { value: "Qualified", label: "Qualified" },
+                    { value: "Proposal", label: "Proposal" },
+                    { value: "Negotiation", label: "Negotiation" },
+                    { value: "Won", label: "Won" },
+                    { value: "Lost", label: "Lost" },
+                  ]}
+                  value={selectedStage}
+                  onChange={setSelectedStage}
+                  clearable
+                  style={{ flex: 1 }}
+                  size={isTablet ? "sm" : "md"}
+                />
+
+                <Select
+                  placeholder="Filter by assigned user"
+                  leftSection={<IconFilter size={16} />}
+                  data={[
+                    // TODO: Fetch from users API
+                    { value: "user1", label: "John Doe" },
+                    { value: "user2", label: "Jane Smith" },
+                  ]}
+                  value={selectedUser}
+                  onChange={setSelectedUser}
+                  clearable
+                  style={{ flex: 1 }}
+                  size={isTablet ? "sm" : "md"}
+                />
+
+                {hasActiveFilters && (
+                  <Tooltip label="Clear all filters">
+                    <ActionIcon
+                      variant="light"
+                      color="red"
+                      onClick={handleClearFilters}
+                      size={isTablet ? "md" : "lg"}
+                    >
+                      <IconX size={16} />
+                    </ActionIcon>
+                  </Tooltip>
+                )}
+              </Group>
+            )}
           </Stack>
         </Paper>
 
+        {/* Mobile Filter Drawer */}
+        <Drawer
+          opened={filterDrawerOpened}
+          onClose={closeFilterDrawer}
+          title="Filter Leads"
+          position="right"
+          size="sm"
+          padding="md"
+        >
+          {renderFilterControls()}
+        </Drawer>
+
         {/* Bulk actions */}
         {selectedLeads.length > 0 && (
-          <Paper p="md" withBorder bg="blue.0">
-            <Group justify="space-between">
-              <Text size="sm" fw={500}>
+          <Paper p={isMobile ? "sm" : "md"} withBorder bg="blue.0">
+            <Group justify="space-between" wrap={isMobile ? "wrap" : "nowrap"}>
+              <Text size="sm" fw={500} style={{ flex: isMobile ? "1 1 100%" : "auto" }}>
                 {selectedLeads.length} lead(s) selected
               </Text>
-              <Group>
-                <Button size="xs" variant="light" onClick={handleBulkQualify}>
+              <Group gap="xs" style={{ flex: isMobile ? "1 1 100%" : "auto" }}>
+                <Button 
+                  size="xs" 
+                  variant="light" 
+                  onClick={handleBulkQualify}
+                  fullWidth={isMobile}
+                >
                   Qualify Selected
                 </Button>
                 <Button
@@ -315,6 +443,7 @@ export const LeadListPage: React.FC = () => {
                   variant="light"
                   color="red"
                   onClick={() => setSelectedLeads([])}
+                  fullWidth={isMobile}
                 >
                   Clear Selection
                 </Button>
@@ -332,11 +461,11 @@ export const LeadListPage: React.FC = () => {
                   No leads found
                 </Text>
                 {hasActiveFilters ? (
-                  <Button variant="light" onClick={handleClearFilters}>
+                  <Button variant="light" onClick={handleClearFilters} fullWidth={isMobile}>
                     Clear filters
                   </Button>
                 ) : (
-                  <Button onClick={handleCreateLead}>
+                  <Button onClick={handleCreateLead} fullWidth={isMobile}>
                     Create your first lead
                   </Button>
                 )}
@@ -344,23 +473,27 @@ export const LeadListPage: React.FC = () => {
             </Center>
           </Paper>
         ) : (
-          <Stack gap="md">
+          <Stack gap={isMobile ? "sm" : "md"}>
             {leads.map((lead) => (
               <div
                 key={lead.id}
                 onClick={() => handleLeadClick(lead.id)}
-                style={{ cursor: "pointer" }}
+                style={{ 
+                  cursor: "pointer",
+                  // Touch-friendly tap target
+                  minHeight: isMobile ? "44px" : "auto",
+                }}
               >
                 <LeadCard
                   lead={lead}
-                  variant="list"
-                  showQuickActions
-                  onQuickActions={{
+                  variant={isMobile ? "compact" : "list"}
+                  showQuickActions={!isMobile}
+                  onQuickActions={!isMobile ? {
                     qualify: () => console.log("Qualify", lead.id),
                     scheduleFollowUp: () =>
                       console.log("Schedule follow-up", lead.id),
                     viewDetails: () => handleLeadClick(lead.id),
-                  }}
+                  } : undefined}
                 />
               </div>
             ))}
@@ -374,7 +507,10 @@ export const LeadListPage: React.FC = () => {
               total={totalPages}
               value={currentPage}
               onChange={handlePageChange}
-              size="md"
+              size={isMobile ? "sm" : "md"}
+              // Mobile-friendly: show fewer siblings on small screens
+              siblings={isMobile ? 0 : 1}
+              boundaries={isMobile ? 1 : 1}
             />
           </Group>
         )}

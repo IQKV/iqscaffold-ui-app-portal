@@ -59,6 +59,8 @@ export const LeadCard: React.FC<LeadCardProps> = ({
   const style = {
     transform: CSS.Translate.toString(transform),
     opacity: isDragging ? 0.5 : 1,
+    // Touch-friendly: ensure card is grabbable
+    touchAction: draggable ? "none" : "auto",
   };
 
   // Business logic: determine card styling based on lead quality
@@ -106,8 +108,8 @@ export const LeadCard: React.FC<LeadCardProps> = ({
           <Group gap="xs" wrap="nowrap">
             <LeadScoreBadge score={lead.score} size="sm" />
             {lead.isOverdue && (
-              <Badge color="red" size="sm">
-                Overdue
+              <Badge color="red" size="xs">
+                !
               </Badge>
             )}
           </Group>
