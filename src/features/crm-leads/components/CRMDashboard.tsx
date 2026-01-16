@@ -16,6 +16,7 @@ import { FollowUpPanel } from "@/widgets/follow-up-panel";
 import { DashboardStats } from "./DashboardStats";
 import { ConversionChart } from "./ConversionChart";
 import { DateRangeFilter } from "./DateRangeFilter";
+import { DashboardSkeleton } from "./skeletons";
 import {
   useDashboardStats,
   useConversionMetrics,
@@ -103,16 +104,7 @@ export function CRMDashboard() {
         )}
 
         {/* Loading state (Requirement 7.7) */}
-        {isLoading && (
-          <Paper p={isMobile ? "md" : "xl"} withBorder>
-            <Group justify="center" gap="md">
-              <Loader size={isMobile ? "md" : "lg"} />
-              <Text size={isMobile ? "sm" : "lg"} c="dimmed">
-                {t`Loading dashboard statistics...`}
-              </Text>
-            </Group>
-          </Paper>
-        )}
+        {isLoading && <DashboardSkeleton />}
 
         {/* Dashboard content */}
         {!isLoading && !hasError && dashboardStats && conversionMetrics && (

@@ -28,6 +28,7 @@ import { useNavigate, useParams } from "@tanstack/react-router";
 import { useLead } from "@/entities/crm/api/crm-queries";
 import { LeadNotesSection } from "./LeadNotesSection";
 import { ActivityTimeline } from "./ActivityTimeline";
+import { LeadDetailSkeleton } from "./skeletons";
 import { LeadScoreBadge, LeadSourceBadge } from "@/entities/crm/ui";
 
 /**
@@ -83,16 +84,7 @@ export const LeadDetailPage: React.FC = () => {
 
   // Render loading state
   if (isLoading) {
-    return (
-      <Container size="xl" py="xl">
-        <Center h={400}>
-          <Stack align="center" gap="md">
-            <Loader size="lg" />
-            <Text c="dimmed">Loading lead details...</Text>
-          </Stack>
-        </Center>
-      </Container>
-    );
+    return <LeadDetailSkeleton />;
   }
 
   // Render error state

@@ -27,7 +27,9 @@ import { notifications } from "@mantine/notifications";
 import { useMediaQuery } from "@mantine/hooks";
 import { PipelineStageColumn } from "./PipelineStageColumn";
 import { PipelineMetrics } from "./PipelineMetrics";
+import { PipelineSkeleton } from "./skeletons";
 import { LeadCard } from "@/entities/crm/ui";
+import { LazyLoad } from "@/shared/ui";
 import {
   usePipelineStages,
   useLeads,
@@ -234,12 +236,13 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
   // Loading state
   if (stagesLoading || leadsLoading) {
     return (
-      <Center h={400}>
-        <Stack align="center" gap="md">
-          <Loader size="lg" />
-          <Text c="dimmed">Loading pipeline...</Text>
-        </Stack>
-      </Center>
+      <Container
+        size="100%"
+        px={isMobile ? "xs" : "md"}
+        py={isMobile ? "sm" : "lg"}
+      >
+        <PipelineSkeleton stageCount={5} cardsPerStage={3} />
+      </Container>
     );
   }
 
@@ -341,16 +344,22 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
               {stages
                 .sort((a, b) => a.orderIndex - b.orderIndex)
                 .map((stage) => (
-                  <PipelineStageColumn
+                  <LazyLoad
                     key={stage.id}
-                    stage={stage}
-                    leads={leadsByStage[stage.id] || []}
-                    onLeadMove={handleDragEnd as any}
-                    onLeadClick={handleLeadClick}
-                    highlightOverdue={highlightOverdueLeads}
-                    isMoving={isMoving}
-                    isMobile={isMobile}
-                  />
+                    height={600}
+                    threshold={0.1}
+                    rootMargin="100px"
+                  >
+                    <PipelineStageColumn
+                      stage={stage}
+                      leads={leadsByStage[stage.id] || []}
+                      onLeadMove={handleDragEnd as any}
+                      onLeadClick={handleLeadClick}
+                      highlightOverdue={highlightOverdueLeads}
+                      isMoving={isMoving}
+                      isMobile={isMobile}
+                    />
+                  </LazyLoad>
                 ))}
             </Group>
           </ScrollArea>

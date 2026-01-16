@@ -42,3 +42,9 @@ export { useLoadingState } from "./loading-state/loading-state-hooks";
 export { FormField, EnhancedFormField } from "./enhanced-form-field";
 
 export { useEnhancedFormValidation } from "./enhanced-form-field/validation-utils";
+
+// Performance optimization components
+export { VirtualizedList } from "./virtualized-list";
+export { LazyLoad } from "./lazy-load";
+export { ProgressiveLoader } from "./progressive-loader";
+export { PerformanceDashboard } from "./performance-dashboard";

@@ -169,7 +169,9 @@ export function CRMLayout({
 
   // Mobile bottom navigation
   const renderBottomNav = () => {
-    if (!isMobile) {return null;}
+    if (!isMobile) {
+      return null;
+    }
 
     return (
       <Box

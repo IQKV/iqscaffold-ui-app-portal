@@ -378,7 +378,11 @@ function LeadSourceChart({
                   />
                 ))}
               </Pie>
-              <Tooltip content={<LeadSourceTooltip total={total} isMobile={isMobile} />} />
+              <Tooltip
+                content={
+                  <LeadSourceTooltip total={total} isMobile={isMobile} />
+                }
+              />
               {!isMobile && <Legend wrapperStyle={{ fontSize: "12px" }} />}
             </PieChart>
           </ResponsiveContainer>

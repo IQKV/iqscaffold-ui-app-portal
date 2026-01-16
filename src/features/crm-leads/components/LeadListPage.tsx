@@ -17,6 +17,7 @@ import {
   MultiSelect,
   Drawer,
   Collapse,
+  Skeleton,
 } from "@mantine/core";
 import {
   IconSearch,
@@ -28,6 +29,7 @@ import {
 } from "@tabler/icons-react";
 import { useLeads } from "@/entities/crm/api/crm-queries";
 import { LeadCard } from "@/entities/crm/ui";
+import { LeadListSkeleton } from "./skeletons";
 import { LeadListParams, LeadSource } from "@/shared/api/crm/types";
 import { useNavigate } from "@tanstack/react-router";
 import {
@@ -167,12 +169,30 @@ export const LeadListPage: React.FC = () => {
   if (isLoading) {
     return (
       <Container size="xl" py="xl">
-        <Center h={400}>
-          <Stack align="center" gap="md">
-            <Loader size="lg" />
-            <Text c="dimmed">Loading leads...</Text>
-          </Stack>
-        </Center>
+        <Stack gap="lg">
+          {/* Header skeleton */}
+          <Group justify="space-between">
+            <div>
+              <Text size="xl" fw={700}>
+                Leads
+              </Text>
+            </div>
+          </Group>
+
+          {/* Search and filters skeleton */}
+          <Paper p="md" withBorder>
+            <Stack gap="md">
+              <Group gap="xs">
+                <div style={{ flex: 1 }}>
+                  <Skeleton height={36} />
+                </div>
+              </Group>
+            </Stack>
+          </Paper>
+
+          {/* Lead list skeleton */}
+          <LeadListSkeleton count={5} variant={isMobile ? "compact" : "list"} />
+        </Stack>
       </Container>
     );
   }
@@ -256,7 +276,9 @@ export const LeadListPage: React.FC = () => {
           leftSection={<IconX size={16} />}
           onClick={() => {
             handleClearFilters();
-            if (isMobile) {closeFilterDrawer();}
+            if (isMobile) {
+              closeFilterDrawer();
+            }
           }}
         >
           {t`Clear all filters`}
