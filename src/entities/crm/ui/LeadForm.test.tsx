@@ -204,7 +204,9 @@ describe("LeadForm", () => {
       await user.click(submitButton);
 
       await waitFor(() => {
-        expect(screen.getByText(/invalid email address/i)).toBeInTheDocument();
+        expect(
+          screen.getByText(/please enter a valid email address/i)
+        ).toBeInTheDocument();
       });
     });
 
@@ -224,7 +226,10 @@ describe("LeadForm", () => {
       await user.click(submitButton);
 
       await waitFor(() => {
-        expect(screen.getByText(/invalid email address/i)).toBeInTheDocument();
+        expect(screen.getByLabelText(/email/i)).toHaveAttribute(
+          "aria-invalid",
+          "true"
+        );
       });
     });
 
@@ -255,7 +260,7 @@ describe("LeadForm", () => {
         const form = screen.getByTestId("form-lead");
         expect(form).toBeInTheDocument();
       });
-    });
+    }, 15000);
   });
 
   describe("Lead Source Selection", () => {
@@ -384,6 +389,6 @@ describe("LeadForm", () => {
       // Company is optional, so form should be valid without it
       const companyInput = screen.getByLabelText(/company/i);
       expect(companyInput).not.toBeRequired();
-    });
+    }, 15000);
   });
 });

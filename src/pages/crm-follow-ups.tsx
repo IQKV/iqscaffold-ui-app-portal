@@ -10,7 +10,7 @@ import { t } from "@lingui/core/macro";
  *
  * Requirements: 8.5
  */
-export const Route = createFileRoute("/crm/follow-ups")({
+export const Route = createFileRoute("/crm-follow-ups")({
   component: FollowUpsPageRoute,
 });
 

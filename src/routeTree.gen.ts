@@ -16,6 +16,8 @@ import { Route as PreferencesDemoRouteImport } from "./pages/preferences-demo"
 import { Route as GatewayConfigRouteImport } from "./pages/gateway-config"
 import { Route as ExamplesRouteImport } from "./pages/examples"
 import { Route as DashboardRouteImport } from "./pages/dashboard"
+import { Route as CrmFollowUpsRouteImport } from "./pages/crm-follow-ups"
+import { Route as CrmDashboardRouteImport } from "./pages/crm-dashboard"
 import { Route as CheckoutRouteImport } from "./pages/checkout"
 import { Route as BillingRouteImport } from "./pages/billing"
 import { Route as AboutRouteImport } from "./pages/about"
@@ -23,8 +25,6 @@ import { Route as R404RouteImport } from "./pages/404"
 import { Route as IndexRouteImport } from "./pages/index"
 import { Route as CrmPipelineRouteImport } from "./pages/crm.pipeline"
 import { Route as CrmLeadsRouteImport } from "./pages/crm.leads"
-import { Route as CrmFollowUpsRouteImport } from "./pages/crm.follow-ups"
-import { Route as CrmDashboardRouteImport } from "./pages/crm.dashboard"
 import { Route as CrmLeadsLeadIdRouteImport } from "./pages/crm.leads.$leadId"
 
 const UsersRoute = UsersRouteImport.update({
@@ -62,6 +62,16 @@ const DashboardRoute = DashboardRouteImport.update({
   path: "/dashboard",
   getParentRoute: () => rootRouteImport,
 } as any)
+const CrmFollowUpsRoute = CrmFollowUpsRouteImport.update({
+  id: "/crm-follow-ups",
+  path: "/crm-follow-ups",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrmDashboardRoute = CrmDashboardRouteImport.update({
+  id: "/crm-dashboard",
+  path: "/crm-dashboard",
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CheckoutRoute = CheckoutRouteImport.update({
   id: "/checkout",
   path: "/checkout",
@@ -97,16 +107,6 @@ const CrmLeadsRoute = CrmLeadsRouteImport.update({
   path: "/crm/leads",
   getParentRoute: () => rootRouteImport,
 } as any)
-const CrmFollowUpsRoute = CrmFollowUpsRouteImport.update({
-  id: "/crm/follow-ups",
-  path: "/crm/follow-ups",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CrmDashboardRoute = CrmDashboardRouteImport.update({
-  id: "/crm/dashboard",
-  path: "/crm/dashboard",
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CrmLeadsLeadIdRoute = CrmLeadsLeadIdRouteImport.update({
   id: "/$leadId",
   path: "/$leadId",
@@ -119,6 +119,8 @@ export interface FileRoutesByFullPath {
   "/about": typeof AboutRoute
   "/billing": typeof BillingRoute
   "/checkout": typeof CheckoutRoute
+  "/crm-dashboard": typeof CrmDashboardRoute
+  "/crm-follow-ups": typeof CrmFollowUpsRoute
   "/dashboard": typeof DashboardRoute
   "/examples": typeof ExamplesRoute
   "/gateway-config": typeof GatewayConfigRoute
@@ -126,8 +128,6 @@ export interface FileRoutesByFullPath {
   "/subscriptions": typeof SubscriptionsRoute
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
-  "/crm/dashboard": typeof CrmDashboardRoute
-  "/crm/follow-ups": typeof CrmFollowUpsRoute
   "/crm/leads": typeof CrmLeadsRouteWithChildren
   "/crm/pipeline": typeof CrmPipelineRoute
   "/crm/leads/$leadId": typeof CrmLeadsLeadIdRoute
@@ -138,6 +138,8 @@ export interface FileRoutesByTo {
   "/about": typeof AboutRoute
   "/billing": typeof BillingRoute
   "/checkout": typeof CheckoutRoute
+  "/crm-dashboard": typeof CrmDashboardRoute
+  "/crm-follow-ups": typeof CrmFollowUpsRoute
   "/dashboard": typeof DashboardRoute
   "/examples": typeof ExamplesRoute
   "/gateway-config": typeof GatewayConfigRoute
@@ -145,8 +147,6 @@ export interface FileRoutesByTo {
   "/subscriptions": typeof SubscriptionsRoute
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
-  "/crm/dashboard": typeof CrmDashboardRoute
-  "/crm/follow-ups": typeof CrmFollowUpsRoute
   "/crm/leads": typeof CrmLeadsRouteWithChildren
   "/crm/pipeline": typeof CrmPipelineRoute
   "/crm/leads/$leadId": typeof CrmLeadsLeadIdRoute
@@ -158,6 +158,8 @@ export interface FileRoutesById {
   "/about": typeof AboutRoute
   "/billing": typeof BillingRoute
   "/checkout": typeof CheckoutRoute
+  "/crm-dashboard": typeof CrmDashboardRoute
+  "/crm-follow-ups": typeof CrmFollowUpsRoute
   "/dashboard": typeof DashboardRoute
   "/examples": typeof ExamplesRoute
   "/gateway-config": typeof GatewayConfigRoute
@@ -165,8 +167,6 @@ export interface FileRoutesById {
   "/subscriptions": typeof SubscriptionsRoute
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
-  "/crm/dashboard": typeof CrmDashboardRoute
-  "/crm/follow-ups": typeof CrmFollowUpsRoute
   "/crm/leads": typeof CrmLeadsRouteWithChildren
   "/crm/pipeline": typeof CrmPipelineRoute
   "/crm/leads/$leadId": typeof CrmLeadsLeadIdRoute
@@ -179,6 +179,8 @@ export interface FileRouteTypes {
     | "/about"
     | "/billing"
     | "/checkout"
+    | "/crm-dashboard"
+    | "/crm-follow-ups"
     | "/dashboard"
     | "/examples"
     | "/gateway-config"
@@ -186,8 +188,6 @@ export interface FileRouteTypes {
     | "/subscriptions"
     | "/user-preferences"
     | "/users"
-    | "/crm/dashboard"
-    | "/crm/follow-ups"
     | "/crm/leads"
     | "/crm/pipeline"
     | "/crm/leads/$leadId"
@@ -198,6 +198,8 @@ export interface FileRouteTypes {
     | "/about"
     | "/billing"
     | "/checkout"
+    | "/crm-dashboard"
+    | "/crm-follow-ups"
     | "/dashboard"
     | "/examples"
     | "/gateway-config"
@@ -205,8 +207,6 @@ export interface FileRouteTypes {
     | "/subscriptions"
     | "/user-preferences"
     | "/users"
-    | "/crm/dashboard"
-    | "/crm/follow-ups"
     | "/crm/leads"
     | "/crm/pipeline"
     | "/crm/leads/$leadId"
@@ -217,6 +217,8 @@ export interface FileRouteTypes {
     | "/about"
     | "/billing"
     | "/checkout"
+    | "/crm-dashboard"
+    | "/crm-follow-ups"
     | "/dashboard"
     | "/examples"
     | "/gateway-config"
@@ -224,8 +226,6 @@ export interface FileRouteTypes {
     | "/subscriptions"
     | "/user-preferences"
     | "/users"
-    | "/crm/dashboard"
-    | "/crm/follow-ups"
     | "/crm/leads"
     | "/crm/pipeline"
     | "/crm/leads/$leadId"
@@ -237,6 +237,8 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   BillingRoute: typeof BillingRoute
   CheckoutRoute: typeof CheckoutRoute
+  CrmDashboardRoute: typeof CrmDashboardRoute
+  CrmFollowUpsRoute: typeof CrmFollowUpsRoute
   DashboardRoute: typeof DashboardRoute
   ExamplesRoute: typeof ExamplesRoute
   GatewayConfigRoute: typeof GatewayConfigRoute
@@ -244,8 +246,6 @@ export interface RootRouteChildren {
   SubscriptionsRoute: typeof SubscriptionsRoute
   UserPreferencesRoute: typeof UserPreferencesRoute
   UsersRoute: typeof UsersRoute
-  CrmDashboardRoute: typeof CrmDashboardRoute
-  CrmFollowUpsRoute: typeof CrmFollowUpsRoute
   CrmLeadsRoute: typeof CrmLeadsRouteWithChildren
   CrmPipelineRoute: typeof CrmPipelineRoute
 }
@@ -301,6 +301,20 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    "/crm-follow-ups": {
+      id: "/crm-follow-ups"
+      path: "/crm-follow-ups"
+      fullPath: "/crm-follow-ups"
+      preLoaderRoute: typeof CrmFollowUpsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/crm-dashboard": {
+      id: "/crm-dashboard"
+      path: "/crm-dashboard"
+      fullPath: "/crm-dashboard"
+      preLoaderRoute: typeof CrmDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     "/checkout": {
       id: "/checkout"
       path: "/checkout"
@@ -350,20 +364,6 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof CrmLeadsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    "/crm/follow-ups": {
-      id: "/crm/follow-ups"
-      path: "/crm/follow-ups"
-      fullPath: "/crm/follow-ups"
-      preLoaderRoute: typeof CrmFollowUpsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/crm/dashboard": {
-      id: "/crm/dashboard"
-      path: "/crm/dashboard"
-      fullPath: "/crm/dashboard"
-      preLoaderRoute: typeof CrmDashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     "/crm/leads/$leadId": {
       id: "/crm/leads/$leadId"
       path: "/$leadId"
@@ -392,6 +392,8 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   BillingRoute: BillingRoute,
   CheckoutRoute: CheckoutRoute,
+  CrmDashboardRoute: CrmDashboardRoute,
+  CrmFollowUpsRoute: CrmFollowUpsRoute,
   DashboardRoute: DashboardRoute,
   ExamplesRoute: ExamplesRoute,
   GatewayConfigRoute: GatewayConfigRoute,
@@ -399,8 +401,6 @@ const rootRouteChildren: RootRouteChildren = {
   SubscriptionsRoute: SubscriptionsRoute,
   UserPreferencesRoute: UserPreferencesRoute,
   UsersRoute: UsersRoute,
-  CrmDashboardRoute: CrmDashboardRoute,
-  CrmFollowUpsRoute: CrmFollowUpsRoute,
   CrmLeadsRoute: CrmLeadsRouteWithChildren,
   CrmPipelineRoute: CrmPipelineRoute,
 }

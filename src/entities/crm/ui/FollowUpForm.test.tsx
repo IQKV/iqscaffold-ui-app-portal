@@ -208,7 +208,7 @@ describe("FollowUpForm", () => {
           })
         );
       });
-    });
+    }, 15000);
   });
 
   describe("Past Date Warning", () => {

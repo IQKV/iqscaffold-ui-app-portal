@@ -492,8 +492,8 @@ msgstr "Choose the payment gateway for merchant onboarding."
 msgid "Clear"
 msgstr "Clear"
 
-#: src/features/crm-leads/components/LeadListPage.tsx:381
-#: src/features/crm-leads/components/LeadListPage.tsx:535
+#: src/features/crm-leads/components/LeadListPage.tsx:383
+#: src/features/crm-leads/components/LeadListPage.tsx:537
 msgid "Clear all filters"
 msgstr "Clear all filters"
 
@@ -527,8 +527,8 @@ msgid "Code Quality:"
 msgstr "Code Quality:"
 
 #: src/entities/crm/ui/LeadForm.tsx:29
-#: src/features/crm-leads/components/LeadListPage.tsx:326
-#: src/features/crm-leads/components/LeadListPage.tsx:486
+#: src/features/crm-leads/components/LeadListPage.tsx:328
+#: src/features/crm-leads/components/LeadListPage.tsx:488
 msgid "Cold Call"
 msgstr "Cold Call"
 
@@ -600,8 +600,8 @@ msgstr "Connect with Stripe"
 msgid "Connection Issue"
 msgstr "Connection Issue"
 
-#: src/features/crm-leads/components/LeadListPage.tsx:343
-#: src/features/crm-leads/components/LeadListPage.tsx:505
+#: src/features/crm-leads/components/LeadListPage.tsx:345
+#: src/features/crm-leads/components/LeadListPage.tsx:507
 msgid "Contacted"
 msgstr "Contacted"
 
@@ -670,7 +670,7 @@ msgid "CRM"
 msgstr "CRM"
 
 #: src/features/crm-leads/components/CRMDashboard.tsx:83
-#: src/pages/crm.dashboard.tsx:20
+#: src/pages/crm-dashboard.tsx:20
 #: src/widgets/sidebar/ui/sidebar.tsx:105
 msgid "CRM Dashboard"
 msgstr "CRM Dashboard"
@@ -914,8 +914,8 @@ msgid "Email Address"
 msgstr "Email Address"
 
 #: src/entities/crm/ui/LeadForm.tsx:30
-#: src/features/crm-leads/components/LeadListPage.tsx:327
-#: src/features/crm-leads/components/LeadListPage.tsx:487
+#: src/features/crm-leads/components/LeadListPage.tsx:329
+#: src/features/crm-leads/components/LeadListPage.tsx:489
 msgid "Email Campaign"
 msgstr "Email Campaign"
 
@@ -1092,7 +1092,7 @@ msgstr "Error Loading Invoices"
 msgid "Error loading lead"
 msgstr "Error loading lead"
 
-#: src/features/crm-leads/components/LeadListPage.tsx:305
+#: src/features/crm-leads/components/LeadListPage.tsx:307
 msgid "Error loading leads"
 msgstr "Error loading leads"
 
@@ -1252,7 +1252,7 @@ msgstr "Failed to load invoices. Please try again later."
 msgid "Failed to load lead details. Please try again."
 msgstr "Failed to load lead details. Please try again."
 
-#: src/features/crm-leads/components/LeadListPage.tsx:307
+#: src/features/crm-leads/components/LeadListPage.tsx:309
 msgid "Failed to load leads. Please try again."
 msgstr "Failed to load leads. Please try again."
 
@@ -1361,8 +1361,8 @@ msgstr "File uploaded successfully"
 msgid "Filter"
 msgstr "Filter"
 
-#: src/features/crm-leads/components/LeadListPage.tsx:356
-#: src/features/crm-leads/components/LeadListPage.tsx:520
+#: src/features/crm-leads/components/LeadListPage.tsx:358
+#: src/features/crm-leads/components/LeadListPage.tsx:522
 msgid "Filter by assigned user"
 msgstr "Filter by assigned user"
 
@@ -1374,13 +1374,13 @@ msgstr "Filter by Date Range"
 msgid "Filter by overdue"
 msgstr "Filter by overdue"
 
-#: src/features/crm-leads/components/LeadListPage.tsx:321
-#: src/features/crm-leads/components/LeadListPage.tsx:481
+#: src/features/crm-leads/components/LeadListPage.tsx:323
+#: src/features/crm-leads/components/LeadListPage.tsx:483
 msgid "Filter by source"
 msgstr "Filter by source"
 
-#: src/features/crm-leads/components/LeadListPage.tsx:339
-#: src/features/crm-leads/components/LeadListPage.tsx:501
+#: src/features/crm-leads/components/LeadListPage.tsx:341
+#: src/features/crm-leads/components/LeadListPage.tsx:503
 msgid "Filter by stage"
 msgstr "Filter by stage"
 
@@ -1388,7 +1388,7 @@ msgstr "Filter by stage"
 msgid "Filter by status"
 msgstr "Filter by status"
 
-#: src/features/crm-leads/components/LeadListPage.tsx:555
+#: src/features/crm-leads/components/LeadListPage.tsx:557
 msgid "Filter Leads"
 msgstr "Filter Leads"
 
@@ -1424,7 +1424,7 @@ msgstr "Follow-up updated successfully"
 #: src/features/crm-leads/components/FollowUpList.tsx:325
 #: src/features/crm-leads/components/FollowUpSection.tsx:175
 #: src/features/crm-leads/components/LeadDetailPage.tsx:270
-#: src/pages/crm.follow-ups.tsx:20
+#: src/pages/crm-follow-ups.tsx:20
 #: src/widgets/sidebar/ui/sidebar.tsx:132
 msgid "Follow-ups"
 msgstr "Follow-ups"
@@ -1738,8 +1738,8 @@ msgstr "Logout from All Devices"
 msgid "Logout from all devices where you're currently signed in. This is useful if you've lost a device or suspect unauthorized access."
 msgstr "Logout from all devices where you're currently signed in. This is useful if you've lost a device or suspect unauthorized access."
 
-#: src/features/crm-leads/components/LeadListPage.tsx:348
-#: src/features/crm-leads/components/LeadListPage.tsx:510
+#: src/features/crm-leads/components/LeadListPage.tsx:350
+#: src/features/crm-leads/components/LeadListPage.tsx:512
 msgid "Lost"
 msgstr "Lost"
 
@@ -1864,8 +1864,8 @@ msgstr "Name must be less than 100 characters"
 msgid "Navigation"
 msgstr "Navigation"
 
-#: src/features/crm-leads/components/LeadListPage.tsx:346
-#: src/features/crm-leads/components/LeadListPage.tsx:508
+#: src/features/crm-leads/components/LeadListPage.tsx:348
+#: src/features/crm-leads/components/LeadListPage.tsx:510
 msgid "Negotiation"
 msgstr "Negotiation"
 
@@ -1873,8 +1873,8 @@ msgstr "Negotiation"
 msgid "Network error occurred"
 msgstr "Network error occurred"
 
-#: src/features/crm-leads/components/LeadListPage.tsx:342
-#: src/features/crm-leads/components/LeadListPage.tsx:504
+#: src/features/crm-leads/components/LeadListPage.tsx:344
+#: src/features/crm-leads/components/LeadListPage.tsx:506
 msgid "New"
 msgstr "New"
 
@@ -2046,8 +2046,8 @@ msgid "Organized by business features rather than technical layers"
 msgstr "Organized by business features rather than technical layers"
 
 #: src/entities/crm/ui/LeadForm.tsx:34
-#: src/features/crm-leads/components/LeadListPage.tsx:331
-#: src/features/crm-leads/components/LeadListPage.tsx:491
+#: src/features/crm-leads/components/LeadListPage.tsx:333
+#: src/features/crm-leads/components/LeadListPage.tsx:493
 msgid "Other"
 msgstr "Other"
 
@@ -2084,8 +2084,8 @@ msgid "Paid: {paidAmount}"
 msgstr "Paid: {paidAmount}"
 
 #: src/entities/crm/ui/LeadForm.tsx:33
-#: src/features/crm-leads/components/LeadListPage.tsx:330
-#: src/features/crm-leads/components/LeadListPage.tsx:490
+#: src/features/crm-leads/components/LeadListPage.tsx:332
+#: src/features/crm-leads/components/LeadListPage.tsx:492
 msgid "Partner"
 msgstr "Partner"
 
@@ -2324,8 +2324,8 @@ msgstr "Processing..."
 msgid "Production (Live)"
 msgstr "Production (Live)"
 
-#: src/features/crm-leads/components/LeadListPage.tsx:345
-#: src/features/crm-leads/components/LeadListPage.tsx:507
+#: src/features/crm-leads/components/LeadListPage.tsx:347
+#: src/features/crm-leads/components/LeadListPage.tsx:509
 msgid "Proposal"
 msgstr "Proposal"
 
@@ -2343,8 +2343,8 @@ msgstr "Publishable Key"
 
 #: src/features/crm-leads/components/LeadDetailPage.tsx:190
 #: src/features/crm-leads/components/LeadDetailPage.tsx:244
-#: src/features/crm-leads/components/LeadListPage.tsx:344
-#: src/features/crm-leads/components/LeadListPage.tsx:506
+#: src/features/crm-leads/components/LeadListPage.tsx:346
+#: src/features/crm-leads/components/LeadListPage.tsx:508
 msgid "Qualified"
 msgstr "Qualified"
 
@@ -2374,8 +2374,8 @@ msgid "Redirecting to payment gateway for onboarding..."
 msgstr "Redirecting to payment gateway for onboarding..."
 
 #: src/entities/crm/ui/LeadForm.tsx:28
-#: src/features/crm-leads/components/LeadListPage.tsx:325
-#: src/features/crm-leads/components/LeadListPage.tsx:485
+#: src/features/crm-leads/components/LeadListPage.tsx:327
+#: src/features/crm-leads/components/LeadListPage.tsx:487
 msgid "Referral"
 msgstr "Referral"
 
@@ -2442,7 +2442,7 @@ msgstr "Response delay (ms)"
 msgid "Resume Subscription"
 msgstr "Resume Subscription"
 
-#: src/features/crm-leads/components/LeadListPage.tsx:309
+#: src/features/crm-leads/components/LeadListPage.tsx:311
 msgid "Retry"
 msgstr "Retry"
 
@@ -2646,8 +2646,8 @@ msgid "Slowest Stage"
 msgstr "Slowest Stage"
 
 #: src/entities/crm/ui/LeadForm.tsx:31
-#: src/features/crm-leads/components/LeadListPage.tsx:328
-#: src/features/crm-leads/components/LeadListPage.tsx:488
+#: src/features/crm-leads/components/LeadListPage.tsx:330
+#: src/features/crm-leads/components/LeadListPage.tsx:490
 msgid "Social Media"
 msgstr "Social Media"
 
@@ -2926,8 +2926,8 @@ msgid "Total Users"
 msgstr "Total Users"
 
 #: src/entities/crm/ui/LeadForm.tsx:32
-#: src/features/crm-leads/components/LeadListPage.tsx:329
-#: src/features/crm-leads/components/LeadListPage.tsx:489
+#: src/features/crm-leads/components/LeadListPage.tsx:331
+#: src/features/crm-leads/components/LeadListPage.tsx:491
 msgid "Trade Show"
 msgstr "Trade Show"
 
@@ -3176,8 +3176,8 @@ msgid "Webhook signing secret for event validation"
 msgstr "Webhook signing secret for event validation"
 
 #: src/entities/crm/ui/LeadForm.tsx:27
-#: src/features/crm-leads/components/LeadListPage.tsx:324
-#: src/features/crm-leads/components/LeadListPage.tsx:484
+#: src/features/crm-leads/components/LeadListPage.tsx:326
+#: src/features/crm-leads/components/LeadListPage.tsx:486
 msgid "Website"
 msgstr "Website"
 
@@ -3197,8 +3197,8 @@ msgstr "What would you like to do?"
 msgid "When you change the language, the following happens:"
 msgstr "When you change the language, the following happens:"
 
-#: src/features/crm-leads/components/LeadListPage.tsx:347
-#: src/features/crm-leads/components/LeadListPage.tsx:509
+#: src/features/crm-leads/components/LeadListPage.tsx:349
+#: src/features/crm-leads/components/LeadListPage.tsx:511
 msgid "Won"
 msgstr "Won"
 

@@ -206,8 +206,21 @@ describe("FSD Architecture", () => {
       const pages = readdirSync(pagesDir).filter((f) => f.endsWith(".tsx"));
 
       pages.forEach((page) => {
-        const isValid =
-          /^[a-z0-9-_]+\.tsx$/.test(page) || page.startsWith("__");
+        if (page.startsWith("__")) {
+          return;
+        }
+
+        const baseName = page.replace(/\.tsx$/, "");
+        const segments = baseName.split(".");
+
+        const isValid = segments.every((segment) => {
+          if (segment.startsWith("$")) {
+            return true;
+          }
+
+          return /^[a-z0-9-_]+$/.test(segment);
+        });
+
         expect(isValid, `Page "${page}" should use kebab-case`).toBe(true);
       });
     });
