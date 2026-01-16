@@ -25,7 +25,9 @@ import { Route as R404RouteImport } from "./pages/404"
 import { Route as IndexRouteImport } from "./pages/index"
 import { Route as CrmPipelineRouteImport } from "./pages/crm.pipeline"
 import { Route as CrmLeadsRouteImport } from "./pages/crm.leads"
+import { Route as CrmContactsRouteImport } from "./pages/crm.contacts"
 import { Route as CrmLeadsLeadIdRouteImport } from "./pages/crm.leads.$leadId"
+import { Route as CrmContactsContactIdRouteImport } from "./pages/crm.contacts.$contactId"
 
 const UsersRoute = UsersRouteImport.update({
   id: "/users",
@@ -107,10 +109,20 @@ const CrmLeadsRoute = CrmLeadsRouteImport.update({
   path: "/crm/leads",
   getParentRoute: () => rootRouteImport,
 } as any)
+const CrmContactsRoute = CrmContactsRouteImport.update({
+  id: "/crm/contacts",
+  path: "/crm/contacts",
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CrmLeadsLeadIdRoute = CrmLeadsLeadIdRouteImport.update({
   id: "/$leadId",
   path: "/$leadId",
   getParentRoute: () => CrmLeadsRoute,
+} as any)
+const CrmContactsContactIdRoute = CrmContactsContactIdRouteImport.update({
+  id: "/$contactId",
+  path: "/$contactId",
+  getParentRoute: () => CrmContactsRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -128,8 +140,10 @@ export interface FileRoutesByFullPath {
   "/subscriptions": typeof SubscriptionsRoute
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
+  "/crm/contacts": typeof CrmContactsRouteWithChildren
   "/crm/leads": typeof CrmLeadsRouteWithChildren
   "/crm/pipeline": typeof CrmPipelineRoute
+  "/crm/contacts/$contactId": typeof CrmContactsContactIdRoute
   "/crm/leads/$leadId": typeof CrmLeadsLeadIdRoute
 }
 export interface FileRoutesByTo {
@@ -147,8 +161,10 @@ export interface FileRoutesByTo {
   "/subscriptions": typeof SubscriptionsRoute
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
+  "/crm/contacts": typeof CrmContactsRouteWithChildren
   "/crm/leads": typeof CrmLeadsRouteWithChildren
   "/crm/pipeline": typeof CrmPipelineRoute
+  "/crm/contacts/$contactId": typeof CrmContactsContactIdRoute
   "/crm/leads/$leadId": typeof CrmLeadsLeadIdRoute
 }
 export interface FileRoutesById {
@@ -167,8 +183,10 @@ export interface FileRoutesById {
   "/subscriptions": typeof SubscriptionsRoute
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
+  "/crm/contacts": typeof CrmContactsRouteWithChildren
   "/crm/leads": typeof CrmLeadsRouteWithChildren
   "/crm/pipeline": typeof CrmPipelineRoute
+  "/crm/contacts/$contactId": typeof CrmContactsContactIdRoute
   "/crm/leads/$leadId": typeof CrmLeadsLeadIdRoute
 }
 export interface FileRouteTypes {
@@ -188,8 +206,10 @@ export interface FileRouteTypes {
     | "/subscriptions"
     | "/user-preferences"
     | "/users"
+    | "/crm/contacts"
     | "/crm/leads"
     | "/crm/pipeline"
+    | "/crm/contacts/$contactId"
     | "/crm/leads/$leadId"
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -207,8 +227,10 @@ export interface FileRouteTypes {
     | "/subscriptions"
     | "/user-preferences"
     | "/users"
+    | "/crm/contacts"
     | "/crm/leads"
     | "/crm/pipeline"
+    | "/crm/contacts/$contactId"
     | "/crm/leads/$leadId"
   id:
     | "__root__"
@@ -226,8 +248,10 @@ export interface FileRouteTypes {
     | "/subscriptions"
     | "/user-preferences"
     | "/users"
+    | "/crm/contacts"
     | "/crm/leads"
     | "/crm/pipeline"
+    | "/crm/contacts/$contactId"
     | "/crm/leads/$leadId"
   fileRoutesById: FileRoutesById
 }
@@ -246,6 +270,7 @@ export interface RootRouteChildren {
   SubscriptionsRoute: typeof SubscriptionsRoute
   UserPreferencesRoute: typeof UserPreferencesRoute
   UsersRoute: typeof UsersRoute
+  CrmContactsRoute: typeof CrmContactsRouteWithChildren
   CrmLeadsRoute: typeof CrmLeadsRouteWithChildren
   CrmPipelineRoute: typeof CrmPipelineRoute
 }
@@ -364,6 +389,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof CrmLeadsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    "/crm/contacts": {
+      id: "/crm/contacts"
+      path: "/crm/contacts"
+      fullPath: "/crm/contacts"
+      preLoaderRoute: typeof CrmContactsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     "/crm/leads/$leadId": {
       id: "/crm/leads/$leadId"
       path: "/$leadId"
@@ -371,8 +403,27 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof CrmLeadsLeadIdRouteImport
       parentRoute: typeof CrmLeadsRoute
     }
+    "/crm/contacts/$contactId": {
+      id: "/crm/contacts/$contactId"
+      path: "/$contactId"
+      fullPath: "/crm/contacts/$contactId"
+      preLoaderRoute: typeof CrmContactsContactIdRouteImport
+      parentRoute: typeof CrmContactsRoute
+    }
   }
 }
+
+interface CrmContactsRouteChildren {
+  CrmContactsContactIdRoute: typeof CrmContactsContactIdRoute
+}
+
+const CrmContactsRouteChildren: CrmContactsRouteChildren = {
+  CrmContactsContactIdRoute: CrmContactsContactIdRoute,
+}
+
+const CrmContactsRouteWithChildren = CrmContactsRoute._addFileChildren(
+  CrmContactsRouteChildren,
+)
 
 interface CrmLeadsRouteChildren {
   CrmLeadsLeadIdRoute: typeof CrmLeadsLeadIdRoute
@@ -401,6 +452,7 @@ const rootRouteChildren: RootRouteChildren = {
   SubscriptionsRoute: SubscriptionsRoute,
   UserPreferencesRoute: UserPreferencesRoute,
   UsersRoute: UsersRoute,
+  CrmContactsRoute: CrmContactsRouteWithChildren,
   CrmLeadsRoute: CrmLeadsRouteWithChildren,
   CrmPipelineRoute: CrmPipelineRoute,
 }

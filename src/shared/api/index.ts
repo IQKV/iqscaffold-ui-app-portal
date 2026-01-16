@@ -37,6 +37,7 @@ export type {
   LeadListParams,
   CreateLeadRequest,
   UpdateLeadRequest,
+  ConvertLeadResponse,
   PipelineStage,
   CreatePipelineStageRequest,
   UpdatePipelineStageRequest,
@@ -54,3 +55,18 @@ export type {
   ConversionMetrics,
   PaginatedResponse,
 } from "./crm/types";
+
+export { contactApi } from "./contact";
+export type {
+  Contact,
+  ContactStatus,
+  ContactListParams,
+  CreateContactRequest,
+  UpdateContactRequest,
+  UpdateLeadScoreRequest,
+  BulkCreateContactsRequest,
+  BulkUpdateStatusRequest,
+  BulkDeleteContactsRequest,
+  BulkUpdateLeadScoresRequest,
+  BulkOperationResponse,
+} from "./contact/types";

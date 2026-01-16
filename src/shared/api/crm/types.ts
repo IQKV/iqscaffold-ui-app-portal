@@ -60,6 +60,11 @@ export interface UpdateLeadRequest {
   source?: LeadSource;
 }
 
+export interface ConvertLeadResponse {
+  contactId: number;
+  message: string;
+}
+
 // Pipeline Types
 export interface PipelineStage {
   id: string;

@@ -77,6 +77,12 @@ export function CRMLayout({
       color: "green",
     },
     {
+      label: t`Contacts`,
+      icon: IconUsers,
+      href: "/crm/contacts",
+      color: "cyan",
+    },
+    {
       label: t`Pipeline`,
       icon: IconLayoutKanban,
       href: "/crm/pipeline",

@@ -119,6 +119,15 @@ export function Sidebar() {
 
       <NavLink
         component={Link}
+        to="/crm/contacts"
+        label={t`Contacts`}
+        leftSection={<IconUsers size="1rem" />}
+        active={location.pathname.startsWith("/crm/contacts")}
+        data-testid="nav-crm-contacts"
+      />
+
+      <NavLink
+        component={Link}
         to="/crm/pipeline"
         label={t`Pipeline`}
         leftSection={<IconLayoutKanban size="1rem" />}

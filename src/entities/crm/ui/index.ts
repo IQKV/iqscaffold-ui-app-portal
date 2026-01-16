@@ -3,3 +3,5 @@ export * from "./LeadScoreBadge";
 export * from "./LeadSourceBadge";
 export * from "./LeadForm";
 export * from "./FollowUpForm";
+export * from "./ContactCard";
+export * from "./ContactForm";

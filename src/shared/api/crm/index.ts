@@ -54,6 +54,25 @@ export const crmApi = {
       method: "DELETE",
     }),
 
+  /**
+   * Convert lead to contact
+   */
+  convertLead: (id: string) =>
+    apiRequest<Types.ConvertLeadResponse>({
+      url: `/api/v1/leads/${id}/convert`,
+      method: "POST",
+    }),
+
+  /**
+   * Get lead counts by source
+   */
+  getLeadStatsBySource: (params?: Types.DashboardStatsParams) =>
+    apiRequest<Record<string, number>>({
+      url: "/api/v1/leads/stats/by-source",
+      method: "GET",
+      params,
+    }),
+
   // Lead notes endpoints
   /**
    * Get all notes for a lead
