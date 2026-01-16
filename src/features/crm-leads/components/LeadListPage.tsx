@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef, useCallback } from "react";
 import {
   Container,
   Stack,
@@ -37,6 +37,11 @@ import {
   useMediaQuery,
   useDisclosure,
 } from "@mantine/hooks";
+import {
+  useKeyboardNavigation,
+  useAnnouncer,
+} from "@/shared/lib/accessibility";
+import { t } from "@lingui/core/macro";
 
 /**
  * LeadListPage Component
@@ -48,13 +53,16 @@ import {
  * - Bulk actions and export functionality
  * - Responsive design with mobile-optimized filters
  * - Touch-friendly interactions
+ * - Keyboard navigation and accessibility support
  *
- * Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 12.1
+ * Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 12.1, 14.1, 14.2, 14.6, 14.7
  */
 export const LeadListPage: React.FC = () => {
   const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const isTablet = useMediaQuery("(max-width: 1024px)");
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const { announce } = useAnnouncer();
 
   // Filter drawer state for mobile
   const [
@@ -70,6 +78,7 @@ export const LeadListPage: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedLeads, setSelectedLeads] = useState<string[]>([]);
+  const [focusedLeadIndex, setFocusedLeadIndex] = useState(0);
 
   // Build query params
   const queryParams = useMemo<LeadListParams>(() => {
@@ -104,6 +113,79 @@ export const LeadListPage: React.FC = () => {
   // Fetch leads with filters
   const { data, isLoading, error, refetch } = useLeads(queryParams);
 
+  const leads = data?.content || [];
+  const totalPages = data?.totalPages || 0;
+  const totalElements = data?.totalElements || 0;
+
+  // Keyboard shortcuts
+  const handleCreateLead = useCallback(() => {
+    // TODO: Open lead form modal
+    console.log("Opening create lead form");
+    announce("Opening create lead form", { priority: "polite" });
+  }, [announce]);
+
+  const handleFocusSearch = useCallback(() => {
+    searchInputRef.current?.focus();
+    announce("Search field focused", { priority: "polite" });
+  }, [announce]);
+
+  const handleSelectAll = useCallback(() => {
+    if (leads.length === 0) return;
+
+    if (selectedLeads.length === leads.length) {
+      setSelectedLeads([]);
+      announce("All leads deselected", { priority: "polite" });
+    } else {
+      setSelectedLeads(leads.map((lead) => lead.id));
+      announce(`${leads.length} leads selected`, { priority: "polite" });
+    }
+  }, [leads, selectedLeads.length, announce]);
+
+  // Setup keyboard shortcuts
+  useKeyboardNavigation({
+    shortcuts: [
+      {
+        key: "n",
+        ctrl: true,
+        action: handleCreateLead,
+        description: "Create new lead",
+      },
+      {
+        key: "k",
+        ctrl: true,
+        action: handleFocusSearch,
+        description: "Focus search",
+      },
+      {
+        key: "a",
+        ctrl: true,
+        action: handleSelectAll,
+        description: "Select/deselect all leads",
+      },
+      {
+        key: "j",
+        action: () => {
+          if (focusedLeadIndex < leads.length - 1) {
+            setFocusedLeadIndex(focusedLeadIndex + 1);
+          }
+        },
+        description: "Next lead",
+        preventDefault: true,
+      },
+      {
+        key: "k",
+        action: () => {
+          if (focusedLeadIndex > 0) {
+            setFocusedLeadIndex(focusedLeadIndex - 1);
+          }
+        },
+        description: "Previous lead",
+        preventDefault: true,
+      },
+    ],
+    enabled: !filterDrawerOpened,
+  });
+
   // Handle filter clearing
   const handleClearFilters = () => {
     setSearchTerm("");
@@ -111,6 +193,7 @@ export const LeadListPage: React.FC = () => {
     setSelectedStage(null);
     setSelectedUser(null);
     setCurrentPage(1);
+    announce("All filters cleared", { priority: "polite" });
   };
 
   // Check if any filters are active
@@ -126,32 +209,27 @@ export const LeadListPage: React.FC = () => {
     );
   };
 
-  // Handle select all
-  const handleSelectAll = () => {
-    if (data?.content) {
-      if (selectedLeads.length === data.content.length) {
-        setSelectedLeads([]);
-      } else {
-        setSelectedLeads(data.content.map((lead) => lead.id));
-      }
-    }
-  };
-
   // Handle export
   const handleExport = () => {
     // TODO: Implement export functionality
     console.log("Exporting leads with filters:", queryParams);
+    announce("Exporting leads", { priority: "polite" });
   };
 
   // Handle bulk actions
   const handleBulkQualify = () => {
     // TODO: Implement bulk qualify
     console.log("Bulk qualifying leads:", selectedLeads);
+    announce(`Qualifying ${selectedLeads.length} leads`, {
+      priority: "polite",
+    });
   };
 
   // Handle page change - preserves filter state
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+    setFocusedLeadIndex(0);
+    announce(`Page ${page} of ${totalPages}`, { priority: "polite" });
   };
 
   // Handle lead click navigation
@@ -159,11 +237,34 @@ export const LeadListPage: React.FC = () => {
     navigate({ to: `/crm/leads/${leadId}` });
   };
 
-  // Handle create lead
-  const handleCreateLead = () => {
-    // TODO: Open lead form modal
-    console.log("Opening create lead form");
+  // Handle lead keyboard navigation
+  const handleLeadKeyDown = (
+    event: React.KeyboardEvent,
+    leadId: string,
+    index: number
+  ) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handleLeadClick(leadId);
+    } else if (event.key === "ArrowDown") {
+      event.preventDefault();
+      if (index < leads.length - 1) {
+        setFocusedLeadIndex(index + 1);
+      }
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault();
+      if (index > 0) {
+        setFocusedLeadIndex(index - 1);
+      }
+    }
   };
+
+  // Announce filter changes
+  React.useEffect(() => {
+    if (data && !isLoading) {
+      announce(`${totalElements} leads found`, { priority: "polite" });
+    }
+  }, [data, isLoading, totalElements, announce]);
 
   // Render loading state
   if (isLoading) {
@@ -332,6 +433,7 @@ export const LeadListPage: React.FC = () => {
             {/* Search bar - always visible */}
             <Group gap="xs" wrap="nowrap">
               <TextInput
+                ref={searchInputRef}
                 placeholder={
                   isMobile
                     ? "Search leads..."
@@ -346,6 +448,7 @@ export const LeadListPage: React.FC = () => {
                       variant="subtle"
                       onClick={() => setSearchTerm("")}
                       size="sm"
+                      aria-label="Clear search"
                     >
                       <IconX size={16} />
                     </ActionIcon>
@@ -358,6 +461,7 @@ export const LeadListPage: React.FC = () => {
                     minHeight: isMobile ? "40px" : "36px",
                   },
                 }}
+                aria-label="Search leads"
               />
 
               {/* Mobile filter button */}
@@ -367,6 +471,7 @@ export const LeadListPage: React.FC = () => {
                   size="lg"
                   onClick={openFilterDrawer}
                   color={hasActiveFilters ? "blue" : "gray"}
+                  aria-label="Open filters"
                 >
                   <IconAdjustments size={20} />
                 </ActionIcon>
@@ -518,19 +623,17 @@ export const LeadListPage: React.FC = () => {
             </Center>
           </Paper>
         ) : (
-          <Stack gap={isMobile ? "sm" : "md"}>
-            {leads.map((lead) => (
+          <Stack
+            gap={isMobile ? "sm" : "md"}
+            role="list"
+            aria-label="Leads list"
+          >
+            {leads.map((lead, index) => (
               <div
                 key={lead.id}
                 onClick={() => handleLeadClick(lead.id)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    handleLeadClick(lead.id);
-                  }
-                }}
-                role="button"
-                tabIndex={0}
+                onKeyDown={(e) => handleLeadKeyDown(e, lead.id, index)}
+                role="listitem"
                 style={{
                   cursor: "pointer",
                   // Touch-friendly tap target
@@ -541,6 +644,8 @@ export const LeadListPage: React.FC = () => {
                   lead={lead}
                   variant={isMobile ? "compact" : "list"}
                   showQuickActions={!isMobile}
+                  tabIndex={index === focusedLeadIndex ? 0 : -1}
+                  onKeyDown={(e) => handleLeadKeyDown(e, lead.id, index)}
                   onQuickActions={
                     !isMobile
                       ? {

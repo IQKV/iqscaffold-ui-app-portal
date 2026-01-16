@@ -26,6 +26,9 @@ interface LeadCardProps {
   };
   // Drag and drop support for kanban view
   draggable?: boolean;
+  // Keyboard navigation support
+  tabIndex?: number;
+  onKeyDown?: (event: React.KeyboardEvent) => void;
 }
 
 /**
@@ -40,6 +43,7 @@ interface LeadCardProps {
  * - Drag-and-drop support for kanban view
  * - Visual indicators for overdue leads
  * - Responsive design for different contexts
+ * - Keyboard navigation and ARIA support (Requirements: 14.1, 14.2, 14.6, 14.7)
  */
 export const LeadCard: React.FC<LeadCardProps> = ({
   lead,
@@ -47,6 +51,8 @@ export const LeadCard: React.FC<LeadCardProps> = ({
   showQuickActions = true,
   onQuickActions,
   draggable = false,
+  tabIndex = 0,
+  onKeyDown,
 }) => {
   // Drag and drop setup for kanban view
   const { attributes, listeners, setNodeRef, transform, isDragging } =
@@ -84,6 +90,9 @@ export const LeadCard: React.FC<LeadCardProps> = ({
   // Get stage color for badge
   const stageColor = getStageColor(lead.currentStage);
 
+  // ARIA label for screen readers
+  const ariaLabel = `Lead: ${lead.name}, ${lead.company || "No company"}, Email: ${lead.email}, Stage: ${lead.currentStage}, Score: ${lead.score}${lead.isOverdue ? ", Overdue" : ""}`;
+
   // Render different variants
   if (variant === "compact") {
     return (
@@ -93,6 +102,10 @@ export const LeadCard: React.FC<LeadCardProps> = ({
         shadow="xs"
         padding="xs"
         data-testid="lead-card"
+        tabIndex={tabIndex}
+        onKeyDown={onKeyDown}
+        role="article"
+        aria-label={ariaLabel}
         {...attributes}
         {...listeners}
       >
@@ -108,7 +121,7 @@ export const LeadCard: React.FC<LeadCardProps> = ({
           <Group gap="xs" wrap="nowrap">
             <LeadScoreBadge score={lead.score} size="sm" />
             {lead.isOverdue && (
-              <Badge color="red" size="xs">
+              <Badge color="red" size="xs" aria-label="Overdue">
                 !
               </Badge>
             )}
@@ -126,6 +139,10 @@ export const LeadCard: React.FC<LeadCardProps> = ({
         shadow="sm"
         padding="md"
         data-testid="lead-card"
+        tabIndex={tabIndex}
+        onKeyDown={onKeyDown}
+        role="article"
+        aria-label={ariaLabel}
         {...attributes}
         {...listeners}
       >
@@ -155,7 +172,7 @@ export const LeadCard: React.FC<LeadCardProps> = ({
             <LeadScoreBadge score={lead.score} />
             <LeadSourceBadge source={lead.source} />
             {lead.isOverdue && (
-              <Badge color="red" size="xs">
+              <Badge color="red" size="xs" aria-label="Overdue">
                 Overdue
               </Badge>
             )}
@@ -163,7 +180,7 @@ export const LeadCard: React.FC<LeadCardProps> = ({
 
           {/* Quick actions */}
           {showQuickActions && onQuickActions && (
-            <Group gap="xs" mt="xs">
+            <Group gap="xs" mt="xs" role="group" aria-label="Lead actions">
               <Button
                 size="xs"
                 variant="light"
@@ -171,6 +188,7 @@ export const LeadCard: React.FC<LeadCardProps> = ({
                   e.stopPropagation();
                   onQuickActions.qualify();
                 }}
+                aria-label={`Qualify ${lead.name}`}
               >
                 Qualify
               </Button>
@@ -181,6 +199,7 @@ export const LeadCard: React.FC<LeadCardProps> = ({
                   e.stopPropagation();
                   onQuickActions.scheduleFollowUp();
                 }}
+                aria-label={`Schedule follow-up for ${lead.name}`}
               >
                 Follow-up
               </Button>
@@ -191,6 +210,7 @@ export const LeadCard: React.FC<LeadCardProps> = ({
                   e.stopPropagation();
                   onQuickActions.viewDetails();
                 }}
+                aria-label={`View details for ${lead.name}`}
               >
                 Details
               </Button>
@@ -209,6 +229,10 @@ export const LeadCard: React.FC<LeadCardProps> = ({
       shadow="sm"
       padding="md"
       data-testid="lead-card"
+      tabIndex={tabIndex}
+      onKeyDown={onKeyDown}
+      role="article"
+      aria-label={ariaLabel}
       {...attributes}
       {...listeners}
     >
@@ -248,18 +272,22 @@ export const LeadCard: React.FC<LeadCardProps> = ({
           <LeadScoreBadge score={lead.score} />
           <LeadSourceBadge source={lead.source} />
           {lead.isQualified && (
-            <Badge color="green" variant="light">
+            <Badge color="green" variant="light" aria-label="Qualified">
               Qualified
             </Badge>
           )}
           {lead.isOverdue && (
-            <Badge color="red" variant="filled">
+            <Badge color="red" variant="filled" aria-label="Overdue">
               Overdue
             </Badge>
           )}
           {lead.nextFollowUpDate && (
             <Tooltip label={`Next follow-up: ${lead.nextFollowUpDate}`}>
-              <Badge color="blue" variant="light">
+              <Badge
+                color="blue"
+                variant="light"
+                aria-label={`Follow-up scheduled for ${lead.nextFollowUpDate}`}
+              >
                 Follow-up scheduled
               </Badge>
             </Tooltip>
@@ -268,7 +296,7 @@ export const LeadCard: React.FC<LeadCardProps> = ({
 
         {/* Quick actions for efficiency */}
         {showQuickActions && onQuickActions && (
-          <Group gap="xs" mt="xs">
+          <Group gap="xs" mt="xs" role="group" aria-label="Lead actions">
             <Button
               size="xs"
               variant="light"
@@ -276,6 +304,7 @@ export const LeadCard: React.FC<LeadCardProps> = ({
                 e.stopPropagation();
                 onQuickActions.qualify();
               }}
+              aria-label={`Qualify ${lead.name}`}
             >
               Qualify
             </Button>
@@ -286,6 +315,7 @@ export const LeadCard: React.FC<LeadCardProps> = ({
                 e.stopPropagation();
                 onQuickActions.scheduleFollowUp();
               }}
+              aria-label={`Schedule follow-up for ${lead.name}`}
             >
               Schedule Follow-up
             </Button>
@@ -296,6 +326,7 @@ export const LeadCard: React.FC<LeadCardProps> = ({
                 e.stopPropagation();
                 onQuickActions.viewDetails();
               }}
+              aria-label={`View details for ${lead.name}`}
             >
               View Details
             </Button>

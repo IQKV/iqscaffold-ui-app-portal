@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Modal, Button, Group, Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { zodResolver } from "mantine-form-zod-resolver";
@@ -13,6 +13,7 @@ import {
   isDuplicateEmailError,
   getDuplicateEmailMessage,
 } from "../lib/validation-schemas";
+import { useFocusTrap, useAnnouncer } from "@/shared/lib/accessibility";
 
 interface LeadFormProps {
   opened: boolean;
@@ -43,16 +44,22 @@ const getLeadSourceOptions = () => [
  * - Lead source selection dropdown
  * - Company field (for future autocomplete enhancement)
  * - Optimistic updates via TanStack Query
+ * - Focus management and screen reader support (Requirements: 14.1, 14.2, 14.6, 14.7)
  *
- * Requirements: 1.1, 1.4, 11.1, 11.2, 11.3
+ * Requirements: 1.1, 1.4, 11.1, 11.2, 11.3, 14.1, 14.2, 14.6, 14.7
  */
 export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
   const createLeadMutation = useCreateLead();
   const updateLeadMutation = useUpdateLead();
+  const modalRef = useRef<HTMLDivElement>(null);
+  const { announce } = useAnnouncer();
 
   const isEditing = !!lead;
   const isLoading =
     createLeadMutation.isPending || updateLeadMutation.isPending;
+
+  // Focus trap for modal
+  useFocusTrap(modalRef, opened);
 
   const form = useForm<LeadFormData>({
     validate: zodResolver(createLeadFormSchema()),
@@ -75,8 +82,12 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
         company: lead.company || "",
         source: lead.source,
       });
+      announce(`Editing lead: ${lead.name}`, { priority: "polite" });
     } else {
       form.reset();
+      if (opened) {
+        announce("Create new lead form opened", { priority: "polite" });
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lead, opened]);
@@ -102,6 +113,7 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
               message: t`Lead updated successfully`,
               color: "green",
             });
+            announce("Lead updated successfully", { priority: "assertive" });
             onClose();
           },
           onError: (error: any) => {
@@ -109,13 +121,16 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
             const errorMessage =
               error?.response?.data?.message || error.message;
 
+            const message = isDuplicateEmailError(error)
+              ? getDuplicateEmailMessage()
+              : t`Failed to update lead: ${errorMessage}`;
+
             notifications.show({
               title: t`Error`,
-              message: isDuplicateEmailError(error)
-                ? getDuplicateEmailMessage()
-                : t`Failed to update lead: ${errorMessage}`,
+              message,
               color: "red",
             });
+            announce(`Error: ${message}`, { priority: "assertive" });
           },
         }
       );
@@ -136,6 +151,7 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
               message: t`Lead created successfully`,
               color: "green",
             });
+            announce("Lead created successfully", { priority: "assertive" });
             onClose();
           },
           onError: (error: any) => {
@@ -143,13 +159,16 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
             const errorMessage =
               error?.response?.data?.message || error.message;
 
+            const message = isDuplicateEmailError(error)
+              ? getDuplicateEmailMessage()
+              : t`Failed to create lead: ${errorMessage}`;
+
             notifications.show({
               title: t`Error`,
-              message: isDuplicateEmailError(error)
-                ? getDuplicateEmailMessage()
-                : t`Failed to create lead: ${errorMessage}`,
+              message,
               color: "red",
             });
+            announce(`Error: ${message}`, { priority: "assertive" });
           },
         }
       );
@@ -158,6 +177,7 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
 
   const handleClose = () => {
     form.reset();
+    announce("Form closed", { priority: "polite" });
     onClose();
   };
 
@@ -169,83 +189,102 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
       size="md"
       centered
       data-testid="modal-lead-form"
+      aria-labelledby="lead-form-title"
+      aria-describedby="lead-form-description"
     >
-      <form
-        onSubmit={form.onSubmit(handleSubmit)}
-        noValidate
-        data-testid="form-lead"
-      >
-        <Stack gap="md">
-          {/* Name field - Required (Requirement 11.1) */}
-          <FormField
-            type="text"
-            name="name"
-            label={t`Name`}
-            placeholder={t`Enter lead name`}
-            form={form}
-            withAsterisk
-          />
+      <div ref={modalRef}>
+        <form
+          onSubmit={form.onSubmit(handleSubmit)}
+          noValidate
+          data-testid="form-lead"
+          aria-label={isEditing ? "Edit lead form" : "Create lead form"}
+        >
+          <Stack gap="md">
+            {/* Name field - Required (Requirement 11.1) */}
+            <FormField
+              type="text"
+              name="name"
+              label={t`Name`}
+              placeholder={t`Enter lead name`}
+              form={form}
+              withAsterisk
+              aria-required="true"
+            />
 
-          {/* Email field - Required with validation (Requirements 11.1, 11.2) */}
-          <FormField
-            type="email"
-            name="email"
-            label={t`Email`}
-            placeholder={t`Enter email address`}
-            form={form}
-            withAsterisk
-          />
+            {/* Email field - Required with validation (Requirements 11.1, 11.2) */}
+            <FormField
+              type="email"
+              name="email"
+              label={t`Email`}
+              placeholder={t`Enter email address`}
+              form={form}
+              withAsterisk
+              aria-required="true"
+              aria-describedby="email-help"
+            />
 
-          {/* Phone field - Optional */}
-          <FormField
-            type="tel"
-            name="phone"
-            label={t`Phone`}
-            placeholder={t`Enter phone number`}
-            form={form}
-          />
+            {/* Phone field - Optional */}
+            <FormField
+              type="tel"
+              name="phone"
+              label={t`Phone`}
+              placeholder={t`Enter phone number`}
+              form={form}
+              aria-describedby="phone-help"
+            />
 
-          {/* Company field - Optional (for future autocomplete) */}
-          <FormField
-            type="text"
-            name="company"
-            label={t`Company`}
-            placeholder={t`Enter company name`}
-            form={form}
-          />
+            {/* Company field - Optional (for future autocomplete) */}
+            <FormField
+              type="text"
+              name="company"
+              label={t`Company`}
+              placeholder={t`Enter company name`}
+              form={form}
+              aria-describedby="company-help"
+            />
 
-          {/* Lead source selection - Required (Requirement 1.1) */}
-          <FormField
-            type="select"
-            name="source"
-            label={t`Lead Source`}
-            placeholder={t`Select lead source`}
-            data={getLeadSourceOptions()}
-            form={form}
-            withAsterisk
-            searchable
-          />
+            {/* Lead source selection - Required (Requirement 1.1) */}
+            <FormField
+              type="select"
+              name="source"
+              label={t`Lead Source`}
+              placeholder={t`Select lead source`}
+              data={getLeadSourceOptions()}
+              form={form}
+              withAsterisk
+              searchable
+              aria-required="true"
+              aria-describedby="source-help"
+            />
 
-          {/* Form actions */}
-          <Group justify="flex-end" mt="md">
-            <Button
-              variant="subtle"
-              onClick={handleClose}
-              disabled={isLoading}
-              data-testid="btn-cancel-lead-form"
+            {/* Form actions */}
+            <Group
+              justify="flex-end"
+              mt="md"
+              role="group"
+              aria-label="Form actions"
             >
-              {t`Cancel`}
-            </Button>
-            <Button
-              type="submit"
-              loading={isLoading}
-              data-testid="btn-submit-lead-form"
-            >
-              {isEditing ? t`Update` : t`Create`}
-            </Button>
-          </Group>
-        </Stack>
-      </form>
+              <Button
+                variant="subtle"
+                onClick={handleClose}
+                disabled={isLoading}
+                data-testid="btn-cancel-lead-form"
+                aria-label="Cancel and close form"
+              >
+                {t`Cancel`}
+              </Button>
+              <Button
+                type="submit"
+                loading={isLoading}
+                data-testid="btn-submit-lead-form"
+                aria-label={isEditing ? "Update lead" : "Create lead"}
+              >
+                {isEditing ? t`Update` : t`Create`}
+              </Button>
+            </Group>
+          </Stack>
+        </form>
+      </div>
     </Modal>
   );
 }

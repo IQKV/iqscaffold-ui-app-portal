@@ -47,8 +47,9 @@ export interface CRMLayoutProps {
  * - Mobile navigation with collapsible menu
  * - Bottom navigation bar for mobile
  * - Touch-friendly navigation elements
+ * - Proper ARIA landmarks and heading hierarchy (Requirements: 14.2, 14.7)
  *
- * Requirements: 8.6, 8.7, 12.6
+ * Requirements: 8.6, 8.7, 12.6, 14.2, 14.7
  */
 export function CRMLayout({
   children,
@@ -143,7 +144,7 @@ export function CRMLayout({
 
   // Render navigation items
   const renderNavItems = () => (
-    <Stack gap="xs">
+    <Stack gap="xs" role="navigation" aria-label="CRM navigation">
       {navItems.map((item) => {
         const Icon = item.icon;
         const active = isActive(item.href);
@@ -151,7 +152,7 @@ export function CRMLayout({
           <NavLink
             key={item.href}
             label={item.label}
-            leftSection={<Icon size={20} />}
+            leftSection={<Icon size={20} aria-hidden="true" />}
             active={active}
             onClick={() => handleNavigation(item.href)}
             color={item.color}
@@ -161,6 +162,7 @@ export function CRMLayout({
               // Touch-friendly height
               minHeight: isMobile ? "48px" : "40px",
             }}
+            aria-current={active ? "page" : undefined}
           />
         );
       })}
@@ -175,6 +177,8 @@ export function CRMLayout({
 
     return (
       <Box
+        component="nav"
+        aria-label="Mobile CRM navigation"
         style={{
           position: "fixed",
           bottom: 0,
@@ -188,7 +192,7 @@ export function CRMLayout({
           paddingBottom: "max(8px, env(safe-area-inset-bottom))",
         }}
       >
-        <Group justify="space-around" gap={0}>
+        <Group justify="space-around" gap={0} role="list">
           {navItems.map((item) => {
             const Icon = item.icon;
             const active = isActive(item.href);
@@ -196,6 +200,16 @@ export function CRMLayout({
               <Box
                 key={item.href}
                 onClick={() => handleNavigation(item.href)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleNavigation(item.href);
+                  }
+                }}
+                role="listitem"
+                tabIndex={0}
+                aria-label={item.label}
+                aria-current={active ? "page" : undefined}
                 style={{
                   flex: 1,
                   display: "flex",
@@ -212,6 +226,7 @@ export function CRMLayout({
                 <Icon
                   size={24}
                   color={active ? "var(--mantine-color-blue-6)" : "#868e96"}
+                  aria-hidden="true"
                 />
                 <Text
                   size="xs"
@@ -249,19 +264,30 @@ export function CRMLayout({
         py={isMobile ? "xs" : "md"}
         // Add bottom padding for mobile bottom nav
         pb={isMobile ? "80px" : "md"}
+        component="main"
+        role="main"
+        aria-label="CRM content"
       >
         <Stack gap={isMobile ? "sm" : "lg"}>
           {/* Mobile Header with Burger Menu */}
           {isMobile && (
-            <Group justify="space-between" mb="xs">
+            <Group
+              justify="space-between"
+              mb="xs"
+              component="header"
+              role="banner"
+            >
               <Group gap="sm">
                 <Burger
                   opened={mobileNavOpened}
                   onClick={toggleMobileNav}
                   size="sm"
-                  aria-label={t`Toggle navigation`}
+                  aria-label={
+                    mobileNavOpened ? t`Close navigation` : t`Open navigation`
+                  }
+                  aria-expanded={mobileNavOpened}
                 />
-                <Text fw={600} size="lg">
+                <Text fw={600} size="lg" component="h1">
                   {title || t`CRM`}
                 </Text>
               </Group>
@@ -270,11 +296,13 @@ export function CRMLayout({
 
           {/* Breadcrumb Navigation - Desktop only */}
           {!isMobile && showBreadcrumbs && breadcrumbs.length > 1 && (
-            <Breadcrumbs>
+            <Breadcrumbs aria-label="Breadcrumb navigation">
               {breadcrumbs.map((item, index) => {
                 const isLast = index === breadcrumbs.length - 1;
                 return isLast ? (
-                  <span key={item.href}>{item.label}</span>
+                  <span key={item.href} aria-current="page">
+                    {item.label}
+                  </span>
                 ) : (
                   <Anchor
                     key={item.href}
@@ -302,6 +330,8 @@ export function CRMLayout({
             p={isMobile ? 0 : "md"}
             radius={isMobile ? 0 : "md"}
             withBorder={!isMobile}
+            component="section"
+            aria-label="Page content"
           >
             {children}
           </Paper>
