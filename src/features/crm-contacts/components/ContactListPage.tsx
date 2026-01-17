@@ -75,7 +75,8 @@ export const ContactListPage: React.FC = () => {
   });
 
   // Create contact mutation
-  const { mutate: createContact, isPending: createLoading } = useCreateContact();
+  const { mutate: createContact, isPending: createLoading } =
+    useCreateContact();
 
   // Delete contact mutation
   const { mutate: deleteContact } = useDeleteContact();
@@ -149,7 +150,7 @@ export const ContactListPage: React.FC = () => {
           message: error.message || "Failed to create contact",
           color: "red",
         });
-      }
+      },
     });
   };
 
@@ -163,22 +164,23 @@ export const ContactListPage: React.FC = () => {
       ),
       labels: { confirm: "Delete", cancel: "Cancel" },
       confirmProps: { color: "red" },
-      onConfirm: () => deleteContact(id, {
-        onSuccess: () => {
-          notifications.show({
-            title: "Success",
-            message: "Contact deleted successfully",
-            color: "green",
-          });
-        },
-        onError: (error: any) => {
-          notifications.show({
-            title: "Error",
-            message: error.message || "Failed to delete contact",
-            color: "red",
-          });
-        }
-      }),
+      onConfirm: () =>
+        deleteContact(id, {
+          onSuccess: () => {
+            notifications.show({
+              title: "Success",
+              message: "Contact deleted successfully",
+              color: "green",
+            });
+          },
+          onError: (error: any) => {
+            notifications.show({
+              title: "Error",
+              message: error.message || "Failed to delete contact",
+              color: "red",
+            });
+          },
+        }),
     });
   };
 
