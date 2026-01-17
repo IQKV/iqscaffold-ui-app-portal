@@ -13,13 +13,20 @@ import {
   Alert,
   LoadingOverlay,
   Box,
+  Paper,
+  Checkbox,
+  Menu,
 } from "@mantine/core";
 import {
   IconPlus,
   IconSearch,
   IconFilter,
   IconAlertCircle,
+  IconDotsVertical,
+  IconTrash,
+  IconCircleCheck,
 } from "@tabler/icons-react";
+import { t } from "@lingui/core/macro";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { notifications } from "@mantine/notifications";
@@ -48,6 +55,7 @@ export const ContactListPage: React.FC = () => {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<ContactStatus | "">("");
   const [createModalOpen, setCreateModalOpen] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
   // Fetch contacts
   const {
@@ -106,6 +114,54 @@ export const ContactListPage: React.FC = () => {
     },
   });
 
+  // Bulk mutations
+  const bulkDeleteMutation = useMutation({
+    mutationFn: (contactIds: number[]) =>
+      contactApi.bulkDeleteContacts({ contactIds }),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["contacts"] });
+      setSelectedIds([]);
+      notifications.show({
+        title: t`Bulk Operation Successful`,
+        message: t`Deleted ${data.successCount} contacts. ${data.failureCount} failed.`,
+        color: "green",
+      });
+    },
+    onError: (error: any) => {
+      notifications.show({
+        title: t`Error`,
+        message: error.message || t`Bulk delete failed`,
+        color: "red",
+      });
+    },
+  });
+
+  const bulkUpdateStatusMutation = useMutation({
+    mutationFn: ({
+      contactIds,
+      status,
+    }: {
+      contactIds: number[];
+      status: ContactStatus;
+    }) => contactApi.bulkUpdateStatus({ contactIds, status }),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["contacts"] });
+      setSelectedIds([]);
+      notifications.show({
+        title: t`Bulk Operation Successful`,
+        message: t`Updated ${data.successCount} contacts. ${data.failureCount} failed.`,
+        color: "green",
+      });
+    },
+    onError: (error: any) => {
+      notifications.show({
+        title: t`Error`,
+        message: error.message || t`Bulk status update failed`,
+        color: "red",
+      });
+    },
+  });
+
   // Handlers
   const handleCreateContact = (values: any) => {
     createMutation.mutate(values);
@@ -131,6 +187,40 @@ export const ContactListPage: React.FC = () => {
 
   const handleEditContact = (id: number) => {
     navigate({ to: `/crm/contacts/${id}` });
+  };
+
+  const toggleSelectAll = (checked: boolean) => {
+    if (checked && contactsData) {
+      setSelectedIds(contactsData.content.map((c) => c.id));
+    } else {
+      setSelectedIds([]);
+    }
+  };
+
+  const toggleSelect = (id: number, checked: boolean) => {
+    if (checked) {
+      setSelectedIds((prev) => [...prev, id]);
+    } else {
+      setSelectedIds((prev) => prev.filter((prevId) => prevId !== id));
+    }
+  };
+
+  const handleBulkDelete = () => {
+    modals.openConfirmModal({
+      title: t`Delete Multiple Contacts`,
+      children: (
+        <Text size="sm">
+          {t`Are you sure you want to delete ${selectedIds.length} contacts? This action cannot be undone.`}
+        </Text>
+      ),
+      labels: { confirm: t`Delete`, cancel: t`Cancel` },
+      confirmProps: { color: "red" },
+      onConfirm: () => bulkDeleteMutation.mutate(selectedIds),
+    });
+  };
+
+  const handleBulkStatusUpdate = (status: ContactStatus) => {
+    bulkUpdateStatusMutation.mutate({ contactIds: selectedIds, status });
   };
 
   return (
@@ -178,6 +268,82 @@ export const ContactListPage: React.FC = () => {
           />
         </Group>
 
+        {/* Bulk Actions Bar */}
+        {selectedIds.length > 0 && (
+          <Paper
+            p="sm"
+            withBorder
+            shadow="xs"
+            bg="var(--mantine-color-blue-0)"
+            style={{ borderRadius: "var(--mantine-radius-md)" }}
+          >
+            <Group justify="space-between">
+              <Group gap="md">
+                <Checkbox
+                  indeterminate={
+                    selectedIds.length > 0 &&
+                    selectedIds.length < (contactsData?.content.length || 0)
+                  }
+                  checked={
+                    contactsData
+                      ? selectedIds.length === contactsData.content.length
+                      : false
+                  }
+                  onChange={(e) => toggleSelectAll(e.currentTarget.checked)}
+                />
+                <Text size="sm" fw={500}>
+                  {t`${selectedIds.length} contacts selected`}
+                </Text>
+              </Group>
+              <Group gap="xs">
+                <Menu position="bottom-end" withinPortal shadow="md">
+                  <Menu.Target>
+                    <Button
+                      variant="light"
+                      size="xs"
+                      leftSection={<IconCircleCheck size={16} />}
+                      loading={bulkUpdateStatusMutation.isPending}
+                    >
+                      {t`Update Status`}
+                    </Button>
+                  </Menu.Target>
+                  <Menu.Dropdown>
+                    <Menu.Item
+                      onClick={() => handleBulkStatusUpdate(ContactStatus.ACTIVE)}
+                    >
+                      {t`Set Active`}
+                    </Menu.Item>
+                    <Menu.Item
+                      onClick={() =>
+                        handleBulkStatusUpdate(ContactStatus.INACTIVE)
+                      }
+                    >
+                      {t`Set Inactive`}
+                    </Menu.Item>
+                    <Menu.Item
+                      onClick={() =>
+                        handleBulkStatusUpdate(ContactStatus.ARCHIVED)
+                      }
+                    >
+                      {t`Set Archived`}
+                    </Menu.Item>
+                  </Menu.Dropdown>
+                </Menu>
+                <Button
+                  variant="light"
+                  color="red"
+                  size="xs"
+                  leftSection={<IconTrash size={16} />}
+                  onClick={handleBulkDelete}
+                  loading={bulkDeleteMutation.isPending}
+                >
+                  {t`Delete Selected`}
+                </Button>
+              </Group>
+            </Group>
+          </Paper>
+        )}
+
         {/* Error state */}
         {error && (
           <Alert icon={<IconAlertCircle size={16} />} title="Error" color="red">
@@ -198,6 +364,8 @@ export const ContactListPage: React.FC = () => {
                   contact={contact}
                   variant="list"
                   showQuickActions
+                  selected={selectedIds.includes(contact.id)}
+                  onSelect={(checked) => toggleSelect(contact.id, checked)}
                   onClick={() => handleViewContact(contact.id)}
                   onEdit={() => handleEditContact(contact.id)}
                   onDelete={() =>

@@ -169,6 +169,16 @@ export const crmApi = {
     }),
 
   /**
+   * Reorder a pipeline stage
+   */
+  reorderStage: (id: string, newOrder: number) =>
+    apiRequest<Types.PipelineStage>({
+      url: `/api/v1/pipeline/stages/${id}/reorder`,
+      method: "PUT",
+      params: { newOrder },
+    }),
+
+  /**
    * Move a lead to a different stage
    */
   moveLeadToStage: (leadId: string, stageId: string) =>

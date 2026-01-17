@@ -17,6 +17,7 @@ interface PipelineMetricsProps {
   conversionMetrics?: ConversionMetrics;
   showVelocity?: boolean;
   showConversionRates?: boolean;
+  extraActions?: React.ReactNode;
 }
 
 /**
@@ -38,6 +39,7 @@ export const PipelineMetrics: React.FC<PipelineMetricsProps> = ({
   conversionMetrics,
   showVelocity = true,
   showConversionRates = true,
+  extraActions,
 }) => {
   // Calculate total leads across all stages
   const totalLeads = stages.reduce(
@@ -70,15 +72,18 @@ export const PipelineMetrics: React.FC<PipelineMetricsProps> = ({
           <Text size="lg" fw={600}>
             {t`Pipeline Metrics`}
           </Text>
-          <Tooltip label={t`Pipeline health based on active leads percentage`}>
-            <Badge
-              size="lg"
-              color={getHealthColor(healthScore)}
-              leftSection={<IconTarget size={16} />}
-            >
-              {t`Health`}: {healthScore}%
-            </Badge>
-          </Tooltip>
+          <Group gap="sm">
+            <Tooltip label={t`Pipeline health based on active leads percentage`}>
+              <Badge
+                size="lg"
+                color={getHealthColor(healthScore)}
+                leftSection={<IconTarget size={16} />}
+              >
+                {t`Health`}: {healthScore}%
+              </Badge>
+            </Tooltip>
+            {extraActions}
+          </Group>
         </Group>
 
         <SimpleGrid cols={{ base: 1, sm: 2, md: 3, lg: 4 }} spacing="md">

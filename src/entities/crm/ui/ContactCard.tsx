@@ -10,6 +10,7 @@ import {
   Box,
   Avatar,
   ActionIcon,
+  Checkbox,
 } from "@mantine/core";
 import {
   IconMail,
@@ -32,6 +33,8 @@ interface ContactCardProps {
   onClick?: () => void;
   tabIndex?: number;
   onKeyDown?: (event: React.KeyboardEvent) => void;
+  selected?: boolean;
+  onSelect?: (selected: boolean) => void;
 }
 
 /**
@@ -56,6 +59,8 @@ export const ContactCard: React.FC<ContactCardProps> = ({
   onClick,
   tabIndex = 0,
   onKeyDown,
+  selected,
+  onSelect,
 }) => {
   // Business logic: determine card styling based on contact status
   const cardStyle = useMemo(() => {
@@ -233,6 +238,17 @@ export const ContactCard: React.FC<ContactCardProps> = ({
       aria-label={ariaLabel}
     >
       <Group justify="space-between" wrap="nowrap">
+        {/* Selection Checkbox */}
+        {onSelect && (
+          <Checkbox
+            checked={selected}
+            onChange={(e) => onSelect(e.currentTarget.checked)}
+            onClick={(e) => e.stopPropagation()}
+            aria-label="Select contact"
+            mr="sm"
+          />
+        )}
+
         {/* Left: Contact info */}
         <Group gap="md" style={{ flex: 1, minWidth: 0 }}>
           <Avatar color="blue" radius="xl" size="md">

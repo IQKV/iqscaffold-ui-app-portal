@@ -356,6 +356,22 @@ export const useDeletePipelineStage = () => {
   });
 };
 
+/**
+ * Hook to reorder a pipeline stage
+ */
+export const useReorderPipelineStage = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ id, newOrder }: { id: string; newOrder: number }) =>
+      crmApi.reorderStage(id, newOrder),
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: crmKeys.pipelineStages() });
+    },
+  });
+};
+
 // Follow-up Query Hooks
 
 /**
@@ -507,5 +523,29 @@ export const useConversionMetrics = (params?: DashboardStatsParams) => {
     queryKey: crmKeys.conversionMetrics(params),
     queryFn: () => crmApi.getConversionMetrics(params),
     staleTime: 5 * 60 * 1000,
+  });
+};
+
+/**
+ * Hook to convert a lead to a contact
+ */
+export const useConvertLead = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (id: string) => crmApi.convertLead(id),
+
+    onSuccess: (response, id) => {
+      // Invalidate related queries
+      queryClient.invalidateQueries({ queryKey: crmKeys.lead(id) });
+      queryClient.invalidateQueries({ queryKey: crmKeys.leads() });
+      queryClient.invalidateQueries({ queryKey: ["contacts"] });
+      queryClient.invalidateQueries({ queryKey: crmKeys.dashboard() });
+      queryClient.invalidateQueries({
+        queryKey: crmKeys.leadActivities(id),
+      });
+
+      return response;
+    },
   });
 };

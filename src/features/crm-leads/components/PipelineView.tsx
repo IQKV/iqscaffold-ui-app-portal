@@ -9,6 +9,9 @@ import {
   Text,
   Alert,
   Box,
+  ActionIcon,
+  Tooltip,
+  Button,
 } from "@mantine/core";
 import {
   DndContext,
@@ -21,13 +24,14 @@ import {
   useSensors,
   PointerSensor,
 } from "@dnd-kit/core";
-import { IconAlertCircle } from "@tabler/icons-react";
+import { IconAlertCircle, IconSettings } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
 import { useNavigate } from "@tanstack/react-router";
 import { notifications } from "@mantine/notifications";
 import { useMediaQuery } from "@mantine/hooks";
 import { PipelineStageColumn } from "./PipelineStageColumn";
 import { PipelineMetrics } from "./PipelineMetrics";
+import { PipelineSettingsModal } from "./PipelineSettingsModal";
 import { PipelineSkeleton } from "./skeletons";
 import { LeadCard } from "@/entities/crm/ui";
 import { LazyLoad } from "@/shared/ui";
@@ -49,18 +53,6 @@ interface PipelineViewProps {
  * PipelineView Component
  *
  * Main pipeline kanban view for visualizing and managing leads through sales stages.
- *
- * Features:
- * - Horizontal scrollable stage columns
- * - Pipeline metrics header with conversion rates
- * - Drag-and-drop lead movement between stages
- * - Touch-friendly drag and drop for mobile/tablet
- * - Optimistic updates for better UX
- * - Automatic activity logging on stage changes
- * - Visual emphasis for overdue leads
- * - Responsive design with mobile optimization
- *
- * Requirements: 3.1, 3.2, 3.3, 3.4, 3.7, 12.2, 12.4
  */
 export const PipelineView: React.FC<PipelineViewProps> = ({
   showConversionMetrics = true,
@@ -71,24 +63,22 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
   const [activeId, setActiveId] = useState<string | null>(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
   const isTablet = useMediaQuery("(max-width: 1024px)");
+  const [settingsOpened, setSettingsOpened] = useState(false);
 
   // Configure sensors for touch and mouse support
-  // Touch sensor with activation constraint to prevent accidental drags
   const touchSensor = useSensor(TouchSensor, {
     activationConstraint: {
-      delay: 250, // 250ms delay before drag starts
-      tolerance: 5, // 5px movement tolerance
+      delay: 250,
+      tolerance: 5,
     },
   });
 
-  // Mouse sensor for desktop
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
-      distance: 10, // 10px movement before drag starts
+      distance: 10,
     },
   });
 
-  // Pointer sensor as fallback
   const pointerSensor = useSensor(PointerSensor, {
     activationConstraint: {
       distance: 8,
@@ -117,7 +107,6 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
   // Move lead mutation
   const { mutate: moveLeadToStage, isPending: isMoving } = useMoveLeadToStage();
 
-  // Extract leads from paginated response - memoized to prevent dependency issues
   const leads = useMemo(() => {
     return leadsResponse?.content || [];
   }, [leadsResponse?.content]);
@@ -126,14 +115,11 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
   const leadsByStage = useMemo(() => {
     const grouped: Record<string, Lead[]> = {};
 
-    // Initialize all stages with empty arrays
     stages.forEach((stage) => {
       grouped[stage.id] = [];
     });
 
-    // Group leads by their current stage
     leads.forEach((lead) => {
-      // Find the stage ID that matches the lead's current stage name
       const stage = stages.find((s) => s.name === lead.currentStage);
       if (stage) {
         grouped[stage.id].push(lead);
@@ -143,7 +129,6 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
     return grouped;
   }, [leads, stages]);
 
-  // Get the currently dragged lead
   const activeLead = useMemo(() => {
     if (!activeId) {
       return null;
@@ -151,71 +136,38 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
     return leads.find((lead) => lead.id === activeId);
   }, [activeId, leads]);
 
-  // Handle drag start
   const handleDragStart = useCallback((event: DragStartEvent) => {
     setActiveId(event.active.id as string);
   }, []);
 
-  // Handle drag end - move lead to new stage
   const handleDragEnd = useCallback(
     (event: DragEndEvent) => {
       const { active, over } = event;
-
       setActiveId(null);
-
-      if (!over) {
-        return;
-      }
+      if (!over) return;
 
       const leadId = active.id as string;
       const targetStageId = over.id as string;
-
-      // Find the lead and target stage
       const lead = leads.find((l) => l.id === leadId);
       const targetStage = stages.find((s) => s.id === targetStageId);
 
-      if (!lead || !targetStage) {
-        return;
-      }
+      if (!lead || !targetStage) return;
+      if (lead.currentStage === targetStage.name) return;
 
-      // Don't move if already in the target stage
-      if (lead.currentStage === targetStage.name) {
-        return;
-      }
-
-      // Move the lead
       moveLeadToStage(
         { leadId, stageId: targetStageId },
         {
           onSuccess: () => {
             notifications.show({
-              title: "Lead Moved",
-              message: `${lead.name} moved to ${targetStage.name}`,
+              title: t`Lead Moved`,
+              message: t`${lead.name} moved to ${targetStage.name}`,
               color: "green",
             });
-
-            // Business logic: Track conversion if moved to Won stage
-            if (targetStage.type === "WON") {
-              notifications.show({
-                title: "Lead Converted!",
-                message: `${lead.name} has been marked as Won! 🎉`,
-                color: "green",
-              });
-            }
-
-            // Business logic: Track lost lead if moved to Lost stage
-            if (targetStage.type === "LOST") {
-              notifications.show({
-                title: "Lead Lost",
-                message: `${lead.name} has been marked as Lost`,
-                color: "red",
-              });
-            }
           },
           onError: (error) => {
             notifications.show({
-              title: "Failed to Move Lead",
-              message: "Please try again",
+              title: t`Failed to Move Lead`,
+              message: t`Please try again`,
               color: "red",
             });
             console.error("Failed to move lead:", error);
@@ -226,7 +178,6 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
     [leads, stages, moveLeadToStage]
   );
 
-  // Handle lead click - navigate to detail page
   const handleLeadClick = useCallback(
     (lead: Lead) => {
       navigate({ to: `/crm/leads/${lead.id}` });
@@ -234,60 +185,43 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
     [navigate]
   );
 
-  // Loading state
   if (stagesLoading || leadsLoading) {
     return (
-      <Container
-        size="100%"
-        px={isMobile ? "xs" : "md"}
-        py={isMobile ? "sm" : "lg"}
-      >
+      <Container size="100%" px={isMobile ? "xs" : "md"} py={isMobile ? "sm" : "lg"}>
         <PipelineSkeleton stageCount={5} cardsPerStage={3} />
       </Container>
     );
   }
 
-  // Error state
   if (stagesError || leadsError) {
     return (
       <Container size="lg" py="xl">
-        <Alert
-          icon={<IconAlertCircle size={16} />}
-          title={t`Error Loading Pipeline`}
-          color="red"
-        >
-          {stagesError?.message ||
-            leadsError?.message ||
-            t`Failed to load pipeline data`}
+        <Alert icon={<IconAlertCircle size={16} />} title={t`Error Loading Pipeline`} color="red">
+          {stagesError?.message || leadsError?.message || t`Failed to load pipeline data`}
         </Alert>
       </Container>
     );
   }
 
-  // Empty state
   if (stages.length === 0) {
     return (
       <Container size="lg" py="xl">
-        <Alert
-          icon={<IconAlertCircle size={16} />}
-          title={t`No Pipeline Stages`}
-          color="blue"
-        >
-          {t`Please configure pipeline stages to start using the kanban view.`}
+        <Alert icon={<IconAlertCircle size={16} />} title={t`No Pipeline Stages`} color="blue">
+          <Group justify="space-between" align="center" w="100%">
+            <Text>{t`Please configure pipeline stages to start using the kanban view.`}</Text>
+            <Button variant="light" leftSection={<IconSettings size={16} />} onClick={() => setSettingsOpened(true)}>
+              {t`Manage Stages`}
+            </Button>
+          </Group>
         </Alert>
+        <PipelineSettingsModal opened={settingsOpened} onClose={() => setSettingsOpened(false)} />
       </Container>
     );
   }
 
   return (
-    <Container
-      size="100%"
-      px={isMobile ? "xs" : "md"}
-      py={isMobile ? "sm" : "lg"}
-      style={{ maxWidth: "100vw" }}
-    >
+    <Container size="100%" px={isMobile ? "xs" : "md"} py={isMobile ? "sm" : "lg"} style={{ maxWidth: "100vw" }}>
       <Stack gap={isMobile ? "md" : "lg"}>
-        {/* Pipeline Metrics Header */}
         {showConversionMetrics && !isMobile && (
           <PipelineMetrics
             stages={stages.map((stage) => ({
@@ -297,15 +231,26 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
             conversionMetrics={conversionMetrics}
             showVelocity
             showConversionRates
+            extraActions={
+              <Tooltip label={t`Manage Pipeline Stages`}>
+                <ActionIcon variant="light" onClick={() => setSettingsOpened(true)} size="lg">
+                  <IconSettings size={20} />
+                </ActionIcon>
+              </Tooltip>
+            }
           />
         )}
 
-        {/* Mobile: Simplified metrics */}
         {showConversionMetrics && isMobile && (
-          <Box>
-            <Text size="sm" fw={500} mb="xs">
-              Pipeline Overview
-            </Text>
+          <Box pos="relative">
+            <Group justify="space-between" align="center" mb="xs">
+              <Text size="sm" fw={500}>
+                {t`Pipeline Overview`}
+              </Text>
+              <ActionIcon variant="subtle" onClick={() => setSettingsOpened(true)}>
+                <IconSettings size={18} />
+              </ActionIcon>
+            </Group>
             <Group gap="xs">
               {stages.slice(0, 3).map((stage) => (
                 <Text key={stage.id} size="xs" c="dimmed">
@@ -316,41 +261,13 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
           </Box>
         )}
 
-        {/* Pipeline Kanban Board */}
-        <DndContext
-          onDragStart={handleDragStart}
-          onDragEnd={handleDragEnd}
-          sensors={sensors}
-        >
-          <ScrollArea
-            type="auto"
-            styles={{
-              viewport: {
-                // Ensure smooth scrolling on mobile
-                WebkitOverflowScrolling: "touch",
-              },
-            }}
-          >
-            <Group
-              align="flex-start"
-              gap={isMobile ? "xs" : "md"}
-              wrap="nowrap"
-              style={{
-                minWidth: "max-content",
-                paddingBottom: 16,
-                // Touch-friendly spacing
-                paddingRight: isMobile ? 8 : 0,
-              }}
-            >
+        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={sensors}>
+          <ScrollArea type="auto">
+            <Group align="flex-start" gap={isMobile ? "xs" : "md"} wrap="nowrap" style={{ minWidth: "max-content", paddingBottom: 16 }}>
               {stages
                 .sort((a, b) => a.orderIndex - b.orderIndex)
                 .map((stage) => (
-                  <LazyLoad
-                    key={stage.id}
-                    height={600}
-                    threshold={0.1}
-                    rootMargin="100px"
-                  >
+                  <LazyLoad key={stage.id} height={600} threshold={0.1}>
                     <PipelineStageColumn
                       stage={stage}
                       leads={leadsByStage[stage.id] || []}
@@ -365,26 +282,16 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
             </Group>
           </ScrollArea>
 
-          {/* Drag Overlay - shows the dragged lead card */}
           <DragOverlay dropAnimation={null}>
             {activeLead ? (
-              <Box
-                style={{
-                  // Make drag overlay more visible
-                  opacity: 0.9,
-                  transform: "rotate(3deg)",
-                  cursor: "grabbing",
-                }}
-              >
-                <LeadCard
-                  lead={activeLead}
-                  variant={isMobile ? "compact" : "kanban"}
-                  showQuickActions={false}
-                />
+              <Box style={{ opacity: 0.9, transform: "rotate(3deg)", cursor: "grabbing" }}>
+                <LeadCard lead={activeLead} variant={isMobile ? "compact" : "kanban"} showQuickActions={false} />
               </Box>
             ) : null}
           </DragOverlay>
         </DndContext>
+
+        <PipelineSettingsModal opened={settingsOpened} onClose={() => setSettingsOpened(false)} />
       </Stack>
     </Container>
   );

@@ -57,16 +57,4 @@ export type {
 } from "./crm/types";
 
 export { contactApi } from "./contact";
-export type {
-  Contact,
-  ContactStatus,
-  ContactListParams,
-  CreateContactRequest,
-  UpdateContactRequest,
-  UpdateLeadScoreRequest,
-  BulkCreateContactsRequest,
-  BulkUpdateStatusRequest,
-  BulkDeleteContactsRequest,
-  BulkUpdateLeadScoresRequest,
-  BulkOperationResponse,
-} from "./contact/types";
+export * from "./contact/types";

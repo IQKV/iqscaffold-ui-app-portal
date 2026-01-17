@@ -24,10 +24,12 @@ import {
   IconPhone,
   IconBuilding,
 } from "@tabler/icons-react";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
+import { notifications } from "@mantine/notifications";
 import { useNavigate, useParams } from "@tanstack/react-router";
-import { useLead } from "@/entities/crm/api/crm-queries";
+import { useLead, useConvertLead } from "@/entities/crm/api/crm-queries";
 import { LeadNotesSection } from "./LeadNotesSection";
+import { FollowUpSection } from "./FollowUpSection";
 import { ActivityTimeline } from "./ActivityTimeline";
 import { LeadDetailSkeleton } from "./skeletons";
 import { LeadScoreBadge, LeadSourceBadge } from "@/entities/crm/ui";
@@ -57,9 +59,24 @@ export const LeadDetailPage: React.FC = () => {
   };
 
   // Handle convert lead
-  const handleConvertLead = () => {
-    // TODO: Implement convert lead functionality
-    console.log("Converting lead:", leadId);
+  const convertLeadMutation = useConvertLead();
+  const handleConvertLead = async () => {
+    try {
+      const response = await convertLeadMutation.mutateAsync(leadId);
+      notifications.show({
+        title: t`Success`,
+        message: response.message || t`Lead converted to contact successfully`,
+        color: "green",
+      });
+      // Redirect to contact page
+      navigate({ to: `/crm/contacts/${response.contactId}` });
+    } catch (error: any) {
+      notifications.show({
+        title: t`Error`,
+        message: error.message || t`Failed to convert lead`,
+        color: "red",
+      });
+    }
   };
 
   // Handle edit lead
@@ -247,6 +264,7 @@ export const LeadDetailPage: React.FC = () => {
                 leftSection={<IconUserCheck size={16} />}
                 variant="light"
                 onClick={handleConvertLead}
+                loading={convertLeadMutation.isPending}
               >
                 {t`Convert to Contact`}
               </Button>
@@ -352,11 +370,7 @@ export const LeadDetailPage: React.FC = () => {
             </Tabs.Panel>
 
             <Tabs.Panel value="follow-ups">
-              <Paper p="xl" withBorder>
-                <Center>
-                  <Text c="dimmed">Follow-ups section coming soon...</Text>
-                </Center>
-              </Paper>
+              <FollowUpSection leadId={leadId} />
             </Tabs.Panel>
           </Box>
         </Tabs>
