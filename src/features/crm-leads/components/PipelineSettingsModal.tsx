@@ -66,7 +66,9 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
   const [editStage, setEditStage] = useState<Partial<PipelineStage>>({});
 
   const handleCreate = async () => {
-    if (!newStage.name) return;
+    if (!newStage.name) {
+      return;
+    }
     try {
       await createMutation.mutateAsync({
         ...newStage,
@@ -89,7 +91,9 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
   };
 
   const handleUpdate = async () => {
-    if (!editingId || !editStage.name) return;
+    if (!editingId || !editStage.name) {
+      return;
+    }
     try {
       await updateMutation.mutateAsync({
         id: editingId,
@@ -137,7 +141,9 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
     direction: "up" | "down"
   ) => {
     const newOrder = direction === "up" ? currentOrder - 1 : currentOrder + 1;
-    if (newOrder < 0 || newOrder >= stages.length) return;
+    if (newOrder < 0 || newOrder >= stages.length) {
+      return;
+    }
 
     try {
       await reorderMutation.mutateAsync({ id, newOrder });

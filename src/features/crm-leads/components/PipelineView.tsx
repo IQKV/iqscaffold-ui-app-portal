@@ -144,15 +144,24 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
     (event: DragEndEvent) => {
       const { active, over } = event;
       setActiveId(null);
-      if (!over) return;
+      if (!over) {
+        return;
+      }
 
       const leadId = active.id as string;
       const targetStageId = over.id as string;
       const lead = leads.find((l) => l.id === leadId);
       const targetStage = stages.find((s) => s.id === targetStageId);
 
-      if (!lead || !targetStage) return;
-      if (lead.currentStage === targetStage.name) return;
+      if (!lead || !targetStage) {
+        return;
+      }
+      if (lead.currentStage === targetStage.name) {
+        return;
+      }
+
+      const leadName = lead.name;
+      const stageName = targetStage.name;
 
       moveLeadToStage(
         { leadId, stageId: targetStageId },
@@ -160,7 +169,7 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
           onSuccess: () => {
             notifications.show({
               title: t`Lead Moved`,
-              message: t`${lead.name} moved to ${targetStage.name}`,
+              message: t`${leadName} moved to ${stageName}`,
               color: "green",
             });
           },

@@ -121,9 +121,11 @@ export const ContactListPage: React.FC = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["contacts"] });
       setSelectedIds([]);
+      const successCount = data.successCount;
+      const failureCount = data.failureCount;
       notifications.show({
         title: t`Bulk Operation Successful`,
-        message: t`Deleted ${data.successCount} contacts. ${data.failureCount} failed.`,
+        message: t`Deleted ${successCount} contacts. ${failureCount} failed.`,
         color: "green",
       });
     },
@@ -147,9 +149,11 @@ export const ContactListPage: React.FC = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["contacts"] });
       setSelectedIds([]);
+      const successCount = data.successCount;
+      const failureCount = data.failureCount;
       notifications.show({
         title: t`Bulk Operation Successful`,
-        message: t`Updated ${data.successCount} contacts. ${data.failureCount} failed.`,
+        message: t`Updated ${successCount} contacts. ${failureCount} failed.`,
         color: "green",
       });
     },
@@ -206,11 +210,12 @@ export const ContactListPage: React.FC = () => {
   };
 
   const handleBulkDelete = () => {
+    const count = selectedIds.length;
     modals.openConfirmModal({
       title: t`Delete Multiple Contacts`,
       children: (
         <Text size="sm">
-          {t`Are you sure you want to delete ${selectedIds.length} contacts? This action cannot be undone.`}
+          {t`Are you sure you want to delete ${count} contacts? This action cannot be undone.`}
         </Text>
       ),
       labels: { confirm: t`Delete`, cancel: t`Cancel` },
@@ -292,7 +297,10 @@ export const ContactListPage: React.FC = () => {
                   onChange={(e) => toggleSelectAll(e.currentTarget.checked)}
                 />
                 <Text size="sm" fw={500}>
-                  {t`${selectedIds.length} contacts selected`}
+                  {(() => {
+                    const count = selectedIds.length;
+                    return t`${count} contacts selected`;
+                  })()}
                 </Text>
               </Group>
               <Group gap="xs">
