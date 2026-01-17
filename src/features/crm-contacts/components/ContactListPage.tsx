@@ -309,7 +309,9 @@ export const ContactListPage: React.FC = () => {
                   </Menu.Target>
                   <Menu.Dropdown>
                     <Menu.Item
-                      onClick={() => handleBulkStatusUpdate(ContactStatus.ACTIVE)}
+                      onClick={() =>
+                        handleBulkStatusUpdate(ContactStatus.ACTIVE)
+                      }
                     >
                       {t`Set Active`}
                     </Menu.Item>

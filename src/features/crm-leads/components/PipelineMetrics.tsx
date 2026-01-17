@@ -73,7 +73,9 @@ export const PipelineMetrics: React.FC<PipelineMetricsProps> = ({
             {t`Pipeline Metrics`}
           </Text>
           <Group gap="sm">
-            <Tooltip label={t`Pipeline health based on active leads percentage`}>
+            <Tooltip
+              label={t`Pipeline health based on active leads percentage`}
+            >
               <Badge
                 size="lg"
                 color={getHealthColor(healthScore)}

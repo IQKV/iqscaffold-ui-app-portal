@@ -187,7 +187,11 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
 
   if (stagesLoading || leadsLoading) {
     return (
-      <Container size="100%" px={isMobile ? "xs" : "md"} py={isMobile ? "sm" : "lg"}>
+      <Container
+        size="100%"
+        px={isMobile ? "xs" : "md"}
+        py={isMobile ? "sm" : "lg"}
+      >
         <PipelineSkeleton stageCount={5} cardsPerStage={3} />
       </Container>
     );
@@ -196,8 +200,14 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
   if (stagesError || leadsError) {
     return (
       <Container size="lg" py="xl">
-        <Alert icon={<IconAlertCircle size={16} />} title={t`Error Loading Pipeline`} color="red">
-          {stagesError?.message || leadsError?.message || t`Failed to load pipeline data`}
+        <Alert
+          icon={<IconAlertCircle size={16} />}
+          title={t`Error Loading Pipeline`}
+          color="red"
+        >
+          {stagesError?.message ||
+            leadsError?.message ||
+            t`Failed to load pipeline data`}
         </Alert>
       </Container>
     );
@@ -206,21 +216,37 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
   if (stages.length === 0) {
     return (
       <Container size="lg" py="xl">
-        <Alert icon={<IconAlertCircle size={16} />} title={t`No Pipeline Stages`} color="blue">
+        <Alert
+          icon={<IconAlertCircle size={16} />}
+          title={t`No Pipeline Stages`}
+          color="blue"
+        >
           <Group justify="space-between" align="center" w="100%">
             <Text>{t`Please configure pipeline stages to start using the kanban view.`}</Text>
-            <Button variant="light" leftSection={<IconSettings size={16} />} onClick={() => setSettingsOpened(true)}>
+            <Button
+              variant="light"
+              leftSection={<IconSettings size={16} />}
+              onClick={() => setSettingsOpened(true)}
+            >
               {t`Manage Stages`}
             </Button>
           </Group>
         </Alert>
-        <PipelineSettingsModal opened={settingsOpened} onClose={() => setSettingsOpened(false)} />
+        <PipelineSettingsModal
+          opened={settingsOpened}
+          onClose={() => setSettingsOpened(false)}
+        />
       </Container>
     );
   }
 
   return (
-    <Container size="100%" px={isMobile ? "xs" : "md"} py={isMobile ? "sm" : "lg"} style={{ maxWidth: "100vw" }}>
+    <Container
+      size="100%"
+      px={isMobile ? "xs" : "md"}
+      py={isMobile ? "sm" : "lg"}
+      style={{ maxWidth: "100vw" }}
+    >
       <Stack gap={isMobile ? "md" : "lg"}>
         {showConversionMetrics && !isMobile && (
           <PipelineMetrics
@@ -233,7 +259,11 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
             showConversionRates
             extraActions={
               <Tooltip label={t`Manage Pipeline Stages`}>
-                <ActionIcon variant="light" onClick={() => setSettingsOpened(true)} size="lg">
+                <ActionIcon
+                  variant="light"
+                  onClick={() => setSettingsOpened(true)}
+                  size="lg"
+                >
                   <IconSettings size={20} />
                 </ActionIcon>
               </Tooltip>
@@ -247,7 +277,10 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
               <Text size="sm" fw={500}>
                 {t`Pipeline Overview`}
               </Text>
-              <ActionIcon variant="subtle" onClick={() => setSettingsOpened(true)}>
+              <ActionIcon
+                variant="subtle"
+                onClick={() => setSettingsOpened(true)}
+              >
                 <IconSettings size={18} />
               </ActionIcon>
             </Group>
@@ -261,9 +294,18 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
           </Box>
         )}
 
-        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={sensors}>
+        <DndContext
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
+          sensors={sensors}
+        >
           <ScrollArea type="auto">
-            <Group align="flex-start" gap={isMobile ? "xs" : "md"} wrap="nowrap" style={{ minWidth: "max-content", paddingBottom: 16 }}>
+            <Group
+              align="flex-start"
+              gap={isMobile ? "xs" : "md"}
+              wrap="nowrap"
+              style={{ minWidth: "max-content", paddingBottom: 16 }}
+            >
               {stages
                 .sort((a, b) => a.orderIndex - b.orderIndex)
                 .map((stage) => (
@@ -284,14 +326,27 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
 
           <DragOverlay dropAnimation={null}>
             {activeLead ? (
-              <Box style={{ opacity: 0.9, transform: "rotate(3deg)", cursor: "grabbing" }}>
-                <LeadCard lead={activeLead} variant={isMobile ? "compact" : "kanban"} showQuickActions={false} />
+              <Box
+                style={{
+                  opacity: 0.9,
+                  transform: "rotate(3deg)",
+                  cursor: "grabbing",
+                }}
+              >
+                <LeadCard
+                  lead={activeLead}
+                  variant={isMobile ? "compact" : "kanban"}
+                  showQuickActions={false}
+                />
               </Box>
             ) : null}
           </DragOverlay>
         </DndContext>
 
-        <PipelineSettingsModal opened={settingsOpened} onClose={() => setSettingsOpened(false)} />
+        <PipelineSettingsModal
+          opened={settingsOpened}
+          onClose={() => setSettingsOpened(false)}
+        />
       </Stack>
     </Container>
   );
