@@ -31,7 +31,12 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { notifications } from "@mantine/notifications";
 import { modals } from "@mantine/modals";
-import { contactApi, ContactStatus } from "@/shared/api";
+import { ContactStatus, contactApi } from "@/shared/api";
+import {
+  useContacts,
+  useCreateContact,
+  useDeleteContact,
+} from "@/entities/crm/api/contact-queries";
 import { ContactCard, ContactForm } from "@/entities/crm/ui";
 
 /**
@@ -57,69 +62,30 @@ export const ContactListPage: React.FC = () => {
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
-  // Fetch contacts
+  // Fetch contacts using standardized hook
   const {
     data: contactsData,
     isLoading,
     error,
-  } = useQuery({
-    queryKey: ["contacts", page, search, statusFilter],
-    queryFn: () =>
-      contactApi.getContacts({
-        page,
-        size: 10,
-        search: search || undefined,
-        status: statusFilter || undefined,
-      }),
+  } = useContacts({
+    page,
+    size: 10,
+    search: search || undefined,
+    status: statusFilter || undefined,
   });
 
   // Create contact mutation
-  const createMutation = useMutation({
-    mutationFn: contactApi.createContact,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["contacts"] });
-      setCreateModalOpen(false);
-      notifications.show({
-        title: "Success",
-        message: "Contact created successfully",
-        color: "green",
-      });
-    },
-    onError: (error: any) => {
-      notifications.show({
-        title: "Error",
-        message: error.message || "Failed to create contact",
-        color: "red",
-      });
-    },
-  });
+  const { mutate: createContact, isPending: createLoading } = useCreateContact();
 
   // Delete contact mutation
-  const deleteMutation = useMutation({
-    mutationFn: contactApi.deleteContact,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["contacts"] });
-      notifications.show({
-        title: "Success",
-        message: "Contact deleted successfully",
-        color: "green",
-      });
-    },
-    onError: (error: any) => {
-      notifications.show({
-        title: "Error",
-        message: error.message || "Failed to delete contact",
-        color: "red",
-      });
-    },
-  });
+  const { mutate: deleteContact } = useDeleteContact();
 
   // Bulk mutations
   const bulkDeleteMutation = useMutation({
     mutationFn: (contactIds: number[]) =>
       contactApi.bulkDeleteContacts({ contactIds }),
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ["contacts"] });
+    onSuccess: (data: any) => {
+      queryClient.invalidateQueries({ queryKey: ["contact", "contacts"] });
       setSelectedIds([]);
       const successCount = data.successCount;
       const failureCount = data.failureCount;
@@ -146,8 +112,8 @@ export const ContactListPage: React.FC = () => {
       contactIds: number[];
       status: ContactStatus;
     }) => contactApi.bulkUpdateStatus({ contactIds, status }),
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ["contacts"] });
+    onSuccess: (data: any) => {
+      queryClient.invalidateQueries({ queryKey: ["contact", "contacts"] });
       setSelectedIds([]);
       const successCount = data.successCount;
       const failureCount = data.failureCount;
@@ -168,7 +134,23 @@ export const ContactListPage: React.FC = () => {
 
   // Handlers
   const handleCreateContact = (values: any) => {
-    createMutation.mutate(values);
+    createContact(values, {
+      onSuccess: () => {
+        setCreateModalOpen(false);
+        notifications.show({
+          title: "Success",
+          message: "Contact created successfully",
+          color: "green",
+        });
+      },
+      onError: (error: any) => {
+        notifications.show({
+          title: "Error",
+          message: error.message || "Failed to create contact",
+          color: "red",
+        });
+      }
+    });
   };
 
   const handleDeleteContact = (id: number, name: string) => {
@@ -181,7 +163,22 @@ export const ContactListPage: React.FC = () => {
       ),
       labels: { confirm: "Delete", cancel: "Cancel" },
       confirmProps: { color: "red" },
-      onConfirm: () => deleteMutation.mutate(id),
+      onConfirm: () => deleteContact(id, {
+        onSuccess: () => {
+          notifications.show({
+            title: "Success",
+            message: "Contact deleted successfully",
+            color: "green",
+          });
+        },
+        onError: (error: any) => {
+          notifications.show({
+            title: "Error",
+            message: error.message || "Failed to delete contact",
+            color: "red",
+          });
+        }
+      }),
     });
   };
 
@@ -420,7 +417,7 @@ export const ContactListPage: React.FC = () => {
         <ContactForm
           onSubmit={handleCreateContact}
           onCancel={() => setCreateModalOpen(false)}
-          loading={createMutation.isPending}
+          loading={createLoading}
         />
       </Modal>
     </Container>

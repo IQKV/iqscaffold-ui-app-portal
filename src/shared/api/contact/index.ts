@@ -118,6 +118,55 @@ export const contactApi = {
       method: "PATCH",
       data: request,
     }),
+
+  // Company CRUD operations
+  /**
+   * Get companies with optional filtering and pagination
+   */
+  getCompanies: (params?: Types.CompanyListParams) =>
+    apiRequest<Types.PaginatedResponse<Types.Company>>({
+      url: "/api/v1/companies",
+      method: "GET",
+      params,
+    }),
+
+  /**
+   * Get company by ID
+   */
+  getCompany: (id: string | number) =>
+    apiRequest<Types.Company>({
+      url: `/api/v1/companies/${id}`,
+      method: "GET",
+    }),
+
+  /**
+   * Create a new company
+   */
+  createCompany: (request: Types.CreateCompanyRequest) =>
+    apiRequest<Types.Company>({
+      url: "/api/v1/companies",
+      method: "POST",
+      data: request,
+    }),
+
+  /**
+   * Update company
+   */
+  updateCompany: (id: string | number, request: Types.UpdateCompanyRequest) =>
+    apiRequest<Types.Company>({
+      url: `/api/v1/companies/${id}`,
+      method: "PUT",
+      data: request,
+    }),
+
+  /**
+   * Delete company
+   */
+  deleteCompany: (id: string | number) =>
+    apiRequest<void>({
+      url: `/api/v1/companies/${id}`,
+      method: "DELETE",
+    }),
 };
 
 // Re-export types for convenience

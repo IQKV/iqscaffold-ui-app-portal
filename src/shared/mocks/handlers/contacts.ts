@@ -89,7 +89,53 @@ const mockContacts: Contact[] = [
   },
 ];
 
+const mockCompanies: any[] = [
+  {
+    id: 1,
+    name: "Acme Corp",
+    website: "https://acme.example.com",
+    industry: "Manufacturing",
+    size: "ENTERPRISE",
+    phone: "+1-555-1001",
+    email: "info@acme.example.com",
+    city: "New York",
+    country: "USA",
+    status: "ACTIVE",
+    createdAt: "2023-10-01T12:00:00Z",
+    updatedAt: "2023-11-05T15:30:00Z",
+  },
+  {
+    id: 2,
+    name: "TechCorp Solutions",
+    website: "https://techcorp.io",
+    industry: "Software",
+    size: "MID_MARKET",
+    phone: "+1-555-2002",
+    email: "contact@techcorp.io",
+    city: "San Francisco",
+    country: "USA",
+    status: "ACTIVE",
+    createdAt: "2023-11-15T09:00:00Z",
+    updatedAt: "2024-01-10T11:45:00Z",
+  },
+  {
+    id: 3,
+    name: "Startup Ventures",
+    website: "https://ventures.io",
+    industry: "Venture Capital",
+    size: "SMALL",
+    phone: "+1-555-3003",
+    email: "deals@ventures.io",
+    city: "London",
+    country: "UK",
+    status: "PROSPECT",
+    createdAt: "2024-01-05T14:20:00Z",
+    updatedAt: "2024-01-05T14:20:00Z",
+  },
+];
+
 let nextId = 5;
+let nextCompanyId = 4;
 
 export const contactsHandlers = [
   // Get all contacts with pagination and filtering
@@ -490,5 +536,153 @@ export const contactsHandlers = [
     };
 
     return HttpResponse.json(response);
+  }),
+
+  // Company Handlers
+  // Get all companies with pagination and filtering
+  http.get("/api/v1/companies", async ({ request }) => {
+    if (config.delay) {
+      await delay(config.delay);
+    }
+
+    const url = new URL(request.url);
+    const page = parseInt(url.searchParams.get("page") || "0", 10);
+    const size = parseInt(url.searchParams.get("size") || "10", 10);
+    const search = url.searchParams.get("search") || "";
+    const industry = url.searchParams.get("industry") || "";
+
+    // Filter companies
+    let filtered = [...mockCompanies];
+
+    if (search) {
+      const searchLower = search.toLowerCase();
+      filtered = filtered.filter(
+        (company) =>
+          company.name.toLowerCase().includes(searchLower) ||
+          company.email?.toLowerCase().includes(searchLower) ||
+          company.website?.toLowerCase().includes(searchLower)
+      );
+    }
+
+    if (industry) {
+      filtered = filtered.filter((company) => company.industry === industry);
+    }
+
+    // Paginate
+    const start = page * size;
+    const end = start + size;
+    const paginatedCompanies = filtered.slice(start, end);
+
+    const response: any = {
+      content: paginatedCompanies,
+      page,
+      size,
+      totalElements: filtered.length,
+      totalPages: Math.ceil(filtered.length / size),
+      first: page === 0,
+      last: end >= filtered.length,
+    };
+
+    return HttpResponse.json(response);
+  }),
+
+  // Get company by ID
+  http.get("/api/v1/companies/:id", async ({ params }) => {
+    if (config.delay) {
+      await delay(config.delay);
+    }
+
+    const { id } = params;
+    const companyId = parseInt(id as string, 10);
+    const company = mockCompanies.find((c) => c.id === companyId);
+
+    if (!company) {
+      return HttpResponse.json(
+        {
+          error: "Company not found",
+          message: `Company with ID ${id} does not exist`,
+        },
+        { status: 404 }
+      );
+    }
+
+    return HttpResponse.json(company);
+  }),
+
+  // Create company
+  http.post("/api/v1/companies", async ({ request }) => {
+    if (config.delay) {
+      await delay(config.delay);
+    }
+
+    const body = (await request.json()) as any;
+
+    const newCompany: any = {
+      id: nextCompanyId++,
+      ...body,
+      status: body.status || "ACTIVE",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
+    mockCompanies.push(newCompany);
+
+    return HttpResponse.json(newCompany, { status: 201 });
+  }),
+
+  // Update company
+  http.put("/api/v1/companies/:id", async ({ params, request }) => {
+    if (config.delay) {
+      await delay(config.delay);
+    }
+
+    const { id } = params;
+    const companyId = parseInt(id as string, 10);
+    const body = (await request.json()) as any;
+
+    const index = mockCompanies.findIndex((c) => c.id === companyId);
+
+    if (index === -1) {
+      return HttpResponse.json(
+        {
+          error: "Company not found",
+          message: `Company with ID ${id} does not exist`,
+        },
+        { status: 404 }
+      );
+    }
+
+    mockCompanies[index] = {
+      ...mockCompanies[index],
+      ...body,
+      updatedAt: new Date().toISOString(),
+    };
+
+    return HttpResponse.json(mockCompanies[index]);
+  }),
+
+  // Delete company
+  http.delete("/api/v1/companies/:id", async ({ params }) => {
+    if (config.delay) {
+      await delay(config.delay);
+    }
+
+    const { id } = params;
+    const companyId = parseInt(id as string, 10);
+    const index = mockCompanies.findIndex((c) => c.id === companyId);
+
+    if (index === -1) {
+      return HttpResponse.json(
+        {
+          error: "Company not found",
+          message: `Company with ID ${id} does not exist`,
+        },
+        { status: 404 }
+      );
+    }
+
+    mockCompanies.splice(index, 1);
+
+    return HttpResponse.json(null, { status: 204 });
   }),
 ];

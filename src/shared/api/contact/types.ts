@@ -24,6 +24,81 @@ export enum ContactStatus {
   ARCHIVED = "ARCHIVED",
 }
 
+export interface Company {
+  id: number;
+  name: string;
+  website?: string;
+  industry?: string;
+  size?: string;
+  phone?: string;
+  email?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+  city?: string;
+  state?: string;
+  postalCode?: string;
+  country?: string;
+  parentCompanyId?: number;
+  status: CompanyStatus;
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export enum CompanyStatus {
+  ACTIVE = "ACTIVE",
+  INACTIVE = "INACTIVE",
+  PROSPECT = "PROSPECT",
+  PARTNER = "PARTNER",
+  TERMINATED = "TERMINATED",
+}
+
+export interface CreateCompanyRequest {
+  name: string;
+  website?: string;
+  industry?: string;
+  size?: string;
+  phone?: string;
+  email?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+  city?: string;
+  state?: string;
+  postalCode?: string;
+  country?: string;
+  parentCompanyId?: number;
+  status?: CompanyStatus;
+  notes?: string;
+}
+
+export interface UpdateCompanyRequest {
+  name?: string;
+  website?: string;
+  industry?: string;
+  size?: string;
+  phone?: string;
+  email?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+  city?: string;
+  state?: string;
+  postalCode?: string;
+  country?: string;
+  parentCompanyId?: number;
+  status?: CompanyStatus;
+  notes?: string;
+}
+
+export interface CompanyListParams {
+  page?: number;
+  size?: number;
+  search?: string;
+  industry?: string;
+  status?: CompanyStatus;
+  sortBy?: string;
+  sortDirection?: "asc" | "desc";
+}
+
 export interface CreateContactRequest {
   firstName: string;
   lastName: string;

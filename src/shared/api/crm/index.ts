@@ -194,7 +194,7 @@ export const crmApi = {
    */
   getFollowUps: (params?: Types.FollowUpListParams) =>
     apiRequest<Types.PaginatedResponse<Types.FollowUp>>({
-      url: "/api/v1/follow-ups",
+      url: "/api/v1/pipeline/follow-ups",
       method: "GET",
       params,
     }),
@@ -204,7 +204,7 @@ export const crmApi = {
    */
   getTodaysFollowUps: () =>
     apiRequest<Types.FollowUp[]>({
-      url: "/api/v1/follow-ups/today",
+      url: "/api/v1/pipeline/follow-ups/today",
       method: "GET",
     }),
 
@@ -213,7 +213,7 @@ export const crmApi = {
    */
   getOverdueFollowUps: () =>
     apiRequest<Types.FollowUp[]>({
-      url: "/api/v1/follow-ups/overdue",
+      url: "/api/v1/pipeline/follow-ups/overdue",
       method: "GET",
     }),
 
@@ -222,7 +222,7 @@ export const crmApi = {
    */
   createFollowUp: (request: Types.CreateFollowUpRequest) =>
     apiRequest<Types.FollowUp>({
-      url: "/api/v1/follow-ups",
+      url: "/api/v1/pipeline/follow-ups",
       method: "POST",
       data: request,
     }),
@@ -232,7 +232,7 @@ export const crmApi = {
    */
   updateFollowUp: (id: string, request: Types.UpdateFollowUpRequest) =>
     apiRequest<Types.FollowUp>({
-      url: `/api/v1/follow-ups/${id}`,
+      url: `/api/v1/pipeline/follow-ups/${id}`,
       method: "PUT",
       data: request,
     }),
@@ -242,7 +242,7 @@ export const crmApi = {
    */
   completeFollowUp: (id: string) =>
     apiRequest<Types.FollowUp>({
-      url: `/api/v1/follow-ups/${id}/complete`,
+      url: `/api/v1/pipeline/follow-ups/${id}/complete`,
       method: "PUT",
     }),
 
@@ -251,7 +251,7 @@ export const crmApi = {
    */
   deleteFollowUp: (id: string) =>
     apiRequest<void>({
-      url: `/api/v1/follow-ups/${id}`,
+      url: `/api/v1/pipeline/follow-ups/${id}`,
       method: "DELETE",
     }),
 
@@ -261,7 +261,7 @@ export const crmApi = {
    */
   getDashboardStats: (params?: Types.DashboardStatsParams) =>
     apiRequest<Types.DashboardStats>({
-      url: "/api/v1/dashboard/stats",
+      url: "/api/v1/pipeline/dashboard/stats",
       method: "GET",
       params,
     }),
@@ -271,7 +271,7 @@ export const crmApi = {
    */
   getConversionMetrics: (params?: Types.DashboardStatsParams) =>
     apiRequest<Types.ConversionMetrics>({
-      url: "/api/v1/dashboard/conversion",
+      url: "/api/v1/pipeline/dashboard/conversion",
       method: "GET",
       params,
     }),
