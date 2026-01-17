@@ -74,7 +74,7 @@ const mockFollowUps: any[] = [
 export const crmHandlers = [
   // Leads
   http.get("/api/v1/leads", async () => {
-    if (config.delay) await delay(config.delay);
+    if (config.delay) {await delay(config.delay);}
     return HttpResponse.json({
       content: mockLeads,
       totalElements: mockLeads.length,
@@ -88,13 +88,13 @@ export const crmHandlers = [
 
   // Pipeline Stages
   http.get("/api/v1/pipeline/stages", async () => {
-    if (config.delay) await delay(config.delay);
+    if (config.delay) {await delay(config.delay);}
     return HttpResponse.json(mockStages);
   }),
 
   // Dashboard (New Paths)
   http.get("/api/v1/pipeline/dashboard/stats", async () => {
-    if (config.delay) await delay(config.delay);
+    if (config.delay) {await delay(config.delay);}
     return HttpResponse.json({
       leadsByStage: { New: 5, Discovery: 3, Proposal: 2 },
       leadsBySource: { WEBSITE: 7, REFERRAL: 3 },
@@ -106,7 +106,7 @@ export const crmHandlers = [
   }),
 
   http.get("/api/v1/pipeline/dashboard/conversion", async () => {
-    if (config.delay) await delay(config.delay);
+    if (config.delay) {await delay(config.delay);}
     return HttpResponse.json({
       conversionRate: 0.25,
       averageTimeToConvert: 15.5,
@@ -116,7 +116,7 @@ export const crmHandlers = [
 
   // Follow-ups (New Paths)
   http.get("/api/v1/pipeline/follow-ups", async () => {
-    if (config.delay) await delay(config.delay);
+    if (config.delay) {await delay(config.delay);}
     return HttpResponse.json({
       content: mockFollowUps,
       totalElements: mockFollowUps.length,
@@ -129,12 +129,12 @@ export const crmHandlers = [
   }),
 
   http.get("/api/v1/pipeline/follow-ups/today", async () => {
-    if (config.delay) await delay(config.delay);
+    if (config.delay) {await delay(config.delay);}
     return HttpResponse.json(mockFollowUps);
   }),
 
   http.get("/api/v1/pipeline/follow-ups/overdue", async () => {
-    if (config.delay) await delay(config.delay);
+    if (config.delay) {await delay(config.delay);}
     return HttpResponse.json([]);
   }),
 ];
