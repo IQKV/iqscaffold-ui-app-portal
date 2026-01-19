@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AuthGuard } from "@/processes/auth";
-import { FollowUpList, CRMLayout } from "@/features/crm-leads";
+import { FollowUpList, CrmLayout } from "@/features/crm-leads";
 import { t } from "@lingui/core/macro";
 
 /**
@@ -17,11 +17,11 @@ export const Route = createFileRoute("/crm-follow-ups")({
 function FollowUpsPageRoute() {
   return (
     <AuthGuard>
-      <CRMLayout title={t`Follow-ups`}>
+      <CrmLayout title={t`Follow-ups`}>
         <div data-testid="page-crm-follow-ups">
           <FollowUpList />
         </div>
-      </CRMLayout>
+      </CrmLayout>
     </AuthGuard>
   );
 }

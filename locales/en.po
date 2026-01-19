@@ -236,7 +236,7 @@ msgstr "Amount Paid:"
 msgid "An error occurred"
 msgstr "An error occurred"
 
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:83
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:83
 msgid "An error occurred while processing your CRM request."
 msgstr "An error occurred while processing your CRM request."
 
@@ -505,7 +505,7 @@ msgstr "Changes saved successfully"
 msgid "Changes take effect immediately. MSW will intercept API calls when enabled."
 msgstr "Changes take effect immediately. MSW will intercept API calls when enabled."
 
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:180
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:180
 msgid "Check your internet connection"
 msgstr "Check your internet connection"
 
@@ -542,7 +542,7 @@ msgstr "Clear"
 msgid "Clear all filters"
 msgstr "Clear all filters"
 
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:186
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:186
 msgid "Clear your browser cache"
 msgstr "Clear your browser cache"
 
@@ -567,7 +567,7 @@ msgstr "Client Secret"
 msgid "Close"
 msgstr "Close"
 
-#: src/features/crm-leads/components/CRMLayout.tsx:292
+#: src/features/crm-leads/components/CrmLayout.tsx:292
 msgid "Close navigation"
 msgstr "Close navigation"
 
@@ -663,7 +663,7 @@ msgstr "Contact Details"
 msgid "Contacted"
 msgstr "Contacted"
 
-#: src/features/crm-leads/components/CRMLayout.tsx:80
+#: src/features/crm-leads/components/CrmLayout.tsx:80
 #: src/pages/crm.contacts.tsx:14
 #: src/widgets/sidebar/ui/sidebar.tsx:123
 msgid "Contacts"
@@ -727,24 +727,24 @@ msgstr "Created successfully"
 msgid "Created:"
 msgstr "Created:"
 
-#: src/features/crm-leads/components/CRMLayout.tsx:107
-#: src/features/crm-leads/components/CRMLayout.tsx:297
+#: src/features/crm-leads/components/CrmLayout.tsx:107
+#: src/features/crm-leads/components/CrmLayout.tsx:297
 #: src/widgets/sidebar/ui/sidebar.tsx:99
 msgid "CRM"
 msgstr "CRM"
 
-#: src/features/crm-leads/components/CRMDashboard.tsx:83
+#: src/features/crm-leads/components/CrmDashboard.tsx:83
 #: src/pages/crm-dashboard.tsx:20
 #: src/widgets/sidebar/ui/sidebar.tsx:105
 msgid "CRM Dashboard"
 msgstr "CRM Dashboard"
 
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:95
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:240
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:95
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:240
 msgid "CRM Error"
 msgstr "CRM Error"
 
-#: src/features/crm-leads/components/CRMLayout.tsx:260
+#: src/features/crm-leads/components/CrmLayout.tsx:260
 msgid "CRM Navigation"
 msgstr "CRM Navigation"
 
@@ -791,8 +791,8 @@ msgstr "Customize your sales process by adding, removing, or reordering pipeline
 msgid "Dark mode"
 msgstr "Dark mode"
 
-#: src/features/crm-leads/components/CRMLayout.tsx:68
-#: src/features/crm-leads/components/CRMLayout.tsx:113
+#: src/features/crm-leads/components/CrmLayout.tsx:68
+#: src/features/crm-leads/components/CrmLayout.tsx:113
 #: src/features/dashboard/ui/dashboard-feature.tsx:15
 #: src/widgets/sidebar/ui/sidebar.tsx:91
 msgid "Dashboard"
@@ -911,7 +911,7 @@ msgstr "Description must be at least 3 characters"
 msgid "Description must be less than 500 characters"
 msgstr "Description must be less than 500 characters"
 
-#: src/features/crm-leads/components/CRMLayout.tsx:128
+#: src/features/crm-leads/components/CrmLayout.tsx:128
 msgid "Details"
 msgstr "Details"
 
@@ -1167,7 +1167,7 @@ msgstr "Error has been reported to our team"
 msgid "Error loading activities"
 msgstr "Error loading activities"
 
-#: src/features/crm-leads/components/CRMDashboard.tsx:98
+#: src/features/crm-leads/components/CrmDashboard.tsx:98
 msgid "Error Loading Dashboard"
 msgstr "Error Loading Dashboard"
 
@@ -1207,7 +1207,7 @@ msgstr "Error loading users: {errorMessage}"
 msgid "Error notification!"
 msgstr "Error notification!"
 
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:107
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:107
 msgid "Error Reference ID:"
 msgstr "Error Reference ID:"
 
@@ -1329,7 +1329,7 @@ msgstr "Failed to delete user: {errorMessage}"
 msgid "Failed to load activity history. Please try again."
 msgstr "Failed to load activity history. Please try again."
 
-#: src/features/crm-leads/components/CRMDashboard.tsx:102
+#: src/features/crm-leads/components/CrmDashboard.tsx:102
 msgid "Failed to load dashboard data. Please try again later."
 msgstr "Failed to load dashboard data. Please try again later."
 
@@ -1530,8 +1530,8 @@ msgstr "Follow-up scheduled successfully"
 msgid "Follow-up updated successfully"
 msgstr "Follow-up updated successfully"
 
-#: src/features/crm-leads/components/CRMLayout.tsx:92
-#: src/features/crm-leads/components/CRMLayout.tsx:116
+#: src/features/crm-leads/components/CrmLayout.tsx:92
+#: src/features/crm-leads/components/CrmLayout.tsx:116
 #: src/features/crm-leads/components/FollowUpList.tsx:325
 #: src/features/crm-leads/components/FollowUpSection.tsx:175
 #: src/features/crm-leads/components/LeadDetailPage.tsx:288
@@ -1607,12 +1607,12 @@ msgstr "Getting Started"
 msgid "Go Back"
 msgstr "Go Back"
 
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:167
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:167
 #: src/pages/404.tsx:55
 msgid "Go Home"
 msgstr "Go Home"
 
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:152
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:152
 msgid "Go to Dashboard"
 msgstr "Go to Dashboard"
 
@@ -1632,7 +1632,7 @@ msgstr "Health"
 msgid "High"
 msgstr "High"
 
-#: src/features/crm-leads/components/CRMLayout.tsx:103
+#: src/features/crm-leads/components/CrmLayout.tsx:103
 #: src/widgets/sidebar/ui/sidebar.tsx:32
 msgid "Home"
 msgstr "Home"
@@ -1773,8 +1773,8 @@ msgstr "Lead updated successfully"
 msgid "leads"
 msgstr "leads"
 
-#: src/features/crm-leads/components/CRMLayout.tsx:74
-#: src/features/crm-leads/components/CRMLayout.tsx:114
+#: src/features/crm-leads/components/CrmLayout.tsx:74
+#: src/features/crm-leads/components/CrmLayout.tsx:114
 #: src/features/crm-leads/components/DashboardStats.tsx:250
 #: src/features/crm-leads/components/DashboardStats.tsx:289
 #: src/pages/crm.leads.tsx:13
@@ -2155,7 +2155,7 @@ msgstr "Onboarding Failed"
 msgid "Only one gateway can be primary at a time"
 msgstr "Only one gateway can be primary at a time"
 
-#: src/features/crm-leads/components/CRMLayout.tsx:292
+#: src/features/crm-leads/components/CrmLayout.tsx:292
 msgid "Open navigation"
 msgstr "Open navigation"
 
@@ -2377,8 +2377,8 @@ msgstr "Pick end date"
 msgid "Pick start date"
 msgstr "Pick start date"
 
-#: src/features/crm-leads/components/CRMLayout.tsx:86
-#: src/features/crm-leads/components/CRMLayout.tsx:115
+#: src/features/crm-leads/components/CrmLayout.tsx:86
+#: src/features/crm-leads/components/CrmLayout.tsx:115
 #: src/pages/crm.pipeline.tsx:13
 #: src/widgets/sidebar/ui/sidebar.tsx:132
 msgid "Pipeline"
@@ -2426,7 +2426,7 @@ msgstr "Please enter a valid email address"
 msgid "Please enter a valid phone number"
 msgstr "Please enter a valid phone number"
 
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:114
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:114
 msgid "Please provide this ID when contacting support."
 msgstr "Please provide this ID when contacting support."
 
@@ -2534,7 +2534,7 @@ msgstr "Redirecting to payment gateway for onboarding..."
 msgid "Referral"
 msgstr "Referral"
 
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:183
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:183
 msgid "Refresh the page"
 msgstr "Refresh the page"
 
@@ -2822,7 +2822,7 @@ msgstr "Social Media"
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:87
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:87
 msgid "Something went wrong with the CRM system. Please try again or contact support if the problem persists."
 msgstr "Something went wrong with the CRM system. Please try again or contact support if the problem persists."
 
@@ -3008,7 +3008,7 @@ msgstr "Testing Ready:"
 msgid "testing setup with Vitest and Playwright"
 msgstr "testing setup with Vitest and Playwright"
 
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:69
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:69
 msgid "The CRM service is temporarily unavailable. Our team has been notified and is working on a fix."
 msgstr "The CRM service is temporarily unavailable. Our team has been notified and is working on a fix."
 
@@ -3032,7 +3032,7 @@ msgstr "The payment is being refunded"
 msgid "The request timed out. Please try again"
 msgstr "The request timed out. Please try again"
 
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:73
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:73
 msgid "There was a problem with the data you submitted. Please check your input and try again."
 msgstr "There was a problem with the data you submitted. Please check your input and try again."
 
@@ -3130,16 +3130,16 @@ msgstr "Trial days must be positive"
 msgid "Trial ends: {trialEndDate}"
 msgstr "Trial ends: {trialEndDate}"
 
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:176
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:176
 msgid "Troubleshooting Tips:"
 msgstr "Troubleshooting Tips:"
 
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:144
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:144
 #: src/shared/ui/loading-state/loading-state.tsx:214
 msgid "Try Again"
 msgstr "Try Again"
 
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:189
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:189
 msgid "Try again in a few minutes"
 msgstr "Try again in a few minutes"
 
@@ -3168,7 +3168,7 @@ msgstr "TypeScript:"
 msgid "UI Components"
 msgstr "UI Components"
 
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:65
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:65
 msgid "Unable to connect to CRM services. Please check your internet connection and try again."
 msgstr "Unable to connect to CRM services. Please check your internet connection and try again."
 
@@ -3299,7 +3299,7 @@ msgstr "View Lead"
 msgid "View lead details"
 msgstr "View lead details"
 
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:158
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:158
 msgid "View Leads"
 msgstr "View Leads"
 
@@ -3387,7 +3387,7 @@ msgstr "Welcome Message"
 msgid "Welcome to IQ Scaffold! Your language preference is active."
 msgstr "Welcome to IQ Scaffold! Your language preference is active."
 
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:135
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:135
 msgid "What would you like to do?"
 msgstr "What would you like to do?"
 
@@ -3435,7 +3435,7 @@ msgstr "You don't have permission to access billing information. Please contact 
 msgid "You don't have permission to access subscription information. Please contact your administrator."
 msgstr "You don't have permission to access subscription information. Please contact your administrator."
 
-#: src/features/crm-leads/components/CRMErrorBoundary.tsx:77
+#: src/features/crm-leads/components/CrmErrorBoundary.tsx:77
 msgid "You don't have permission to access this CRM feature. Please contact your administrator."
 msgstr "You don't have permission to access this CRM feature. Please contact your administrator."
 

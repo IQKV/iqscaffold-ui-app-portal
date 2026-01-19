@@ -25,9 +25,9 @@ import {
   IconCalendarEvent,
   IconPlus,
 } from "@tabler/icons-react";
-import { CRMErrorBoundary } from "./CRMErrorBoundary";
+import { CrmErrorBoundary } from "./CrmErrorBoundary.tsx";
 
-export interface CRMLayoutProps {
+export interface CrmLayoutProps {
   children: React.ReactNode;
   title?: string;
   showBreadcrumbs?: boolean;
@@ -51,11 +51,11 @@ export interface CRMLayoutProps {
  *
  * Requirements: 8.6, 8.7, 12.6, 14.2, 14.7
  */
-export function CRMLayout({
+export function CrmLayout({
   children,
   title,
   showBreadcrumbs = true,
-}: CRMLayoutProps) {
+}: CrmLayoutProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -251,7 +251,7 @@ export function CRMLayout({
   };
 
   return (
-    <CRMErrorBoundary>
+    <CrmErrorBoundary>
       {/* Mobile Navigation Drawer */}
       {isMobile && (
         <Drawer
@@ -346,6 +346,6 @@ export function CRMLayout({
 
       {/* Mobile Bottom Navigation */}
       {renderBottomNav()}
-    </CRMErrorBoundary>
+    </CrmErrorBoundary>
   );
 }

@@ -24,7 +24,7 @@ import {
 import type { DashboardStatsParams } from "@/shared/api/crm/types";
 
 /**
- * CRMDashboard - Main dashboard page for CRM statistics and follow-ups
+ * CrmDashboard - Main dashboard page for CRM statistics and follow-ups
  *
  * Features:
  * - Integrate FollowUpPanel for today's reminders (Requirement 6.1-6.7)
@@ -37,7 +37,7 @@ import type { DashboardStatsParams } from "@/shared/api/crm/types";
  *
  * Requirements: 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 12.5
  */
-export function CRMDashboard() {
+export function CrmDashboard() {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   // Date range state for filtering (Requirement 7.5)

@@ -11,7 +11,7 @@ import { t } from "@lingui/core/macro";
  */
 
 // Factory function to create CRM validation schemas with Lingui
-export const createCRMValidationSchemas = () => ({
+export const createCrmValidationSchemas = () => ({
   // Lead form validation schemas
   leadName: z
     .string()
@@ -92,15 +92,15 @@ export const createCRMValidationSchemas = () => ({
 
 // Lazy initialization proxy for validation schemas
 let _crmValidationSchemas: ReturnType<
-  typeof createCRMValidationSchemas
+  typeof createCrmValidationSchemas
 > | null = null;
 
 export const crmValidationSchemas = new Proxy(
-  {} as ReturnType<typeof createCRMValidationSchemas>,
+  {} as ReturnType<typeof createCrmValidationSchemas>,
   {
     get(target, prop) {
       if (!_crmValidationSchemas) {
-        _crmValidationSchemas = createCRMValidationSchemas();
+        _crmValidationSchemas = createCrmValidationSchemas();
       }
       return _crmValidationSchemas[prop as keyof typeof _crmValidationSchemas];
     },
@@ -112,7 +112,7 @@ export const crmValidationSchemas = new Proxy(
  * Requirements: 11.1, 11.2
  */
 export const createLeadFormSchema = () => {
-  const schemas = createCRMValidationSchemas();
+  const schemas = createCrmValidationSchemas();
   return z.object({
     name: schemas.leadName,
     email: schemas.leadEmail,
@@ -129,7 +129,7 @@ export type LeadFormData = z.infer<ReturnType<typeof createLeadFormSchema>>;
  * Requirements: 11.4
  */
 export const createFollowUpFormSchema = () => {
-  const schemas = createCRMValidationSchemas();
+  const schemas = createCrmValidationSchemas();
   return z.object({
     description: schemas.followUpDescription,
     dueDate: schemas.followUpDueDate,
@@ -146,7 +146,7 @@ export type FollowUpFormData = z.infer<
  * Note form schema
  */
 export const createNoteFormSchema = () => {
-  const schemas = createCRMValidationSchemas();
+  const schemas = createCrmValidationSchemas();
   return z.object({
     content: schemas.noteContent,
   });

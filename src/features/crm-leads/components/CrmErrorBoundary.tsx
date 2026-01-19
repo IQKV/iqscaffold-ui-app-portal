@@ -31,17 +31,17 @@ import { notificationService } from "@/shared/lib/notifications";
  *
  * Requirements: Error handling and user experience
  */
-interface CRMErrorFallbackProps {
+interface CrmErrorFallbackProps {
   error: Error;
   resetError: () => void;
 }
 
-function CRMErrorFallback({ error, resetError }: CRMErrorFallbackProps) {
+function CrmErrorFallback({ error, resetError }: CrmErrorFallbackProps) {
   const appError = errorFromAxios(error);
   const displayError = formatErrorForDisplay(appError);
 
   // Determine if this is a CRM-specific business error
-  const isCRMBusinessError =
+  const isCrmBusinessError =
     displayError.message?.toLowerCase().includes("lead") ||
     displayError.message?.toLowerCase().includes("follow-up") ||
     displayError.message?.toLowerCase().includes("pipeline") ||
@@ -77,7 +77,7 @@ function CRMErrorFallback({ error, resetError }: CRMErrorFallbackProps) {
       return t`You don't have permission to access this CRM feature. Please contact your administrator.`;
     }
 
-    if (isCRMBusinessError) {
+    if (isCrmBusinessError) {
       return (
         displayError.message ||
         t`An error occurred while processing your CRM request.`
@@ -204,14 +204,14 @@ function CRMErrorFallback({ error, resetError }: CRMErrorFallbackProps) {
  *
  * Usage:
  * ```tsx
- * <CRMErrorBoundary>
+ * <CrmErrorBoundary>
  *   <LeadListPage />
- * </CRMErrorBoundary>
+ * </CrmErrorBoundary>
  * ```
  *
  * Requirements: Error handling and user experience
  */
-export function CRMErrorBoundary({
+export function CrmErrorBoundary({
   children,
   ...props
 }: Omit<ErrorBoundaryProps, "fallback" | "onError">) {
@@ -246,7 +246,7 @@ export function CRMErrorBoundary({
   return (
     <ErrorBoundary
       {...props}
-      fallback={CRMErrorFallback}
+      fallback={CrmErrorFallback}
       onError={handleError}
       showReportButton={false}
       showTechnicalDetails={process.env.NODE_ENV === "development"}
@@ -261,20 +261,20 @@ export function CRMErrorBoundary({
  *
  * Usage:
  * ```tsx
- * export const LeadListPage = withCRMErrorBoundary(LeadListPageComponent);
+ * export const LeadListPage = withCrmErrorBoundary(LeadListPageComponent);
  * ```
  */
 // eslint-disable-next-line react-refresh/only-export-components
-export function withCRMErrorBoundary<P extends object>(
+export function withCrmErrorBoundary<P extends object>(
   Component: React.ComponentType<P>
 ) {
   const WrappedComponent = (props: P) => (
-    <CRMErrorBoundary>
+    <CrmErrorBoundary>
       <Component {...props} />
-    </CRMErrorBoundary>
+    </CrmErrorBoundary>
   );
 
-  WrappedComponent.displayName = `withCRMErrorBoundary(${Component.displayName || Component.name})`;
+  WrappedComponent.displayName = `withCrmErrorBoundary(${Component.displayName || Component.name})`;
 
   return WrappedComponent;
 }

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AuthGuard } from "@/processes/auth";
 import { ContactListPage } from "@/features/crm-contacts";
-import { CRMLayout } from "@/features/crm-leads";
+import { CrmLayout } from "@/features/crm-leads";
 import { t } from "@lingui/core/macro";
 
 export const Route = createFileRoute("/crm/contacts")({
@@ -11,11 +11,11 @@ export const Route = createFileRoute("/crm/contacts")({
 function ContactsPageRoute() {
   return (
     <AuthGuard>
-      <CRMLayout title={t`Contacts`}>
+      <CrmLayout title={t`Contacts`}>
         <div data-testid="page-crm-contacts">
           <ContactListPage />
         </div>
-      </CRMLayout>
+      </CrmLayout>
     </AuthGuard>
   );
 }
