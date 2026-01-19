@@ -1,7 +1,11 @@
 import { Group, Title } from "@mantine/core";
 import { t } from "@lingui/core/macro";
 import { UserMenu } from "@/processes/auth";
-import { ThemeToggle } from "@/shared/ui";
+import {
+  ThemeToggle,
+  SubscriptionStatusBadge,
+  SilentFeatureErrorBoundary,
+} from "@/shared/ui";
 
 interface HeaderProps {
   title?: string;
@@ -14,6 +18,9 @@ export function Header({ title = t`IQ Scaffold Platform` }: HeaderProps) {
         {title}
       </Title>
       <Group gap="md">
+        <SilentFeatureErrorBoundary>
+          <SubscriptionStatusBadge />
+        </SilentFeatureErrorBoundary>
         <ThemeToggle />
         <UserMenu />
       </Group>

@@ -63,28 +63,33 @@ msgstr " (edited)"
 msgid "{0}"
 msgstr "{0}"
 
-#. placeholder {0}: selectedIds.length
 #: src/features/crm-contacts/components/ContactListPage.tsx:295
-msgid "{0} contacts selected"
-msgstr "{0} contacts selected"
+#~ msgid "{0} contacts selected"
+#~ msgstr "{0} contacts selected"
 
 #: src/pages/examples.tsx:161
 #~ msgid "{0} deleted successfully"
 #~ msgstr "{0} deleted successfully"
 
-#. placeholder {0}: lead.name
-#. placeholder {1}: targetStage.name
 #: src/features/crm-leads/components/PipelineView.tsx:163
-msgid "{0} moved to {1}"
-msgstr "{0} moved to {1}"
+#~ msgid "{0} moved to {1}"
+#~ msgstr "{0} moved to {1}"
 
 #: src/features/crm-leads/components/FollowUpList.tsx:263
 msgid "{completedCount} follow-up(s) marked as complete"
 msgstr "{completedCount} follow-up(s) marked as complete"
 
+#: src/features/crm-contacts/components/ContactListPage.tsx:301
+msgid "{count} contacts selected"
+msgstr "{count} contacts selected"
+
 #: src/features/crm-leads/components/FollowUpList.tsx:303
 msgid "{deletedCount} follow-up(s) deleted successfully"
 msgstr "{deletedCount} follow-up(s) deleted successfully"
+
+#: src/features/crm-leads/components/PipelineView.tsx:172
+msgid "{leadName} moved to {stageName}"
+msgstr "{leadName} moved to {stageName}"
 
 #: src/features/subscription-management/ui/SubscriptionPlansGrid.tsx:130
 msgid "{trialDays} day trial"
@@ -102,7 +107,7 @@ msgstr "%s | IQ Scaffold Platform"
 msgid "A lead with this email already exists"
 msgstr "A lead with this email already exists"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:41
+#: src/widgets/sidebar/ui/sidebar.tsx:42
 msgid "About"
 msgstr "About"
 
@@ -114,7 +119,7 @@ msgstr "About This Template"
 msgid "Accept-Language header (from browser)"
 msgstr "Accept-Language header (from browser)"
 
-#: src/pages/billing.tsx:58
+#: src/pages/billing.tsx:67
 #: src/pages/gateway-config.tsx:151
 #: src/pages/subscriptions.tsx:47
 msgid "Access Denied"
@@ -139,8 +144,8 @@ msgstr "Activate"
 msgid "Activate immediately"
 msgstr "Activate immediately"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:195
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:316
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:201
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:322
 #: src/features/gateway-config/ui/gateway-status-badge.tsx:28
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:60
 msgid "Active"
@@ -162,7 +167,7 @@ msgstr "Active Sessions"
 msgid "Activities"
 msgstr "Activities"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:334
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:340
 msgid "Add"
 msgstr "Add"
 
@@ -179,7 +184,7 @@ msgstr "Add Gateway"
 msgid "Add Lead"
 msgstr "Add Lead"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:300
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:306
 msgid "Add New Stage"
 msgstr "Add New Stage"
 
@@ -195,7 +200,7 @@ msgstr "Add Note"
 msgid "Add Payment Gateway"
 msgstr "Add Payment Gateway"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:354
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:360
 msgid "Add Stage"
 msgstr "Add Stage"
 
@@ -281,10 +286,13 @@ msgstr "Are you sure you want to cancel your subscription immediately? This acti
 msgid "Are you sure you want to cancel your subscription? It will remain active until the end of your current billing period."
 msgstr "Are you sure you want to cancel your subscription? It will remain active until the end of your current billing period."
 
-#. placeholder {0}: selectedIds.length
 #: src/features/crm-contacts/components/ContactListPage.tsx:213
-msgid "Are you sure you want to delete {0} contacts? This action cannot be undone."
-msgstr "Are you sure you want to delete {0} contacts? This action cannot be undone."
+#~ msgid "Are you sure you want to delete {0} contacts? This action cannot be undone."
+#~ msgstr "Are you sure you want to delete {0} contacts? This action cannot be undone."
+
+#: src/features/crm-contacts/components/ContactListPage.tsx:217
+msgid "Are you sure you want to delete {count} contacts? This action cannot be undone."
+msgstr "Are you sure you want to delete {count} contacts? This action cannot be undone."
 
 #: src/features/crm-leads/components/FollowUpList.tsx:290
 msgid "Are you sure you want to delete {count} follow-up(s)? This action cannot be undone."
@@ -410,11 +418,11 @@ msgstr "Backend responses (errors, validation messages) are in your language"
 msgid "Backend user preference is updated via API"
 msgstr "Backend user preference is updated via API"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:70
+#: src/widgets/sidebar/ui/sidebar.tsx:71
 msgid "Billing"
 msgstr "Billing"
 
-#: src/pages/billing.tsx:71
+#: src/pages/billing.tsx:81
 msgid "Billing & Payments"
 msgstr "Billing & Payments"
 
@@ -426,16 +434,16 @@ msgstr "Billing Period:"
 msgid "Built following Feature-Sliced Design methodology for maintainable and scalable frontend architecture."
 msgstr "Built following Feature-Sliced Design methodology for maintainable and scalable frontend architecture."
 
-#: src/features/crm-contacts/components/ContactListPage.tsx:133
+#: src/features/crm-contacts/components/ContactListPage.tsx:102
 msgid "Bulk delete failed"
 msgstr "Bulk delete failed"
 
-#: src/features/crm-contacts/components/ContactListPage.tsx:125
-#: src/features/crm-contacts/components/ContactListPage.tsx:151
+#: src/features/crm-contacts/components/ContactListPage.tsx:94
+#: src/features/crm-contacts/components/ContactListPage.tsx:122
 msgid "Bulk Operation Successful"
 msgstr "Bulk Operation Successful"
 
-#: src/features/crm-contacts/components/ContactListPage.tsx:159
+#: src/features/crm-contacts/components/ContactListPage.tsx:130
 msgid "Bulk status update failed"
 msgstr "Bulk status update failed"
 
@@ -449,13 +457,13 @@ msgstr "Call"
 
 #: src/entities/crm/ui/FollowUpForm.tsx:214
 #: src/entities/crm/ui/LeadForm.tsx:274
-#: src/features/crm-contacts/components/ContactListPage.tsx:216
+#: src/features/crm-contacts/components/ContactListPage.tsx:220
 #: src/features/crm-leads/components/FollowUpList.tsx:171
 #: src/features/crm-leads/components/FollowUpList.tsx:253
 #: src/features/crm-leads/components/FollowUpList.tsx:293
 #: src/features/crm-leads/components/FollowUpSection.tsx:132
 #: src/features/crm-leads/components/LeadNotesSection.tsx:256
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:341
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:347
 #: src/features/gateway-config/ui/gateway-config-form.tsx:190
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:166
 #: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:66
@@ -563,7 +571,7 @@ msgstr "Client ID for Stripe Connect (optional)"
 msgid "Client Secret"
 msgstr "Client Secret"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:369
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:375
 msgid "Close"
 msgstr "Close"
 
@@ -581,8 +589,8 @@ msgstr "Code Quality:"
 msgid "Cold Call"
 msgstr "Cold Call"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:203
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:324
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:209
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:330
 msgid "Color"
 msgstr "Color"
 
@@ -665,7 +673,7 @@ msgstr "Contacted"
 
 #: src/features/crm-leads/components/CrmLayout.tsx:80
 #: src/pages/crm.contacts.tsx:14
-#: src/widgets/sidebar/ui/sidebar.tsx:123
+#: src/widgets/sidebar/ui/sidebar.tsx:129
 msgid "Contacts"
 msgstr "Contacts"
 
@@ -729,13 +737,13 @@ msgstr "Created:"
 
 #: src/features/crm-leads/components/CrmLayout.tsx:107
 #: src/features/crm-leads/components/CrmLayout.tsx:297
-#: src/widgets/sidebar/ui/sidebar.tsx:99
+#: src/widgets/sidebar/ui/sidebar.tsx:102
 msgid "CRM"
 msgstr "CRM"
 
 #: src/features/crm-leads/components/CrmDashboard.tsx:83
 #: src/pages/crm-dashboard.tsx:20
-#: src/widgets/sidebar/ui/sidebar.tsx:105
+#: src/widgets/sidebar/ui/sidebar.tsx:108
 msgid "CRM Dashboard"
 msgstr "CRM Dashboard"
 
@@ -770,7 +778,7 @@ msgstr "Current period: {periodStart} - {periodEnd}"
 msgid "Current Plan"
 msgstr "Current Plan"
 
-#: src/pages/billing.tsx:128
+#: src/pages/billing.tsx:144
 #: src/pages/subscriptions.tsx:78
 msgid "Current Subscription"
 msgstr "Current Subscription"
@@ -783,7 +791,7 @@ msgstr "Custom Range"
 msgid "Customer ID: {customerId}"
 msgstr "Customer ID: {customerId}"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:162
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:168
 msgid "Customize your sales process by adding, removing, or reordering pipeline stages."
 msgstr "Customize your sales process by adding, removing, or reordering pipeline stages."
 
@@ -794,7 +802,7 @@ msgstr "Dark mode"
 #: src/features/crm-leads/components/CrmLayout.tsx:68
 #: src/features/crm-leads/components/CrmLayout.tsx:113
 #: src/features/dashboard/ui/dashboard-feature.tsx:15
-#: src/widgets/sidebar/ui/sidebar.tsx:91
+#: src/widgets/sidebar/ui/sidebar.tsx:92
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -835,7 +843,7 @@ msgstr "Deactivate"
 msgid "Default locale (English)"
 msgstr "Default locale (English)"
 
-#: src/features/crm-contacts/components/ContactListPage.tsx:216
+#: src/features/crm-contacts/components/ContactListPage.tsx:220
 #: src/features/crm-leads/components/FollowUpList.tsx:171
 #: src/features/crm-leads/components/FollowUpList.tsx:293
 #: src/features/crm-leads/components/FollowUpList.tsx:673
@@ -862,7 +870,7 @@ msgstr "Delete Gateway"
 msgid "Delete Gateway Configuration"
 msgstr "Delete Gateway Configuration"
 
-#: src/features/crm-contacts/components/ContactListPage.tsx:210
+#: src/features/crm-contacts/components/ContactListPage.tsx:214
 msgid "Delete Multiple Contacts"
 msgstr "Delete Multiple Contacts"
 
@@ -870,7 +878,7 @@ msgstr "Delete Multiple Contacts"
 msgid "Delete note"
 msgstr "Delete note"
 
-#: src/features/crm-contacts/components/ContactListPage.tsx:342
+#: src/features/crm-contacts/components/ContactListPage.tsx:349
 #: src/features/crm-leads/components/FollowUpList.tsx:404
 msgid "Delete Selected"
 msgstr "Delete Selected"
@@ -888,11 +896,13 @@ msgstr "Delete user"
 msgid "Delete User"
 msgstr "Delete User"
 
-#. placeholder {0}: data.successCount
-#. placeholder {1}: data.failureCount
 #: src/features/crm-contacts/components/ContactListPage.tsx:126
-msgid "Deleted {0} contacts. {1} failed."
-msgstr "Deleted {0} contacts. {1} failed."
+#~ msgid "Deleted {0} contacts. {1} failed."
+#~ msgstr "Deleted {0} contacts. {1} failed."
+
+#: src/features/crm-contacts/components/ContactListPage.tsx:95
+msgid "Deleted {successCount} contacts. {failureCount} failed."
+msgstr "Deleted {successCount} contacts. {failureCount} failed."
 
 #: src/shared/constants/index.ts:96
 msgid "Deleted successfully"
@@ -1033,6 +1043,10 @@ msgstr "Enable MSW"
 msgid "Enabled"
 msgstr "Enabled"
 
+#: src/pages/billing.tsx:196
+msgid "Enabled Features"
+msgstr "Enabled Features"
+
 #: src/features/crm-leads/components/DateRangeFilter.tsx:181
 msgid "End Date"
 msgstr "End Date"
@@ -1119,8 +1133,8 @@ msgstr "Environment mode for the gateway"
 #: src/entities/crm/ui/FollowUpForm.tsx:121
 #: src/entities/crm/ui/LeadForm.tsx:129
 #: src/entities/crm/ui/LeadForm.tsx:167
-#: src/features/crm-contacts/components/ContactListPage.tsx:132
-#: src/features/crm-contacts/components/ContactListPage.tsx:158
+#: src/features/crm-contacts/components/ContactListPage.tsx:101
+#: src/features/crm-contacts/components/ContactListPage.tsx:129
 #: src/features/crm-leads/components/FollowUpList.tsx:155
 #: src/features/crm-leads/components/FollowUpList.tsx:190
 #: src/features/crm-leads/components/FollowUpList.tsx:269
@@ -1130,10 +1144,10 @@ msgstr "Environment mode for the gateway"
 #: src/features/crm-leads/components/FollowUpSection.tsx:145
 #: src/features/crm-leads/components/FollowUpSection.tsx:200
 #: src/features/crm-leads/components/LeadDetailPage.tsx:75
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:84
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:110
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:127
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:146
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:86
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:114
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:131
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:152
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:73
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:57
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:89
@@ -1187,7 +1201,7 @@ msgstr "Error loading leads"
 msgid "Error loading notes"
 msgstr "Error loading notes"
 
-#: src/features/crm-leads/components/PipelineView.tsx:205
+#: src/features/crm-leads/components/PipelineView.tsx:214
 msgid "Error Loading Pipeline"
 msgstr "Error Loading Pipeline"
 
@@ -1225,7 +1239,7 @@ msgstr "every {count} months"
 msgid "every {count} years"
 msgstr "every {count} years"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:59
+#: src/widgets/sidebar/ui/sidebar.tsx:60
 msgid "Examples"
 msgstr "Examples"
 
@@ -1278,7 +1292,7 @@ msgstr "Failed to convert lead"
 msgid "Failed to create lead: {errorMessage}"
 msgstr "Failed to create lead: {errorMessage}"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:85
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:87
 msgid "Failed to create stage"
 msgstr "Failed to create stage"
 
@@ -1313,7 +1327,7 @@ msgstr "Failed to delete gateway"
 msgid "Failed to delete some follow-ups"
 msgstr "Failed to delete some follow-ups"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:128
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:132
 msgid "Failed to delete stage"
 msgstr "Failed to delete stage"
 
@@ -1359,7 +1373,7 @@ msgstr "Failed to load leads. Please try again."
 msgid "Failed to load notes. Please try again."
 msgstr "Failed to load notes. Please try again."
 
-#: src/features/crm-leads/components/PipelineView.tsx:210
+#: src/features/crm-leads/components/PipelineView.tsx:219
 msgid "Failed to load pipeline data"
 msgstr "Failed to load pipeline data"
 
@@ -1371,7 +1385,7 @@ msgstr "Failed to load subscription plans. Please try again later."
 msgid "Failed to logout from all devices"
 msgstr "Failed to logout from all devices"
 
-#: src/features/crm-leads/components/PipelineView.tsx:169
+#: src/features/crm-leads/components/PipelineView.tsx:178
 msgid "Failed to Move Lead"
 msgstr "Failed to Move Lead"
 
@@ -1383,7 +1397,7 @@ msgstr "Failed to pause subscription. Please try again."
 msgid "Failed to process the refund. Please try again."
 msgstr "Failed to process the refund. Please try again."
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:147
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:153
 msgid "Failed to reorder stage"
 msgstr "Failed to reorder stage"
 
@@ -1428,7 +1442,7 @@ msgstr "Failed to update follow-up: {errorMessage}"
 msgid "Failed to update lead: {errorMessage}"
 msgstr "Failed to update lead: {errorMessage}"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:111
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:115
 msgid "Failed to update stage"
 msgstr "Failed to update stage"
 
@@ -1456,9 +1470,17 @@ msgstr "Fair"
 msgid "Fastest Stage"
 msgstr "Fastest Stage"
 
+#: src/pages/billing.tsx:182
+msgid "Feature Usage"
+msgstr "Feature Usage"
+
 #: src/pages/about.tsx:105
 msgid "Feature-Sliced Design:"
 msgstr "Feature-Sliced Design:"
+
+#: src/pages/billing.tsx:122
+msgid "Features & Usage"
+msgstr "Features & Usage"
 
 #: src/features/subscription-management/ui/SubscriptionPlansGrid.tsx:158
 msgid "Features:"
@@ -1536,7 +1558,7 @@ msgstr "Follow-up updated successfully"
 #: src/features/crm-leads/components/FollowUpSection.tsx:175
 #: src/features/crm-leads/components/LeadDetailPage.tsx:288
 #: src/pages/crm-follow-ups.tsx:20
-#: src/widgets/sidebar/ui/sidebar.tsx:141
+#: src/widgets/sidebar/ui/sidebar.tsx:151
 msgid "Follow-ups"
 msgstr "Follow-ups"
 
@@ -1569,11 +1591,11 @@ msgstr "Gateway"
 msgid "Gateway activated successfully"
 msgstr "Gateway activated successfully"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:79
+#: src/widgets/sidebar/ui/sidebar.tsx:80
 msgid "Gateway Config"
 msgstr "Gateway Config"
 
-#: src/pages/billing.tsx:88
+#: src/pages/billing.tsx:98
 msgid "Gateway Configuration"
 msgstr "Gateway Configuration"
 
@@ -1595,7 +1617,7 @@ msgstr "Gateway deleted successfully"
 msgid "Gateway:"
 msgstr "Gateway:"
 
-#: src/pages/billing.tsx:139
+#: src/pages/billing.tsx:155
 msgid "Get started with a subscription plan to unlock premium features."
 msgstr "Get started with a subscription plan to unlock premium features."
 
@@ -1633,7 +1655,7 @@ msgid "High"
 msgstr "High"
 
 #: src/features/crm-leads/components/CrmLayout.tsx:103
-#: src/widgets/sidebar/ui/sidebar.tsx:32
+#: src/widgets/sidebar/ui/sidebar.tsx:33
 msgid "Home"
 msgstr "Home"
 
@@ -1698,7 +1720,7 @@ msgstr "Invoice"
 msgid "Invoice {invoiceId}..."
 msgstr "Invoice {invoiceId}..."
 
-#: src/pages/billing.tsx:118
+#: src/pages/billing.tsx:134
 #: src/pages/subscriptions.tsx:87
 msgid "Invoices"
 msgstr "Invoices"
@@ -1753,7 +1775,7 @@ msgstr "Lead created successfully"
 msgid "Lead Details"
 msgstr "Lead Details"
 
-#: src/features/crm-leads/components/PipelineView.tsx:162
+#: src/features/crm-leads/components/PipelineView.tsx:171
 msgid "Lead Moved"
 msgstr "Lead Moved"
 
@@ -1769,7 +1791,7 @@ msgstr "Lead Source"
 msgid "Lead updated successfully"
 msgstr "Lead updated successfully"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:241
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:247
 msgid "leads"
 msgstr "leads"
 
@@ -1778,7 +1800,7 @@ msgstr "leads"
 #: src/features/crm-leads/components/DashboardStats.tsx:250
 #: src/features/crm-leads/components/DashboardStats.tsx:289
 #: src/pages/crm.leads.tsx:13
-#: src/widgets/sidebar/ui/sidebar.tsx:114
+#: src/widgets/sidebar/ui/sidebar.tsx:118
 msgid "Leads"
 msgstr "Leads"
 
@@ -1863,8 +1885,8 @@ msgstr "Logout from all devices where you're currently signed in. This is useful
 
 #: src/features/crm-leads/components/LeadListPage.tsx:350
 #: src/features/crm-leads/components/LeadListPage.tsx:512
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:197
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:318
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:203
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:324
 msgid "Lost"
 msgstr "Lost"
 
@@ -1880,16 +1902,16 @@ msgstr "Low"
 msgid "Manage all your follow-up tasks"
 msgstr "Manage all your follow-up tasks"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:157
-#: src/features/crm-leads/components/PipelineView.tsx:261
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:163
+#: src/features/crm-leads/components/PipelineView.tsx:270
 msgid "Manage Pipeline Stages"
 msgstr "Manage Pipeline Stages"
 
-#: src/features/crm-leads/components/PipelineView.tsx:231
+#: src/features/crm-leads/components/PipelineView.tsx:240
 msgid "Manage Stages"
 msgstr "Manage Stages"
 
-#: src/pages/billing.tsx:79
+#: src/pages/billing.tsx:89
 msgid "Manage Subscriptions"
 msgstr "Manage Subscriptions"
 
@@ -1958,11 +1980,11 @@ msgstr "Modern React components library with comprehensive theming"
 msgid "monthly"
 msgstr "monthly"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:257
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:263
 msgid "Move Down"
 msgstr "Move Down"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:246
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:252
 msgid "Move Up"
 msgstr "Move Up"
 
@@ -1991,7 +2013,7 @@ msgid "My Payment Gateway"
 msgstr "My Payment Gateway"
 
 #: src/entities/crm/ui/LeadForm.tsx:207
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:178
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:184
 msgid "Name"
 msgstr "Name"
 
@@ -2003,7 +2025,7 @@ msgstr "Name must be at least 2 characters"
 msgid "Name must be less than 100 characters"
 msgstr "Name must be less than 100 characters"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:26
+#: src/widgets/sidebar/ui/sidebar.tsx:27
 msgid "Navigation"
 msgstr "Navigation"
 
@@ -2047,10 +2069,14 @@ msgstr "No Active Gateways"
 msgid "No active payment gateways configured. Please configure a gateway first."
 msgstr "No active payment gateways configured. Please configure a gateway first."
 
-#: src/pages/billing.tsx:136
+#: src/pages/billing.tsx:152
 #: src/pages/subscriptions.tsx:109
 msgid "No Active Subscription"
 msgstr "No Active Subscription"
+
+#: src/pages/billing.tsx:209
+msgid "No features enabled"
+msgstr "No features enabled"
 
 #: src/features/crm-leads/components/FollowUpList.tsx:441
 msgid "No follow-ups found matching your search."
@@ -2088,7 +2114,7 @@ msgstr "No payments found"
 msgid "No pipeline data available"
 msgstr "No pipeline data available"
 
-#: src/features/crm-leads/components/PipelineView.tsx:221
+#: src/features/crm-leads/components/PipelineView.tsx:230
 msgid "No Pipeline Stages"
 msgstr "No Pipeline Stages"
 
@@ -2100,7 +2126,7 @@ msgstr "No Plans Available"
 msgid "No source data available"
 msgstr "No source data available"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:361
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:367
 msgid "No Stages"
 msgstr "No Stages"
 
@@ -2214,7 +2240,7 @@ msgid "Override the default trial period for this subscription"
 msgstr "Override the default trial period for this subscription"
 
 #: src/features/crm-leads/components/LeadDetailPage.tsx:285
-#: src/pages/billing.tsx:106
+#: src/pages/billing.tsx:116
 msgid "Overview"
 msgstr "Overview"
 
@@ -2334,7 +2360,7 @@ msgstr "Payment Gateway Configuration"
 msgid "Payment gateway configured successfully"
 msgstr "Payment gateway configured successfully"
 
-#: src/pages/billing.tsx:112
+#: src/pages/billing.tsx:128
 #: src/widgets/billing-history/ui/billing-history-table.tsx:70
 msgid "Payment History"
 msgstr "Payment History"
@@ -2380,7 +2406,7 @@ msgstr "Pick start date"
 #: src/features/crm-leads/components/CrmLayout.tsx:86
 #: src/features/crm-leads/components/CrmLayout.tsx:115
 #: src/pages/crm.pipeline.tsx:13
-#: src/widgets/sidebar/ui/sidebar.tsx:132
+#: src/widgets/sidebar/ui/sidebar.tsx:140
 msgid "Pipeline"
 msgstr "Pipeline"
 
@@ -2392,7 +2418,7 @@ msgstr "Pipeline health based on active leads percentage"
 msgid "Pipeline Metrics"
 msgstr "Pipeline Metrics"
 
-#: src/features/crm-leads/components/PipelineView.tsx:278
+#: src/features/crm-leads/components/PipelineView.tsx:287
 msgid "Pipeline Overview"
 msgstr "Pipeline Overview"
 
@@ -2408,7 +2434,7 @@ msgstr "Please check your email for the password reset link"
 msgid "Please check your inbox for the verification link"
 msgstr "Please check your inbox for the verification link"
 
-#: src/features/crm-leads/components/PipelineView.tsx:225
+#: src/features/crm-leads/components/PipelineView.tsx:234
 msgid "Please configure pipeline stages to start using the kanban view."
 msgstr "Please configure pipeline stages to start using the kanban view."
 
@@ -2446,7 +2472,7 @@ msgstr "Please select a lead source"
 msgid "Please select a priority"
 msgstr "Please select a priority"
 
-#: src/features/crm-leads/components/PipelineView.tsx:170
+#: src/features/crm-leads/components/PipelineView.tsx:179
 msgid "Please try again"
 msgstr "Please try again"
 
@@ -2776,11 +2802,11 @@ msgstr "Server is temporarily unavailable. Please try again"
 msgid "Service temporarily unavailable"
 msgstr "Service temporarily unavailable"
 
-#: src/features/crm-contacts/components/ContactListPage.tsx:316
+#: src/features/crm-contacts/components/ContactListPage.tsx:323
 msgid "Set Active"
 msgstr "Set Active"
 
-#: src/features/crm-contacts/components/ContactListPage.tsx:330
+#: src/features/crm-contacts/components/ContactListPage.tsx:337
 msgid "Set Archived"
 msgstr "Set Archived"
 
@@ -2792,7 +2818,7 @@ msgstr "Set as primary"
 msgid "Set as primary gateway"
 msgstr "Set as primary gateway"
 
-#: src/features/crm-contacts/components/ContactListPage.tsx:323
+#: src/features/crm-contacts/components/ContactListPage.tsx:330
 msgid "Set Inactive"
 msgstr "Set Inactive"
 
@@ -2846,19 +2872,19 @@ msgstr "Sorting by {key} in {direction} order"
 msgid "Square location ID for payments"
 msgstr "Square location ID for payments"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:79
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:81
 msgid "Stage created successfully"
 msgstr "Stage created successfully"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:122
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:126
 msgid "Stage deleted successfully"
 msgstr "Stage deleted successfully"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:303
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:309
 msgid "Stage Name"
 msgstr "Stage Name"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:105
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:109
 msgid "Stage updated successfully"
 msgstr "Stage updated successfully"
 
@@ -2944,9 +2970,9 @@ msgstr "Subscriptions"
 #: src/features/crm-leads/components/FollowUpSection.tsx:109
 #: src/features/crm-leads/components/FollowUpSection.tsx:138
 #: src/features/crm-leads/components/LeadDetailPage.tsx:67
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:78
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:104
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:121
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:80
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:108
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:125
 #: src/features/users/components/user-form-modal.tsx:130
 #: src/features/users/components/user-form-modal.tsx:168
 #: src/features/users/components/users-data-grid.tsx:67
@@ -3144,7 +3170,7 @@ msgid "Try again in a few minutes"
 msgstr "Try again in a few minutes"
 
 #: src/entities/crm/ui/FollowUpForm.tsx:199
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:189
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:195
 msgid "Type"
 msgstr "Type"
 
@@ -3186,7 +3212,7 @@ msgstr "Unverified"
 msgid "Update"
 msgstr "Update"
 
-#: src/features/crm-contacts/components/ContactListPage.tsx:307
+#: src/features/crm-contacts/components/ContactListPage.tsx:314
 msgid "Update Status"
 msgstr "Update Status"
 
@@ -3198,11 +3224,13 @@ msgstr "Update your password to keep your account secure."
 msgid "Updated"
 msgstr "Updated"
 
-#. placeholder {0}: data.successCount
-#. placeholder {1}: data.failureCount
 #: src/features/crm-contacts/components/ContactListPage.tsx:152
-msgid "Updated {0} contacts. {1} failed."
-msgstr "Updated {0} contacts. {1} failed."
+#~ msgid "Updated {0} contacts. {1} failed."
+#~ msgstr "Updated {0} contacts. {1} failed."
+
+#: src/features/crm-contacts/components/ContactListPage.tsx:123
+msgid "Updated {successCount} contacts. {failureCount} failed."
+msgstr "Updated {successCount} contacts. {failureCount} failed."
 
 #: src/shared/constants/index.ts:95
 msgid "Updated successfully"
@@ -3232,7 +3260,7 @@ msgid "User deleted successfully"
 msgstr "User deleted successfully"
 
 #: src/features/users/components/users-data-grid.tsx:226
-#: src/widgets/sidebar/ui/sidebar.tsx:50
+#: src/widgets/sidebar/ui/sidebar.tsx:51
 msgid "User Management"
 msgstr "User Management"
 
@@ -3311,7 +3339,7 @@ msgstr "View on GitHub"
 msgid "View only"
 msgstr "View only"
 
-#: src/pages/billing.tsx:146
+#: src/pages/billing.tsx:162
 msgid "View Plans"
 msgstr "View Plans"
 
@@ -3397,8 +3425,8 @@ msgstr "When you change the language, the following happens:"
 
 #: src/features/crm-leads/components/LeadListPage.tsx:349
 #: src/features/crm-leads/components/LeadListPage.tsx:511
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:196
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:317
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:202
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:323
 msgid "Won"
 msgstr "Won"
 
@@ -3427,7 +3455,7 @@ msgstr "You are not authorized to perform this action"
 msgid "You don't have an active subscription. Browse our available plans to get started."
 msgstr "You don't have an active subscription. Browse our available plans to get started."
 
-#: src/pages/billing.tsx:59
+#: src/pages/billing.tsx:68
 msgid "You don't have permission to access billing information. Please contact your administrator."
 msgstr "You don't have permission to access billing information. Please contact your administrator."
 
@@ -3451,7 +3479,7 @@ msgstr "You don't have permission to view payment history."
 msgid "You have been logged out from all devices"
 msgstr "You have been logged out from all devices"
 
-#: src/pages/billing.tsx:96
+#: src/pages/billing.tsx:106
 msgid "You have read-only access to billing information."
 msgstr "You have read-only access to billing information."
 
@@ -3511,7 +3539,7 @@ msgstr "Your PayPal REST API client ID"
 msgid "Your PayPal REST API client secret"
 msgstr "Your PayPal REST API client secret"
 
-#: src/features/crm-leads/components/PipelineSettingsModal.tsx:364
+#: src/features/crm-leads/components/PipelineSettingsModal.tsx:370
 msgid "Your pipeline has no stages. Create some to get started."
 msgstr "Your pipeline has no stages. Create some to get started."
 

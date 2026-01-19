@@ -48,3 +48,17 @@ export { VirtualizedList } from "./virtualized-list";
 export { LazyLoad } from "./lazy-load";
 export { ProgressiveLoader } from "./progressive-loader";
 export { PerformanceDashboard } from "./performance-dashboard";
+
+// Feature management components
+export { FeatureGate } from "./FeatureGate";
+export { withFeatureGate } from "./feature-gate-utils";
+export {
+  FeatureErrorBoundary,
+  SilentFeatureErrorBoundary,
+} from "./FeatureErrorBoundary";
+export {
+  FeatureUsage,
+  CompactFeatureUsage,
+  FeatureUsageList,
+} from "./FeatureUsage";
+export { SubscriptionInfo, SubscriptionStatusBadge } from "./SubscriptionInfo";

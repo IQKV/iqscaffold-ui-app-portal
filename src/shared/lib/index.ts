@@ -23,3 +23,9 @@ export * from "./tenant-utils";
 // Locale management
 export * from "./locale-preference";
 export * from "./locale-manager";
+
+// Feature management
+export { useFeatures } from "./hooks/useFeatures";
+export { useEnabledFeatures } from "./hooks/useEnabledFeatures";
+export { FeatureProvider, useFeatureContext } from "./contexts/FeatureContext";
+export { useHasFeature } from "./feature-utils";

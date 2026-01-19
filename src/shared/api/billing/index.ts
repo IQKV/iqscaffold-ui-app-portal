@@ -40,7 +40,25 @@ export const billingApi = {
       method: "POST",
     }),
 
-  // Subscription Management APIs
+  // Feature Management APIs
+
+  /**
+   * Get user's complete feature information including subscription details
+   */
+  getMyFeatures: () =>
+    apiRequest<Types.UserFeaturesResponse>({
+      url: "/api/v1/features/my-features",
+      method: "GET",
+    }),
+
+  /**
+   * Get only enabled features (lightweight endpoint for frequent checks)
+   */
+  getEnabledFeatures: () =>
+    apiRequest<Types.FeatureDto[]>({
+      url: "/api/v1/features/enabled",
+      method: "GET",
+    }),
 
   /**
    * Create a subscription

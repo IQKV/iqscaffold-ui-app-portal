@@ -16,6 +16,7 @@ import { theme } from "./theme";
 import { queryClient } from "@/shared/lib";
 import { AuthProvider, AuthGuardWrapper } from "@/processes/auth";
 import { TenantProvider } from "@/processes/tenant";
+import { FeatureProvider } from "@/shared/lib/contexts/FeatureContext";
 
 import { ErrorBoundary } from "@/shared/ui";
 import { MSWDevTools } from "@/shared/ui/msw-dev-tools";
@@ -72,9 +73,11 @@ export function App() {
                   <TenantProvider>
                     <AuthProvider>
                       <AuthGuardWrapper>
-                        <RouterProvider router={router} />
-                        <ReactQueryDevtools initialIsOpen={false} />
-                        <MSWDevTools />
+                        <FeatureProvider autoFetch>
+                          <RouterProvider router={router} />
+                          <ReactQueryDevtools initialIsOpen={false} />
+                          <MSWDevTools />
+                        </FeatureProvider>
                       </AuthGuardWrapper>
                     </AuthProvider>
                   </TenantProvider>

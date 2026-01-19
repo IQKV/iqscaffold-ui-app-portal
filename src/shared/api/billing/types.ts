@@ -94,6 +94,36 @@ export interface UpdateSubscriptionPlanRequest {
   features?: Record<string, any>;
 }
 
+// Feature Management Types
+
+export interface FeatureDto {
+  code: string;
+  name: string;
+  description: string;
+  category: string;
+  enabled: boolean;
+  usageLimit?: number;
+  currentUsage?: number;
+}
+
+export interface UserFeaturesResponse {
+  enabledFeatures: FeatureDto[];
+  allFeatures: FeatureDto[];
+  planName: string;
+  subscriptionStatus: string;
+  subscriptionExpiresAt?: string;
+  isTrialPeriod: boolean;
+  trialExpiresAt?: string;
+  tenantId: string;
+}
+
+export interface FeatureUsageInfo {
+  current: number;
+  limit: number;
+  percentage: number;
+  remaining: number;
+}
+
 export interface SubscriptionPlanResponse {
   id: string;
   name: string;
