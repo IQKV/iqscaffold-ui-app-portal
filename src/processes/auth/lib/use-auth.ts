@@ -28,7 +28,7 @@ export function useAuth() {
       hasAuthority("TENANT_OWNER") ||
       hasAuthority("SUPER_ADMIN");
     const isSuperAdmin = () => hasAuthority("SUPER_ADMIN");
-    const isTenantOwner = () => billingPerms.isTenantOwner(user);
+    const isTenantOwner = () => hasAuthority("TENANT_OWNER");
     const canManageUsers = () => isAdmin();
 
     // Billing permissions
@@ -40,8 +40,8 @@ export function useAuth() {
     const canManageMerchants = () => billingPerms.canManageMerchants(user);
     const canViewPayments = () => billingPerms.canViewPayments(user);
     const canViewPayouts = () => billingPerms.canViewPayouts(user);
-    const isBillingAdmin = () => billingPerms.isBillingAdmin(user);
-    const isFinanceViewer = () => billingPerms.isFinanceViewer(user);
+    const isBillingAdmin = () => billingPerms.hasAdminAccess(user);
+    const isFinanceViewer = () => billingPerms.hasAdminAccess(user);
 
     return {
       hasAuthority,

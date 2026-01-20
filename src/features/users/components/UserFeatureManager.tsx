@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Card,
   Text,
@@ -13,8 +13,14 @@ import {
   Tooltip,
 } from "@mantine/core";
 import { IconInfoCircle, IconRefresh } from "@tabler/icons-react";
-import { useFeatureContext, useFeatureManagement } from "@/shared/lib/contexts/FeatureContext";
-import { userManagementApi, UserFeaturesResponse } from "@/shared/api/user-management-api";
+import {
+  useFeatureContext,
+  useFeatureManagement,
+} from "@/shared/lib/contexts/FeatureContext";
+import {
+  userManagementApi,
+  UserFeaturesResponse,
+} from "@/shared/api/user-management-api";
 import { notificationService } from "@/shared/lib/notifications";
 
 interface UserFeatureManagerProps {
@@ -24,7 +30,7 @@ interface UserFeatureManagerProps {
 
 /**
  * Component for managing user features in the admin interface.
- * 
+ *
  * Provides:
  * - Toggle individual features on/off
  * - View feature descriptions and dependencies
@@ -37,39 +43,45 @@ export const UserFeatureManager: React.FC<UserFeatureManagerProps> = ({
 }) => {
   const { availableFeatures } = useFeatureContext();
   const { enableFeature, disableFeature } = useFeatureManagement();
-  
-  const [userFeatures, setUserFeatures] = useState<UserFeaturesResponse | null>(null);
+
+  const [userFeatures, setUserFeatures] = useState<UserFeaturesResponse | null>(
+    null
+  );
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchUserFeatures = async () => {
+  const fetchUserFeatures = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
       const response = await userManagementApi.getUserFeatures(userId);
       setUserFeatures(response);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Failed to fetch user features";
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to fetch user features";
       setError(errorMessage);
-      notificationService.error(errorMessage);
+      notificationService.error({
+        title: "Failed to fetch user features",
+        message: errorMessage,
+      });
     } finally {
       setLoading(false);
     }
-  };
+  }, [userId]);
 
   useEffect(() => {
     fetchUserFeatures();
-  }, [userId]);
+  }, [fetchUserFeatures]);
 
   const handleFeatureToggle = async (featureCode: string, enabled: boolean) => {
     setUpdating(featureCode);
-    
+
     try {
-      const success = enabled 
+      const success = enabled
         ? await enableFeature(userId, featureCode)
         : await disableFeature(userId, featureCode);
-      
+
       if (success) {
         // Refresh user features to get updated state
         await fetchUserFeatures();
@@ -80,17 +92,19 @@ export const UserFeatureManager: React.FC<UserFeatureManagerProps> = ({
   };
 
   const isFeatureEnabled = (featureCode: string): boolean => {
-    return userFeatures?.features.some(f => f.code === featureCode) || false;
+    return userFeatures?.features.some((f) => f.code === featureCode) || false;
   };
 
   const getFeatureDependencies = (featureCode: string): string[] => {
-    const feature = availableFeatures?.features.find(f => f.code === featureCode);
+    const feature = availableFeatures?.features.find(
+      (f) => f.code === featureCode
+    );
     return feature?.dependencies || [];
   };
 
   const hasUnmetDependencies = (featureCode: string): boolean => {
     const dependencies = getFeatureDependencies(featureCode);
-    return dependencies.some(dep => !isFeatureEnabled(dep));
+    return dependencies.some((dep) => !isFeatureEnabled(dep));
   };
 
   if (loading) {
@@ -129,7 +143,9 @@ export const UserFeatureManager: React.FC<UserFeatureManagerProps> = ({
     );
   }
 
-  const composableFeatures = availableFeatures.features.filter(f => f.composable);
+  const composableFeatures = availableFeatures.features.filter(
+    (f) => f.composable
+  );
 
   return (
     <Card withBorder>
@@ -180,15 +196,17 @@ export const UserFeatureManager: React.FC<UserFeatureManagerProps> = ({
                       {enabled ? "Enabled" : "Disabled"}
                     </Badge>
                   </Group>
-                  
+
                   <Text size="xs" c="dimmed" mb="xs">
                     {feature.description}
                   </Text>
 
                   {dependencies.length > 0 && (
                     <Group gap="xs" mb="xs">
-                      <Text size="xs" c="dimmed">Dependencies:</Text>
-                      {dependencies.map(dep => (
+                      <Text size="xs" c="dimmed">
+                        Dependencies:
+                      </Text>
+                      {dependencies.map((dep) => (
                         <Badge
                           key={dep}
                           size="xs"
@@ -203,8 +221,10 @@ export const UserFeatureManager: React.FC<UserFeatureManagerProps> = ({
 
                   {feature.requiredAuthorities.length > 0 && (
                     <Group gap="xs">
-                      <Text size="xs" c="dimmed">Authorities:</Text>
-                      {feature.requiredAuthorities.map(auth => (
+                      <Text size="xs" c="dimmed">
+                        Authorities:
+                      </Text>
+                      {feature.requiredAuthorities.map((auth) => (
                         <Badge key={auth} size="xs" variant="dot">
                           {auth}
                         </Badge>
@@ -218,14 +238,17 @@ export const UserFeatureManager: React.FC<UserFeatureManagerProps> = ({
                     hasUnmet && !enabled
                       ? "Cannot enable: missing dependencies"
                       : enabled
-                      ? "Disable this feature"
-                      : "Enable this feature"
+                        ? "Disable this feature"
+                        : "Enable this feature"
                   }
                 >
                   <Switch
                     checked={enabled}
                     onChange={(event) =>
-                      handleFeatureToggle(feature.code, event.currentTarget.checked)
+                      handleFeatureToggle(
+                        feature.code,
+                        event.currentTarget.checked
+                      )
                     }
                     disabled={isUpdating || (hasUnmet && !enabled)}
                     size="sm"

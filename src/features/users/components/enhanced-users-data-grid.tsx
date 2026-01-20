@@ -13,8 +13,14 @@ import {
   Modal,
   Tabs,
 } from "@mantine/core";
-import { IconEdit, IconTrash, IconPlus, IconSearch, IconSettings } from "@tabler/icons-react";
-import { DataTable, type DataTableColumn } from "@/shared/ui/data-table";
+import {
+  IconEdit,
+  IconTrash,
+  IconPlus,
+  IconSearch,
+  IconSettings,
+} from "@tabler/icons-react";
+import { DataTable, type DataTableColumn } from "mantine-datatable";
 import { useUsersQuery, useDeleteUserMutation } from "../hooks/use-users-query";
 import { User } from "../api/users-api";
 import { UserFeatureManager } from "./UserFeatureManager";
@@ -107,7 +113,7 @@ export function EnhancedUsersDataGrid({
     return "gray";
   };
 
-  const formatRoles = (authorities: string[]) => {
+  const formatRoles = useCallback((authorities: string[]) => {
     if (authorities.length === 0) {
       return <Badge color="gray" size="sm">{t`No roles`}</Badge>;
     }
@@ -115,10 +121,10 @@ export function EnhancedUsersDataGrid({
     const primaryRole = authorities.includes("SUPER_ADMIN")
       ? "SUPER_ADMIN"
       : authorities.includes("ADMIN")
-      ? "ADMIN"
-      : authorities.includes("USER")
-      ? "USER"
-      : authorities[0];
+        ? "ADMIN"
+        : authorities.includes("USER")
+          ? "USER"
+          : authorities[0];
 
     return (
       <Group gap="xs">
@@ -134,7 +140,7 @@ export function EnhancedUsersDataGrid({
         )}
       </Group>
     );
-  };
+  }, []);
 
   const columns: DataTableColumn<User>[] = useMemo(
     () => [
@@ -184,9 +190,7 @@ export function EnhancedUsersDataGrid({
         accessor: "createdAt",
         title: t`Created`,
         render: (user) => (
-          <Text size="sm">
-            {new Date(user.createdAt).toLocaleDateString()}
-          </Text>
+          <Text size="sm">{new Date(user.createdAt).toLocaleDateString()}</Text>
         ),
       },
       {
@@ -229,13 +233,14 @@ export function EnhancedUsersDataGrid({
         ),
       },
     ],
-    [onEditUser, handleDeleteUser, handleManageFeatures, canManageUsers]
+    [onEditUser, handleDeleteUser, handleManageFeatures, canManageUsers, formatRoles]
   );
 
   if (error) {
+    const errorMessage = error.message;
     return (
       <Paper p="md">
-        <Text c="red">{t`Error loading users: ${error.message}`}</Text>
+        <Text c="red">{t`Error loading users: ${errorMessage}`}</Text>
       </Paper>
     );
   }
@@ -267,19 +272,19 @@ export function EnhancedUsersDataGrid({
 
           <DataTable
             columns={columns}
-            data={data?.data || []}
-            loading={isLoading}
-            pagination={{
-              page,
-              total: Math.ceil((data?.total || 0) / limit),
-              onPageChange: setPage,
-            }}
-            emptyState={{
-              title: t`No users found`,
-              description: search
-                ? t`No users match your search criteria`
-                : t`No users have been created yet`,
-            }}
+            records={data?.data || []}
+            fetching={isLoading}
+            totalRecords={data?.pagination.total || 0}
+            recordsPerPage={limit}
+            page={page}
+            onPageChange={setPage}
+            emptyState={
+              <Text ta="center" c="dimmed">
+                {search
+                  ? t`No users match your search criteria`
+                  : t`No users have been created yet`}
+              </Text>
+            }
           />
         </Paper>
       </Stack>
@@ -290,7 +295,11 @@ export function EnhancedUsersDataGrid({
         onClose={() => setFeatureModalOpened(false)}
         title={
           selectedUser
-            ? t`Manage Features - ${selectedUser.firstName} ${selectedUser.lastName}`
+            ? (() => {
+                const firstName = selectedUser.firstName;
+                const lastName = selectedUser.lastName;
+                return t`Manage Features - ${firstName} ${lastName}`;
+              })()
             : t`Manage Features`
         }
         size="lg"

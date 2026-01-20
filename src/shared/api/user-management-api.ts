@@ -246,7 +246,10 @@ export const userManagementApi = {
    * Enable a feature for a user
    * Requires ADMIN or SUPER_ADMIN role
    */
-  async enableUserFeature(userId: number, featureCode: string): Promise<FeatureAccessResponse> {
+  async enableUserFeature(
+    userId: number,
+    featureCode: string
+  ): Promise<FeatureAccessResponse> {
     return apiRequest<FeatureAccessResponse>({
       url: `/api/v1/users/features/${userId}/${featureCode}/enable`,
       method: "POST",
@@ -257,7 +260,10 @@ export const userManagementApi = {
    * Disable a feature for a user
    * Requires ADMIN or SUPER_ADMIN role
    */
-  async disableUserFeature(userId: number, featureCode: string): Promise<FeatureAccessResponse> {
+  async disableUserFeature(
+    userId: number,
+    featureCode: string
+  ): Promise<FeatureAccessResponse> {
     return apiRequest<FeatureAccessResponse>({
       url: `/api/v1/users/features/${userId}/${featureCode}/disable`,
       method: "DELETE",
@@ -268,7 +274,10 @@ export const userManagementApi = {
    * Check if a user has access to a feature
    * Requires ADMIN or SUPER_ADMIN role
    */
-  async checkUserFeatureAccess(userId: number, featureCode: string): Promise<FeatureAccessResponse> {
+  async checkUserFeatureAccess(
+    userId: number,
+    featureCode: string
+  ): Promise<FeatureAccessResponse> {
     return apiRequest<FeatureAccessResponse>({
       url: `/api/v1/users/features/${userId}/${featureCode}/check`,
       method: "GET",
@@ -279,7 +288,10 @@ export const userManagementApi = {
    * Update user features in bulk (enable/disable multiple features)
    * Requires ADMIN or SUPER_ADMIN role
    */
-  async bulkUpdateUserFeatures(userId: number, request: BulkFeatureUpdateRequest): Promise<BulkFeatureUpdateResponse> {
+  async bulkUpdateUserFeatures(
+    userId: number,
+    request: BulkFeatureUpdateRequest
+  ): Promise<BulkFeatureUpdateResponse> {
     return apiRequest<BulkFeatureUpdateResponse>({
       url: `/api/v1/users/features/${userId}`,
       method: "PUT",
@@ -302,7 +314,9 @@ export const userManagementApi = {
    * Get microservice access information for a user
    * Requires ADMIN or SUPER_ADMIN role
    */
-  async getUserMicroserviceAccess(userId: number): Promise<MicroserviceAccessResponse> {
+  async getUserMicroserviceAccess(
+    userId: number
+  ): Promise<MicroserviceAccessResponse> {
     return apiRequest<MicroserviceAccessResponse>({
       url: `/api/v1/users/features/${userId}/microservices`,
       method: "GET",

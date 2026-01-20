@@ -47,7 +47,7 @@ function BillingPage() {
     user,
   } = useAuth();
 
-  const { features, enabledFeatures } = useFeatureContext();
+  const { userFeatures, enabledFeatures } = useFeatureContext();
 
   const { data: orgsData } = useQuery({
     queryKey: ["organizations"],

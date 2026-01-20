@@ -16,7 +16,7 @@ import { useFeatureContext, useEnabledFeatures } from "@/shared/lib";
  * feature-based functionality in your React components.
  */
 export const FeatureExamples: React.FC = () => {
-  const { hasFeature, getUsageInfo, planName } = useFeatureContext();
+  const { hasFeature } = useFeatureContext();
   const { enabledFeatures } = useEnabledFeatures();
 
   return (
@@ -90,7 +90,7 @@ export const FeatureExamples: React.FC = () => {
           </Title>
           <Stack gap="sm">
             <Text>
-              <strong>Current Plan:</strong> {planName}
+              <strong>Current Plan:</strong> Basic Plan
             </Text>
             <Text>
               <strong>Has Advanced Analytics:</strong>{" "}
@@ -101,13 +101,7 @@ export const FeatureExamples: React.FC = () => {
               {hasFeature("pipeline_management") ? "✅ Yes" : "❌ No"}
             </Text>
             <Text>
-              <strong>API Calls Usage:</strong>{" "}
-              {(() => {
-                const usage = getUsageInfo("api_calls");
-                return usage
-                  ? `${usage.current}/${usage.limit} (${Math.round(usage.percentage)}%)`
-                  : "Unlimited";
-              })()}
+              <strong>API Calls Usage:</strong> Unlimited
             </Text>
           </Stack>
         </Card>
@@ -158,35 +152,7 @@ export const FeatureExamples: React.FC = () => {
             )}
 
             {/* Complex conditional with usage check */}
-            {(() => {
-              const apiUsage = getUsageInfo("api_calls");
-              if (!apiUsage) {
-                return null;
-              }
-
-              if (apiUsage.percentage > 90) {
-                return (
-                  <Alert color="red">
-                    ⚠️ API usage is at {Math.round(apiUsage.percentage)}% -
-                    consider upgrading your plan!
-                  </Alert>
-                );
-              }
-              if (apiUsage.percentage > 75) {
-                return (
-                  <Alert color="orange">
-                    📈 API usage is at {Math.round(apiUsage.percentage)}% -
-                    you're approaching your limit.
-                  </Alert>
-                );
-              }
-
-              return (
-                <Alert color="green">
-                  ✅ API usage is healthy at {Math.round(apiUsage.percentage)}%
-                </Alert>
-              );
-            })()}
+            {/* API usage alerts removed - no usage tracking in current implementation */}
 
             {/* Feature-dependent button */}
             <Button
@@ -259,7 +225,7 @@ export const FeatureAwareNavigation: React.FC = () => {
  * Example of a feature-aware dashboard widget
  */
 export const FeatureDashboardWidget: React.FC = () => {
-  const { hasFeature, getUsageInfo } = useFeatureContext();
+  const { hasFeature } = useFeatureContext();
 
   return (
     <Card withBorder p="md">

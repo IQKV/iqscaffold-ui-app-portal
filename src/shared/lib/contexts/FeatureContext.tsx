@@ -4,14 +4,15 @@ import React, {
   useEffect,
   useState,
   useCallback,
+  useMemo,
 } from "react";
 import {
   UserFeaturesResponse,
   FeatureSummary,
   AvailableFeaturesResponse,
   FeatureDetail,
+  userManagementApi,
 } from "@/shared/api/user-management-api";
-import { userManagementApi } from "@/shared/api/user-management-api";
 import { notificationService } from "@/shared/lib/notifications";
 import { useAuthStore } from "@/processes/auth";
 
@@ -34,7 +35,11 @@ interface FeatureContextValue {
   // Feature management (admin only)
   enableFeature: (userId: number, featureCode: string) => Promise<boolean>;
   disableFeature: (userId: number, featureCode: string) => Promise<boolean>;
-  bulkUpdateFeatures: (userId: number, enableFeatures: string[], disableFeatures: string[]) => Promise<boolean>;
+  bulkUpdateFeatures: (
+    userId: number,
+    enableFeatures: string[],
+    disableFeatures: string[]
+  ) => Promise<boolean>;
 }
 
 const FeatureContext = createContext<FeatureContextValue | null>(null);
@@ -65,11 +70,14 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
   autoFetch = true,
   refetchInterval = 0, // Disabled by default
 }) => {
-  const [userFeatures, setUserFeatures] = useState<UserFeaturesResponse | null>(null);
-  const [availableFeatures, setAvailableFeatures] = useState<AvailableFeaturesResponse | null>(null);
+  const [userFeatures, setUserFeatures] = useState<UserFeaturesResponse | null>(
+    null
+  );
+  const [availableFeatures, setAvailableFeatures] =
+    useState<AvailableFeaturesResponse | null>(null);
   const [loading, setLoading] = useState(autoFetch);
   const [error, setError] = useState<string | null>(null);
-  
+
   const { user } = useAuthStore();
 
   const fetchUserFeatures = useCallback(async () => {
@@ -85,10 +93,11 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
       const response = await userManagementApi.getMyFeatures();
       setUserFeatures(response);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Failed to fetch user features";
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to fetch user features";
       console.warn("Feature service unavailable, using fallback", err);
       setError(errorMessage);
-      
+
       // Graceful degradation - set empty features
       setUserFeatures({
         userId: user.userId,
@@ -143,113 +152,158 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
   }, [refetchInterval, user, fetchUserFeatures]);
 
   // Derived state
-  const enabledFeatures = userFeatures?.features.map(f => f.code) || [];
+  const enabledFeatures = useMemo(
+    () => userFeatures?.features.map((f) => f.code) || [],
+    [userFeatures]
+  );
 
   // Feature access methods
-  const hasFeature = useCallback((featureCode: string): boolean => {
-    return enabledFeatures.includes(featureCode);
-  }, [enabledFeatures]);
+  const hasFeature = useCallback(
+    (featureCode: string): boolean => {
+      return enabledFeatures.includes(featureCode);
+    },
+    [enabledFeatures]
+  );
 
-  const canAccessFeature = useCallback((featureCode: string): boolean => {
-    if (!user || !availableFeatures) {
-      return false;
-    }
+  const canAccessFeature = useCallback(
+    (featureCode: string): boolean => {
+      if (!user || !availableFeatures) {
+        return false;
+      }
 
-    // Check if user has the feature enabled
-    if (!hasFeature(featureCode)) {
-      return false;
-    }
+      // Check if user has the feature enabled
+      if (!hasFeature(featureCode)) {
+        return false;
+      }
 
-    // Check if user has required authorities for the feature
-    const featureDetail = availableFeatures.features.find(f => f.code === featureCode);
-    if (!featureDetail) {
-      return false;
-    }
+      // Check if user has required authorities for the feature
+      const featureDetail = availableFeatures.features.find(
+        (f) => f.code === featureCode
+      );
+      if (!featureDetail) {
+        return false;
+      }
 
-    // Admin authorities have universal access
-    const adminAuthorities = ["SUPER_ADMIN", "ADMIN"];
-    if (user.authorities?.some(auth => adminAuthorities.includes(auth))) {
-      return true;
-    }
+      // Admin authorities have universal access
+      const adminAuthorities = ["SUPER_ADMIN", "ADMIN"];
+      if (user.authorities?.some((auth) => adminAuthorities.includes(auth))) {
+        return true;
+      }
 
-    // Check if user has any of the required authorities
-    return featureDetail.requiredAuthorities.some(reqAuth => 
-      user.authorities?.includes(reqAuth)
-    );
-  }, [user, availableFeatures, hasFeature]);
+      // Check if user has any of the required authorities
+      return featureDetail.requiredAuthorities.some((reqAuth) =>
+        user.authorities?.includes(reqAuth)
+      );
+    },
+    [user, availableFeatures, hasFeature]
+  );
 
-  const getFeature = useCallback((featureCode: string): FeatureDetail | undefined => {
-    return availableFeatures?.features.find(f => f.code === featureCode);
-  }, [availableFeatures]);
+  const getFeature = useCallback(
+    (featureCode: string): FeatureDetail | undefined => {
+      return availableFeatures?.features.find((f) => f.code === featureCode);
+    },
+    [availableFeatures]
+  );
 
-  const getFeatureSummary = useCallback((featureCode: string): FeatureSummary | undefined => {
-    return userFeatures?.features.find(f => f.code === featureCode);
-  }, [userFeatures]);
+  const getFeatureSummary = useCallback(
+    (featureCode: string): FeatureSummary | undefined => {
+      return userFeatures?.features.find((f) => f.code === featureCode);
+    },
+    [userFeatures]
+  );
 
   // Feature management methods (admin only)
-  const enableFeature = useCallback(async (userId: number, featureCode: string): Promise<boolean> => {
-    try {
-      await userManagementApi.enableUserFeature(userId, featureCode);
-      notificationService.success(`Feature ${featureCode} enabled successfully`);
-      
-      // Refresh features if it's the current user
-      if (user && userId === user.userId) {
-        await fetchUserFeatures();
-      }
-      
-      return true;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Failed to enable feature";
-      notificationService.error(errorMessage);
-      return false;
-    }
-  }, [user, fetchUserFeatures]);
+  const enableFeature = useCallback(
+    async (userId: number, featureCode: string): Promise<boolean> => {
+      try {
+        await userManagementApi.enableUserFeature(userId, featureCode);
+        notificationService.success({
+          title: "Feature Updated",
+          message: `Feature ${featureCode} enabled successfully`,
+        });
 
-  const disableFeature = useCallback(async (userId: number, featureCode: string): Promise<boolean> => {
-    try {
-      await userManagementApi.disableUserFeature(userId, featureCode);
-      notificationService.success(`Feature ${featureCode} disabled successfully`);
-      
-      // Refresh features if it's the current user
-      if (user && userId === user.userId) {
-        await fetchUserFeatures();
-      }
-      
-      return true;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Failed to disable feature";
-      notificationService.error(errorMessage);
-      return false;
-    }
-  }, [user, fetchUserFeatures]);
+        // Refresh features if it's the current user
+        if (user && userId === user.userId) {
+          await fetchUserFeatures();
+        }
 
-  const bulkUpdateFeatures = useCallback(async (
-    userId: number, 
-    enableFeatures: string[], 
-    disableFeatures: string[]
-  ): Promise<boolean> => {
-    try {
-      await userManagementApi.bulkUpdateUserFeatures(userId, {
-        enableFeatures,
-        disableFeatures,
-      });
-      
-      notificationService.success(
-        `Updated ${enableFeatures.length + disableFeatures.length} features successfully`
-      );
-      
-      // Refresh features if it's the current user
-      if (user && userId === user.userId) {
-        await fetchUserFeatures();
+        return true;
+      } catch (err) {
+        const errorMessage =
+          err instanceof Error ? err.message : "Failed to enable feature";
+        notificationService.error({
+          title: "Failed to enable feature",
+          message: errorMessage,
+        });
+        return false;
       }
-      
-      return true;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Failed to update features";
-      notificationService.error(errorMessage);
-      return false;
-    }
-  }, [user, fetchUserFeatures]);
+    },
+    [user, fetchUserFeatures]
+  );
+
+  const disableFeature = useCallback(
+    async (userId: number, featureCode: string): Promise<boolean> => {
+      try {
+        await userManagementApi.disableUserFeature(userId, featureCode);
+        notificationService.success({
+          title: "Feature Updated",
+          message: `Feature ${featureCode} disabled successfully`,
+        });
+
+        // Refresh features if it's the current user
+        if (user && userId === user.userId) {
+          await fetchUserFeatures();
+        }
+
+        return true;
+      } catch (err) {
+        const errorMessage =
+          err instanceof Error ? err.message : "Failed to disable feature";
+        notificationService.error({
+          title: "Failed to disable feature",
+          message: errorMessage,
+        });
+        return false;
+      }
+    },
+    [user, fetchUserFeatures]
+  );
+
+  const bulkUpdateFeatures = useCallback(
+    async (
+      userId: number,
+      enableFeatures: string[],
+      disableFeatures: string[]
+    ): Promise<boolean> => {
+      try {
+        await userManagementApi.bulkUpdateUserFeatures(userId, {
+          enableFeatures,
+          disableFeatures,
+        });
+
+        notificationService.success({
+          title: "Features Updated",
+          message: `Updated ${enableFeatures.length + disableFeatures.length} features successfully`,
+        });
+
+        // Refresh features if it's the current user
+        if (user && userId === user.userId) {
+          await fetchUserFeatures();
+        }
+
+        return true;
+      } catch (err) {
+        const errorMessage =
+          err instanceof Error ? err.message : "Failed to update features";
+        notificationService.error({
+          title: "Failed to update features",
+          message: errorMessage,
+        });
+        return false;
+      }
+    },
+    [user, fetchUserFeatures]
+  );
 
   const value: FeatureContextValue = {
     userFeatures,
@@ -269,9 +323,7 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
   };
 
   return (
-    <FeatureContext.Provider value={value}>
-      {children}
-    </FeatureContext.Provider>
+    <FeatureContext.Provider value={value}>{children}</FeatureContext.Provider>
   );
 };
 
@@ -292,8 +344,9 @@ export const useFeatureContext = (): FeatureContextValue => {
  * Returns only the essential feature checking functions
  */
 export const useEnabledFeatures = () => {
-  const { hasFeature, canAccessFeature, enabledFeatures, loading, error } = useFeatureContext();
-  
+  const { hasFeature, canAccessFeature, enabledFeatures, loading, error } =
+    useFeatureContext();
+
   return {
     hasFeature,
     canAccessFeature,
@@ -308,14 +361,14 @@ export const useEnabledFeatures = () => {
  * Returns feature management functions for admin users
  */
 export const useFeatureManagement = () => {
-  const { 
-    enableFeature, 
-    disableFeature, 
+  const {
+    enableFeature,
+    disableFeature,
     bulkUpdateFeatures,
     availableFeatures,
     refetchAvailableFeatures,
   } = useFeatureContext();
-  
+
   return {
     enableFeature,
     disableFeature,

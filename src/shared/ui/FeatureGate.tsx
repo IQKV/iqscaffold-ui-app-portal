@@ -74,7 +74,9 @@ export const FeatureGate: React.FC<FeatureGateProps> = ({
   }
 
   // Determine access based on checkAuthorities flag
-  const hasAccess = checkAuthorities ? canAccessFeature(feature) : hasFeature(feature);
+  const hasAccess = checkAuthorities
+    ? canAccessFeature(feature)
+    : hasFeature(feature);
 
   // Render children if feature is accessible, otherwise render fallback
   return hasAccess ? <>{children}</> : <>{fallback}</>;

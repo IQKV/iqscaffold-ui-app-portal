@@ -1,7 +1,7 @@
 /**
  * System-wide authority constants
  * These match the backend authority structure exactly
- * 
+ *
  * Note: Feature-specific authorities are now managed dynamically
  * through the configuration-driven feature system.
  */
@@ -50,9 +50,3 @@ export function isAdminAuthority(authority: string): boolean {
 export function getAuthorityLevel(authority: string): number {
   return ROLE_HIERARCHY[authority as keyof typeof ROLE_HIERARCHY] || 0;
 }
-  [AUTHORITY_FINANCE_VIEWER]: 2,
-  [AUTHORITY_BILLING_ADMIN]: 3,
-  [AUTHORITY_ADMIN]: 4,
-  [AUTHORITY_TENANT_OWNER]: 5,
-  [AUTHORITY_SUPER_ADMIN]: 6,
-} as const;

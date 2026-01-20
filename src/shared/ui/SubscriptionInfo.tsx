@@ -32,15 +32,17 @@ export const SubscriptionInfo: React.FC<SubscriptionInfoProps> = ({
   onUpgrade,
 }) => {
   const {
-    planName,
-    subscriptionStatus,
-    isTrialPeriod,
-    trialExpiresAt,
-    features,
+    userFeatures,
     loading,
   } = useFeatureContext();
 
-  if (loading || !features) {
+  // Mock subscription data for now - this should be replaced with actual subscription context
+  const planName = "Basic Plan";
+  const subscriptionStatus: "active" | "past_due" | "canceled" | "trial" = "active";
+  const isTrialPeriod = false;
+  const trialExpiresAt = null;
+
+  if (loading || !userFeatures) {
     return null;
   }
 
@@ -104,9 +106,7 @@ export const SubscriptionInfo: React.FC<SubscriptionInfoProps> = ({
   };
 
   const trialExpiration = formatExpirationDate(trialExpiresAt || null);
-  const subscriptionExpiration = formatExpirationDate(
-    features.subscriptionExpiresAt || null
-  );
+  const subscriptionExpiration = formatExpirationDate(null);
 
   if (compact) {
     return (
@@ -187,34 +187,7 @@ export const SubscriptionInfo: React.FC<SubscriptionInfoProps> = ({
             </Stack>
           </Alert>
         )}
-
-        {subscriptionStatus === "past_due" && (
-          <Alert
-            icon={<IconAlertTriangle size="1rem" />}
-            title="Payment Required"
-            color="orange"
-            variant="light"
-          >
-            <Text size="sm">
-              Your subscription payment is past due. Please update your payment
-              method to continue using all features.
-            </Text>
-          </Alert>
-        )}
-
-        {subscriptionStatus === "canceled" && (
-          <Alert
-            icon={<IconAlertTriangle size="1rem" />}
-            title="Subscription Canceled"
-            color="red"
-            variant="light"
-          >
-            <Text size="sm">
-              Your subscription has been canceled. You'll continue to have
-              access until the end of your billing period.
-            </Text>
-          </Alert>
-        )}
+        {/* Subscription alerts removed - using mock data */}
       </Stack>
     </Card>
   );
@@ -224,7 +197,10 @@ export const SubscriptionInfo: React.FC<SubscriptionInfoProps> = ({
  * Minimal subscription status indicator for headers and navigation.
  */
 export const SubscriptionStatusBadge: React.FC = () => {
-  const { planName, subscriptionStatus, isTrialPeriod } = useFeatureContext();
+  // Mock subscription data for now - this should be replaced with actual subscription context
+  const planName = "Basic Plan";
+  const subscriptionStatus: "active" | "past_due" | "canceled" | "trial" = "active";
+  const isTrialPeriod = false;
 
   if (!planName) {
     return null;

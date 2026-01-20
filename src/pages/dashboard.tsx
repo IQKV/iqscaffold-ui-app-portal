@@ -14,7 +14,7 @@ export const Route = createFileRoute("/dashboard")({
 });
 
 function DashboardPage() {
-  const { enabledFeatures, planName } = useFeatureContext();
+  const { enabledFeatures } = useFeatureContext();
 
   return (
     <AuthGuard>
@@ -25,7 +25,7 @@ function DashboardPage() {
               Dashboard
             </Title>
             <Text c="dimmed" data-testid="dashboard-description">
-              Welcome to your {planName} dashboard. Here's what you have access
+              Welcome to your dashboard. Here's what you have access
               to:
             </Text>
           </Paper>

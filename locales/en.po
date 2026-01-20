@@ -107,7 +107,7 @@ msgstr "%s | IQ Scaffold Platform"
 msgid "A lead with this email already exists"
 msgstr "A lead with this email already exists"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:42
+#: src/widgets/sidebar/ui/sidebar.tsx:39
 msgid "About"
 msgstr "About"
 
@@ -130,6 +130,7 @@ msgid "Access Token"
 msgstr "Access Token"
 
 #: src/features/invoice-management/ui/InvoicesTable.tsx:74
+#: src/features/users/components/enhanced-users-data-grid.tsx:198
 #: src/features/users/components/users-data-grid.tsx:169
 #: src/pages/examples.tsx:133
 #: src/widgets/billing-history/ui/billing-history-table.tsx:113
@@ -147,6 +148,7 @@ msgstr "Activate immediately"
 #: src/features/crm-leads/components/PipelineSettingsModal.tsx:201
 #: src/features/crm-leads/components/PipelineSettingsModal.tsx:322
 #: src/features/gateway-config/ui/gateway-status-badge.tsx:28
+#: src/features/users/components/enhanced-users-data-grid.tsx:185
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:60
 msgid "Active"
 msgstr "Active"
@@ -204,6 +206,7 @@ msgstr "Add Payment Gateway"
 msgid "Add Stage"
 msgstr "Add Stage"
 
+#: src/features/users/components/enhanced-users-data-grid.tsx:259
 #: src/features/users/components/users-data-grid.tsx:233
 #: src/pages/examples.tsx:288
 msgid "Add User"
@@ -319,6 +322,7 @@ msgstr "Are you sure you want to delete this item? This action cannot be undone.
 msgid "Are you sure you want to delete this user? This action cannot be undone."
 msgstr "Are you sure you want to delete this user? This action cannot be undone."
 
+#: src/features/users/components/enhanced-users-data-grid.tsx:65
 #: src/features/users/components/users-data-grid.tsx:54
 msgid "Are you sure you want to delete user"
 msgstr "Are you sure you want to delete user"
@@ -369,10 +373,15 @@ msgstr "At least one authority is required"
 #~ msgid "At least one role is required"
 #~ msgstr "At least one role is required"
 
+#: src/features/users/components/enhanced-users-data-grid.tsx:311
 #: src/features/users/components/user-form-modal.tsx:259
 #: src/features/users/components/users-data-grid.tsx:128
 msgid "Authorities"
 msgstr "Authorities"
+
+#: src/features/users/components/enhanced-users-data-grid.tsx:332
+msgid "Authority management will be available in a future update."
+msgstr "Authority management will be available in a future update."
 
 #: src/pages/subscriptions.tsx:81
 msgid "Available Plans"
@@ -418,7 +427,7 @@ msgstr "Backend responses (errors, validation messages) are in your language"
 msgid "Backend user preference is updated via API"
 msgstr "Backend user preference is updated via API"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:71
+#: src/widgets/sidebar/ui/sidebar.tsx:69
 msgid "Billing"
 msgstr "Billing"
 
@@ -469,6 +478,7 @@ msgstr "Call"
 #: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:66
 #: src/features/security-settings/ui/security-settings-feature.tsx:41
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:137
+#: src/features/users/components/enhanced-users-data-grid.tsx:72
 #: src/features/users/components/user-form-modal.tsx:303
 #: src/features/users/components/users-data-grid.tsx:61
 #: src/pages/gateway-config.tsx:235
@@ -673,7 +683,7 @@ msgstr "Contacted"
 
 #: src/features/crm-leads/components/CrmLayout.tsx:80
 #: src/pages/crm.contacts.tsx:14
-#: src/widgets/sidebar/ui/sidebar.tsx:129
+#: src/widgets/sidebar/ui/sidebar.tsx:125
 msgid "Contacts"
 msgstr "Contacts"
 
@@ -723,6 +733,7 @@ msgstr "Create New User"
 msgid "Create Subscription"
 msgstr "Create Subscription"
 
+#: src/features/users/components/enhanced-users-data-grid.tsx:191
 #: src/features/users/components/users-data-grid.tsx:161
 msgid "Created"
 msgstr "Created"
@@ -737,13 +748,13 @@ msgstr "Created:"
 
 #: src/features/crm-leads/components/CrmLayout.tsx:107
 #: src/features/crm-leads/components/CrmLayout.tsx:297
-#: src/widgets/sidebar/ui/sidebar.tsx:102
+#: src/widgets/sidebar/ui/sidebar.tsx:98
 msgid "CRM"
 msgstr "CRM"
 
 #: src/features/crm-leads/components/CrmDashboard.tsx:83
 #: src/pages/crm-dashboard.tsx:20
-#: src/widgets/sidebar/ui/sidebar.tsx:108
+#: src/widgets/sidebar/ui/sidebar.tsx:104
 msgid "CRM Dashboard"
 msgstr "CRM Dashboard"
 
@@ -755,6 +766,10 @@ msgstr "CRM Error"
 #: src/features/crm-leads/components/CrmLayout.tsx:260
 msgid "CRM Navigation"
 msgstr "CRM Navigation"
+
+#: src/features/users/components/enhanced-users-data-grid.tsx:323
+msgid "Current Authorities"
+msgstr "Current Authorities"
 
 #: src/features/locale-demo/locale-demo.tsx:122
 msgid "Current Locale Status"
@@ -778,7 +793,7 @@ msgstr "Current period: {periodStart} - {periodEnd}"
 msgid "Current Plan"
 msgstr "Current Plan"
 
-#: src/pages/billing.tsx:144
+#: src/pages/billing.tsx:141
 #: src/pages/subscriptions.tsx:78
 msgid "Current Subscription"
 msgstr "Current Subscription"
@@ -802,7 +817,7 @@ msgstr "Dark mode"
 #: src/features/crm-leads/components/CrmLayout.tsx:68
 #: src/features/crm-leads/components/CrmLayout.tsx:113
 #: src/features/dashboard/ui/dashboard-feature.tsx:15
-#: src/widgets/sidebar/ui/sidebar.tsx:92
+#: src/widgets/sidebar/ui/sidebar.tsx:88
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -852,6 +867,7 @@ msgstr "Default locale (English)"
 #: src/features/crm-leads/components/FollowUpSection.tsx:430
 #: src/features/crm-leads/components/FollowUpSection.tsx:453
 #: src/features/gateway-config/ui/gateway-config-list.tsx:164
+#: src/features/users/components/enhanced-users-data-grid.tsx:72
 #: src/features/users/components/users-data-grid.tsx:61
 #: src/pages/examples.tsx:49
 msgid "Delete"
@@ -891,6 +907,8 @@ msgstr "Delete Selected Follow-ups"
 msgid "Delete user"
 msgstr "Delete user"
 
+#: src/features/users/components/enhanced-users-data-grid.tsx:62
+#: src/features/users/components/enhanced-users-data-grid.tsx:222
 #: src/features/users/components/users-data-grid.tsx:51
 #: src/pages/examples.tsx:47
 msgid "Delete User"
@@ -929,6 +947,7 @@ msgstr "Details"
 msgid "Disable MSW"
 msgstr "Disable MSW"
 
+#: src/features/users/components/enhanced-users-data-grid.tsx:185
 #: src/features/users/components/users-data-grid.tsx:147
 msgid "Disabled"
 msgstr "Disabled"
@@ -981,6 +1000,7 @@ msgstr "Edit note"
 msgid "Edit user"
 msgstr "Edit user"
 
+#: src/features/users/components/enhanced-users-data-grid.tsx:212
 #: src/features/users/components/users-page.tsx:47
 msgid "Edit User"
 msgstr "Edit User"
@@ -995,6 +1015,7 @@ msgstr "Editing {userName}"
 
 #: src/entities/crm/ui/FollowUpForm.tsx:42
 #: src/entities/crm/ui/LeadForm.tsx:218
+#: src/features/users/components/enhanced-users-data-grid.tsx:163
 #: src/features/users/components/user-form-modal.tsx:218
 msgid "Email"
 msgstr "Email"
@@ -1043,7 +1064,7 @@ msgstr "Enable MSW"
 msgid "Enabled"
 msgstr "Enabled"
 
-#: src/pages/billing.tsx:196
+#: src/pages/billing.tsx:193
 msgid "Enabled Features"
 msgstr "Enabled Features"
 
@@ -1153,6 +1174,7 @@ msgstr "Environment mode for the gateway"
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:89
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:111
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:131
+#: src/features/users/components/enhanced-users-data-grid.tsx:86
 #: src/features/users/components/user-form-modal.tsx:139
 #: src/features/users/components/user-form-modal.tsx:149
 #: src/features/users/components/user-form-modal.tsx:177
@@ -1213,6 +1235,7 @@ msgstr "Error Loading Plans"
 #~ msgid "Error loading users: {0}"
 #~ msgstr "Error loading users: {0}"
 
+#: src/features/users/components/enhanced-users-data-grid.tsx:243
 #: src/features/users/components/users-data-grid.tsx:214
 msgid "Error loading users: {errorMessage}"
 msgstr "Error loading users: {errorMessage}"
@@ -1239,7 +1262,7 @@ msgstr "every {count} months"
 msgid "every {count} years"
 msgstr "every {count} years"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:60
+#: src/widgets/sidebar/ui/sidebar.tsx:57
 msgid "Examples"
 msgstr "Examples"
 
@@ -1335,6 +1358,7 @@ msgstr "Failed to delete stage"
 #~ msgid "Failed to delete user: {0}"
 #~ msgstr "Failed to delete user: {0}"
 
+#: src/features/users/components/enhanced-users-data-grid.tsx:87
 #: src/features/users/components/users-data-grid.tsx:76
 msgid "Failed to delete user: {errorMessage}"
 msgstr "Failed to delete user: {errorMessage}"
@@ -1470,7 +1494,7 @@ msgstr "Fair"
 msgid "Fastest Stage"
 msgstr "Fastest Stage"
 
-#: src/pages/billing.tsx:182
+#: src/pages/billing.tsx:179
 msgid "Feature Usage"
 msgstr "Feature Usage"
 
@@ -1478,7 +1502,11 @@ msgstr "Feature Usage"
 msgid "Feature-Sliced Design:"
 msgstr "Feature-Sliced Design:"
 
-#: src/pages/billing.tsx:122
+#: src/features/users/components/enhanced-users-data-grid.tsx:310
+msgid "Features"
+msgstr "Features"
+
+#: src/pages/billing.tsx:119
 msgid "Features & Usage"
 msgstr "Features & Usage"
 
@@ -1558,7 +1586,7 @@ msgstr "Follow-up updated successfully"
 #: src/features/crm-leads/components/FollowUpSection.tsx:175
 #: src/features/crm-leads/components/LeadDetailPage.tsx:288
 #: src/pages/crm-follow-ups.tsx:20
-#: src/widgets/sidebar/ui/sidebar.tsx:151
+#: src/widgets/sidebar/ui/sidebar.tsx:147
 msgid "Follow-ups"
 msgstr "Follow-ups"
 
@@ -1591,7 +1619,7 @@ msgstr "Gateway"
 msgid "Gateway activated successfully"
 msgstr "Gateway activated successfully"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:80
+#: src/widgets/sidebar/ui/sidebar.tsx:77
 msgid "Gateway Config"
 msgstr "Gateway Config"
 
@@ -1617,7 +1645,7 @@ msgstr "Gateway deleted successfully"
 msgid "Gateway:"
 msgstr "Gateway:"
 
-#: src/pages/billing.tsx:155
+#: src/pages/billing.tsx:152
 msgid "Get started with a subscription plan to unlock premium features."
 msgstr "Get started with a subscription plan to unlock premium features."
 
@@ -1655,7 +1683,7 @@ msgid "High"
 msgstr "High"
 
 #: src/features/crm-leads/components/CrmLayout.tsx:103
-#: src/widgets/sidebar/ui/sidebar.tsx:33
+#: src/widgets/sidebar/ui/sidebar.tsx:30
 msgid "Home"
 msgstr "Home"
 
@@ -1720,13 +1748,13 @@ msgstr "Invoice"
 msgid "Invoice {invoiceId}..."
 msgstr "Invoice {invoiceId}..."
 
-#: src/pages/billing.tsx:134
+#: src/pages/billing.tsx:131
 #: src/pages/subscriptions.tsx:87
 msgid "Invoices"
 msgstr "Invoices"
 
 #: src/pages/__root.tsx:26
-#: src/widgets/header/ui/header.tsx:10
+#: src/widgets/header/ui/header.tsx:14
 msgid "IQ Scaffold Platform"
 msgstr "IQ Scaffold Platform"
 
@@ -1800,7 +1828,7 @@ msgstr "leads"
 #: src/features/crm-leads/components/DashboardStats.tsx:250
 #: src/features/crm-leads/components/DashboardStats.tsx:289
 #: src/pages/crm.leads.tsx:13
-#: src/widgets/sidebar/ui/sidebar.tsx:118
+#: src/widgets/sidebar/ui/sidebar.tsx:114
 msgid "Leads"
 msgstr "Leads"
 
@@ -1901,6 +1929,15 @@ msgstr "Low"
 #: src/features/crm-leads/components/FollowUpList.tsx:328
 msgid "Manage all your follow-up tasks"
 msgstr "Manage all your follow-up tasks"
+
+#: src/features/users/components/enhanced-users-data-grid.tsx:202
+#: src/features/users/components/enhanced-users-data-grid.tsx:303
+msgid "Manage Features"
+msgstr "Manage Features"
+
+#: src/features/users/components/enhanced-users-data-grid.tsx:301
+msgid "Manage Features - {firstName} {lastName}"
+msgstr "Manage Features - {firstName} {lastName}"
 
 #: src/features/crm-leads/components/PipelineSettingsModal.tsx:163
 #: src/features/crm-leads/components/PipelineView.tsx:270
@@ -2014,6 +2051,7 @@ msgstr "My Payment Gateway"
 
 #: src/entities/crm/ui/LeadForm.tsx:207
 #: src/features/crm-leads/components/PipelineSettingsModal.tsx:184
+#: src/features/users/components/enhanced-users-data-grid.tsx:149
 msgid "Name"
 msgstr "Name"
 
@@ -2025,7 +2063,7 @@ msgstr "Name must be at least 2 characters"
 msgid "Name must be less than 100 characters"
 msgstr "Name must be less than 100 characters"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:27
+#: src/widgets/sidebar/ui/sidebar.tsx:24
 msgid "Navigation"
 msgstr "Navigation"
 
@@ -2069,12 +2107,12 @@ msgstr "No Active Gateways"
 msgid "No active payment gateways configured. Please configure a gateway first."
 msgstr "No active payment gateways configured. Please configure a gateway first."
 
-#: src/pages/billing.tsx:152
+#: src/pages/billing.tsx:149
 #: src/pages/subscriptions.tsx:109
 msgid "No Active Subscription"
 msgstr "No Active Subscription"
 
-#: src/pages/billing.tsx:209
+#: src/pages/billing.tsx:212
 msgid "No features enabled"
 msgstr "No features enabled"
 
@@ -2122,6 +2160,10 @@ msgstr "No Pipeline Stages"
 msgid "No Plans Available"
 msgstr "No Plans Available"
 
+#: src/features/users/components/enhanced-users-data-grid.tsx:118
+msgid "No roles"
+msgstr "No roles"
+
 #: src/features/crm-leads/components/DashboardStats.tsx:354
 msgid "No source data available"
 msgstr "No source data available"
@@ -2138,6 +2180,14 @@ msgstr "No subscription plans are currently available."
 #: src/pages/examples.tsx:296
 msgid "No users found"
 msgstr "No users found"
+
+#: src/features/users/components/enhanced-users-data-grid.tsx:285
+msgid "No users have been created yet"
+msgstr "No users have been created yet"
+
+#: src/features/users/components/enhanced-users-data-grid.tsx:284
+msgid "No users match your search criteria"
+msgstr "No users match your search criteria"
 
 #: src/features/crm-leads/components/ConversionChart.tsx:229
 msgid "No velocity data available"
@@ -2360,7 +2410,7 @@ msgstr "Payment Gateway Configuration"
 msgid "Payment gateway configured successfully"
 msgstr "Payment gateway configured successfully"
 
-#: src/pages/billing.tsx:128
+#: src/pages/billing.tsx:125
 #: src/widgets/billing-history/ui/billing-history-table.tsx:70
 msgid "Payment History"
 msgstr "Payment History"
@@ -2406,7 +2456,7 @@ msgstr "Pick start date"
 #: src/features/crm-leads/components/CrmLayout.tsx:86
 #: src/features/crm-leads/components/CrmLayout.tsx:115
 #: src/pages/crm.pipeline.tsx:13
-#: src/widgets/sidebar/ui/sidebar.tsx:140
+#: src/widgets/sidebar/ui/sidebar.tsx:136
 msgid "Pipeline"
 msgstr "Pipeline"
 
@@ -2655,10 +2705,9 @@ msgstr "Role"
 #~ msgid "Role is required"
 #~ msgstr "Role is required"
 
-#: src/features/users/components/user-form-modal.tsx:257
-#: src/features/users/components/users-data-grid.tsx:128
-#~ msgid "Roles"
-#~ msgstr "Roles"
+#: src/features/users/components/enhanced-users-data-grid.tsx:177
+msgid "Roles"
+msgstr "Roles"
 
 #: src/shared/ui/msw-dev-tools.tsx:57
 msgid "Running"
@@ -2709,6 +2758,7 @@ msgstr "Search follow-ups..."
 msgid "Search term must be less than 100 characters"
 msgstr "Search term must be less than 100 characters"
 
+#: src/features/users/components/enhanced-users-data-grid.tsx:265
 #: src/features/users/components/users-data-grid.tsx:239
 msgid "Search users..."
 msgstr "Search users..."
@@ -2903,6 +2953,7 @@ msgstr "Start Onboarding"
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:72
 #: src/features/gateway-config/ui/gateway-config-list.tsx:180
 #: src/features/invoice-management/ui/InvoicesTable.tsx:70
+#: src/features/users/components/enhanced-users-data-grid.tsx:182
 #: src/features/users/components/users-data-grid.tsx:138
 #: src/pages/examples.tsx:124
 #: src/widgets/billing-history/ui/billing-history-table.tsx:108
@@ -2973,6 +3024,7 @@ msgstr "Subscriptions"
 #: src/features/crm-leads/components/PipelineSettingsModal.tsx:80
 #: src/features/crm-leads/components/PipelineSettingsModal.tsx:108
 #: src/features/crm-leads/components/PipelineSettingsModal.tsx:125
+#: src/features/users/components/enhanced-users-data-grid.tsx:78
 #: src/features/users/components/user-form-modal.tsx:130
 #: src/features/users/components/user-form-modal.tsx:168
 #: src/features/users/components/users-data-grid.tsx:67
@@ -3062,6 +3114,7 @@ msgstr "The request timed out. Please try again"
 msgid "There was a problem with the data you submitted. Please check your input and try again."
 msgstr "There was a problem with the data you submitted. Please check your input and try again."
 
+#: src/features/users/components/enhanced-users-data-grid.tsx:69
 #: src/features/users/components/users-data-grid.tsx:58
 msgid "This action cannot be undone."
 msgstr "This action cannot be undone."
@@ -3255,12 +3308,14 @@ msgstr "User can log in and access the system"
 msgid "User created successfully"
 msgstr "User created successfully"
 
+#: src/features/users/components/enhanced-users-data-grid.tsx:79
 #: src/features/users/components/users-data-grid.tsx:68
 msgid "User deleted successfully"
 msgstr "User deleted successfully"
 
+#: src/features/users/components/enhanced-users-data-grid.tsx:253
 #: src/features/users/components/users-data-grid.tsx:226
-#: src/widgets/sidebar/ui/sidebar.tsx:51
+#: src/widgets/sidebar/ui/sidebar.tsx:48
 msgid "User Management"
 msgstr "User Management"
 
@@ -3297,6 +3352,7 @@ msgid "Verification Failed"
 msgstr "Verification Failed"
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:85
+#: src/features/users/components/enhanced-users-data-grid.tsx:169
 #: src/features/users/components/users-data-grid.tsx:154
 msgid "Verified"
 msgstr "Verified"
@@ -3339,7 +3395,7 @@ msgstr "View on GitHub"
 msgid "View only"
 msgstr "View only"
 
-#: src/pages/billing.tsx:162
+#: src/pages/billing.tsx:159
 msgid "View Plans"
 msgstr "View Plans"
 
