@@ -20,7 +20,8 @@ export const CrmContactManagerGuard: React.FC<CrmContactManagerGuardProps> = ({
   fallback,
   showUpgrade = true,
 }) => {
-  const { canManageContacts, getCrmAuthorityLevel, getUserCrmAuthorities } = useAuth();
+  const { canManageContacts, getCrmAuthorityLevel, getUserCrmAuthorities } =
+    useAuth();
 
   if (canManageContacts()) {
     return <>{children}</>;
@@ -37,9 +38,10 @@ export const CrmContactManagerGuard: React.FC<CrmContactManagerGuardProps> = ({
         Contact Management Access Required
       </Title>
       <Text ta="center" c="dimmed" maw={400}>
-        You need contact management permissions to access this feature. Contact your administrator to request contact management access.
+        You need contact management permissions to access this feature. Contact
+        your administrator to request contact management access.
       </Text>
-      
+
       {showUpgrade && (
         <Alert
           icon={<IconAddressBook size={16} />}
@@ -51,11 +53,10 @@ export const CrmContactManagerGuard: React.FC<CrmContactManagerGuardProps> = ({
             This feature requires one of the following authorities:
           </Text>
           <Text size="sm" mt="xs">
-            • <strong>CRM_CONTACT_MANAGER</strong> - Contact management permissions
-            <br />
-            • <strong>CRM_ADMIN</strong> - Full CRM administration
-            <br />
-            • <strong>ADMIN</strong> - Platform administration
+            • <strong>CRM_CONTACT_MANAGER</strong> - Contact management
+            permissions
+            <br />• <strong>CRM_ADMIN</strong> - Full CRM administration
+            <br />• <strong>ADMIN</strong> - Platform administration
           </Text>
           <Text size="sm" mt="xs" c="dimmed">
             Current CRM level: <strong>{getCrmAuthorityLevel()}</strong>
@@ -67,11 +68,8 @@ export const CrmContactManagerGuard: React.FC<CrmContactManagerGuardProps> = ({
           )}
         </Alert>
       )}
-      
-      <Button
-        variant="light"
-        onClick={() => window.history.back()}
-      >
+
+      <Button variant="light" onClick={() => window.history.back()}>
         Go Back
       </Button>
     </Stack>

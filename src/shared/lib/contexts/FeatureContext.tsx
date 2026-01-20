@@ -28,7 +28,10 @@ interface FeatureContextValue {
   // Methods
   hasFeature: (featureCode: string) => boolean;
   canAccessFeature: (featureCode: string) => boolean;
-  hasFeatureWithAuthority: (featureCode: string, requiredAuthorities: string[]) => boolean;
+  hasFeatureWithAuthority: (
+    featureCode: string,
+    requiredAuthorities: string[]
+  ) => boolean;
   getFeature: (featureCode: string) => FeatureDetail | undefined;
   getFeatureSummary: (featureCode: string) => FeatureSummary | undefined;
   refetchFeatures: () => Promise<void>;
@@ -50,29 +53,83 @@ interface FeatureContextValue {
  */
 const FEATURE_AUTHORITY_MAPPING: Record<string, string[]> = {
   // Billing features
-  'billing': ['BILLING_ACCESS', 'BILLING_MANAGER', 'BILLING_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
-  'payments': ['BILLING_ACCESS', 'BILLING_MANAGER', 'BILLING_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
-  'subscriptions': ['BILLING_ACCESS', 'BILLING_MANAGER', 'BILLING_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
-  'invoices': ['BILLING_MANAGER', 'BILLING_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
-  'refunds': ['BILLING_MANAGER', 'BILLING_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
-  'gateway_config': ['BILLING_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
-  'merchant_onboarding': ['BILLING_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
-  
+  billing: [
+    "BILLING_ACCESS",
+    "BILLING_MANAGER",
+    "BILLING_ADMIN",
+    "ADMIN",
+    "SUPER_ADMIN",
+  ],
+  payments: [
+    "BILLING_ACCESS",
+    "BILLING_MANAGER",
+    "BILLING_ADMIN",
+    "ADMIN",
+    "SUPER_ADMIN",
+  ],
+  subscriptions: [
+    "BILLING_ACCESS",
+    "BILLING_MANAGER",
+    "BILLING_ADMIN",
+    "ADMIN",
+    "SUPER_ADMIN",
+  ],
+  invoices: ["BILLING_MANAGER", "BILLING_ADMIN", "ADMIN", "SUPER_ADMIN"],
+  refunds: ["BILLING_MANAGER", "BILLING_ADMIN", "ADMIN", "SUPER_ADMIN"],
+  gateway_config: ["BILLING_ADMIN", "ADMIN", "SUPER_ADMIN"],
+  merchant_onboarding: ["BILLING_ADMIN", "ADMIN", "SUPER_ADMIN"],
+
   // CRM features
-  'crm': ['CRM_ACCESS', 'CRM_LEAD_MANAGER', 'CRM_CONTACT_MANAGER', 'CRM_PIPELINE_MANAGER', 'CRM_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
-  'leads': ['CRM_ACCESS', 'CRM_LEAD_MANAGER', 'CRM_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
-  'contacts': ['CRM_ACCESS', 'CRM_CONTACT_MANAGER', 'CRM_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
-  'pipeline': ['CRM_ACCESS', 'CRM_PIPELINE_MANAGER', 'CRM_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
-  'lead_management': ['CRM_LEAD_MANAGER', 'CRM_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
-  'contact_management': ['CRM_CONTACT_MANAGER', 'CRM_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
-  'pipeline_management': ['CRM_PIPELINE_MANAGER', 'CRM_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
-  
+  crm: [
+    "CRM_ACCESS",
+    "CRM_LEAD_MANAGER",
+    "CRM_CONTACT_MANAGER",
+    "CRM_PIPELINE_MANAGER",
+    "CRM_ADMIN",
+    "ADMIN",
+    "SUPER_ADMIN",
+  ],
+  leads: [
+    "CRM_ACCESS",
+    "CRM_LEAD_MANAGER",
+    "CRM_ADMIN",
+    "ADMIN",
+    "SUPER_ADMIN",
+  ],
+  contacts: [
+    "CRM_ACCESS",
+    "CRM_CONTACT_MANAGER",
+    "CRM_ADMIN",
+    "ADMIN",
+    "SUPER_ADMIN",
+  ],
+  pipeline: [
+    "CRM_ACCESS",
+    "CRM_PIPELINE_MANAGER",
+    "CRM_ADMIN",
+    "ADMIN",
+    "SUPER_ADMIN",
+  ],
+  lead_management: ["CRM_LEAD_MANAGER", "CRM_ADMIN", "ADMIN", "SUPER_ADMIN"],
+  contact_management: [
+    "CRM_CONTACT_MANAGER",
+    "CRM_ADMIN",
+    "ADMIN",
+    "SUPER_ADMIN",
+  ],
+  pipeline_management: [
+    "CRM_PIPELINE_MANAGER",
+    "CRM_ADMIN",
+    "ADMIN",
+    "SUPER_ADMIN",
+  ],
+
   // API features
-  'api_access': ['API_ACCESS', 'ADMIN', 'SUPER_ADMIN'],
-  
+  api_access: ["API_ACCESS", "ADMIN", "SUPER_ADMIN"],
+
   // Admin features
-  'user_management': ['ADMIN', 'SUPER_ADMIN', 'TENANT_OWNER'],
-  'platform_config': ['SUPER_ADMIN', 'TENANT_OWNER'],
+  user_management: ["ADMIN", "SUPER_ADMIN", "TENANT_OWNER"],
+  platform_config: ["SUPER_ADMIN", "TENANT_OWNER"],
 };
 
 const FeatureContext = createContext<FeatureContextValue | null>(null);
@@ -104,13 +161,19 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
   autoFetch = true,
   refetchInterval = 0, // Disabled by default
 }) => {
-  const [userFeatures, setUserFeatures] = useState<UserFeaturesResponse | null>(null);
-  const [availableFeatures, setAvailableFeatures] = useState<AvailableFeaturesResponse | null>(null);
+  const [userFeatures, setUserFeatures] = useState<UserFeaturesResponse | null>(
+    null
+  );
+  const [availableFeatures, setAvailableFeatures] =
+    useState<AvailableFeaturesResponse | null>(null);
   const [loading, setLoading] = useState(autoFetch);
   const [error, setError] = useState<string | null>(null);
 
   const user = useAuthStore((state) => state.user);
-  const userAuthorities = useMemo(() => user?.authorities ?? [], [user?.authorities]);
+  const userAuthorities = useMemo(
+    () => user?.authorities ?? [],
+    [user?.authorities]
+  );
 
   // Memoized enabled features list
   const enabledFeatures = useMemo(() => {
@@ -142,7 +205,10 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
         return true;
       }
 
-      return hasAnyAuthorityWithInheritance(userAuthorities, requiredAuthorities);
+      return hasAnyAuthorityWithInheritance(
+        userAuthorities,
+        requiredAuthorities
+      );
     },
     [hasFeature, userAuthorities]
   );
@@ -155,21 +221,28 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
       }
 
       // Check if user has any of the required authorities
-      return hasAnyAuthorityWithInheritance(userAuthorities, requiredAuthorities);
+      return hasAnyAuthorityWithInheritance(
+        userAuthorities,
+        requiredAuthorities
+      );
     },
     [hasFeature, userAuthorities]
   );
 
   const getFeature = useCallback(
     (featureCode: string): FeatureDetail | undefined => {
-      return availableFeatures?.features.find((f: FeatureDetail) => f.code === featureCode);
+      return availableFeatures?.features.find(
+        (f: FeatureDetail) => f.code === featureCode
+      );
     },
     [availableFeatures]
   );
 
   const getFeatureSummary = useCallback(
     (featureCode: string): FeatureSummary | undefined => {
-      return userFeatures?.features.find((f: FeatureSummary) => f.code === featureCode);
+      return userFeatures?.features.find(
+        (f: FeatureSummary) => f.code === featureCode
+      );
     },
     [userFeatures]
   );
@@ -187,13 +260,14 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
       const response = await userManagementApi.getMyFeatures();
       setUserFeatures(response);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Failed to fetch user features";
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to fetch user features";
       setError(errorMessage);
       notificationService.error({
         title: "Failed to load user features",
         message: errorMessage,
       });
-      
+
       // Graceful degradation - set empty features
       setUserFeatures({
         userId: user.userId,
@@ -212,9 +286,12 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
       const response = await userManagementApi.getAvailableFeatures();
       setAvailableFeatures(response);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Failed to fetch available features";
+      const errorMessage =
+        err instanceof Error
+          ? err.message
+          : "Failed to fetch available features";
       console.warn("Failed to fetch available features:", errorMessage);
-      
+
       // Graceful degradation - set empty features
       setAvailableFeatures({
         features: [],
@@ -235,7 +312,8 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
         });
         return true;
       } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : "Failed to enable feature";
+        const errorMessage =
+          err instanceof Error ? err.message : "Failed to enable feature";
         notificationService.error({
           title: "Failed to enable feature",
           message: errorMessage,
@@ -257,7 +335,8 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
         });
         return true;
       } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : "Failed to disable feature";
+        const errorMessage =
+          err instanceof Error ? err.message : "Failed to disable feature";
         notificationService.error({
           title: "Failed to disable feature",
           message: errorMessage,
@@ -286,7 +365,8 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
         });
         return true;
       } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : "Failed to update features";
+        const errorMessage =
+          err instanceof Error ? err.message : "Failed to update features";
         notificationService.error({
           title: "Failed to update features",
           message: errorMessage,
@@ -376,12 +456,15 @@ export const useFeatures = (): FeatureContextValue => {
  */
 export const useFeatureAccess = (featureCode: string) => {
   const { hasFeature, canAccessFeature, getFeature } = useFeatures();
-  
-  return useMemo(() => ({
-    hasFeature: hasFeature(featureCode),
-    canAccess: canAccessFeature(featureCode),
-    feature: getFeature(featureCode),
-  }), [featureCode, hasFeature, canAccessFeature, getFeature]);
+
+  return useMemo(
+    () => ({
+      hasFeature: hasFeature(featureCode),
+      canAccess: canAccessFeature(featureCode),
+      feature: getFeature(featureCode),
+    }),
+    [featureCode, hasFeature, canAccessFeature, getFeature]
+  );
 };
 
 /**
@@ -389,10 +472,10 @@ export const useFeatureAccess = (featureCode: string) => {
  */
 export const useMultipleFeatureAccess = (featureCodes: string[]) => {
   const { canAccessFeature } = useFeatures();
-  
+
   return useMemo(() => {
     const results: Record<string, boolean> = {};
-    featureCodes.forEach(code => {
+    featureCodes.forEach((code) => {
       results[code] = canAccessFeature(code);
     });
     return results;
@@ -412,7 +495,8 @@ export const useFeatureContext = (): FeatureContextValue => {
  * Returns only the essential feature checking functions
  */
 export const useEnabledFeatures = () => {
-  const { hasFeature, canAccessFeature, enabledFeatures, loading, error } = useFeatures();
+  const { hasFeature, canAccessFeature, enabledFeatures, loading, error } =
+    useFeatures();
 
   return {
     hasFeature,

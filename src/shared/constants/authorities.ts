@@ -75,22 +75,22 @@ export const AUTHORITY_HIERARCHY = {
   // Core authorities
   [AUTHORITY_USER]: 1,
   [AUTHORITY_API_ACCESS]: 5,
-  
+
   // Billing authorities
   [AUTHORITY_BILLING_ACCESS]: 10,
   [AUTHORITY_BILLING_MANAGER]: 20,
   [AUTHORITY_BILLING_ADMIN]: 30,
-  
+
   // CRM authorities
   [AUTHORITY_CRM_ACCESS]: 10,
   [AUTHORITY_CRM_LEAD_MANAGER]: 20,
   [AUTHORITY_CRM_CONTACT_MANAGER]: 20,
   [AUTHORITY_CRM_PIPELINE_MANAGER]: 25,
   [AUTHORITY_CRM_ADMIN]: 30,
-  
+
   // Legacy authorities
   [AUTHORITY_FINANCE_VIEWER]: 15,
-  
+
   // Admin authorities
   [AUTHORITY_ADMIN]: 90,
   [AUTHORITY_TENANT_OWNER]: 95,
@@ -126,33 +126,25 @@ export const AUTHORITY_INHERITANCE = {
     AUTHORITY_FINANCE_VIEWER,
     AUTHORITY_USER,
   ],
-  
+
   // Feature admin authorities inherit feature authorities
   [AUTHORITY_BILLING_ADMIN]: [
     AUTHORITY_BILLING_MANAGER,
     AUTHORITY_BILLING_ACCESS,
     AUTHORITY_FINANCE_VIEWER,
   ],
-  [AUTHORITY_BILLING_MANAGER]: [
-    AUTHORITY_BILLING_ACCESS,
-  ],
-  
+  [AUTHORITY_BILLING_MANAGER]: [AUTHORITY_BILLING_ACCESS],
+
   [AUTHORITY_CRM_ADMIN]: [
     AUTHORITY_CRM_LEAD_MANAGER,
     AUTHORITY_CRM_CONTACT_MANAGER,
     AUTHORITY_CRM_PIPELINE_MANAGER,
     AUTHORITY_CRM_ACCESS,
   ],
-  [AUTHORITY_CRM_PIPELINE_MANAGER]: [
-    AUTHORITY_CRM_ACCESS,
-  ],
-  [AUTHORITY_CRM_LEAD_MANAGER]: [
-    AUTHORITY_CRM_ACCESS,
-  ],
-  [AUTHORITY_CRM_CONTACT_MANAGER]: [
-    AUTHORITY_CRM_ACCESS,
-  ],
-  
+  [AUTHORITY_CRM_PIPELINE_MANAGER]: [AUTHORITY_CRM_ACCESS],
+  [AUTHORITY_CRM_LEAD_MANAGER]: [AUTHORITY_CRM_ACCESS],
+  [AUTHORITY_CRM_CONTACT_MANAGER]: [AUTHORITY_CRM_ACCESS],
+
   // Add missing authority mappings (no inheritance for basic authorities)
   [AUTHORITY_USER]: [],
   [AUTHORITY_API_ACCESS]: [],
@@ -207,9 +199,9 @@ export function hasAuthorityWithInheritance(
   if (userAuthorities.includes(requiredAuthority)) {
     return true;
   }
-  
+
   // Check if any user authority inherits the required authority
-  return userAuthorities.some(userAuth => {
+  return userAuthorities.some((userAuth) => {
     const inherited = getInheritedAuthorities(userAuth);
     return inherited.includes(requiredAuthority);
   });
@@ -222,7 +214,7 @@ export function hasAnyAuthorityWithInheritance(
   userAuthorities: string[],
   requiredAuthorities: string[]
 ): boolean {
-  return requiredAuthorities.some(auth => 
+  return requiredAuthorities.some((auth) =>
     hasAuthorityWithInheritance(userAuthorities, auth)
   );
 }

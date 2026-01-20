@@ -37,9 +37,10 @@ export const BillingAccessGuard: React.FC<BillingAccessGuardProps> = ({
         Billing Access Required
       </Title>
       <Text ta="center" c="dimmed" maw={400}>
-        You need billing access to view this page. Contact your administrator to request access to billing features.
+        You need billing access to view this page. Contact your administrator to
+        request access to billing features.
       </Text>
-      
+
       {showUpgrade && (
         <Alert
           icon={<IconCreditCard size={16} />}
@@ -52,21 +53,16 @@ export const BillingAccessGuard: React.FC<BillingAccessGuardProps> = ({
           </Text>
           <Text size="sm" mt="xs">
             • <strong>BILLING_ACCESS</strong> - Basic billing operations
-            <br />
-            • <strong>BILLING_MANAGER</strong> - Billing management
-            <br />
-            • <strong>BILLING_ADMIN</strong> - Full billing administration
+            <br />• <strong>BILLING_MANAGER</strong> - Billing management
+            <br />• <strong>BILLING_ADMIN</strong> - Full billing administration
           </Text>
           <Text size="sm" mt="xs" c="dimmed">
             Current level: <strong>{getBillingAuthorityLevel()}</strong>
           </Text>
         </Alert>
       )}
-      
-      <Button
-        variant="light"
-        onClick={() => window.history.back()}
-      >
+
+      <Button variant="light" onClick={() => window.history.back()}>
         Go Back
       </Button>
     </Stack>

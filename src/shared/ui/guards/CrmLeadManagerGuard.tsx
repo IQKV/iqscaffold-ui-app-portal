@@ -20,7 +20,8 @@ export const CrmLeadManagerGuard: React.FC<CrmLeadManagerGuardProps> = ({
   fallback,
   showUpgrade = true,
 }) => {
-  const { canManageLeads, getCrmAuthorityLevel, getUserCrmAuthorities } = useAuth();
+  const { canManageLeads, getCrmAuthorityLevel, getUserCrmAuthorities } =
+    useAuth();
 
   if (canManageLeads()) {
     return <>{children}</>;
@@ -37,9 +38,10 @@ export const CrmLeadManagerGuard: React.FC<CrmLeadManagerGuardProps> = ({
         Lead Management Access Required
       </Title>
       <Text ta="center" c="dimmed" maw={400}>
-        You need lead management permissions to access this feature. Contact your administrator to request lead management access.
+        You need lead management permissions to access this feature. Contact
+        your administrator to request lead management access.
       </Text>
-      
+
       {showUpgrade && (
         <Alert
           icon={<IconUserCheck size={16} />}
@@ -52,10 +54,8 @@ export const CrmLeadManagerGuard: React.FC<CrmLeadManagerGuardProps> = ({
           </Text>
           <Text size="sm" mt="xs">
             • <strong>CRM_LEAD_MANAGER</strong> - Lead management permissions
-            <br />
-            • <strong>CRM_ADMIN</strong> - Full CRM administration
-            <br />
-            • <strong>ADMIN</strong> - Platform administration
+            <br />• <strong>CRM_ADMIN</strong> - Full CRM administration
+            <br />• <strong>ADMIN</strong> - Platform administration
           </Text>
           <Text size="sm" mt="xs" c="dimmed">
             Current CRM level: <strong>{getCrmAuthorityLevel()}</strong>
@@ -67,11 +67,8 @@ export const CrmLeadManagerGuard: React.FC<CrmLeadManagerGuardProps> = ({
           )}
         </Alert>
       )}
-      
-      <Button
-        variant="light"
-        onClick={() => window.history.back()}
-      >
+
+      <Button variant="light" onClick={() => window.history.back()}>
         Go Back
       </Button>
     </Stack>

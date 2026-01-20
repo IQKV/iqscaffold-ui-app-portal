@@ -20,7 +20,11 @@ export const BillingManagerGuard: React.FC<BillingManagerGuardProps> = ({
   fallback,
   showUpgrade = true,
 }) => {
-  const { canModifyBilling, getBillingAuthorityLevel, getUserBillingAuthorities } = useAuth();
+  const {
+    canModifyBilling,
+    getBillingAuthorityLevel,
+    getUserBillingAuthorities,
+  } = useAuth();
 
   if (canModifyBilling()) {
     return <>{children}</>;
@@ -37,9 +41,10 @@ export const BillingManagerGuard: React.FC<BillingManagerGuardProps> = ({
         Billing Management Access Required
       </Title>
       <Text ta="center" c="dimmed" maw={400}>
-        You need billing management permissions to access this feature. Contact your administrator to request billing management access.
+        You need billing management permissions to access this feature. Contact
+        your administrator to request billing management access.
       </Text>
-      
+
       {showUpgrade && (
         <Alert
           icon={<IconCreditCardPay size={16} />}
@@ -52,10 +57,8 @@ export const BillingManagerGuard: React.FC<BillingManagerGuardProps> = ({
           </Text>
           <Text size="sm" mt="xs">
             • <strong>BILLING_MANAGER</strong> - Billing management permissions
-            <br />
-            • <strong>BILLING_ADMIN</strong> - Full billing administration
-            <br />
-            • <strong>ADMIN</strong> - Platform administration
+            <br />• <strong>BILLING_ADMIN</strong> - Full billing administration
+            <br />• <strong>ADMIN</strong> - Platform administration
           </Text>
           <Text size="sm" mt="xs" c="dimmed">
             Current billing level: <strong>{getBillingAuthorityLevel()}</strong>
@@ -67,11 +70,8 @@ export const BillingManagerGuard: React.FC<BillingManagerGuardProps> = ({
           )}
         </Alert>
       )}
-      
-      <Button
-        variant="light"
-        onClick={() => window.history.back()}
-      >
+
+      <Button variant="light" onClick={() => window.history.back()}>
         Go Back
       </Button>
     </Stack>

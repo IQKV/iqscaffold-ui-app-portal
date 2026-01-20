@@ -22,7 +22,7 @@ export function hasCrmAccess(user: UserContext | null): boolean {
   if (!user?.authorities) {
     return false;
   }
-  
+
   return hasAnyAuthorityWithInheritance(user.authorities, [
     AUTHORITY_CRM_ACCESS,
     AUTHORITY_CRM_LEAD_MANAGER,
@@ -41,7 +41,7 @@ export function canManageLeads(user: UserContext | null): boolean {
   if (!user?.authorities) {
     return false;
   }
-  
+
   return hasAnyAuthorityWithInheritance(user.authorities, [
     AUTHORITY_CRM_LEAD_MANAGER,
     AUTHORITY_CRM_ADMIN,
@@ -57,7 +57,7 @@ export function canManageContacts(user: UserContext | null): boolean {
   if (!user?.authorities) {
     return false;
   }
-  
+
   return hasAnyAuthorityWithInheritance(user.authorities, [
     AUTHORITY_CRM_CONTACT_MANAGER,
     AUTHORITY_CRM_ADMIN,
@@ -73,7 +73,7 @@ export function canManagePipeline(user: UserContext | null): boolean {
   if (!user?.authorities) {
     return false;
   }
-  
+
   return hasAnyAuthorityWithInheritance(user.authorities, [
     AUTHORITY_CRM_PIPELINE_MANAGER,
     AUTHORITY_CRM_ADMIN,
@@ -89,7 +89,7 @@ export function isCrmAdmin(user: UserContext | null): boolean {
   if (!user?.authorities) {
     return false;
   }
-  
+
   return hasAnyAuthorityWithInheritance(user.authorities, [
     AUTHORITY_CRM_ADMIN,
     ...ADMIN_AUTHORITIES,
@@ -104,7 +104,7 @@ export function canDeleteLeads(user: UserContext | null): boolean {
   if (!user?.authorities) {
     return false;
   }
-  
+
   return hasAnyAuthorityWithInheritance(user.authorities, [
     AUTHORITY_CRM_LEAD_MANAGER,
     AUTHORITY_CRM_ADMIN,
@@ -120,7 +120,7 @@ export function canDeleteContacts(user: UserContext | null): boolean {
   if (!user?.authorities) {
     return false;
   }
-  
+
   return hasAnyAuthorityWithInheritance(user.authorities, [
     AUTHORITY_CRM_CONTACT_MANAGER,
     AUTHORITY_CRM_ADMIN,
@@ -136,7 +136,7 @@ export function canManagePipelineStages(user: UserContext | null): boolean {
   if (!user?.authorities) {
     return false;
   }
-  
+
   return hasAnyAuthorityWithInheritance(user.authorities, [
     AUTHORITY_CRM_PIPELINE_MANAGER,
     AUTHORITY_CRM_ADMIN,
@@ -160,7 +160,7 @@ export function canConvertLeads(user: UserContext | null): boolean {
   if (!user?.authorities) {
     return false;
   }
-  
+
   return hasAnyAuthorityWithInheritance(user.authorities, [
     AUTHORITY_CRM_LEAD_MANAGER,
     AUTHORITY_CRM_CONTACT_MANAGER,
@@ -185,7 +185,7 @@ export function canDeleteFollowUps(user: UserContext | null): boolean {
   if (!user?.authorities) {
     return false;
   }
-  
+
   return hasAnyAuthorityWithInheritance(user.authorities, [
     AUTHORITY_CRM_PIPELINE_MANAGER,
     AUTHORITY_CRM_ADMIN,
@@ -196,24 +196,30 @@ export function canDeleteFollowUps(user: UserContext | null): boolean {
 /**
  * Get user's CRM authority level for UI display
  */
-export function getCrmAuthorityLevel(user: UserContext | null): 'none' | 'access' | 'manager' | 'admin' {
+export function getCrmAuthorityLevel(
+  user: UserContext | null
+): "none" | "access" | "manager" | "admin" {
   if (!user?.authorities) {
-    return 'none';
+    return "none";
   }
-  
+
   if (isCrmAdmin(user)) {
-    return 'admin';
+    return "admin";
   }
-  
-  if (canManageLeads(user) || canManageContacts(user) || canManagePipeline(user)) {
-    return 'manager';
+
+  if (
+    canManageLeads(user) ||
+    canManageContacts(user) ||
+    canManagePipeline(user)
+  ) {
+    return "manager";
   }
-  
+
   if (hasCrmAccess(user)) {
-    return 'access';
+    return "access";
   }
-  
-  return 'none';
+
+  return "none";
 }
 
 /**
@@ -223,7 +229,7 @@ export function getUserCrmAuthorities(user: UserContext | null): string[] {
   if (!user?.authorities) {
     return [];
   }
-  
+
   const crmAuthorities = [
     AUTHORITY_CRM_ACCESS,
     AUTHORITY_CRM_LEAD_MANAGER,
@@ -231,6 +237,8 @@ export function getUserCrmAuthorities(user: UserContext | null): string[] {
     AUTHORITY_CRM_PIPELINE_MANAGER,
     AUTHORITY_CRM_ADMIN,
   ];
-  
-  return user.authorities.filter(auth => crmAuthorities.includes(auth as any));
+
+  return user.authorities.filter((auth) =>
+    crmAuthorities.includes(auth as any)
+  );
 }

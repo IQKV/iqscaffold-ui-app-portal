@@ -2,7 +2,10 @@ import { useMemo } from "react";
 import { useAuthStore } from "@/processes/auth";
 import * as billingPerms from "./billing-permissions";
 import * as crmPerms from "./crm-permissions";
-import { hasAnyAuthorityWithInheritance, hasAuthorityWithInheritance as hasAuthorityWithInheritanceHelper } from "@/shared/constants/authorities";
+import {
+  hasAnyAuthorityWithInheritance,
+  hasAuthorityWithInheritance as hasAuthorityWithInheritanceHelper,
+} from "@/shared/constants/authorities";
 
 /**
  * Auth hook built on top of the centralized processes/auth store.
@@ -25,15 +28,15 @@ export function useAuth() {
       a.some((x) => authorities.includes(x));
     const hasAllAuthorities = (a: string[]) =>
       a.every((x) => authorities.includes(x));
-    
+
     // New authority helpers with inheritance
     const hasAuthorityWithInheritance = (authority: string) =>
       hasAuthorityWithInheritanceHelper(authorities, authority);
     const hasAnyAuthorityWithInheritanceLocal = (a: string[]) =>
       hasAnyAuthorityWithInheritance(authorities, a);
-    
+
     const hasPermission = (p: string) => permissions.includes(p);
-    
+
     // Core authority helpers
     const isAdmin = () =>
       hasAuthority("ADMIN") ||
@@ -53,11 +56,14 @@ export function useAuth() {
     const canViewPayments = () => billingPerms.canViewPayments(user);
     const canViewPayouts = () => billingPerms.canViewPayouts(user);
     const isBillingAdmin = () => billingPerms.hasAdminAccess(user);
-    const canManageGatewayConfig = () => billingPerms.canManageGatewayConfig(user);
+    const canManageGatewayConfig = () =>
+      billingPerms.canManageGatewayConfig(user);
     const canViewGatewayConfig = () => billingPerms.canViewGatewayConfig(user);
-    const canManageSubscriptions = () => billingPerms.canManageSubscriptions(user);
+    const canManageSubscriptions = () =>
+      billingPerms.canManageSubscriptions(user);
     const canCreatePayments = () => billingPerms.canCreatePayments(user);
-    const canManageSubscriptionPlans = () => billingPerms.canManageSubscriptionPlans(user);
+    const canManageSubscriptionPlans = () =>
+      billingPerms.canManageSubscriptionPlans(user);
 
     // CRM permissions (new)
     const hasCrmAccess = () => crmPerms.hasCrmAccess(user);
@@ -67,21 +73,26 @@ export function useAuth() {
     const isCrmAdmin = () => crmPerms.isCrmAdmin(user);
     const canDeleteLeads = () => crmPerms.canDeleteLeads(user);
     const canDeleteContacts = () => crmPerms.canDeleteContacts(user);
-    const canManagePipelineStages = () => crmPerms.canManagePipelineStages(user);
+    const canManagePipelineStages = () =>
+      crmPerms.canManagePipelineStages(user);
     const canViewCrmDashboard = () => crmPerms.canViewCrmDashboard(user);
     const canConvertLeads = () => crmPerms.canConvertLeads(user);
     const canManageFollowUps = () => crmPerms.canManageFollowUps(user);
     const canDeleteFollowUps = () => crmPerms.canDeleteFollowUps(user);
 
     // Authority level helpers
-    const getBillingAuthorityLevel = () => billingPerms.getBillingAuthorityLevel(user);
+    const getBillingAuthorityLevel = () =>
+      billingPerms.getBillingAuthorityLevel(user);
     const getCrmAuthorityLevel = () => crmPerms.getCrmAuthorityLevel(user);
-    const getUserBillingAuthorities = () => billingPerms.getUserBillingAuthorities(user);
+    const getUserBillingAuthorities = () =>
+      billingPerms.getUserBillingAuthorities(user);
     const getUserCrmAuthorities = () => crmPerms.getUserCrmAuthorities(user);
 
     // Legacy compatibility (deprecated)
     const isFinanceViewer = () => {
-      console.warn('isFinanceViewer is deprecated, use hasReadOnlyBillingAccess instead');
+      console.warn(
+        "isFinanceViewer is deprecated, use hasReadOnlyBillingAccess instead"
+      );
       return billingPerms.hasReadOnlyBillingAccess(user);
     };
 
@@ -91,17 +102,17 @@ export function useAuth() {
       hasAnyAuthority,
       hasAllAuthorities,
       hasPermission,
-      
+
       // New authority helpers with inheritance
       hasAuthorityWithInheritance,
       hasAnyAuthorityWithInheritance: hasAnyAuthorityWithInheritanceLocal,
-      
+
       // Core helpers
       isAdmin,
       isSuperAdmin,
       isTenantOwner,
       canManageUsers,
-      
+
       // Billing permissions
       hasBillingAccess,
       canModifyBilling,
@@ -116,7 +127,7 @@ export function useAuth() {
       canManageSubscriptions,
       canCreatePayments,
       canManageSubscriptionPlans,
-      
+
       // CRM permissions
       hasCrmAccess,
       canManageLeads,
@@ -130,13 +141,13 @@ export function useAuth() {
       canConvertLeads,
       canManageFollowUps,
       canDeleteFollowUps,
-      
+
       // Authority level helpers
       getBillingAuthorityLevel,
       getCrmAuthorityLevel,
       getUserBillingAuthorities,
       getUserCrmAuthorities,
-      
+
       // Legacy compatibility (deprecated)
       isFinanceViewer,
     };
@@ -148,10 +159,10 @@ export function useAuth() {
     login,
     logout,
     refresh,
-    
+
     // Authentication state
     isAuthenticated: !!user,
-    isLoading: status === 'initializing',
+    isLoading: status === "initializing",
     ...helpers,
   };
 }

@@ -21,7 +21,7 @@ export function hasBillingAccess(user: UserContext | null): boolean {
   if (!user?.authorities) {
     return false;
   }
-  
+
   return hasAnyAuthorityWithInheritance(user.authorities, [
     AUTHORITY_BILLING_ACCESS,
     AUTHORITY_BILLING_MANAGER,
@@ -38,7 +38,7 @@ export function canModifyBilling(user: UserContext | null): boolean {
   if (!user?.authorities) {
     return false;
   }
-  
+
   return hasAnyAuthorityWithInheritance(user.authorities, [
     AUTHORITY_BILLING_MANAGER,
     AUTHORITY_BILLING_ADMIN,
@@ -54,7 +54,7 @@ export function hasReadOnlyBillingAccess(user: UserContext | null): boolean {
   if (!user?.authorities) {
     return false;
   }
-  
+
   return hasAnyAuthorityWithInheritance(user.authorities, [
     AUTHORITY_BILLING_ACCESS,
     AUTHORITY_FINANCE_VIEWER,
@@ -80,7 +80,7 @@ export function canManageMerchants(user: UserContext | null): boolean {
   if (!user?.authorities) {
     return false;
   }
-  
+
   return hasAnyAuthorityWithInheritance(user.authorities, [
     AUTHORITY_BILLING_ADMIN,
     ...ADMIN_AUTHORITIES,
@@ -103,7 +103,7 @@ export function canViewPayouts(user: UserContext | null): boolean {
   if (!user?.authorities) {
     return false;
   }
-  
+
   return hasAnyAuthorityWithInheritance(user.authorities, [
     AUTHORITY_BILLING_MANAGER,
     AUTHORITY_BILLING_ADMIN,
@@ -120,7 +120,7 @@ export function hasAdminAccess(user: UserContext | null): boolean {
   if (!user?.authorities) {
     return false;
   }
-  
+
   return hasAnyAuthorityWithInheritance(user.authorities, [
     AUTHORITY_BILLING_ADMIN,
     ...ADMIN_AUTHORITIES,
@@ -143,7 +143,7 @@ export function canViewGatewayConfig(user: UserContext | null): boolean {
   if (!user?.authorities) {
     return false;
   }
-  
+
   return hasAnyAuthorityWithInheritance(user.authorities, [
     AUTHORITY_BILLING_MANAGER,
     AUTHORITY_BILLING_ADMIN,
@@ -179,24 +179,26 @@ export function canManageSubscriptionPlans(user: UserContext | null): boolean {
 /**
  * Get user's billing authority level for UI display
  */
-export function getBillingAuthorityLevel(user: UserContext | null): 'none' | 'access' | 'manager' | 'admin' {
+export function getBillingAuthorityLevel(
+  user: UserContext | null
+): "none" | "access" | "manager" | "admin" {
   if (!user?.authorities) {
-    return 'none';
+    return "none";
   }
-  
+
   if (hasAdminAccess(user)) {
-    return 'admin';
+    return "admin";
   }
-  
+
   if (canModifyBilling(user)) {
-    return 'manager';
+    return "manager";
   }
-  
+
   if (hasBillingAccess(user)) {
-    return 'access';
+    return "access";
   }
-  
-  return 'none';
+
+  return "none";
 }
 
 /**
@@ -206,15 +208,17 @@ export function getUserBillingAuthorities(user: UserContext | null): string[] {
   if (!user?.authorities) {
     return [];
   }
-  
+
   const billingAuthorities = [
     AUTHORITY_BILLING_ACCESS,
     AUTHORITY_BILLING_MANAGER,
     AUTHORITY_BILLING_ADMIN,
     AUTHORITY_FINANCE_VIEWER,
   ];
-  
-  return user.authorities.filter(auth => billingAuthorities.includes(auth as any));
+
+  return user.authorities.filter((auth) =>
+    billingAuthorities.includes(auth as any)
+  );
 }
 
 // Legacy function compatibility (deprecated)
@@ -222,7 +226,7 @@ export function getUserBillingAuthorities(user: UserContext | null): string[] {
  * @deprecated Use hasAdminAccess instead
  */
 export function isBillingAdmin(user: UserContext | null): boolean {
-  console.warn('isBillingAdmin is deprecated, use hasAdminAccess instead');
+  console.warn("isBillingAdmin is deprecated, use hasAdminAccess instead");
   return hasAdminAccess(user);
 }
 
@@ -230,6 +234,8 @@ export function isBillingAdmin(user: UserContext | null): boolean {
  * @deprecated Use hasReadOnlyBillingAccess instead
  */
 export function isFinanceViewer(user: UserContext | null): boolean {
-  console.warn('isFinanceViewer is deprecated, use hasReadOnlyBillingAccess instead');
+  console.warn(
+    "isFinanceViewer is deprecated, use hasReadOnlyBillingAccess instead"
+  );
   return hasReadOnlyBillingAccess(user);
 }

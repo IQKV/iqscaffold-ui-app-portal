@@ -37,9 +37,10 @@ export const CrmAccessGuard: React.FC<CrmAccessGuardProps> = ({
         CRM Access Required
       </Title>
       <Text ta="center" c="dimmed" maw={400}>
-        You need CRM access to view this page. Contact your administrator to request access to CRM features.
+        You need CRM access to view this page. Contact your administrator to
+        request access to CRM features.
       </Text>
-      
+
       {showUpgrade && (
         <Alert
           icon={<IconUsers size={16} />}
@@ -52,25 +53,18 @@ export const CrmAccessGuard: React.FC<CrmAccessGuardProps> = ({
           </Text>
           <Text size="sm" mt="xs">
             • <strong>CRM_ACCESS</strong> - Basic CRM operations
-            <br />
-            • <strong>CRM_LEAD_MANAGER</strong> - Lead management
-            <br />
-            • <strong>CRM_CONTACT_MANAGER</strong> - Contact management
-            <br />
-            • <strong>CRM_PIPELINE_MANAGER</strong> - Pipeline management
-            <br />
-            • <strong>CRM_ADMIN</strong> - Full CRM administration
+            <br />• <strong>CRM_LEAD_MANAGER</strong> - Lead management
+            <br />• <strong>CRM_CONTACT_MANAGER</strong> - Contact management
+            <br />• <strong>CRM_PIPELINE_MANAGER</strong> - Pipeline management
+            <br />• <strong>CRM_ADMIN</strong> - Full CRM administration
           </Text>
           <Text size="sm" mt="xs" c="dimmed">
             Current level: <strong>{getCrmAuthorityLevel()}</strong>
           </Text>
         </Alert>
       )}
-      
-      <Button
-        variant="light"
-        onClick={() => window.history.back()}
-      >
+
+      <Button variant="light" onClick={() => window.history.back()}>
         Go Back
       </Button>
     </Stack>

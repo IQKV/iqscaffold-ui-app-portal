@@ -15,12 +15,11 @@ interface CrmPipelineManagerGuardProps {
  * Guard component that restricts access to pipeline management features.
  * Requires: CRM_PIPELINE_MANAGER, CRM_ADMIN, or admin access
  */
-export const CrmPipelineManagerGuard: React.FC<CrmPipelineManagerGuardProps> = ({
-  children,
-  fallback,
-  showUpgrade = true,
-}) => {
-  const { canManagePipeline, getCrmAuthorityLevel, getUserCrmAuthorities } = useAuth();
+export const CrmPipelineManagerGuard: React.FC<
+  CrmPipelineManagerGuardProps
+> = ({ children, fallback, showUpgrade = true }) => {
+  const { canManagePipeline, getCrmAuthorityLevel, getUserCrmAuthorities } =
+    useAuth();
 
   if (canManagePipeline()) {
     return <>{children}</>;
@@ -37,9 +36,10 @@ export const CrmPipelineManagerGuard: React.FC<CrmPipelineManagerGuardProps> = (
         Pipeline Management Access Required
       </Title>
       <Text ta="center" c="dimmed" maw={400}>
-        You need pipeline management permissions to access this feature. Contact your administrator to request pipeline management access.
+        You need pipeline management permissions to access this feature. Contact
+        your administrator to request pipeline management access.
       </Text>
-      
+
       {showUpgrade && (
         <Alert
           icon={<IconChartLine size={16} />}
@@ -51,11 +51,10 @@ export const CrmPipelineManagerGuard: React.FC<CrmPipelineManagerGuardProps> = (
             This feature requires one of the following authorities:
           </Text>
           <Text size="sm" mt="xs">
-            • <strong>CRM_PIPELINE_MANAGER</strong> - Pipeline management permissions
-            <br />
-            • <strong>CRM_ADMIN</strong> - Full CRM administration
-            <br />
-            • <strong>ADMIN</strong> - Platform administration
+            • <strong>CRM_PIPELINE_MANAGER</strong> - Pipeline management
+            permissions
+            <br />• <strong>CRM_ADMIN</strong> - Full CRM administration
+            <br />• <strong>ADMIN</strong> - Platform administration
           </Text>
           <Text size="sm" mt="xs" c="dimmed">
             Current CRM level: <strong>{getCrmAuthorityLevel()}</strong>
@@ -67,11 +66,8 @@ export const CrmPipelineManagerGuard: React.FC<CrmPipelineManagerGuardProps> = (
           )}
         </Alert>
       )}
-      
-      <Button
-        variant="light"
-        onClick={() => window.history.back()}
-      >
+
+      <Button variant="light" onClick={() => window.history.back()}>
         Go Back
       </Button>
     </Stack>
