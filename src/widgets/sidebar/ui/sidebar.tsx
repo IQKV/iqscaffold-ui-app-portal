@@ -12,14 +12,11 @@ import {
   IconCalendarEvent,
 } from "@tabler/icons-react";
 import { Link, useLocation } from "@tanstack/react-router";
-import { useAuth } from "@/processes/auth";
-import { canManageGatewayConfigs } from "@/processes/auth/lib/billing-permissions";
 import { FeatureGate, SilentFeatureErrorBoundary } from "@/shared/ui";
 import { t } from "@lingui/core/macro";
 
 export function Sidebar() {
   const location = useLocation();
-  const { hasBillingAccess, user } = useAuth();
 
   return (
     <Stack gap="md" data-testid="widget-sidebar">
@@ -63,8 +60,9 @@ export function Sidebar() {
         data-testid="nav-examples"
       />
 
-      {hasBillingAccess() && (
-        <>
+      {/* Billing Section */}
+      <SilentFeatureErrorBoundary>
+        <FeatureGate feature="billing" showLoading={false}>
           <NavLink
             component={Link}
             to="/billing"
@@ -73,18 +71,16 @@ export function Sidebar() {
             active={location.pathname === "/billing"}
             data-testid="nav-billing"
           />
-          {canManageGatewayConfigs(user) && (
-            <NavLink
-              component={Link}
-              to="/gateway-config"
-              label={t`Gateway Config`}
-              leftSection={<IconSettings size="1rem" />}
-              active={location.pathname === "/gateway-config"}
-              data-testid="nav-gateway-config"
-            />
-          )}
-        </>
-      )}
+          <NavLink
+            component={Link}
+            to="/gateway-config"
+            label={t`Gateway Config`}
+            leftSection={<IconSettings size="1rem" />}
+            active={location.pathname === "/gateway-config"}
+            data-testid="nav-gateway-config"
+          />
+        </FeatureGate>
+      </SilentFeatureErrorBoundary>
 
       <NavLink
         component={Link}
@@ -97,7 +93,7 @@ export function Sidebar() {
 
       {/* CRM Section */}
       <SilentFeatureErrorBoundary>
-        <FeatureGate feature="crm_access" showLoading={false}>
+        <FeatureGate feature="crm" showLoading={false}>
           <Text size="sm" fw={500} mt="md">
             {t`CRM`}
           </Text>
@@ -111,7 +107,7 @@ export function Sidebar() {
             data-testid="nav-crm-dashboard"
           />
 
-          <FeatureGate feature="lead_management" showLoading={false}>
+          <FeatureGate feature="crm" showLoading={false}>
             <NavLink
               component={Link}
               to="/crm/leads"
@@ -122,7 +118,7 @@ export function Sidebar() {
             />
           </FeatureGate>
 
-          <FeatureGate feature="contact_management" showLoading={false}>
+          <FeatureGate feature="crm" showLoading={false}>
             <NavLink
               component={Link}
               to="/crm/contacts"
@@ -133,7 +129,7 @@ export function Sidebar() {
             />
           </FeatureGate>
 
-          <FeatureGate feature="pipeline_management" showLoading={false}>
+          <FeatureGate feature="crm" showLoading={false}>
             <NavLink
               component={Link}
               to="/crm/pipeline"
@@ -144,7 +140,7 @@ export function Sidebar() {
             />
           </FeatureGate>
 
-          <FeatureGate feature="follow_up_management" showLoading={false}>
+          <FeatureGate feature="crm" showLoading={false}>
             <NavLink
               component={Link}
               to="/crm/follow-ups"

@@ -1,130 +1,214 @@
 import { http, HttpResponse } from "msw";
-import { UserFeaturesResponse, FeatureDto } from "@/shared/api/billing/types";
+import {
+  UserFeaturesResponse,
+  FeatureSummary,
+  AvailableFeaturesResponse,
+  FeatureDetail,
+  FeatureAccessResponse,
+  BulkFeatureUpdateResponse,
+} from "@/shared/api/user-management-api";
 
-// Mock feature data for development
-const mockFeatures: FeatureDto[] = [
+// Mock available features from backend configuration
+const mockAvailableFeatures: FeatureDetail[] = [
   {
-    code: "advanced_analytics",
-    name: "Advanced Analytics",
+    code: "crm",
+    displayName: "Customer Relationship Management",
+    description: "Manage leads, contacts, and sales pipeline",
+    composable: true,
+    requiredAuthorities: ["CRM_ACCESS"],
+    dependencies: [],
+  },
+  {
+    code: "billing",
+    displayName: "Billing & Payments",
+    description: "Manage subscriptions, payments, and invoicing",
+    composable: true,
+    requiredAuthorities: ["BILLING_ACCESS"],
+    dependencies: [],
+  },
+  {
+    code: "api",
+    displayName: "Platform API Access",
+    description: "Access to platform APIs and integrations",
+    composable: true,
+    requiredAuthorities: ["API_ACCESS"],
+    dependencies: [],
+  },
+  {
+    code: "analytics",
+    displayName: "Advanced Analytics",
     description: "Access to advanced reporting and analytics dashboards",
-    category: "ANALYTICS",
-    enabled: true,
-    usageLimit: undefined,
-    currentUsage: 0,
-  },
-  {
-    code: "api_calls",
-    name: "API Calls",
-    description: "Monthly API call quota",
-    category: "API",
-    enabled: true,
-    usageLimit: 10000,
-    currentUsage: 1250,
-  },
-  {
-    code: "storage_gb",
-    name: "Storage",
-    description: "File storage quota in GB",
-    category: "STORAGE",
-    enabled: true,
-    usageLimit: 100,
-    currentUsage: 23,
-  },
-  {
-    code: "team_members",
-    name: "Team Members",
-    description: "Maximum number of team members",
-    category: "TEAM",
-    enabled: true,
-    usageLimit: 10,
-    currentUsage: 3,
-  },
-  {
-    code: "lead_management",
-    name: "Lead Management",
-    description: "Manage sales leads and track conversion rates",
-    category: "CRM",
-    enabled: true,
-    usageLimit: undefined,
-    currentUsage: 0,
-  },
-  {
-    code: "contact_management",
-    name: "Contact Management",
-    description: "Manage customer contacts and relationships",
-    category: "CRM",
-    enabled: true,
-    usageLimit: undefined,
-    currentUsage: 0,
-  },
-  {
-    code: "pipeline_management",
-    name: "Pipeline Management",
-    description: "Visual sales pipeline with drag-and-drop functionality",
-    category: "CRM",
-    enabled: false, // Disabled to show feature gate behavior
-    usageLimit: undefined,
-    currentUsage: 0,
-  },
-  {
-    code: "follow_up_management",
-    name: "Follow-up Management",
-    description: "Schedule and track customer follow-ups",
-    category: "CRM",
-    enabled: true,
-    usageLimit: undefined,
-    currentUsage: 0,
-  },
-  {
-    code: "reporting",
-    name: "Advanced Reporting",
-    description: "Generate detailed reports and export data",
-    category: "REPORTING",
-    enabled: true,
-    usageLimit: undefined,
-    currentUsage: 0,
-  },
-  {
-    code: "monthly_reports",
-    name: "Monthly Reports",
-    description: "Number of reports generated per month",
-    category: "REPORTING",
-    enabled: true,
-    usageLimit: 50,
-    currentUsage: 12,
-  },
-  {
-    code: "crm_access",
-    name: "CRM Access",
-    description: "Access to CRM functionality",
-    category: "CRM",
-    enabled: true,
-    usageLimit: undefined,
-    currentUsage: 0,
+    composable: true,
+    requiredAuthorities: ["ANALYTICS_ACCESS"],
+    dependencies: [],
   },
 ];
 
-const mockUserFeaturesResponse: UserFeaturesResponse = {
-  enabledFeatures: mockFeatures.filter((f) => f.enabled),
-  allFeatures: mockFeatures,
-  planName: "Pro Plan",
-  subscriptionStatus: "active",
-  subscriptionExpiresAt: new Date(
-    Date.now() + 30 * 24 * 60 * 60 * 1000
-  ).toISOString(), // 30 days from now
-  isTrialPeriod: false,
-  trialExpiresAt: undefined,
-  tenantId: "tenant-123",
-};
+// Mock user features (what the current user has enabled)
+const mockUserFeatures: FeatureSummary[] = [
+  {
+    code: "crm",
+    displayName: "Customer Relationship Management",
+    description: "Manage leads, contacts, and sales pipeline",
+    enabled: true,
+  },
+  {
+    code: "analytics",
+    displayName: "Advanced Analytics",
+    description: "Access to advanced reporting and analytics dashboards",
+    enabled: true,
+  },
+];
+
+// Track enabled features per user (for admin management)
+const userFeatureMap = new Map<number, Set<string>>();
+
+// Initialize some test users with features
+userFeatureMap.set(1, new Set(["crm", "analytics"]));
+userFeatureMap.set(2, new Set(["billing"]));
+userFeatureMap.set(3, new Set(["crm", "billing", "api"]));
 
 export const featureHandlers = [
-  // Get user's complete feature information
-  http.get("/api/v1/features/my-features", () => {
-    return HttpResponse.json(mockUserFeaturesResponse);
+  // Get current user's features
+  http.get("/api/v1/users/features/me", () => {
+    const response: UserFeaturesResponse = {
+      userId: 1,
+      username: "current-user",
+      featureCount: mockUserFeatures.length,
+      features: mockUserFeatures,
+    };
+
+    return HttpResponse.json(response);
   }),
 
-  // Get only enabled features (lightweight)
-  http.get("/api/v1/features/enabled", () => {
-    return HttpResponse.json(mockFeatures.filter((f) => f.enabled));
+  // Get available features (admin only)
+  http.get("/api/v1/users/features/available", () => {
+    const response: AvailableFeaturesResponse = {
+      totalCount: mockAvailableFeatures.length,
+      features: mockAvailableFeatures,
+    };
+
+    return HttpResponse.json(response);
+  }),
+
+  // Get user features by ID (admin only)
+  http.get("/api/v1/users/features/:userId", ({ params }) => {
+    const userId = Number(params.userId);
+    const userFeatures = userFeatureMap.get(userId) || new Set();
+    
+    const features: FeatureSummary[] = Array.from(userFeatures).map(code => {
+      const availableFeature = mockAvailableFeatures.find(f => f.code === code);
+      return {
+        code,
+        displayName: availableFeature?.displayName || code,
+        description: availableFeature?.description || "",
+        enabled: true,
+      };
+    });
+
+    const response: UserFeaturesResponse = {
+      userId,
+      username: `user-${userId}`,
+      featureCount: features.length,
+      features,
+    };
+
+    return HttpResponse.json(response);
+  }),
+
+  // Enable feature for user (admin only)
+  http.post("/api/v1/users/features/:userId/:featureCode/enable", ({ params }) => {
+    const userId = Number(params.userId);
+    const featureCode = params.featureCode as string;
+    
+    if (!userFeatureMap.has(userId)) {
+      userFeatureMap.set(userId, new Set());
+    }
+    
+    const userFeatures = userFeatureMap.get(userId)!;
+    userFeatures.add(featureCode);
+
+    const response: FeatureAccessResponse = {
+      userId,
+      username: `user-${userId}`,
+      featureCode,
+      hasAccess: true,
+      message: `Feature ${featureCode} enabled successfully`,
+    };
+
+    return HttpResponse.json(response);
+  }),
+
+  // Disable feature for user (admin only)
+  http.delete("/api/v1/users/features/:userId/:featureCode/disable", ({ params }) => {
+    const userId = Number(params.userId);
+    const featureCode = params.featureCode as string;
+    
+    const userFeatures = userFeatureMap.get(userId);
+    if (userFeatures) {
+      userFeatures.delete(featureCode);
+    }
+
+    const response: FeatureAccessResponse = {
+      userId,
+      username: `user-${userId}`,
+      featureCode,
+      hasAccess: false,
+      message: `Feature ${featureCode} disabled successfully`,
+    };
+
+    return HttpResponse.json(response);
+  }),
+
+  // Check feature access for user (admin only)
+  http.get("/api/v1/users/features/:userId/:featureCode/check", ({ params }) => {
+    const userId = Number(params.userId);
+    const featureCode = params.featureCode as string;
+    
+    const userFeatures = userFeatureMap.get(userId) || new Set();
+    const hasAccess = userFeatures.has(featureCode);
+
+    const response: FeatureAccessResponse = {
+      userId,
+      username: `user-${userId}`,
+      featureCode,
+      hasAccess,
+      message: hasAccess 
+        ? `User has access to ${featureCode}`
+        : `User does not have access to ${featureCode}`,
+    };
+
+    return HttpResponse.json(response);
+  }),
+
+  // Bulk update user features (admin only)
+  http.put("/api/v1/users/features/:userId", async ({ params, request }) => {
+    const userId = Number(params.userId);
+    const { enableFeatures, disableFeatures } = await request.json() as {
+      enableFeatures: string[];
+      disableFeatures: string[];
+    };
+    
+    if (!userFeatureMap.has(userId)) {
+      userFeatureMap.set(userId, new Set());
+    }
+    
+    const userFeatures = userFeatureMap.get(userId)!;
+    
+    // Enable features
+    enableFeatures.forEach(code => userFeatures.add(code));
+    
+    // Disable features
+    disableFeatures.forEach(code => userFeatures.delete(code));
+
+    const response: BulkFeatureUpdateResponse = {
+      userId,
+      username: `user-${userId}`,
+      featuresEnabled: enableFeatures.length,
+      featuresDisabled: disableFeatures.length,
+      message: `Updated ${enableFeatures.length + disableFeatures.length} features successfully`,
+    };
+
+    return HttpResponse.json(response);
   }),
 ];

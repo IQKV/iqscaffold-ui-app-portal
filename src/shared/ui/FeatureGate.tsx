@@ -1,5 +1,5 @@
 import React from "react";
-import { useEnabledFeatures } from "@/shared/lib/hooks/useEnabledFeatures";
+import { useEnabledFeatures } from "@/shared/lib/contexts/FeatureContext";
 import { Loader } from "@mantine/core";
 
 interface FeatureGateProps {
@@ -13,21 +13,29 @@ interface FeatureGateProps {
   showLoading?: boolean;
   /** Custom loading component */
   loadingComponent?: React.ReactNode;
+  /** Whether to use authority-based access check (default: true) */
+  checkAuthorities?: boolean;
 }
 
 /**
- * Component for conditional rendering based on feature enablement.
+ * Component for conditional rendering based on feature enablement and authority access.
  *
  * Automatically handles:
  * - Feature loading states
+ * - Authority-based access validation
  * - Graceful fallback when features unavailable
  * - Performance optimization with lightweight feature checks
  *
  * @example
  * ```tsx
- * // Basic usage
- * <FeatureGate feature="advanced_analytics">
- *   <AdvancedAnalyticsDashboard />
+ * // Basic usage with authority check
+ * <FeatureGate feature="crm">
+ *   <CRMDashboard />
+ * </FeatureGate>
+ *
+ * // Feature check only (no authority validation)
+ * <FeatureGate feature="analytics" checkAuthorities={false}>
+ *   <AnalyticsDashboard />
  * </FeatureGate>
  *
  * // With fallback content
@@ -50,8 +58,9 @@ export const FeatureGate: React.FC<FeatureGateProps> = ({
   fallback = null,
   showLoading = true,
   loadingComponent,
+  checkAuthorities = true,
 }) => {
-  const { hasFeature, loading, error } = useEnabledFeatures();
+  const { hasFeature, canAccessFeature, loading, error } = useEnabledFeatures();
 
   // Show loading state if requested and still loading
   if (loading && showLoading) {
@@ -64,8 +73,11 @@ export const FeatureGate: React.FC<FeatureGateProps> = ({
     return <>{fallback}</>;
   }
 
-  // Render children if feature is enabled, otherwise render fallback
-  return hasFeature(feature) ? <>{children}</> : <>{fallback}</>;
+  // Determine access based on checkAuthorities flag
+  const hasAccess = checkAuthorities ? canAccessFeature(feature) : hasFeature(feature);
+
+  // Render children if feature is accessible, otherwise render fallback
+  return hasAccess ? <>{children}</> : <>{fallback}</>;
 };
 
 /**
