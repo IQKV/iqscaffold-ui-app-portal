@@ -15,6 +15,7 @@ import {
 } from "@/shared/api/user-management-api";
 import { notificationService } from "@/shared/lib/notifications";
 import { useAuthStore } from "@/processes/auth";
+import { hasAnyAuthorityWithInheritance } from "@/shared/constants/authorities";
 
 interface FeatureContextValue {
   // Data
@@ -27,6 +28,7 @@ interface FeatureContextValue {
   // Methods
   hasFeature: (featureCode: string) => boolean;
   canAccessFeature: (featureCode: string) => boolean;
+  hasFeatureWithAuthority: (featureCode: string, requiredAuthorities: string[]) => boolean;
   getFeature: (featureCode: string) => FeatureDetail | undefined;
   getFeatureSummary: (featureCode: string) => FeatureSummary | undefined;
   refetchFeatures: () => Promise<void>;
@@ -41,6 +43,37 @@ interface FeatureContextValue {
     disableFeatures: string[]
   ) => Promise<boolean>;
 }
+
+/**
+ * Feature-authority mapping for access control validation
+ * Maps feature codes to required authorities
+ */
+const FEATURE_AUTHORITY_MAPPING: Record<string, string[]> = {
+  // Billing features
+  'billing': ['BILLING_ACCESS', 'BILLING_MANAGER', 'BILLING_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
+  'payments': ['BILLING_ACCESS', 'BILLING_MANAGER', 'BILLING_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
+  'subscriptions': ['BILLING_ACCESS', 'BILLING_MANAGER', 'BILLING_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
+  'invoices': ['BILLING_MANAGER', 'BILLING_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
+  'refunds': ['BILLING_MANAGER', 'BILLING_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
+  'gateway_config': ['BILLING_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
+  'merchant_onboarding': ['BILLING_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
+  
+  // CRM features
+  'crm': ['CRM_ACCESS', 'CRM_LEAD_MANAGER', 'CRM_CONTACT_MANAGER', 'CRM_PIPELINE_MANAGER', 'CRM_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
+  'leads': ['CRM_ACCESS', 'CRM_LEAD_MANAGER', 'CRM_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
+  'contacts': ['CRM_ACCESS', 'CRM_CONTACT_MANAGER', 'CRM_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
+  'pipeline': ['CRM_ACCESS', 'CRM_PIPELINE_MANAGER', 'CRM_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
+  'lead_management': ['CRM_LEAD_MANAGER', 'CRM_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
+  'contact_management': ['CRM_CONTACT_MANAGER', 'CRM_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
+  'pipeline_management': ['CRM_PIPELINE_MANAGER', 'CRM_ADMIN', 'ADMIN', 'SUPER_ADMIN'],
+  
+  // API features
+  'api_access': ['API_ACCESS', 'ADMIN', 'SUPER_ADMIN'],
+  
+  // Admin features
+  'user_management': ['ADMIN', 'SUPER_ADMIN', 'TENANT_OWNER'],
+  'platform_config': ['SUPER_ADMIN', 'TENANT_OWNER'],
+};
 
 const FeatureContext = createContext<FeatureContextValue | null>(null);
 
@@ -58,10 +91,11 @@ interface FeatureProviderProps {
  * Provides centralized feature state management across the entire application.
  * Automatically handles:
  * - Dynamic feature loading from backend configuration
- * - Feature access validation based on user authorities
+ * - Feature access validation based on user authorities with inheritance
  * - Error handling with graceful degradation
  * - Feature management operations (admin only)
  * - Optional automatic refetching
+ * - Authority-based feature access control
  *
  * Place this high in your component tree, typically in App.tsx.
  */
@@ -70,17 +104,78 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
   autoFetch = true,
   refetchInterval = 0, // Disabled by default
 }) => {
-  const [userFeatures, setUserFeatures] = useState<UserFeaturesResponse | null>(
-    null
-  );
-  const [availableFeatures, setAvailableFeatures] =
-    useState<AvailableFeaturesResponse | null>(null);
+  const [userFeatures, setUserFeatures] = useState<UserFeaturesResponse | null>(null);
+  const [availableFeatures, setAvailableFeatures] = useState<AvailableFeaturesResponse | null>(null);
   const [loading, setLoading] = useState(autoFetch);
   const [error, setError] = useState<string | null>(null);
 
-  const { user } = useAuthStore();
+  const user = useAuthStore((state) => state.user);
+  const userAuthorities = useMemo(() => user?.authorities ?? [], [user?.authorities]);
 
-  const fetchUserFeatures = useCallback(async () => {
+  // Memoized enabled features list
+  const enabledFeatures = useMemo(() => {
+    if (!userFeatures?.features) {
+      return [];
+    }
+    return userFeatures.features.map((f: FeatureSummary) => f.code);
+  }, [userFeatures]);
+
+  // Feature access methods with authority validation
+  const hasFeature = useCallback(
+    (featureCode: string): boolean => {
+      return enabledFeatures.includes(featureCode);
+    },
+    [enabledFeatures]
+  );
+
+  const canAccessFeature = useCallback(
+    (featureCode: string): boolean => {
+      // Check if user has the feature enabled
+      if (!hasFeature(featureCode)) {
+        return false;
+      }
+
+      // Check if user has required authorities for this feature
+      const requiredAuthorities = FEATURE_AUTHORITY_MAPPING[featureCode];
+      if (!requiredAuthorities) {
+        // If no authority mapping exists, allow access if feature is enabled
+        return true;
+      }
+
+      return hasAnyAuthorityWithInheritance(userAuthorities, requiredAuthorities);
+    },
+    [hasFeature, userAuthorities]
+  );
+
+  const hasFeatureWithAuthority = useCallback(
+    (featureCode: string, requiredAuthorities: string[]): boolean => {
+      // Check if user has the feature enabled
+      if (!hasFeature(featureCode)) {
+        return false;
+      }
+
+      // Check if user has any of the required authorities
+      return hasAnyAuthorityWithInheritance(userAuthorities, requiredAuthorities);
+    },
+    [hasFeature, userAuthorities]
+  );
+
+  const getFeature = useCallback(
+    (featureCode: string): FeatureDetail | undefined => {
+      return availableFeatures?.features.find((f: FeatureDetail) => f.code === featureCode);
+    },
+    [availableFeatures]
+  );
+
+  const getFeatureSummary = useCallback(
+    (featureCode: string): FeatureSummary | undefined => {
+      return userFeatures?.features.find((f: FeatureSummary) => f.code === featureCode);
+    },
+    [userFeatures]
+  );
+
+  // Fetch user features
+  const refetchFeatures = useCallback(async () => {
     if (!user) {
       setUserFeatures(null);
       return;
@@ -89,15 +184,16 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
     try {
       setLoading(true);
       setError(null);
-
       const response = await userManagementApi.getMyFeatures();
       setUserFeatures(response);
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Failed to fetch user features";
-      console.warn("Feature service unavailable, using fallback", err);
+      const errorMessage = err instanceof Error ? err.message : "Failed to fetch user features";
       setError(errorMessage);
-
+      notificationService.error({
+        title: "Failed to load user features",
+        message: errorMessage,
+      });
+      
       // Graceful degradation - set empty features
       setUserFeatures({
         userId: user.userId,
@@ -110,127 +206,36 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
     }
   }, [user]);
 
-  const fetchAvailableFeatures = useCallback(async () => {
-    if (!user) {
-      return;
-    }
-
+  // Fetch available features
+  const refetchAvailableFeatures = useCallback(async () => {
     try {
       const response = await userManagementApi.getAvailableFeatures();
       setAvailableFeatures(response);
     } catch (err) {
-      console.warn("Failed to fetch available features", err);
-      // Don't set error for available features - it's not critical
+      const errorMessage = err instanceof Error ? err.message : "Failed to fetch available features";
+      console.warn("Failed to fetch available features:", errorMessage);
+      
+      // Graceful degradation - set empty features
+      setAvailableFeatures({
+        features: [],
+        totalCount: 0,
+      });
     }
-  }, [user]);
-
-  const refetchFeatures = useCallback(async () => {
-    await fetchUserFeatures();
-  }, [fetchUserFeatures]);
-
-  const refetchAvailableFeatures = useCallback(async () => {
-    await fetchAvailableFeatures();
-  }, [fetchAvailableFeatures]);
-
-  // Fetch features on mount and user change
-  useEffect(() => {
-    if (autoFetch && user) {
-      fetchUserFeatures();
-      fetchAvailableFeatures();
-    }
-  }, [autoFetch, user, fetchUserFeatures, fetchAvailableFeatures]);
-
-  // Set up refetch interval
-  useEffect(() => {
-    if (refetchInterval > 0 && user) {
-      const interval = setInterval(() => {
-        fetchUserFeatures();
-      }, refetchInterval);
-
-      return () => clearInterval(interval);
-    }
-  }, [refetchInterval, user, fetchUserFeatures]);
-
-  // Derived state
-  const enabledFeatures = useMemo(
-    () => userFeatures?.features.map((f) => f.code) || [],
-    [userFeatures]
-  );
-
-  // Feature access methods
-  const hasFeature = useCallback(
-    (featureCode: string): boolean => {
-      return enabledFeatures.includes(featureCode);
-    },
-    [enabledFeatures]
-  );
-
-  const canAccessFeature = useCallback(
-    (featureCode: string): boolean => {
-      if (!user || !availableFeatures) {
-        return false;
-      }
-
-      // Check if user has the feature enabled
-      if (!hasFeature(featureCode)) {
-        return false;
-      }
-
-      // Check if user has required authorities for the feature
-      const featureDetail = availableFeatures.features.find(
-        (f) => f.code === featureCode
-      );
-      if (!featureDetail) {
-        return false;
-      }
-
-      // Admin authorities have universal access
-      const adminAuthorities = ["SUPER_ADMIN", "ADMIN"];
-      if (user.authorities?.some((auth) => adminAuthorities.includes(auth))) {
-        return true;
-      }
-
-      // Check if user has any of the required authorities
-      return featureDetail.requiredAuthorities.some((reqAuth) =>
-        user.authorities?.includes(reqAuth)
-      );
-    },
-    [user, availableFeatures, hasFeature]
-  );
-
-  const getFeature = useCallback(
-    (featureCode: string): FeatureDetail | undefined => {
-      return availableFeatures?.features.find((f) => f.code === featureCode);
-    },
-    [availableFeatures]
-  );
-
-  const getFeatureSummary = useCallback(
-    (featureCode: string): FeatureSummary | undefined => {
-      return userFeatures?.features.find((f) => f.code === featureCode);
-    },
-    [userFeatures]
-  );
+  }, []);
 
   // Feature management methods (admin only)
   const enableFeature = useCallback(
     async (userId: number, featureCode: string): Promise<boolean> => {
       try {
         await userManagementApi.enableUserFeature(userId, featureCode);
+        await refetchFeatures();
         notificationService.success({
-          title: "Feature Updated",
-          message: `Feature ${featureCode} enabled successfully`,
+          title: "Feature enabled",
+          message: `Feature ${featureCode} has been enabled`,
         });
-
-        // Refresh features if it's the current user
-        if (user && userId === user.userId) {
-          await fetchUserFeatures();
-        }
-
         return true;
       } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : "Failed to enable feature";
+        const errorMessage = err instanceof Error ? err.message : "Failed to enable feature";
         notificationService.error({
           title: "Failed to enable feature",
           message: errorMessage,
@@ -238,27 +243,21 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
         return false;
       }
     },
-    [user, fetchUserFeatures]
+    [refetchFeatures]
   );
 
   const disableFeature = useCallback(
     async (userId: number, featureCode: string): Promise<boolean> => {
       try {
         await userManagementApi.disableUserFeature(userId, featureCode);
+        await refetchFeatures();
         notificationService.success({
-          title: "Feature Updated",
-          message: `Feature ${featureCode} disabled successfully`,
+          title: "Feature disabled",
+          message: `Feature ${featureCode} has been disabled`,
         });
-
-        // Refresh features if it's the current user
-        if (user && userId === user.userId) {
-          await fetchUserFeatures();
-        }
-
         return true;
       } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : "Failed to disable feature";
+        const errorMessage = err instanceof Error ? err.message : "Failed to disable feature";
         notificationService.error({
           title: "Failed to disable feature",
           message: errorMessage,
@@ -266,7 +265,7 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
         return false;
       }
     },
-    [user, fetchUserFeatures]
+    [refetchFeatures]
   );
 
   const bulkUpdateFeatures = useCallback(
@@ -280,21 +279,14 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
           enableFeatures,
           disableFeatures,
         });
-
+        await refetchFeatures();
         notificationService.success({
-          title: "Features Updated",
-          message: `Updated ${enableFeatures.length + disableFeatures.length} features successfully`,
+          title: "Features updated",
+          message: "Bulk feature update completed",
         });
-
-        // Refresh features if it's the current user
-        if (user && userId === user.userId) {
-          await fetchUserFeatures();
-        }
-
         return true;
       } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : "Failed to update features";
+        const errorMessage = err instanceof Error ? err.message : "Failed to update features";
         notificationService.error({
           title: "Failed to update features",
           message: errorMessage,
@@ -302,41 +294,117 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
         return false;
       }
     },
-    [user, fetchUserFeatures]
+    [refetchFeatures]
   );
 
-  const value: FeatureContextValue = {
-    userFeatures,
-    availableFeatures,
-    enabledFeatures,
-    loading,
-    error,
-    hasFeature,
-    canAccessFeature,
-    getFeature,
-    getFeatureSummary,
-    refetchFeatures,
-    refetchAvailableFeatures,
-    enableFeature,
-    disableFeature,
-    bulkUpdateFeatures,
-  };
+  // Auto-fetch on mount and user change
+  useEffect(() => {
+    if (autoFetch) {
+      refetchFeatures();
+      refetchAvailableFeatures();
+    }
+  }, [autoFetch, refetchFeatures, refetchAvailableFeatures]);
+
+  // Auto-refetch interval
+  useEffect(() => {
+    if (refetchInterval > 0) {
+      const interval = setInterval(() => {
+        refetchFeatures();
+      }, refetchInterval);
+
+      return () => clearInterval(interval);
+    }
+  }, [refetchInterval, refetchFeatures]);
+
+  const contextValue: FeatureContextValue = useMemo(
+    () => ({
+      userFeatures,
+      availableFeatures,
+      enabledFeatures,
+      loading,
+      error,
+      hasFeature,
+      canAccessFeature,
+      hasFeatureWithAuthority,
+      getFeature,
+      getFeatureSummary,
+      refetchFeatures,
+      refetchAvailableFeatures,
+      enableFeature,
+      disableFeature,
+      bulkUpdateFeatures,
+    }),
+    [
+      userFeatures,
+      availableFeatures,
+      enabledFeatures,
+      loading,
+      error,
+      hasFeature,
+      canAccessFeature,
+      hasFeatureWithAuthority,
+      getFeature,
+      getFeatureSummary,
+      refetchFeatures,
+      refetchAvailableFeatures,
+      enableFeature,
+      disableFeature,
+      bulkUpdateFeatures,
+    ]
+  );
 
   return (
-    <FeatureContext.Provider value={value}>{children}</FeatureContext.Provider>
+    <FeatureContext.Provider value={contextValue}>
+      {children}
+    </FeatureContext.Provider>
   );
 };
 
 /**
  * Hook to access feature context
+ */
+export const useFeatures = (): FeatureContextValue => {
+  const context = useContext(FeatureContext);
+  if (!context) {
+    throw new Error("useFeatures must be used within a FeatureProvider");
+  }
+  return context;
+};
+
+/**
+ * Hook to check if a feature is available and user has access
+ */
+export const useFeatureAccess = (featureCode: string) => {
+  const { hasFeature, canAccessFeature, getFeature } = useFeatures();
+  
+  return useMemo(() => ({
+    hasFeature: hasFeature(featureCode),
+    canAccess: canAccessFeature(featureCode),
+    feature: getFeature(featureCode),
+  }), [featureCode, hasFeature, canAccessFeature, getFeature]);
+};
+
+/**
+ * Hook to check multiple features at once
+ */
+export const useMultipleFeatureAccess = (featureCodes: string[]) => {
+  const { canAccessFeature } = useFeatures();
+  
+  return useMemo(() => {
+    const results: Record<string, boolean> = {};
+    featureCodes.forEach(code => {
+      results[code] = canAccessFeature(code);
+    });
+    return results;
+  }, [featureCodes, canAccessFeature]);
+};
+
+/**
+ * Hook to access feature context (alias for useFeatures)
  * Must be used within a FeatureProvider
  */
 export const useFeatureContext = (): FeatureContextValue => {
-  const context = useContext(FeatureContext);
-  if (!context) {
-    throw new Error("useFeatureContext must be used within a FeatureProvider");
-  }
-  return context;
+  return useFeatures();
 };
 
 /**
@@ -344,8 +412,7 @@ export const useFeatureContext = (): FeatureContextValue => {
  * Returns only the essential feature checking functions
  */
 export const useEnabledFeatures = () => {
-  const { hasFeature, canAccessFeature, enabledFeatures, loading, error } =
-    useFeatureContext();
+  const { hasFeature, canAccessFeature, enabledFeatures, loading, error } = useFeatures();
 
   return {
     hasFeature,
@@ -367,7 +434,7 @@ export const useFeatureManagement = () => {
     bulkUpdateFeatures,
     availableFeatures,
     refetchAvailableFeatures,
-  } = useFeatureContext();
+  } = useFeatures();
 
   return {
     enableFeature,

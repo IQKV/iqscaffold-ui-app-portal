@@ -206,7 +206,7 @@ msgstr "Add Payment Gateway"
 msgid "Add Stage"
 msgstr "Add Stage"
 
-#: src/features/users/components/enhanced-users-data-grid.tsx:259
+#: src/features/users/components/enhanced-users-data-grid.tsx:265
 #: src/features/users/components/users-data-grid.tsx:233
 #: src/pages/examples.tsx:288
 msgid "Add User"
@@ -373,13 +373,13 @@ msgstr "At least one authority is required"
 #~ msgid "At least one role is required"
 #~ msgstr "At least one role is required"
 
-#: src/features/users/components/enhanced-users-data-grid.tsx:311
+#: src/features/users/components/enhanced-users-data-grid.tsx:317
 #: src/features/users/components/user-form-modal.tsx:259
 #: src/features/users/components/users-data-grid.tsx:128
 msgid "Authorities"
 msgstr "Authorities"
 
-#: src/features/users/components/enhanced-users-data-grid.tsx:332
+#: src/features/users/components/enhanced-users-data-grid.tsx:338
 msgid "Authority management will be available in a future update."
 msgstr "Authority management will be available in a future update."
 
@@ -767,7 +767,7 @@ msgstr "CRM Error"
 msgid "CRM Navigation"
 msgstr "CRM Navigation"
 
-#: src/features/users/components/enhanced-users-data-grid.tsx:323
+#: src/features/users/components/enhanced-users-data-grid.tsx:329
 msgid "Current Authorities"
 msgstr "Current Authorities"
 
@@ -1235,7 +1235,7 @@ msgstr "Error Loading Plans"
 #~ msgid "Error loading users: {0}"
 #~ msgstr "Error loading users: {0}"
 
-#: src/features/users/components/enhanced-users-data-grid.tsx:243
+#: src/features/users/components/enhanced-users-data-grid.tsx:249
 #: src/features/users/components/users-data-grid.tsx:214
 msgid "Error loading users: {errorMessage}"
 msgstr "Error loading users: {errorMessage}"
@@ -1502,7 +1502,7 @@ msgstr "Feature Usage"
 msgid "Feature-Sliced Design:"
 msgstr "Feature-Sliced Design:"
 
-#: src/features/users/components/enhanced-users-data-grid.tsx:310
+#: src/features/users/components/enhanced-users-data-grid.tsx:316
 msgid "Features"
 msgstr "Features"
 
@@ -1931,11 +1931,11 @@ msgid "Manage all your follow-up tasks"
 msgstr "Manage all your follow-up tasks"
 
 #: src/features/users/components/enhanced-users-data-grid.tsx:202
-#: src/features/users/components/enhanced-users-data-grid.tsx:303
+#: src/features/users/components/enhanced-users-data-grid.tsx:309
 msgid "Manage Features"
 msgstr "Manage Features"
 
-#: src/features/users/components/enhanced-users-data-grid.tsx:301
+#: src/features/users/components/enhanced-users-data-grid.tsx:307
 msgid "Manage Features - {firstName} {lastName}"
 msgstr "Manage Features - {firstName} {lastName}"
 
@@ -2181,11 +2181,11 @@ msgstr "No subscription plans are currently available."
 msgid "No users found"
 msgstr "No users found"
 
-#: src/features/users/components/enhanced-users-data-grid.tsx:285
+#: src/features/users/components/enhanced-users-data-grid.tsx:291
 msgid "No users have been created yet"
 msgstr "No users have been created yet"
 
-#: src/features/users/components/enhanced-users-data-grid.tsx:284
+#: src/features/users/components/enhanced-users-data-grid.tsx:290
 msgid "No users match your search criteria"
 msgstr "No users match your search criteria"
 
@@ -2758,7 +2758,7 @@ msgstr "Search follow-ups..."
 msgid "Search term must be less than 100 characters"
 msgstr "Search term must be less than 100 characters"
 
-#: src/features/users/components/enhanced-users-data-grid.tsx:265
+#: src/features/users/components/enhanced-users-data-grid.tsx:271
 #: src/features/users/components/users-data-grid.tsx:239
 msgid "Search users..."
 msgstr "Search users..."
@@ -3313,7 +3313,7 @@ msgstr "User created successfully"
 msgid "User deleted successfully"
 msgstr "User deleted successfully"
 
-#: src/features/users/components/enhanced-users-data-grid.tsx:253
+#: src/features/users/components/enhanced-users-data-grid.tsx:259
 #: src/features/users/components/users-data-grid.tsx:226
 #: src/widgets/sidebar/ui/sidebar.tsx:48
 msgid "User Management"

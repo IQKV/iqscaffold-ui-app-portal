@@ -1,143 +1,235 @@
 import type { UserContext } from "@/entities/user";
-import { hasAnyAuthority } from "./auth-utils";
 import {
+  hasAnyAuthorityWithInheritance,
+  AUTHORITY_BILLING_ACCESS,
+  AUTHORITY_BILLING_MANAGER,
+  AUTHORITY_BILLING_ADMIN,
+  AUTHORITY_FINANCE_VIEWER,
   ADMIN_AUTHORITIES,
-  isAdminAuthority,
 } from "@/shared/constants/authorities";
 
 /**
- * Feature-based authorization helpers
- * Uses the new configuration-driven feature system instead of hardcoded authorities
+ * Billing feature-based authorization helpers
+ * Uses the new configuration-driven feature system with authority inheritance
  */
 
 /**
- * Check if user has admin access (universal access to all features)
- * Includes: SUPER_ADMIN, TENANT_OWNER, ADMIN
- */
-export function hasAdminAccess(user: UserContext | null): boolean {
-  if (!user) {
-    return false;
-  }
-  return hasAnyAuthority(user, [...ADMIN_AUTHORITIES]);
-}
-
-/**
- * Check if user has any admin authority
- */
-export function isAdmin(user: UserContext | null): boolean {
-  if (!user || !user.authorities) {
-    return false;
-  }
-  return user.authorities.some((auth) => isAdminAuthority(auth));
-}
-
-/**
- * Check if user can manage other users
- * Requires: SUPER_ADMIN, TENANT_OWNER, or ADMIN
- */
-export function canManageUsers(user: UserContext | null): boolean {
-  return hasAdminAccess(user);
-}
-
-/**
- * Check if user can manage platform configuration
- * Requires: SUPER_ADMIN or TENANT_OWNER
- */
-export function canManagePlatform(user: UserContext | null): boolean {
-  if (!user) {
-    return false;
-  }
-  return hasAnyAuthority(user, ["SUPER_ADMIN", "TENANT_OWNER"]);
-}
-
-/**
- * @deprecated Use FeatureGate component with feature="billing" instead
- * This function is kept for backward compatibility during migration
+ * Check if user has basic billing access
+ * Requires: BILLING_ACCESS, BILLING_MANAGER, BILLING_ADMIN, or admin access
  */
 export function hasBillingAccess(user: UserContext | null): boolean {
-  console.warn(
-    "hasBillingAccess is deprecated. Use FeatureGate with feature='billing' instead."
-  );
-  return hasAdminAccess(user);
+  if (!user?.authorities) {
+    return false;
+  }
+  
+  return hasAnyAuthorityWithInheritance(user.authorities, [
+    AUTHORITY_BILLING_ACCESS,
+    AUTHORITY_BILLING_MANAGER,
+    AUTHORITY_BILLING_ADMIN,
+    ...ADMIN_AUTHORITIES,
+  ]);
 }
 
 /**
- * @deprecated Use FeatureGate component with feature="billing" instead
- * This function is kept for backward compatibility during migration
+ * Check if user can modify billing (create/update operations)
+ * Requires: BILLING_MANAGER, BILLING_ADMIN, or admin access
  */
 export function canModifyBilling(user: UserContext | null): boolean {
-  console.warn(
-    "canModifyBilling is deprecated. Use FeatureGate with feature='billing' instead."
-  );
-  return hasAdminAccess(user);
+  if (!user?.authorities) {
+    return false;
+  }
+  
+  return hasAnyAuthorityWithInheritance(user.authorities, [
+    AUTHORITY_BILLING_MANAGER,
+    AUTHORITY_BILLING_ADMIN,
+    ...ADMIN_AUTHORITIES,
+  ]);
 }
 
 /**
- * @deprecated Use FeatureGate component with feature="billing" instead
+ * Check if user has read-only billing access
+ * Requires: BILLING_ACCESS, FINANCE_VIEWER, or any billing authority
  */
 export function hasReadOnlyBillingAccess(user: UserContext | null): boolean {
-  console.warn(
-    "hasReadOnlyBillingAccess is deprecated. Use FeatureGate with feature='billing' instead."
-  );
-  return false;
+  if (!user?.authorities) {
+    return false;
+  }
+  
+  return hasAnyAuthorityWithInheritance(user.authorities, [
+    AUTHORITY_BILLING_ACCESS,
+    AUTHORITY_FINANCE_VIEWER,
+    AUTHORITY_BILLING_MANAGER,
+    AUTHORITY_BILLING_ADMIN,
+    ...ADMIN_AUTHORITIES,
+  ]);
 }
 
 /**
- * @deprecated Use FeatureGate component with feature="billing" instead
+ * Check if user can process refunds
+ * Requires: BILLING_MANAGER, BILLING_ADMIN, or admin access
  */
 export function canProcessRefunds(user: UserContext | null): boolean {
-  console.warn(
-    "canProcessRefunds is deprecated. Use FeatureGate with feature='billing' instead."
-  );
-  return hasAdminAccess(user);
+  return canModifyBilling(user);
 }
 
 /**
- * @deprecated Use FeatureGate component with feature="billing" instead
+ * Check if user can manage merchants
+ * Requires: BILLING_ADMIN or admin access
  */
 export function canManageMerchants(user: UserContext | null): boolean {
-  console.warn(
-    "canManageMerchants is deprecated. Use FeatureGate with feature='billing' instead."
-  );
-  return hasAdminAccess(user);
+  if (!user?.authorities) {
+    return false;
+  }
+  
+  return hasAnyAuthorityWithInheritance(user.authorities, [
+    AUTHORITY_BILLING_ADMIN,
+    ...ADMIN_AUTHORITIES,
+  ]);
 }
 
 /**
- * @deprecated Use FeatureGate component with feature="billing" instead
+ * Check if user can view payments
+ * Requires: Any billing access or finance viewer
  */
 export function canViewPayments(user: UserContext | null): boolean {
-  console.warn(
-    "canViewPayments is deprecated. Use FeatureGate with feature='billing' instead."
-  );
-  return hasAdminAccess(user);
+  return hasReadOnlyBillingAccess(user);
 }
 
 /**
- * @deprecated Use FeatureGate component with feature="billing" instead
+ * Check if user can view payouts
+ * Requires: BILLING_MANAGER, BILLING_ADMIN, FINANCE_VIEWER, or admin access
  */
 export function canViewPayouts(user: UserContext | null): boolean {
-  console.warn(
-    "canViewPayouts is deprecated. Use FeatureGate with feature='billing' instead."
-  );
+  if (!user?.authorities) {
+    return false;
+  }
+  
+  return hasAnyAuthorityWithInheritance(user.authorities, [
+    AUTHORITY_BILLING_MANAGER,
+    AUTHORITY_BILLING_ADMIN,
+    AUTHORITY_FINANCE_VIEWER,
+    ...ADMIN_AUTHORITIES,
+  ]);
+}
+
+/**
+ * Check if user has billing admin access
+ * Requires: BILLING_ADMIN or admin access
+ */
+export function hasAdminAccess(user: UserContext | null): boolean {
+  if (!user?.authorities) {
+    return false;
+  }
+  
+  return hasAnyAuthorityWithInheritance(user.authorities, [
+    AUTHORITY_BILLING_ADMIN,
+    ...ADMIN_AUTHORITIES,
+  ]);
+}
+
+/**
+ * Check if user can manage gateway configuration
+ * Requires: BILLING_ADMIN or admin access
+ */
+export function canManageGatewayConfig(user: UserContext | null): boolean {
   return hasAdminAccess(user);
 }
 
 /**
- * @deprecated Use FeatureGate component with feature="billing" instead
+ * Check if user can view gateway configuration
+ * Requires: BILLING_MANAGER, BILLING_ADMIN, FINANCE_VIEWER, or admin access
  */
-export function canManageGatewayConfigs(user: UserContext | null): boolean {
-  console.warn(
-    "canManageGatewayConfigs is deprecated. Use FeatureGate with feature='billing' instead."
-  );
+export function canViewGatewayConfig(user: UserContext | null): boolean {
+  if (!user?.authorities) {
+    return false;
+  }
+  
+  return hasAnyAuthorityWithInheritance(user.authorities, [
+    AUTHORITY_BILLING_MANAGER,
+    AUTHORITY_BILLING_ADMIN,
+    AUTHORITY_FINANCE_VIEWER,
+    ...ADMIN_AUTHORITIES,
+  ]);
+}
+
+/**
+ * Check if user can manage subscriptions
+ * Requires: BILLING_MANAGER, BILLING_ADMIN, or admin access
+ */
+export function canManageSubscriptions(user: UserContext | null): boolean {
+  return canModifyBilling(user);
+}
+
+/**
+ * Check if user can create payment intents
+ * Requires: Any billing access
+ */
+export function canCreatePayments(user: UserContext | null): boolean {
+  return hasBillingAccess(user);
+}
+
+/**
+ * Check if user can manage subscription plans
+ * Requires: BILLING_ADMIN or admin access
+ */
+export function canManageSubscriptionPlans(user: UserContext | null): boolean {
   return hasAdminAccess(user);
 }
 
 /**
- * @deprecated Use FeatureGate component with feature="billing" instead
+ * Get user's billing authority level for UI display
  */
-export function canViewGatewayConfigs(user: UserContext | null): boolean {
-  console.warn(
-    "canViewGatewayConfigs is deprecated. Use FeatureGate with feature='billing' instead."
-  );
+export function getBillingAuthorityLevel(user: UserContext | null): 'none' | 'access' | 'manager' | 'admin' {
+  if (!user?.authorities) {
+    return 'none';
+  }
+  
+  if (hasAdminAccess(user)) {
+    return 'admin';
+  }
+  
+  if (canModifyBilling(user)) {
+    return 'manager';
+  }
+  
+  if (hasBillingAccess(user)) {
+    return 'access';
+  }
+  
+  return 'none';
+}
+
+/**
+ * Get user's specific billing authorities for debugging/display
+ */
+export function getUserBillingAuthorities(user: UserContext | null): string[] {
+  if (!user?.authorities) {
+    return [];
+  }
+  
+  const billingAuthorities = [
+    AUTHORITY_BILLING_ACCESS,
+    AUTHORITY_BILLING_MANAGER,
+    AUTHORITY_BILLING_ADMIN,
+    AUTHORITY_FINANCE_VIEWER,
+  ];
+  
+  return user.authorities.filter(auth => billingAuthorities.includes(auth as any));
+}
+
+// Legacy function compatibility (deprecated)
+/**
+ * @deprecated Use hasAdminAccess instead
+ */
+export function isBillingAdmin(user: UserContext | null): boolean {
+  console.warn('isBillingAdmin is deprecated, use hasAdminAccess instead');
   return hasAdminAccess(user);
+}
+
+/**
+ * @deprecated Use hasReadOnlyBillingAccess instead
+ */
+export function isFinanceViewer(user: UserContext | null): boolean {
+  console.warn('isFinanceViewer is deprecated, use hasReadOnlyBillingAccess instead');
+  return hasReadOnlyBillingAccess(user);
 }

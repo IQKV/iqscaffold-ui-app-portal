@@ -24,7 +24,7 @@ import { MerchantStatusCard } from "@/widgets/merchant-status-card";
 import { organizationApi } from "@/shared/api/organization-api";
 import { t } from "@lingui/macro";
 import { useQuery } from "@tanstack/react-query";
-import { canManageGatewayConfigs } from "@/processes/auth/lib/billing-permissions";
+import { canManageGatewayConfig } from "@/processes/auth/lib/billing-permissions";
 import { useActiveSubscription } from "@/entities/billing";
 import { SubscriptionCard } from "@/features/subscription-management";
 import { InvoicesTable } from "@/features/invoice-management";
@@ -88,7 +88,7 @@ function BillingPage() {
                 >
                   {t`Manage Subscriptions`}
                 </Button>
-                {canManageGatewayConfigs(user) && (
+                {canManageGatewayConfig(user) && (
                   <Button
                     component={Link}
                     to="/gateway-config"

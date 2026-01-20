@@ -30,8 +30,8 @@ import {
 import { notificationService } from "@/shared/lib/notifications";
 import { PaymentGatewayProvider } from "@/shared/api/billing/types";
 import {
-  canManageGatewayConfigs,
-  canViewGatewayConfigs,
+  canManageGatewayConfig,
+  canViewGatewayConfig,
 } from "@/processes/auth/lib/billing-permissions";
 
 export const Route = createFileRoute("/gateway-config")({
@@ -52,8 +52,8 @@ function GatewayConfigPage() {
   const setPrimaryMutation = useSetPrimaryGateway();
   const deleteMutation = useDeleteGatewayConfig();
 
-  const canManage = canManageGatewayConfigs(user);
-  const canView = canViewGatewayConfigs(user);
+  const canManage = canManageGatewayConfig(user);
+  const canView = canViewGatewayConfig(user);
 
   const handleCreate = async (request: any) => {
     try {
