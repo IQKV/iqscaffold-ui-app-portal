@@ -233,7 +233,13 @@ export function EnhancedUsersDataGrid({
         ),
       },
     ],
-    [onEditUser, handleDeleteUser, handleManageFeatures, canManageUsers, formatRoles]
+    [
+      onEditUser,
+      handleDeleteUser,
+      handleManageFeatures,
+      canManageUsers,
+      formatRoles,
+    ]
   );
 
   if (error) {

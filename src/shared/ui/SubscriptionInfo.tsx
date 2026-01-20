@@ -31,14 +31,12 @@ export const SubscriptionInfo: React.FC<SubscriptionInfoProps> = ({
   showUpgradeButton = true,
   onUpgrade,
 }) => {
-  const {
-    userFeatures,
-    loading,
-  } = useFeatureContext();
+  const { userFeatures, loading } = useFeatureContext();
 
   // Mock subscription data for now - this should be replaced with actual subscription context
   const planName = "Basic Plan";
-  const subscriptionStatus: "active" | "past_due" | "canceled" | "trial" = "active";
+  const subscriptionStatus: "active" | "past_due" | "canceled" | "trial" =
+    "active";
   const isTrialPeriod = false;
   const trialExpiresAt = null;
 
@@ -199,7 +197,8 @@ export const SubscriptionInfo: React.FC<SubscriptionInfoProps> = ({
 export const SubscriptionStatusBadge: React.FC = () => {
   // Mock subscription data for now - this should be replaced with actual subscription context
   const planName = "Basic Plan";
-  const subscriptionStatus: "active" | "past_due" | "canceled" | "trial" = "active";
+  const subscriptionStatus: "active" | "past_due" | "canceled" | "trial" =
+    "active";
   const isTrialPeriod = false;
 
   if (!planName) {

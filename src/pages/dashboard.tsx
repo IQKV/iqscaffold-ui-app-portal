@@ -25,8 +25,7 @@ function DashboardPage() {
               Dashboard
             </Title>
             <Text c="dimmed" data-testid="dashboard-description">
-              Welcome to your dashboard. Here's what you have access
-              to:
+              Welcome to your dashboard. Here's what you have access to:
             </Text>
           </Paper>
 
