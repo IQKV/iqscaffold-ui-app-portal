@@ -27,6 +27,7 @@ An application portal that demonstrates:
 - **Profile Management** - User profile and account settings
 - **Multi-Language Support** - Internationalization with Lingui
 - **Billing & Payments** - Stripe integration for modern payment processing
+- **CRM Workspace** - Leads list, Kanban pipeline, follow-ups management, and CRM dashboard
 - **Merchant Ecosystem** - Stripe Connect onboarding for marketplace/multi-tenant sellers
 - **SaaS Frontend Patterns** - Patterns for building multi-tenant SaaS frontends
 
