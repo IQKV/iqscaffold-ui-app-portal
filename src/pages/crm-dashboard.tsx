@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AuthGuard } from "@/processes/auth";
 import { CrmDashboard, CrmLayout } from "@/features/crm-leads";
+import { FeatureGate } from "@/shared/ui";
+import { CrmAccessGuard } from "@/shared/ui/guards/CrmAccessGuard";
 import { t } from "@lingui/core/macro";
 
 /**
@@ -17,9 +19,13 @@ export const Route = createFileRoute("/crm-dashboard")({
 function CrmDashboardPage() {
   return (
     <AuthGuard>
-      <CrmLayout title={t`CRM Dashboard`}>
-        <CrmDashboard />
-      </CrmLayout>
+      <FeatureGate feature="crm">
+        <CrmAccessGuard>
+          <CrmLayout title={t`CRM Dashboard`}>
+            <CrmDashboard />
+          </CrmLayout>
+        </CrmAccessGuard>
+      </FeatureGate>
     </AuthGuard>
   );
 }

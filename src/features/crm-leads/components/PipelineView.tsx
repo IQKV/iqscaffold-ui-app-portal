@@ -108,8 +108,9 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
   const { mutate: moveLeadToStage, isPending: isMoving } = useMoveLeadToStage();
 
   const leads = useMemo(() => {
-    return leadsResponse?.content || [];
-  }, [leadsResponse?.content]);
+    const content = (leadsResponse as any)?.content;
+    return content || [];
+  }, [leadsResponse]);
 
   // Group leads by stage
   const leadsByStage = useMemo(() => {
@@ -119,7 +120,7 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
       grouped[stage.id] = [];
     });
 
-    leads.forEach((lead) => {
+    leads.forEach((lead: any) => {
       const stage = stages.find((s) => s.name === lead.currentStage);
       if (stage) {
         grouped[stage.id].push(lead);
@@ -133,7 +134,7 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
     if (!activeId) {
       return null;
     }
-    return leads.find((lead) => lead.id === activeId);
+    return leads.find((lead: any) => lead.id === activeId);
   }, [activeId, leads]);
 
   const handleDragStart = useCallback((event: DragStartEvent) => {
@@ -150,7 +151,7 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
 
       const leadId = active.id as string;
       const targetStageId = over.id as string;
-      const lead = leads.find((l) => l.id === leadId);
+      const lead = leads.find((l: any) => l.id === leadId);
       const targetStage = stages.find((s) => s.id === targetStageId);
 
       if (!lead || !targetStage) {

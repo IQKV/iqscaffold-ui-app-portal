@@ -90,4 +90,4 @@ export const FeatureGate: React.FC<FeatureGateProps> = ({
  * const ProtectedComponent = withFeatureGate('advanced_analytics')(MyComponent);
  * ```
  */
-export { withFeatureGate } from "./feature-gate-utils";
+export { ServiceDegradationBanner } from "./ServiceDegradationBanner";

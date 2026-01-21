@@ -4,6 +4,9 @@
 import { apiRequest } from "../base";
 import * as Types from "./types";
 
+/**
+ * CRM API client with enhanced error handling for service unavailability
+ */
 export const crmApi = {
   // Lead management endpoints - following existing billing API patterns
   /**
@@ -52,6 +55,15 @@ export const crmApi = {
     apiRequest<void>({
       url: `/api/v1/leads/${id}`,
       method: "DELETE",
+    }),
+
+  /**
+   * Health check endpoint for service availability monitoring
+   */
+  healthCheck: () =>
+    apiRequest<{ status: string; timestamp: string }>({
+      url: "/api/v1/leads/health",
+      method: "GET",
     }),
 
   /**

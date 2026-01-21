@@ -62,3 +62,6 @@ export {
   FeatureUsageList,
 } from "./FeatureUsage";
 export { SubscriptionInfo, SubscriptionStatusBadge } from "./SubscriptionInfo";
+
+// Service health components
+export { ServiceDegradationBanner } from "./ServiceDegradationBanner";

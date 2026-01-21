@@ -87,7 +87,7 @@ msgstr "{count} contacts selected"
 msgid "{deletedCount} follow-up(s) deleted successfully"
 msgstr "{deletedCount} follow-up(s) deleted successfully"
 
-#: src/features/crm-leads/components/PipelineView.tsx:172
+#: src/features/crm-leads/components/PipelineView.tsx:173
 msgid "{leadName} moved to {stageName}"
 msgstr "{leadName} moved to {stageName}"
 
@@ -228,6 +228,14 @@ msgstr "All"
 #: src/features/locale-demo/locale-demo.tsx:80
 msgid "All API requests include Accept-Language and X-User-Locale headers"
 msgstr "All API requests include Accept-Language and X-User-Locale headers"
+
+#: src/shared/ui/ServiceDegradationBanner.tsx:87
+msgid "All CRM services are operating normally."
+msgstr "All CRM services are operating normally."
+
+#: src/shared/ui/ServiceDegradationBanner.tsx:76
+msgid "All CRM Services Available"
+msgstr "All CRM Services Available"
 
 #: src/features/invoice-management/ui/InvoicesTable.tsx:71
 #: src/widgets/billing-history/ui/billing-history-table.tsx:103
@@ -531,9 +539,17 @@ msgstr "Check your internet connection"
 msgid "Check your internet connection and try again"
 msgstr "Check your internet connection and try again"
 
+#: src/shared/ui/guards/CrmAccessGuard.tsx:106
+msgid "Checking CRM service availability..."
+msgstr "Checking CRM service availability..."
+
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:42
 msgid "Checking email status..."
 msgstr "Checking email status..."
+
+#: src/shared/ui/guards/CrmAccessGuard.tsx:46
+msgid "Checking feature availability..."
+msgstr "Checking feature availability..."
 
 #: src/pages/checkout.tsx:50
 msgid "Checkout"
@@ -585,7 +601,7 @@ msgstr "Client Secret"
 msgid "Close"
 msgstr "Close"
 
-#: src/features/crm-leads/components/CrmLayout.tsx:292
+#: src/features/crm-leads/components/CrmLayout.tsx:296
 msgid "Close navigation"
 msgstr "Close navigation"
 
@@ -681,8 +697,9 @@ msgstr "Contact Details"
 msgid "Contacted"
 msgstr "Contacted"
 
-#: src/features/crm-leads/components/CrmLayout.tsx:80
+#: src/features/crm-leads/components/CrmLayout.tsx:84
 #: src/pages/crm.contacts.tsx:14
+#: src/shared/ui/ServiceDegradationBanner.tsx:50
 #: src/widgets/sidebar/ui/sidebar.tsx:125
 msgid "Contacts"
 msgstr "Contacts"
@@ -746,14 +763,18 @@ msgstr "Created successfully"
 msgid "Created:"
 msgstr "Created:"
 
-#: src/features/crm-leads/components/CrmLayout.tsx:107
-#: src/features/crm-leads/components/CrmLayout.tsx:297
+#: src/features/crm-leads/components/CrmLayout.tsx:111
+#: src/features/crm-leads/components/CrmLayout.tsx:301
 #: src/widgets/sidebar/ui/sidebar.tsx:98
 msgid "CRM"
 msgstr "CRM"
 
+#: src/shared/ui/guards/CrmAccessGuard.tsx:77
+msgid "CRM Access Required"
+msgstr "CRM Access Required"
+
 #: src/features/crm-leads/components/CrmDashboard.tsx:83
-#: src/pages/crm-dashboard.tsx:20
+#: src/pages/crm-dashboard.tsx:24
 #: src/widgets/sidebar/ui/sidebar.tsx:104
 msgid "CRM Dashboard"
 msgstr "CRM Dashboard"
@@ -763,9 +784,25 @@ msgstr "CRM Dashboard"
 msgid "CRM Error"
 msgstr "CRM Error"
 
-#: src/features/crm-leads/components/CrmLayout.tsx:260
+#: src/shared/ui/guards/CrmAccessGuard.tsx:58
+msgid "CRM Feature Not Available"
+msgstr "CRM Feature Not Available"
+
+#: src/features/crm-leads/components/CrmLayout.tsx:264
 msgid "CRM Navigation"
 msgstr "CRM Navigation"
+
+#: src/shared/ui/guards/CrmAccessGuard.tsx:122
+msgid "CRM services are currently experiencing issues. Our team has been notified and is working on a fix."
+msgstr "CRM services are currently experiencing issues. Our team has been notified and is working on a fix."
+
+#: src/shared/ui/guards/CrmAccessGuard.tsx:121
+msgid "CRM services are temporarily unavailable due to multiple connection failures. Please try again later."
+msgstr "CRM services are temporarily unavailable due to multiple connection failures. Please try again later."
+
+#: src/shared/ui/guards/CrmAccessGuard.tsx:117
+msgid "CRM Services Unavailable"
+msgstr "CRM Services Unavailable"
 
 #: src/features/users/components/enhanced-users-data-grid.tsx:329
 msgid "Current Authorities"
@@ -814,8 +851,8 @@ msgstr "Customize your sales process by adding, removing, or reordering pipeline
 msgid "Dark mode"
 msgstr "Dark mode"
 
-#: src/features/crm-leads/components/CrmLayout.tsx:68
-#: src/features/crm-leads/components/CrmLayout.tsx:113
+#: src/features/crm-leads/components/CrmLayout.tsx:72
+#: src/features/crm-leads/components/CrmLayout.tsx:117
 #: src/features/dashboard/ui/dashboard-feature.tsx:15
 #: src/widgets/sidebar/ui/sidebar.tsx:88
 msgid "Dashboard"
@@ -939,7 +976,7 @@ msgstr "Description must be at least 3 characters"
 msgid "Description must be less than 500 characters"
 msgstr "Description must be less than 500 characters"
 
-#: src/features/crm-leads/components/CrmLayout.tsx:128
+#: src/features/crm-leads/components/CrmLayout.tsx:132
 msgid "Details"
 msgstr "Details"
 
@@ -1223,7 +1260,7 @@ msgstr "Error loading leads"
 msgid "Error loading notes"
 msgstr "Error loading notes"
 
-#: src/features/crm-leads/components/PipelineView.tsx:214
+#: src/features/crm-leads/components/PipelineView.tsx:215
 msgid "Error Loading Pipeline"
 msgstr "Error Loading Pipeline"
 
@@ -1397,7 +1434,7 @@ msgstr "Failed to load leads. Please try again."
 msgid "Failed to load notes. Please try again."
 msgstr "Failed to load notes. Please try again."
 
-#: src/features/crm-leads/components/PipelineView.tsx:219
+#: src/features/crm-leads/components/PipelineView.tsx:220
 msgid "Failed to load pipeline data"
 msgstr "Failed to load pipeline data"
 
@@ -1409,7 +1446,7 @@ msgstr "Failed to load subscription plans. Please try again later."
 msgid "Failed to logout from all devices"
 msgstr "Failed to logout from all devices"
 
-#: src/features/crm-leads/components/PipelineView.tsx:178
+#: src/features/crm-leads/components/PipelineView.tsx:179
 msgid "Failed to Move Lead"
 msgstr "Failed to Move Lead"
 
@@ -1580,8 +1617,8 @@ msgstr "Follow-up scheduled successfully"
 msgid "Follow-up updated successfully"
 msgstr "Follow-up updated successfully"
 
-#: src/features/crm-leads/components/CrmLayout.tsx:92
-#: src/features/crm-leads/components/CrmLayout.tsx:116
+#: src/features/crm-leads/components/CrmLayout.tsx:96
+#: src/features/crm-leads/components/CrmLayout.tsx:120
 #: src/features/crm-leads/components/FollowUpList.tsx:325
 #: src/features/crm-leads/components/FollowUpSection.tsx:175
 #: src/features/crm-leads/components/LeadDetailPage.tsx:288
@@ -1663,6 +1700,7 @@ msgid "Go Home"
 msgstr "Go Home"
 
 #: src/features/crm-leads/components/CrmErrorBoundary.tsx:152
+#: src/shared/ui/guards/CrmAccessGuard.tsx:140
 msgid "Go to Dashboard"
 msgstr "Go to Dashboard"
 
@@ -1682,7 +1720,7 @@ msgstr "Health"
 msgid "High"
 msgstr "High"
 
-#: src/features/crm-leads/components/CrmLayout.tsx:103
+#: src/features/crm-leads/components/CrmLayout.tsx:107
 #: src/widgets/sidebar/ui/sidebar.tsx:30
 msgid "Home"
 msgstr "Home"
@@ -1779,6 +1817,10 @@ msgstr "Last 7 days"
 msgid "Last 90 days"
 msgstr "Last 90 days"
 
+#: src/shared/ui/ServiceDegradationBanner.tsx:102
+#~ msgid "Last checked: {0}"
+#~ msgstr "Last checked: {0}"
+
 #: src/features/users/components/user-form-modal.tsx:237
 msgid "Last Name"
 msgstr "Last Name"
@@ -1803,7 +1845,7 @@ msgstr "Lead created successfully"
 msgid "Lead Details"
 msgstr "Lead Details"
 
-#: src/features/crm-leads/components/PipelineView.tsx:171
+#: src/features/crm-leads/components/PipelineView.tsx:172
 msgid "Lead Moved"
 msgstr "Lead Moved"
 
@@ -1823,11 +1865,12 @@ msgstr "Lead updated successfully"
 msgid "leads"
 msgstr "leads"
 
-#: src/features/crm-leads/components/CrmLayout.tsx:74
-#: src/features/crm-leads/components/CrmLayout.tsx:114
+#: src/features/crm-leads/components/CrmLayout.tsx:78
+#: src/features/crm-leads/components/CrmLayout.tsx:118
 #: src/features/crm-leads/components/DashboardStats.tsx:250
 #: src/features/crm-leads/components/DashboardStats.tsx:289
 #: src/pages/crm.leads.tsx:13
+#: src/shared/ui/ServiceDegradationBanner.tsx:48
 #: src/widgets/sidebar/ui/sidebar.tsx:114
 msgid "Leads"
 msgstr "Leads"
@@ -1940,11 +1983,11 @@ msgid "Manage Features - {firstName} {lastName}"
 msgstr "Manage Features - {firstName} {lastName}"
 
 #: src/features/crm-leads/components/PipelineSettingsModal.tsx:163
-#: src/features/crm-leads/components/PipelineView.tsx:270
+#: src/features/crm-leads/components/PipelineView.tsx:271
 msgid "Manage Pipeline Stages"
 msgstr "Manage Pipeline Stages"
 
-#: src/features/crm-leads/components/PipelineView.tsx:240
+#: src/features/crm-leads/components/PipelineView.tsx:241
 msgid "Manage Stages"
 msgstr "Manage Stages"
 
@@ -2152,7 +2195,7 @@ msgstr "No payments found"
 msgid "No pipeline data available"
 msgstr "No pipeline data available"
 
-#: src/features/crm-leads/components/PipelineView.tsx:230
+#: src/features/crm-leads/components/PipelineView.tsx:231
 msgid "No Pipeline Stages"
 msgstr "No Pipeline Stages"
 
@@ -2231,7 +2274,7 @@ msgstr "Onboarding Failed"
 msgid "Only one gateway can be primary at a time"
 msgstr "Only one gateway can be primary at a time"
 
-#: src/features/crm-leads/components/CrmLayout.tsx:292
+#: src/features/crm-leads/components/CrmLayout.tsx:296
 msgid "Open navigation"
 msgstr "Open navigation"
 
@@ -2453,9 +2496,10 @@ msgstr "Pick end date"
 msgid "Pick start date"
 msgstr "Pick start date"
 
-#: src/features/crm-leads/components/CrmLayout.tsx:86
-#: src/features/crm-leads/components/CrmLayout.tsx:115
+#: src/features/crm-leads/components/CrmLayout.tsx:90
+#: src/features/crm-leads/components/CrmLayout.tsx:119
 #: src/pages/crm.pipeline.tsx:13
+#: src/shared/ui/ServiceDegradationBanner.tsx:52
 #: src/widgets/sidebar/ui/sidebar.tsx:136
 msgid "Pipeline"
 msgstr "Pipeline"
@@ -2468,7 +2512,7 @@ msgstr "Pipeline health based on active leads percentage"
 msgid "Pipeline Metrics"
 msgstr "Pipeline Metrics"
 
-#: src/features/crm-leads/components/PipelineView.tsx:287
+#: src/features/crm-leads/components/PipelineView.tsx:288
 msgid "Pipeline Overview"
 msgstr "Pipeline Overview"
 
@@ -2484,7 +2528,7 @@ msgstr "Please check your email for the password reset link"
 msgid "Please check your inbox for the verification link"
 msgstr "Please check your inbox for the verification link"
 
-#: src/features/crm-leads/components/PipelineView.tsx:234
+#: src/features/crm-leads/components/PipelineView.tsx:235
 msgid "Please configure pipeline stages to start using the kanban view."
 msgstr "Please configure pipeline stages to start using the kanban view."
 
@@ -2522,7 +2566,7 @@ msgstr "Please select a lead source"
 msgid "Please select a priority"
 msgstr "Please select a priority"
 
-#: src/features/crm-leads/components/PipelineView.tsx:179
+#: src/features/crm-leads/components/PipelineView.tsx:180
 msgid "Please try again"
 msgstr "Please try again"
 
@@ -2610,6 +2654,10 @@ msgstr "Redirecting to payment gateway for onboarding..."
 msgid "Referral"
 msgstr "Referral"
 
+#: src/shared/ui/ServiceDegradationBanner.tsx:123
+msgid "Refresh"
+msgstr "Refresh"
+
 #: src/features/crm-leads/components/CrmErrorBoundary.tsx:183
 msgid "Refresh the page"
 msgstr "Refresh the page"
@@ -2648,6 +2696,10 @@ msgstr "Registered"
 #: src/shared/constants/index.ts:115
 msgid "Request timed out"
 msgstr "Request timed out"
+
+#: src/shared/ui/guards/CrmAccessGuard.tsx:86
+msgid "Required Authority"
+msgstr "Required Authority"
 
 #: src/pages/checkout.tsx:37
 msgid "Required payment information is missing."
@@ -2894,6 +2946,14 @@ msgstr "Slowest Stage"
 msgid "Social Media"
 msgstr "Social Media"
 
+#: src/shared/ui/ServiceDegradationBanner.tsx:77
+msgid "Some CRM Services Unavailable"
+msgstr "Some CRM Services Unavailable"
+
+#: src/shared/ui/ServiceDegradationBanner.tsx:105
+msgid "Some features may be limited. We're working to restore full functionality."
+msgstr "Some features may be limited. We're working to restore full functionality."
+
 #: src/shared/constants/index.ts:109
 msgid "Something went wrong"
 msgstr "Something went wrong"
@@ -3066,6 +3126,10 @@ msgstr "TanStack Router:"
 msgid "Task"
 msgstr "Task"
 
+#: src/shared/ui/guards/CrmAccessGuard.tsx:147
+msgid "Technical Details"
+msgstr "Technical Details"
+
 #: src/pages/about.tsx:47
 msgid "Technology Stack"
 msgstr "Technology Stack"
@@ -3086,9 +3150,21 @@ msgstr "Testing Ready:"
 msgid "testing setup with Vitest and Playwright"
 msgstr "testing setup with Vitest and Playwright"
 
+#: src/shared/ui/guards/CrmAccessGuard.tsx:61
+msgid "The CRM feature is not enabled for your account. Contact your administrator to enable CRM functionality."
+msgstr "The CRM feature is not enabled for your account. Contact your administrator to enable CRM functionality."
+
 #: src/features/crm-leads/components/CrmErrorBoundary.tsx:69
 msgid "The CRM service is temporarily unavailable. Our team has been notified and is working on a fix."
 msgstr "The CRM service is temporarily unavailable. Our team has been notified and is working on a fix."
+
+#: src/shared/ui/ServiceDegradationBanner.tsx:93
+msgid "The following CRM service is currently unavailable:"
+msgstr "The following CRM service is currently unavailable:"
+
+#: src/shared/ui/ServiceDegradationBanner.tsx:94
+msgid "The following CRM services are currently unavailable:"
+msgstr "The following CRM services are currently unavailable:"
 
 #: src/pages/404.tsx:36
 msgid "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
@@ -3214,6 +3290,7 @@ msgid "Troubleshooting Tips:"
 msgstr "Troubleshooting Tips:"
 
 #: src/features/crm-leads/components/CrmErrorBoundary.tsx:144
+#: src/shared/ui/guards/CrmAccessGuard.tsx:132
 #: src/shared/ui/loading-state/loading-state.tsx:214
 msgid "Try Again"
 msgstr "Try Again"
@@ -3546,6 +3623,14 @@ msgstr "You have selected a date in the past. This follow-up will be marked as o
 #: src/shared/constants/index.ts:128
 msgid "You have unsaved changes"
 msgstr "You have unsaved changes"
+
+#: src/shared/ui/guards/CrmAccessGuard.tsx:80
+msgid "You need CRM access to view this page. Contact your administrator to request access to CRM features."
+msgstr "You need CRM access to view this page. Contact your administrator to request access to CRM features."
+
+#: src/shared/ui/guards/CrmAccessGuard.tsx:91
+msgid "You need one of the following authorities: CRM_ACCESS, CRM_LEAD_MANAGER, CRM_CONTACT_MANAGER, CRM_PIPELINE_MANAGER, or CRM_ADMIN."
+msgstr "You need one of the following authorities: CRM_ACCESS, CRM_LEAD_MANAGER, CRM_CONTACT_MANAGER, CRM_PIPELINE_MANAGER, or CRM_ADMIN."
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:35
 msgid "You will need to sign in again on all devices."

@@ -26,22 +26,25 @@ import {
   IconPlus,
 } from "@tabler/icons-react";
 import { CrmErrorBoundary } from "./CrmErrorBoundary.tsx";
+import { ServiceDegradationBanner } from "@/shared/ui/ServiceDegradationBanner";
 
 export interface CrmLayoutProps {
   children: React.ReactNode;
   title?: string;
   showBreadcrumbs?: boolean;
+  showServiceStatus?: boolean;
 }
 
 /**
  * CRM Layout Wrapper
  *
- * Provides consistent header, breadcrumb navigation, and error boundaries
- * for all CRM pages.
+ * Provides consistent header, breadcrumb navigation, error boundaries,
+ * and service status information for all CRM pages.
  *
  * Features:
  * - Automatic breadcrumb generation based on route
  * - CRM-specific error boundary
+ * - Service degradation notifications
  * - Consistent page header styling
  * - Responsive container
  * - Mobile navigation with collapsible menu
@@ -55,6 +58,7 @@ export function CrmLayout({
   children,
   title,
   showBreadcrumbs = true,
+  showServiceStatus = true,
 }: CrmLayoutProps) {
   const location = useLocation();
   const navigate = useNavigate();
@@ -329,6 +333,9 @@ export function CrmLayout({
               {title}
             </Title>
           )}
+
+          {/* Service Status Banner */}
+          {showServiceStatus && <ServiceDegradationBanner />}
 
           {/* Page Content */}
           <Paper

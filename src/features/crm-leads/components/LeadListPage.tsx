@@ -113,9 +113,9 @@ export const LeadListPage: React.FC = () => {
   // Fetch leads with filters
   const { data, isLoading, error, refetch } = useLeads(queryParams);
 
-  const leads = useMemo(() => data?.content || [], [data]);
-  const totalPages = data?.totalPages || 0;
-  const totalElements = data?.totalElements || 0;
+  const leads = useMemo(() => (data as any)?.content || [], [data]);
+  const totalPages = (data as any)?.totalPages || 0;
+  const totalElements = (data as any)?.totalElements || 0;
 
   // Keyboard shortcuts
   const handleCreateLead = useCallback(() => {
@@ -138,7 +138,7 @@ export const LeadListPage: React.FC = () => {
       setSelectedLeads([]);
       announce("All leads deselected", { priority: "polite" });
     } else {
-      setSelectedLeads(leads.map((lead) => lead.id));
+      setSelectedLeads(leads.map((lead: any) => lead.id));
       announce(`${leads.length} leads selected`, { priority: "polite" });
     }
   }, [leads, selectedLeads, announce]);
@@ -626,7 +626,7 @@ export const LeadListPage: React.FC = () => {
             role="list"
             aria-label="Leads list"
           >
-            {leads.map((lead, index) => (
+            {leads.map((lead: any, index: number) => (
               <div
                 key={lead.id}
                 role="listitem"

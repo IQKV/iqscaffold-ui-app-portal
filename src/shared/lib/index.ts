@@ -28,3 +28,6 @@ export * from "./locale-manager";
 export { useFeatures } from "./hooks/useFeatures";
 export { useEnabledFeatures } from "./hooks/useEnabledFeatures";
 export { FeatureProvider, useFeatureContext } from "./contexts/FeatureContext";
+
+// Service health monitoring
+export { useCrmServiceHealth } from "./hooks/useCrmServiceHealth";

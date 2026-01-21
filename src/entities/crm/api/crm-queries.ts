@@ -3,6 +3,8 @@
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { crmApi } from "@/shared/api/crm";
+import { useCrmServiceHealth } from "@/shared/lib/hooks/useCrmServiceHealth";
+import { notificationService } from "@/shared/lib/notifications";
 import type {
   LeadListParams,
   CreateLeadRequest,
@@ -45,14 +47,24 @@ export const crmKeys = {
 
 /**
  * Hook to fetch leads with optional filtering and pagination
- * Follows billing service pattern with stale time and refetch on window focus
+ * Includes service health checks and graceful degradation
  */
 export const useLeads = (params?: LeadListParams) => {
+  const { isFeatureAvailable } = useCrmServiceHealth();
+  
   return useQuery({
     queryKey: crmKeys.leadsList(params),
     queryFn: () => crmApi.getLeads(params),
+    enabled: isFeatureAvailable('leads'),
     staleTime: 5 * 60 * 1000, // 5 minutes - matches billing service
     refetchOnWindowFocus: true, // Business logic: Refetch when user returns to tab
+    retry: (failureCount, error: any) => {
+      // Don't retry if service is known to be unavailable
+      if (error?.response?.status === 503) {
+        return false;
+      }
+      return failureCount < 3;
+    },
   });
 };
 
@@ -60,11 +72,19 @@ export const useLeads = (params?: LeadListParams) => {
  * Hook to fetch a single lead by ID
  */
 export const useLead = (id: string) => {
+  const { isFeatureAvailable } = useCrmServiceHealth();
+  
   return useQuery({
     queryKey: crmKeys.lead(id),
     queryFn: () => crmApi.getLead(id),
-    enabled: !!id,
+    enabled: !!id && isFeatureAvailable('leads'),
     staleTime: 5 * 60 * 1000,
+    retry: (failureCount, error: any) => {
+      if (error?.response?.status === 503) {
+        return false;
+      }
+      return failureCount < 3;
+    },
   });
 };
 
@@ -72,10 +92,12 @@ export const useLead = (id: string) => {
  * Hook to fetch notes for a specific lead
  */
 export const useLeadNotes = (leadId: string) => {
+  const { isFeatureAvailable } = useCrmServiceHealth();
+  
   return useQuery({
     queryKey: crmKeys.leadNotes(leadId),
     queryFn: () => crmApi.getLeadNotes(leadId),
-    enabled: !!leadId,
+    enabled: !!leadId && isFeatureAvailable('leads'),
     staleTime: 2 * 60 * 1000, // 2 minutes for more dynamic content
   });
 };
@@ -84,10 +106,12 @@ export const useLeadNotes = (leadId: string) => {
  * Hook to fetch activities for a specific lead
  */
 export const useLeadActivities = (leadId: string) => {
+  const { isFeatureAvailable } = useCrmServiceHealth();
+  
   return useQuery({
     queryKey: crmKeys.leadActivities(leadId),
     queryFn: () => crmApi.getLeadActivities(leadId),
-    enabled: !!leadId,
+    enabled: !!leadId && isFeatureAvailable('leads'),
     staleTime: 2 * 60 * 1000,
   });
 };
@@ -96,7 +120,7 @@ export const useLeadActivities = (leadId: string) => {
 
 /**
  * Hook to create a new lead with optimistic updates
- * Follows billing service pattern for optimistic updates and error handling
+ * Includes service availability checks
  */
 export const useCreateLead = () => {
   const queryClient = useQueryClient();
