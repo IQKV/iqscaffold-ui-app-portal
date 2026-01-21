@@ -356,50 +356,6 @@ Run `pnpm test:arch` to verify FSD compliance (layer structure, public APIs, nam
 | `TZ`                              | Defines timezone                              | `UTC`                         | No       |
 | `NODE_ENV`                        | Defines nodejs environment                    | `development`                 | No       |
 
-#### API Endpoints
-
-The application connects to the following backend endpoints (configured via `VITE_API_URL_SERVER`):
-
-**Authentication Endpoints:**
-
-- `POST /api/v1/auth/login` - Authenticate user (redirects to auth portal)
-- `POST /api/v1/auth/refresh` - Refresh access token
-- `POST /api/v1/auth/validate` - Validate JWT token
-- `POST /api/v1/auth/logout` - Logout current session
-- `POST /api/v1/auth/logout-all` - Logout all sessions
-
-**Email Verification Endpoints:**
-
-- `GET /api/v1/auth/email/status` - Get email verification status
-- `POST /api/v1/auth/email/resend` - Resend verification email
-
-**User Endpoints (Protected):**
-
-- `GET /api/v1/users/me` - Get current user profile
-- `PATCH /api/v1/users/me/password` - Change password
-
-**Admin Endpoints (Requires ADMIN/SUPER_ADMIN Role):**
-
-- `GET /api/v1/admin/users` - List users with pagination and search
-- `GET /api/v1/admin/users/{id}` - Get user by ID
-- `POST /api/v1/admin/users` - Create new user
-- `PUT /api/v1/admin/users/{id}` - Update user
-- `DELETE /api/v1/admin/users/{id}` - Delete user
-
-**User Preferences Endpoints:**
-
-- `GET /api/v1/users/me/preferences` - Get user preferences
-- `PUT /api/v1/users/me/preferences` - Update user preferences
-
-**Billing & Merchant Endpoints:**
-
-- `POST /api/v1/billing/payments/intent` - Create Stripe Payment Intent
-- `GET /api/v1/billing/payments/{id}` - Get payment details
-- `GET /api/v1/billing/payments` - List payments with pagination
-- `POST /api/v1/billing/payments/{id}/refund` - Refund payment (Admin only)
-- `POST /api/v1/admin/billing/merchants/onboard` - Initiate Stripe Connect onboarding
-- `GET /api/v1/admin/billing/merchants/status` - Get merchant onboarding status
-
 ### 🤖 AI Agent Development Support
 
 This project includes comprehensive AI agent development guidelines in `AGENTS.md`:
