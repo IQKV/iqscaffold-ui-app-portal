@@ -58,16 +58,26 @@ export const crmApi = {
     }),
 
   /**
-   * Health check endpoint for service availability monitoring
+   * Health check endpoints for service availability monitoring
    */
-  healthCheck: () =>
+  leadsHealthCheck: () =>
     apiRequest<{ status: string; timestamp: string }>({
       url: "/api/v1/leads/health",
       method: "GET",
     }),
+  contactsHealthCheck: () =>
+    apiRequest<{ status: string; timestamp: string }>({
+      url: "/api/v1/contacts/health",
+      method: "GET",
+    }),
+  pipelineHealthCheck: () =>
+    apiRequest<{ status: string; timestamp: string }>({
+      url: "/api/v1/pipeline/health",
+      method: "GET",
+    }),
 
   /**
-   * Convert lead to contact
+   * Create a new lead
    */
   convertLead: (id: string) =>
     apiRequest<Types.ConvertLeadResponse>({

@@ -3,6 +3,30 @@ import * as Types from "./types";
 
 export const billingApi = {
   /**
+   * Health check endpoints for service availability monitoring
+   */
+  paymentsHealthCheck: () =>
+    apiRequest<{ status: string; timestamp: string }>({
+      url: "/api/v1/billing/payments/health",
+      method: "GET",
+    }),
+  subscriptionsHealthCheck: () =>
+    apiRequest<{ status: string; timestamp: string }>({
+      url: "/api/v1/billing/subscriptions/health",
+      method: "GET",
+    }),
+  invoicesHealthCheck: () =>
+    apiRequest<{ status: string; timestamp: string }>({
+      url: "/api/v1/billing/invoices/health",
+      method: "GET",
+    }),
+  gatewayHealthCheck: () =>
+    apiRequest<{ status: string; timestamp: string }>({
+      url: "/api/v1/billing/gateway/health",
+      method: "GET",
+    }),
+
+  /**
    * Create a payment intent
    */
   createPaymentIntent: (request: Types.CreatePaymentRequest) =>

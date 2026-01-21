@@ -91,6 +91,26 @@ msgstr "{deletedCount} follow-up(s) deleted successfully"
 msgid "{leadName} moved to {stageName}"
 msgstr "{leadName} moved to {stageName}"
 
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:88
+#~ msgid "{serviceName} Access Required"
+#~ msgstr "{serviceName} Access Required"
+
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:69
+#~ msgid "{serviceName} Feature Not Available"
+#~ msgstr "{serviceName} Feature Not Available"
+
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:135
+#~ msgid "{serviceName} services are currently experiencing issues. Our team has been notified and is working on a fix."
+#~ msgstr "{serviceName} services are currently experiencing issues. Our team has been notified and is working on a fix."
+
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:134
+#~ msgid "{serviceName} services are temporarily unavailable due to multiple connection failures. Please try again later."
+#~ msgstr "{serviceName} services are temporarily unavailable due to multiple connection failures. Please try again later."
+
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:130
+#~ msgid "{serviceName} Services Unavailable"
+#~ msgstr "{serviceName} Services Unavailable"
+
 #: src/features/subscription-management/ui/SubscriptionPlansGrid.tsx:130
 msgid "{trialDays} day trial"
 msgstr "{trialDays} day trial"
@@ -119,8 +139,7 @@ msgstr "About This Template"
 msgid "Accept-Language header (from browser)"
 msgstr "Accept-Language header (from browser)"
 
-#: src/pages/billing.tsx:67
-#: src/pages/gateway-config.tsx:151
+#: src/pages/gateway-config.tsx:153
 #: src/pages/subscriptions.tsx:47
 msgid "Access Denied"
 msgstr "Access Denied"
@@ -178,7 +197,7 @@ msgid "Add any notes about this subscription..."
 msgstr "Add any notes about this subscription..."
 
 #: src/features/gateway-config/ui/gateway-config-form.tsx:193
-#: src/pages/gateway-config.tsx:177
+#: src/pages/gateway-config.tsx:183
 msgid "Add Gateway"
 msgstr "Add Gateway"
 
@@ -225,17 +244,25 @@ msgstr "Admin"
 msgid "All"
 msgstr "All"
 
+#: src/shared/ui/GenericServiceDegradationBanner.tsx:92
+msgid "All {serviceName} services are operating normally."
+msgstr "All {serviceName} services are operating normally."
+
+#: src/shared/ui/GenericServiceDegradationBanner.tsx:81
+msgid "All {serviceName} Services Available"
+msgstr "All {serviceName} Services Available"
+
 #: src/features/locale-demo/locale-demo.tsx:80
 msgid "All API requests include Accept-Language and X-User-Locale headers"
 msgstr "All API requests include Accept-Language and X-User-Locale headers"
 
 #: src/shared/ui/ServiceDegradationBanner.tsx:87
-msgid "All CRM services are operating normally."
-msgstr "All CRM services are operating normally."
+#~ msgid "All CRM services are operating normally."
+#~ msgstr "All CRM services are operating normally."
 
 #: src/shared/ui/ServiceDegradationBanner.tsx:76
-msgid "All CRM Services Available"
-msgstr "All CRM Services Available"
+#~ msgid "All CRM Services Available"
+#~ msgstr "All CRM Services Available"
 
 #: src/features/invoice-management/ui/InvoicesTable.tsx:71
 #: src/widgets/billing-history/ui/billing-history-table.tsx:103
@@ -309,7 +336,7 @@ msgstr "Are you sure you want to delete {count} contacts? This action cannot be 
 msgid "Are you sure you want to delete {count} follow-up(s)? This action cannot be undone."
 msgstr "Are you sure you want to delete {count} follow-up(s)? This action cannot be undone."
 
-#: src/pages/gateway-config.tsx:224
+#: src/pages/gateway-config.tsx:230
 msgid "Are you sure you want to delete the"
 msgstr "Are you sure you want to delete the"
 
@@ -439,7 +466,7 @@ msgstr "Backend user preference is updated via API"
 msgid "Billing"
 msgstr "Billing"
 
-#: src/pages/billing.tsx:81
+#: src/pages/billing.tsx:75
 msgid "Billing & Payments"
 msgstr "Billing & Payments"
 
@@ -489,7 +516,7 @@ msgstr "Call"
 #: src/features/users/components/enhanced-users-data-grid.tsx:72
 #: src/features/users/components/user-form-modal.tsx:303
 #: src/features/users/components/users-data-grid.tsx:61
-#: src/pages/gateway-config.tsx:235
+#: src/pages/gateway-config.tsx:241
 #: src/shared/ui/confirmation-modal/confirm-context-modal.tsx:25
 #: src/shared/ui/confirmation-modal/confirmation-modal.tsx:25
 #: src/shared/ui/confirmation-modal/open-confirm.ts:18
@@ -539,15 +566,19 @@ msgstr "Check your internet connection"
 msgid "Check your internet connection and try again"
 msgstr "Check your internet connection and try again"
 
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:119
+msgid "Checking {serviceName} service availability..."
+msgstr "Checking {serviceName} service availability..."
+
 #: src/shared/ui/guards/CrmAccessGuard.tsx:106
-msgid "Checking CRM service availability..."
-msgstr "Checking CRM service availability..."
+#~ msgid "Checking CRM service availability..."
+#~ msgstr "Checking CRM service availability..."
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:42
 msgid "Checking email status..."
 msgstr "Checking email status..."
 
-#: src/shared/ui/guards/CrmAccessGuard.tsx:46
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:57
 msgid "Checking feature availability..."
 msgstr "Checking feature availability..."
 
@@ -699,7 +730,7 @@ msgstr "Contacted"
 
 #: src/features/crm-leads/components/CrmLayout.tsx:84
 #: src/pages/crm.contacts.tsx:14
-#: src/shared/ui/ServiceDegradationBanner.tsx:50
+#: src/shared/ui/CrmServiceDegradationBanner.tsx:22
 #: src/widgets/sidebar/ui/sidebar.tsx:125
 msgid "Contacts"
 msgstr "Contacts"
@@ -770,8 +801,8 @@ msgid "CRM"
 msgstr "CRM"
 
 #: src/shared/ui/guards/CrmAccessGuard.tsx:77
-msgid "CRM Access Required"
-msgstr "CRM Access Required"
+#~ msgid "CRM Access Required"
+#~ msgstr "CRM Access Required"
 
 #: src/features/crm-leads/components/CrmDashboard.tsx:83
 #: src/pages/crm-dashboard.tsx:24
@@ -785,24 +816,24 @@ msgid "CRM Error"
 msgstr "CRM Error"
 
 #: src/shared/ui/guards/CrmAccessGuard.tsx:58
-msgid "CRM Feature Not Available"
-msgstr "CRM Feature Not Available"
+#~ msgid "CRM Feature Not Available"
+#~ msgstr "CRM Feature Not Available"
 
 #: src/features/crm-leads/components/CrmLayout.tsx:264
 msgid "CRM Navigation"
 msgstr "CRM Navigation"
 
 #: src/shared/ui/guards/CrmAccessGuard.tsx:122
-msgid "CRM services are currently experiencing issues. Our team has been notified and is working on a fix."
-msgstr "CRM services are currently experiencing issues. Our team has been notified and is working on a fix."
+#~ msgid "CRM services are currently experiencing issues. Our team has been notified and is working on a fix."
+#~ msgstr "CRM services are currently experiencing issues. Our team has been notified and is working on a fix."
 
 #: src/shared/ui/guards/CrmAccessGuard.tsx:121
-msgid "CRM services are temporarily unavailable due to multiple connection failures. Please try again later."
-msgstr "CRM services are temporarily unavailable due to multiple connection failures. Please try again later."
+#~ msgid "CRM services are temporarily unavailable due to multiple connection failures. Please try again later."
+#~ msgstr "CRM services are temporarily unavailable due to multiple connection failures. Please try again later."
 
 #: src/shared/ui/guards/CrmAccessGuard.tsx:117
-msgid "CRM Services Unavailable"
-msgstr "CRM Services Unavailable"
+#~ msgid "CRM Services Unavailable"
+#~ msgstr "CRM Services Unavailable"
 
 #: src/features/users/components/enhanced-users-data-grid.tsx:329
 msgid "Current Authorities"
@@ -830,7 +861,7 @@ msgstr "Current period: {periodStart} - {periodEnd}"
 msgid "Current Plan"
 msgstr "Current Plan"
 
-#: src/pages/billing.tsx:141
+#: src/pages/billing.tsx:135
 #: src/pages/subscriptions.tsx:78
 msgid "Current Subscription"
 msgstr "Current Subscription"
@@ -915,11 +946,11 @@ msgstr "Delete"
 msgid "Delete Follow-up"
 msgstr "Delete Follow-up"
 
-#: src/pages/gateway-config.tsx:243
+#: src/pages/gateway-config.tsx:249
 msgid "Delete Gateway"
 msgstr "Delete Gateway"
 
-#: src/pages/gateway-config.tsx:214
+#: src/pages/gateway-config.tsx:220
 msgid "Delete Gateway Configuration"
 msgstr "Delete Gateway Configuration"
 
@@ -1101,7 +1132,7 @@ msgstr "Enable MSW"
 msgid "Enabled"
 msgstr "Enabled"
 
-#: src/pages/billing.tsx:193
+#: src/pages/billing.tsx:187
 msgid "Enabled Features"
 msgstr "Enabled Features"
 
@@ -1217,12 +1248,12 @@ msgstr "Environment mode for the gateway"
 #: src/features/users/components/user-form-modal.tsx:177
 #: src/features/users/components/users-data-grid.tsx:75
 #: src/pages/examples.tsx:333
-#: src/pages/gateway-config.tsx:68
-#: src/pages/gateway-config.tsx:83
-#: src/pages/gateway-config.tsx:98
-#: src/pages/gateway-config.tsx:113
-#: src/pages/gateway-config.tsx:139
-#: src/pages/gateway-config.tsx:188
+#: src/pages/gateway-config.tsx:70
+#: src/pages/gateway-config.tsx:85
+#: src/pages/gateway-config.tsx:100
+#: src/pages/gateway-config.tsx:115
+#: src/pages/gateway-config.tsx:141
+#: src/pages/gateway-config.tsx:194
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:81
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:127
 msgid "Error"
@@ -1307,7 +1338,7 @@ msgstr "Examples"
 msgid "Explore the various components and features available in this template"
 msgstr "Explore the various components and features available in this template"
 
-#: src/pages/gateway-config.tsx:84
+#: src/pages/gateway-config.tsx:86
 #: src/shared/constants/index.ts:120
 msgid "Failed to activate gateway"
 msgstr "Failed to activate gateway"
@@ -1339,7 +1370,7 @@ msgstr "Failed to complete follow-up: {errorMessage}"
 msgid "Failed to complete some follow-ups"
 msgstr "Failed to complete some follow-ups"
 
-#: src/pages/gateway-config.tsx:69
+#: src/pages/gateway-config.tsx:71
 #: src/shared/constants/index.ts:119
 msgid "Failed to configure payment gateway"
 msgstr "Failed to configure payment gateway"
@@ -1368,7 +1399,7 @@ msgstr "Failed to create subscription. Please try again."
 msgid "Failed to create user: {errorMessage}"
 msgstr "Failed to create user: {errorMessage}"
 
-#: src/pages/gateway-config.tsx:99
+#: src/pages/gateway-config.tsx:101
 #: src/shared/constants/index.ts:121
 msgid "Failed to deactivate gateway"
 msgstr "Failed to deactivate gateway"
@@ -1378,7 +1409,7 @@ msgstr "Failed to deactivate gateway"
 msgid "Failed to delete follow-up: {errorMessage}"
 msgstr "Failed to delete follow-up: {errorMessage}"
 
-#: src/pages/gateway-config.tsx:140
+#: src/pages/gateway-config.tsx:142
 #: src/shared/constants/index.ts:123
 msgid "Failed to delete gateway"
 msgstr "Failed to delete gateway"
@@ -1414,7 +1445,7 @@ msgstr "Failed to load dashboard data. Please try again later."
 msgid "Failed to load follow-ups. Please try again later."
 msgstr "Failed to load follow-ups. Please try again later."
 
-#: src/pages/gateway-config.tsx:189
+#: src/pages/gateway-config.tsx:195
 msgid "Failed to load gateway configurations"
 msgstr "Failed to load gateway configurations"
 
@@ -1490,7 +1521,7 @@ msgstr "Failed to Send Reset Link"
 msgid "Failed to send verification email"
 msgstr "Failed to send verification email"
 
-#: src/pages/gateway-config.tsx:114
+#: src/pages/gateway-config.tsx:116
 #: src/shared/constants/index.ts:122
 msgid "Failed to set primary gateway"
 msgstr "Failed to set primary gateway"
@@ -1531,7 +1562,7 @@ msgstr "Fair"
 msgid "Fastest Stage"
 msgstr "Fastest Stage"
 
-#: src/pages/billing.tsx:179
+#: src/pages/billing.tsx:173
 msgid "Feature Usage"
 msgstr "Feature Usage"
 
@@ -1543,7 +1574,7 @@ msgstr "Feature-Sliced Design:"
 msgid "Features"
 msgstr "Features"
 
-#: src/pages/billing.tsx:119
+#: src/pages/billing.tsx:113
 msgid "Features & Usage"
 msgstr "Features & Usage"
 
@@ -1648,10 +1679,11 @@ msgid "Functional"
 msgstr "Functional"
 
 #: src/features/gateway-config/ui/gateway-config-list.tsx:178
+#: src/shared/ui/BillingServiceDegradationBanner.tsx:24
 msgid "Gateway"
 msgstr "Gateway"
 
-#: src/pages/gateway-config.tsx:79
+#: src/pages/gateway-config.tsx:81
 #: src/shared/constants/index.ts:101
 msgid "Gateway activated successfully"
 msgstr "Gateway activated successfully"
@@ -1660,20 +1692,20 @@ msgstr "Gateway activated successfully"
 msgid "Gateway Config"
 msgstr "Gateway Config"
 
-#: src/pages/billing.tsx:98
+#: src/pages/billing.tsx:92
 msgid "Gateway Configuration"
 msgstr "Gateway Configuration"
 
-#: src/pages/gateway-config.tsx:225
+#: src/pages/gateway-config.tsx:231
 msgid "gateway configuration?"
 msgstr "gateway configuration?"
 
-#: src/pages/gateway-config.tsx:94
+#: src/pages/gateway-config.tsx:96
 #: src/shared/constants/index.ts:102
 msgid "Gateway deactivated successfully"
 msgstr "Gateway deactivated successfully"
 
-#: src/pages/gateway-config.tsx:133
+#: src/pages/gateway-config.tsx:135
 #: src/shared/constants/index.ts:104
 msgid "Gateway deleted successfully"
 msgstr "Gateway deleted successfully"
@@ -1682,7 +1714,7 @@ msgstr "Gateway deleted successfully"
 msgid "Gateway:"
 msgstr "Gateway:"
 
-#: src/pages/billing.tsx:152
+#: src/pages/billing.tsx:146
 msgid "Get started with a subscription plan to unlock premium features."
 msgstr "Get started with a subscription plan to unlock premium features."
 
@@ -1700,7 +1732,7 @@ msgid "Go Home"
 msgstr "Go Home"
 
 #: src/features/crm-leads/components/CrmErrorBoundary.tsx:152
-#: src/shared/ui/guards/CrmAccessGuard.tsx:140
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:153
 msgid "Go to Dashboard"
 msgstr "Go to Dashboard"
 
@@ -1786,8 +1818,9 @@ msgstr "Invoice"
 msgid "Invoice {invoiceId}..."
 msgstr "Invoice {invoiceId}..."
 
-#: src/pages/billing.tsx:131
+#: src/pages/billing.tsx:125
 #: src/pages/subscriptions.tsx:87
+#: src/shared/ui/BillingServiceDegradationBanner.tsx:23
 msgid "Invoices"
 msgstr "Invoices"
 
@@ -1870,7 +1903,7 @@ msgstr "leads"
 #: src/features/crm-leads/components/DashboardStats.tsx:250
 #: src/features/crm-leads/components/DashboardStats.tsx:289
 #: src/pages/crm.leads.tsx:13
-#: src/shared/ui/ServiceDegradationBanner.tsx:48
+#: src/shared/ui/CrmServiceDegradationBanner.tsx:21
 #: src/widgets/sidebar/ui/sidebar.tsx:114
 msgid "Leads"
 msgstr "Leads"
@@ -1991,7 +2024,7 @@ msgstr "Manage Pipeline Stages"
 msgid "Manage Stages"
 msgstr "Manage Stages"
 
-#: src/pages/billing.tsx:89
+#: src/pages/billing.tsx:83
 msgid "Manage Subscriptions"
 msgstr "Manage Subscriptions"
 
@@ -1999,7 +2032,7 @@ msgstr "Manage Subscriptions"
 msgid "Manage your account security and active sessions."
 msgstr "Manage your account security and active sessions."
 
-#: src/pages/gateway-config.tsx:169
+#: src/pages/gateway-config.tsx:175
 msgid "Manage your payment gateway integrations"
 msgstr "Manage your payment gateway integrations"
 
@@ -2150,12 +2183,12 @@ msgstr "No Active Gateways"
 msgid "No active payment gateways configured. Please configure a gateway first."
 msgstr "No active payment gateways configured. Please configure a gateway first."
 
-#: src/pages/billing.tsx:149
+#: src/pages/billing.tsx:143
 #: src/pages/subscriptions.tsx:109
 msgid "No Active Subscription"
 msgstr "No Active Subscription"
 
-#: src/pages/billing.tsx:212
+#: src/pages/billing.tsx:206
 msgid "No features enabled"
 msgstr "No features enabled"
 
@@ -2333,7 +2366,7 @@ msgid "Override the default trial period for this subscription"
 msgstr "Override the default trial period for this subscription"
 
 #: src/features/crm-leads/components/LeadDetailPage.tsx:285
-#: src/pages/billing.tsx:116
+#: src/pages/billing.tsx:110
 msgid "Overview"
 msgstr "Overview"
 
@@ -2444,16 +2477,16 @@ msgstr "Payment Details"
 msgid "Payment Gateway"
 msgstr "Payment Gateway"
 
-#: src/pages/gateway-config.tsx:167
+#: src/pages/gateway-config.tsx:173
 msgid "Payment Gateway Configuration"
 msgstr "Payment Gateway Configuration"
 
-#: src/pages/gateway-config.tsx:63
+#: src/pages/gateway-config.tsx:65
 #: src/shared/constants/index.ts:100
 msgid "Payment gateway configured successfully"
 msgstr "Payment gateway configured successfully"
 
-#: src/pages/billing.tsx:125
+#: src/pages/billing.tsx:119
 #: src/widgets/billing-history/ui/billing-history-table.tsx:70
 msgid "Payment History"
 msgstr "Payment History"
@@ -2470,6 +2503,10 @@ msgstr "Payment Past Due"
 #: src/features/payment-checkout/ui/stripe-checkout-form.tsx:42
 msgid "Payment succeeded!"
 msgstr "Payment succeeded!"
+
+#: src/shared/ui/BillingServiceDegradationBanner.tsx:21
+msgid "Payments"
+msgstr "Payments"
 
 #: src/features/crm-leads/components/FollowUpList.tsx:357
 #: src/features/crm-leads/components/FollowUpSection.tsx:232
@@ -2499,7 +2536,7 @@ msgstr "Pick start date"
 #: src/features/crm-leads/components/CrmLayout.tsx:90
 #: src/features/crm-leads/components/CrmLayout.tsx:119
 #: src/pages/crm.pipeline.tsx:13
-#: src/shared/ui/ServiceDegradationBanner.tsx:52
+#: src/shared/ui/CrmServiceDegradationBanner.tsx:23
 #: src/widgets/sidebar/ui/sidebar.tsx:136
 msgid "Pipeline"
 msgstr "Pipeline"
@@ -2578,7 +2615,7 @@ msgstr "Powerful data synchronization and caching"
 msgid "Primary"
 msgstr "Primary"
 
-#: src/pages/gateway-config.tsx:109
+#: src/pages/gateway-config.tsx:111
 #: src/shared/constants/index.ts:103
 msgid "Primary gateway updated successfully"
 msgstr "Primary gateway updated successfully"
@@ -2654,7 +2691,7 @@ msgstr "Redirecting to payment gateway for onboarding..."
 msgid "Referral"
 msgstr "Referral"
 
-#: src/shared/ui/ServiceDegradationBanner.tsx:123
+#: src/shared/ui/GenericServiceDegradationBanner.tsx:128
 msgid "Refresh"
 msgstr "Refresh"
 
@@ -2697,7 +2734,7 @@ msgstr "Registered"
 msgid "Request timed out"
 msgstr "Request timed out"
 
-#: src/shared/ui/guards/CrmAccessGuard.tsx:86
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:97
 msgid "Required Authority"
 msgstr "Required Authority"
 
@@ -2946,11 +2983,15 @@ msgstr "Slowest Stage"
 msgid "Social Media"
 msgstr "Social Media"
 
-#: src/shared/ui/ServiceDegradationBanner.tsx:77
-msgid "Some CRM Services Unavailable"
-msgstr "Some CRM Services Unavailable"
+#: src/shared/ui/GenericServiceDegradationBanner.tsx:82
+msgid "Some {serviceName} Services Unavailable"
+msgstr "Some {serviceName} Services Unavailable"
 
-#: src/shared/ui/ServiceDegradationBanner.tsx:105
+#: src/shared/ui/ServiceDegradationBanner.tsx:77
+#~ msgid "Some CRM Services Unavailable"
+#~ msgstr "Some CRM Services Unavailable"
+
+#: src/shared/ui/GenericServiceDegradationBanner.tsx:110
 msgid "Some features may be limited. We're working to restore full functionality."
 msgstr "Some features may be limited. We're working to restore full functionality."
 
@@ -3066,6 +3107,7 @@ msgid "Subscription Resumed"
 msgstr "Subscription Resumed"
 
 #: src/pages/subscriptions.tsx:69
+#: src/shared/ui/BillingServiceDegradationBanner.tsx:22
 msgid "Subscriptions"
 msgstr "Subscriptions"
 
@@ -3089,11 +3131,11 @@ msgstr "Subscriptions"
 #: src/features/users/components/user-form-modal.tsx:168
 #: src/features/users/components/users-data-grid.tsx:67
 #: src/pages/examples.tsx:324
-#: src/pages/gateway-config.tsx:62
-#: src/pages/gateway-config.tsx:78
-#: src/pages/gateway-config.tsx:93
-#: src/pages/gateway-config.tsx:108
-#: src/pages/gateway-config.tsx:132
+#: src/pages/gateway-config.tsx:64
+#: src/pages/gateway-config.tsx:80
+#: src/pages/gateway-config.tsx:95
+#: src/pages/gateway-config.tsx:110
+#: src/pages/gateway-config.tsx:134
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:74
 msgid "Success"
 msgstr "Success"
@@ -3126,7 +3168,7 @@ msgstr "TanStack Router:"
 msgid "Task"
 msgstr "Task"
 
-#: src/shared/ui/guards/CrmAccessGuard.tsx:147
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:160
 msgid "Technical Details"
 msgstr "Technical Details"
 
@@ -3150,21 +3192,33 @@ msgstr "Testing Ready:"
 msgid "testing setup with Vitest and Playwright"
 msgstr "testing setup with Vitest and Playwright"
 
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:72
+#~ msgid "The {serviceName} feature is not enabled for your account. Contact your administrator to enable {serviceName} functionality."
+#~ msgstr "The {serviceName} feature is not enabled for your account. Contact your administrator to enable {serviceName} functionality."
+
 #: src/shared/ui/guards/CrmAccessGuard.tsx:61
-msgid "The CRM feature is not enabled for your account. Contact your administrator to enable CRM functionality."
-msgstr "The CRM feature is not enabled for your account. Contact your administrator to enable CRM functionality."
+#~ msgid "The CRM feature is not enabled for your account. Contact your administrator to enable CRM functionality."
+#~ msgstr "The CRM feature is not enabled for your account. Contact your administrator to enable CRM functionality."
 
 #: src/features/crm-leads/components/CrmErrorBoundary.tsx:69
 msgid "The CRM service is temporarily unavailable. Our team has been notified and is working on a fix."
 msgstr "The CRM service is temporarily unavailable. Our team has been notified and is working on a fix."
 
+#: src/shared/ui/GenericServiceDegradationBanner.tsx:98
+msgid "The following {serviceName} service is currently unavailable:"
+msgstr "The following {serviceName} service is currently unavailable:"
+
+#: src/shared/ui/GenericServiceDegradationBanner.tsx:99
+msgid "The following {serviceName} services are currently unavailable:"
+msgstr "The following {serviceName} services are currently unavailable:"
+
 #: src/shared/ui/ServiceDegradationBanner.tsx:93
-msgid "The following CRM service is currently unavailable:"
-msgstr "The following CRM service is currently unavailable:"
+#~ msgid "The following CRM service is currently unavailable:"
+#~ msgstr "The following CRM service is currently unavailable:"
 
 #: src/shared/ui/ServiceDegradationBanner.tsx:94
-msgid "The following CRM services are currently unavailable:"
-msgstr "The following CRM services are currently unavailable:"
+#~ msgid "The following CRM services are currently unavailable:"
+#~ msgstr "The following CRM services are currently unavailable:"
 
 #: src/pages/404.tsx:36
 msgid "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
@@ -3195,7 +3249,7 @@ msgstr "There was a problem with the data you submitted. Please check your input
 msgid "This action cannot be undone."
 msgstr "This action cannot be undone."
 
-#: src/pages/gateway-config.tsx:219
+#: src/pages/gateway-config.tsx:225
 msgid "This action cannot be undone. All configuration data for this gateway will be permanently deleted."
 msgstr "This action cannot be undone. All configuration data for this gateway will be permanently deleted."
 
@@ -3290,7 +3344,7 @@ msgid "Troubleshooting Tips:"
 msgstr "Troubleshooting Tips:"
 
 #: src/features/crm-leads/components/CrmErrorBoundary.tsx:144
-#: src/shared/ui/guards/CrmAccessGuard.tsx:132
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:145
 #: src/shared/ui/loading-state/loading-state.tsx:214
 msgid "Try Again"
 msgstr "Try Again"
@@ -3472,7 +3526,7 @@ msgstr "View on GitHub"
 msgid "View only"
 msgstr "View only"
 
-#: src/pages/billing.tsx:159
+#: src/pages/billing.tsx:153
 msgid "View Plans"
 msgstr "View Plans"
 
@@ -3494,7 +3548,7 @@ msgstr "Warn (log warning)"
 
 #: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:29
 #: src/pages/examples.tsx:344
-#: src/pages/gateway-config.tsx:218
+#: src/pages/gateway-config.tsx:224
 msgid "Warning"
 msgstr "Warning"
 
@@ -3589,8 +3643,8 @@ msgid "You don't have an active subscription. Browse our available plans to get 
 msgstr "You don't have an active subscription. Browse our available plans to get started."
 
 #: src/pages/billing.tsx:68
-msgid "You don't have permission to access billing information. Please contact your administrator."
-msgstr "You don't have permission to access billing information. Please contact your administrator."
+#~ msgid "You don't have permission to access billing information. Please contact your administrator."
+#~ msgstr "You don't have permission to access billing information. Please contact your administrator."
 
 #: src/pages/subscriptions.tsx:48
 msgid "You don't have permission to access subscription information. Please contact your administrator."
@@ -3600,7 +3654,7 @@ msgstr "You don't have permission to access subscription information. Please con
 msgid "You don't have permission to access this CRM feature. Please contact your administrator."
 msgstr "You don't have permission to access this CRM feature. Please contact your administrator."
 
-#: src/pages/gateway-config.tsx:154
+#: src/pages/gateway-config.tsx:156
 msgid "You don't have permission to view gateway configurations."
 msgstr "You don't have permission to view gateway configurations."
 
@@ -3612,7 +3666,7 @@ msgstr "You don't have permission to view payment history."
 msgid "You have been logged out from all devices"
 msgstr "You have been logged out from all devices"
 
-#: src/pages/billing.tsx:106
+#: src/pages/billing.tsx:100
 msgid "You have read-only access to billing information."
 msgstr "You have read-only access to billing information."
 
@@ -3624,13 +3678,21 @@ msgstr "You have selected a date in the past. This follow-up will be marked as o
 msgid "You have unsaved changes"
 msgstr "You have unsaved changes"
 
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:91
+#~ msgid "You need {serviceName} access to view this page. Contact your administrator to request access to {serviceName} features."
+#~ msgstr "You need {serviceName} access to view this page. Contact your administrator to request access to {serviceName} features."
+
 #: src/shared/ui/guards/CrmAccessGuard.tsx:80
-msgid "You need CRM access to view this page. Contact your administrator to request access to CRM features."
-msgstr "You need CRM access to view this page. Contact your administrator to request access to CRM features."
+#~ msgid "You need CRM access to view this page. Contact your administrator to request access to CRM features."
+#~ msgstr "You need CRM access to view this page. Contact your administrator to request access to CRM features."
+
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:102
+#~ msgid "You need one of the following authorities: {0}."
+#~ msgstr "You need one of the following authorities: {0}."
 
 #: src/shared/ui/guards/CrmAccessGuard.tsx:91
-msgid "You need one of the following authorities: CRM_ACCESS, CRM_LEAD_MANAGER, CRM_CONTACT_MANAGER, CRM_PIPELINE_MANAGER, or CRM_ADMIN."
-msgstr "You need one of the following authorities: CRM_ACCESS, CRM_LEAD_MANAGER, CRM_CONTACT_MANAGER, CRM_PIPELINE_MANAGER, or CRM_ADMIN."
+#~ msgid "You need one of the following authorities: CRM_ACCESS, CRM_LEAD_MANAGER, CRM_CONTACT_MANAGER, CRM_PIPELINE_MANAGER, or CRM_ADMIN."
+#~ msgstr "You need one of the following authorities: CRM_ACCESS, CRM_LEAD_MANAGER, CRM_CONTACT_MANAGER, CRM_PIPELINE_MANAGER, or CRM_ADMIN."
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:35
 msgid "You will need to sign in again on all devices."

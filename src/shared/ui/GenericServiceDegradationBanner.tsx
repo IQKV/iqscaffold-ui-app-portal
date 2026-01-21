@@ -1,19 +1,33 @@
 import React from "react";
 import { Alert, Group, Text, Button, Badge } from "@mantine/core";
 import { IconAlertTriangle, IconRefresh } from "@tabler/icons-react";
-import { useCrmServiceHealth } from "@/shared/lib/hooks/useCrmServiceHealth";
 import { t } from "@lingui/core/macro";
 
-interface ServiceDegradationBannerProps {
+interface GenericServiceDegradationBannerProps {
+  /** Service name for display */
+  serviceName: string;
+  /** Service health hook result */
+  serviceHealth: {
+    isHealthy: boolean;
+    services: Record<string, boolean>;
+    circuitBreakerOpen: boolean;
+    retryConnection: () => void;
+    lastChecked?: Date;
+  };
+  /** Service display name mapping */
+  serviceDisplayNames?: Record<string, string>;
   /** Whether to show the banner even when all services are healthy */
   alwaysShow?: boolean;
 }
 
 /**
- * Banner component that displays service degradation information
- * Shows which CRM services are unavailable and provides retry options
+ * Generic banner component that displays service degradation information
+ * Shows which services are unavailable and provides retry options
  */
-export const ServiceDegradationBanner: React.FC<ServiceDegradationBannerProps> = ({
+export const GenericServiceDegradationBanner: React.FC<GenericServiceDegradationBannerProps> = ({
+  serviceName,
+  serviceHealth,
+  serviceDisplayNames = {},
   alwaysShow = false,
 }) => {
   const { 
@@ -22,14 +36,14 @@ export const ServiceDegradationBanner: React.FC<ServiceDegradationBannerProps> =
     circuitBreakerOpen, 
     retryConnection,
     lastChecked 
-  } = useCrmServiceHealth();
+  } = serviceHealth;
 
   // Don't show if all services are healthy (unless alwaysShow is true)
   if (isHealthy && !alwaysShow) {
     return null;
   }
 
-  // Don't show if circuit breaker is open (handled by CrmAccessGuard)
+  // Don't show if circuit breaker is open (handled by ServiceAccessGuard)
   if (circuitBreakerOpen) {
     return null;
   }
@@ -43,16 +57,7 @@ export const ServiceDegradationBanner: React.FC<ServiceDegradationBannerProps> =
   }
 
   const getServiceDisplayName = (service: string) => {
-    switch (service) {
-      case 'leads': 
-        return t`Leads`;
-      case 'contacts': 
-        return t`Contacts`;
-      case 'pipeline': 
-        return t`Pipeline`;
-      default: 
-        return service;
-    }
+    return serviceDisplayNames[service] || service.charAt(0).toUpperCase() + service.slice(1);
   };
 
   const getSeverityColor = () => {
@@ -73,8 +78,8 @@ export const ServiceDegradationBanner: React.FC<ServiceDegradationBannerProps> =
       icon={<IconAlertTriangle size={16} />}
       title={
         unavailableServices.length === 0 
-          ? t`All CRM Services Available`
-          : t`Some CRM Services Unavailable`
+          ? t`All ${serviceName} Services Available`
+          : t`Some ${serviceName} Services Unavailable`
       }
       color={getSeverityColor()}
       variant="light"
@@ -84,14 +89,14 @@ export const ServiceDegradationBanner: React.FC<ServiceDegradationBannerProps> =
         <div>
           {unavailableServices.length === 0 ? (
             <Text size="sm">
-              {t`All CRM services are operating normally.`}
+              {t`All ${serviceName} services are operating normally.`}
             </Text>
           ) : (
             <>
               <Text size="sm" mb="xs">
                 {unavailableServices.length === 1
-                  ? t`The following CRM service is currently unavailable:`
-                  : t`The following CRM services are currently unavailable:`
+                  ? t`The following ${serviceName} service is currently unavailable:`
+                  : t`The following ${serviceName} services are currently unavailable:`
                 }
               </Text>
               <Group gap="xs" mb="xs">

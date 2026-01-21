@@ -26,7 +26,7 @@ import {
   IconPlus,
 } from "@tabler/icons-react";
 import { CrmErrorBoundary } from "./CrmErrorBoundary.tsx";
-import { ServiceDegradationBanner } from "@/shared/ui/ServiceDegradationBanner";
+import { CrmServiceDegradationBanner } from "@/shared/ui/CrmServiceDegradationBanner";
 
 export interface CrmLayoutProps {
   children: React.ReactNode;
@@ -335,7 +335,7 @@ export function CrmLayout({
           )}
 
           {/* Service Status Banner */}
-          {showServiceStatus && <ServiceDegradationBanner />}
+          {showServiceStatus && <CrmServiceDegradationBanner />}
 
           {/* Page Content */}
           <Paper

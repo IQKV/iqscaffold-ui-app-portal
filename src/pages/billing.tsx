@@ -19,6 +19,8 @@ import {
   IconStar,
 } from "@tabler/icons-react";
 import { AuthGuard, useAuth } from "@/processes/auth";
+import { BillingAccessGuard } from "@/shared/ui/guards/BillingAccessGuard";
+import { BillingServiceDegradationBanner } from "@/shared/ui/BillingServiceDegradationBanner";
 import { BillingHistoryTable } from "@/widgets/billing-history";
 import { MerchantStatusCard } from "@/widgets/merchant-status-card";
 import { organizationApi } from "@/shared/api/organization-api";
@@ -60,52 +62,44 @@ function BillingPage() {
   const organizations =
     orgsData?.content.map((org) => ({ id: org.id, name: org.name })) || [];
 
-  if (!hasBillingAccess()) {
-    return (
-      <AuthGuard>
-        <Container size="xl" py="xl" data-testid="page-billing">
-          <Alert color="red" title={t`Access Denied`}>
-            {t`You don't have permission to access billing information. Please contact your administrator.`}
-          </Alert>
-        </Container>
-      </AuthGuard>
-    );
-  }
-
   return (
     <AuthGuard>
-      <FeatureErrorBoundary>
-        <Container size="xl" py="xl" data-testid="page-billing">
-          <Stack gap="xl">
-            <Group justify="space-between">
-              <Title order={2}>{t`Billing & Payments`}</Title>
-              <Group gap="sm">
-                <Button
-                  component={Link}
-                  to="/subscriptions"
-                  leftSection={<IconCreditCard size={18} />}
-                  variant="light"
-                >
-                  {t`Manage Subscriptions`}
-                </Button>
-                {canManageGatewayConfig(user) && (
+      <BillingAccessGuard>
+        <FeatureErrorBoundary>
+          <Container size="xl" py="xl" data-testid="page-billing">
+            <Stack gap="xl">
+              {/* Service Status Banner */}
+              <BillingServiceDegradationBanner />
+
+              <Group justify="space-between">
+                <Title order={2}>{t`Billing & Payments`}</Title>
+                <Group gap="sm">
                   <Button
                     component={Link}
-                    to="/gateway-config"
-                    leftSection={<IconSettings size={18} />}
+                    to="/subscriptions"
+                    leftSection={<IconCreditCard size={18} />}
                     variant="light"
                   >
-                    {t`Gateway Configuration`}
+                    {t`Manage Subscriptions`}
                   </Button>
-                )}
+                  {canManageGatewayConfig(user) && (
+                    <Button
+                      component={Link}
+                      to="/gateway-config"
+                      leftSection={<IconSettings size={18} />}
+                      variant="light"
+                    >
+                      {t`Gateway Configuration`}
+                    </Button>
+                  )}
+                </Group>
               </Group>
-            </Group>
 
-            {hasReadOnlyBillingAccess() && (
-              <Alert color="blue">
-                {t`You have read-only access to billing information.`}
-              </Alert>
-            )}
+              {hasReadOnlyBillingAccess() && (
+                <Alert color="blue">
+                  {t`You have read-only access to billing information.`}
+                </Alert>
+              )}
 
             <Tabs defaultValue="overview" variant="outline">
               <Tabs.List>
@@ -239,6 +233,7 @@ function BillingPage() {
           </Stack>
         </Container>
       </FeatureErrorBoundary>
-    </AuthGuard>
-  );
+    </BillingAccessGuard>
+  </AuthGuard>
+);
 }

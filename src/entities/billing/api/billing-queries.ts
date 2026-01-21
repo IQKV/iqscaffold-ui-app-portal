@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { billingApi } from "@/shared/api/billing";
+import { useBillingServiceHealth } from "@/shared/lib/hooks/useBillingServiceHealth";
 import {
   BillingHistoryParams,
   PaymentGatewayProvider,
@@ -56,17 +57,34 @@ export const billingKeys = {
 // Payment Hooks
 
 export const usePayments = (params?: BillingHistoryParams) => {
+  const { isFeatureAvailable } = useBillingServiceHealth();
+  
   return useQuery({
     queryKey: billingKeys.history(params || {}),
     queryFn: () => billingApi.listPayments(params),
+    enabled: isFeatureAvailable('payments'),
+    retry: (failureCount, error: any) => {
+      if (error?.response?.status === 503) {
+        return false;
+      }
+      return failureCount < 3;
+    },
   });
 };
 
 export const usePayment = (id: string) => {
+  const { isFeatureAvailable } = useBillingServiceHealth();
+  
   return useQuery({
     queryKey: billingKeys.payment(id),
     queryFn: () => billingApi.getPayment(id),
-    enabled: !!id,
+    enabled: !!id && isFeatureAvailable('payments'),
+    retry: (failureCount, error: any) => {
+      if (error?.response?.status === 503) {
+        return false;
+      }
+      return failureCount < 3;
+    },
   });
 };
 
@@ -83,16 +101,34 @@ export const useRefundPayment = () => {
 // Subscription Hooks
 
 export const useSubscriptions = (params?: BillingHistoryParams) => {
+  const { isFeatureAvailable } = useBillingServiceHealth();
+  
   return useQuery({
     queryKey: billingKeys.subscriptions(),
     queryFn: () => billingApi.listSubscriptions(params),
+    enabled: isFeatureAvailable('subscriptions'),
+    retry: (failureCount, error: any) => {
+      if (error?.response?.status === 503) {
+        return false;
+      }
+      return failureCount < 3;
+    },
   });
 };
 
 export const useActiveSubscription = () => {
+  const { isFeatureAvailable } = useBillingServiceHealth();
+  
   return useQuery({
     queryKey: billingKeys.activeSubscription(),
     queryFn: () => billingApi.getActiveSubscription(),
+    enabled: isFeatureAvailable('subscriptions'),
+    retry: (failureCount, error: any) => {
+      if (error?.response?.status === 503) {
+        return false;
+      }
+      return failureCount < 3;
+    },
   });
 };
 

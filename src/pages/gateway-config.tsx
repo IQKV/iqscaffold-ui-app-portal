@@ -15,6 +15,8 @@ import {
 import { IconPlus, IconAlertCircle, IconTrash } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
 import { AuthGuard, useAuth } from "@/processes/auth";
+import { BillingAccessGuard } from "@/shared/ui/guards/BillingAccessGuard";
+import { BillingServiceDegradationBanner } from "@/shared/ui/BillingServiceDegradationBanner";
 import {
   GatewayConfigForm,
   GatewayConfigList,
@@ -160,24 +162,28 @@ function GatewayConfigPage() {
 
   return (
     <AuthGuard>
-      <Container size="xl" py="xl" data-testid="page-gateway-config">
-        <Stack gap="xl">
-          <Group justify="space-between">
-            <div>
-              <Title order={2}>{t`Payment Gateway Configuration`}</Title>
-              <Text c="dimmed" size="sm">
-                {t`Manage your payment gateway integrations`}
-              </Text>
-            </div>
-            {canManage && (
-              <Button
-                leftSection={<IconPlus size={18} />}
-                onClick={() => setFormOpened(true)}
-              >
-                {t`Add Gateway`}
-              </Button>
-            )}
-          </Group>
+      <BillingAccessGuard>
+        <Container size="xl" py="xl" data-testid="page-gateway-config">
+          <Stack gap="xl">
+            {/* Service Status Banner */}
+            <BillingServiceDegradationBanner />
+
+            <Group justify="space-between">
+              <div>
+                <Title order={2}>{t`Payment Gateway Configuration`}</Title>
+                <Text c="dimmed" size="sm">
+                  {t`Manage your payment gateway integrations`}
+                </Text>
+              </div>
+              {canManage && (
+                <Button
+                  leftSection={<IconPlus size={18} />}
+                  onClick={() => setFormOpened(true)}
+                >
+                  {t`Add Gateway`}
+                </Button>
+              )}
+            </Group>
 
           <Card withBorder>
             {isLoading ? (
@@ -246,6 +252,7 @@ function GatewayConfigPage() {
           </Stack>
         </Modal>
       </Container>
-    </AuthGuard>
-  );
+    </BillingAccessGuard>
+  </AuthGuard>
+);
 }
