@@ -185,74 +185,75 @@ function GatewayConfigPage() {
               )}
             </Group>
 
-          <Card withBorder>
-            {isLoading ? (
-              <Group justify="center" py="xl">
-                <Loader />
-              </Group>
-            ) : error ? (
-              <Alert color="red" title={t`Error`} icon={<IconAlertCircle />}>
-                {t`Failed to load gateway configurations`}
-              </Alert>
-            ) : (
-              <GatewayConfigList
-                configs={configs || []}
-                onActivate={handleActivate}
-                onDeactivate={handleDeactivate}
-                onSetPrimary={handleSetPrimary}
-                onDelete={handleDelete}
-                canManage={canManage}
-              />
-            )}
-          </Card>
-        </Stack>
-
-        <GatewayConfigForm
-          opened={formOpened}
-          onClose={() => setFormOpened(false)}
-          onSubmit={handleCreate}
-          loading={createMutation.isPending}
-        />
-
-        <Modal
-          opened={deleteConfirmOpened}
-          onClose={() => setDeleteConfirmOpened(false)}
-          title={t`Delete Gateway Configuration`}
-          centered
-        >
-          <Stack gap="md">
-            <Alert icon={<IconAlertCircle />} title={t`Warning`} color="red">
-              {t`This action cannot be undone. All configuration data for this gateway will be permanently deleted.`}
-            </Alert>
-
-            {providerToDelete && (
-              <Text size="sm">
-                {t`Are you sure you want to delete the`}{" "}
-                <strong>{providerToDelete}</strong> {t`gateway configuration?`}
-              </Text>
-            )}
-
-            <Group justify="flex-end" mt="md">
-              <Button
-                variant="subtle"
-                onClick={() => setDeleteConfirmOpened(false)}
-                disabled={deleteMutation.isPending}
-              >
-                {t`Cancel`}
-              </Button>
-              <Button
-                color="red"
-                leftSection={<IconTrash size={18} />}
-                onClick={handleConfirmDelete}
-                loading={deleteMutation.isPending}
-              >
-                {t`Delete Gateway`}
-              </Button>
-            </Group>
+            <Card withBorder>
+              {isLoading ? (
+                <Group justify="center" py="xl">
+                  <Loader />
+                </Group>
+              ) : error ? (
+                <Alert color="red" title={t`Error`} icon={<IconAlertCircle />}>
+                  {t`Failed to load gateway configurations`}
+                </Alert>
+              ) : (
+                <GatewayConfigList
+                  configs={configs || []}
+                  onActivate={handleActivate}
+                  onDeactivate={handleDeactivate}
+                  onSetPrimary={handleSetPrimary}
+                  onDelete={handleDelete}
+                  canManage={canManage}
+                />
+              )}
+            </Card>
           </Stack>
-        </Modal>
-      </Container>
-    </BillingAccessGuard>
-  </AuthGuard>
-);
+
+          <GatewayConfigForm
+            opened={formOpened}
+            onClose={() => setFormOpened(false)}
+            onSubmit={handleCreate}
+            loading={createMutation.isPending}
+          />
+
+          <Modal
+            opened={deleteConfirmOpened}
+            onClose={() => setDeleteConfirmOpened(false)}
+            title={t`Delete Gateway Configuration`}
+            centered
+          >
+            <Stack gap="md">
+              <Alert icon={<IconAlertCircle />} title={t`Warning`} color="red">
+                {t`This action cannot be undone. All configuration data for this gateway will be permanently deleted.`}
+              </Alert>
+
+              {providerToDelete && (
+                <Text size="sm">
+                  {t`Are you sure you want to delete the`}{" "}
+                  <strong>{providerToDelete}</strong>{" "}
+                  {t`gateway configuration?`}
+                </Text>
+              )}
+
+              <Group justify="flex-end" mt="md">
+                <Button
+                  variant="subtle"
+                  onClick={() => setDeleteConfirmOpened(false)}
+                  disabled={deleteMutation.isPending}
+                >
+                  {t`Cancel`}
+                </Button>
+                <Button
+                  color="red"
+                  leftSection={<IconTrash size={18} />}
+                  onClick={handleConfirmDelete}
+                  loading={deleteMutation.isPending}
+                >
+                  {t`Delete Gateway`}
+                </Button>
+              </Group>
+            </Stack>
+          </Modal>
+        </Container>
+      </BillingAccessGuard>
+    </AuthGuard>
+  );
 }

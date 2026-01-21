@@ -24,18 +24,20 @@ interface GenericServiceDegradationBannerProps {
  * Generic banner component that displays service degradation information
  * Shows which services are unavailable and provides retry options
  */
-export const GenericServiceDegradationBanner: React.FC<GenericServiceDegradationBannerProps> = ({
+export const GenericServiceDegradationBanner: React.FC<
+  GenericServiceDegradationBannerProps
+> = ({
   serviceName,
   serviceHealth,
   serviceDisplayNames = {},
   alwaysShow = false,
 }) => {
-  const { 
-    isHealthy, 
-    services, 
-    circuitBreakerOpen, 
+  const {
+    isHealthy,
+    services,
+    circuitBreakerOpen,
     retryConnection,
-    lastChecked 
+    lastChecked,
   } = serviceHealth;
 
   // Don't show if all services are healthy (unless alwaysShow is true)
@@ -57,7 +59,10 @@ export const GenericServiceDegradationBanner: React.FC<GenericServiceDegradation
   }
 
   const getServiceDisplayName = (service: string) => {
-    return serviceDisplayNames[service] || service.charAt(0).toUpperCase() + service.slice(1);
+    return (
+      serviceDisplayNames[service] ||
+      service.charAt(0).toUpperCase() + service.slice(1)
+    );
   };
 
   const getSeverityColor = () => {
@@ -77,7 +82,7 @@ export const GenericServiceDegradationBanner: React.FC<GenericServiceDegradation
     <Alert
       icon={<IconAlertTriangle size={16} />}
       title={
-        unavailableServices.length === 0 
+        unavailableServices.length === 0
           ? t`All ${serviceName} Services Available`
           : t`Some ${serviceName} Services Unavailable`
       }
@@ -96,8 +101,7 @@ export const GenericServiceDegradationBanner: React.FC<GenericServiceDegradation
               <Text size="sm" mb="xs">
                 {unavailableServices.length === 1
                   ? t`The following ${serviceName} service is currently unavailable:`
-                  : t`The following ${serviceName} services are currently unavailable:`
-                }
+                  : t`The following ${serviceName} services are currently unavailable:`}
               </Text>
               <Group gap="xs" mb="xs">
                 {unavailableServices.map((service) => (
@@ -111,7 +115,7 @@ export const GenericServiceDegradationBanner: React.FC<GenericServiceDegradation
               </Text>
             </>
           )}
-          
+
           {lastChecked && (
             <Text size="xs" c="dimmed" mt="xs">
               Last checked: {lastChecked.toLocaleTimeString()}

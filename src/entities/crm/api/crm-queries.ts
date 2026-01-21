@@ -51,11 +51,11 @@ export const crmKeys = {
  */
 export const useLeads = (params?: LeadListParams) => {
   const { isFeatureAvailable } = useCrmServiceHealth();
-  
+
   return useQuery({
     queryKey: crmKeys.leadsList(params),
     queryFn: () => crmApi.getLeads(params),
-    enabled: isFeatureAvailable('leads'),
+    enabled: isFeatureAvailable("leads"),
     staleTime: 5 * 60 * 1000, // 5 minutes - matches billing service
     refetchOnWindowFocus: true, // Business logic: Refetch when user returns to tab
     retry: (failureCount, error: any) => {
@@ -73,11 +73,11 @@ export const useLeads = (params?: LeadListParams) => {
  */
 export const useLead = (id: string) => {
   const { isFeatureAvailable } = useCrmServiceHealth();
-  
+
   return useQuery({
     queryKey: crmKeys.lead(id),
     queryFn: () => crmApi.getLead(id),
-    enabled: !!id && isFeatureAvailable('leads'),
+    enabled: !!id && isFeatureAvailable("leads"),
     staleTime: 5 * 60 * 1000,
     retry: (failureCount, error: any) => {
       if (error?.response?.status === 503) {
@@ -93,11 +93,11 @@ export const useLead = (id: string) => {
  */
 export const useLeadNotes = (leadId: string) => {
   const { isFeatureAvailable } = useCrmServiceHealth();
-  
+
   return useQuery({
     queryKey: crmKeys.leadNotes(leadId),
     queryFn: () => crmApi.getLeadNotes(leadId),
-    enabled: !!leadId && isFeatureAvailable('leads'),
+    enabled: !!leadId && isFeatureAvailable("leads"),
     staleTime: 2 * 60 * 1000, // 2 minutes for more dynamic content
   });
 };
@@ -107,11 +107,11 @@ export const useLeadNotes = (leadId: string) => {
  */
 export const useLeadActivities = (leadId: string) => {
   const { isFeatureAvailable } = useCrmServiceHealth();
-  
+
   return useQuery({
     queryKey: crmKeys.leadActivities(leadId),
     queryFn: () => crmApi.getLeadActivities(leadId),
-    enabled: !!leadId && isFeatureAvailable('leads'),
+    enabled: !!leadId && isFeatureAvailable("leads"),
     staleTime: 2 * 60 * 1000,
   });
 };

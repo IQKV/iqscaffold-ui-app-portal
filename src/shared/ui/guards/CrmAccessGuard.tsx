@@ -24,11 +24,11 @@ export const CrmAccessGuard: React.FC<CrmAccessGuardProps> = (props) => {
   const requiredAuthorities = [
     "CRM_ACCESS",
     "CRM_LEAD_MANAGER",
-    "CRM_CONTACT_MANAGER", 
+    "CRM_CONTACT_MANAGER",
     "CRM_PIPELINE_MANAGER",
     "CRM_ADMIN",
     "ADMIN",
-    "SUPER_ADMIN"
+    "SUPER_ADMIN",
   ];
 
   return (

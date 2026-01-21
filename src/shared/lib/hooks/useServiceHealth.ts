@@ -22,7 +22,7 @@ interface ServiceHealthConfig {
 
 /**
  * Generic hook to monitor service health and availability
- * 
+ *
  * Features:
  * - Periodic health checks
  * - Service degradation detection
@@ -49,7 +49,10 @@ export function useServiceHealth(config: ServiceHealthConfig) {
         // Check individual service endpoints
         const checks = await Promise.allSettled(
           Object.entries(endpoints).map(([serviceName, endpoint]) =>
-            apiRequest({ url: endpoint, method: "GET" }).then(() => ({ serviceName, success: true }))
+            apiRequest({ url: endpoint, method: "GET" }).then(() => ({
+              serviceName,
+              success: true,
+            }))
           )
         );
 
@@ -81,12 +84,15 @@ export function useServiceHealth(config: ServiceHealthConfig) {
   }, [refetch]);
 
   // Check if specific feature is available
-  const isFeatureAvailable = useCallback((feature: string) => {
-    if (!healthStatus) {
-      return false;
-    }
-    return healthStatus.services[feature] ?? false;
-  }, [healthStatus]);
+  const isFeatureAvailable = useCallback(
+    (feature: string) => {
+      if (!healthStatus) {
+        return false;
+      }
+      return healthStatus.services[feature] ?? false;
+    },
+    [healthStatus]
+  );
 
   // Simple circuit breaker based on error state
   const circuitBreakerOpen = Boolean(error);

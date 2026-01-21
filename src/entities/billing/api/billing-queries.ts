@@ -58,11 +58,11 @@ export const billingKeys = {
 
 export const usePayments = (params?: BillingHistoryParams) => {
   const { isFeatureAvailable } = useBillingServiceHealth();
-  
+
   return useQuery({
     queryKey: billingKeys.history(params || {}),
     queryFn: () => billingApi.listPayments(params),
-    enabled: isFeatureAvailable('payments'),
+    enabled: isFeatureAvailable("payments"),
     retry: (failureCount, error: any) => {
       if (error?.response?.status === 503) {
         return false;
@@ -74,11 +74,11 @@ export const usePayments = (params?: BillingHistoryParams) => {
 
 export const usePayment = (id: string) => {
   const { isFeatureAvailable } = useBillingServiceHealth();
-  
+
   return useQuery({
     queryKey: billingKeys.payment(id),
     queryFn: () => billingApi.getPayment(id),
-    enabled: !!id && isFeatureAvailable('payments'),
+    enabled: !!id && isFeatureAvailable("payments"),
     retry: (failureCount, error: any) => {
       if (error?.response?.status === 503) {
         return false;
@@ -102,11 +102,11 @@ export const useRefundPayment = () => {
 
 export const useSubscriptions = (params?: BillingHistoryParams) => {
   const { isFeatureAvailable } = useBillingServiceHealth();
-  
+
   return useQuery({
     queryKey: billingKeys.subscriptions(),
     queryFn: () => billingApi.listSubscriptions(params),
-    enabled: isFeatureAvailable('subscriptions'),
+    enabled: isFeatureAvailable("subscriptions"),
     retry: (failureCount, error: any) => {
       if (error?.response?.status === 503) {
         return false;
@@ -118,11 +118,11 @@ export const useSubscriptions = (params?: BillingHistoryParams) => {
 
 export const useActiveSubscription = () => {
   const { isFeatureAvailable } = useBillingServiceHealth();
-  
+
   return useQuery({
     queryKey: billingKeys.activeSubscription(),
     queryFn: () => billingApi.getActiveSubscription(),
-    enabled: isFeatureAvailable('subscriptions'),
+    enabled: isFeatureAvailable("subscriptions"),
     retry: (failureCount, error: any) => {
       if (error?.response?.status === 503) {
         return false;
