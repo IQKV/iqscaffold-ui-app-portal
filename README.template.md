@@ -7,7 +7,7 @@
 - [Business Purpose](#business-purpose)
 - [Overview](#overview)
 - [Use Cases Implemented](#use-cases-implemented)
-- [API Integration](#api-integration)
+- [Configuration](#configuration)
 - [What It Demonstrates](#what-it-demonstrates)
 - [Architecture Patterns](#architecture-patterns)
 - [Technical Highlights](#technical-highlights)
@@ -20,18 +20,21 @@
 
 An application portal that demonstrates:
 
-- **Dashboard & Analytics** - Metrics and statistics visualization
-- **User Management** - User CRUD operations with role-based access control
+- **Feature-Gated Dashboard** - Subscription-based feature access with usage tracking and analytics
+- **User Management** - Complete user CRUD operations with role-based access control
 - **Security Management** - Password change, session management, and multi-device logout
 - **Email Verification** - Email status checking and verification workflow
-- **Profile Management** - User profile and account settings
-- **Multi-Language Support** - Internationalization with Lingui
-- **Billing & Payments** - Stripe integration for modern payment processing
-- **CRM Workspace** - Leads list, Kanban pipeline, follow-ups management, and CRM dashboard
-- **Merchant Ecosystem** - Stripe Connect onboarding for marketplace/multi-tenant sellers
-- **SaaS Frontend Patterns** - Patterns for building multi-tenant SaaS frontends
+- **Subscription Management** - Plan selection, billing cycles, and subscription lifecycle
+- **Payment Processing** - Stripe checkout with multiple payment methods and refund capabilities
+- **Invoice Management** - Automated invoice generation, viewing, and download functionality
+- **Gateway Configuration** - Multi-provider payment gateway setup and management
+- **Merchant Onboarding** - Stripe Connect integration for marketplace sellers
+- **CRM System** - Complete lead management, contact tracking, and sales pipeline
+- **Multi-Language Support** - Internationalization with Lingui framework
+- **User Preferences** - Theme switching, locale settings, and personalization
+- **SaaS Frontend Patterns** - Patterns for building scalable multi-tenant SaaS applications
 
-Reference implementation for building microservices-based SaaS applications, demonstrating frontend architecture, authentication integration, and common application patterns.
+Reference implementation for building microservices-based SaaS applications, demonstrating modern frontend architecture, subscription management, payment processing, and CRM functionality.
 
 ## Overview
 
@@ -41,155 +44,128 @@ Starting point for microservices frontend development, demonstrating scalable Sa
 
 ## Use Cases Implemented
 
-### Dashboard & Analytics
+### Feature-Gated Dashboard & Analytics
 
-- Statistics overview with key metrics
-- Trend indicators (positive/negative changes)
-- Real-time data visualization
-- Business KPIs display
-- Responsive grid layout
-- Icon-based visual indicators
+- Subscription-based feature access control with FeatureGate components
+- Feature usage tracking and quota management
+- Subscription information display with upgrade prompts
+- Enabled features listing with dynamic access control
+- Business metrics visualization with responsive grid layout
+- Real-time feature availability based on subscription tier
 
 ### User Management (Admin)
 
-- User listing with pagination (page, limit)
-- User search by username, email, or name
-- User creation with role assignment
-- User editing with validation
-- User deletion with confirmation
-- Email verification status display
-- Role-based access control enforcement
+- User listing with pagination, search, and filtering
+- User creation with role assignment and validation
+- User editing with comprehensive form validation
+- User deletion with confirmation dialogs
+- Email verification status tracking and management
+- Role-based access control enforcement (USER, ADMIN, SUPER_ADMIN)
+- Bulk user operations and administrative controls
 
-### 💳 Billing & Payments
+### 💳 Subscription Management
 
-- Stripe checkout flow with client-side validation
-- Modern PaymentElement integration for various methods
-- Theme-aware appearance (Light/Dark mode sync)
-- Paginated billing history with status visualization
-- Administrative payment refund workflow
-- Multi-currency support with locale intelligence
+- Subscription plan selection with feature comparison
+- Active subscription display with billing cycle information
+- Plan upgrade/downgrade workflow with prorated billing
+- Subscription cancellation and renewal management
+- Feature usage monitoring against subscription limits
+- Billing history integration with subscription events
 
-### 🏦 Merchant Onboarding
+### 💰 Payment Processing & Billing
 
-- Stripe Connect account link generation
-- Automated redirect to onboarding portal
-- Onboarding completeness status tracking
-- Direct access to Stripe Dashboard for configured accounts
-- Environment-specific return/refresh URL handling
+- Stripe checkout flow with PaymentElement integration
+- Multi-payment method support (cards, wallets, bank transfers)
+- Theme-aware payment UI (Light/Dark mode synchronization)
+- Payment intent creation and confirmation workflow
+- Paginated billing history with transaction details
+- Administrative payment refund capabilities
+- Multi-currency support with locale-aware formatting
+
+### 📄 Invoice Management
+
+- Automated invoice generation for subscriptions and payments
+- Invoice listing with status tracking (draft, sent, paid, overdue)
+- PDF invoice download and email delivery
+- Invoice search and filtering by date, status, and amount
+- Payment reconciliation with invoice matching
+- Tax calculation and compliance features
+
+### 🏦 Payment Gateway Configuration
+
+- Multi-provider gateway setup (Stripe, PayPal, Square)
+- Gateway activation/deactivation controls
+- Primary gateway selection for payment routing
+- Configuration validation and testing tools
+- Environment-specific gateway management
+- Administrative access controls for gateway settings
+
+### 🤝 Merchant Onboarding
+
+- Stripe Connect account creation and linking
+- Onboarding progress tracking with completion status
+- Direct access to Stripe Dashboard for merchants
+- Return URL handling for onboarding completion
+- Merchant verification status monitoring
+- Multi-organization merchant management
+
+### 📊 CRM System
+
+- **Lead Management**: Complete lead lifecycle from creation to conversion
+- **Contact Management**: Customer contact database with interaction history
+- **Sales Pipeline**: Visual Kanban-style pipeline with drag-and-drop functionality
+- **CRM Dashboard**: Analytics and metrics for sales performance
+- **Follow-up Management**: Automated follow-up scheduling and tracking
+- **Lead Conversion**: Conversion tracking and analytics
+- **Activity Logging**: Comprehensive interaction and communication history
 
 ### Security Management
 
-- Password change with validation
-- Current password verification
-- Password strength requirements
-- Multi-device session management
-- Logout from all devices
-- Security recommendations display
+- Password change with current password validation
+- Password strength requirements and validation
+- Multi-device session management and monitoring
+- Logout from all devices functionality
+- Security settings dashboard with recommendations
+- Account security audit trail
 
 ### Email Verification
 
-- Email verification status checking
-- Verification workflow integration
-- Resend verification email
-- Email verification confirmation
-- Status display in user profile
+- Email verification status checking and display
+- Verification workflow integration with backend
+- Resend verification email functionality
+- Email verification confirmation handling
+- Status display in user profiles and admin panels
+- Automated verification reminders
 
-### Profile Management
+### User Preferences & Personalization
 
-- Current user profile display
-- User information viewing
-- Account settings access
-- Role and permission display
-- Tenant information display
+- Theme switching (Light/Dark mode) with system preference detection
+- Locale selection with real-time language switching
+- User preference persistence across sessions
+- Quick theme switcher in navigation
+- Personalized dashboard layouts
+- Accessibility preferences and settings
 
-### Route Protection
+### Route Protection & Access Control
 
-- Public routes (redirected to auth portal)
-- Protected routes (requires authentication)
-- Admin routes (requires ADMIN/SUPER_ADMIN role)
-- Permission-based routes (requires specific permissions)
-- Automatic redirect for unauthorized access
+- Public routes with automatic auth portal redirection
+- Protected routes requiring authentication
+- Admin routes requiring ADMIN/SUPER_ADMIN roles
+- Permission-based routes for granular access control
+- Feature-gated routes based on subscription tier
 - Email verification requirement enforcement
+- Automatic redirect handling for unauthorized access
 
-## API Integration
+### Internationalization
 
-### Backend Endpoints
+- Multi-language support with Lingui framework
+- Message extraction and compilation workflow
+- Pluralization and number formatting
+- Date and currency localization
+- Language switching without page reload
+- Translation-ready component architecture
 
-The application integrates with the User Service API:
-
-**Authentication Endpoints:**
-
-- `POST /api/v1/auth/login` - Authenticate user
-- `POST /api/v1/auth/signup` - Register new user
-- `POST /api/v1/auth/refresh` - Refresh access token
-- `POST /api/v1/auth/logout` - Logout current session
-- `POST /api/v1/auth/logout-all` - Logout all sessions
-- `POST /api/v1/auth/validate` - Validate JWT token
-- `POST /api/v1/auth/password/forgot` - Request password reset
-- `POST /api/v1/auth/password/reset` - Reset password with token
-- `POST /api/v1/auth/email/verify` - Verify email with token
-- `POST /api/v1/auth/email/resend` - Resend verification email
-- `GET /api/v1/auth/email/status` - Get email verification status
-
-**User Endpoints:**
-
-- `PATCH /api/v1/users/me/password` - Change password for authenticated user
-- `GET /api/v1/users/me/preferences` - Get current user's preferences
-- `PATCH /api/v1/users/me/preferences` - Update current user's preferences
-- `DELETE /api/v1/users/me/preferences` - Delete current user's preferences
-
-**User Management Endpoints (Requires ADMIN/SUPER_ADMIN Role):**
-
-- `GET /api/v1/admin/users` - List users with pagination and search
-- `GET /api/v1/admin/users/{id}` - Get user by ID
-- `POST /api/v1/admin/users` - Create new user
-- `PUT /api/v1/admin/users/{id}` - Update user
-- `DELETE /api/v1/admin/users/{id}` - Delete user
-
-**Organization Management Endpoints (Requires ADMIN/SUPER_ADMIN Role):**
-
-- `GET /api/v1/admin/organizations` - List organizations with pagination
-- `GET /api/v1/admin/organizations/{id}` - Get organization by ID
-- `POST /api/v1/admin/organizations` - Create organization (SUPER_ADMIN only)
-- `PUT /api/v1/admin/organizations/{id}` - Update organization
-- `DELETE /api/v1/admin/organizations/{id}` - Delete organization (SUPER_ADMIN only)
-- `GET /api/v1/admin/organizations/tenant/{tenantId}` - Get organization by tenant ID (SUPER_ADMIN only)
-
-**Tenant Management Endpoints (Requires SUPER_ADMIN Role):**
-
-- `GET /api/v1/admin/tenants` - Get all tenants
-- `GET /api/v1/admin/tenants/{tenantId}` - Get tenant by ID
-- `POST /api/v1/admin/tenants` - Create new tenant
-- `PUT /api/v1/admin/tenants/{tenantId}` - Update tenant
-- `PATCH /api/v1/admin/tenants/{tenantId}/enabled` - Enable or disable tenant
-- `DELETE /api/v1/admin/tenants/{tenantId}` - Delete tenant
-- `GET /api/v1/admin/tenants/statistics` - Get tenant statistics
-
-**Billing & Payment Endpoints:**
-
-- `POST /api/v1/billing/payments/intent` - Create Stripe Payment Intent
-- `GET /api/v1/billing/payments` - List payments with pagination
-- `GET /api/v1/billing/payments/{id}` - Get payment details
-- `POST /api/v1/billing/payments/{id}/refund` - Refund payment
-- `GET /api/v1/billing/payouts` - List payouts with pagination
-- `GET /api/v1/billing/payouts/{id}` - Get payout details
-
-**Merchant & Gateway Configuration Endpoints (Requires ADMIN Role):**
-
-- `POST /api/v1/admin/billing/merchants/onboard` - Initiate Stripe Connect onboarding
-- `GET /api/v1/admin/billing/merchants/status/{organizationId}` - Get merchant onboarding status
-- `POST /api/v1/admin/billing/gateway-config` - Create gateway configuration
-- `GET /api/v1/admin/billing/gateway-config` - List all gateway configurations
-- `GET /api/v1/admin/billing/gateway-config/active` - List active gateway configurations
-- `GET /api/v1/admin/billing/gateway-config/primary` - Get primary gateway configuration
-- `GET /api/v1/admin/billing/gateway-config/{provider}` - Get gateway configuration by provider
-- `PUT /api/v1/admin/billing/gateway-config/{provider}` - Update gateway configuration
-- `DELETE /api/v1/admin/billing/gateway-config/{provider}` - Delete gateway configuration
-- `POST /api/v1/admin/billing/gateway-config/{provider}/activate` - Activate gateway
-- `POST /api/v1/admin/billing/gateway-config/{provider}/deactivate` - Deactivate gateway
-- `POST /api/v1/admin/billing/gateway-config/{provider}/set-primary` - Set primary gateway
-
-### Configuration
+## Configuration
 
 Environment variables for API integration:
 
