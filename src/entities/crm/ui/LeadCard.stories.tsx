@@ -7,6 +7,8 @@ import { DndContext } from "@dnd-kit/core";
 // Mock lead data for stories
 const mockLeadHighScore: Lead = {
   id: "lead-1",
+  firstName: "Sarah",
+  lastName: "Johnson",
   name: "Sarah Johnson",
   email: "sarah.johnson@techcorp.com",
   phone: "+1 (555) 123-4567",
@@ -27,6 +29,8 @@ const mockLeadHighScore: Lead = {
 
 const mockLeadMediumScore: Lead = {
   id: "lead-2",
+  firstName: "Michael",
+  lastName: "Chen",
   name: "Michael Chen",
   email: "m.chen@startup.io",
   phone: "+1 (555) 987-6543",
@@ -44,6 +48,8 @@ const mockLeadMediumScore: Lead = {
 
 const mockLeadLowScore: Lead = {
   id: "lead-3",
+  firstName: "Emily",
+  lastName: "Rodriguez",
   name: "Emily Rodriguez",
   email: "emily.r@example.com",
   company: "Small Business LLC",
@@ -58,6 +64,8 @@ const mockLeadLowScore: Lead = {
 
 const mockLeadOverdue: Lead = {
   id: "lead-4",
+  firstName: "David",
+  lastName: "Park",
   name: "David Park",
   email: "david.park@enterprise.com",
   phone: "+1 (555) 456-7890",
@@ -77,6 +85,8 @@ const mockLeadOverdue: Lead = {
 
 const mockLeadMinimal: Lead = {
   id: "lead-5",
+  firstName: "Alex",
+  lastName: "Thompson",
   name: "Alex Thompson",
   email: "alex@email.com",
   source: "SOCIAL_MEDIA",

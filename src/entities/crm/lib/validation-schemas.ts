@@ -114,7 +114,8 @@ export const crmValidationSchemas = new Proxy(
 export const createLeadFormSchema = () => {
   const schemas = createCrmValidationSchemas();
   return z.object({
-    name: schemas.leadName,
+    firstName: schemas.leadName,
+    lastName: schemas.leadName,
     email: schemas.leadEmail,
     phone: schemas.leadPhone,
     company: schemas.leadCompany,

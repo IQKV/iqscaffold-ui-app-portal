@@ -13,7 +13,7 @@ import {
   isDuplicateEmailError,
   getDuplicateEmailMessage,
 } from "../lib/validation-schemas";
-import { useFocusTrap, useAnnouncer } from "@/shared/lib/accessibility";
+import { useAnnouncer } from "@/shared/lib/accessibility";
 
 interface LeadFormProps {
   opened: boolean;
@@ -59,12 +59,13 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
     createLeadMutation.isPending || updateLeadMutation.isPending;
 
   // Focus trap for modal
-  useFocusTrap(modalRef as any, opened);
+  // useFocusTrap(modalRef as any, opened);
 
   const form = useForm<LeadFormData>({
     validate: zodResolver(createLeadFormSchema()),
     initialValues: {
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
       phone: "",
       company: "",
@@ -76,13 +77,16 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
   useEffect(() => {
     if (lead) {
       form.setValues({
-        name: lead.name,
+        firstName: lead.firstName,
+        lastName: lead.lastName,
         email: lead.email,
         phone: lead.phone || "",
         company: lead.company || "",
         source: lead.source,
       });
-      announce(`Editing lead: ${lead.name}`, { priority: "polite" });
+      announce(`Editing lead: ${lead.firstName} ${lead.lastName}`, {
+        priority: "polite",
+      });
     } else {
       form.reset();
       if (opened) {
@@ -99,7 +103,8 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
         {
           id: lead.id,
           data: {
-            name: values.name,
+            firstName: values.firstName,
+            lastName: values.lastName,
             email: values.email,
             phone: values.phone || undefined,
             company: values.company || undefined,
@@ -138,7 +143,8 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
       // Create new lead (Requirement 1.1, 1.2)
       createLeadMutation.mutate(
         {
-          name: values.name,
+          firstName: values.firstName,
+          lastName: values.lastName,
           email: values.email,
           phone: values.phone || undefined,
           company: values.company || undefined,
@@ -200,12 +206,23 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
           aria-label={isEditing ? "Edit lead form" : "Create lead form"}
         >
           <Stack gap="md">
-            {/* Name field - Required (Requirement 11.1) */}
+            {/* First Name field - Required (Requirement 11.1) */}
             <FormField
               type="text"
-              name="name"
-              label={t`Name`}
-              placeholder={t`Enter lead name`}
+              name="firstName"
+              label={t`First Name`}
+              placeholder={t`Enter first name`}
+              form={form}
+              withAsterisk
+              aria-required="true"
+            />
+
+            {/* Last Name field - Required (Requirement 11.1) */}
+            <FormField
+              type="text"
+              name="lastName"
+              label={t`Last Name`}
+              placeholder={t`Enter last name`}
               form={form}
               withAsterisk
               aria-required="true"

@@ -355,8 +355,10 @@ function getStatusColor(status: ContactStatus): string {
       return "#40c057"; // Green
     case "INACTIVE":
       return "#868e96"; // Gray
-    case "ARCHIVED":
-      return "#fa5252"; // Red
+    case "PROSPECT":
+      return "#fd7e14"; // Orange
+    case "CUSTOMER":
+      return "#51cf66"; // Green
     default:
       return "#228be6"; // Blue
   }
@@ -368,8 +370,10 @@ function getStatusConfig(status: ContactStatus) {
       return { color: "green", label: "Active" };
     case "INACTIVE":
       return { color: "gray", label: "Inactive" };
-    case "ARCHIVED":
-      return { color: "red", label: "Archived" };
+    case "PROSPECT":
+      return { color: "orange", label: "Prospect" };
+    case "CUSTOMER":
+      return { color: "green", label: "Customer" };
     default:
       return { color: "blue", label: status };
   }

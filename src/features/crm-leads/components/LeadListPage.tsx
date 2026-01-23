@@ -27,7 +27,11 @@ import {
   IconX,
   IconAdjustments,
 } from "@tabler/icons-react";
-import { useLeads } from "@/entities/crm/api/crm-queries";
+import {
+  useLeads,
+  useBulkQualifyLeads,
+  useExportLeads,
+} from "@/entities/crm/api/crm-queries";
 import { LeadCard } from "@/entities/crm/ui";
 import { LeadListSkeleton } from "./skeletons";
 import { LeadListParams, LeadSource } from "@/shared/api/crm/types";
@@ -78,6 +82,10 @@ export const LeadListPage: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedLeads, setSelectedLeads] = useState<string[]>([]);
+
+  // Bulk operations
+  const bulkQualifyMutation = useBulkQualifyLeads();
+  const exportMutation = useExportLeads();
   const [focusedLeadIndex, setFocusedLeadIndex] = useState(0);
 
   // Build query params
@@ -212,19 +220,33 @@ export const LeadListPage: React.FC = () => {
   };
 
   // Handle export
-  const handleExport = () => {
-    // TODO: Implement export functionality
-    console.log("Exporting leads with filters:", queryParams);
-    announce("Exporting leads", { priority: "polite" });
+  const handleExport = async () => {
+    try {
+      await exportMutation.mutateAsync(queryParams);
+      announce("Leads exported successfully", { priority: "polite" });
+    } catch (error) {
+      announce("Failed to export leads", { priority: "assertive" });
+    }
   };
 
   // Handle bulk actions
-  const handleBulkQualify = () => {
-    // TODO: Implement bulk qualify
-    console.log("Bulk qualifying leads:", selectedLeads);
-    announce(`Qualifying ${selectedLeads.length} leads`, {
-      priority: "polite",
-    });
+  const handleBulkQualify = async () => {
+    if (selectedLeads.length === 0) {
+      announce("No leads selected for qualification", {
+        priority: "assertive",
+      });
+      return;
+    }
+
+    try {
+      await bulkQualifyMutation.mutateAsync(selectedLeads);
+      setSelectedLeads([]); // Clear selection after successful operation
+      announce(`Successfully qualified ${selectedLeads.length} leads`, {
+        priority: "polite",
+      });
+    } catch (error) {
+      announce("Failed to qualify leads", { priority: "assertive" });
+    }
   };
 
   // Handle page change - preserves filter state
@@ -409,6 +431,8 @@ export const LeadListPage: React.FC = () => {
                 leftSection={<IconDownload size={16} />}
                 variant="light"
                 onClick={handleExport}
+                loading={exportMutation.isPending}
+                disabled={exportMutation.isPending}
                 size={isTablet ? "sm" : "md"}
               >
                 Export
@@ -578,15 +602,17 @@ export const LeadListPage: React.FC = () => {
                   size="xs"
                   variant="light"
                   onClick={handleBulkQualify}
+                  loading={bulkQualifyMutation.isPending}
+                  disabled={bulkQualifyMutation.isPending}
                   fullWidth={isMobile}
                 >
                   Qualify Selected
                 </Button>
                 <Button
                   size="xs"
-                  variant="light"
-                  color="red"
+                  variant="outline"
                   onClick={() => setSelectedLeads([])}
+                  disabled={bulkQualifyMutation.isPending}
                   fullWidth={isMobile}
                 >
                   Clear Selection

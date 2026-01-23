@@ -1,13 +1,31 @@
 // CRM API Type Definitions
 // Following billing service pattern for consistency
 
+// Bulk Operation Types
+export interface BulkOperationResponse {
+  successCount: number;
+  failureCount: number;
+  results: BulkOperationResult[];
+}
+
+export interface BulkOperationResult {
+  id: string;
+  email?: string;
+  success: boolean;
+  message: string;
+  data?: any;
+}
+
 // Lead Types
 export interface Lead {
   id: string;
+  firstName: string;
+  lastName: string;
   name: string;
   email: string;
   phone?: string;
   company?: string;
+  jobTitle?: string;
   source: LeadSource;
   currentStage: string;
   score: number; // 0-100 qualification score
@@ -15,6 +33,7 @@ export interface Lead {
   assignedToName?: string;
   createdAt: string;
   updatedAt: string;
+  notes?: string;
 
   // Business context fields
   isQualified: boolean;
@@ -45,19 +64,26 @@ export interface LeadListParams {
 }
 
 export interface CreateLeadRequest {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone?: string;
   company?: string;
+  jobTitle?: string;
   source: LeadSource;
 }
 
 export interface UpdateLeadRequest {
-  name?: string;
+  firstName?: string;
+  lastName?: string;
   email?: string;
   phone?: string;
   company?: string;
+  jobTitle?: string;
   source?: LeadSource;
+  score?: number;
+  qualified?: boolean;
+  notes?: string;
 }
 
 export interface ConvertLeadResponse {

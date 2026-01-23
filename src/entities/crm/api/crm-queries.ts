@@ -89,6 +89,89 @@ export const useLead = (id: string) => {
 };
 
 /**
+ * Hook to update a lead
+ */
+export const useUpdateLead = () => {
+  const queryClient = useQueryClient();
+  const { isFeatureAvailable } = useCrmServiceHealth();
+
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: UpdateLeadRequest }) =>
+      crmApi.updateLead(id, data),
+    onSuccess: (updatedLead, { id }) => {
+      // Update the lead in cache
+      queryClient.setQueryData(crmKeys.lead(id), updatedLead);
+
+      // Invalidate leads list to refresh data
+      queryClient.invalidateQueries({ queryKey: crmKeys.leads() });
+
+      notificationService.success({ message: "Lead updated successfully" });
+    },
+    onError: (error: any) => {
+      notificationService.error({
+        message: error.message || "Failed to update lead",
+      });
+    },
+  });
+};
+
+/**
+ * Hook to bulk qualify leads
+ */
+export const useBulkQualifyLeads = () => {
+  const queryClient = useQueryClient();
+  const { isFeatureAvailable } = useCrmServiceHealth();
+
+  return useMutation({
+    mutationFn: (leadIds: string[]) => crmApi.bulkQualifyLeads(leadIds),
+    onSuccess: (data) => {
+      // Invalidate leads list to refresh data
+      queryClient.invalidateQueries({ queryKey: crmKeys.leads() });
+
+      notificationService.success({
+        message: `Successfully qualified ${data.successCount} leads${
+          data.failureCount > 0 ? `, ${data.failureCount} failed` : ""
+        }`,
+      });
+    },
+    onError: (error: any) => {
+      notificationService.error({
+        message: error.message || "Failed to qualify leads",
+      });
+    },
+  });
+};
+
+/**
+ * Hook to export leads
+ */
+export const useExportLeads = () => {
+  const { isFeatureAvailable } = useCrmServiceHealth();
+
+  return useMutation({
+    mutationFn: (params?: LeadListParams) => crmApi.exportLeads(params),
+    onSuccess: (blob) => {
+      // Create download link
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `leads-export-${new Date().toISOString().split("T")[0]}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+
+      notificationService.success({ message: "Leads exported successfully" });
+    },
+    onError: (error: any) => {
+      notificationService.error({
+        message: error.message || "Failed to export leads",
+      });
+    },
+  });
+};
+
+/**
  * Hook to fetch notes for a specific lead
  */
 export const useLeadNotes = (leadId: string) => {
@@ -173,26 +256,6 @@ export const useCreateLead = () => {
       if (context?.previousLeads) {
         queryClient.setQueryData(crmKeys.leadsList(), context.previousLeads);
       }
-    },
-  });
-};
-
-/**
- * Hook to update an existing lead
- */
-export const useUpdateLead = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: ({ id, data }: { id: string; data: UpdateLeadRequest }) =>
-      crmApi.updateLead(id, data),
-
-    onSuccess: (updatedLead) => {
-      // Update individual lead cache
-      queryClient.setQueryData(crmKeys.lead(updatedLead.id), updatedLead);
-
-      // Invalidate leads list to refresh
-      queryClient.invalidateQueries({ queryKey: crmKeys.leads() });
     },
   });
 };

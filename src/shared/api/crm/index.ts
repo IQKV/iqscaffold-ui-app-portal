@@ -30,6 +30,27 @@ export const crmApi = {
     }),
 
   /**
+   * Bulk qualify leads
+   */
+  bulkQualifyLeads: (leadIds: string[]) =>
+    apiRequest<Types.BulkOperationResponse>({
+      url: "/api/v1/leads/bulk/qualify",
+      method: "PATCH",
+      data: { leadIds },
+    }),
+
+  /**
+   * Export leads to CSV
+   */
+  exportLeads: (params?: Types.LeadListParams) =>
+    apiRequest<Blob>({
+      url: "/api/v1/leads/export",
+      method: "GET",
+      params,
+      responseType: "blob",
+    }),
+
+  /**
    * Get lead by ID
    */
   getLead: (id: string) =>

@@ -1,36 +1,26 @@
-// Contact and Company Query Hooks
-// Following CRM and billing service patterns for consistency
+// Contact Query Hooks and State Management
+// Following CRM service pattern for consistency
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { contactApi } from "@/shared/api/contact";
+import { notificationService } from "@/shared/lib/notifications";
 import type {
   ContactListParams,
   CreateContactRequest,
   UpdateContactRequest,
   UpdateLeadScoreRequest,
-  BulkCreateContactsRequest,
-  BulkUpdateStatusRequest,
-  BulkDeleteContactsRequest,
-  BulkUpdateLeadScoresRequest,
-  CompanyListParams,
-  CreateCompanyRequest,
-  UpdateCompanyRequest,
 } from "@/shared/api/contact/types";
 
 // Query Keys
 export const contactKeys = {
-  all: ["contact"] as const,
-  contacts: () => [...contactKeys.all, "contacts"] as const,
-  contactsList: (params?: ContactListParams) =>
-    [...contactKeys.contacts(), "list", params] as const,
-  contact: (id: string | number) => [...contactKeys.contacts(), id] as const,
-  contactsByCompany: (companyId: string | number) =>
-    [...contactKeys.contacts(), "by-company", companyId] as const,
-
-  companies: () => [...contactKeys.all, "companies"] as const,
-  companiesList: (params?: CompanyListParams) =>
-    [...contactKeys.companies(), "list", params] as const,
-  company: (id: string | number) => [...contactKeys.companies(), id] as const,
+  all: ["contacts"] as const,
+  lists: () => [...contactKeys.all, "list"] as const,
+  list: (params?: ContactListParams) =>
+    [...contactKeys.lists(), params] as const,
+  details: () => [...contactKeys.all, "detail"] as const,
+  detail: (id: string | number) => [...contactKeys.details(), id] as const,
+  company: (companyId: string | number) =>
+    [...contactKeys.all, "company", companyId] as const,
 };
 
 // Contact Query Hooks
@@ -40,9 +30,10 @@ export const contactKeys = {
  */
 export const useContacts = (params?: ContactListParams) => {
   return useQuery({
-    queryKey: contactKeys.contactsList(params),
+    queryKey: contactKeys.list(params),
     queryFn: () => contactApi.getContacts(params),
-    staleTime: 5 * 60 * 1000,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    refetchOnWindowFocus: true,
   });
 };
 
@@ -51,7 +42,7 @@ export const useContacts = (params?: ContactListParams) => {
  */
 export const useContact = (id: string | number) => {
   return useQuery({
-    queryKey: contactKeys.contact(id),
+    queryKey: contactKeys.detail(id),
     queryFn: () => contactApi.getContact(id),
     enabled: !!id,
     staleTime: 5 * 60 * 1000,
@@ -59,11 +50,11 @@ export const useContact = (id: string | number) => {
 };
 
 /**
- * Hook to fetch contacts belonging to a specific company
+ * Hook to fetch contacts by company ID
  */
 export const useContactsByCompany = (companyId: string | number) => {
   return useQuery({
-    queryKey: contactKeys.contactsByCompany(companyId),
+    queryKey: contactKeys.company(companyId),
     queryFn: () => contactApi.getContactsByCompany(companyId),
     enabled: !!companyId,
     staleTime: 5 * 60 * 1000,
@@ -72,18 +63,37 @@ export const useContactsByCompany = (companyId: string | number) => {
 
 // Contact Mutation Hooks
 
+/**
+ * Hook to create a new contact
+ */
 export const useCreateContact = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: contactApi.createContact,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: contactKeys.contacts() });
+    mutationFn: (data: CreateContactRequest) => contactApi.createContact(data),
+    onSuccess: (newContact) => {
+      // Invalidate contacts list to refresh data
+      queryClient.invalidateQueries({ queryKey: contactKeys.lists() });
+
+      // Add to cache optimistically
+      queryClient.setQueryData(contactKeys.detail(newContact.id), newContact);
+
+      notificationService.success({ message: "Contact created successfully" });
+    },
+    onError: (error: any) => {
+      notificationService.error({
+        message: error.message || "Failed to create contact",
+      });
     },
   });
 };
 
+/**
+ * Hook to update a contact
+ */
 export const useUpdateContact = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: ({
       id,
@@ -92,85 +102,72 @@ export const useUpdateContact = () => {
       id: string | number;
       data: UpdateContactRequest;
     }) => contactApi.updateContact(id, data),
-    onSuccess: (data) => {
-      queryClient.setQueryData(contactKeys.contact(data.id), data);
-      queryClient.invalidateQueries({ queryKey: contactKeys.contacts() });
+    onSuccess: (updatedContact, { id }) => {
+      // Update the contact in cache
+      queryClient.setQueryData(contactKeys.detail(id), updatedContact);
+
+      // Invalidate contacts list to refresh data
+      queryClient.invalidateQueries({ queryKey: contactKeys.lists() });
+
+      notificationService.success({ message: "Contact updated successfully" });
+    },
+    onError: (error: any) => {
+      notificationService.error({
+        message: error.message || "Failed to update contact",
+      });
     },
   });
 };
 
+/**
+ * Hook to delete a contact
+ */
 export const useDeleteContact = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: contactApi.deleteContact,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: contactKeys.contacts() });
+    mutationFn: (id: string | number) => contactApi.deleteContact(id),
+    onSuccess: (_, id) => {
+      // Remove from cache
+      queryClient.removeQueries({ queryKey: contactKeys.detail(id) });
+
+      // Invalidate contacts list to refresh data
+      queryClient.invalidateQueries({ queryKey: contactKeys.lists() });
+
+      notificationService.success({ message: "Contact deleted successfully" });
+    },
+    onError: (error: any) => {
+      notificationService.error({
+        message: error.message || "Failed to delete contact",
+      });
     },
   });
 };
-
-// Company Query Hooks
 
 /**
- * Hook to fetch companies with optional filtering and pagination
+ * Hook to update contact lead score
  */
-export const useCompanies = (params?: CompanyListParams) => {
-  return useQuery({
-    queryKey: contactKeys.companiesList(params),
-    queryFn: () => contactApi.getCompanies(params),
-    staleTime: 10 * 60 * 1000, // Companies change less frequently
-  });
-};
-
-/**
- * Hook to fetch a single company by ID
- */
-export const useCompany = (id: string | number) => {
-  return useQuery({
-    queryKey: contactKeys.company(id),
-    queryFn: () => contactApi.getCompany(id),
-    enabled: !!id,
-    staleTime: 10 * 60 * 1000,
-  });
-};
-
-// Company Mutation Hooks
-
-export const useCreateCompany = () => {
+export const useUpdateContactLeadScore = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: contactApi.createCompany,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: contactKeys.companies() });
+    mutationFn: ({ id, score }: { id: string | number; score: number }) =>
+      contactApi.updateLeadScore(id, { leadScore: score }),
+    onSuccess: (updatedContact, { id }) => {
+      // Update the contact in cache
+      queryClient.setQueryData(contactKeys.detail(id), updatedContact);
+
+      // Invalidate contacts list to refresh data
+      queryClient.invalidateQueries({ queryKey: contactKeys.lists() });
+
+      notificationService.success({
+        message: "Lead score updated successfully",
+      });
     },
-  });
-};
-
-export const useUpdateCompany = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: ({
-      id,
-      data,
-    }: {
-      id: string | number;
-      data: UpdateCompanyRequest;
-    }) => contactApi.updateCompany(id, data),
-    onSuccess: (data) => {
-      queryClient.setQueryData(contactKeys.company(data.id), data);
-      queryClient.invalidateQueries({ queryKey: contactKeys.companies() });
-    },
-  });
-};
-
-export const useDeleteCompany = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: contactApi.deleteCompany,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: contactKeys.companies() });
-      // Also invalidate contacts as their company info might change
-      queryClient.invalidateQueries({ queryKey: contactKeys.contacts() });
+    onError: (error: any) => {
+      notificationService.error({
+        message: error.message || "Failed to update lead score",
+      });
     },
   });
 };

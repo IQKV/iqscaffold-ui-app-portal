@@ -12,16 +12,22 @@ export interface Contact {
   status: ContactStatus;
   leadScore: number;
   notes?: string;
+  convertedFromLeadId?: number;
+  convertedAt?: string;
   createdAt: string;
   updatedAt: string;
   createdBy: string;
   lastModifiedBy: string;
+
+  // Relationship data
+  company?: Company;
 }
 
 export enum ContactStatus {
   ACTIVE = "ACTIVE",
   INACTIVE = "INACTIVE",
-  ARCHIVED = "ARCHIVED",
+  CUSTOMER = "CUSTOMER",
+  PROSPECT = "PROSPECT",
 }
 
 export interface Company {

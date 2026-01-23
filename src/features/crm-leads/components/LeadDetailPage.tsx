@@ -32,6 +32,7 @@ import { LeadNotesSection } from "./LeadNotesSection";
 import { FollowUpSection } from "./FollowUpSection";
 import { ActivityTimeline } from "./ActivityTimeline";
 import { LeadDetailSkeleton } from "./skeletons";
+import { LeadEditModal } from "./LeadEditModal";
 import { LeadScoreBadge, LeadSourceBadge } from "@/entities/crm/ui";
 
 /**
@@ -48,9 +49,10 @@ export const LeadDetailPage: React.FC = () => {
   const navigate = useNavigate();
   const { leadId } = useParams({ strict: false }) as { leadId: string };
   const [activeTab, setActiveTab] = useState<string | null>("overview");
+  const [editModalOpened, setEditModalOpened] = useState(false);
 
   // Fetch lead data
-  const { data: lead, isLoading, error } = useLead(leadId);
+  const { data: lead, isLoading, error, refetch } = useLead(leadId);
 
   // Handle qualify lead
   const handleQualifyLead = () => {
@@ -81,8 +83,7 @@ export const LeadDetailPage: React.FC = () => {
 
   // Handle edit lead
   const handleEditLead = () => {
-    // TODO: Open edit lead modal
-    console.log("Editing lead:", leadId);
+    setEditModalOpened(true);
   };
 
   // Handle back navigation
@@ -375,6 +376,17 @@ export const LeadDetailPage: React.FC = () => {
           </Box>
         </Tabs>
       </Stack>
+
+      {/* Edit Modal */}
+      <LeadEditModal
+        opened={editModalOpened}
+        onClose={() => setEditModalOpened(false)}
+        lead={lead}
+        onSuccess={() => {
+          refetch();
+          setEditModalOpened(false);
+        }}
+      />
     </Container>
   );
 };

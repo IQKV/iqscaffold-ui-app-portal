@@ -1,166 +1,113 @@
 import React, { useState } from "react";
 import {
   Container,
-  Title,
-  Group,
-  Button,
   Stack,
-  Paper,
+  Group,
   Text,
+  Button,
+  Paper,
   Badge,
+  Tabs,
+  Loader,
+  Center,
   Alert,
-  LoadingOverlay,
+  ActionIcon,
+  Tooltip,
   Box,
-  Divider,
-  Modal,
   Avatar,
-  Grid,
+  Divider,
 } from "@mantine/core";
 import {
   IconArrowLeft,
   IconEdit,
-  IconTrash,
   IconMail,
   IconPhone,
-  IconBriefcase,
   IconBuilding,
-  IconStar,
-  IconAlertCircle,
-  IconNotes,
-  IconCalendar,
   IconUser,
+  IconCalendar,
+  IconNotes,
 } from "@tabler/icons-react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useNavigate, useParams, useSearch } from "@tanstack/react-router";
+import { t } from "@lingui/core/macro";
 import { notifications } from "@mantine/notifications";
-import { modals } from "@mantine/modals";
-import { contactApi } from "@/shared/api";
-import { ContactForm, LeadScoreBadge } from "@/entities/crm/ui";
+import { useNavigate, useParams } from "@tanstack/react-router";
+import { useContact } from "@/entities/crm/api/contact-queries";
+import { ContactDetailSkeleton } from "./skeletons";
+import { ContactEditModal } from "./ContactEditModal";
+import { ContactNotesSection } from "./ContactNotesSection";
+import { ContactActivityTimeline } from "./ContactActivityTimeline";
+import { LeadScoreBadge } from "@/entities/crm/ui";
+import { formatDate } from "@/shared/lib/utils";
 
 /**
  * ContactDetailPage Component
  *
- * Detailed view of a single contact with edit and delete capabilities.
+ * Comprehensive contact detail view with:
+ * - Contact header with quick actions (edit, email, call)
+ * - Tabbed interface (Overview, Notes, Activities)
+ * - Company information display
+ * - Lead score and status indicators
+ * - Contact history and conversion tracking
  *
- * Features:
- * - Contact information display
- * - Edit contact
- * - Delete contact
- * - Responsive design
+ * Requirements: Contact management, CRM integration
  */
 export const ContactDetailPage: React.FC = () => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const { id } = useParams({ strict: false }) as { id: string };
-  const search = useSearch({ strict: false }) as { edit?: boolean };
+  const { contactId } = useParams({ strict: false }) as { contactId: string };
+  const [activeTab, setActiveTab] = useState<string | null>("overview");
+  const [editModalOpened, setEditModalOpened] = useState(false);
 
-  const [editModalOpen, setEditModalOpen] = useState(search?.edit || false);
+  // Fetch contact data
+  const { data: contact, isLoading, error, refetch } = useContact(contactId);
 
-  // Fetch contact
-  const {
-    data: contact,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["contact", id],
-    queryFn: () => contactApi.getContact(id),
-    enabled: !!id,
-  });
-
-  // Update contact mutation
-  const updateMutation = useMutation({
-    mutationFn: (values: any) => contactApi.updateContact(id, values),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["contact", id] });
-      queryClient.invalidateQueries({ queryKey: ["contacts"] });
-      setEditModalOpen(false);
-      notifications.show({
-        title: "Success",
-        message: "Contact updated successfully",
-        color: "green",
-      });
-    },
-    onError: (error: any) => {
-      notifications.show({
-        title: "Error",
-        message: error.message || "Failed to update contact",
-        color: "red",
-      });
-    },
-  });
-
-  // Delete contact mutation
-  const deleteMutation = useMutation({
-    mutationFn: () => contactApi.deleteContact(id),
-    onSuccess: () => {
-      notifications.show({
-        title: "Success",
-        message: "Contact deleted successfully",
-        color: "green",
-      });
-      navigate({ to: "/crm/contacts" });
-    },
-    onError: (error: any) => {
-      notifications.show({
-        title: "Error",
-        message: error.message || "Failed to delete contact",
-        color: "red",
-      });
-    },
-  });
-
-  // Handlers
-  const handleUpdateContact = (values: any) => {
-    updateMutation.mutate(values);
+  // Handle edit contact
+  const handleEditContact = () => {
+    setEditModalOpened(true);
   };
 
-  const handleDeleteContact = () => {
-    if (!contact) {
-      return;
-    }
-
-    modals.openConfirmModal({
-      title: "Delete Contact",
-      children: (
-        <Text size="sm">
-          Are you sure you want to delete {contact.firstName} {contact.lastName}
-          ? This action cannot be undone.
-        </Text>
-      ),
-      labels: { confirm: "Delete", cancel: "Cancel" },
-      confirmProps: { color: "red" },
-      onConfirm: () => deleteMutation.mutate(),
-    });
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "ACTIVE":
-        return "green";
-      case "INACTIVE":
-        return "gray";
-      case "ARCHIVED":
-        return "red";
-      default:
-        return "blue";
+  // Handle email contact
+  const handleEmailContact = () => {
+    if (contact?.email) {
+      window.location.href = `mailto:${contact.email}`;
     }
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
+  // Handle call contact
+  const handleCallContact = () => {
+    if (contact?.phone) {
+      window.location.href = `tel:${contact.phone}`;
+    }
   };
 
-  if (error) {
+  // Handle back navigation
+  const handleBack = () => {
+    navigate({ to: "/crm/contacts" });
+  };
+
+  // Loading state
+  if (isLoading) {
     return (
       <Container size="xl" py="xl">
-        <Alert icon={<IconAlertCircle size={16} />} title="Error" color="red">
-          Failed to load contact. Please try again.
+        <ContactDetailSkeleton />
+      </Container>
+    );
+  }
+
+  // Error state
+  if (error || !contact) {
+    return (
+      <Container size="xl" py="xl">
+        <Alert color="red" title={t`Error loading contact`}>
+          <Stack gap="sm">
+            <Text>{t`Failed to load contact details. Please try again.`}</Text>
+            <Group>
+              <Button onClick={() => refetch()} variant="light">
+                {t`Retry`}
+              </Button>
+              <Button onClick={handleBack} variant="outline">
+                {t`Back to Contacts`}
+              </Button>
+            </Group>
+          </Stack>
         </Alert>
       </Container>
     );
@@ -168,215 +115,248 @@ export const ContactDetailPage: React.FC = () => {
 
   return (
     <Container size="xl" py="xl">
-      <Box pos="relative" mih={400}>
-        <LoadingOverlay visible={isLoading} />
+      <Stack gap="lg">
+        {/* Header */}
+        <Group justify="space-between">
+          <Group>
+            <ActionIcon
+              variant="subtle"
+              onClick={handleBack}
+              size="lg"
+              aria-label="Back to contacts"
+            >
+              <IconArrowLeft size={20} />
+            </ActionIcon>
+            <div>
+              <Text size="xl" fw={700}>
+                {contact.firstName} {contact.lastName}
+              </Text>
+              <Text size="sm" c="dimmed">
+                Contact Details
+              </Text>
+            </div>
+          </Group>
 
-        {contact && (
-          <Stack gap="lg">
-            {/* Header */}
-            <Group justify="space-between">
-              <Group>
-                <Button
-                  variant="subtle"
-                  leftSection={<IconArrowLeft size={16} />}
-                  onClick={() => navigate({ to: "/crm/contacts" })}
-                >
-                  Back to Contacts
-                </Button>
-              </Group>
-              <Group>
-                <Button
+          <Group>
+            {contact.email && (
+              <Tooltip label={t`Send email`}>
+                <ActionIcon
                   variant="light"
-                  leftSection={<IconEdit size={16} />}
-                  onClick={() => setEditModalOpen(true)}
-                >
-                  Edit
-                </Button>
-                <Button
-                  variant="light"
-                  color="red"
-                  leftSection={<IconTrash size={16} />}
-                  onClick={handleDeleteContact}
-                  loading={deleteMutation.isPending}
-                >
-                  Delete
-                </Button>
-              </Group>
-            </Group>
-
-            {/* Contact header */}
-            <Paper shadow="sm" p="xl" radius="md" withBorder>
-              <Group align="flex-start">
-                <Avatar
-                  size={80}
-                  radius="xl"
                   color="blue"
-                  styles={{ placeholder: { fontSize: 32 } }}
+                  size="lg"
+                  onClick={handleEmailContact}
                 >
-                  {contact.firstName[0]}
-                  {contact.lastName[0]}
-                </Avatar>
-                <Box style={{ flex: 1 }}>
-                  <Group justify="space-between" align="flex-start">
-                    <Box>
-                      <Title order={2}>
-                        {contact.firstName} {contact.lastName}
-                      </Title>
-                      {contact.jobTitle && (
-                        <Group gap={4} mt={4}>
-                          <IconBriefcase size={16} />
-                          <Text size="lg" c="dimmed">
-                            {contact.jobTitle}
-                          </Text>
-                        </Group>
-                      )}
-                    </Box>
-                    <Group>
-                      <Badge
-                        color={getStatusColor(contact.status)}
-                        variant="light"
-                        size="lg"
-                      >
-                        {contact.status}
-                      </Badge>
-                      <LeadScoreBadge score={contact.leadScore} size="lg" />
-                    </Group>
-                  </Group>
-                </Box>
-              </Group>
-            </Paper>
-
-            {/* Contact information */}
-            <Grid>
-              <Grid.Col span={{ base: 12, md: 6 }}>
-                <Paper shadow="sm" p="lg" radius="md" withBorder>
-                  <Title order={4} mb="md">
-                    Contact Information
-                  </Title>
-                  <Stack gap="md">
-                    <Group gap="xs">
-                      <IconMail size={18} />
-                      <Box>
-                        <Text size="xs" c="dimmed">
-                          Email
-                        </Text>
-                        <Text size="sm">{contact.email}</Text>
-                      </Box>
-                    </Group>
-                    {contact.phone && (
-                      <Group gap="xs">
-                        <IconPhone size={18} />
-                        <Box>
-                          <Text size="xs" c="dimmed">
-                            Phone
-                          </Text>
-                          <Text size="sm">{contact.phone}</Text>
-                        </Box>
-                      </Group>
-                    )}
-                    {contact.companyId && (
-                      <Group gap="xs">
-                        <IconBuilding size={18} />
-                        <Box>
-                          <Text size="xs" c="dimmed">
-                            Company ID
-                          </Text>
-                          <Text size="sm">{contact.companyId}</Text>
-                        </Box>
-                      </Group>
-                    )}
-                    <Group gap="xs">
-                      <IconStar size={18} />
-                      <Box>
-                        <Text size="xs" c="dimmed">
-                          Lead Score
-                        </Text>
-                        <Text size="sm">{contact.leadScore}/100</Text>
-                      </Box>
-                    </Group>
-                  </Stack>
-                </Paper>
-              </Grid.Col>
-
-              <Grid.Col span={{ base: 12, md: 6 }}>
-                <Paper shadow="sm" p="lg" radius="md" withBorder>
-                  <Title order={4} mb="md">
-                    Metadata
-                  </Title>
-                  <Stack gap="md">
-                    <Group gap="xs">
-                      <IconCalendar size={18} />
-                      <Box>
-                        <Text size="xs" c="dimmed">
-                          Created
-                        </Text>
-                        <Text size="sm">{formatDate(contact.createdAt)}</Text>
-                      </Box>
-                    </Group>
-                    <Group gap="xs">
-                      <IconUser size={18} />
-                      <Box>
-                        <Text size="xs" c="dimmed">
-                          Created By
-                        </Text>
-                        <Text size="sm">{contact.createdBy}</Text>
-                      </Box>
-                    </Group>
-                    <Group gap="xs">
-                      <IconCalendar size={18} />
-                      <Box>
-                        <Text size="xs" c="dimmed">
-                          Last Updated
-                        </Text>
-                        <Text size="sm">{formatDate(contact.updatedAt)}</Text>
-                      </Box>
-                    </Group>
-                    <Group gap="xs">
-                      <IconUser size={18} />
-                      <Box>
-                        <Text size="xs" c="dimmed">
-                          Last Modified By
-                        </Text>
-                        <Text size="sm">{contact.lastModifiedBy}</Text>
-                      </Box>
-                    </Group>
-                  </Stack>
-                </Paper>
-              </Grid.Col>
-            </Grid>
-
-            {/* Notes */}
-            {contact.notes && (
-              <Paper shadow="sm" p="lg" radius="md" withBorder>
-                <Group gap="xs" mb="md">
-                  <IconNotes size={18} />
-                  <Title order={4}>Notes</Title>
-                </Group>
-                <Text size="sm" style={{ whiteSpace: "pre-wrap" }}>
-                  {contact.notes}
-                </Text>
-              </Paper>
+                  <IconMail size={18} />
+                </ActionIcon>
+              </Tooltip>
             )}
-          </Stack>
-        )}
-      </Box>
+            {contact.phone && (
+              <Tooltip label={t`Call contact`}>
+                <ActionIcon
+                  variant="light"
+                  color="green"
+                  size="lg"
+                  onClick={handleCallContact}
+                >
+                  <IconPhone size={18} />
+                </ActionIcon>
+              </Tooltip>
+            )}
+            <Button
+              leftSection={<IconEdit size={16} />}
+              onClick={handleEditContact}
+            >
+              {t`Edit Contact`}
+            </Button>
+          </Group>
+        </Group>
 
-      {/* Edit contact modal */}
-      <Modal
-        opened={editModalOpen}
-        onClose={() => setEditModalOpen(false)}
-        title="Edit Contact"
-        size="lg"
-      >
-        {contact && (
-          <ContactForm
-            contact={contact}
-            onSubmit={handleUpdateContact}
-            onCancel={() => setEditModalOpen(false)}
-            loading={updateMutation.isPending}
-          />
-        )}
-      </Modal>
+        {/* Contact Overview Card */}
+        <Paper p="xl" withBorder>
+          <Group align="flex-start" wrap="nowrap">
+            <Avatar
+              size="xl"
+              radius="md"
+              color="blue"
+              name={`${contact.firstName} ${contact.lastName}`}
+            >
+              <IconUser size={32} />
+            </Avatar>
+
+            <Box style={{ flex: 1 }}>
+              <Group justify="space-between" align="flex-start" mb="md">
+                <div>
+                  <Text size="xl" fw={600} mb="xs">
+                    {contact.firstName} {contact.lastName}
+                  </Text>
+                  {contact.jobTitle && (
+                    <Text size="md" c="dimmed" mb="xs">
+                      {contact.jobTitle}
+                    </Text>
+                  )}
+                  {contact.company?.name && (
+                    <Group gap="xs" mb="xs">
+                      <IconBuilding size={16} />
+                      <Text size="sm">{contact.company.name}</Text>
+                    </Group>
+                  )}
+                </div>
+
+                <Group gap="xs">
+                  <Badge
+                    color={
+                      contact.status === "ACTIVE"
+                        ? "green"
+                        : contact.status === "INACTIVE"
+                          ? "gray"
+                          : "blue"
+                    }
+                    variant="light"
+                  >
+                    {contact.status}
+                  </Badge>
+                  <LeadScoreBadge score={contact.leadScore} />
+                </Group>
+              </Group>
+
+              <Divider mb="md" />
+
+              <Group gap="xl">
+                {contact.email && (
+                  <Group gap="xs">
+                    <IconMail size={16} />
+                    <Text size="sm">{contact.email}</Text>
+                  </Group>
+                )}
+                {contact.phone && (
+                  <Group gap="xs">
+                    <IconPhone size={16} />
+                    <Text size="sm">{contact.phone}</Text>
+                  </Group>
+                )}
+                <Group gap="xs">
+                  <IconCalendar size={16} />
+                  <Text size="sm">Created {formatDate(contact.createdAt)}</Text>
+                </Group>
+              </Group>
+
+              {contact.convertedFromLeadId && (
+                <Group gap="xs" mt="md">
+                  <Badge color="blue" variant="outline">
+                    Converted from Lead #{contact.convertedFromLeadId}
+                  </Badge>
+                  {contact.convertedAt && (
+                    <Text size="xs" c="dimmed">
+                      on {formatDate(contact.convertedAt)}
+                    </Text>
+                  )}
+                </Group>
+              )}
+            </Box>
+          </Group>
+        </Paper>
+
+        {/* Tabbed Content */}
+        <Tabs value={activeTab} onChange={setActiveTab}>
+          <Tabs.List>
+            <Tabs.Tab value="overview" leftSection={<IconUser size={16} />}>
+              {t`Overview`}
+            </Tabs.Tab>
+            <Tabs.Tab value="notes" leftSection={<IconNotes size={16} />}>
+              {t`Notes`}
+            </Tabs.Tab>
+            <Tabs.Tab
+              value="activities"
+              leftSection={<IconCalendar size={16} />}
+            >
+              {t`Activities`}
+            </Tabs.Tab>
+          </Tabs.List>
+
+          <Tabs.Panel value="overview" pt="lg">
+            <Stack gap="lg">
+              {/* Company Information */}
+              {contact.company && (
+                <Paper p="lg" withBorder>
+                  <Text size="lg" fw={600} mb="md">
+                    Company Information
+                  </Text>
+                  <Stack gap="sm">
+                    <Group>
+                      <Text fw={500} w={120}>
+                        Company:
+                      </Text>
+                      <Text>{contact.company.name}</Text>
+                    </Group>
+                    {contact.company.website && (
+                      <Group>
+                        <Text fw={500} w={120}>
+                          Website:
+                        </Text>
+                        <Text
+                          component="a"
+                          href={contact.company.website}
+                          target="_blank"
+                          c="blue"
+                        >
+                          {contact.company.website}
+                        </Text>
+                      </Group>
+                    )}
+                    {contact.company.industry && (
+                      <Group>
+                        <Text fw={500} w={120}>
+                          Industry:
+                        </Text>
+                        <Text>{contact.company.industry}</Text>
+                      </Group>
+                    )}
+                    {contact.company.size && (
+                      <Group>
+                        <Text fw={500} w={120}>
+                          Size:
+                        </Text>
+                        <Text>{contact.company.size}</Text>
+                      </Group>
+                    )}
+                  </Stack>
+                </Paper>
+              )}
+
+              {/* Additional Notes */}
+              {contact.notes && (
+                <Paper p="lg" withBorder>
+                  <Text size="lg" fw={600} mb="md">
+                    Notes
+                  </Text>
+                  <Text style={{ whiteSpace: "pre-wrap" }}>
+                    {contact.notes}
+                  </Text>
+                </Paper>
+              )}
+            </Stack>
+          </Tabs.Panel>
+
+          <Tabs.Panel value="notes" pt="lg">
+            <ContactNotesSection contactId={contactId} />
+          </Tabs.Panel>
+
+          <Tabs.Panel value="activities" pt="lg">
+            <ContactActivityTimeline contactId={contactId} />
+          </Tabs.Panel>
+        </Tabs>
+      </Stack>
+
+      {/* Edit Modal */}
+      <ContactEditModal
+        opened={editModalOpened}
+        onClose={() => setEditModalOpened(false)}
+        contact={contact}
+        onSuccess={() => {
+          refetch();
+          setEditModalOpened(false);
+        }}
+      />
     </Container>
   );
 };

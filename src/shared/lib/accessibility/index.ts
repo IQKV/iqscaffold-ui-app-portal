@@ -1,36 +1,84 @@
+import { useEffect, useCallback } from "react";
+
+interface KeyboardShortcut {
+  key: string;
+  ctrl?: boolean;
+  alt?: boolean;
+  shift?: boolean;
+  action: () => void;
+  description: string;
+  preventDefault?: boolean;
+}
+
+interface UseKeyboardNavigationOptions {
+  shortcuts: KeyboardShortcut[];
+  enabled?: boolean;
+}
+
 /**
- * Accessibility utilities for CRM features
- *
- * Provides keyboard navigation, focus management, and ARIA support
- * Requirements: 14.1, 14.2, 14.3, 14.6, 14.7
+ * Hook for keyboard navigation and shortcuts
  */
+export const useKeyboardNavigation = ({
+  shortcuts,
+  enabled = true,
+}: UseKeyboardNavigationOptions) => {
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (!enabled) {
+        return;
+      }
 
-export {
-  useKeyboardNavigation,
-  useFocusTrap,
-  useRovingTabIndex,
-  CRM_KEYBOARD_SHORTCUTS,
-  type KeyboardShortcut,
-  type UseKeyboardNavigationOptions,
-} from "./useKeyboardNavigation";
+      const shortcut = shortcuts.find(
+        (s) =>
+          s.key.toLowerCase() === event.key.toLowerCase() &&
+          !!s.ctrl === event.ctrlKey &&
+          !!s.alt === event.altKey &&
+          !!s.shift === event.shiftKey
+      );
 
-export { VisuallyHidden } from "./VisuallyHidden";
-export { SkipLink } from "./SkipLink";
-export { useAnnouncer } from "./useAnnouncer";
-export { FocusIndicator } from "./FocusIndicator";
+      if (shortcut) {
+        if (shortcut.preventDefault) {
+          event.preventDefault();
+        }
+        shortcut.action();
+      }
+    },
+    [shortcuts, enabled]
+  );
 
-export {
-  prefersReducedMotion,
-  prefersHighContrast,
-  prefersDarkMode,
-  getAnimationDuration,
-  getFocusIndicatorStyle,
-  focusIndicatorStyles,
-  getRelativeLuminance,
-  getContrastRatio,
-  meetsWCAGAA,
-  meetsWCAGAAA,
-  a11yClassNames,
-  applyFocusVisibleStyles,
-  useAccessibilityPreferences,
-} from "./visualAccessibility";
+  useEffect(() => {
+    if (enabled) {
+      document.addEventListener("keydown", handleKeyDown);
+      return () => document.removeEventListener("keydown", handleKeyDown);
+    }
+  }, [handleKeyDown, enabled]);
+};
+
+/**
+ * Hook for screen reader announcements
+ */
+export const useAnnouncer = () => {
+  const announce = useCallback(
+    (message: string, options?: { priority?: "polite" | "assertive" }) => {
+      const announcement = document.createElement("div");
+      announcement.setAttribute("aria-live", options?.priority || "polite");
+      announcement.setAttribute("aria-atomic", "true");
+      announcement.setAttribute("class", "sr-only");
+      announcement.style.position = "absolute";
+      announcement.style.left = "-10000px";
+      announcement.style.width = "1px";
+      announcement.style.height = "1px";
+      announcement.style.overflow = "hidden";
+      announcement.textContent = message;
+
+      document.body.appendChild(announcement);
+
+      setTimeout(() => {
+        document.body.removeChild(announcement);
+      }, 1000);
+    },
+    []
+  );
+
+  return { announce };
+};

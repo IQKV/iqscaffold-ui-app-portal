@@ -12,6 +12,8 @@ const renderWithMantine = (component: React.ReactElement) => {
 // Mock lead data for testing
 const mockLead: Lead = {
   id: "lead-1",
+  firstName: "John",
+  lastName: "Doe",
   name: "John Doe",
   email: "john@example.com",
   phone: "+1234567890",
@@ -140,6 +142,8 @@ describe("LeadCard", () => {
   it("handles leads without optional fields", () => {
     const minimalLead: Lead = {
       id: "lead-2",
+      firstName: "Jane",
+      lastName: "Doe",
       name: "Jane Doe",
       email: "jane@example.com",
       source: "REFERRAL",

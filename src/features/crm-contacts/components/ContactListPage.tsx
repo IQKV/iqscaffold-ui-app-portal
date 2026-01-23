@@ -260,7 +260,8 @@ export const ContactListPage: React.FC = () => {
               { value: "", label: "All Statuses" },
               { value: "ACTIVE", label: "Active" },
               { value: "INACTIVE", label: "Inactive" },
-              { value: "ARCHIVED", label: "Archived" },
+              { value: "PROSPECT", label: "Prospect" },
+              { value: "CUSTOMER", label: "Customer" },
             ]}
             value={statusFilter}
             onChange={(value) => {
@@ -331,10 +332,10 @@ export const ContactListPage: React.FC = () => {
                     </Menu.Item>
                     <Menu.Item
                       onClick={() =>
-                        handleBulkStatusUpdate(ContactStatus.ARCHIVED)
+                        handleBulkStatusUpdate(ContactStatus.PROSPECT)
                       }
                     >
-                      {t`Set Archived`}
+                      {t`Set Prospect`}
                     </Menu.Item>
                   </Menu.Dropdown>
                 </Menu>

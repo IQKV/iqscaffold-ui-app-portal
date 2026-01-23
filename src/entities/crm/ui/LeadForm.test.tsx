@@ -53,6 +53,8 @@ const TestWrapper = ({ children }: { children: React.ReactNode }) => {
 
 const mockLead: Lead = {
   id: "1",
+  firstName: "John",
+  lastName: "Doe",
   name: "John Doe",
   email: "john.doe@example.com",
   phone: "+1234567890",
