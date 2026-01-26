@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { useAuthStore } from "@/processes/auth";
 import * as billingPerms from "./billing-permissions";
-import * as crmPerms from "./crm-permissions";
 import {
   hasAnyAuthorityWithInheritance,
   hasAuthorityWithInheritance as hasAuthorityWithInheritanceHelper,
@@ -65,28 +64,11 @@ export function useAuth() {
     const canManageSubscriptionPlans = () =>
       billingPerms.canManageSubscriptionPlans(user);
 
-    // CRM permissions (new)
-    const hasCrmAccess = () => crmPerms.hasCrmAccess(user);
-    const canManageLeads = () => crmPerms.canManageLeads(user);
-    const canManageContacts = () => crmPerms.canManageContacts(user);
-    const canManagePipeline = () => crmPerms.canManagePipeline(user);
-    const isCrmAdmin = () => crmPerms.isCrmAdmin(user);
-    const canDeleteLeads = () => crmPerms.canDeleteLeads(user);
-    const canDeleteContacts = () => crmPerms.canDeleteContacts(user);
-    const canManagePipelineStages = () =>
-      crmPerms.canManagePipelineStages(user);
-    const canViewCrmDashboard = () => crmPerms.canViewCrmDashboard(user);
-    const canConvertLeads = () => crmPerms.canConvertLeads(user);
-    const canManageFollowUps = () => crmPerms.canManageFollowUps(user);
-    const canDeleteFollowUps = () => crmPerms.canDeleteFollowUps(user);
-
     // Authority level helpers
     const getBillingAuthorityLevel = () =>
       billingPerms.getBillingAuthorityLevel(user);
-    const getCrmAuthorityLevel = () => crmPerms.getCrmAuthorityLevel(user);
     const getUserBillingAuthorities = () =>
       billingPerms.getUserBillingAuthorities(user);
-    const getUserCrmAuthorities = () => crmPerms.getUserCrmAuthorities(user);
 
     // Legacy compatibility (deprecated)
     const isFinanceViewer = () => {
@@ -128,25 +110,9 @@ export function useAuth() {
       canCreatePayments,
       canManageSubscriptionPlans,
 
-      // CRM permissions
-      hasCrmAccess,
-      canManageLeads,
-      canManageContacts,
-      canManagePipeline,
-      isCrmAdmin,
-      canDeleteLeads,
-      canDeleteContacts,
-      canManagePipelineStages,
-      canViewCrmDashboard,
-      canConvertLeads,
-      canManageFollowUps,
-      canDeleteFollowUps,
-
       // Authority level helpers
       getBillingAuthorityLevel,
-      getCrmAuthorityLevel,
       getUserBillingAuthorities,
-      getUserCrmAuthorities,
 
       // Legacy compatibility (deprecated)
       isFinanceViewer,

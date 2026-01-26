@@ -11,14 +11,6 @@ import {
 // Mock available features from backend configuration
 const mockAvailableFeatures: FeatureDetail[] = [
   {
-    code: "crm",
-    displayName: "Customer Relationship Management",
-    description: "Manage leads, contacts, and sales pipeline",
-    composable: true,
-    requiredAuthorities: ["CRM_ACCESS"],
-    dependencies: [],
-  },
-  {
     code: "billing",
     displayName: "Billing & Payments",
     description: "Manage subscriptions, payments, and invoicing",
@@ -47,12 +39,6 @@ const mockAvailableFeatures: FeatureDetail[] = [
 // Mock user features (what the current user has enabled)
 const mockUserFeatures: FeatureSummary[] = [
   {
-    code: "crm",
-    displayName: "Customer Relationship Management",
-    description: "Manage leads, contacts, and sales pipeline",
-    enabled: true,
-  },
-  {
     code: "analytics",
     displayName: "Advanced Analytics",
     description: "Access to advanced reporting and analytics dashboards",
@@ -64,9 +50,9 @@ const mockUserFeatures: FeatureSummary[] = [
 const userFeatureMap = new Map<number, Set<string>>();
 
 // Initialize some test users with features
-userFeatureMap.set(1, new Set(["crm", "analytics"]));
+userFeatureMap.set(1, new Set(["analytics"]));
 userFeatureMap.set(2, new Set(["billing"]));
-userFeatureMap.set(3, new Set(["crm", "billing", "api"]));
+userFeatureMap.set(3, new Set(["billing", "api"]));
 
 export const featureHandlers = [
   // Get current user's features

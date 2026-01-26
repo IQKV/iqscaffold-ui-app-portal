@@ -29,12 +29,11 @@ An application portal that demonstrates:
 - **Invoice Management** - Automated invoice generation, viewing, and download functionality
 - **Gateway Configuration** - Multi-provider payment gateway setup and management
 - **Merchant Onboarding** - Stripe Connect integration for marketplace sellers
-- **CRM System** - Complete lead management, contact tracking, and sales pipeline
 - **Multi-Language Support** - Internationalization with Lingui framework
 - **User Preferences** - Theme switching, locale settings, and personalization
 - **SaaS Frontend Patterns** - Patterns for building scalable multi-tenant SaaS applications
 
-Reference implementation for building microservices-based SaaS applications, demonstrating modern frontend architecture, subscription management, payment processing, and CRM functionality.
+Reference implementation for building microservices-based SaaS applications, demonstrating modern frontend architecture, subscription management, and payment processing.
 
 ## Overview
 
@@ -108,16 +107,6 @@ Starting point for microservices frontend development, demonstrating scalable Sa
 - Return URL handling for onboarding completion
 - Merchant verification status monitoring
 - Multi-organization merchant management
-
-### 📊 CRM System
-
-- **Lead Management**: Complete lead lifecycle from creation to conversion
-- **Contact Management**: Customer contact database with interaction history
-- **Sales Pipeline**: Visual Kanban-style pipeline with drag-and-drop functionality
-- **CRM Dashboard**: Analytics and metrics for sales performance
-- **Follow-up Management**: Automated follow-up scheduling and tracking
-- **Lead Conversion**: Conversion tracking and analytics
-- **Activity Logging**: Comprehensive interaction and communication history
 
 ### Security Management
 
@@ -409,7 +398,6 @@ Patterns applicable to various SaaS scenarios:
 
 - Multi-tenant B2B SaaS platforms
 - Enterprise management consoles
-- Customer relationship management (CRM)
 - Project management tools
 - Analytics and reporting platforms
 - E-commerce admin panels
@@ -429,7 +417,6 @@ Patterns applicable to various SaaS scenarios:
 - State management patterns (server/client/URL/form)
 - API integration strategies with type safety
 - Testing and quality assurance setup
-- CI/CD pipeline configuration
 - Docker containerization for deployment
 
 Patterns apply to SaaS applications requiring web frontends with authentication, authorization, user management, and microservices integration.

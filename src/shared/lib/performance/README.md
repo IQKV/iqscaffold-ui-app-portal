@@ -1,6 +1,6 @@
 # Performance Optimization Guide
 
-This directory contains performance monitoring and optimization utilities for the CRM application.
+This directory contains performance monitoring and optimization utilities for the application.
 
 ## Features
 
@@ -17,8 +17,8 @@ This directory contains performance monitoring and optimization utilities for th
 import { VirtualizedList } from "@/shared/ui";
 
 <VirtualizedList
-  items={leads}
-  renderItem={(lead) => <LeadCard lead={lead} />}
+  items={items}
+  renderItem={(item) => <ItemCard item={item} />}
   itemHeight={120}
   hasMore={hasMore}
   onLoadMore={loadMore}
@@ -38,7 +38,7 @@ import { VirtualizedList } from "@/shared/ui";
 import { LazyLoad } from "@/shared/ui";
 
 <LazyLoad height={600} threshold={0.1}>
-  <PipelineStageColumn stage={stage} />
+  <ComponentToLazyLoad />
 </LazyLoad>;
 ```
 
@@ -77,7 +77,7 @@ import { usePerformanceMonitor } from "@/shared/lib/performance";
 const { trackInteraction, trackMetric } = usePerformanceMonitor();
 
 // Track user interaction
-trackInteraction("lead_click", "LeadCard", duration);
+trackInteraction("item_click", "ItemCard", duration);
 
 // Track custom metric
 trackMetric("data_processing", duration, { recordCount: 100 });
@@ -142,20 +142,23 @@ Exceeding these budgets will trigger console warnings in development mode.
 
 ## Skeleton Loaders
 
-Skeleton loaders are available for all major CRM components:
+Skeleton loaders are available for major application components:
 
-- `LeadListSkeleton` - For lead list pages
-- `LeadDetailSkeleton` - For lead detail pages
-- `PipelineSkeleton` - For pipeline kanban view
-- `DashboardSkeleton` - For CRM dashboard
+- `TableSkeleton` - For data table pages
+- `DetailSkeleton` - For detail pages
+- `DashboardSkeleton` - For dashboard widgets
 
 **Usage:**
 
 ```tsx
-import { LeadListSkeleton } from "@/features/crm-leads/components/skeletons";
+import { LoadingState } from "@/shared/ui";
 
 {
-  isLoading ? <LeadListSkeleton count={5} /> : <LeadList leads={leads} />;
+  isLoading ? (
+    <LoadingState.TableSkeleton count={5} />
+  ) : (
+    <DataTable data={data} />
+  );
 }
 ```
 
@@ -172,7 +175,7 @@ import { LeadListSkeleton } from "@/features/crm-leads/components/skeletons";
 ## Requirements Satisfied
 
 - **13.1**: Virtual scrolling for large datasets
-- **13.2**: Lazy loading for pipeline stages
+- **13.2**: Lazy loading for components
 - **13.3**: Pagination optimization
 - **13.4**: Skeleton loaders matching content layout
 - **13.6**: Optimistic updates for better perceived performance

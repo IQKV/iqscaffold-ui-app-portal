@@ -16,13 +16,6 @@ export const AUTHORITY_BILLING_ACCESS = "BILLING_ACCESS" as const;
 export const AUTHORITY_BILLING_MANAGER = "BILLING_MANAGER" as const;
 export const AUTHORITY_BILLING_ADMIN = "BILLING_ADMIN" as const;
 
-// CRM feature authorities
-export const AUTHORITY_CRM_ACCESS = "CRM_ACCESS" as const;
-export const AUTHORITY_CRM_LEAD_MANAGER = "CRM_LEAD_MANAGER" as const;
-export const AUTHORITY_CRM_CONTACT_MANAGER = "CRM_CONTACT_MANAGER" as const;
-export const AUTHORITY_CRM_PIPELINE_MANAGER = "CRM_PIPELINE_MANAGER" as const;
-export const AUTHORITY_CRM_ADMIN = "CRM_ADMIN" as const;
-
 // API access authority
 export const AUTHORITY_API_ACCESS = "API_ACCESS" as const;
 
@@ -38,11 +31,6 @@ export type Authority =
   | typeof AUTHORITY_BILLING_ACCESS
   | typeof AUTHORITY_BILLING_MANAGER
   | typeof AUTHORITY_BILLING_ADMIN
-  | typeof AUTHORITY_CRM_ACCESS
-  | typeof AUTHORITY_CRM_LEAD_MANAGER
-  | typeof AUTHORITY_CRM_CONTACT_MANAGER
-  | typeof AUTHORITY_CRM_PIPELINE_MANAGER
-  | typeof AUTHORITY_CRM_ADMIN
   | typeof AUTHORITY_API_ACCESS
   | typeof AUTHORITY_FINANCE_VIEWER;
 
@@ -59,14 +47,6 @@ export const BILLING_AUTHORITIES = [
   AUTHORITY_BILLING_ADMIN,
 ] as const;
 
-export const CRM_AUTHORITIES = [
-  AUTHORITY_CRM_ACCESS,
-  AUTHORITY_CRM_LEAD_MANAGER,
-  AUTHORITY_CRM_CONTACT_MANAGER,
-  AUTHORITY_CRM_PIPELINE_MANAGER,
-  AUTHORITY_CRM_ADMIN,
-] as const;
-
 /**
  * Authority hierarchy for UI rendering and access control
  * Higher number = higher privilege level
@@ -80,13 +60,6 @@ export const AUTHORITY_HIERARCHY = {
   [AUTHORITY_BILLING_ACCESS]: 10,
   [AUTHORITY_BILLING_MANAGER]: 20,
   [AUTHORITY_BILLING_ADMIN]: 30,
-
-  // CRM authorities
-  [AUTHORITY_CRM_ACCESS]: 10,
-  [AUTHORITY_CRM_LEAD_MANAGER]: 20,
-  [AUTHORITY_CRM_CONTACT_MANAGER]: 20,
-  [AUTHORITY_CRM_PIPELINE_MANAGER]: 25,
-  [AUTHORITY_CRM_ADMIN]: 30,
 
   // Legacy authorities
   [AUTHORITY_FINANCE_VIEWER]: 15,
@@ -106,7 +79,6 @@ export const AUTHORITY_INHERITANCE = {
   [AUTHORITY_SUPER_ADMIN]: [
     ...ADMIN_AUTHORITIES,
     ...BILLING_AUTHORITIES,
-    ...CRM_AUTHORITIES,
     AUTHORITY_API_ACCESS,
     AUTHORITY_FINANCE_VIEWER,
     AUTHORITY_USER,
@@ -114,14 +86,12 @@ export const AUTHORITY_INHERITANCE = {
   [AUTHORITY_TENANT_OWNER]: [
     AUTHORITY_ADMIN,
     ...BILLING_AUTHORITIES,
-    ...CRM_AUTHORITIES,
     AUTHORITY_API_ACCESS,
     AUTHORITY_FINANCE_VIEWER,
     AUTHORITY_USER,
   ],
   [AUTHORITY_ADMIN]: [
     ...BILLING_AUTHORITIES,
-    ...CRM_AUTHORITIES,
     AUTHORITY_API_ACCESS,
     AUTHORITY_FINANCE_VIEWER,
     AUTHORITY_USER,
@@ -135,22 +105,11 @@ export const AUTHORITY_INHERITANCE = {
   ],
   [AUTHORITY_BILLING_MANAGER]: [AUTHORITY_BILLING_ACCESS],
 
-  [AUTHORITY_CRM_ADMIN]: [
-    AUTHORITY_CRM_LEAD_MANAGER,
-    AUTHORITY_CRM_CONTACT_MANAGER,
-    AUTHORITY_CRM_PIPELINE_MANAGER,
-    AUTHORITY_CRM_ACCESS,
-  ],
-  [AUTHORITY_CRM_PIPELINE_MANAGER]: [AUTHORITY_CRM_ACCESS],
-  [AUTHORITY_CRM_LEAD_MANAGER]: [AUTHORITY_CRM_ACCESS],
-  [AUTHORITY_CRM_CONTACT_MANAGER]: [AUTHORITY_CRM_ACCESS],
-
   // Add missing authority mappings (no inheritance for basic authorities)
   [AUTHORITY_USER]: [],
   [AUTHORITY_API_ACCESS]: [],
   [AUTHORITY_FINANCE_VIEWER]: [],
   [AUTHORITY_BILLING_ACCESS]: [],
-  [AUTHORITY_CRM_ACCESS]: [],
 } as const;
 
 /**
@@ -165,13 +124,6 @@ export function isAdminAuthority(authority: string): boolean {
  */
 export function isBillingAuthority(authority: string): boolean {
   return BILLING_AUTHORITIES.includes(authority as any);
-}
-
-/**
- * Check if an authority is a CRM authority
- */
-export function isCrmAuthority(authority: string): boolean {
-  return CRM_AUTHORITIES.includes(authority as any);
 }
 
 /**

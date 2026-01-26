@@ -64,7 +64,6 @@ export {
 export { SubscriptionInfo, SubscriptionStatusBadge } from "./SubscriptionInfo";
 
 // Service health components
-export { CrmServiceDegradationBanner } from "./CrmServiceDegradationBanner";
 export { BillingServiceDegradationBanner } from "./BillingServiceDegradationBanner";
 export { GenericServiceDegradationBanner } from "./GenericServiceDegradationBanner";
 

@@ -6,10 +6,6 @@ import {
   IconUsers,
   IconCreditCard,
   IconSettings,
-  IconUsersGroup,
-  IconLayoutKanban,
-  IconChartBar,
-  IconCalendarEvent,
 } from "@tabler/icons-react";
 import { Link, useLocation } from "@tanstack/react-router";
 import { FeatureGate, SilentFeatureErrorBoundary } from "@/shared/ui";
@@ -90,68 +86,6 @@ export function Sidebar() {
         active={location.pathname === "/dashboard"}
         data-testid="nav-dashboard"
       />
-
-      {/* CRM Section */}
-      <SilentFeatureErrorBoundary>
-        <FeatureGate feature="crm" showLoading={false}>
-          <Text size="sm" fw={500} mt="md">
-            {t`CRM`}
-          </Text>
-
-          <NavLink
-            component={Link}
-            to="/crm/dashboard"
-            label={t`CRM Dashboard`}
-            leftSection={<IconChartBar size="1rem" />}
-            active={location.pathname === "/crm/dashboard"}
-            data-testid="nav-crm-dashboard"
-          />
-
-          <FeatureGate feature="crm" showLoading={false}>
-            <NavLink
-              component={Link}
-              to="/crm/leads"
-              label={t`Leads`}
-              leftSection={<IconUsersGroup size="1rem" />}
-              active={location.pathname.startsWith("/crm/leads")}
-              data-testid="nav-crm-leads"
-            />
-          </FeatureGate>
-
-          <FeatureGate feature="crm" showLoading={false}>
-            <NavLink
-              component={Link}
-              to="/crm/contacts"
-              label={t`Contacts`}
-              leftSection={<IconUsers size="1rem" />}
-              active={location.pathname.startsWith("/crm/contacts")}
-              data-testid="nav-crm-contacts"
-            />
-          </FeatureGate>
-
-          <FeatureGate feature="crm" showLoading={false}>
-            <NavLink
-              component={Link}
-              to="/crm/pipeline"
-              label={t`Pipeline`}
-              leftSection={<IconLayoutKanban size="1rem" />}
-              active={location.pathname === "/crm/pipeline"}
-              data-testid="nav-crm-pipeline"
-            />
-          </FeatureGate>
-
-          <FeatureGate feature="crm" showLoading={false}>
-            <NavLink
-              component={Link}
-              to="/crm/follow-ups"
-              label={t`Follow-ups`}
-              leftSection={<IconCalendarEvent size="1rem" />}
-              active={location.pathname === "/crm/follow-ups"}
-              data-testid="nav-crm-follow-ups"
-            />
-          </FeatureGate>
-        </FeatureGate>
-      </SilentFeatureErrorBoundary>
     </Stack>
   );
 }

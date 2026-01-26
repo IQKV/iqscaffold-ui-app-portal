@@ -30,6 +30,5 @@ export { useEnabledFeatures } from "./hooks/useEnabledFeatures";
 export { FeatureProvider, useFeatureContext } from "./contexts/FeatureContext";
 
 // Service health monitoring
-export { useCrmServiceHealth } from "./hooks/useCrmServiceHealth";
 export { useBillingServiceHealth } from "./hooks/useBillingServiceHealth";
 export { useServiceHealth } from "./hooks/useServiceHealth";

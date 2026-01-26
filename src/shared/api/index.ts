@@ -29,32 +29,3 @@ export type {
   UpdateUserRequest,
   UserPageResponse,
 } from "./user-management-api";
-
-export { crmApi } from "./crm";
-export type {
-  Lead,
-  LeadSource,
-  LeadListParams,
-  CreateLeadRequest,
-  UpdateLeadRequest,
-  ConvertLeadResponse,
-  PipelineStage,
-  CreatePipelineStageRequest,
-  UpdatePipelineStageRequest,
-  LeadNote,
-  CreateLeadNoteRequest,
-  UpdateLeadNoteRequest,
-  ActivityLogEntry,
-  ActivityType,
-  FollowUp,
-  CreateFollowUpRequest,
-  UpdateFollowUpRequest,
-  FollowUpListParams,
-  DashboardStatsParams,
-  DashboardStats,
-  ConversionMetrics,
-  PaginatedResponse,
-} from "./crm/types";
-
-export { contactApi } from "./contact";
-export * from "./contact/types";
