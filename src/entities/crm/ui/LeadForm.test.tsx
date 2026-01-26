@@ -85,7 +85,8 @@ describe("LeadForm", () => {
 
       expect(screen.getByTestId("modal-lead-form")).toBeInTheDocument();
       expect(screen.getByTestId("form-lead")).toBeInTheDocument();
-      expect(screen.getByLabelText(/name/i)).toHaveValue("");
+      expect(screen.getByLabelText(/first name/i)).toHaveValue("");
+      expect(screen.getByLabelText(/last name/i)).toHaveValue("");
       expect(screen.getByLabelText(/email/i)).toHaveValue("");
       expect(screen.getByLabelText(/phone/i)).toHaveValue("");
       expect(screen.getByLabelText(/company/i)).toHaveValue("");
@@ -123,12 +124,14 @@ describe("LeadForm", () => {
         </TestWrapper>
       );
 
-      // Check for required fields (name, email, source)
+      // Check for required fields (firstName, lastName, email, source)
       // Note: Mantine form validation is handled by Zod, not HTML5 required attribute
-      const nameInput = screen.getByLabelText(/name/i);
+      const firstNameInput = screen.getByLabelText(/first name/i);
+      const lastNameInput = screen.getByLabelText(/last name/i);
       const emailInput = screen.getByLabelText(/email/i);
 
-      expect(nameInput).toBeInTheDocument();
+      expect(firstNameInput).toBeInTheDocument();
+      expect(lastNameInput).toBeInTheDocument();
       expect(emailInput).toBeInTheDocument();
     });
   });
@@ -141,7 +144,8 @@ describe("LeadForm", () => {
         </TestWrapper>
       );
 
-      expect(screen.getByLabelText(/name/i)).toHaveValue(mockLead.name);
+      expect(screen.getByLabelText(/first name/i)).toHaveValue(mockLead.firstName);
+      expect(screen.getByLabelText(/last name/i)).toHaveValue(mockLead.lastName);
       expect(screen.getByLabelText(/email/i)).toHaveValue(mockLead.email);
       expect(screen.getByLabelText(/phone/i)).toHaveValue(mockLead.phone);
       expect(screen.getByLabelText(/company/i)).toHaveValue(mockLead.company);
@@ -171,7 +175,7 @@ describe("LeadForm", () => {
   });
 
   describe("Form Validation (Requirements 11.1, 11.2)", () => {
-    it("should show validation error for missing name", async () => {
+    it("should show validation error for missing first name", async () => {
       const user = userEvent.setup();
 
       render(
@@ -184,9 +188,8 @@ describe("LeadForm", () => {
       await user.click(submitButton);
 
       await waitFor(() => {
-        expect(
-          screen.getByText(/name must be at least 2 characters/i)
-        ).toBeInTheDocument();
+        const errorMessages = screen.getAllByText(/name must be at least 2 characters/i);
+        expect(errorMessages.length).toBeGreaterThan(0);
       });
     });
 
@@ -221,8 +224,11 @@ describe("LeadForm", () => {
         </TestWrapper>
       );
 
-      const nameInput = screen.getByLabelText(/name/i);
-      await user.type(nameInput, "John Doe");
+      const firstNameInput = screen.getByLabelText(/first name/i);
+      await user.type(firstNameInput, "John");
+      
+      const lastNameInput = screen.getByLabelText(/last name/i);
+      await user.type(lastNameInput, "Doe");
 
       const submitButton = screen.getByTestId("btn-submit-lead-form");
       await user.click(submitButton);
@@ -244,10 +250,12 @@ describe("LeadForm", () => {
         </TestWrapper>
       );
 
-      const nameInput = screen.getByLabelText(/name/i);
+      const firstNameInput = screen.getByLabelText(/first name/i);
+      const lastNameInput = screen.getByLabelText(/last name/i);
       const emailInput = screen.getByLabelText(/email/i);
 
-      await user.type(nameInput, "John Doe");
+      await user.type(firstNameInput, "John");
+      await user.type(lastNameInput, "Doe");
       await user.type(emailInput, "john@example.com");
 
       // Clear the default source value
@@ -319,8 +327,8 @@ describe("LeadForm", () => {
         </TestWrapper>
       );
 
-      const nameInput = screen.getByLabelText(/name/i);
-      await user.type(nameInput, "Test Name");
+      const firstNameInput = screen.getByLabelText(/first name/i);
+      await user.type(firstNameInput, "Test Name");
 
       const cancelButton = screen.getByTestId("btn-cancel-lead-form");
       await user.click(cancelButton);
@@ -362,10 +370,12 @@ describe("LeadForm", () => {
         </TestWrapper>
       );
 
-      const nameInput = screen.getByLabelText(/name/i);
+      const firstNameInput = screen.getByLabelText(/first name/i);
+      const lastNameInput = screen.getByLabelText(/last name/i);
       const emailInput = screen.getByLabelText(/email/i);
 
-      await user.type(nameInput, "John Doe");
+      await user.type(firstNameInput, "John");
+      await user.type(lastNameInput, "Doe");
       await user.type(emailInput, "john@example.com");
 
       // Phone is optional, so form should be valid without it
@@ -382,10 +392,12 @@ describe("LeadForm", () => {
         </TestWrapper>
       );
 
-      const nameInput = screen.getByLabelText(/name/i);
+      const firstNameInput = screen.getByLabelText(/first name/i);
+      const lastNameInput = screen.getByLabelText(/last name/i);
       const emailInput = screen.getByLabelText(/email/i);
 
-      await user.type(nameInput, "John Doe");
+      await user.type(firstNameInput, "John");
+      await user.type(lastNameInput, "Doe");
       await user.type(emailInput, "john@example.com");
 
       // Company is optional, so form should be valid without it
