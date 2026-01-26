@@ -144,8 +144,12 @@ describe("LeadForm", () => {
         </TestWrapper>
       );
 
-      expect(screen.getByLabelText(/first name/i)).toHaveValue(mockLead.firstName);
-      expect(screen.getByLabelText(/last name/i)).toHaveValue(mockLead.lastName);
+      expect(screen.getByLabelText(/first name/i)).toHaveValue(
+        mockLead.firstName
+      );
+      expect(screen.getByLabelText(/last name/i)).toHaveValue(
+        mockLead.lastName
+      );
       expect(screen.getByLabelText(/email/i)).toHaveValue(mockLead.email);
       expect(screen.getByLabelText(/phone/i)).toHaveValue(mockLead.phone);
       expect(screen.getByLabelText(/company/i)).toHaveValue(mockLead.company);
@@ -188,7 +192,9 @@ describe("LeadForm", () => {
       await user.click(submitButton);
 
       await waitFor(() => {
-        const errorMessages = screen.getAllByText(/name must be at least 2 characters/i);
+        const errorMessages = screen.getAllByText(
+          /name must be at least 2 characters/i
+        );
         expect(errorMessages.length).toBeGreaterThan(0);
       });
     });
@@ -226,7 +232,7 @@ describe("LeadForm", () => {
 
       const firstNameInput = screen.getByLabelText(/first name/i);
       await user.type(firstNameInput, "John");
-      
+
       const lastNameInput = screen.getByLabelText(/last name/i);
       await user.type(lastNameInput, "Doe");
 
