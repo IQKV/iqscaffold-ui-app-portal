@@ -61,7 +61,7 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@dr.pogodin/react-helmet": "^3.0.5",
     "@hookform/resolvers": "^5.2.2",
-    "@lingui/core": "^5.5.1",
+    "@lingui/core": "^5.9.0",
     "@lingui/macro": "^5.9.0",
     "@lingui/react": "^5.5.1",
     "@mantine/carousel": "^8.3.5",
