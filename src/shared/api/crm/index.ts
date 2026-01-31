@@ -14,7 +14,7 @@ export const crmApi = {
    */
   getLeads: (params?: Types.LeadListParams) =>
     apiRequest<Types.PaginatedResponse<Types.Lead>>({
-      url: "/api/v1/leads",
+      url: "/v1/leads",
       method: "GET",
       params,
     }),
@@ -24,7 +24,7 @@ export const crmApi = {
    */
   createLead: (request: Types.CreateLeadRequest) =>
     apiRequest<Types.Lead>({
-      url: "/api/v1/leads",
+      url: "/v1/leads",
       method: "POST",
       data: request,
     }),
@@ -34,7 +34,7 @@ export const crmApi = {
    */
   bulkQualifyLeads: (leadIds: string[]) =>
     apiRequest<Types.BulkOperationResponse>({
-      url: "/api/v1/leads/bulk/qualify",
+      url: "/v1/leads/bulk/qualify",
       method: "PATCH",
       data: { leadIds },
     }),
@@ -44,7 +44,7 @@ export const crmApi = {
    */
   exportLeads: (params?: Types.LeadListParams) =>
     apiRequest<Blob>({
-      url: "/api/v1/leads/export",
+      url: "/v1/leads/export",
       method: "GET",
       params,
       responseType: "blob",
@@ -55,7 +55,7 @@ export const crmApi = {
    */
   getLead: (id: string) =>
     apiRequest<Types.Lead>({
-      url: `/api/v1/leads/${id}`,
+      url: `/v1/leads/${id}`,
       method: "GET",
     }),
 
@@ -64,7 +64,7 @@ export const crmApi = {
    */
   updateLead: (id: string, request: Types.UpdateLeadRequest) =>
     apiRequest<Types.Lead>({
-      url: `/api/v1/leads/${id}`,
+      url: `/v1/leads/${id}`,
       method: "PUT",
       data: request,
     }),
@@ -74,7 +74,7 @@ export const crmApi = {
    */
   deleteLead: (id: string) =>
     apiRequest<void>({
-      url: `/api/v1/leads/${id}`,
+      url: `/v1/leads/${id}`,
       method: "DELETE",
     }),
 
@@ -83,17 +83,17 @@ export const crmApi = {
    */
   leadsHealthCheck: () =>
     apiRequest<{ status: string; timestamp: string }>({
-      url: "/api/v1/leads/health",
+      url: "/v1/leads/health",
       method: "GET",
     }),
   contactsHealthCheck: () =>
     apiRequest<{ status: string; timestamp: string }>({
-      url: "/api/v1/contacts/health",
+      url: "/v1/contacts/health",
       method: "GET",
     }),
   pipelineHealthCheck: () =>
     apiRequest<{ status: string; timestamp: string }>({
-      url: "/api/v1/pipeline/health",
+      url: "/v1/pipeline/health",
       method: "GET",
     }),
 
@@ -102,7 +102,7 @@ export const crmApi = {
    */
   convertLead: (id: string) =>
     apiRequest<Types.ConvertLeadResponse>({
-      url: `/api/v1/leads/${id}/convert`,
+      url: `/v1/leads/${id}/convert`,
       method: "POST",
     }),
 
@@ -111,7 +111,7 @@ export const crmApi = {
    */
   getLeadStatsBySource: (params?: Types.DashboardStatsParams) =>
     apiRequest<Record<string, number>>({
-      url: "/api/v1/leads/stats/by-source",
+      url: "/v1/leads/stats/by-source",
       method: "GET",
       params,
     }),
@@ -122,7 +122,7 @@ export const crmApi = {
    */
   getLeadNotes: (leadId: string) =>
     apiRequest<Types.LeadNote[]>({
-      url: `/api/v1/leads/${leadId}/notes`,
+      url: `/v1/leads/${leadId}/notes`,
       method: "GET",
     }),
 
@@ -131,7 +131,7 @@ export const crmApi = {
    */
   createLeadNote: (leadId: string, request: Types.CreateLeadNoteRequest) =>
     apiRequest<Types.LeadNote>({
-      url: `/api/v1/leads/${leadId}/notes`,
+      url: `/v1/leads/${leadId}/notes`,
       method: "POST",
       data: request,
     }),
@@ -145,7 +145,7 @@ export const crmApi = {
     request: Types.UpdateLeadNoteRequest
   ) =>
     apiRequest<Types.LeadNote>({
-      url: `/api/v1/leads/${leadId}/notes/${noteId}`,
+      url: `/v1/leads/${leadId}/notes/${noteId}`,
       method: "PUT",
       data: request,
     }),
@@ -155,7 +155,7 @@ export const crmApi = {
    */
   deleteLeadNote: (leadId: string, noteId: string) =>
     apiRequest<void>({
-      url: `/api/v1/leads/${leadId}/notes/${noteId}`,
+      url: `/v1/leads/${leadId}/notes/${noteId}`,
       method: "DELETE",
     }),
 
@@ -165,7 +165,7 @@ export const crmApi = {
    */
   getLeadActivities: (leadId: string) =>
     apiRequest<Types.ActivityLogEntry[]>({
-      url: `/api/v1/leads/${leadId}/activities`,
+      url: `/v1/leads/${leadId}/activities`,
       method: "GET",
     }),
 
@@ -175,7 +175,7 @@ export const crmApi = {
    */
   getPipelineStages: () =>
     apiRequest<Types.PipelineStage[]>({
-      url: "/api/v1/pipeline/stages",
+      url: "/v1/pipeline/stages",
       method: "GET",
     }),
 
@@ -184,7 +184,7 @@ export const crmApi = {
    */
   createPipelineStage: (request: Types.CreatePipelineStageRequest) =>
     apiRequest<Types.PipelineStage>({
-      url: "/api/v1/pipeline/stages",
+      url: "/v1/pipeline/stages",
       method: "POST",
       data: request,
     }),
@@ -197,7 +197,7 @@ export const crmApi = {
     request: Types.UpdatePipelineStageRequest
   ) =>
     apiRequest<Types.PipelineStage>({
-      url: `/api/v1/pipeline/stages/${id}`,
+      url: `/v1/pipeline/stages/${id}`,
       method: "PUT",
       data: request,
     }),
@@ -207,7 +207,7 @@ export const crmApi = {
    */
   deletePipelineStage: (id: string) =>
     apiRequest<void>({
-      url: `/api/v1/pipeline/stages/${id}`,
+      url: `/v1/pipeline/stages/${id}`,
       method: "DELETE",
     }),
 
@@ -216,7 +216,7 @@ export const crmApi = {
    */
   reorderStage: (id: string, newOrder: number) =>
     apiRequest<Types.PipelineStage>({
-      url: `/api/v1/pipeline/stages/${id}/reorder`,
+      url: `/v1/pipeline/stages/${id}/reorder`,
       method: "PUT",
       params: { newOrder },
     }),
@@ -226,7 +226,7 @@ export const crmApi = {
    */
   moveLeadToStage: (leadId: string, stageId: string) =>
     apiRequest<void>({
-      url: `/api/v1/pipeline/items/${leadId}/stage`,
+      url: `/v1/pipeline/items/${leadId}/stage`,
       method: "PUT",
       params: { stageId },
     }),
@@ -237,7 +237,7 @@ export const crmApi = {
    */
   getFollowUps: (params?: Types.FollowUpListParams) =>
     apiRequest<Types.PaginatedResponse<Types.FollowUp>>({
-      url: "/api/v1/pipeline/follow-ups",
+      url: "/v1/pipeline/follow-ups",
       method: "GET",
       params,
     }),
@@ -247,7 +247,7 @@ export const crmApi = {
    */
   getTodaysFollowUps: () =>
     apiRequest<Types.FollowUp[]>({
-      url: "/api/v1/pipeline/follow-ups/today",
+      url: "/v1/pipeline/follow-ups/today",
       method: "GET",
     }),
 
@@ -256,7 +256,7 @@ export const crmApi = {
    */
   getOverdueFollowUps: () =>
     apiRequest<Types.FollowUp[]>({
-      url: "/api/v1/pipeline/follow-ups/overdue",
+      url: "/v1/pipeline/follow-ups/overdue",
       method: "GET",
     }),
 
@@ -265,7 +265,7 @@ export const crmApi = {
    */
   createFollowUp: (request: Types.CreateFollowUpRequest) =>
     apiRequest<Types.FollowUp>({
-      url: "/api/v1/pipeline/follow-ups",
+      url: "/v1/pipeline/follow-ups",
       method: "POST",
       data: request,
     }),
@@ -275,7 +275,7 @@ export const crmApi = {
    */
   updateFollowUp: (id: string, request: Types.UpdateFollowUpRequest) =>
     apiRequest<Types.FollowUp>({
-      url: `/api/v1/pipeline/follow-ups/${id}`,
+      url: `/v1/pipeline/follow-ups/${id}`,
       method: "PUT",
       data: request,
     }),
@@ -285,7 +285,7 @@ export const crmApi = {
    */
   completeFollowUp: (id: string) =>
     apiRequest<Types.FollowUp>({
-      url: `/api/v1/pipeline/follow-ups/${id}/complete`,
+      url: `/v1/pipeline/follow-ups/${id}/complete`,
       method: "PUT",
     }),
 
@@ -294,7 +294,7 @@ export const crmApi = {
    */
   deleteFollowUp: (id: string) =>
     apiRequest<void>({
-      url: `/api/v1/pipeline/follow-ups/${id}`,
+      url: `/v1/pipeline/follow-ups/${id}`,
       method: "DELETE",
     }),
 
@@ -304,7 +304,7 @@ export const crmApi = {
    */
   getDashboardStats: (params?: Types.DashboardStatsParams) =>
     apiRequest<Types.DashboardStats>({
-      url: "/api/v1/pipeline/dashboard/stats",
+      url: "/v1/pipeline/dashboard/stats",
       method: "GET",
       params,
     }),
@@ -314,7 +314,7 @@ export const crmApi = {
    */
   getConversionMetrics: (params?: Types.DashboardStatsParams) =>
     apiRequest<Types.ConversionMetrics>({
-      url: "/api/v1/pipeline/dashboard/conversion",
+      url: "/v1/pipeline/dashboard/conversion",
       method: "GET",
       params,
     }),

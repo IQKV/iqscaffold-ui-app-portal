@@ -8,9 +8,9 @@ export function useCrmServiceHealth() {
   return useServiceHealth({
     serviceName: "crm",
     endpoints: {
-      leads: "/api/v1/leads/health",
-      contacts: "/api/v1/contacts/health",
-      pipeline: "/api/v1/pipeline/health",
+      leads: "/v1/leads/health",
+      contacts: "/v1/contacts/health",
+      pipeline: "/v1/pipeline/health",
     },
   });
 }

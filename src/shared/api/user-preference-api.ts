@@ -9,7 +9,7 @@ import type {
   UpdateUserPreferenceRequest,
 } from "@/entities/user/model/user-preference-types";
 
-const BASE_PATH = "/api/v1/users/me/preferences";
+const BASE_PATH = "/v1/users/me/preferences";
 
 export const userPreferenceApi = {
   /**

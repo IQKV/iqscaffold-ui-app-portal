@@ -70,7 +70,7 @@ userFeatureMap.set(3, new Set(["crm", "billing", "api"]));
 
 export const featureHandlers = [
   // Get current user's features
-  http.get("/api/v1/users/features/me", () => {
+  http.get("/v1/users/features/me", () => {
     const response: UserFeaturesResponse = {
       userId: 1,
       username: "current-user",
@@ -82,7 +82,7 @@ export const featureHandlers = [
   }),
 
   // Get available features (admin only)
-  http.get("/api/v1/users/features/available", () => {
+  http.get("/v1/users/features/available", () => {
     const response: AvailableFeaturesResponse = {
       totalCount: mockAvailableFeatures.length,
       features: mockAvailableFeatures,
@@ -92,7 +92,7 @@ export const featureHandlers = [
   }),
 
   // Get user features by ID (admin only)
-  http.get("/api/v1/users/features/:userId", ({ params }) => {
+  http.get("/v1/users/features/:userId", ({ params }) => {
     const userId = Number(params.userId);
     const userFeatures = userFeatureMap.get(userId) || new Set();
 
@@ -120,7 +120,7 @@ export const featureHandlers = [
 
   // Enable feature for user (admin only)
   http.post(
-    "/api/v1/users/features/:userId/:featureCode/enable",
+    "/v1/users/features/:userId/:featureCode/enable",
     ({ params }) => {
       const userId = Number(params.userId);
       const featureCode = params.featureCode as string;
@@ -146,7 +146,7 @@ export const featureHandlers = [
 
   // Disable feature for user (admin only)
   http.delete(
-    "/api/v1/users/features/:userId/:featureCode/disable",
+    "/v1/users/features/:userId/:featureCode/disable",
     ({ params }) => {
       const userId = Number(params.userId);
       const featureCode = params.featureCode as string;
@@ -170,7 +170,7 @@ export const featureHandlers = [
 
   // Check feature access for user (admin only)
   http.get(
-    "/api/v1/users/features/:userId/:featureCode/check",
+    "/v1/users/features/:userId/:featureCode/check",
     ({ params }) => {
       const userId = Number(params.userId);
       const featureCode = params.featureCode as string;
@@ -193,7 +193,7 @@ export const featureHandlers = [
   ),
 
   // Bulk update user features (admin only)
-  http.put("/api/v1/users/features/:userId", async ({ params, request }) => {
+  http.put("/v1/users/features/:userId", async ({ params, request }) => {
     const userId = Number(params.userId);
     const { enableFeatures, disableFeatures } = (await request.json()) as {
       enableFeatures: string[];

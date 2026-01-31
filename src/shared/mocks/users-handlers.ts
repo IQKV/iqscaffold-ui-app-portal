@@ -76,7 +76,7 @@ let nextId = 6;
 
 export const usersHandlers = [
   // Get users with pagination and search
-  http.get("/api/v1/admin/users", ({ request }) => {
+  http.get("/v1/admin/users", ({ request }) => {
     const url = new URL(request.url);
     const page = parseInt(url.searchParams.get("page") || "1", 10);
     const limit = parseInt(url.searchParams.get("limit") || "10", 10);
@@ -120,7 +120,7 @@ export const usersHandlers = [
   }),
 
   // Get user by ID
-  http.get("/api/v1/admin/users/:id", ({ params }) => {
+  http.get("/v1/admin/users/:id", ({ params }) => {
     const { id } = params;
     const userId = parseInt(id as string, 10);
     const user = users.find((u) => u.id === userId);
@@ -134,7 +134,7 @@ export const usersHandlers = [
   }),
 
   // Create user (signup)
-  http.post("/api/v1/auth/signup", async ({ request }) => {
+  http.post("/v1/auth/signup", async ({ request }) => {
     const body = (await request.json()) as any;
 
     // Check if username or email already exists
@@ -170,7 +170,7 @@ export const usersHandlers = [
   }),
 
   // Update user
-  http.put("/api/v1/admin/users/:id", async ({ params, request }) => {
+  http.put("/v1/admin/users/:id", async ({ params, request }) => {
     const { id } = params;
     const body = (await request.json()) as any;
     const userId = parseInt(id as string, 10);
@@ -212,7 +212,7 @@ export const usersHandlers = [
   }),
 
   // Delete user
-  http.delete("/api/v1/admin/users/:id", ({ params }) => {
+  http.delete("/v1/admin/users/:id", ({ params }) => {
     const { id } = params;
     const userId = parseInt(id as string, 10);
     const userIndex = users.findIndex((u) => u.id === userId);

@@ -173,7 +173,7 @@ export const userManagementApi = {
    */
   async getAllUsers(params?: PageParams): Promise<UserPageResponse> {
     return apiRequest<UserPageResponse>({
-      url: "/api/v1/admin/users",
+      url: "/v1/admin/users",
       method: "GET",
       params,
     });
@@ -185,7 +185,7 @@ export const userManagementApi = {
    */
   async getUserById(id: number): Promise<UserDto> {
     return apiRequest<UserDto>({
-      url: `/api/v1/admin/users/${id}`,
+      url: `/v1/admin/users/${id}`,
       method: "GET",
     });
   },
@@ -197,7 +197,7 @@ export const userManagementApi = {
    */
   async createUser(data: CreateUserRequest): Promise<UserDto> {
     return apiRequest<UserDto>({
-      url: "/api/v1/admin/users",
+      url: "/v1/admin/users",
       method: "POST",
       data,
     });
@@ -210,7 +210,7 @@ export const userManagementApi = {
    */
   async updateUser(id: number, data: UpdateUserRequest): Promise<UserDto> {
     return apiRequest<UserDto>({
-      url: `/api/v1/admin/users/${id}`,
+      url: `/v1/admin/users/${id}`,
       method: "PUT",
       data,
     });
@@ -224,7 +224,7 @@ export const userManagementApi = {
    */
   async deleteUser(id: number): Promise<void> {
     return apiRequest<void>({
-      url: `/api/v1/admin/users/${id}`,
+      url: `/v1/admin/users/${id}`,
       method: "DELETE",
     });
   },
@@ -237,7 +237,7 @@ export const userManagementApi = {
    */
   async getUserFeatures(userId: number): Promise<UserFeaturesResponse> {
     return apiRequest<UserFeaturesResponse>({
-      url: `/api/v1/users/features/${userId}`,
+      url: `/v1/users/features/${userId}`,
       method: "GET",
     });
   },
@@ -251,7 +251,7 @@ export const userManagementApi = {
     featureCode: string
   ): Promise<FeatureAccessResponse> {
     return apiRequest<FeatureAccessResponse>({
-      url: `/api/v1/users/features/${userId}/${featureCode}/enable`,
+      url: `/v1/users/features/${userId}/${featureCode}/enable`,
       method: "POST",
     });
   },
@@ -265,7 +265,7 @@ export const userManagementApi = {
     featureCode: string
   ): Promise<FeatureAccessResponse> {
     return apiRequest<FeatureAccessResponse>({
-      url: `/api/v1/users/features/${userId}/${featureCode}/disable`,
+      url: `/v1/users/features/${userId}/${featureCode}/disable`,
       method: "DELETE",
     });
   },
@@ -279,7 +279,7 @@ export const userManagementApi = {
     featureCode: string
   ): Promise<FeatureAccessResponse> {
     return apiRequest<FeatureAccessResponse>({
-      url: `/api/v1/users/features/${userId}/${featureCode}/check`,
+      url: `/v1/users/features/${userId}/${featureCode}/check`,
       method: "GET",
     });
   },
@@ -293,7 +293,7 @@ export const userManagementApi = {
     request: BulkFeatureUpdateRequest
   ): Promise<BulkFeatureUpdateResponse> {
     return apiRequest<BulkFeatureUpdateResponse>({
-      url: `/api/v1/users/features/${userId}`,
+      url: `/v1/users/features/${userId}`,
       method: "PUT",
       data: request,
     });
@@ -305,7 +305,7 @@ export const userManagementApi = {
    */
   async getAvailableFeatures(): Promise<AvailableFeaturesResponse> {
     return apiRequest<AvailableFeaturesResponse>({
-      url: "/api/v1/users/features/available",
+      url: "/v1/users/features/available",
       method: "GET",
     });
   },
@@ -318,7 +318,7 @@ export const userManagementApi = {
     userId: number
   ): Promise<MicroserviceAccessResponse> {
     return apiRequest<MicroserviceAccessResponse>({
-      url: `/api/v1/users/features/${userId}/microservices`,
+      url: `/v1/users/features/${userId}/microservices`,
       method: "GET",
     });
   },
@@ -328,7 +328,7 @@ export const userManagementApi = {
    */
   async getMyFeatures(): Promise<UserFeaturesResponse> {
     return apiRequest<UserFeaturesResponse>({
-      url: "/api/v1/users/features/me",
+      url: "/v1/users/features/me",
       method: "GET",
     });
   },

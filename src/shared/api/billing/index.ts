@@ -7,22 +7,22 @@ export const billingApi = {
    */
   paymentsHealthCheck: () =>
     apiRequest<{ status: string; timestamp: string }>({
-      url: "/api/v1/billing/payments/health",
+      url: "/v1/billing/payments/health",
       method: "GET",
     }),
   subscriptionsHealthCheck: () =>
     apiRequest<{ status: string; timestamp: string }>({
-      url: "/api/v1/billing/subscriptions/health",
+      url: "/v1/billing/subscriptions/health",
       method: "GET",
     }),
   invoicesHealthCheck: () =>
     apiRequest<{ status: string; timestamp: string }>({
-      url: "/api/v1/billing/invoices/health",
+      url: "/v1/billing/invoices/health",
       method: "GET",
     }),
   gatewayHealthCheck: () =>
     apiRequest<{ status: string; timestamp: string }>({
-      url: "/api/v1/billing/gateway/health",
+      url: "/v1/billing/gateway/health",
       method: "GET",
     }),
 
@@ -31,7 +31,7 @@ export const billingApi = {
    */
   createPaymentIntent: (request: Types.CreatePaymentRequest) =>
     apiRequest<Types.PaymentResponse>({
-      url: "/api/v1/billing/payments/intent",
+      url: "/v1/billing/payments/intent",
       method: "POST",
       data: request,
     }),
@@ -41,7 +41,7 @@ export const billingApi = {
    */
   getPayment: (id: string) =>
     apiRequest<Types.PaymentResponse>({
-      url: `/api/v1/billing/payments/${id}`,
+      url: `/v1/billing/payments/${id}`,
       method: "GET",
     }),
 
@@ -50,7 +50,7 @@ export const billingApi = {
    */
   listPayments: (params?: Types.BillingHistoryParams) =>
     apiRequest<Types.PaginatedResponse<Types.PaymentResponse>>({
-      url: "/api/v1/billing/payments",
+      url: "/v1/billing/payments",
       method: "GET",
       params,
     }),
@@ -60,7 +60,7 @@ export const billingApi = {
    */
   refundPayment: (id: string) =>
     apiRequest<void>({
-      url: `/api/v1/billing/payments/${id}/refund`,
+      url: `/v1/billing/payments/${id}/refund`,
       method: "POST",
     }),
 
@@ -72,7 +72,7 @@ export const billingApi = {
    */
   getMyFeatures: () =>
     apiRequest<Types.UserFeaturesResponse>({
-      url: "/api/v1/features/my-features",
+      url: "/v1/features/my-features",
       method: "GET",
     }),
 
@@ -82,7 +82,7 @@ export const billingApi = {
    */
   getEnabledFeatures: () =>
     apiRequest<Types.FeatureDto[]>({
-      url: "/api/v1/features/enabled",
+      url: "/v1/features/enabled",
       method: "GET",
     }),
 
@@ -91,7 +91,7 @@ export const billingApi = {
    */
   createSubscription: (request: Types.CreateSubscriptionRequest) =>
     apiRequest<Types.SubscriptionResponse>({
-      url: "/api/v1/billing/subscriptions",
+      url: "/v1/billing/subscriptions",
       method: "POST",
       data: request,
     }),
@@ -101,7 +101,7 @@ export const billingApi = {
    */
   getActiveSubscription: () =>
     apiRequest<Types.SubscriptionResponse>({
-      url: "/api/v1/billing/subscriptions/active",
+      url: "/v1/billing/subscriptions/active",
       method: "GET",
     }),
 
@@ -110,7 +110,7 @@ export const billingApi = {
    */
   getSubscription: (id: string) =>
     apiRequest<Types.SubscriptionResponse>({
-      url: `/api/v1/billing/subscriptions/${id}`,
+      url: `/v1/billing/subscriptions/${id}`,
       method: "GET",
     }),
 
@@ -119,7 +119,7 @@ export const billingApi = {
    */
   listSubscriptions: (params?: Types.BillingHistoryParams) =>
     apiRequest<Types.PaginatedResponse<Types.SubscriptionResponse>>({
-      url: "/api/v1/billing/subscriptions",
+      url: "/v1/billing/subscriptions",
       method: "GET",
       params,
     }),
@@ -129,7 +129,7 @@ export const billingApi = {
    */
   updateSubscription: (id: string, request: Types.UpdateSubscriptionRequest) =>
     apiRequest<Types.SubscriptionResponse>({
-      url: `/api/v1/billing/subscriptions/${id}`,
+      url: `/v1/billing/subscriptions/${id}`,
       method: "PUT",
       data: request,
     }),
@@ -139,7 +139,7 @@ export const billingApi = {
    */
   cancelSubscription: (id: string) =>
     apiRequest<Types.SubscriptionResponse>({
-      url: `/api/v1/billing/subscriptions/${id}/cancel`,
+      url: `/v1/billing/subscriptions/${id}/cancel`,
       method: "POST",
     }),
 
@@ -148,7 +148,7 @@ export const billingApi = {
    */
   cancelSubscriptionImmediately: (id: string) =>
     apiRequest<Types.SubscriptionResponse>({
-      url: `/api/v1/billing/subscriptions/${id}/cancel-immediately`,
+      url: `/v1/billing/subscriptions/${id}/cancel-immediately`,
       method: "POST",
     }),
 
@@ -157,7 +157,7 @@ export const billingApi = {
    */
   pauseSubscription: (id: string) =>
     apiRequest<Types.SubscriptionResponse>({
-      url: `/api/v1/billing/subscriptions/${id}/pause`,
+      url: `/v1/billing/subscriptions/${id}/pause`,
       method: "POST",
     }),
 
@@ -166,7 +166,7 @@ export const billingApi = {
    */
   resumeSubscription: (id: string) =>
     apiRequest<Types.SubscriptionResponse>({
-      url: `/api/v1/billing/subscriptions/${id}/resume`,
+      url: `/v1/billing/subscriptions/${id}/resume`,
       method: "POST",
     }),
 
@@ -177,7 +177,7 @@ export const billingApi = {
    */
   createSubscriptionPlan: (request: Types.CreateSubscriptionPlanRequest) =>
     apiRequest<Types.SubscriptionPlanResponse>({
-      url: "/api/v1/billing/subscription-plans",
+      url: "/v1/billing/subscription-plans",
       method: "POST",
       data: request,
     }),
@@ -187,7 +187,7 @@ export const billingApi = {
    */
   getSubscriptionPlan: (id: string) =>
     apiRequest<Types.SubscriptionPlanResponse>({
-      url: `/api/v1/billing/subscription-plans/${id}`,
+      url: `/v1/billing/subscription-plans/${id}`,
       method: "GET",
     }),
 
@@ -196,7 +196,7 @@ export const billingApi = {
    */
   listSubscriptionPlans: (params?: Types.BillingHistoryParams) =>
     apiRequest<Types.PaginatedResponse<Types.SubscriptionPlanResponse>>({
-      url: "/api/v1/billing/subscription-plans",
+      url: "/v1/billing/subscription-plans",
       method: "GET",
       params,
     }),
@@ -206,7 +206,7 @@ export const billingApi = {
    */
   listActiveSubscriptionPlans: () =>
     apiRequest<Types.SubscriptionPlanResponse[]>({
-      url: "/api/v1/billing/subscription-plans/active",
+      url: "/v1/billing/subscription-plans/active",
       method: "GET",
     }),
 
@@ -218,7 +218,7 @@ export const billingApi = {
     request: Types.UpdateSubscriptionPlanRequest
   ) =>
     apiRequest<Types.SubscriptionPlanResponse>({
-      url: `/api/v1/billing/subscription-plans/${id}`,
+      url: `/v1/billing/subscription-plans/${id}`,
       method: "PUT",
       data: request,
     }),
@@ -228,7 +228,7 @@ export const billingApi = {
    */
   syncSubscriptionPlan: (id: string) =>
     apiRequest<void>({
-      url: `/api/v1/billing/subscription-plans/${id}/sync`,
+      url: `/v1/billing/subscription-plans/${id}/sync`,
       method: "POST",
     }),
 
@@ -239,7 +239,7 @@ export const billingApi = {
    */
   getInvoice: (id: string) =>
     apiRequest<Types.InvoiceResponse>({
-      url: `/api/v1/billing/invoices/${id}`,
+      url: `/v1/billing/invoices/${id}`,
       method: "GET",
     }),
 
@@ -248,7 +248,7 @@ export const billingApi = {
    */
   listInvoices: (params?: Types.BillingHistoryParams) =>
     apiRequest<Types.PaginatedResponse<Types.InvoiceResponse>>({
-      url: "/api/v1/billing/invoices",
+      url: "/v1/billing/invoices",
       method: "GET",
       params,
     }),
@@ -261,7 +261,7 @@ export const billingApi = {
     params?: Types.BillingHistoryParams
   ) =>
     apiRequest<Types.PaginatedResponse<Types.InvoiceResponse>>({
-      url: `/api/v1/billing/invoices/subscription/${subscriptionId}`,
+      url: `/v1/billing/invoices/subscription/${subscriptionId}`,
       method: "GET",
       params,
     }),
@@ -271,7 +271,7 @@ export const billingApi = {
    */
   listOpenInvoices: () =>
     apiRequest<Types.InvoiceResponse[]>({
-      url: "/api/v1/billing/invoices/open",
+      url: "/v1/billing/invoices/open",
       method: "GET",
     }),
 
@@ -280,7 +280,7 @@ export const billingApi = {
    */
   initiateOnboarding: (request: Types.OnboardRequest) =>
     apiRequest<Types.OnboardResponse>({
-      url: "/api/v1/admin/billing/merchants/onboard",
+      url: "/v1/admin/billing/merchants/onboard",
       method: "POST",
       data: request,
     }),
@@ -290,7 +290,7 @@ export const billingApi = {
    */
   getMerchantStatus: (organizationId: number) =>
     apiRequest<Types.MerchantStatus>({
-      url: `/api/v1/admin/billing/merchants/status/${organizationId}`,
+      url: `/v1/admin/billing/merchants/status/${organizationId}`,
       method: "GET",
     }),
 
@@ -299,7 +299,7 @@ export const billingApi = {
    */
   listPayouts: (params?: Types.BillingHistoryParams) =>
     apiRequest<Types.PaginatedResponse<Types.PayoutResponse>>({
-      url: "/api/v1/billing/payouts",
+      url: "/v1/billing/payouts",
       method: "GET",
       params,
     }),
@@ -309,7 +309,7 @@ export const billingApi = {
    */
   getPayout: (id: string) =>
     apiRequest<Types.PayoutResponse>({
-      url: `/api/v1/billing/payouts/${id}`,
+      url: `/v1/billing/payouts/${id}`,
       method: "GET",
     }),
 
@@ -320,7 +320,7 @@ export const billingApi = {
    */
   createGatewayConfig: (request: Types.CreateGatewayConfigRequest) =>
     apiRequest<Types.GatewayConfigResponse>({
-      url: "/api/v1/admin/billing/gateway-config",
+      url: "/v1/admin/billing/gateway-config",
       method: "POST",
       data: request,
     }),
@@ -333,7 +333,7 @@ export const billingApi = {
     request: Types.UpdateGatewayConfigRequest
   ) =>
     apiRequest<Types.GatewayConfigResponse>({
-      url: `/api/v1/admin/billing/gateway-config/${provider}`,
+      url: `/v1/admin/billing/gateway-config/${provider}`,
       method: "PUT",
       data: request,
     }),
@@ -343,7 +343,7 @@ export const billingApi = {
    */
   getGatewayConfig: (provider: Types.PaymentGatewayProvider) =>
     apiRequest<Types.GatewayConfigResponse>({
-      url: `/api/v1/admin/billing/gateway-config/${provider}`,
+      url: `/v1/admin/billing/gateway-config/${provider}`,
       method: "GET",
     }),
 
@@ -352,7 +352,7 @@ export const billingApi = {
    */
   listGatewayConfigs: () =>
     apiRequest<Types.GatewayConfigSummary[]>({
-      url: "/api/v1/admin/billing/gateway-config",
+      url: "/v1/admin/billing/gateway-config",
       method: "GET",
     }),
 
@@ -361,7 +361,7 @@ export const billingApi = {
    */
   listActiveGatewayConfigs: () =>
     apiRequest<Types.GatewayConfigSummary[]>({
-      url: "/api/v1/admin/billing/gateway-config/active",
+      url: "/v1/admin/billing/gateway-config/active",
       method: "GET",
     }),
 
@@ -370,7 +370,7 @@ export const billingApi = {
    */
   getPrimaryGatewayConfig: () =>
     apiRequest<Types.GatewayConfigResponse>({
-      url: "/api/v1/admin/billing/gateway-config/primary",
+      url: "/v1/admin/billing/gateway-config/primary",
       method: "GET",
     }),
 
@@ -379,7 +379,7 @@ export const billingApi = {
    */
   activateGateway: (provider: Types.PaymentGatewayProvider) =>
     apiRequest<Types.GatewayStatusResponse>({
-      url: `/api/v1/admin/billing/gateway-config/${provider}/activate`,
+      url: `/v1/admin/billing/gateway-config/${provider}/activate`,
       method: "POST",
     }),
 
@@ -388,7 +388,7 @@ export const billingApi = {
    */
   deactivateGateway: (provider: Types.PaymentGatewayProvider) =>
     apiRequest<Types.GatewayStatusResponse>({
-      url: `/api/v1/admin/billing/gateway-config/${provider}/deactivate`,
+      url: `/v1/admin/billing/gateway-config/${provider}/deactivate`,
       method: "POST",
     }),
 
@@ -397,7 +397,7 @@ export const billingApi = {
    */
   setPrimaryGateway: (provider: Types.PaymentGatewayProvider) =>
     apiRequest<Types.GatewayStatusResponse>({
-      url: `/api/v1/admin/billing/gateway-config/${provider}/set-primary`,
+      url: `/v1/admin/billing/gateway-config/${provider}/set-primary`,
       method: "POST",
     }),
 
@@ -406,7 +406,7 @@ export const billingApi = {
    */
   deleteGatewayConfig: (provider: Types.PaymentGatewayProvider) =>
     apiRequest<void>({
-      url: `/api/v1/admin/billing/gateway-config/${provider}`,
+      url: `/v1/admin/billing/gateway-config/${provider}`,
       method: "DELETE",
     }),
 };

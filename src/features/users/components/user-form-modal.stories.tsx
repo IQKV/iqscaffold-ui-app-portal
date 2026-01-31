@@ -27,7 +27,7 @@ const meta: Meta<typeof UserFormModal> = {
     layout: "centered",
     msw: {
       handlers: [
-        http.post("/api/v1/auth/signup", async ({ request }) => {
+        http.post("/v1/auth/signup", async ({ request }) => {
           const body = (await request.json()) as any;
           return HttpResponse.json(
             {
@@ -48,7 +48,7 @@ const meta: Meta<typeof UserFormModal> = {
             { status: 201 }
           );
         }),
-        http.put("/api/v1/users/:id", async ({ request }) => {
+        http.put("/v1/users/:id", async ({ request }) => {
           const body = (await request.json()) as any;
           return HttpResponse.json({
             data: {
@@ -120,7 +120,7 @@ export const CreateUserWithError: Story = {
   parameters: {
     msw: {
       handlers: [
-        http.post("/api/v1/auth/signup", () => {
+        http.post("/v1/auth/signup", () => {
           return HttpResponse.json(
             { error: "Username or email already exists" },
             { status: 409 }
@@ -140,7 +140,7 @@ export const EditUserWithError: Story = {
   parameters: {
     msw: {
       handlers: [
-        http.put("/api/v1/users/:id", () => {
+        http.put("/v1/users/:id", () => {
           return HttpResponse.json(
             { error: "User not found" },
             { status: 404 }
@@ -161,7 +161,7 @@ export const Loading: Story = {
   parameters: {
     msw: {
       handlers: [
-        http.post("/api/v1/auth/signup", async () => {
+        http.post("/v1/auth/signup", async () => {
           await new Promise((resolve) => setTimeout(resolve, 3000));
           return HttpResponse.json(
             {

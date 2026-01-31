@@ -8,10 +8,10 @@ export function useBillingServiceHealth() {
   return useServiceHealth({
     serviceName: "billing",
     endpoints: {
-      payments: "/api/v1/billing/payments/health",
-      subscriptions: "/api/v1/billing/subscriptions/health",
-      invoices: "/api/v1/billing/invoices/health",
-      gateway: "/api/v1/billing/gateway/health",
+      payments: "/v1/billing/payments/health",
+      subscriptions: "/v1/billing/subscriptions/health",
+      invoices: "/v1/billing/invoices/health",
+      gateway: "/v1/billing/gateway/health",
     },
   });
 }

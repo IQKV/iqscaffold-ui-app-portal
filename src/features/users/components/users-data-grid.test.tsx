@@ -250,7 +250,7 @@ describe("UsersDataGrid", () => {
   it("handles API error gracefully", async () => {
     // Mock API error
     server.use(
-      http.get("/api/v1/admin/users", () => {
+      http.get("/v1/admin/users", () => {
         return HttpResponse.json(
           { error: "Internal server error" },
           { status: 500 }
@@ -276,7 +276,7 @@ describe("UsersDataGrid", () => {
   it("displays loading state", () => {
     // Mock slow API response
     server.use(
-      http.get("/api/v1/admin/users", async () => {
+      http.get("/v1/admin/users", async () => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return HttpResponse.json({
           data: [],

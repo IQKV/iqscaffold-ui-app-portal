@@ -20,7 +20,7 @@ interface UseEnabledFeaturesReturn {
  * - Simple feature gates
  * - Performance-critical components
  *
- * Uses the lightweight /api/v1/features/enabled endpoint with higher rate limits.
+ * Uses the lightweight /v1/features/enabled endpoint with higher rate limits.
  * For complete feature information including quotas and subscription details, use useFeatures.
  */
 export const useEnabledFeatures = (): UseEnabledFeaturesReturn => {

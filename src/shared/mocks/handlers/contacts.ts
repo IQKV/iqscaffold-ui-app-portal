@@ -139,7 +139,7 @@ let nextCompanyId = 4;
 
 export const contactsHandlers = [
   // Get all contacts with pagination and filtering
-  http.get("/api/v1/contacts", async ({ request }) => {
+  http.get("/v1/contacts", async ({ request }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -187,7 +187,7 @@ export const contactsHandlers = [
   }),
 
   // Get contact by ID
-  http.get("/api/v1/contacts/:id", async ({ params }) => {
+  http.get("/v1/contacts/:id", async ({ params }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -210,7 +210,7 @@ export const contactsHandlers = [
   }),
 
   // Create contact
-  http.post("/api/v1/contacts", async ({ request }) => {
+  http.post("/v1/contacts", async ({ request }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -252,7 +252,7 @@ export const contactsHandlers = [
   }),
 
   // Update contact
-  http.put("/api/v1/contacts/:id", async ({ params, request }) => {
+  http.put("/v1/contacts/:id", async ({ params, request }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -300,7 +300,7 @@ export const contactsHandlers = [
   }),
 
   // Delete contact
-  http.delete("/api/v1/contacts/:id", async ({ params }) => {
+  http.delete("/v1/contacts/:id", async ({ params }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -325,7 +325,7 @@ export const contactsHandlers = [
   }),
 
   // Get contacts by company
-  http.get("/api/v1/contacts/company/:companyId", async ({ params }) => {
+  http.get("/v1/contacts/company/:companyId", async ({ params }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -338,7 +338,7 @@ export const contactsHandlers = [
   }),
 
   // Update lead score
-  http.patch("/api/v1/contacts/:id/score", async ({ params, request }) => {
+  http.patch("/v1/contacts/:id/score", async ({ params, request }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -370,7 +370,7 @@ export const contactsHandlers = [
   }),
 
   // Bulk create contacts
-  http.post("/api/v1/contacts/bulk", async ({ request }) => {
+  http.post("/v1/contacts/bulk", async ({ request }) => {
     if (config.delay) {
       await delay(config.delay * 2); // Longer delay for bulk operations
     }
@@ -423,7 +423,7 @@ export const contactsHandlers = [
   }),
 
   // Bulk update status
-  http.patch("/api/v1/contacts/bulk/status", async ({ request }) => {
+  http.patch("/v1/contacts/bulk/status", async ({ request }) => {
     if (config.delay) {
       await delay(config.delay * 2);
     }
@@ -463,7 +463,7 @@ export const contactsHandlers = [
   }),
 
   // Bulk delete contacts
-  http.delete("/api/v1/contacts/bulk", async ({ request }) => {
+  http.delete("/v1/contacts/bulk", async ({ request }) => {
     if (config.delay) {
       await delay(config.delay * 2);
     }
@@ -497,7 +497,7 @@ export const contactsHandlers = [
   }),
 
   // Bulk update lead scores
-  http.patch("/api/v1/contacts/bulk/scores", async ({ request }) => {
+  http.patch("/v1/contacts/bulk/scores", async ({ request }) => {
     if (config.delay) {
       await delay(config.delay * 2);
     }
@@ -540,7 +540,7 @@ export const contactsHandlers = [
 
   // Company Handlers
   // Get all companies with pagination and filtering
-  http.get("/api/v1/companies", async ({ request }) => {
+  http.get("/v1/companies", async ({ request }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -587,7 +587,7 @@ export const contactsHandlers = [
   }),
 
   // Get company by ID
-  http.get("/api/v1/companies/:id", async ({ params }) => {
+  http.get("/v1/companies/:id", async ({ params }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -610,7 +610,7 @@ export const contactsHandlers = [
   }),
 
   // Create company
-  http.post("/api/v1/companies", async ({ request }) => {
+  http.post("/v1/companies", async ({ request }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -631,7 +631,7 @@ export const contactsHandlers = [
   }),
 
   // Update company
-  http.put("/api/v1/companies/:id", async ({ params, request }) => {
+  http.put("/v1/companies/:id", async ({ params, request }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -662,7 +662,7 @@ export const contactsHandlers = [
   }),
 
   // Delete company
-  http.delete("/api/v1/companies/:id", async ({ params }) => {
+  http.delete("/v1/companies/:id", async ({ params }) => {
     if (config.delay) {
       await delay(config.delay);
     }

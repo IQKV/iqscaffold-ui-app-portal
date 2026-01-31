@@ -11,7 +11,7 @@ export const contactApi = {
    */
   getContacts: (params?: Types.ContactListParams) =>
     apiRequest<Types.PaginatedResponse<Types.Contact>>({
-      url: "/api/v1/contacts",
+      url: "/v1/contacts",
       method: "GET",
       params,
     }),
@@ -21,7 +21,7 @@ export const contactApi = {
    */
   getContact: (id: string | number) =>
     apiRequest<Types.Contact>({
-      url: `/api/v1/contacts/${id}`,
+      url: `/v1/contacts/${id}`,
       method: "GET",
     }),
 
@@ -30,7 +30,7 @@ export const contactApi = {
    */
   createContact: (request: Types.CreateContactRequest) =>
     apiRequest<Types.Contact>({
-      url: "/api/v1/contacts",
+      url: "/v1/contacts",
       method: "POST",
       data: request,
     }),
@@ -40,7 +40,7 @@ export const contactApi = {
    */
   updateContact: (id: string | number, request: Types.UpdateContactRequest) =>
     apiRequest<Types.Contact>({
-      url: `/api/v1/contacts/${id}`,
+      url: `/v1/contacts/${id}`,
       method: "PUT",
       data: request,
     }),
@@ -50,7 +50,7 @@ export const contactApi = {
    */
   deleteContact: (id: string | number) =>
     apiRequest<void>({
-      url: `/api/v1/contacts/${id}`,
+      url: `/v1/contacts/${id}`,
       method: "DELETE",
     }),
 
@@ -60,7 +60,7 @@ export const contactApi = {
    */
   getContactsByCompany: (companyId: string | number) =>
     apiRequest<Types.Contact[]>({
-      url: `/api/v1/contacts/company/${companyId}`,
+      url: `/v1/contacts/company/${companyId}`,
       method: "GET",
     }),
 
@@ -73,7 +73,7 @@ export const contactApi = {
     request: Types.UpdateLeadScoreRequest
   ) =>
     apiRequest<Types.Contact>({
-      url: `/api/v1/contacts/${id}/score`,
+      url: `/v1/contacts/${id}/score`,
       method: "PATCH",
       data: request,
     }),
@@ -84,7 +84,7 @@ export const contactApi = {
    */
   bulkCreateContacts: (request: Types.BulkCreateContactsRequest) =>
     apiRequest<Types.BulkOperationResponse>({
-      url: "/api/v1/contacts/bulk",
+      url: "/v1/contacts/bulk",
       method: "POST",
       data: request,
     }),
@@ -94,7 +94,7 @@ export const contactApi = {
    */
   bulkUpdateStatus: (request: Types.BulkUpdateStatusRequest) =>
     apiRequest<Types.BulkOperationResponse>({
-      url: "/api/v1/contacts/bulk/status",
+      url: "/v1/contacts/bulk/status",
       method: "PATCH",
       data: request,
     }),
@@ -104,7 +104,7 @@ export const contactApi = {
    */
   bulkDeleteContacts: (request: Types.BulkDeleteContactsRequest) =>
     apiRequest<Types.BulkOperationResponse>({
-      url: "/api/v1/contacts/bulk",
+      url: "/v1/contacts/bulk",
       method: "DELETE",
       data: request,
     }),
@@ -114,7 +114,7 @@ export const contactApi = {
    */
   bulkUpdateLeadScores: (request: Types.BulkUpdateLeadScoresRequest) =>
     apiRequest<Types.BulkOperationResponse>({
-      url: "/api/v1/contacts/bulk/scores",
+      url: "/v1/contacts/bulk/scores",
       method: "PATCH",
       data: request,
     }),
@@ -125,7 +125,7 @@ export const contactApi = {
    */
   getCompanies: (params?: Types.CompanyListParams) =>
     apiRequest<Types.PaginatedResponse<Types.Company>>({
-      url: "/api/v1/companies",
+      url: "/v1/companies",
       method: "GET",
       params,
     }),
@@ -135,7 +135,7 @@ export const contactApi = {
    */
   getCompany: (id: string | number) =>
     apiRequest<Types.Company>({
-      url: `/api/v1/companies/${id}`,
+      url: `/v1/companies/${id}`,
       method: "GET",
     }),
 
@@ -144,7 +144,7 @@ export const contactApi = {
    */
   createCompany: (request: Types.CreateCompanyRequest) =>
     apiRequest<Types.Company>({
-      url: "/api/v1/companies",
+      url: "/v1/companies",
       method: "POST",
       data: request,
     }),
@@ -154,7 +154,7 @@ export const contactApi = {
    */
   updateCompany: (id: string | number, request: Types.UpdateCompanyRequest) =>
     apiRequest<Types.Company>({
-      url: `/api/v1/companies/${id}`,
+      url: `/v1/companies/${id}`,
       method: "PUT",
       data: request,
     }),
@@ -164,7 +164,7 @@ export const contactApi = {
    */
   deleteCompany: (id: string | number) =>
     apiRequest<void>({
-      url: `/api/v1/companies/${id}`,
+      url: `/v1/companies/${id}`,
       method: "DELETE",
     }),
 };

@@ -16,7 +16,7 @@ describe("userPreferenceApi", () => {
   });
 
   describe("getMyPreferences", () => {
-    it("should call GET /api/v1/users/me/preferences", async () => {
+    it("should call GET /v1/users/me/preferences", async () => {
       const mockPreferences = {
         id: 1,
         userId: 123,
@@ -47,14 +47,14 @@ describe("userPreferenceApi", () => {
 
       expect(base.apiRequest).toHaveBeenCalledWith({
         method: "GET",
-        url: "/api/v1/users/me/preferences",
+        url: "/v1/users/me/preferences",
       });
       expect(result).toEqual(mockPreferences);
     });
   });
 
   describe("updateMyPreferences", () => {
-    it("should call PATCH /api/v1/users/me/preferences with data", async () => {
+    it("should call PATCH /v1/users/me/preferences with data", async () => {
       const updateData = {
         theme: "dark" as const,
         locale: "fr",
@@ -91,7 +91,7 @@ describe("userPreferenceApi", () => {
 
       expect(base.apiRequest).toHaveBeenCalledWith({
         method: "PATCH",
-        url: "/api/v1/users/me/preferences",
+        url: "/v1/users/me/preferences",
         data: updateData,
       });
       expect(result).toEqual(mockResponse);
@@ -99,14 +99,14 @@ describe("userPreferenceApi", () => {
   });
 
   describe("deleteMyPreferences", () => {
-    it("should call DELETE /api/v1/users/me/preferences", async () => {
+    it("should call DELETE /v1/users/me/preferences", async () => {
       vi.mocked(base.apiRequest).mockResolvedValue(undefined);
 
       await userPreferenceApi.deleteMyPreferences();
 
       expect(base.apiRequest).toHaveBeenCalledWith({
         method: "DELETE",
-        url: "/api/v1/users/me/preferences",
+        url: "/v1/users/me/preferences",
       });
     });
   });

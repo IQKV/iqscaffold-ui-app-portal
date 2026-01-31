@@ -59,7 +59,7 @@ export const tenantApi = {
    */
   async getTenant(tenantId: string): Promise<TenantResponse> {
     const response = await apiClient.get<TenantResponse>(
-      `/api/v1/admin/tenants/${tenantId}`
+      `/v1/admin/tenants/${tenantId}`
     );
     return response.data;
   },
@@ -69,7 +69,7 @@ export const tenantApi = {
    */
   async getAllTenants(enabledOnly: boolean = false): Promise<TenantSummary[]> {
     const response = await apiClient.get<TenantSummary[]>(
-      "/api/v1/admin/tenants",
+      "/v1/admin/tenants",
       {
         params: { enabledOnly },
       }
@@ -82,7 +82,7 @@ export const tenantApi = {
    */
   async createTenant(data: CreateTenantRequest): Promise<TenantResponse> {
     const response = await apiClient.post<TenantResponse>(
-      "/api/v1/admin/tenants",
+      "/v1/admin/tenants",
       data
     );
     return response.data;
@@ -96,7 +96,7 @@ export const tenantApi = {
     data: UpdateTenantRequest
   ): Promise<TenantResponse> {
     const response = await apiClient.put<TenantResponse>(
-      `/api/v1/admin/tenants/${tenantId}`,
+      `/v1/admin/tenants/${tenantId}`,
       data
     );
     return response.data;
@@ -110,7 +110,7 @@ export const tenantApi = {
     enabled: boolean
   ): Promise<TenantResponse> {
     const response = await apiClient.patch<TenantResponse>(
-      `/api/v1/admin/tenants/${tenantId}/enabled`,
+      `/v1/admin/tenants/${tenantId}/enabled`,
       null,
       {
         params: { enabled },
@@ -123,7 +123,7 @@ export const tenantApi = {
    * Delete tenant (SUPER_ADMIN only)
    */
   async deleteTenant(tenantId: string): Promise<void> {
-    await apiClient.delete(`/api/v1/admin/tenants/${tenantId}`);
+    await apiClient.delete(`/v1/admin/tenants/${tenantId}`);
   },
 
   /**
@@ -131,7 +131,7 @@ export const tenantApi = {
    */
   async getTenantStatistics(): Promise<TenantStatistics[]> {
     const response = await apiClient.get<TenantStatistics[]>(
-      "/api/v1/admin/tenants/statistics"
+      "/v1/admin/tenants/statistics"
     );
     return response.data;
   },

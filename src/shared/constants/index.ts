@@ -12,25 +12,25 @@ import { msg } from "@lingui/core/macro";
 export const API_ENDPOINTS = {
   // Auth endpoints
   AUTH: {
-    LOGIN: "/api/v1/auth/login",
-    SIGNUP: "/api/v1/auth/signup",
-    REFRESH: "/api/v1/auth/refresh",
-    LOGOUT: "/api/v1/auth/logout",
-    FORGOT_PASSWORD: "/api/v1/auth/password/forgot",
-    RESET_PASSWORD: "/api/v1/auth/password/reset",
-    VERIFY_EMAIL: "/api/v1/auth/email/verify",
-    RESEND_VERIFICATION: "/api/v1/auth/email/resend",
-    VALIDATE_TOKEN: "/api/v1/auth/validate",
-    LOGOUT_ALL: "/api/v1/auth/logout-all",
-    EMAIL_STATUS: "/api/v1/auth/email/status",
+    LOGIN: "/v1/auth/login",
+    SIGNUP: "/v1/auth/signup",
+    REFRESH: "/v1/auth/refresh",
+    LOGOUT: "/v1/auth/logout",
+    FORGOT_PASSWORD: "/v1/auth/password/forgot",
+    RESET_PASSWORD: "/v1/auth/password/reset",
+    VERIFY_EMAIL: "/v1/auth/email/verify",
+    RESEND_VERIFICATION: "/v1/auth/email/resend",
+    VALIDATE_TOKEN: "/v1/auth/validate",
+    LOGOUT_ALL: "/v1/auth/logout-all",
+    EMAIL_STATUS: "/v1/auth/email/status",
   },
 
   // User endpoints
   USERS: {
-    ME: "/api/v1/users/me",
-    CHANGE_PASSWORD: "/api/v1/users/me/password",
-    ADMIN_USERS: "/api/v1/admin/users",
-    ADMIN_USER_BY_ID: (id: string | number) => `/api/v1/admin/users/${id}`,
+    ME: "/v1/users/me",
+    CHANGE_PASSWORD: "/v1/users/me/password",
+    ADMIN_USERS: "/v1/admin/users",
+    ADMIN_USER_BY_ID: (id: string | number) => `/v1/admin/users/${id}`,
   },
 } as const;
 

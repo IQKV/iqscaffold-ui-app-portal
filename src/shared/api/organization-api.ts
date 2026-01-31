@@ -107,7 +107,7 @@ export const organizationApi = {
     params?: PageParams
   ): Promise<OrganizationPageResponse> {
     return apiRequest<OrganizationPageResponse>({
-      url: "/api/v1/admin/organizations",
+      url: "/v1/admin/organizations",
       method: "GET",
       params,
     });
@@ -120,7 +120,7 @@ export const organizationApi = {
    */
   async getOrganizationById(id: number): Promise<OrganizationDto> {
     return apiRequest<OrganizationDto>({
-      url: `/api/v1/admin/organizations/${id}`,
+      url: `/v1/admin/organizations/${id}`,
       method: "GET",
     });
   },
@@ -133,7 +133,7 @@ export const organizationApi = {
     data: CreateOrganizationRequest
   ): Promise<OrganizationDto> {
     return apiRequest<OrganizationDto>({
-      url: "/api/v1/admin/organizations",
+      url: "/v1/admin/organizations",
       method: "POST",
       data,
     });
@@ -149,7 +149,7 @@ export const organizationApi = {
     data: UpdateOrganizationRequest
   ): Promise<OrganizationDto> {
     return apiRequest<OrganizationDto>({
-      url: `/api/v1/admin/organizations/${id}`,
+      url: `/v1/admin/organizations/${id}`,
       method: "PUT",
       data,
     });
@@ -161,7 +161,7 @@ export const organizationApi = {
    */
   async deleteOrganization(id: number): Promise<void> {
     return apiRequest<void>({
-      url: `/api/v1/admin/organizations/${id}`,
+      url: `/v1/admin/organizations/${id}`,
       method: "DELETE",
     });
   },
@@ -173,7 +173,7 @@ export const organizationApi = {
    */
   async getOrganizationByTenantId(tenantId: string): Promise<OrganizationDto> {
     return apiRequest<OrganizationDto>({
-      url: `/api/v1/admin/organizations/tenant/${tenantId}`,
+      url: `/v1/admin/organizations/tenant/${tenantId}`,
       method: "GET",
     });
   },

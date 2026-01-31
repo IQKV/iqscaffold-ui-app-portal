@@ -73,7 +73,7 @@ const mockFollowUps: any[] = [
 
 export const crmHandlers = [
   // Leads
-  http.get("/api/v1/leads", async () => {
+  http.get("/v1/leads", async () => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -89,7 +89,7 @@ export const crmHandlers = [
   }),
 
   // Pipeline Stages
-  http.get("/api/v1/pipeline/stages", async () => {
+  http.get("/v1/pipeline/stages", async () => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -97,7 +97,7 @@ export const crmHandlers = [
   }),
 
   // Dashboard (New Paths)
-  http.get("/api/v1/pipeline/dashboard/stats", async () => {
+  http.get("/v1/pipeline/dashboard/stats", async () => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -111,7 +111,7 @@ export const crmHandlers = [
     });
   }),
 
-  http.get("/api/v1/pipeline/dashboard/conversion", async () => {
+  http.get("/v1/pipeline/dashboard/conversion", async () => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -123,7 +123,7 @@ export const crmHandlers = [
   }),
 
   // Follow-ups (New Paths)
-  http.get("/api/v1/pipeline/follow-ups", async () => {
+  http.get("/v1/pipeline/follow-ups", async () => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -138,14 +138,14 @@ export const crmHandlers = [
     });
   }),
 
-  http.get("/api/v1/pipeline/follow-ups/today", async () => {
+  http.get("/v1/pipeline/follow-ups/today", async () => {
     if (config.delay) {
       await delay(config.delay);
     }
     return HttpResponse.json(mockFollowUps);
   }),
 
-  http.get("/api/v1/pipeline/follow-ups/overdue", async () => {
+  http.get("/v1/pipeline/follow-ups/overdue", async () => {
     if (config.delay) {
       await delay(config.delay);
     }
