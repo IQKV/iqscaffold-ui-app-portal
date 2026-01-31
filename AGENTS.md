@@ -835,7 +835,7 @@ import { normalizeAxiosError } from "./http-error";
 import { notificationService } from "./notifications";
 import { resolveTenantId } from "./tenant-utils";
 
-const BASE_URL = getConfig("VITE_API_URL_SERVER");
+const BASE_URL = getConfig("VITE_API_SERVER_URL");
 
 export const api = axios.create({
   baseURL: BASE_URL,
@@ -938,7 +938,7 @@ Use the config helper for environment variables:
 ```tsx
 import { getConfig } from "@/app/config";
 
-const apiUrl = getConfig("VITE_API_URL_SERVER");
+const apiUrl = getConfig("VITE_API_SERVER_URL");
 const authDomain = getConfig("VITE_AUTH_DOMAIN_AUTH");
 ```
 
@@ -1073,7 +1073,7 @@ export { UserFormFeature } from "./ui/user-form-feature";
 
 ```env
 # Backend API
-VITE_API_URL_SERVER=http://localhost:8080
+VITE_API_SERVER_URL=http://localhost:8080
 
 # Auth Configuration
 VITE_AUTH_DOMAIN_AUTH=https://auth.iqscaffold.com
@@ -1647,7 +1647,7 @@ import { ProtectedRoute } from "@/shared/ui";
 // Centralized config in app/config
 import { getConfig } from "@/app/config";
 
-const apiUrl = getConfig("VITE_API_URL_SERVER");
+const apiUrl = getConfig("VITE_API_SERVER_URL");
 const authDomain = getConfig("VITE_AUTH_DOMAIN_AUTH");
 ```
 
@@ -1771,7 +1771,7 @@ The project includes GitHub Actions workflows:
 
 ```env
 # Required for production
-VITE_API_URL_SERVER=https://api.production.com
+VITE_API_SERVER_URL=https://api.production.com
 VITE_AUTH_DOMAIN_AUTH=https://auth.production.com
 VITE_AUTH_DOMAIN_APP=https://app.production.com
 

@@ -159,7 +159,7 @@ export const CONFIRMATION_MESSAGES = {
 // =============================================================================
 
 export const ENV_KEYS = {
-  API_URL_SERVER: "VITE_API_URL_SERVER",
+  API_SERVER_URL: "VITE_API_SERVER_URL",
   AUTH_DOMAIN_AUTH: "VITE_AUTH_DOMAIN_AUTH",
   AUTH_DOMAIN_APP: "VITE_AUTH_DOMAIN_APP",
   AUTH_REDIRECT_AFTER_LOGIN: "VITE_AUTH_REDIRECT_AFTER_LOGIN",

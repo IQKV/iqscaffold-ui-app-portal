@@ -14,7 +14,7 @@ import { getUserLocalePreference } from "@/shared/lib/locale-preference";
 import { getClientLocale } from "@/shared/locales";
 import { ENV_KEYS } from "@/shared/constants";
 
-const BASE_URL = getConfig(ENV_KEYS.API_URL_SERVER);
+const BASE_URL = getConfig(ENV_KEYS.API_SERVER_URL);
 
 /**
  * Create base axios instance with common configuration

@@ -10,7 +10,7 @@ import { resolveTenantId } from "./tenant-utils";
 import { ENV_KEYS, NOTIFICATION_MESSAGES } from "@/shared/constants";
 import { i18n } from "@lingui/core";
 
-const BASE_URL = getConfig(ENV_KEYS.API_URL_SERVER);
+const BASE_URL = getConfig(ENV_KEYS.API_SERVER_URL);
 
 export const api = axios.create({
   baseURL: BASE_URL,

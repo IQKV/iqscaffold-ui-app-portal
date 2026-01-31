@@ -4,7 +4,7 @@ import { getConfig, hasConfig, getConfigOrThrow } from "./index";
 describe("Config Utilities", () => {
   describe("getConfig", () => {
     it("returns config value or undefined", () => {
-      const value = getConfig("VITE_API_URL_SERVER");
+      const value = getConfig("VITE_API_SERVER_URL");
       // Value may or may not exist in test environment
       expect(value === undefined || typeof value === "string").toBe(true);
     });
@@ -22,7 +22,7 @@ describe("Config Utilities", () => {
 
   describe("hasConfig", () => {
     it("returns boolean for config check", () => {
-      const exists = hasConfig("VITE_API_URL_SERVER");
+      const exists = hasConfig("VITE_API_SERVER_URL");
       expect(typeof exists).toBe("boolean");
     });
 
