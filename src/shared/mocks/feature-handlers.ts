@@ -7,6 +7,10 @@ import {
   FeatureAccessResponse,
   BulkFeatureUpdateResponse,
 } from "@/shared/api/user-management-api";
+import { getConfig } from "@/app/config";
+import { ENV_KEYS } from "@/shared/constants";
+
+const API_BASE_URL = getConfig(ENV_KEYS.API_SERVER_URL) || "";
 
 // Mock available features from backend configuration
 const mockAvailableFeatures: FeatureDetail[] = [
@@ -70,7 +74,7 @@ userFeatureMap.set(3, new Set(["crm", "billing", "api"]));
 
 export const featureHandlers = [
   // Get current user's features
-  http.get("/v1/users/features/me", () => {
+  http.get(`${API_BASE_URL}/v1/users/features/me`, () => {
     const response: UserFeaturesResponse = {
       userId: 1,
       username: "current-user",
@@ -82,7 +86,7 @@ export const featureHandlers = [
   }),
 
   // Get available features (admin only)
-  http.get("/v1/users/features/available", () => {
+  http.get(`${API_BASE_URL}/v1/users/features/available`, () => {
     const response: AvailableFeaturesResponse = {
       totalCount: mockAvailableFeatures.length,
       features: mockAvailableFeatures,
@@ -92,7 +96,7 @@ export const featureHandlers = [
   }),
 
   // Get user features by ID (admin only)
-  http.get("/v1/users/features/:userId", ({ params }) => {
+  http.get(`${API_BASE_URL}/v1/users/features/:userId`, ({ params }) => {
     const userId = Number(params.userId);
     const userFeatures = userFeatureMap.get(userId) || new Set();
 
@@ -119,31 +123,34 @@ export const featureHandlers = [
   }),
 
   // Enable feature for user (admin only)
-  http.post("/v1/users/features/:userId/:featureCode/enable", ({ params }) => {
-    const userId = Number(params.userId);
-    const featureCode = params.featureCode as string;
+  http.post(
+    `${API_BASE_URL}/v1/users/features/:userId/:featureCode/enable`,
+    ({ params }) => {
+      const userId = Number(params.userId);
+      const featureCode = params.featureCode as string;
 
-    if (!userFeatureMap.has(userId)) {
-      userFeatureMap.set(userId, new Set());
+      if (!userFeatureMap.has(userId)) {
+        userFeatureMap.set(userId, new Set());
+      }
+
+      const userFeatures = userFeatureMap.get(userId)!;
+      userFeatures.add(featureCode);
+
+      const response: FeatureAccessResponse = {
+        userId,
+        username: `user-${userId}`,
+        featureCode,
+        hasAccess: true,
+        message: `Feature ${featureCode} enabled successfully`,
+      };
+
+      return HttpResponse.json(response);
     }
-
-    const userFeatures = userFeatureMap.get(userId)!;
-    userFeatures.add(featureCode);
-
-    const response: FeatureAccessResponse = {
-      userId,
-      username: `user-${userId}`,
-      featureCode,
-      hasAccess: true,
-      message: `Feature ${featureCode} enabled successfully`,
-    };
-
-    return HttpResponse.json(response);
-  }),
+  ),
 
   // Disable feature for user (admin only)
   http.delete(
-    "/v1/users/features/:userId/:featureCode/disable",
+    `${API_BASE_URL}/v1/users/features/:userId/:featureCode/disable`,
     ({ params }) => {
       const userId = Number(params.userId);
       const featureCode = params.featureCode as string;
@@ -166,54 +173,60 @@ export const featureHandlers = [
   ),
 
   // Check feature access for user (admin only)
-  http.get("/v1/users/features/:userId/:featureCode/check", ({ params }) => {
-    const userId = Number(params.userId);
-    const featureCode = params.featureCode as string;
+  http.get(
+    `${API_BASE_URL}/v1/users/features/:userId/:featureCode/check`,
+    ({ params }) => {
+      const userId = Number(params.userId);
+      const featureCode = params.featureCode as string;
 
-    const userFeatures = userFeatureMap.get(userId) || new Set();
-    const hasAccess = userFeatures.has(featureCode);
+      const userFeatures = userFeatureMap.get(userId) || new Set();
+      const hasAccess = userFeatures.has(featureCode);
 
-    const response: FeatureAccessResponse = {
-      userId,
-      username: `user-${userId}`,
-      featureCode,
-      hasAccess,
-      message: hasAccess
-        ? `User has access to ${featureCode}`
-        : `User does not have access to ${featureCode}`,
-    };
+      const response: FeatureAccessResponse = {
+        userId,
+        username: `user-${userId}`,
+        featureCode,
+        hasAccess,
+        message: hasAccess
+          ? `User has access to ${featureCode}`
+          : `User does not have access to ${featureCode}`,
+      };
 
-    return HttpResponse.json(response);
-  }),
+      return HttpResponse.json(response);
+    }
+  ),
 
   // Bulk update user features (admin only)
-  http.put("/v1/users/features/:userId", async ({ params, request }) => {
-    const userId = Number(params.userId);
-    const { enableFeatures, disableFeatures } = (await request.json()) as {
-      enableFeatures: string[];
-      disableFeatures: string[];
-    };
+  http.put(
+    `${API_BASE_URL}/v1/users/features/:userId`,
+    async ({ params, request }) => {
+      const userId = Number(params.userId);
+      const { enableFeatures, disableFeatures } = (await request.json()) as {
+        enableFeatures: string[];
+        disableFeatures: string[];
+      };
 
-    if (!userFeatureMap.has(userId)) {
-      userFeatureMap.set(userId, new Set());
+      if (!userFeatureMap.has(userId)) {
+        userFeatureMap.set(userId, new Set());
+      }
+
+      const userFeatures = userFeatureMap.get(userId)!;
+
+      // Enable features
+      enableFeatures.forEach((code) => userFeatures.add(code));
+
+      // Disable features
+      disableFeatures.forEach((code) => userFeatures.delete(code));
+
+      const response: BulkFeatureUpdateResponse = {
+        userId,
+        username: `user-${userId}`,
+        featuresEnabled: enableFeatures.length,
+        featuresDisabled: disableFeatures.length,
+        message: `Updated ${enableFeatures.length + disableFeatures.length} features successfully`,
+      };
+
+      return HttpResponse.json(response);
     }
-
-    const userFeatures = userFeatureMap.get(userId)!;
-
-    // Enable features
-    enableFeatures.forEach((code) => userFeatures.add(code));
-
-    // Disable features
-    disableFeatures.forEach((code) => userFeatures.delete(code));
-
-    const response: BulkFeatureUpdateResponse = {
-      userId,
-      username: `user-${userId}`,
-      featuresEnabled: enableFeatures.length,
-      featuresDisabled: disableFeatures.length,
-      message: `Updated ${enableFeatures.length + disableFeatures.length} features successfully`,
-    };
-
-    return HttpResponse.json(response);
-  }),
+  ),
 ];

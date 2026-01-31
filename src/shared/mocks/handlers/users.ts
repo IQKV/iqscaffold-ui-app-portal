@@ -1,7 +1,10 @@
 import { http, HttpResponse, delay } from "msw";
 import { getMSWConfig } from "@/shared/lib/msw-config";
+import { getConfig } from "@/app/config";
+import { ENV_KEYS } from "@/shared/constants";
 
 const config = getMSWConfig();
+const API_BASE_URL = getConfig(ENV_KEYS.API_SERVER_URL) || "";
 
 // Mock users data
 const mockUsers = [
@@ -73,7 +76,7 @@ let nextUserId = 6;
 
 export const usersHandlers = [
   // Get all users with pagination
-  http.get("/v1/admin/users", async ({ request }) => {
+  http.get(`${API_BASE_URL}/v1/admin/users`, async ({ request }) => {
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
@@ -127,7 +130,7 @@ export const usersHandlers = [
   }),
 
   // Get user by ID
-  http.get("/v1/admin/users/:id", async ({ params }) => {
+  http.get(`${API_BASE_URL}/v1/admin/users/:id`, async ({ params }) => {
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
@@ -162,7 +165,7 @@ export const usersHandlers = [
   }),
 
   // Create user (signup)
-  http.post("/v1/auth/signup", async ({ request }) => {
+  http.post(`${API_BASE_URL}/v1/auth/signup`, async ({ request }) => {
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
@@ -222,7 +225,7 @@ export const usersHandlers = [
   }),
 
   // Create user (admin endpoint)
-  http.post("/v1/admin/users", async ({ request }) => {
+  http.post(`${API_BASE_URL}/v1/admin/users`, async ({ request }) => {
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
@@ -282,81 +285,84 @@ export const usersHandlers = [
   }),
 
   // Update user
-  http.put("/v1/admin/users/:id", async ({ params, request }) => {
-    if (config.delay) {
-      await delay(
-        typeof config.delay === "object"
-          ? Math.random() * (config.delay.max - config.delay.min) +
-              config.delay.min
-          : config.delay
-      );
-    }
-
-    const { id } = params;
-    const body = (await request.json()) as {
-      username?: string;
-      email?: string;
-      firstName?: string;
-      lastName?: string;
-      authorities?: string[];
-      enabled?: boolean;
-      emailVerified?: boolean;
-    };
-
-    if (config.enableLogging) {
-      console.log("✏️ MSW: Update user", { id, ...body });
-    }
-
-    const userId = parseInt(id as string, 10);
-    const userIndex = mockUsers.findIndex((u) => u.id === userId);
-
-    if (userIndex === -1) {
-      return HttpResponse.json(
-        {
-          type: "https://example.com/problems/user-not-found",
-          title: "User Not Found",
-          status: 404,
-          detail: `User with ID ${id} was not found.`,
-        },
-        { status: 404 }
-      );
-    }
-
-    // Check if username or email already exists (excluding current user)
-    if (body.username || body.email) {
-      const existingUser = mockUsers.find(
-        (u) =>
-          u.id !== userId &&
-          ((body.username && u.username === body.username) ||
-            (body.email && u.email === body.email))
-      );
-      if (existingUser) {
-        return HttpResponse.json(
-          {
-            type: "https://example.com/problems/user-exists",
-            title: "User Already Exists",
-            status: 409,
-            detail: "Username or email already exists.",
-          },
-          { status: 409 }
+  http.put(
+    `${API_BASE_URL}/v1/admin/users/:id`,
+    async ({ params, request }) => {
+      if (config.delay) {
+        await delay(
+          typeof config.delay === "object"
+            ? Math.random() * (config.delay.max - config.delay.min) +
+                config.delay.min
+            : config.delay
         );
       }
+
+      const { id } = params;
+      const body = (await request.json()) as {
+        username?: string;
+        email?: string;
+        firstName?: string;
+        lastName?: string;
+        authorities?: string[];
+        enabled?: boolean;
+        emailVerified?: boolean;
+      };
+
+      if (config.enableLogging) {
+        console.log("✏️ MSW: Update user", { id, ...body });
+      }
+
+      const userId = parseInt(id as string, 10);
+      const userIndex = mockUsers.findIndex((u) => u.id === userId);
+
+      if (userIndex === -1) {
+        return HttpResponse.json(
+          {
+            type: "https://example.com/problems/user-not-found",
+            title: "User Not Found",
+            status: 404,
+            detail: `User with ID ${id} was not found.`,
+          },
+          { status: 404 }
+        );
+      }
+
+      // Check if username or email already exists (excluding current user)
+      if (body.username || body.email) {
+        const existingUser = mockUsers.find(
+          (u) =>
+            u.id !== userId &&
+            ((body.username && u.username === body.username) ||
+              (body.email && u.email === body.email))
+        );
+        if (existingUser) {
+          return HttpResponse.json(
+            {
+              type: "https://example.com/problems/user-exists",
+              title: "User Already Exists",
+              status: 409,
+              detail: "Username or email already exists.",
+            },
+            { status: 409 }
+          );
+        }
+      }
+
+      const updatedUser = {
+        ...mockUsers[userIndex],
+        ...body,
+        authorities: body.authorities || mockUsers[userIndex].authorities,
+        updatedAt: new Date().toISOString(),
+      };
+
+      mockUsers[userIndex] = updatedUser;
+
+      return HttpResponse.json({ data: updatedUser });
     }
-
-    const updatedUser = {
-      ...mockUsers[userIndex],
-      ...body,
-      authorities: body.authorities || mockUsers[userIndex].authorities,
-      updatedAt: new Date().toISOString(),
-    };
-
-    mockUsers[userIndex] = updatedUser;
-
-    return HttpResponse.json({ data: updatedUser });
-  }),
+  ),
 
   // Delete user
-  http.delete("/v1/admin/users/:id", async ({ params }) => {
+  http.delete(`${API_BASE_URL}/v1/admin/users/:id`, async ({ params }) => {
     if (config.delay) {
       await delay(
         typeof config.delay === "object"

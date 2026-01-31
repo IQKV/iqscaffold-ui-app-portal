@@ -14,6 +14,10 @@ import {
   type PaginatedResponse,
   ContactStatus,
 } from "@/shared/api/contact/types";
+import { getConfig } from "@/app/config";
+import { ENV_KEYS } from "@/shared/constants";
+
+const API_BASE_URL = getConfig(ENV_KEYS.API_SERVER_URL) || "";
 
 // Mock configuration
 const config = {
@@ -139,7 +143,7 @@ let nextCompanyId = 4;
 
 export const contactsHandlers = [
   // Get all contacts with pagination and filtering
-  http.get("/v1/contacts", async ({ request }) => {
+  http.get(`${API_BASE_URL}/v1/contacts`, async ({ request }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -187,7 +191,7 @@ export const contactsHandlers = [
   }),
 
   // Get contact by ID
-  http.get("/v1/contacts/:id", async ({ params }) => {
+  http.get(`${API_BASE_URL}/v1/contacts/:id`, async ({ params }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -210,7 +214,7 @@ export const contactsHandlers = [
   }),
 
   // Create contact
-  http.post("/v1/contacts", async ({ request }) => {
+  http.post(`${API_BASE_URL}/v1/contacts`, async ({ request }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -252,7 +256,7 @@ export const contactsHandlers = [
   }),
 
   // Update contact
-  http.put("/v1/contacts/:id", async ({ params, request }) => {
+  http.put(`${API_BASE_URL}/v1/contacts/:id`, async ({ params, request }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -300,7 +304,7 @@ export const contactsHandlers = [
   }),
 
   // Delete contact
-  http.delete("/v1/contacts/:id", async ({ params }) => {
+  http.delete(`${API_BASE_URL}/v1/contacts/:id`, async ({ params }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -325,52 +329,58 @@ export const contactsHandlers = [
   }),
 
   // Get contacts by company
-  http.get("/v1/contacts/company/:companyId", async ({ params }) => {
-    if (config.delay) {
-      await delay(config.delay);
+  http.get(
+    `${API_BASE_URL}/v1/contacts/company/:companyId`,
+    async ({ params }) => {
+      if (config.delay) {
+        await delay(config.delay);
+      }
+
+      const { companyId } = params;
+      const companyIdNum = parseInt(companyId as string, 10);
+      const contacts = mockContacts.filter((c) => c.companyId === companyIdNum);
+
+      return HttpResponse.json(contacts);
     }
-
-    const { companyId } = params;
-    const companyIdNum = parseInt(companyId as string, 10);
-    const contacts = mockContacts.filter((c) => c.companyId === companyIdNum);
-
-    return HttpResponse.json(contacts);
-  }),
+  ),
 
   // Update lead score
-  http.patch("/v1/contacts/:id/score", async ({ params, request }) => {
-    if (config.delay) {
-      await delay(config.delay);
+  http.patch(
+    `${API_BASE_URL}/v1/contacts/:id/score`,
+    async ({ params, request }) => {
+      if (config.delay) {
+        await delay(config.delay);
+      }
+
+      const { id } = params;
+      const contactId = parseInt(id as string, 10);
+      const body = (await request.json()) as { leadScore: number };
+
+      const contactIndex = mockContacts.findIndex((c) => c.id === contactId);
+
+      if (contactIndex === -1) {
+        return HttpResponse.json(
+          {
+            error: "Contact not found",
+            message: `Contact with ID ${id} does not exist`,
+          },
+          { status: 404 }
+        );
+      }
+
+      mockContacts[contactIndex] = {
+        ...mockContacts[contactIndex],
+        leadScore: body.leadScore,
+        updatedAt: new Date().toISOString(),
+        lastModifiedBy: "current-user",
+      };
+
+      return HttpResponse.json(mockContacts[contactIndex]);
     }
-
-    const { id } = params;
-    const contactId = parseInt(id as string, 10);
-    const body = (await request.json()) as { leadScore: number };
-
-    const contactIndex = mockContacts.findIndex((c) => c.id === contactId);
-
-    if (contactIndex === -1) {
-      return HttpResponse.json(
-        {
-          error: "Contact not found",
-          message: `Contact with ID ${id} does not exist`,
-        },
-        { status: 404 }
-      );
-    }
-
-    mockContacts[contactIndex] = {
-      ...mockContacts[contactIndex],
-      leadScore: body.leadScore,
-      updatedAt: new Date().toISOString(),
-      lastModifiedBy: "current-user",
-    };
-
-    return HttpResponse.json(mockContacts[contactIndex]);
-  }),
+  ),
 
   // Bulk create contacts
-  http.post("/v1/contacts/bulk", async ({ request }) => {
+  http.post(`${API_BASE_URL}/v1/contacts/bulk`, async ({ request }) => {
     if (config.delay) {
       await delay(config.delay * 2); // Longer delay for bulk operations
     }
@@ -423,7 +433,7 @@ export const contactsHandlers = [
   }),
 
   // Bulk update status
-  http.patch("/v1/contacts/bulk/status", async ({ request }) => {
+  http.patch(`${API_BASE_URL}/v1/contacts/bulk/status`, async ({ request }) => {
     if (config.delay) {
       await delay(config.delay * 2);
     }
@@ -463,7 +473,7 @@ export const contactsHandlers = [
   }),
 
   // Bulk delete contacts
-  http.delete("/v1/contacts/bulk", async ({ request }) => {
+  http.delete(`${API_BASE_URL}/v1/contacts/bulk`, async ({ request }) => {
     if (config.delay) {
       await delay(config.delay * 2);
     }
@@ -497,7 +507,7 @@ export const contactsHandlers = [
   }),
 
   // Bulk update lead scores
-  http.patch("/v1/contacts/bulk/scores", async ({ request }) => {
+  http.patch(`${API_BASE_URL}/v1/contacts/bulk/scores`, async ({ request }) => {
     if (config.delay) {
       await delay(config.delay * 2);
     }
@@ -540,7 +550,7 @@ export const contactsHandlers = [
 
   // Company Handlers
   // Get all companies with pagination and filtering
-  http.get("/v1/companies", async ({ request }) => {
+  http.get(`${API_BASE_URL}/v1/companies`, async ({ request }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -587,7 +597,7 @@ export const contactsHandlers = [
   }),
 
   // Get company by ID
-  http.get("/v1/companies/:id", async ({ params }) => {
+  http.get(`${API_BASE_URL}/v1/companies/:id`, async ({ params }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -610,7 +620,7 @@ export const contactsHandlers = [
   }),
 
   // Create company
-  http.post("/v1/companies", async ({ request }) => {
+  http.post(`${API_BASE_URL}/v1/companies`, async ({ request }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -631,7 +641,7 @@ export const contactsHandlers = [
   }),
 
   // Update company
-  http.put("/v1/companies/:id", async ({ params, request }) => {
+  http.put(`${API_BASE_URL}/v1/companies/:id`, async ({ params, request }) => {
     if (config.delay) {
       await delay(config.delay);
     }
@@ -662,7 +672,7 @@ export const contactsHandlers = [
   }),
 
   // Delete company
-  http.delete("/v1/companies/:id", async ({ params }) => {
+  http.delete(`${API_BASE_URL}/v1/companies/:id`, async ({ params }) => {
     if (config.delay) {
       await delay(config.delay);
     }
