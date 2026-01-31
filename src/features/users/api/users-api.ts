@@ -85,12 +85,9 @@ export async function fetchUsers(
  * Fetch user by ID
  */
 export async function fetchUser(id: number): Promise<UserResponse> {
-  const response = await apiClient.get<UserResponse>(
-    `/v1/admin/users/${id}`,
-    {
-      headers: getAuthHeaders(),
-    }
-  );
+  const response = await apiClient.get<UserResponse>(`/v1/admin/users/${id}`, {
+    headers: getAuthHeaders(),
+  });
   return response.data;
 }
 

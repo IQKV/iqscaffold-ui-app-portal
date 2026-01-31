@@ -83,9 +83,9 @@ export function MSWDemoPage() {
             API Demo: Users List
           </Title>
           <Text c="dimmed" mb="md">
-            This component fetches data from <code>/v1/admin/users</code>.
-            When MSW is enabled, it returns mock data. When disabled, it will
-            attempt to call your real API.
+            This component fetches data from <code>/v1/admin/users</code>. When
+            MSW is enabled, it returns mock data. When disabled, it will attempt
+            to call your real API.
           </Text>
 
           {isLoading && <Text>Loading users...</Text>}

@@ -119,30 +119,27 @@ export const featureHandlers = [
   }),
 
   // Enable feature for user (admin only)
-  http.post(
-    "/v1/users/features/:userId/:featureCode/enable",
-    ({ params }) => {
-      const userId = Number(params.userId);
-      const featureCode = params.featureCode as string;
+  http.post("/v1/users/features/:userId/:featureCode/enable", ({ params }) => {
+    const userId = Number(params.userId);
+    const featureCode = params.featureCode as string;
 
-      if (!userFeatureMap.has(userId)) {
-        userFeatureMap.set(userId, new Set());
-      }
-
-      const userFeatures = userFeatureMap.get(userId)!;
-      userFeatures.add(featureCode);
-
-      const response: FeatureAccessResponse = {
-        userId,
-        username: `user-${userId}`,
-        featureCode,
-        hasAccess: true,
-        message: `Feature ${featureCode} enabled successfully`,
-      };
-
-      return HttpResponse.json(response);
+    if (!userFeatureMap.has(userId)) {
+      userFeatureMap.set(userId, new Set());
     }
-  ),
+
+    const userFeatures = userFeatureMap.get(userId)!;
+    userFeatures.add(featureCode);
+
+    const response: FeatureAccessResponse = {
+      userId,
+      username: `user-${userId}`,
+      featureCode,
+      hasAccess: true,
+      message: `Feature ${featureCode} enabled successfully`,
+    };
+
+    return HttpResponse.json(response);
+  }),
 
   // Disable feature for user (admin only)
   http.delete(
@@ -169,28 +166,25 @@ export const featureHandlers = [
   ),
 
   // Check feature access for user (admin only)
-  http.get(
-    "/v1/users/features/:userId/:featureCode/check",
-    ({ params }) => {
-      const userId = Number(params.userId);
-      const featureCode = params.featureCode as string;
+  http.get("/v1/users/features/:userId/:featureCode/check", ({ params }) => {
+    const userId = Number(params.userId);
+    const featureCode = params.featureCode as string;
 
-      const userFeatures = userFeatureMap.get(userId) || new Set();
-      const hasAccess = userFeatures.has(featureCode);
+    const userFeatures = userFeatureMap.get(userId) || new Set();
+    const hasAccess = userFeatures.has(featureCode);
 
-      const response: FeatureAccessResponse = {
-        userId,
-        username: `user-${userId}`,
-        featureCode,
-        hasAccess,
-        message: hasAccess
-          ? `User has access to ${featureCode}`
-          : `User does not have access to ${featureCode}`,
-      };
+    const response: FeatureAccessResponse = {
+      userId,
+      username: `user-${userId}`,
+      featureCode,
+      hasAccess,
+      message: hasAccess
+        ? `User has access to ${featureCode}`
+        : `User does not have access to ${featureCode}`,
+    };
 
-      return HttpResponse.json(response);
-    }
-  ),
+    return HttpResponse.json(response);
+  }),
 
   // Bulk update user features (admin only)
   http.put("/v1/users/features/:userId", async ({ params, request }) => {

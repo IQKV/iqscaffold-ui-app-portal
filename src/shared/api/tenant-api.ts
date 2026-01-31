@@ -68,12 +68,9 @@ export const tenantApi = {
    * Get all tenants (SUPER_ADMIN only)
    */
   async getAllTenants(enabledOnly: boolean = false): Promise<TenantSummary[]> {
-    const response = await apiClient.get<TenantSummary[]>(
-      "/v1/admin/tenants",
-      {
-        params: { enabledOnly },
-      }
-    );
+    const response = await apiClient.get<TenantSummary[]>("/v1/admin/tenants", {
+      params: { enabledOnly },
+    });
     return response.data;
   },
 
