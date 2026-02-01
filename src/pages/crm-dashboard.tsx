@@ -4,6 +4,7 @@ import { CrmDashboard, CrmLayout } from "@/features/crm-leads";
 import { FeatureGate } from "@/shared/ui";
 import { CrmAccessGuard } from "@/shared/ui/guards/CrmAccessGuard";
 import { t } from "@lingui/core/macro";
+import { usePageTitle } from "@/shared/lib";
 
 /**
  * CRM Dashboard Page Route
@@ -17,8 +18,11 @@ export const Route = createFileRoute("/crm-dashboard")({
 });
 
 function CrmDashboardPage() {
+  const pageTitle = usePageTitle(t`CRM Dashboard`);
+
   return (
     <AuthGuard>
+      {pageTitle}
       <FeatureGate feature="crm">
         <CrmAccessGuard>
           <CrmLayout title={t`CRM Dashboard`}>

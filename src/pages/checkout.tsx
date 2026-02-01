@@ -11,6 +11,7 @@ import {
 import { AuthGuard } from "@/processes/auth";
 import { StripePaymentWidget } from "@/widgets/stripe-payment-widget";
 import { t } from "@lingui/macro";
+import { usePageTitle } from "@/shared/lib";
 
 export const Route = createFileRoute("/checkout")({
   component: CheckoutPage,
@@ -28,10 +29,12 @@ function CheckoutPage() {
   const { clientSecret, publicKey, amount, currency } = useSearch({
     from: "/checkout",
   });
+  const pageTitle = usePageTitle(t`Checkout`);
 
   if (!clientSecret || !publicKey) {
     return (
       <AuthGuard>
+        {pageTitle}
         <Container size="xs" py="xl">
           <Alert color="red" title={t`Invalid Checkout`}>
             {t`Required payment information is missing.`}
@@ -43,6 +46,7 @@ function CheckoutPage() {
 
   return (
     <AuthGuard>
+      {pageTitle}
       <Container size="xs" py="xl" data-testid="page-checkout">
         <Stack gap="xl">
           <Center>

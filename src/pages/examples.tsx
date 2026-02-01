@@ -26,7 +26,7 @@ import {
   type DataTableColumn,
 } from "@/shared/ui";
 import { AuthGuard } from "@/processes/auth";
-import { notificationService } from "@/shared/lib";
+import { notificationService, usePageTitle } from "@/shared/lib";
 import { t } from "@lingui/core/macro";
 
 export const Route = createFileRoute("/examples")({
@@ -43,6 +43,7 @@ interface User {
 }
 
 function ExamplesPage() {
+  const pageTitle = usePageTitle(t`Examples`);
   const confirmationModal = useConfirmationModal({
     title: t`Delete User`,
     message: t`Are you sure you want to delete this user? This action cannot be undone.`,
@@ -180,6 +181,7 @@ function ExamplesPage() {
 
   return (
     <AuthGuard>
+      {pageTitle}
       <Container size="xl" data-testid="page-examples">
         <Stack gap="xl">
           <div>

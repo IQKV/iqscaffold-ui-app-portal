@@ -22,6 +22,7 @@ import {
   CreateSubscriptionModal,
 } from "@/features/subscription-management";
 import { InvoicesTable } from "@/features/invoice-management";
+import { usePageTitle } from "@/shared/lib";
 
 export const Route = createFileRoute("/subscriptions")({
   component: SubscriptionsPage,
@@ -33,6 +34,7 @@ function SubscriptionsPage() {
   const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan | null>(
     null
   );
+  const pageTitle = usePageTitle(t`Subscriptions`);
 
   const {
     data: activeSubscription,
@@ -43,6 +45,7 @@ function SubscriptionsPage() {
   if (!hasBillingAccess()) {
     return (
       <AuthGuard>
+        {pageTitle}
         <Container size="xl" py="xl" data-testid="page-subscriptions">
           <Alert color="red" title={t`Access Denied`}>
             {t`You don't have permission to access subscription information. Please contact your administrator.`}
@@ -63,6 +66,7 @@ function SubscriptionsPage() {
 
   return (
     <AuthGuard>
+      {pageTitle}
       <Container size="xl" py="xl" data-testid="page-subscriptions">
         <Stack gap="xl">
           <Group justify="space-between">

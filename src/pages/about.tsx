@@ -13,14 +13,18 @@ import { IconBrandGithub, IconInfoCircle } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { AuthGuard } from "@/processes/auth";
 import { t } from "@lingui/core/macro";
+import { usePageTitle } from "@/shared/lib";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
 });
 
 function AboutPage() {
+  const pageTitle = usePageTitle(t`About`);
+
   return (
     <AuthGuard>
+      {pageTitle}
       <Container size="md" data-testid="page-about">
         <Stack gap="xl">
           <div>

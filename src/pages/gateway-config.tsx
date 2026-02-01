@@ -28,7 +28,8 @@ import {
   useDeactivateGateway,
   useSetPrimaryGateway,
   useDeleteGatewayConfig,
-} from "@/entities/billing";
+} from "@/entities/gateway-config";
+import { usePageTitle } from "@/shared/lib";
 import { notificationService } from "@/shared/lib/notifications";
 import { PaymentGatewayProvider } from "@/shared/api/billing/types";
 import {
@@ -46,6 +47,7 @@ function GatewayConfigPage() {
   const [deleteConfirmOpened, setDeleteConfirmOpened] = useState(false);
   const [providerToDelete, setProviderToDelete] =
     useState<PaymentGatewayProvider | null>(null);
+  const pageTitle = usePageTitle(t`Gateway Configuration`);
 
   const { data: configs, isLoading, error } = useGatewayConfigs();
   const createMutation = useCreateGatewayConfig();
@@ -147,6 +149,7 @@ function GatewayConfigPage() {
   if (!canView) {
     return (
       <AuthGuard>
+        {pageTitle}
         <Container size="xl" py="xl">
           <Alert
             color="red"
@@ -162,6 +165,7 @@ function GatewayConfigPage() {
 
   return (
     <AuthGuard>
+      {pageTitle}
       <BillingAccessGuard>
         <Container size="xl" py="xl" data-testid="page-gateway-config">
           <Stack gap="xl">

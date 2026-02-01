@@ -8,6 +8,8 @@ import {
   FeatureErrorBoundary,
 } from "@/shared/ui";
 import { useFeatureContext } from "@/shared/lib";
+import { usePageTitle } from "@/shared/lib";
+import { t } from "@lingui/macro";
 
 export const Route = createFileRoute("/dashboard")({
   component: DashboardPage,
@@ -15,17 +17,19 @@ export const Route = createFileRoute("/dashboard")({
 
 function DashboardPage() {
   const { enabledFeatures } = useFeatureContext();
+  const pageTitle = usePageTitle(t`Dashboard`);
 
   return (
     <AuthGuard>
+      {pageTitle}
       <FeatureErrorBoundary>
         <Stack gap="lg" data-testid="page-dashboard">
           <Paper p="lg" withBorder>
             <Title order={2} data-testid="dashboard-title">
-              Dashboard
+              {t`Dashboard`}
             </Title>
             <Text c="dimmed" data-testid="dashboard-description">
-              Welcome to your dashboard. Here's what you have access to:
+              {t`Welcome to your dashboard. Here's what you have access to:`}
             </Text>
           </Paper>
 
@@ -38,17 +42,15 @@ function DashboardPage() {
                   fallback={
                     <Paper p="md" withBorder style={{ opacity: 0.6 }}>
                       <Text size="sm" c="dimmed">
-                        Advanced Analytics - Upgrade to Pro to unlock this
-                        feature
+                        {t`Advanced Analytics - Upgrade to Pro to unlock this feature`}
                       </Text>
                     </Paper>
                   }
                 >
                   <Paper p="md" withBorder>
-                    <Title order={3}>Advanced Analytics</Title>
+                    <Title order={3}>{t`Advanced Analytics`}</Title>
                     <Text size="sm" c="dimmed">
-                      Premium analytics dashboard with detailed insights and
-                      reporting.
+                      {t`Premium analytics dashboard with detailed insights and reporting.`}
                     </Text>
                   </Paper>
                 </FeatureGate>
@@ -58,15 +60,15 @@ function DashboardPage() {
                   fallback={
                     <Paper p="md" withBorder style={{ opacity: 0.6 }}>
                       <Text size="sm" c="dimmed">
-                        Lead Management - Available in Business plan
+                        {t`Lead Management - Available in Business plan`}
                       </Text>
                     </Paper>
                   }
                 >
                   <Paper p="md" withBorder>
-                    <Title order={3}>Lead Management</Title>
+                    <Title order={3}>{t`Lead Management`}</Title>
                     <Text size="sm" c="dimmed">
-                      Manage your sales leads and track conversion rates.
+                      {t`Manage your sales leads and track conversion rates.`}
                     </Text>
                   </Paper>
                 </FeatureGate>
@@ -76,24 +78,24 @@ function DashboardPage() {
                   fallback={
                     <Paper p="md" withBorder style={{ opacity: 0.6 }}>
                       <Text size="sm" c="dimmed">
-                        Sales Pipeline - Enterprise feature
+                        {t`Sales Pipeline - Enterprise feature`}
                       </Text>
                     </Paper>
                   }
                 >
                   <Paper p="md" withBorder>
-                    <Title order={3}>Sales Pipeline</Title>
+                    <Title order={3}>{t`Sales Pipeline`}</Title>
                     <Text size="sm" c="dimmed">
-                      Visual sales pipeline with drag-and-drop functionality.
+                      {t`Visual sales pipeline with drag-and-drop functionality.`}
                     </Text>
                   </Paper>
                 </FeatureGate>
 
                 <FeatureGate feature="reporting">
                   <Paper p="md" withBorder>
-                    <Title order={3}>Reports</Title>
+                    <Title order={3}>{t`Reports`}</Title>
                     <Text size="sm" c="dimmed">
-                      Generate detailed reports and export data.
+                      {t`Generate detailed reports and export data.`}
                     </Text>
                   </Paper>
                 </FeatureGate>
@@ -108,7 +110,7 @@ function DashboardPage() {
                 {/* Feature usage information */}
                 <Paper p="md" withBorder>
                   <Title order={4} mb="md">
-                    Feature Usage
+                    {t`Feature Usage`}
                   </Title>
                   <FeatureUsageList
                     featureCodes={[
@@ -124,7 +126,7 @@ function DashboardPage() {
                 {/* Enabled features list */}
                 <Paper p="md" withBorder>
                   <Title order={4} mb="md">
-                    Enabled Features
+                    {t`Enabled Features`}
                   </Title>
                   {enabledFeatures.length > 0 ? (
                     <Stack gap="xs">
@@ -139,7 +141,7 @@ function DashboardPage() {
                     </Stack>
                   ) : (
                     <Text size="sm" c="dimmed">
-                      No features enabled
+                      {t`No features enabled`}
                     </Text>
                   )}
                 </Paper>

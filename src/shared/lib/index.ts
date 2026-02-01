@@ -33,3 +33,6 @@ export { FeatureProvider, useFeatureContext } from "./contexts/FeatureContext";
 export { useCrmServiceHealth } from "./hooks/useCrmServiceHealth";
 export { useBillingServiceHealth } from "./hooks/useBillingServiceHealth";
 export { useServiceHealth } from "./hooks/useServiceHealth";
+
+// Page utilities
+export { usePageTitle } from "./hooks/usePageTitle";

@@ -115,7 +115,7 @@ msgstr "{leadName} moved to {stageName}"
 msgid "{trialDays} day trial"
 msgstr "{trialDays} day trial"
 
-#: src/pages/examples.tsx:163
+#: src/pages/examples.tsx:164
 msgid "{userName} deleted successfully"
 msgstr "{userName} deleted successfully"
 
@@ -132,11 +132,12 @@ msgstr "0-100"
 msgid "A lead with this email already exists"
 msgstr "A lead with this email already exists"
 
+#: src/pages/about.tsx:23
 #: src/widgets/sidebar/ui/sidebar.tsx:39
 msgid "About"
 msgstr "About"
 
-#: src/pages/about.tsx:32
+#: src/pages/about.tsx:36
 msgid "About This Template"
 msgstr "About This Template"
 
@@ -144,8 +145,8 @@ msgstr "About This Template"
 msgid "Accept-Language header (from browser)"
 msgstr "Accept-Language header (from browser)"
 
-#: src/pages/gateway-config.tsx:153
-#: src/pages/subscriptions.tsx:47
+#: src/pages/gateway-config.tsx:156
+#: src/pages/subscriptions.tsx:50
 msgid "Access Denied"
 msgstr "Access Denied"
 
@@ -156,7 +157,7 @@ msgstr "Access Token"
 #: src/features/invoice-management/ui/InvoicesTable.tsx:74
 #: src/features/users/components/enhanced-users-data-grid.tsx:198
 #: src/features/users/components/users-data-grid.tsx:169
-#: src/pages/examples.tsx:133
+#: src/pages/examples.tsx:134
 #: src/widgets/billing-history/ui/billing-history-table.tsx:113
 msgid "Actions"
 msgstr "Actions"
@@ -217,7 +218,7 @@ msgid "Add First Note"
 msgstr "Add First Note"
 
 #: src/features/gateway-config/ui/gateway-config-form.tsx:193
-#: src/pages/gateway-config.tsx:183
+#: src/pages/gateway-config.tsx:187
 msgid "Add Gateway"
 msgstr "Add Gateway"
 
@@ -229,7 +230,7 @@ msgstr "Add Lead"
 msgid "Add New Stage"
 msgstr "Add New Stage"
 
-#: src/pages/examples.tsx:285
+#: src/pages/examples.tsx:287
 msgid "Add new user clicked"
 msgstr "Add new user clicked"
 
@@ -252,7 +253,7 @@ msgstr "Add Stage"
 
 #: src/features/users/components/enhanced-users-data-grid.tsx:265
 #: src/features/users/components/users-data-grid.tsx:233
-#: src/pages/examples.tsx:288
+#: src/pages/examples.tsx:290
 msgid "Add User"
 msgstr "Add User"
 
@@ -267,6 +268,14 @@ msgstr "Admin"
 #: src/entities/user/ui/UserFormField.tsx:84
 msgid "Admin Access"
 msgstr "Admin Access"
+
+#: src/pages/dashboard.tsx:51
+msgid "Advanced Analytics"
+msgstr "Advanced Analytics"
+
+#: src/pages/dashboard.tsx:45
+msgid "Advanced Analytics - Upgrade to Pro to unlock this feature"
+msgstr "Advanced Analytics - Upgrade to Pro to unlock this feature"
 
 #: src/features/crm-leads/components/FollowUpList.tsx:356
 #: src/features/crm-leads/components/FollowUpList.tsx:370
@@ -341,7 +350,7 @@ msgstr "Application ID for frontend use (optional)"
 msgid "Apply"
 msgstr "Apply"
 
-#: src/pages/about.tsx:93
+#: src/pages/about.tsx:97
 msgid "Architecture"
 msgstr "Architecture"
 
@@ -365,7 +374,7 @@ msgstr "Are you sure you want to delete {count} contacts? This action cannot be 
 msgid "Are you sure you want to delete {count} follow-up(s)? This action cannot be undone."
 msgstr "Are you sure you want to delete {count} follow-up(s)? This action cannot be undone."
 
-#: src/pages/gateway-config.tsx:230
+#: src/pages/gateway-config.tsx:234
 msgid "Are you sure you want to delete the"
 msgstr "Are you sure you want to delete the"
 
@@ -382,7 +391,7 @@ msgstr "Are you sure you want to delete this follow-up? This action cannot be un
 msgid "Are you sure you want to delete this item? This action cannot be undone."
 msgstr "Are you sure you want to delete this item? This action cannot be undone."
 
-#: src/pages/examples.tsx:48
+#: src/pages/examples.tsx:49
 msgid "Are you sure you want to delete this user? This action cannot be undone."
 msgstr "Are you sure you want to delete this user? This action cannot be undone."
 
@@ -447,7 +456,7 @@ msgstr "Authorities"
 msgid "Authority management will be available in a future update."
 msgstr "Authority management will be available in a future update."
 
-#: src/pages/subscriptions.tsx:81
+#: src/pages/subscriptions.tsx:85
 msgid "Available Plans"
 msgstr "Available Plans"
 
@@ -515,11 +524,12 @@ msgstr "Backend user preference is updated via API"
 msgid "Basic User Access"
 msgstr "Basic User Access"
 
+#: src/pages/billing.tsx:51
 #: src/widgets/sidebar/ui/sidebar.tsx:69
 msgid "Billing"
 msgstr "Billing"
 
-#: src/pages/billing.tsx:75
+#: src/pages/billing.tsx:77
 msgid "Billing & Payments"
 msgstr "Billing & Payments"
 
@@ -527,7 +537,7 @@ msgstr "Billing & Payments"
 msgid "Billing Period:"
 msgstr "Billing Period:"
 
-#: src/pages/about.tsx:100
+#: src/pages/about.tsx:104
 msgid "Built following Feature-Sliced Design methodology for maintainable and scalable frontend architecture."
 msgstr "Built following Feature-Sliced Design methodology for maintainable and scalable frontend architecture."
 
@@ -575,7 +585,7 @@ msgstr "Call contact"
 #: src/features/users/components/enhanced-users-data-grid.tsx:72
 #: src/features/users/components/user-form-modal.tsx:303
 #: src/features/users/components/users-data-grid.tsx:61
-#: src/pages/gateway-config.tsx:242
+#: src/pages/gateway-config.tsx:246
 #: src/shared/ui/confirmation-modal/confirm-context-modal.tsx:25
 #: src/shared/ui/confirmation-modal/confirmation-modal.tsx:25
 #: src/shared/ui/confirmation-modal/open-confirm.ts:18
@@ -609,6 +619,10 @@ msgstr "Cancel Subscription Immediately"
 msgid "Change Password"
 msgstr "Change Password"
 
+#: src/pages/preferences-demo.tsx:66
+msgid "Change your theme preference instantly"
+msgstr "Change your theme preference instantly"
+
 #: src/shared/constants/index.ts:94
 msgid "Changes saved successfully"
 msgstr "Changes saved successfully"
@@ -641,11 +655,12 @@ msgstr "Checking email status..."
 msgid "Checking feature availability..."
 msgstr "Checking feature availability..."
 
-#: src/pages/checkout.tsx:50
+#: src/pages/checkout.tsx:32
+#: src/pages/checkout.tsx:54
 msgid "Checkout"
 msgstr "Checkout"
 
-#: src/pages/subscriptions.tsx:136
+#: src/pages/subscriptions.tsx:140
 msgid "Choose a subscription plan that fits your needs. You can upgrade or downgrade at any time."
 msgstr "Choose a subscription plan that fits your needs. You can upgrade or downgrade at any time."
 
@@ -695,7 +710,7 @@ msgstr "Close"
 msgid "Close navigation"
 msgstr "Close navigation"
 
-#: src/pages/about.tsx:117
+#: src/pages/about.tsx:121
 msgid "Code Quality:"
 msgstr "Code Quality:"
 
@@ -725,6 +740,10 @@ msgstr "Company name must be less than 200 characters"
 msgid "Complete"
 msgstr "Complete"
 
+#: src/pages/preferences-demo.tsx:56
+msgid "Complete demonstration of the user preferences API integration"
+msgstr "Complete demonstration of the user preferences API integration"
+
 #: src/features/crm-leads/components/FollowUpList.tsx:395
 msgid "Complete Selected"
 msgstr "Complete Selected"
@@ -740,7 +759,7 @@ msgstr "Complete Selected Follow-ups"
 msgid "Completed"
 msgstr "Completed"
 
-#: src/pages/examples.tsx:187
+#: src/pages/examples.tsx:189
 msgid "Component Examples"
 msgstr "Component Examples"
 
@@ -769,7 +788,7 @@ msgstr "Confirm Refund"
 msgid "Confirm your new password"
 msgstr "Confirm your new password"
 
-#: src/pages/examples.tsx:259
+#: src/pages/examples.tsx:261
 msgid "Confirmation modals, notifications, loading states, and error boundaries."
 msgstr "Confirmation modals, notifications, loading states, and error boundaries."
 
@@ -781,9 +800,9 @@ msgstr "Connect with Stripe"
 msgid "Connection Issue"
 msgstr "Connection Issue"
 
-#: src/pages/crm.contacts.$contactId.tsx:14
-#~ msgid "Contact Details"
-#~ msgstr "Contact Details"
+#: src/pages/crm.contacts.$contactId.tsx:11
+msgid "Contact Details"
+msgstr "Contact Details"
 
 #: src/features/crm-contacts/components/ContactEditModal.tsx:110
 msgid "Contact updated successfully"
@@ -795,7 +814,7 @@ msgid "Contacted"
 msgstr "Contacted"
 
 #: src/features/crm-leads/components/CrmLayout.tsx:84
-#: src/pages/crm.contacts.tsx:14
+#: src/pages/crm.contacts.tsx:18
 #: src/shared/ui/CrmServiceDegradationBanner.tsx:22
 #: src/widgets/sidebar/ui/sidebar.tsx:125
 msgid "Contacts"
@@ -870,8 +889,13 @@ msgstr "CRM"
 #~ msgid "CRM Access Required"
 #~ msgstr "CRM Access Required"
 
+#: src/pages/crm.contacts.tsx:13
+msgid "CRM Contacts"
+msgstr "CRM Contacts"
+
 #: src/features/crm-leads/components/CrmDashboard.tsx:83
-#: src/pages/crm-dashboard.tsx:24
+#: src/pages/crm-dashboard.tsx:21
+#: src/pages/crm-dashboard.tsx:28
 #: src/widgets/sidebar/ui/sidebar.tsx:104
 msgid "CRM Dashboard"
 msgstr "CRM Dashboard"
@@ -885,9 +909,21 @@ msgstr "CRM Error"
 #~ msgid "CRM Feature Not Available"
 #~ msgstr "CRM Feature Not Available"
 
+#: src/pages/crm-follow-ups.tsx:19
+msgid "CRM Follow-ups"
+msgstr "CRM Follow-ups"
+
+#: src/pages/crm.leads.tsx:12
+msgid "CRM Leads"
+msgstr "CRM Leads"
+
 #: src/features/crm-leads/components/CrmLayout.tsx:264
 msgid "CRM Navigation"
 msgstr "CRM Navigation"
+
+#: src/pages/crm.pipeline.tsx:12
+msgid "CRM Pipeline"
+msgstr "CRM Pipeline"
 
 #: src/shared/ui/guards/CrmAccessGuard.tsx:122
 #~ msgid "CRM services are currently experiencing issues. Our team has been notified and is working on a fix."
@@ -900,6 +936,10 @@ msgstr "CRM Navigation"
 #: src/shared/ui/guards/CrmAccessGuard.tsx:117
 #~ msgid "CRM Services Unavailable"
 #~ msgstr "CRM Services Unavailable"
+
+#: src/pages/preferences-demo.tsx:109
+msgid "Currency"
+msgstr "Currency"
 
 #: src/features/users/components/enhanced-users-data-grid.tsx:329
 msgid "Current Authorities"
@@ -927,8 +967,12 @@ msgstr "Current period: {periodStart} - {periodEnd}"
 msgid "Current Plan"
 msgstr "Current Plan"
 
-#: src/pages/billing.tsx:138
-#: src/pages/subscriptions.tsx:78
+#: src/pages/preferences-demo.tsx:76
+msgid "Current Preference Values"
+msgstr "Current Preference Values"
+
+#: src/pages/billing.tsx:140
+#: src/pages/subscriptions.tsx:82
 msgid "Current Subscription"
 msgstr "Current Subscription"
 
@@ -955,15 +999,17 @@ msgstr "Dark mode"
 #: src/features/crm-leads/components/CrmLayout.tsx:72
 #: src/features/crm-leads/components/CrmLayout.tsx:117
 #: src/features/dashboard/ui/dashboard-feature.tsx:15
+#: src/pages/dashboard.tsx:20
+#: src/pages/dashboard.tsx:29
 #: src/widgets/sidebar/ui/sidebar.tsx:88
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: src/pages/examples.tsx:277
+#: src/pages/examples.tsx:279
 msgid "Data Table Example"
 msgstr "Data Table Example"
 
-#: src/pages/examples.tsx:231
+#: src/pages/examples.tsx:233
 msgid "Data Tables"
 msgstr "Data Tables"
 
@@ -1007,7 +1053,7 @@ msgstr "Default locale (English)"
 #: src/features/gateway-config/ui/gateway-config-list.tsx:164
 #: src/features/users/components/enhanced-users-data-grid.tsx:72
 #: src/features/users/components/users-data-grid.tsx:61
-#: src/pages/examples.tsx:49
+#: src/pages/examples.tsx:50
 msgid "Delete"
 msgstr "Delete"
 
@@ -1016,11 +1062,11 @@ msgstr "Delete"
 msgid "Delete Follow-up"
 msgstr "Delete Follow-up"
 
-#: src/pages/gateway-config.tsx:250
+#: src/pages/gateway-config.tsx:254
 msgid "Delete Gateway"
 msgstr "Delete Gateway"
 
-#: src/pages/gateway-config.tsx:220
+#: src/pages/gateway-config.tsx:224
 msgid "Delete Gateway Configuration"
 msgstr "Delete Gateway Configuration"
 
@@ -1048,7 +1094,7 @@ msgstr "Delete user"
 #: src/features/users/components/enhanced-users-data-grid.tsx:62
 #: src/features/users/components/enhanced-users-data-grid.tsx:222
 #: src/features/users/components/users-data-grid.tsx:51
-#: src/pages/examples.tsx:47
+#: src/pages/examples.tsx:48
 msgid "Delete User"
 msgstr "Delete User"
 
@@ -1112,7 +1158,7 @@ msgstr "Due date is required"
 msgid "Due Date:"
 msgstr "Due Date:"
 
-#: src/pages/about.tsx:133
+#: src/pages/about.tsx:137
 msgid "Easy"
 msgstr "Easy"
 
@@ -1153,7 +1199,7 @@ msgstr "Edit User"
 #~ msgid "Editing {0}"
 #~ msgstr "Editing {0}"
 
-#: src/pages/examples.tsx:151
+#: src/pages/examples.tsx:152
 msgid "Editing {userName}"
 msgstr "Editing {userName}"
 
@@ -1211,7 +1257,8 @@ msgstr "Enable MSW"
 msgid "Enabled"
 msgstr "Enabled"
 
-#: src/pages/billing.tsx:190
+#: src/pages/billing.tsx:192
+#: src/pages/dashboard.tsx:129
 msgid "Enabled Features"
 msgstr "Enabled Features"
 
@@ -1219,7 +1266,7 @@ msgstr "Enabled Features"
 msgid "End Date"
 msgstr "End Date"
 
-#: src/pages/about.tsx:110
+#: src/pages/about.tsx:114
 msgid "End-to-end type safety from API to UI components"
 msgstr "End-to-end type safety from API to UI components"
 
@@ -1352,13 +1399,13 @@ msgstr "Environment mode for the gateway"
 #: src/features/users/components/user-form-modal.tsx:145
 #: src/features/users/components/user-form-modal.tsx:173
 #: src/features/users/components/users-data-grid.tsx:75
-#: src/pages/examples.tsx:333
-#: src/pages/gateway-config.tsx:70
-#: src/pages/gateway-config.tsx:85
-#: src/pages/gateway-config.tsx:100
-#: src/pages/gateway-config.tsx:115
-#: src/pages/gateway-config.tsx:141
-#: src/pages/gateway-config.tsx:194
+#: src/pages/examples.tsx:335
+#: src/pages/gateway-config.tsx:72
+#: src/pages/gateway-config.tsx:87
+#: src/pages/gateway-config.tsx:102
+#: src/pages/gateway-config.tsx:117
+#: src/pages/gateway-config.tsx:143
+#: src/pages/gateway-config.tsx:198
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:81
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:127
 msgid "Error"
@@ -1417,7 +1464,7 @@ msgstr "Error Loading Plans"
 msgid "Error loading users: {errorMessage}"
 msgstr "Error loading users: {errorMessage}"
 
-#: src/pages/examples.tsx:330
+#: src/pages/examples.tsx:332
 msgid "Error notification!"
 msgstr "Error notification!"
 
@@ -1425,7 +1472,7 @@ msgstr "Error notification!"
 msgid "Error Reference ID:"
 msgstr "Error Reference ID:"
 
-#: src/pages/about.tsx:118
+#: src/pages/about.tsx:122
 msgid "ESLint, Prettier, and automated quality checks"
 msgstr "ESLint, Prettier, and automated quality checks"
 
@@ -1439,15 +1486,16 @@ msgstr "every {count} months"
 msgid "every {count} years"
 msgstr "every {count} years"
 
+#: src/pages/examples.tsx:46
 #: src/widgets/sidebar/ui/sidebar.tsx:57
 msgid "Examples"
 msgstr "Examples"
 
-#: src/pages/examples.tsx:190
+#: src/pages/examples.tsx:192
 msgid "Explore the various components and features available in this template"
 msgstr "Explore the various components and features available in this template"
 
-#: src/pages/gateway-config.tsx:86
+#: src/pages/gateway-config.tsx:88
 #: src/shared/constants/index.ts:121
 msgid "Failed to activate gateway"
 msgstr "Failed to activate gateway"
@@ -1479,7 +1527,7 @@ msgstr "Failed to complete follow-up: {errorMessage}"
 msgid "Failed to complete some follow-ups"
 msgstr "Failed to complete some follow-ups"
 
-#: src/pages/gateway-config.tsx:71
+#: src/pages/gateway-config.tsx:73
 #: src/shared/constants/index.ts:120
 msgid "Failed to configure payment gateway"
 msgstr "Failed to configure payment gateway"
@@ -1508,7 +1556,7 @@ msgstr "Failed to create subscription. Please try again."
 msgid "Failed to create user: {errorMessage}"
 msgstr "Failed to create user: {errorMessage}"
 
-#: src/pages/gateway-config.tsx:101
+#: src/pages/gateway-config.tsx:103
 #: src/shared/constants/index.ts:122
 msgid "Failed to deactivate gateway"
 msgstr "Failed to deactivate gateway"
@@ -1522,7 +1570,7 @@ msgstr "Failed to delete avatar. Please try again."
 msgid "Failed to delete follow-up: {errorMessage}"
 msgstr "Failed to delete follow-up: {errorMessage}"
 
-#: src/pages/gateway-config.tsx:142
+#: src/pages/gateway-config.tsx:144
 #: src/shared/constants/index.ts:124
 msgid "Failed to delete gateway"
 msgstr "Failed to delete gateway"
@@ -1562,7 +1610,7 @@ msgstr "Failed to load dashboard data. Please try again later."
 msgid "Failed to load follow-ups. Please try again later."
 msgstr "Failed to load follow-ups. Please try again later."
 
-#: src/pages/gateway-config.tsx:195
+#: src/pages/gateway-config.tsx:199
 msgid "Failed to load gateway configurations"
 msgstr "Failed to load gateway configurations"
 
@@ -1638,7 +1686,7 @@ msgstr "Failed to Send Reset Link"
 msgid "Failed to send verification email"
 msgstr "Failed to send verification email"
 
-#: src/pages/gateway-config.tsx:116
+#: src/pages/gateway-config.tsx:118
 #: src/shared/constants/index.ts:123
 msgid "Failed to set primary gateway"
 msgstr "Failed to set primary gateway"
@@ -1691,11 +1739,12 @@ msgstr "Fair"
 msgid "Fastest Stage"
 msgstr "Fastest Stage"
 
-#: src/pages/billing.tsx:176
+#: src/pages/billing.tsx:178
+#: src/pages/dashboard.tsx:113
 msgid "Feature Usage"
 msgstr "Feature Usage"
 
-#: src/pages/about.tsx:105
+#: src/pages/about.tsx:109
 msgid "Feature-Sliced Design:"
 msgstr "Feature-Sliced Design:"
 
@@ -1703,7 +1752,7 @@ msgstr "Feature-Sliced Design:"
 msgid "Features"
 msgstr "Features"
 
-#: src/pages/billing.tsx:116
+#: src/pages/billing.tsx:118
 msgid "Features & Usage"
 msgstr "Features & Usage"
 
@@ -1785,7 +1834,7 @@ msgstr "Follow-up updated successfully"
 #: src/features/crm-leads/components/FollowUpList.tsx:325
 #: src/features/crm-leads/components/FollowUpSection.tsx:175
 #: src/features/crm-leads/components/LeadDetailPage.tsx:289
-#: src/pages/crm-follow-ups.tsx:20
+#: src/pages/crm-follow-ups.tsx:24
 #: src/widgets/sidebar/ui/sidebar.tsx:147
 msgid "Follow-ups"
 msgstr "Follow-ups"
@@ -1806,7 +1855,7 @@ msgstr "Formatted: "
 #~ msgid "Formatted: {0}"
 #~ msgstr "Formatted: {0}"
 
-#: src/pages/examples.tsx:206
+#: src/pages/examples.tsx:208
 msgid "Forms"
 msgstr "Forms"
 
@@ -1814,7 +1863,11 @@ msgstr "Forms"
 msgid "Frontend UI updates to the selected language"
 msgstr "Frontend UI updates to the selected language"
 
-#: src/pages/examples.tsx:237
+#: src/pages/preferences-demo.tsx:148
+msgid "Full Preferences Form"
+msgstr "Full Preferences Form"
+
+#: src/pages/examples.tsx:239
 msgid "Functional"
 msgstr "Functional"
 
@@ -1823,7 +1876,7 @@ msgstr "Functional"
 msgid "Gateway"
 msgstr "Gateway"
 
-#: src/pages/gateway-config.tsx:81
+#: src/pages/gateway-config.tsx:83
 #: src/shared/constants/index.ts:102
 msgid "Gateway activated successfully"
 msgstr "Gateway activated successfully"
@@ -1832,20 +1885,21 @@ msgstr "Gateway activated successfully"
 msgid "Gateway Config"
 msgstr "Gateway Config"
 
-#: src/pages/billing.tsx:92
+#: src/pages/billing.tsx:94
+#: src/pages/gateway-config.tsx:50
 msgid "Gateway Configuration"
 msgstr "Gateway Configuration"
 
-#: src/pages/gateway-config.tsx:232
+#: src/pages/gateway-config.tsx:236
 msgid "gateway configuration?"
 msgstr "gateway configuration?"
 
-#: src/pages/gateway-config.tsx:96
+#: src/pages/gateway-config.tsx:98
 #: src/shared/constants/index.ts:103
 msgid "Gateway deactivated successfully"
 msgstr "Gateway deactivated successfully"
 
-#: src/pages/gateway-config.tsx:135
+#: src/pages/gateway-config.tsx:137
 #: src/shared/constants/index.ts:105
 msgid "Gateway deleted successfully"
 msgstr "Gateway deleted successfully"
@@ -1854,20 +1908,24 @@ msgstr "Gateway deleted successfully"
 msgid "Gateway:"
 msgstr "Gateway:"
 
-#: src/pages/billing.tsx:149
+#: src/pages/dashboard.tsx:98
+msgid "Generate detailed reports and export data."
+msgstr "Generate detailed reports and export data."
+
+#: src/pages/billing.tsx:151
 msgid "Get started with a subscription plan to unlock premium features."
 msgstr "Get started with a subscription plan to unlock premium features."
 
-#: src/pages/about.tsx:131
+#: src/pages/about.tsx:135
 msgid "Getting Started"
 msgstr "Getting Started"
 
-#: src/pages/404.tsx:47
+#: src/pages/404.tsx:51
 msgid "Go Back"
 msgstr "Go Back"
 
 #: src/features/crm-leads/components/CrmErrorBoundary.tsx:167
-#: src/pages/404.tsx:55
+#: src/pages/404.tsx:59
 msgid "Go Home"
 msgstr "Go Home"
 
@@ -1894,6 +1952,7 @@ msgid "High"
 msgstr "High"
 
 #: src/features/crm-leads/components/CrmLayout.tsx:107
+#: src/pages/index.tsx:12
 #: src/widgets/sidebar/ui/sidebar.tsx:30
 msgid "Home"
 msgstr "Home"
@@ -1912,19 +1971,19 @@ msgstr "How to handle requests without mocks"
 msgid "Inactive"
 msgstr "Inactive"
 
-#: src/pages/examples.tsx:353
+#: src/pages/examples.tsx:355
 msgid "Info"
 msgstr "Info"
 
-#: src/pages/examples.tsx:350
+#: src/pages/examples.tsx:352
 msgid "Info notification!"
 msgstr "Info notification!"
 
-#: src/pages/examples.tsx:212
+#: src/pages/examples.tsx:214
 msgid "Interactive"
 msgstr "Interactive"
 
-#: src/pages/examples.tsx:279
+#: src/pages/examples.tsx:281
 msgid "Interactive data table with sorting, actions, and custom rendering"
 msgstr "Interactive data table with sorting, actions, and custom rendering"
 
@@ -1932,7 +1991,7 @@ msgstr "Interactive data table with sorting, actions, and custom rendering"
 msgid "Internationalization (i18n) Demo"
 msgstr "Internationalization (i18n) Demo"
 
-#: src/pages/checkout.tsx:36
+#: src/pages/checkout.tsx:39
 msgid "Invalid Checkout"
 msgstr "Invalid Checkout"
 
@@ -1961,8 +2020,8 @@ msgstr "Invoice"
 msgid "Invoice {invoiceId}..."
 msgstr "Invoice {invoiceId}..."
 
-#: src/pages/billing.tsx:128
-#: src/pages/subscriptions.tsx:87
+#: src/pages/billing.tsx:130
+#: src/pages/subscriptions.tsx:91
 #: src/shared/ui/BillingServiceDegradationBanner.tsx:23
 msgid "Invoices"
 msgstr "Invoices"
@@ -2017,7 +2076,7 @@ msgstr "Last Name"
 msgid "Last name must be at least 2 characters"
 msgstr "Last name must be at least 2 characters"
 
-#: src/pages/about.tsx:60
+#: src/pages/about.tsx:64
 msgid "Latest React with concurrent features and improved performance"
 msgstr "Latest React with concurrent features and improved performance"
 
@@ -2029,9 +2088,18 @@ msgstr "Lead converted to contact successfully"
 msgid "Lead created successfully"
 msgstr "Lead created successfully"
 
-#: src/pages/crm.leads.$leadId.tsx:13
+#: src/pages/crm.leads.$leadId.tsx:12
+#: src/pages/crm.leads.$leadId.tsx:17
 msgid "Lead Details"
 msgstr "Lead Details"
+
+#: src/pages/dashboard.tsx:69
+msgid "Lead Management"
+msgstr "Lead Management"
+
+#: src/pages/dashboard.tsx:63
+msgid "Lead Management - Available in Business plan"
+msgstr "Lead Management - Available in Business plan"
 
 #: src/features/crm-leads/components/PipelineView.tsx:172
 msgid "Lead Moved"
@@ -2064,7 +2132,7 @@ msgstr "leads"
 #: src/features/crm-leads/components/CrmLayout.tsx:118
 #: src/features/crm-leads/components/DashboardStats.tsx:250
 #: src/features/crm-leads/components/DashboardStats.tsx:289
-#: src/pages/crm.leads.tsx:13
+#: src/pages/crm.leads.tsx:17
 #: src/shared/ui/CrmServiceDegradationBanner.tsx:21
 #: src/widgets/sidebar/ui/sidebar.tsx:114
 msgid "Leads"
@@ -2078,7 +2146,7 @@ msgstr "Leads by Pipeline Stage"
 msgid "Leads by Source"
 msgstr "Leads by Source"
 
-#: src/pages/about.tsx:35
+#: src/pages/about.tsx:39
 msgid "Learn more about the technologies and architecture used in this project"
 msgstr "Learn more about the technologies and architecture used in this project"
 
@@ -2086,7 +2154,7 @@ msgstr "Learn more about the technologies and architecture used in this project"
 msgid "Light mode"
 msgstr "Light mode"
 
-#: src/pages/about.tsx:68
+#: src/pages/about.tsx:72
 msgid "Lightning-fast development server with instant HMR"
 msgstr "Lightning-fast development server with instant HMR"
 
@@ -2109,7 +2177,7 @@ msgstr "Loading follow-ups..."
 msgid "Loading merchant status..."
 msgstr "Loading merchant status..."
 
-#: src/pages/subscriptions.tsx:96
+#: src/pages/subscriptions.tsx:100
 msgid "Loading subscription..."
 msgstr "Loading subscription..."
 
@@ -2118,6 +2186,10 @@ msgstr "Loading subscription..."
 #: src/shared/ui/loading-state/loading-state.tsx:148
 msgid "Loading..."
 msgstr "Loading..."
+
+#: src/pages/preferences-demo.tsx:93
+msgid "Locale"
+msgstr "Locale"
 
 #: src/features/locale-demo/locale-demo.tsx:193
 msgid "Localized Content Examples"
@@ -2168,6 +2240,10 @@ msgstr "Low"
 msgid "Manage all your follow-up tasks"
 msgstr "Manage all your follow-up tasks"
 
+#: src/pages/preferences-demo.tsx:150
+msgid "Manage all your preferences in one place"
+msgstr "Manage all your preferences in one place"
+
 #: src/entities/user/ui/UserFormField.tsx:87
 msgid "Manage Billing"
 msgstr "Manage Billing"
@@ -2194,7 +2270,7 @@ msgstr "Manage Pipeline Stages"
 msgid "Manage Stages"
 msgstr "Manage Stages"
 
-#: src/pages/billing.tsx:83
+#: src/pages/billing.tsx:85
 msgid "Manage Subscriptions"
 msgstr "Manage Subscriptions"
 
@@ -2206,15 +2282,23 @@ msgstr "Manage Users"
 msgid "Manage your account security and active sessions."
 msgstr "Manage your account security and active sessions."
 
-#: src/pages/gateway-config.tsx:175
+#: src/pages/gateway-config.tsx:179
 msgid "Manage your payment gateway integrations"
 msgstr "Manage your payment gateway integrations"
+
+#: src/pages/user-preferences.tsx:28
+msgid "Manage your personal settings and preferences"
+msgstr "Manage your personal settings and preferences"
+
+#: src/pages/dashboard.tsx:71
+msgid "Manage your sales leads and track conversion rates."
+msgstr "Manage your sales leads and track conversion rates."
 
 #: src/features/users/components/user-form-modal.tsx:44
 #~ msgid "Manager"
 #~ msgstr "Manager"
 
-#: src/pages/about.tsx:71
+#: src/pages/about.tsx:75
 msgid "Mantine UI:"
 msgstr "Mantine UI:"
 
@@ -2254,11 +2338,11 @@ msgstr "Min 8 characters with uppercase, lowercase, number, and special characte
 msgid "Mode"
 msgstr "Mode"
 
-#: src/pages/about.tsx:49
+#: src/pages/about.tsx:53
 msgid "Modern"
 msgstr "Modern"
 
-#: src/pages/about.tsx:72
+#: src/pages/about.tsx:76
 msgid "Modern React components library with comprehensive theming"
 msgstr "Modern React components library with comprehensive theming"
 
@@ -2360,8 +2444,8 @@ msgstr "No Active Gateways"
 msgid "No active payment gateways configured. Please configure a gateway first."
 msgstr "No active payment gateways configured. Please configure a gateway first."
 
-#: src/pages/billing.tsx:146
-#: src/pages/subscriptions.tsx:109
+#: src/pages/billing.tsx:148
+#: src/pages/subscriptions.tsx:113
 msgid "No Active Subscription"
 msgstr "No Active Subscription"
 
@@ -2369,7 +2453,8 @@ msgstr "No Active Subscription"
 msgid "No activities yet for this contact."
 msgstr "No activities yet for this contact."
 
-#: src/pages/billing.tsx:209
+#: src/pages/billing.tsx:211
+#: src/pages/dashboard.tsx:144
 msgid "No features enabled"
 msgstr "No features enabled"
 
@@ -2446,7 +2531,7 @@ msgid "No subscription plans are currently available."
 msgstr "No subscription plans are currently available."
 
 #: src/features/users/components/users-data-grid.tsx:257
-#: src/pages/examples.tsx:296
+#: src/pages/examples.tsx:298
 msgid "No users found"
 msgstr "No users found"
 
@@ -2487,9 +2572,13 @@ msgstr "Note must be less than 2000 characters"
 msgid "Notes"
 msgstr "Notes"
 
-#: src/pages/examples.tsx:308
+#: src/pages/examples.tsx:310
 msgid "Notification Examples"
 msgstr "Notification Examples"
+
+#: src/pages/preferences-demo.tsx:117
+msgid "Notifications"
+msgstr "Notifications"
 
 #: src/features/locale-demo/locale-demo.tsx:222
 msgid "Number Formatting"
@@ -2537,7 +2626,7 @@ msgstr "Organization"
 msgid "Organization:"
 msgstr "Organization:"
 
-#: src/pages/about.tsx:106
+#: src/pages/about.tsx:110
 msgid "Organized by business features rather than technical layers"
 msgstr "Organized by business features rather than technical layers"
 
@@ -2565,11 +2654,12 @@ msgstr "Override the default trial period for this subscription"
 
 #: src/features/crm-contacts/components/ContactDetailPage.tsx:263
 #: src/features/crm-leads/components/LeadDetailPage.tsx:286
-#: src/pages/billing.tsx:110
+#: src/pages/billing.tsx:112
 msgid "Overview"
 msgstr "Overview"
 
-#: src/pages/404.tsx:33
+#: src/pages/404.tsx:21
+#: src/pages/404.tsx:37
 msgid "Page Not Found"
 msgstr "Page Not Found"
 
@@ -2685,16 +2775,16 @@ msgstr "Payment Details"
 msgid "Payment Gateway"
 msgstr "Payment Gateway"
 
-#: src/pages/gateway-config.tsx:173
+#: src/pages/gateway-config.tsx:177
 msgid "Payment Gateway Configuration"
 msgstr "Payment Gateway Configuration"
 
-#: src/pages/gateway-config.tsx:65
+#: src/pages/gateway-config.tsx:67
 #: src/shared/constants/index.ts:101
 msgid "Payment gateway configured successfully"
 msgstr "Payment gateway configured successfully"
 
-#: src/pages/billing.tsx:122
+#: src/pages/billing.tsx:124
 #: src/widgets/billing-history/ui/billing-history-table.tsx:70
 msgid "Payment History"
 msgstr "Payment History"
@@ -2749,7 +2839,7 @@ msgstr "Pick start date"
 
 #: src/features/crm-leads/components/CrmLayout.tsx:90
 #: src/features/crm-leads/components/CrmLayout.tsx:119
-#: src/pages/crm.pipeline.tsx:13
+#: src/pages/crm.pipeline.tsx:17
 #: src/shared/ui/CrmServiceDegradationBanner.tsx:23
 #: src/widgets/sidebar/ui/sidebar.tsx:136
 msgid "Pipeline"
@@ -2821,15 +2911,23 @@ msgstr "Please select a priority"
 msgid "Please try again"
 msgstr "Please try again"
 
-#: src/pages/about.tsx:80
+#: src/pages/about.tsx:84
 msgid "Powerful data synchronization and caching"
 msgstr "Powerful data synchronization and caching"
+
+#: src/pages/preferences-demo.tsx:45
+msgid "Preferences Demo"
+msgstr "Preferences Demo"
+
+#: src/pages/dashboard.tsx:53
+msgid "Premium analytics dashboard with detailed insights and reporting."
+msgstr "Premium analytics dashboard with detailed insights and reporting."
 
 #: src/features/gateway-config/ui/gateway-status-badge.tsx:17
 msgid "Primary"
 msgstr "Primary"
 
-#: src/pages/gateway-config.tsx:111
+#: src/pages/gateway-config.tsx:113
 #: src/shared/constants/index.ts:104
 msgid "Primary gateway updated successfully"
 msgstr "Primary gateway updated successfully"
@@ -2894,11 +2992,15 @@ msgstr "Qualify Lead"
 msgid "Quick Select"
 msgstr "Quick Select"
 
-#: src/pages/about.tsx:59
+#: src/pages/preferences-demo.tsx:64
+msgid "Quick Theme Switcher"
+msgstr "Quick Theme Switcher"
+
+#: src/pages/about.tsx:63
 msgid "React 19:"
 msgstr "React 19:"
 
-#: src/pages/about.tsx:138
+#: src/pages/about.tsx:142
 msgid "Ready to start building? Check out the documentation and source code."
 msgstr "Ready to start building? Check out the documentation and source code."
 
@@ -2957,17 +3059,21 @@ msgstr "Refund Processed"
 msgid "Registered"
 msgstr "Registered"
 
-#: src/entities/user/ui/avatar-upload.tsx:112
+#: src/entities/user/ui/avatar-upload.tsx:115
 msgid "Remove"
 msgstr "Remove"
 
-#: src/entities/user/ui/avatar-upload.tsx:210
+#: src/entities/user/ui/avatar-upload.tsx:208
 msgid "Remove Avatar"
 msgstr "Remove Avatar"
 
-#: src/entities/user/ui/avatar-upload.tsx:210
+#: src/entities/user/ui/avatar-upload.tsx:208
 msgid "Removing..."
 msgstr "Removing..."
+
+#: src/pages/dashboard.tsx:96
+msgid "Reports"
+msgstr "Reports"
 
 #: src/shared/constants/index.ts:116
 msgid "Request timed out"
@@ -2977,7 +3083,7 @@ msgstr "Request timed out"
 msgid "Required Authority"
 msgstr "Required Authority"
 
-#: src/pages/checkout.tsx:37
+#: src/pages/checkout.tsx:40
 msgid "Required payment information is missing."
 msgstr "Required payment information is missing."
 
@@ -3010,11 +3116,11 @@ msgstr "Retry"
 msgid "Retrying..."
 msgstr "Retrying..."
 
-#: src/pages/examples.tsx:262
+#: src/pages/examples.tsx:264
 msgid "Reusable"
 msgstr "Reusable"
 
-#: src/pages/examples.tsx:209
+#: src/pages/examples.tsx:211
 msgid "Reusable form components with validation, built using Mantine Form and custom validation rules."
 msgstr "Reusable form components with validation, built using Mantine Form and custom validation rules."
 
@@ -3026,7 +3132,7 @@ msgstr "Revenue"
 msgid "Review your selections and click Continue to proceed with onboarding."
 msgstr "Review your selections and click Continue to proceed with onboarding."
 
-#: src/pages/examples.tsx:110
+#: src/pages/examples.tsx:111
 msgid "Role"
 msgstr "Role"
 
@@ -3041,6 +3147,14 @@ msgstr "Roles"
 #: src/shared/ui/msw-dev-tools.tsx:57
 msgid "Running"
 msgstr "Running"
+
+#: src/pages/dashboard.tsx:87
+msgid "Sales Pipeline"
+msgstr "Sales Pipeline"
+
+#: src/pages/dashboard.tsx:81
+msgid "Sales Pipeline - Enterprise feature"
+msgstr "Sales Pipeline - Enterprise feature"
 
 #: src/features/sample-form/ui/sample-form-feature.tsx:70
 #~ msgid "Sample Form"
@@ -3069,7 +3183,7 @@ msgstr "Save"
 msgid "Save Changes"
 msgstr "Save Changes"
 
-#: src/pages/about.tsx:95
+#: src/pages/about.tsx:99
 msgid "Scalable"
 msgstr "Scalable"
 
@@ -3279,11 +3393,11 @@ msgstr "Something went wrong."
 msgid "Something went wrong. Please try again"
 msgstr "Something went wrong. Please try again"
 
-#: src/pages/examples.tsx:234
+#: src/pages/examples.tsx:236
 msgid "Sortable, filterable data tables with pagination and custom cell rendering."
 msgstr "Sortable, filterable data tables with pagination and custom cell rendering."
 
-#: src/pages/examples.tsx:177
+#: src/pages/examples.tsx:178
 msgid "Sorting by {key} in {direction} order"
 msgstr "Sorting by {key} in {direction} order"
 
@@ -3325,7 +3439,7 @@ msgstr "Start Onboarding"
 #: src/features/invoice-management/ui/InvoicesTable.tsx:70
 #: src/features/users/components/enhanced-users-data-grid.tsx:182
 #: src/features/users/components/users-data-grid.tsx:138
-#: src/pages/examples.tsx:124
+#: src/pages/examples.tsx:125
 #: src/widgets/billing-history/ui/billing-history-table.tsx:108
 msgid "Status"
 msgstr "Status"
@@ -3376,7 +3490,8 @@ msgstr "Subscription Paused"
 msgid "Subscription Resumed"
 msgstr "Subscription Resumed"
 
-#: src/pages/subscriptions.tsx:69
+#: src/pages/subscriptions.tsx:37
+#: src/pages/subscriptions.tsx:73
 #: src/shared/ui/BillingServiceDegradationBanner.tsx:22
 msgid "Subscriptions"
 msgstr "Subscriptions"
@@ -3402,17 +3517,17 @@ msgstr "Subscriptions"
 #: src/features/users/components/user-form-modal.tsx:126
 #: src/features/users/components/user-form-modal.tsx:164
 #: src/features/users/components/users-data-grid.tsx:67
-#: src/pages/examples.tsx:324
-#: src/pages/gateway-config.tsx:64
-#: src/pages/gateway-config.tsx:80
-#: src/pages/gateway-config.tsx:95
-#: src/pages/gateway-config.tsx:110
-#: src/pages/gateway-config.tsx:134
+#: src/pages/examples.tsx:326
+#: src/pages/gateway-config.tsx:66
+#: src/pages/gateway-config.tsx:82
+#: src/pages/gateway-config.tsx:97
+#: src/pages/gateway-config.tsx:112
+#: src/pages/gateway-config.tsx:136
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:74
 msgid "Success"
 msgstr "Success"
 
-#: src/pages/examples.tsx:320
+#: src/pages/examples.tsx:322
 msgid "Success notification!"
 msgstr "Success notification!"
 
@@ -3436,11 +3551,11 @@ msgstr "Switch to dark mode"
 msgid "Switch to light mode"
 msgstr "Switch to light mode"
 
-#: src/pages/about.tsx:79
+#: src/pages/about.tsx:83
 msgid "TanStack Query:"
 msgstr "TanStack Query:"
 
-#: src/pages/about.tsx:75
+#: src/pages/about.tsx:79
 msgid "TanStack Router:"
 msgstr "TanStack Router:"
 
@@ -3452,7 +3567,7 @@ msgstr "Task"
 msgid "Technical Details"
 msgstr "Technical Details"
 
-#: src/pages/about.tsx:47
+#: src/pages/about.tsx:51
 msgid "Technology Stack"
 msgstr "Technology Stack"
 
@@ -3460,15 +3575,15 @@ msgstr "Technology Stack"
 msgid "Test"
 msgstr "Test"
 
-#: src/pages/examples.tsx:311
+#: src/pages/examples.tsx:313
 msgid "Test different types of notifications"
 msgstr "Test different types of notifications"
 
-#: src/pages/about.tsx:113
+#: src/pages/about.tsx:117
 msgid "Testing Ready:"
 msgstr "Testing Ready:"
 
-#: src/pages/about.tsx:114
+#: src/pages/about.tsx:118
 msgid "testing setup with Vitest and Playwright"
 msgstr "testing setup with Vitest and Playwright"
 
@@ -3500,7 +3615,7 @@ msgstr "The following {serviceName} services are currently unavailable:"
 #~ msgid "The following CRM services are currently unavailable:"
 #~ msgstr "The following CRM services are currently unavailable:"
 
-#: src/pages/404.tsx:36
+#: src/pages/404.tsx:40
 msgid "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
 msgstr "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
 
@@ -3520,16 +3635,24 @@ msgstr "The payment is being refunded"
 msgid "The request timed out. Please try again"
 msgstr "The request timed out. Please try again"
 
+#: src/pages/preferences-demo.tsx:85
+msgid "Theme"
+msgstr "Theme"
+
 #: src/features/crm-leads/components/CrmErrorBoundary.tsx:73
 msgid "There was a problem with the data you submitted. Please check your input and try again."
 msgstr "There was a problem with the data you submitted. Please check your input and try again."
+
+#: src/pages/preferences-demo.tsx:79
+msgid "These values are fetched using custom hooks"
+msgstr "These values are fetched using custom hooks"
 
 #: src/features/users/components/enhanced-users-data-grid.tsx:69
 #: src/features/users/components/users-data-grid.tsx:58
 msgid "This action cannot be undone."
 msgstr "This action cannot be undone."
 
-#: src/pages/gateway-config.tsx:225
+#: src/pages/gateway-config.tsx:229
 msgid "This action cannot be undone. All configuration data for this gateway will be permanently deleted."
 msgstr "This action cannot be undone. All configuration data for this gateway will be permanently deleted."
 
@@ -3561,13 +3684,17 @@ msgstr "This organization is set up to receive payments."
 msgid "This organization needs to complete payment gateway onboarding."
 msgstr "This organization needs to complete payment gateway onboarding."
 
-#: src/pages/about.tsx:54
+#: src/pages/about.tsx:58
 msgid "This template is built with cutting-edge technologies for optimal developer experience and performance."
 msgstr "This template is built with cutting-edge technologies for optimal developer experience and performance."
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:28
 msgid "This will log you out from all devices where you're currently signed in, including this device."
 msgstr "This will log you out from all devices where you're currently signed in, including this device."
+
+#: src/pages/preferences-demo.tsx:101
+msgid "Timezone"
+msgstr "Timezone"
 
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:47
 #~ msgid "To start receiving payments from your customers, you need to connect your Stripe account."
@@ -3642,28 +3769,32 @@ msgstr "Try Again"
 msgid "Try again in a few minutes"
 msgstr "Try again in a few minutes"
 
+#: src/pages/preferences-demo.tsx:129
+msgid "Two-Factor Auth"
+msgstr "Two-Factor Auth"
+
 #: src/entities/crm/ui/FollowUpForm.tsx:183
 #: src/features/crm-leads/components/PipelineSettingsModal.tsx:195
 msgid "Type"
 msgstr "Type"
 
-#: src/pages/about.tsx:109
+#: src/pages/about.tsx:113
 msgid "Type Safety:"
 msgstr "Type Safety:"
 
-#: src/pages/about.tsx:64
+#: src/pages/about.tsx:68
 msgid "Type-safe development with enhanced developer experience"
 msgstr "Type-safe development with enhanced developer experience"
 
-#: src/pages/about.tsx:76
+#: src/pages/about.tsx:80
 msgid "Type-safe routing with code splitting"
 msgstr "Type-safe routing with code splitting"
 
-#: src/pages/about.tsx:63
+#: src/pages/about.tsx:67
 msgid "TypeScript:"
 msgstr "TypeScript:"
 
-#: src/pages/examples.tsx:256
+#: src/pages/examples.tsx:258
 msgid "UI Components"
 msgstr "UI Components"
 
@@ -3713,12 +3844,12 @@ msgstr "Updated successfully"
 msgid "Updated:"
 msgstr "Updated:"
 
-#: src/entities/user/ui/avatar-upload.tsx:96
-#: src/entities/user/ui/avatar-upload.tsx:197
+#: src/entities/user/ui/avatar-upload.tsx:99
+#: src/entities/user/ui/avatar-upload.tsx:195
 msgid "Upload Avatar"
 msgstr "Upload Avatar"
 
-#: src/entities/user/ui/avatar-upload.tsx:120
+#: src/entities/user/ui/avatar-upload.tsx:123
 msgid "Uploading"
 msgstr "Uploading"
 
@@ -3726,14 +3857,14 @@ msgstr "Uploading"
 #~ msgid "Uploading {0}..."
 #~ msgstr "Uploading {0}..."
 
-#: src/entities/user/ui/avatar-upload.tsx:197
+#: src/entities/user/ui/avatar-upload.tsx:195
 msgid "Uploading..."
 msgstr "Uploading..."
 
 #: src/entities/user/ui/UserFormField.tsx:77
 #: src/features/users/components/user-form-modal.tsx:310
 #: src/features/users/components/users-data-grid.tsx:111
-#: src/pages/examples.tsx:88
+#: src/pages/examples.tsx:89
 msgid "User"
 msgstr "User"
 
@@ -3760,6 +3891,15 @@ msgstr "User Management"
 msgid "User Preference"
 msgstr "User Preference"
 
+#: src/pages/user-preferences.tsx:16
+#: src/pages/user-preferences.tsx:25
+msgid "User Preferences"
+msgstr "User Preferences"
+
+#: src/pages/preferences-demo.tsx:54
+msgid "User Preferences Demo"
+msgstr "User Preferences Demo"
+
 #: src/features/users/components/user-form-modal.tsx:127
 msgid "User updated successfully"
 msgstr "User updated successfully"
@@ -3779,6 +3919,10 @@ msgstr "Username must be 3-30 characters, letters, numbers, underscore, or dash 
 #: src/features/users/components/user-form-modal.tsx:19
 msgid "Username must be at least 3 characters"
 msgstr "Username must be at least 3 characters"
+
+#: src/pages/users.tsx:12
+msgid "Users"
+msgstr "Users"
 
 #: src/shared/constants/index.ts:113
 msgid "Validation failed"
@@ -3803,11 +3947,11 @@ msgstr "Verified"
 #~ msgid "Very Weak"
 #~ msgstr "Very Weak"
 
-#: src/pages/subscriptions.tsx:148
+#: src/pages/subscriptions.tsx:152
 msgid "View and download your subscription invoices."
 msgstr "View and download your subscription invoices."
 
-#: src/pages/subscriptions.tsx:125
+#: src/pages/subscriptions.tsx:129
 msgid "View Available Plans"
 msgstr "View Available Plans"
 
@@ -3836,7 +3980,7 @@ msgstr "View lead details"
 msgid "View Leads"
 msgstr "View Leads"
 
-#: src/pages/about.tsx:150
+#: src/pages/about.tsx:154
 msgid "View on GitHub"
 msgstr "View on GitHub"
 
@@ -3844,7 +3988,7 @@ msgstr "View on GitHub"
 msgid "View only"
 msgstr "View only"
 
-#: src/pages/billing.tsx:156
+#: src/pages/billing.tsx:158
 msgid "View Plans"
 msgstr "View Plans"
 
@@ -3856,11 +4000,15 @@ msgstr "View Users"
 #~ msgid "Viewing {0}"
 #~ msgstr "Viewing {0}"
 
-#: src/pages/examples.tsx:141
+#: src/pages/examples.tsx:142
 msgid "Viewing {userName}"
 msgstr "Viewing {userName}"
 
-#: src/pages/about.tsx:67
+#: src/pages/dashboard.tsx:89
+msgid "Visual sales pipeline with drag-and-drop functionality."
+msgstr "Visual sales pipeline with drag-and-drop functionality."
+
+#: src/pages/about.tsx:71
 msgid "Vite:"
 msgstr "Vite:"
 
@@ -3869,12 +4017,12 @@ msgid "Warn (log warning)"
 msgstr "Warn (log warning)"
 
 #: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:29
-#: src/pages/examples.tsx:344
-#: src/pages/gateway-config.tsx:224
+#: src/pages/examples.tsx:346
+#: src/pages/gateway-config.tsx:228
 msgid "Warning"
 msgstr "Warning"
 
-#: src/pages/examples.tsx:340
+#: src/pages/examples.tsx:342
 msgid "Warning notification!"
 msgstr "Warning notification!"
 
@@ -3926,6 +4074,10 @@ msgstr "Welcome Message"
 msgid "Welcome to IQ Scaffold! Your language preference is active."
 msgstr "Welcome to IQ Scaffold! Your language preference is active."
 
+#: src/pages/dashboard.tsx:32
+msgid "Welcome to your dashboard. Here's what you have access to:"
+msgstr "Welcome to your dashboard. Here's what you have access to:"
+
 #: src/features/crm-leads/components/CrmErrorBoundary.tsx:135
 msgid "What would you like to do?"
 msgstr "What would you like to do?"
@@ -3966,7 +4118,7 @@ msgstr "You are being redirected to Stripe to complete your setup."
 msgid "You are not authorized to perform this action"
 msgstr "You are not authorized to perform this action"
 
-#: src/pages/subscriptions.tsx:112
+#: src/pages/subscriptions.tsx:116
 msgid "You don't have an active subscription. Browse our available plans to get started."
 msgstr "You don't have an active subscription. Browse our available plans to get started."
 
@@ -3974,7 +4126,7 @@ msgstr "You don't have an active subscription. Browse our available plans to get
 #~ msgid "You don't have permission to access billing information. Please contact your administrator."
 #~ msgstr "You don't have permission to access billing information. Please contact your administrator."
 
-#: src/pages/subscriptions.tsx:48
+#: src/pages/subscriptions.tsx:51
 msgid "You don't have permission to access subscription information. Please contact your administrator."
 msgstr "You don't have permission to access subscription information. Please contact your administrator."
 
@@ -3982,7 +4134,7 @@ msgstr "You don't have permission to access subscription information. Please con
 msgid "You don't have permission to access this CRM feature. Please contact your administrator."
 msgstr "You don't have permission to access this CRM feature. Please contact your administrator."
 
-#: src/pages/gateway-config.tsx:156
+#: src/pages/gateway-config.tsx:159
 msgid "You don't have permission to view gateway configurations."
 msgstr "You don't have permission to view gateway configurations."
 
@@ -3994,7 +4146,7 @@ msgstr "You don't have permission to view payment history."
 msgid "You have been logged out from all devices"
 msgstr "You have been logged out from all devices"
 
-#: src/pages/billing.tsx:100
+#: src/pages/billing.tsx:102
 msgid "You have read-only access to billing information."
 msgstr "You have read-only access to billing information."
 

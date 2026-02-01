@@ -35,7 +35,7 @@ import {
   FeatureUsageList,
   FeatureErrorBoundary,
 } from "@/shared/ui";
-import { useFeatureContext } from "@/shared/lib";
+import { useFeatureContext, usePageTitle } from "@/shared/lib";
 
 export const Route = createFileRoute("/billing")({
   component: BillingPage,
@@ -48,6 +48,7 @@ function BillingPage() {
     canManageMerchants,
     user,
   } = useAuth();
+  const pageTitle = usePageTitle(t`Billing`);
 
   const { userFeatures, enabledFeatures } = useFeatureContext();
 
@@ -64,6 +65,7 @@ function BillingPage() {
 
   return (
     <AuthGuard>
+      {pageTitle}
       <BillingAccessGuard>
         <FeatureErrorBoundary>
           <Container size="xl" py="xl" data-testid="page-billing">
