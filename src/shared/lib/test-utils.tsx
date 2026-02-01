@@ -2,6 +2,8 @@ import React, { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MantineProvider } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
+import { I18nProvider } from "@lingui/react";
+import { i18n } from "@lingui/core";
 import { AuthContext, type AuthContextType } from "./auth-context";
 import { theme } from "@/app/theme";
 import type { UserContext } from "@/entities/user";
@@ -70,14 +72,16 @@ export function TestWrapper({
   };
 
   return (
-    <MantineProvider theme={theme}>
-      <ModalsProvider>
-        <QueryClientProvider client={queryClient}>
-          <AuthContext.Provider value={mockAuthContext}>
-            {children}
-          </AuthContext.Provider>
-        </QueryClientProvider>
-      </ModalsProvider>
-    </MantineProvider>
+    <I18nProvider i18n={i18n}>
+      <MantineProvider theme={theme}>
+        <ModalsProvider>
+          <QueryClientProvider client={queryClient}>
+            <AuthContext.Provider value={mockAuthContext}>
+              {children}
+            </AuthContext.Provider>
+          </QueryClientProvider>
+        </ModalsProvider>
+      </MantineProvider>
+    </I18nProvider>
   );
 }

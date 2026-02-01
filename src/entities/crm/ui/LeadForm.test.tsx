@@ -2,11 +2,8 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { LeadForm } from "./LeadForm";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { MantineProvider } from "@mantine/core";
-import { ModalsProvider } from "@mantine/modals";
-import { Notifications } from "@mantine/notifications";
 import type { Lead } from "@/shared/api/crm/types";
+import { TestWrapper } from "@/shared/lib/test-utils";
 
 // Mock the CRM API
 vi.mock("@/shared/api/crm", () => ({
@@ -26,30 +23,6 @@ vi.mock("@mantine/notifications", async () => {
     },
   };
 });
-
-const TestWrapper = ({ children }: { children: React.ReactNode }) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-      mutations: {
-        retry: false,
-      },
-    },
-  });
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <MantineProvider>
-        <ModalsProvider>
-          <Notifications />
-          {children}
-        </ModalsProvider>
-      </MantineProvider>
-    </QueryClientProvider>
-  );
-};
 
 const mockLead: Lead = {
   id: "1",

@@ -3,21 +3,12 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { FollowUpForm } from "./FollowUpForm";
 import type { FollowUp } from "@/shared/api/crm/types";
-import { MantineProvider } from "@mantine/core";
-import { Notifications } from "@mantine/notifications";
+import { TestWrapper } from "@/shared/lib/test-utils";
 
 // Mock the lingui macro
 vi.mock("@lingui/core/macro", () => ({
   t: (str: any) => str,
 }));
-
-// Wrapper component for Mantine context
-const TestWrapper = ({ children }: { children: React.ReactNode }) => (
-  <MantineProvider>
-    <Notifications />
-    {children}
-  </MantineProvider>
-);
 
 describe("FollowUpForm", () => {
   const mockOnClose = vi.fn();
@@ -240,9 +231,8 @@ describe("FollowUpForm", () => {
 
       // Check for past date warning
       await waitFor(() => {
-        expect(screen.getByText(/Past Date Selected/i)).toBeInTheDocument();
         expect(
-          screen.getByText(/You have selected a date in the past/i)
+          screen.getByText(/This date is in the past/i)
         ).toBeInTheDocument();
       });
     });

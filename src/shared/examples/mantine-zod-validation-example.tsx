@@ -1,12 +1,34 @@
 import React from "react";
-import { Paper, Title, Button, Stack, Group, Text, Alert, Tabs } from "@mantine/core";
+import {
+  Paper,
+  Title,
+  Button,
+  Stack,
+  Group,
+  Text,
+  Alert,
+  Tabs,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { z } from "zod";
-import { IconInfoCircle, IconUser, IconCreditCard, IconUsers } from "@tabler/icons-react";
+import {
+  IconInfoCircle,
+  IconUser,
+  IconCreditCard,
+  IconUsers,
+} from "@tabler/icons-react";
 import { UserFormField, getUserRoles } from "@/entities/user";
-import { BillingFormField, getBillingGateways, getBillingCurrencies } from "@/entities/billing";
-import { CrmFormField, getCrmLeadSources, getCrmPriorities } from "@/entities/crm";
+import {
+  BillingFormField,
+  getBillingGateways,
+  getBillingCurrencies,
+} from "@/entities/billing";
+import {
+  CrmFormField,
+  getCrmLeadSources,
+  getCrmPriorities,
+} from "@/entities/crm";
 
 // User management schema
 const userSchema = z.object({
@@ -112,9 +134,10 @@ export function MantineZodValidationExample() {
 
       <Alert color="blue" icon={<IconInfoCircle size={16} />} mb="lg">
         <Text size="sm">
-          This example demonstrates business-focused form components for different domains:
-          User Management, Billing Configuration, and CRM. Each domain has its own specialized
-          form fields with business-specific validation and features.
+          This example demonstrates business-focused form components for
+          different domains: User Management, Billing Configuration, and CRM.
+          Each domain has its own specialized form fields with business-specific
+          validation and features.
         </Text>
       </Alert>
 

@@ -74,30 +74,30 @@ export const getBillingEnvironments = () => [
   { value: "PRODUCTION", label: t`Production` },
 ];
 
-  // Billing-specific validation
-  const validateApiKey = (value: string, gateway: string): boolean => {
-    if (!value) {
-      return false;
+// Billing-specific validation
+const validateApiKey = (value: string, gateway: string): boolean => {
+  if (!value) {
+    return false;
+  }
+
+  switch (gateway) {
+    case "STRIPE": {
+      return value.startsWith("sk_") || value.startsWith("pk_");
     }
-    
-    switch (gateway) {
-      case "STRIPE": {
-        return value.startsWith("sk_") || value.startsWith("pk_");
-      }
-      case "PAYPAL": {
-        return value.length >= 20;
-      }
-      case "SQUARE": {
-        return value.startsWith("sq0");
-      }
-      case "BRAINTREE": {
-        return value.length >= 16;
-      }
-      default: {
-        return value.length >= 8;
-      }
+    case "PAYPAL": {
+      return value.length >= 20;
     }
-  };
+    case "SQUARE": {
+      return value.startsWith("sq0");
+    }
+    case "BRAINTREE": {
+      return value.length >= 16;
+    }
+    default: {
+      return value.length >= 8;
+    }
+  }
+};
 
 const formatCurrency = (amount: number, currency: string = "USD"): string => {
   return new Intl.NumberFormat("en-US", {
@@ -108,7 +108,7 @@ const formatCurrency = (amount: number, currency: string = "USD"): string => {
 
 /**
  * Billing-specific form field component with business logic
- * 
+ *
  * Features:
  * - Gateway-specific API key validation
  * - Currency formatting and selection
@@ -118,14 +118,25 @@ const formatCurrency = (amount: number, currency: string = "USD"): string => {
  */
 export function BillingFormField(props: BillingFormFieldProps) {
   const { _ } = useLingui();
-  const { name, label, form, disabled = false, withAsterisk = false, description } = props;
+  const {
+    name,
+    label,
+    form,
+    disabled = false,
+    withAsterisk = false,
+    description,
+  } = props;
 
   const labelText = typeof label === "string" ? label : _(label);
-  const placeholderText = props.placeholder 
-    ? typeof props.placeholder === "string" ? props.placeholder : _(props.placeholder)
+  const placeholderText = props.placeholder
+    ? typeof props.placeholder === "string"
+      ? props.placeholder
+      : _(props.placeholder)
     : undefined;
   const descriptionText = description
-    ? typeof description === "string" ? description : _(description)
+    ? typeof description === "string"
+      ? description
+      : _(description)
     : undefined;
 
   const fieldProps = {
@@ -140,18 +151,13 @@ export function BillingFormField(props: BillingFormFieldProps) {
   switch (props.type) {
     case "text":
     case "email": {
-      return (
-        <TextInput
-          {...fieldProps}
-          type={props.type}
-        />
-      );
+      return <TextInput {...fieldProps} type={props.type} />;
     }
 
     case "password": {
       const { showStrengthIndicator = false } = props;
       const value = form.values[name] || "";
-      
+
       // Simple strength calculation for API keys
       const getKeyStrength = (key: string) => {
         if (!key) {
@@ -170,12 +176,10 @@ export function BillingFormField(props: BillingFormFieldProps) {
       };
 
       const strength = showStrengthIndicator ? getKeyStrength(value) : null;
-      
+
       return (
         <Stack gap="xs">
-          <PasswordInput
-            {...fieldProps}
-          />
+          <PasswordInput {...fieldProps} />
           {strength && (
             <Group gap="xs">
               <Text size="xs" c="dimmed">
@@ -192,7 +196,7 @@ export function BillingFormField(props: BillingFormFieldProps) {
 
     case "select": {
       const { data, searchable = false, clearable = false } = props;
-      
+
       return (
         <Select
           {...fieldProps}
@@ -206,7 +210,7 @@ export function BillingFormField(props: BillingFormFieldProps) {
     case "amount": {
       const { currency = "USD", min = 0, max, precision = 2 } = props;
       const value = form.values[name];
-      
+
       return (
         <Stack gap="xs">
           <NumberInput
@@ -216,14 +220,21 @@ export function BillingFormField(props: BillingFormFieldProps) {
             decimalScale={precision}
             leftSection={
               <Text size="sm" c="dimmed">
-                {currency === "USD" ? "$" : currency === "EUR" ? "€" : currency === "GBP" ? "£" : currency}
+                {currency === "USD"
+                  ? "$"
+                  : currency === "EUR"
+                    ? "€"
+                    : currency === "GBP"
+                      ? "£"
+                      : currency}
               </Text>
             }
             thousandSeparator=","
           />
           {value && !isNaN(value) && (
             <Text size="xs" c="dimmed">
-              {t`Formatted: `}{formatCurrency(value, currency)}
+              {t`Formatted: `}
+              {formatCurrency(value, currency)}
             </Text>
           )}
         </Stack>

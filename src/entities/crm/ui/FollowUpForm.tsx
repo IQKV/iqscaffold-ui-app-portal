@@ -3,7 +3,11 @@ import { Modal, Button, Group, Stack, Alert } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { t } from "@lingui/core/macro";
-import { CrmFormField, getCrmPriorities, getCrmFollowUpTypes } from "./CrmFormField";
+import {
+  CrmFormField,
+  getCrmPriorities,
+  getCrmFollowUpTypes,
+} from "./CrmFormField";
 import type { FollowUp } from "@/shared/api/crm/types";
 import { notifications } from "@mantine/notifications";
 import { IconAlertCircle } from "@tabler/icons-react";

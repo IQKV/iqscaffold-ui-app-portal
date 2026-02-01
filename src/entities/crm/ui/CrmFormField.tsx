@@ -1,18 +1,9 @@
-import React from "react";
-import {
-  TextInput,
-  Textarea,
-  Select,
-  Stack,
-  Text,
-  Alert,
-  Group,
-} from "@mantine/core";
+import { TextInput, Textarea, Select, Stack, Text, Alert } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { UseFormReturnType } from "@mantine/form";
 import { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
-import { IconAlertTriangle, IconCalendarExclamation } from "@tabler/icons-react";
+import { IconCalendarExclamation } from "@tabler/icons-react";
 import { t } from "@lingui/core/macro";
 
 interface BaseCrmFormFieldProps {
@@ -92,7 +83,7 @@ export const getCrmFollowUpTypes = () => [
 
 /**
  * CRM-specific form field component with business logic
- * 
+ *
  * Features:
  * - CRM-specific validation and options
  * - Past date warnings for follow-ups
@@ -102,14 +93,25 @@ export const getCrmFollowUpTypes = () => [
  */
 export function CrmFormField(props: CrmFormFieldProps) {
   const { _ } = useLingui();
-  const { name, label, form, disabled = false, withAsterisk = false, description } = props;
+  const {
+    name,
+    label,
+    form,
+    disabled = false,
+    withAsterisk = false,
+    description,
+  } = props;
 
   const labelText = typeof label === "string" ? label : _(label);
-  const placeholderText = props.placeholder 
-    ? typeof props.placeholder === "string" ? props.placeholder : _(props.placeholder)
+  const placeholderText = props.placeholder
+    ? typeof props.placeholder === "string"
+      ? props.placeholder
+      : _(props.placeholder)
     : undefined;
   const descriptionText = description
-    ? typeof description === "string" ? description : _(description)
+    ? typeof description === "string"
+      ? description
+      : _(description)
     : undefined;
 
   const fieldProps = {
@@ -127,16 +129,15 @@ export function CrmFormField(props: CrmFormFieldProps) {
     case "tel": {
       const { maxLength, showCharacterCount } = props;
       const currentLength = form.values[name]?.length || 0;
-      
+
       return (
         <Stack gap="xs">
-          <TextInput
-            {...fieldProps}
-            type={props.type}
-            maxLength={maxLength}
-          />
+          <TextInput {...fieldProps} type={props.type} maxLength={maxLength} />
           {showCharacterCount && maxLength && (
-            <Text size="xs" c={currentLength > maxLength * 0.9 ? "orange" : "dimmed"}>
+            <Text
+              size="xs"
+              c={currentLength > maxLength * 0.9 ? "orange" : "dimmed"}
+            >
               {currentLength}/{maxLength}
             </Text>
           )}
@@ -147,7 +148,7 @@ export function CrmFormField(props: CrmFormFieldProps) {
     case "textarea": {
       const { rows = 3, maxLength, showCharacterCount } = props;
       const currentLength = form.values[name]?.length || 0;
-      
+
       return (
         <Stack gap="xs">
           <Textarea
@@ -159,7 +160,10 @@ export function CrmFormField(props: CrmFormFieldProps) {
             maxRows={rows + 2}
           />
           {showCharacterCount && maxLength && (
-            <Text size="xs" c={currentLength > maxLength * 0.9 ? "orange" : "dimmed"}>
+            <Text
+              size="xs"
+              c={currentLength > maxLength * 0.9 ? "orange" : "dimmed"}
+            >
               {currentLength}/{maxLength}
             </Text>
           )}
@@ -169,7 +173,7 @@ export function CrmFormField(props: CrmFormFieldProps) {
 
     case "select": {
       const { data, searchable = false, clearable = false } = props;
-      
+
       return (
         <Select
           {...fieldProps}
@@ -183,8 +187,11 @@ export function CrmFormField(props: CrmFormFieldProps) {
     case "date": {
       const { minDate, maxDate, showPastDateWarning = false } = props;
       const selectedDate = form.values[name];
-      const showWarning = showPastDateWarning && selectedDate && isPastDate(new Date(selectedDate));
-      
+      const showWarning =
+        showPastDateWarning &&
+        selectedDate &&
+        isPastDate(new Date(selectedDate));
+
       return (
         <Stack gap="xs">
           <DateInput
