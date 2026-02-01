@@ -7,8 +7,7 @@ import {
   FeatureUsageList,
   FeatureErrorBoundary,
 } from "@/shared/ui";
-import { useFeatureContext } from "@/shared/lib";
-import { usePageTitle } from "@/shared/lib";
+import { useFeatureContext, usePageTitle } from "@/shared/lib";
 import { t } from "@lingui/macro";
 
 export const Route = createFileRoute("/dashboard")({
