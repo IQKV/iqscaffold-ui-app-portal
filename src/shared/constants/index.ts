@@ -29,6 +29,7 @@ export const API_ENDPOINTS = {
   USERS: {
     ME: "/v1/users/me",
     CHANGE_PASSWORD: "/v1/users/me/password",
+    AVATAR: "/v1/users/me/avatar",
     ADMIN_USERS: "/v1/admin/users",
     ADMIN_USER_BY_ID: (id: string | number) => `/v1/admin/users/${id}`,
   },

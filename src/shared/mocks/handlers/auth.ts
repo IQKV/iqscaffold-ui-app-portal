@@ -254,4 +254,122 @@ export const authHandlers = [
       message: "Password reset successfully",
     });
   }),
+
+  // Avatar endpoints
+  http.get(`${API_BASE_URL}/v1/users/me/avatar`, async () => {
+    if (config.delay) {
+      await delay(
+        typeof config.delay === "object"
+          ? Math.random() * (config.delay.max - config.delay.min) +
+              config.delay.min
+          : config.delay
+      );
+    }
+
+    if (config.enableLogging) {
+      console.log("🖼️ MSW: Get avatar URL");
+    }
+
+    // Simulate user has avatar 50% of the time
+    if (Math.random() > 0.5) {
+      return HttpResponse.json({
+        avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${mockUser.email}&size=150`,
+      });
+    }
+
+    return HttpResponse.json(
+      {
+        type: "https://example.com/problems/not-found",
+        title: "Avatar Not Found",
+        status: 404,
+        detail: "No avatar found for this user.",
+      },
+      { status: 404 }
+    );
+  }),
+
+  http.post(`${API_BASE_URL}/v1/users/me/avatar`, async ({ request }) => {
+    if (config.delay) {
+      await delay(
+        typeof config.delay === "object"
+          ? Math.random() * (config.delay.max - config.delay.min) +
+              config.delay.min
+          : config.delay
+      );
+    }
+
+    if (config.enableLogging) {
+      console.log("📤 MSW: Upload avatar");
+    }
+
+    const formData = await request.formData();
+    const file = formData.get("file") as File;
+
+    if (!file) {
+      return HttpResponse.json(
+        {
+          type: "https://example.com/problems/validation-error",
+          title: "Validation Error",
+          status: 400,
+          detail: "No file provided.",
+        },
+        { status: 400 }
+      );
+    }
+
+    // Simulate file validation
+    const maxSize = 5 * 1024 * 1024; // 5MB
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+
+    if (!allowedTypes.includes(file.type)) {
+      return HttpResponse.json(
+        {
+          type: "https://example.com/problems/validation-error",
+          title: "Invalid File Type",
+          status: 400,
+          detail: "Invalid file type. Please use JPEG, PNG, WebP, or GIF.",
+        },
+        { status: 400 }
+      );
+    }
+
+    if (file.size > maxSize) {
+      return HttpResponse.json(
+        {
+          type: "https://example.com/problems/validation-error",
+          title: "File Too Large",
+          status: 413,
+          detail: "File size exceeds 5MB limit.",
+        },
+        { status: 413 }
+      );
+    }
+
+    // Return mock upload response
+    return HttpResponse.json({
+      storageKey: `avatars/${Date.now()}-${file.name}`,
+      avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${Date.now()}&size=150`,
+      fileSize: file.size,
+      contentType: file.type,
+      uploadedAt: new Date().toISOString(),
+    });
+  }),
+
+  http.delete(`${API_BASE_URL}/v1/users/me/avatar`, async () => {
+    if (config.delay) {
+      await delay(
+        typeof config.delay === "object"
+          ? Math.random() * (config.delay.max - config.delay.min) +
+              config.delay.min
+          : config.delay
+      );
+    }
+
+    if (config.enableLogging) {
+      console.log("🗑️ MSW: Delete avatar");
+    }
+
+    // Simulate successful deletion
+    return new HttpResponse(null, { status: 204 });
+  }),
 ];

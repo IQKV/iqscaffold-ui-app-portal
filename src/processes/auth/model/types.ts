@@ -38,6 +38,7 @@ export interface AuthActions {
   }) => void;
   refresh: () => Promise<void>;
   logout: (options?: { silent?: boolean }) => Promise<void>;
+  updateUser: (updates: Partial<UserContext>) => void;
 }
 
 export type AuthStore = AuthState & AuthActions;

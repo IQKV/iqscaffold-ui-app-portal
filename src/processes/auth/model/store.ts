@@ -12,6 +12,7 @@ import { authApi } from "@/processes/auth/lib/auth-api";
 import { decodeUser } from "../lib/jwt";
 import { useTenantStore } from "@/processes/tenant";
 import type { AuthStore, LoginCredentials } from "./types";
+import type { UserContext } from "@/entities/user";
 
 let refreshTimer: number | null = null;
 
@@ -226,6 +227,14 @@ export const useAuthStore = create<AuthStore>()(
           const cfg = getAuthConfig();
           window.location.href = cfg.redirects.afterLogout;
         }
+      },
+
+      updateUser: (updates: Partial<UserContext>) => {
+        set((s) => {
+          if (s.user) {
+            s.user = { ...s.user, ...updates };
+          }
+        });
       },
     }))
   )

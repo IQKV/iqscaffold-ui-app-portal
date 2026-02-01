@@ -14,6 +14,8 @@ export interface User {
   tenantId: string | null;
   organizationId: number | null;
   emailVerified?: boolean;
+  avatarUrl?: string;
+  avatarUpdatedAt?: string;
   customClaims: Record<string, unknown>;
 }
 
@@ -27,6 +29,8 @@ export interface UserContext {
   lastName: string;
   tenantId: string | null;
   organizationId: number | null;
+  avatarUrl?: string;
+  avatarUpdatedAt?: string;
   customClaims: Record<string, unknown>;
 }
 
@@ -46,6 +50,8 @@ export interface UserProfile {
   firstName: string;
   lastName: string;
   emailVerified: boolean;
+  avatarUrl?: string;
+  avatarUpdatedAt?: string;
   createdAt: string;
   updatedAt?: string;
 }
