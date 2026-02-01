@@ -406,9 +406,41 @@ const mutation = useFormMutation<ResponseType, FormValues>(
 Comprehensive form field component in `@/shared/ui`:
 
 ```typescript
-import { FormField } from "@/shared/ui";
+// Business-focused form components
+import { CrmFormField } from "@/entities/crm";
+import { UserFormField } from "@/entities/user";
+import { BillingFormField } from "@/entities/billing";
 
-<FormField
+// CRM Lead Form
+<CrmFormField
+  type="text"
+  name="firstName"
+  label={t`First Name`}
+  form={form}
+  withAsterisk
+  maxLength={100}
+  showCharacterCount
+/>
+
+// User Management Form
+<UserFormField
+  type="username"
+  name="username"
+  label={t`Username`}
+  form={form}
+  withAsterisk
+  showCharacterCount
+/>
+
+// Billing Configuration Form
+<BillingFormField
+  type="password"
+  name="apiKey"
+  label={t`API Key`}
+  form={form}
+  withAsterisk
+  showStrengthIndicator
+/>
   type="text"
   name="name"
   label={msg`Name`}

@@ -38,11 +38,6 @@ export {
 
 export { useLoadingState } from "./loading-state/loading-state-hooks";
 
-// Enhanced form fields - comprehensive form field with Mantine + Zod + Lingui
-export { FormField, EnhancedFormField } from "./enhanced-form-field";
-
-export { useEnhancedFormValidation } from "./enhanced-form-field/validation-utils";
-
 // Performance optimization components
 export { VirtualizedList } from "./virtualized-list";
 export { LazyLoad } from "./lazy-load";

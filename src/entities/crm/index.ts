@@ -6,4 +6,5 @@ export * from "./api/contact-queries";
 export * from "./ui/LeadCard";
 export * from "./ui/LeadScoreBadge";
 export * from "./ui/LeadSourceBadge";
+export * from "./ui/CrmFormField";
 export * from "./lib";

@@ -701,8 +701,42 @@ The project includes a comprehensive `EnhancedFormField` component that supports
 **Usage Example:**
 
 ```tsx
-import { FormField } from "@/shared/ui";
-import { useForm } from "@mantine/form";
+// Business-focused form components
+import { CrmFormField } from "@/entities/crm";
+import { UserFormField } from "@/entities/user";
+import { BillingFormField } from "@/entities/billing";
+
+// CRM forms use CrmFormField with business-specific features
+<CrmFormField
+  type="select"
+  name="source"
+  label={t`Lead Source`}
+  data={getCrmLeadSources()}
+  form={form}
+  withAsterisk
+  searchable
+/>
+
+// User forms use UserFormField with user-specific validation
+<UserFormField
+  type="password"
+  name="password"
+  label={t`Password`}
+  form={form}
+  withAsterisk
+  showStrengthIndicator
+  requireStrong
+/>
+
+// Billing forms use BillingFormField with payment-specific features
+<BillingFormField
+  type="amount"
+  name="amount"
+  label={t`Amount`}
+  form={form}
+  currency="USD"
+  precision={2}
+/>
 
 const form = useForm<FormValues>({
   initialValues: { name: "", email: "" },
@@ -985,7 +1019,7 @@ import { Button, Modal, Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { t } from "@lingui/core/macro";
-import { FormField } from "@/shared/ui";
+import { CrmFormField } from "@/entities/crm";
 import { useFormMutation } from "@/shared/lib";
 import { initialFormValues, validateUserForm } from "../model/validation";
 import { FormValues } from "../model/types";
@@ -1794,8 +1828,9 @@ VITE_LOG_LEVEL=silent
 ### Common Import Paths
 
 ```tsx
-// UI Components
-import { FormField, ErrorBoundary, LoadingOverlay } from "@/shared/ui";
+// Business-focused UI Components
+import { CrmFormField, UserFormField, BillingFormField } from "@/entities/crm";
+import { ErrorBoundary, LoadingOverlay } from "@/shared/ui";
 
 // Utilities
 import {

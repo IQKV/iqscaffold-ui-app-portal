@@ -3,7 +3,7 @@ import { Modal, Button, Group, Stack, Alert } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { t } from "@lingui/core/macro";
-import { FormField } from "@/shared/ui";
+import { CrmFormField, getCrmPriorities, getCrmFollowUpTypes } from "./CrmFormField";
 import type { FollowUp } from "@/shared/api/crm/types";
 import { notifications } from "@mantine/notifications";
 import { IconAlertCircle } from "@tabler/icons-react";
@@ -30,19 +30,10 @@ interface FollowUpFormProps {
 }
 
 // Priority options for the select dropdown
-const getPriorityOptions = () => [
-  { value: "LOW", label: t`Low` },
-  { value: "MEDIUM", label: t`Medium` },
-  { value: "HIGH", label: t`High` },
-];
+const getPriorityOptions = getCrmPriorities;
 
 // Follow-up type options for the select dropdown
-const getFollowUpTypeOptions = () => [
-  { value: "CALL", label: t`Call` },
-  { value: "EMAIL", label: t`Email` },
-  { value: "MEETING", label: t`Meeting` },
-  { value: "TASK", label: t`Task` },
-];
+const getFollowUpTypeOptions = getCrmFollowUpTypes;
 
 /**
  * FollowUpForm component for creating and editing follow-ups
@@ -148,7 +139,7 @@ export function FollowUpForm({
       >
         <Stack gap="md">
           {/* Description field - Required (Requirement 5.1) */}
-          <FormField
+          <CrmFormField
             type="textarea"
             name="description"
             label={t`Description`}
@@ -156,33 +147,22 @@ export function FollowUpForm({
             form={form}
             withAsterisk
             rows={3}
+            maxLength={500}
+            showCharacterCount
           />
 
           {/* Due date field - Required with past date warning (Requirement 5.5, 11.4) */}
-          <FormField
+          <CrmFormField
             type="date"
             name="dueDate"
             label={t`Due Date`}
-            placeholder={t`Select due date`}
             form={form}
             withAsterisk
-            minDate={undefined} // Allow past dates but show warning
+            showPastDateWarning
           />
 
-          {/* Past date warning (Requirement 11.4) */}
-          {isPastDateSelected && (
-            <Alert
-              icon={<IconAlertCircle size={16} />}
-              title={t`Past Date Selected`}
-              color="yellow"
-              variant="light"
-            >
-              {t`You have selected a date in the past. This follow-up will be marked as overdue.`}
-            </Alert>
-          )}
-
           {/* Priority selection - Required (Requirement 5.1) */}
-          <FormField
+          <CrmFormField
             type="select"
             name="priority"
             label={t`Priority`}
@@ -193,7 +173,7 @@ export function FollowUpForm({
           />
 
           {/* Follow-up type selection - Required (Requirement 5.1) */}
-          <FormField
+          <CrmFormField
             type="select"
             name="type"
             label={t`Type`}

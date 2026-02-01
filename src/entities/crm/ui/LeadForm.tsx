@@ -3,7 +3,7 @@ import { Modal, Button, Group, Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { t } from "@lingui/core/macro";
-import { FormField } from "@/shared/ui";
+import { CrmFormField, getCrmLeadSources } from "./CrmFormField";
 import type { Lead, LeadSource } from "@/shared/api/crm/types";
 import { useCreateLead, useUpdateLead } from "../api/crm-queries";
 import { notifications } from "@mantine/notifications";
@@ -23,16 +23,7 @@ interface LeadFormProps {
 }
 
 // Lead source options for the select dropdown
-const getLeadSourceOptions = () => [
-  { value: "WEBSITE", label: t`Website` },
-  { value: "REFERRAL", label: t`Referral` },
-  { value: "COLD_CALL", label: t`Cold Call` },
-  { value: "EMAIL_CAMPAIGN", label: t`Email Campaign` },
-  { value: "SOCIAL_MEDIA", label: t`Social Media` },
-  { value: "TRADE_SHOW", label: t`Trade Show` },
-  { value: "PARTNER", label: t`Partner` },
-  { value: "OTHER", label: t`Other` },
-];
+const getLeadSourceOptions = getCrmLeadSources;
 
 /**
  * LeadForm component for creating and editing leads
@@ -207,61 +198,61 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
         >
           <Stack gap="md">
             {/* First Name field - Required (Requirement 11.1) */}
-            <FormField
+            <CrmFormField
               type="text"
               name="firstName"
               label={t`First Name`}
               placeholder={t`Enter first name`}
               form={form}
               withAsterisk
-              aria-required="true"
+              maxLength={100}
+              showCharacterCount
             />
 
             {/* Last Name field - Required (Requirement 11.1) */}
-            <FormField
+            <CrmFormField
               type="text"
               name="lastName"
               label={t`Last Name`}
               placeholder={t`Enter last name`}
               form={form}
               withAsterisk
-              aria-required="true"
+              maxLength={100}
+              showCharacterCount
             />
 
             {/* Email field - Required with validation (Requirements 11.1, 11.2) */}
-            <FormField
+            <CrmFormField
               type="email"
               name="email"
               label={t`Email`}
               placeholder={t`Enter email address`}
               form={form}
               withAsterisk
-              aria-required="true"
-              aria-describedby="email-help"
             />
 
             {/* Phone field - Optional */}
-            <FormField
+            <CrmFormField
               type="tel"
               name="phone"
               label={t`Phone`}
               placeholder={t`Enter phone number`}
               form={form}
-              aria-describedby="phone-help"
             />
 
             {/* Company field - Optional (for future autocomplete) */}
-            <FormField
+            <CrmFormField
               type="text"
               name="company"
               label={t`Company`}
               placeholder={t`Enter company name`}
               form={form}
-              aria-describedby="company-help"
+              maxLength={200}
+              showCharacterCount
             />
 
             {/* Lead source selection - Required (Requirement 1.1) */}
-            <FormField
+            <CrmFormField
               type="select"
               name="source"
               label={t`Lead Source`}
@@ -270,8 +261,6 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
               form={form}
               withAsterisk
               searchable
-              aria-required="true"
-              aria-describedby="source-help"
             />
 
             {/* Form actions */}

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { t, msg } from "@lingui/core/macro";
 import { i18n } from "@lingui/core";
 import { useChangePassword } from "@/shared/lib/use-auth-api";
-import { FormField } from "@/shared/ui";
+import { UserFormField } from "@/entities/user";
 import { z } from "zod";
 
 // Validation schema
@@ -99,7 +99,7 @@ export function ChangePasswordFormFeature({
             </>
           )}
 
-          <FormField
+          <UserFormField
             type="password"
             name="currentPassword"
             label={t`Current Password`}
@@ -108,7 +108,7 @@ export function ChangePasswordFormFeature({
             form={form}
           />
 
-          <FormField
+          <UserFormField
             type="password"
             name="newPassword"
             label={t`New Password`}
@@ -116,10 +116,11 @@ export function ChangePasswordFormFeature({
             description={t`Min 8 characters with uppercase, lowercase, number, and special character`}
             withAsterisk
             showStrengthIndicator
+            requireStrong
             form={form}
           />
 
-          <FormField
+          <UserFormField
             type="password"
             name="confirmPassword"
             label={t`Confirm New Password`}

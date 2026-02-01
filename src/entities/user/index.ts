@@ -45,3 +45,5 @@ export {
   useDeleteUser,
   USER_MANAGEMENT_QUERY_KEY,
 } from "./model/use-user-management";
+
+export * from "./ui/UserFormField";

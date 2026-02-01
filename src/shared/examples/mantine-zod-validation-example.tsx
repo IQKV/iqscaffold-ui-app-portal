@@ -1,333 +1,359 @@
 import React from "react";
-import { Paper, Title, Button, Stack, Group, Text, Alert } from "@mantine/core";
+import { Paper, Title, Button, Stack, Group, Text, Alert, Tabs } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { z } from "zod";
-import { IconInfoCircle } from "@tabler/icons-react";
-import { FormField } from "@/shared/ui";
+import { IconInfoCircle, IconUser, IconCreditCard, IconUsers } from "@tabler/icons-react";
+import { UserFormField, getUserRoles } from "@/entities/user";
+import { BillingFormField, getBillingGateways, getBillingCurrencies } from "@/entities/billing";
+import { CrmFormField, getCrmLeadSources, getCrmPriorities } from "@/entities/crm";
 
-// Comprehensive Zod schema with various validation rules
-const validationSchema = z.object({
-  // Basic text validation
-  firstName: z
-    .string()
-    .min(2, "First name must be at least 2 characters")
-    .max(50, "First name must not exceed 50 characters"),
-
-  lastName: z
-    .string()
-    .min(2, "Last name must be at least 2 characters")
-    .max(50, "Last name must not exceed 50 characters"),
-
-  // Email validation
-  email: z
-    .string()
-    .email("Please enter a valid email address")
-    .min(1, "Email is required"),
-
-  // Password with complex validation
-  password: z
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
-    .regex(/[0-9]/, "Password must contain at least one number")
-    .regex(
-      /[^A-Za-z0-9]/,
-      "Password must contain at least one special character"
-    ),
-
-  // Number validation
-  age: z
-    .number()
-    .min(18, "You must be at least 18 years old")
-    .max(120, "Age must be realistic")
-    .int("Age must be a whole number"),
-
-  // Select validation
-  country: z.string().min(1, "Please select a country"),
-
-  // Multi-select validation
-  interests: z
-    .array(z.string())
-    .min(1, "Please select at least one interest")
-    .max(5, "Please select no more than 5 interests"),
-
-  // Date validation (using string for simplicity)
-  birthDate: z
-    .string()
-    .min(1, "Birth date is required")
-    .refine((dateStr) => {
-      const date = new Date(dateStr);
-      const age = new Date().getFullYear() - date.getFullYear();
-      return age >= 18;
-    }, "You must be at least 18 years old"),
-
-  // Textarea validation
-  bio: z
-    .string()
-    .min(10, "Bio must be at least 10 characters")
-    .max(500, "Bio must not exceed 500 characters")
-    .optional(),
-
-  // Boolean validation
-  agreeToTerms: z
-    .boolean()
-    .refine(
-      (val) => val === true,
-      "You must agree to the terms and conditions"
-    ),
-
-  // Optional newsletter subscription
-  subscribeNewsletter: z.boolean().optional(),
+// User management schema
+const userSchema = z.object({
+  username: z.string().min(3, "Username must be at least 3 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  firstName: z.string().min(2, "First name must be at least 2 characters"),
+  lastName: z.string().min(2, "Last name must be at least 2 characters"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+  authorities: z.array(z.string()).min(1, "At least one role is required"),
+  enabled: z.boolean(),
 });
 
-type FormData = z.infer<typeof validationSchema>;
+// Billing configuration schema
+const billingSchema = z.object({
+  gateway: z.string().min(1, "Please select a gateway"),
+  apiKey: z.string().min(8, "API key is required"),
+  environment: z.string().min(1, "Please select environment"),
+  currency: z.string().min(1, "Please select currency"),
+  amount: z.number().min(0.01, "Amount must be greater than 0"),
+});
 
-const countryOptions = [
-  { value: "us", label: "United States" },
-  { value: "ca", label: "Canada" },
-  { value: "uk", label: "United Kingdom" },
-  { value: "de", label: "Germany" },
-  { value: "fr", label: "France" },
-];
+// CRM lead schema
+const crmSchema = z.object({
+  firstName: z.string().min(2, "First name must be at least 2 characters"),
+  lastName: z.string().min(2, "Last name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  company: z.string().optional(),
+  source: z.string().min(1, "Please select a lead source"),
+  priority: z.string().min(1, "Please select priority"),
+  notes: z.string().max(500, "Notes must not exceed 500 characters").optional(),
+});
 
-const interestOptions = [
-  { value: "technology", label: "Technology" },
-  { value: "sports", label: "Sports" },
-  { value: "music", label: "Music" },
-  { value: "travel", label: "Travel" },
-  { value: "cooking", label: "Cooking" },
-  { value: "reading", label: "Reading" },
-  { value: "gaming", label: "Gaming" },
-  { value: "art", label: "Art" },
-];
+type UserFormData = z.infer<typeof userSchema>;
+type BillingFormData = z.infer<typeof billingSchema>;
+type CrmFormData = z.infer<typeof crmSchema>;
 
 export function MantineZodValidationExample() {
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [activeTab, setActiveTab] = React.useState<string | null>("user");
 
-  const form = useForm<FormData>({
-    // Use zodResolver for validation - this replaces HTML5 validation
-    validate: zodResolver(validationSchema),
+  // User form
+  const userForm = useForm<UserFormData>({
+    validate: zodResolver(userSchema),
+    initialValues: {
+      username: "",
+      email: "",
+      firstName: "",
+      lastName: "",
+      password: "",
+      authorities: ["USER"],
+      enabled: true,
+    },
+  });
+
+  // Billing form
+  const billingForm = useForm<BillingFormData>({
+    validate: zodResolver(billingSchema),
+    initialValues: {
+      gateway: "",
+      apiKey: "",
+      environment: "",
+      currency: "USD",
+      amount: 0,
+    },
+  });
+
+  // CRM form
+  const crmForm = useForm<CrmFormData>({
+    validate: zodResolver(crmSchema),
     initialValues: {
       firstName: "",
       lastName: "",
       email: "",
-      password: "",
-      age: 18,
-      country: "",
-      interests: [],
-      birthDate: "",
-      bio: "",
-      agreeToTerms: false,
-      subscribeNewsletter: false,
+      company: "",
+      source: "",
+      priority: "",
+      notes: "",
     },
   });
 
-  const handleSubmit = async (values: FormData) => {
-    setIsLoading(true);
+  const handleUserSubmit = async (values: UserFormData) => {
+    console.log("User form submitted:", values);
+    // eslint-disable-next-line no-alert
+    alert("User form submitted successfully!");
+  };
 
-    try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+  const handleBillingSubmit = async (values: BillingFormData) => {
+    console.log("Billing form submitted:", values);
+    // eslint-disable-next-line no-alert
+    alert("Billing form submitted successfully!");
+  };
 
-      console.log("Form submitted with values:", values);
-
-      // Reset form on success
-      form.reset();
-
-      // eslint-disable-next-line no-alert
-      alert("Form submitted successfully!");
-    } catch (error) {
-      console.error("Form submission error:", error);
-      // eslint-disable-next-line no-alert
-      alert("Form submission failed!");
-    } finally {
-      setIsLoading(false);
-    }
+  const handleCrmSubmit = async (values: CrmFormData) => {
+    console.log("CRM form submitted:", values);
+    // eslint-disable-next-line no-alert
+    alert("CRM form submitted successfully!");
   };
 
   return (
-    <Paper p="xl" withBorder maw={600} mx="auto">
+    <Paper p="xl" withBorder maw={800} mx="auto">
       <Title order={2} mb="lg">
-        Mantine + Zod Validation Example
+        Business-Focused Form Components Example
       </Title>
 
       <Alert color="blue" icon={<IconInfoCircle size={16} />} mb="lg">
         <Text size="sm">
-          This form demonstrates proper Mantine + Zod validation with HTML5
-          validation disabled. All validation is handled by Zod schemas and
-          Mantine's form system.
+          This example demonstrates business-focused form components for different domains:
+          User Management, Billing Configuration, and CRM. Each domain has its own specialized
+          form fields with business-specific validation and features.
         </Text>
       </Alert>
 
-      {/* 
-        IMPORTANT: noValidate attribute disables HTML5 validation
-        This ensures only Zod validation is used
-      */}
-      <form onSubmit={form.onSubmit(handleSubmit)} noValidate>
-        <Stack gap="md">
-          {/* Basic text inputs with enhanced validation */}
-          <Group grow>
-            <FormField
-              type="text"
-              name="firstName"
-              label="First Name"
-              placeholder="Enter your first name"
-              form={form}
-              withAsterisk
-              showCharacterCount
-              maxLength={50}
-            />
-            <FormField
-              type="text"
-              name="lastName"
-              label="Last Name"
-              placeholder="Enter your last name"
-              form={form}
-              withAsterisk
-              showCharacterCount
-              maxLength={50}
-            />
-          </Group>
+      <Tabs value={activeTab} onChange={setActiveTab}>
+        <Tabs.List>
+          <Tabs.Tab value="user" leftSection={<IconUser size={16} />}>
+            User Management
+          </Tabs.Tab>
+          <Tabs.Tab value="billing" leftSection={<IconCreditCard size={16} />}>
+            Billing Config
+          </Tabs.Tab>
+          <Tabs.Tab value="crm" leftSection={<IconUsers size={16} />}>
+            CRM Lead
+          </Tabs.Tab>
+        </Tabs.List>
 
-          {/* Email input with validation status */}
-          <FormField
-            type="email"
-            name="email"
-            label="Email"
-            placeholder="Enter your email"
-            form={form}
-            withAsterisk
-            showValidationStatus
-          />
+        <Tabs.Panel value="user" pt="md">
+          <form onSubmit={userForm.onSubmit(handleUserSubmit)} noValidate>
+            <Stack gap="md">
+              <UserFormField
+                type="username"
+                name="username"
+                label="Username"
+                placeholder="Enter username"
+                form={userForm}
+                withAsterisk
+                maxLength={30}
+                showCharacterCount
+              />
 
-          {/* Password with strength indicator */}
-          <FormField
-            type="password"
-            name="password"
-            label="Password"
-            placeholder="Enter a strong password"
-            description="Must contain uppercase, lowercase, number, and special character"
-            form={form}
-            withAsterisk
-            showStrengthIndicator
-          />
+              <Group grow>
+                <UserFormField
+                  type="text"
+                  name="firstName"
+                  label="First Name"
+                  placeholder="Enter first name"
+                  form={userForm}
+                  withAsterisk
+                />
+                <UserFormField
+                  type="text"
+                  name="lastName"
+                  label="Last Name"
+                  placeholder="Enter last name"
+                  form={userForm}
+                  withAsterisk
+                />
+              </Group>
 
-          {/* Number input with validation */}
-          <FormField
-            type="number"
-            name="age"
-            label="Age"
-            placeholder="Enter your age"
-            form={form}
-            withAsterisk
-            min={18}
-            max={120}
-          />
+              <UserFormField
+                type="email"
+                name="email"
+                label="Email"
+                placeholder="Enter email address"
+                form={userForm}
+                withAsterisk
+              />
 
-          {/* Select dropdown with search */}
-          <FormField
-            type="select"
-            name="country"
-            label="Country"
-            placeholder="Select your country"
-            data={countryOptions}
-            form={form}
-            withAsterisk
-            searchable
-            clearable
-          />
+              <UserFormField
+                type="password"
+                name="password"
+                label="Password"
+                placeholder="Enter password"
+                form={userForm}
+                withAsterisk
+                showStrengthIndicator
+                requireStrong
+              />
 
-          {/* Multi-select with limits */}
-          <FormField
-            type="multiselect"
-            name="interests"
-            label="Interests"
-            placeholder="Select your interests (1-5)"
-            data={interestOptions}
-            form={form}
-            withAsterisk
-            searchable
-            maxValues={5}
-          />
+              <UserFormField
+                type="multiselect"
+                name="authorities"
+                label="Roles"
+                placeholder="Select user roles"
+                data={getUserRoles()}
+                form={userForm}
+                withAsterisk
+                maxValues={3}
+              />
 
-          {/* Date input */}
-          <FormField
-            type="text"
-            name="birthDate"
-            label="Birth Date"
-            placeholder="YYYY-MM-DD"
-            form={form}
-            withAsterisk
-          />
+              <UserFormField
+                type="switch"
+                name="enabled"
+                label="Account Enabled"
+                description="User can log in and access the system"
+                form={userForm}
+              />
 
-          {/* Textarea with character count */}
-          <FormField
-            type="textarea"
-            name="bio"
-            label="Bio (Optional)"
-            placeholder="Tell us about yourself"
-            form={form}
-            rows={4}
-            maxLength={500}
-            showCharacterCount
-            autosize
-            minRows={2}
-            maxRows={6}
-          />
+              <Button type="submit">Create User</Button>
+            </Stack>
+          </form>
+        </Tabs.Panel>
 
-          {/* Required switch */}
-          <FormField
-            type="switch"
-            name="agreeToTerms"
-            label="I agree to the terms and conditions"
-            form={form}
-          />
+        <Tabs.Panel value="billing" pt="md">
+          <form onSubmit={billingForm.onSubmit(handleBillingSubmit)} noValidate>
+            <Stack gap="md">
+              <BillingFormField
+                type="select"
+                name="gateway"
+                label="Payment Gateway"
+                placeholder="Select gateway"
+                data={getBillingGateways()}
+                form={billingForm}
+                withAsterisk
+              />
 
-          {/* Optional switch */}
-          <FormField
-            type="switch"
-            name="subscribeNewsletter"
-            label="Subscribe to newsletter"
-            description="Receive updates about new features and content"
-            form={form}
-          />
+              <BillingFormField
+                type="password"
+                name="apiKey"
+                label="API Key"
+                placeholder="Enter API key"
+                form={billingForm}
+                withAsterisk
+                showStrengthIndicator
+              />
 
-          <Group justify="flex-end" mt="lg">
-            <Button
-              type="button"
-              variant="subtle"
-              onClick={() => form.reset()}
-              disabled={isLoading}
-            >
-              Reset
-            </Button>
-            <Button type="submit" loading={isLoading}>
-              Submit Form
-            </Button>
-          </Group>
-        </Stack>
-      </form>
+              <Group grow>
+                <BillingFormField
+                  type="select"
+                  name="environment"
+                  label="Environment"
+                  placeholder="Select environment"
+                  data={[
+                    { value: "SANDBOX", label: "Sandbox" },
+                    { value: "PRODUCTION", label: "Production" },
+                  ]}
+                  form={billingForm}
+                  withAsterisk
+                />
+                <BillingFormField
+                  type="select"
+                  name="currency"
+                  label="Currency"
+                  placeholder="Select currency"
+                  data={getBillingCurrencies()}
+                  form={billingForm}
+                  withAsterisk
+                />
+              </Group>
 
-      {/* Debug information */}
-      <Paper p="md" mt="xl" bg="gray.0">
-        <Title order={4} mb="sm">
-          Debug Information
-        </Title>
-        <Text size="sm" mb="xs">
-          Form Values:
-        </Text>
-        <pre style={{ fontSize: "12px", overflow: "auto" }}>
-          {JSON.stringify(form.values, null, 2)}
-        </pre>
-        <Text size="sm" mb="xs" mt="md">
-          Form Errors:
-        </Text>
-        <pre style={{ fontSize: "12px", overflow: "auto" }}>
-          {JSON.stringify(form.errors, null, 2)}
-        </pre>
-      </Paper>
+              <BillingFormField
+                type="amount"
+                name="amount"
+                label="Test Amount"
+                form={billingForm}
+                currency="USD"
+                min={0.01}
+                max={10000}
+                precision={2}
+              />
+
+              <Button type="submit">Save Configuration</Button>
+            </Stack>
+          </form>
+        </Tabs.Panel>
+
+        <Tabs.Panel value="crm" pt="md">
+          <form onSubmit={crmForm.onSubmit(handleCrmSubmit)} noValidate>
+            <Stack gap="md">
+              <Group grow>
+                <CrmFormField
+                  type="text"
+                  name="firstName"
+                  label="First Name"
+                  placeholder="Enter first name"
+                  form={crmForm}
+                  withAsterisk
+                  maxLength={100}
+                  showCharacterCount
+                />
+                <CrmFormField
+                  type="text"
+                  name="lastName"
+                  label="Last Name"
+                  placeholder="Enter last name"
+                  form={crmForm}
+                  withAsterisk
+                  maxLength={100}
+                  showCharacterCount
+                />
+              </Group>
+
+              <CrmFormField
+                type="email"
+                name="email"
+                label="Email"
+                placeholder="Enter email address"
+                form={crmForm}
+                withAsterisk
+              />
+
+              <CrmFormField
+                type="text"
+                name="company"
+                label="Company"
+                placeholder="Enter company name"
+                form={crmForm}
+                maxLength={200}
+                showCharacterCount
+              />
+
+              <Group grow>
+                <CrmFormField
+                  type="select"
+                  name="source"
+                  label="Lead Source"
+                  placeholder="Select source"
+                  data={getCrmLeadSources()}
+                  form={crmForm}
+                  withAsterisk
+                  searchable
+                />
+                <CrmFormField
+                  type="select"
+                  name="priority"
+                  label="Priority"
+                  placeholder="Select priority"
+                  data={getCrmPriorities()}
+                  form={crmForm}
+                  withAsterisk
+                />
+              </Group>
+
+              <CrmFormField
+                type="textarea"
+                name="notes"
+                label="Notes"
+                placeholder="Enter additional notes"
+                form={crmForm}
+                rows={3}
+                maxLength={500}
+                showCharacterCount
+              />
+
+              <Button type="submit">Create Lead</Button>
+            </Stack>
+          </form>
+        </Tabs.Panel>
+      </Tabs>
     </Paper>
   );
 }

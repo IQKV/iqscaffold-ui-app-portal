@@ -1,6 +1,9 @@
-import { TextInput, PasswordInput, Stack } from "@mantine/core";
+import React from "react";
+import { Stack } from "@mantine/core";
 import { t } from "@lingui/macro";
+import { BillingFormField } from "@/entities/billing";
 import { StripeGatewayConfigData } from "@/shared/api/billing/types";
+import { useForm } from "@mantine/form";
 
 interface StripeConfigFormProps {
   value: Partial<StripeGatewayConfigData>;
@@ -13,46 +16,53 @@ export const StripeConfigForm = ({
   onChange,
   errors = {},
 }: StripeConfigFormProps) => {
+  // Create a form to work with BillingFormField
+  const form = useForm({
+    initialValues: value,
+    onValuesChange: onChange,
+  });
+
+  // Update form when value prop changes
+  React.useEffect(() => {
+    form.setValues(value);
+  }, [value, form]);
+
   return (
     <Stack gap="md">
-      <PasswordInput
+      <BillingFormField
+        type="password"
+        name="apiKey"
         label={t`API Key`}
         placeholder="sk_test_..."
-        required
-        value={value.apiKey || ""}
-        onChange={(e) => onChange({ ...value, apiKey: e.currentTarget.value })}
-        error={errors.apiKey}
+        form={form}
+        withAsterisk
         description={t`Your Stripe secret API key`}
+        showStrengthIndicator
       />
-      <PasswordInput
+      <BillingFormField
+        type="password"
+        name="webhookSecret"
         label={t`Webhook Secret`}
         placeholder="whsec_..."
-        required
-        value={value.webhookSecret || ""}
-        onChange={(e) =>
-          onChange({ ...value, webhookSecret: e.currentTarget.value })
-        }
-        error={errors.webhookSecret}
+        form={form}
+        withAsterisk
         description={t`Webhook signing secret for event validation`}
+        showStrengthIndicator
       />
-      <TextInput
+      <BillingFormField
+        type="text"
+        name="clientId"
         label={t`Client ID`}
         placeholder="ca_..."
-        value={value.clientId || ""}
-        onChange={(e) =>
-          onChange({ ...value, clientId: e.currentTarget.value })
-        }
-        error={errors.clientId}
+        form={form}
         description={t`Client ID for Stripe Connect (optional)`}
       />
-      <TextInput
+      <BillingFormField
+        type="text"
+        name="publicKey"
         label={t`Publishable Key`}
         placeholder="pk_test_..."
-        value={value.publicKey || ""}
-        onChange={(e) =>
-          onChange({ ...value, publicKey: e.currentTarget.value })
-        }
-        error={errors.publicKey}
+        form={form}
         description={t`Public key for frontend use (optional)`}
       />
     </Stack>

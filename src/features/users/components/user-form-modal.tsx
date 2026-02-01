@@ -4,7 +4,7 @@ import { IconLock } from "@tabler/icons-react";
 import { useForm } from "@mantine/form";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { z } from "zod";
-import { FormField } from "@/shared/ui";
+import { UserFormField, getUserRoles } from "@/entities/user";
 import { User, CreateUserRequest, UpdateUserRequest } from "../api/users-api";
 import {
   useCreateUserMutation,
@@ -40,11 +40,7 @@ interface UserFormModalProps {
   title: string;
 }
 
-const getRoleOptions = () => [
-  { value: "USER", label: t`User` },
-  { value: "ADMIN", label: t`Admin` },
-  { value: "SUPER_ADMIN", label: t`Super Admin` },
-];
+const getRoleOptions = getUserRoles;
 
 export function UserFormModal({
   opened,
@@ -203,16 +199,18 @@ export function UserFormModal({
         data-testid="form-user"
       >
         <Stack gap="md">
-          <FormField
-            type="text"
+          <UserFormField
+            type="username"
             name="username"
             label={t`Username`}
             placeholder={t`Enter username`}
             form={form}
             withAsterisk
+            maxLength={30}
+            showCharacterCount
           />
 
-          <FormField
+          <UserFormField
             type="email"
             name="email"
             label={t`Email`}
@@ -222,7 +220,7 @@ export function UserFormModal({
           />
 
           <Group grow>
-            <FormField
+            <UserFormField
               type="text"
               name="firstName"
               label={t`First Name`}
@@ -231,7 +229,7 @@ export function UserFormModal({
               withAsterisk
             />
 
-            <FormField
+            <UserFormField
               type="text"
               name="lastName"
               label={t`Last Name`}
@@ -242,7 +240,7 @@ export function UserFormModal({
           </Group>
 
           {!isEditing && (
-            <FormField
+            <UserFormField
               type="password"
               name="password"
               label={t`Password`}
@@ -250,10 +248,11 @@ export function UserFormModal({
               form={form}
               withAsterisk
               showStrengthIndicator
+              requireStrong
             />
           )}
 
-          <FormField
+          <UserFormField
             type="multiselect"
             name="authorities"
             label={t`Authorities`}
@@ -261,18 +260,19 @@ export function UserFormModal({
             data={getRoleOptions()}
             form={form}
             withAsterisk
+            maxValues={5}
           />
 
           {isEditing && (
             <Group grow>
-              <FormField
+              <UserFormField
                 type="switch"
                 name="enabled"
                 label={t`Enabled`}
                 description={t`User can log in and access the system`}
                 form={form}
               />
-              <FormField
+              <UserFormField
                 type="switch"
                 name="emailVerified"
                 label={t`Email Verified`}
