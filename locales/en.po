@@ -269,11 +269,11 @@ msgstr "Admin"
 msgid "Admin Access"
 msgstr "Admin Access"
 
-#: src/pages/dashboard.tsx:51
+#: src/pages/dashboard.tsx:50
 msgid "Advanced Analytics"
 msgstr "Advanced Analytics"
 
-#: src/pages/dashboard.tsx:45
+#: src/pages/dashboard.tsx:44
 msgid "Advanced Analytics - Upgrade to Pro to unlock this feature"
 msgstr "Advanced Analytics - Upgrade to Pro to unlock this feature"
 
@@ -999,8 +999,8 @@ msgstr "Dark mode"
 #: src/features/crm-leads/components/CrmLayout.tsx:72
 #: src/features/crm-leads/components/CrmLayout.tsx:117
 #: src/features/dashboard/ui/dashboard-feature.tsx:15
-#: src/pages/dashboard.tsx:20
-#: src/pages/dashboard.tsx:29
+#: src/pages/dashboard.tsx:19
+#: src/pages/dashboard.tsx:28
 #: src/widgets/sidebar/ui/sidebar.tsx:88
 msgid "Dashboard"
 msgstr "Dashboard"
@@ -1258,7 +1258,7 @@ msgid "Enabled"
 msgstr "Enabled"
 
 #: src/pages/billing.tsx:192
-#: src/pages/dashboard.tsx:129
+#: src/pages/dashboard.tsx:128
 msgid "Enabled Features"
 msgstr "Enabled Features"
 
@@ -1740,7 +1740,7 @@ msgid "Fastest Stage"
 msgstr "Fastest Stage"
 
 #: src/pages/billing.tsx:178
-#: src/pages/dashboard.tsx:113
+#: src/pages/dashboard.tsx:112
 msgid "Feature Usage"
 msgstr "Feature Usage"
 
@@ -1908,7 +1908,7 @@ msgstr "Gateway deleted successfully"
 msgid "Gateway:"
 msgstr "Gateway:"
 
-#: src/pages/dashboard.tsx:98
+#: src/pages/dashboard.tsx:97
 msgid "Generate detailed reports and export data."
 msgstr "Generate detailed reports and export data."
 
@@ -2093,11 +2093,11 @@ msgstr "Lead created successfully"
 msgid "Lead Details"
 msgstr "Lead Details"
 
-#: src/pages/dashboard.tsx:69
+#: src/pages/dashboard.tsx:68
 msgid "Lead Management"
 msgstr "Lead Management"
 
-#: src/pages/dashboard.tsx:63
+#: src/pages/dashboard.tsx:62
 msgid "Lead Management - Available in Business plan"
 msgstr "Lead Management - Available in Business plan"
 
@@ -2290,7 +2290,7 @@ msgstr "Manage your payment gateway integrations"
 msgid "Manage your personal settings and preferences"
 msgstr "Manage your personal settings and preferences"
 
-#: src/pages/dashboard.tsx:71
+#: src/pages/dashboard.tsx:70
 msgid "Manage your sales leads and track conversion rates."
 msgstr "Manage your sales leads and track conversion rates."
 
@@ -2454,7 +2454,7 @@ msgid "No activities yet for this contact."
 msgstr "No activities yet for this contact."
 
 #: src/pages/billing.tsx:211
-#: src/pages/dashboard.tsx:144
+#: src/pages/dashboard.tsx:143
 msgid "No features enabled"
 msgstr "No features enabled"
 
@@ -2919,7 +2919,7 @@ msgstr "Powerful data synchronization and caching"
 msgid "Preferences Demo"
 msgstr "Preferences Demo"
 
-#: src/pages/dashboard.tsx:53
+#: src/pages/dashboard.tsx:52
 msgid "Premium analytics dashboard with detailed insights and reporting."
 msgstr "Premium analytics dashboard with detailed insights and reporting."
 
@@ -3071,7 +3071,7 @@ msgstr "Remove Avatar"
 msgid "Removing..."
 msgstr "Removing..."
 
-#: src/pages/dashboard.tsx:96
+#: src/pages/dashboard.tsx:95
 msgid "Reports"
 msgstr "Reports"
 
@@ -3148,11 +3148,11 @@ msgstr "Roles"
 msgid "Running"
 msgstr "Running"
 
-#: src/pages/dashboard.tsx:87
+#: src/pages/dashboard.tsx:86
 msgid "Sales Pipeline"
 msgstr "Sales Pipeline"
 
-#: src/pages/dashboard.tsx:81
+#: src/pages/dashboard.tsx:80
 msgid "Sales Pipeline - Enterprise feature"
 msgstr "Sales Pipeline - Enterprise feature"
 
@@ -4004,7 +4004,7 @@ msgstr "View Users"
 msgid "Viewing {userName}"
 msgstr "Viewing {userName}"
 
-#: src/pages/dashboard.tsx:89
+#: src/pages/dashboard.tsx:88
 msgid "Visual sales pipeline with drag-and-drop functionality."
 msgstr "Visual sales pipeline with drag-and-drop functionality."
 
@@ -4074,7 +4074,7 @@ msgstr "Welcome Message"
 msgid "Welcome to IQ Scaffold! Your language preference is active."
 msgstr "Welcome to IQ Scaffold! Your language preference is active."
 
-#: src/pages/dashboard.tsx:32
+#: src/pages/dashboard.tsx:31
 msgid "Welcome to your dashboard. Here's what you have access to:"
 msgstr "Welcome to your dashboard. Here's what you have access to:"
 
