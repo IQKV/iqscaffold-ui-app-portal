@@ -6,7 +6,7 @@
 
 ## Project Overview
 
-This is a modern React application built with Feature-Sliced Design (FSD) architecture, focusing on maintainability, scalability, and developer experience. The project uses React 19, TypeScript, Mantine UI v8, and a comprehensive toolchain for building high-performance Single Page Applications.
+This is a modern React application built with Feature-Sliced Design (FSD) architecture, focusing on maintainability, scalability, and developer experience. The project uses React 19, TypeScript, Mantine UI v8, and toolchain for building high-performance Single Page Applications.
 
 **Key Characteristics:**
 
@@ -480,7 +480,7 @@ AI agents MUST communicate efficiently without unnecessary verbosity. Users valu
 **For Task Completion:**
 
 - ✅ "Created 4 files for user-form feature. All checks passed."
-- ❌ "I have successfully completed the task of creating a new user form feature. Let me provide you with a comprehensive summary of everything that was accomplished..."
+- ❌ "I have successfully completed the task of creating a new user form feature. Let me provide you with summary of everything that was accomplished..."
 
 **For Explanations:**
 
@@ -499,7 +499,7 @@ AI agents MUST communicate efficiently without unnecessary verbosity. Users valu
 ```
 I understand you want to add a user form feature. Let me break this down for you.
 
-First, I'll analyze the requirements and create a comprehensive plan.
+First, I'll analyze the requirements and create plan.
 Then, I'll implement the feature following best practices.
 After that, I'll verify everything works correctly.
 
@@ -575,7 +575,7 @@ Refactored auth flow (8 files). All checks passed. Breaking changes: none.
 
 ```
 I have successfully completed the implementation of the user form feature.
-Here's a comprehensive breakdown of everything that was done:
+Here's breakdown of everything that was done:
 
 Files Created:
 - src/features/user-form/index.ts (15 lines)
@@ -684,11 +684,11 @@ Users don't need a play-by-play commentary. They need results. Respect their tim
 2. **TypeScript Interfaces**: Define strict interfaces for all props
 3. **Component Naming**: PascalCase for components, kebab-case for folders
 4. **Feature-Sliced Structure**: Organize by features, not by file types
-5. **Use EnhancedFormField**: The project has a comprehensive FormField component in `@/shared/ui`
+5. **Use EnhancedFormField**: The project has FormField component in `@/shared/ui`
 
 ### Actual FormField Implementation
 
-The project includes a comprehensive `EnhancedFormField` component that supports:
+The project includes `EnhancedFormField` component that supports:
 
 - All common input types (text, email, password, textarea, select, multiselect, etc.)
 - Lingui i18n integration with MessageDescriptor support
