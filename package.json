@@ -88,7 +88,7 @@
     "@tiptap/extension-text-align": "^3.18.0",
     "@tiptap/extension-text-style": "^3.18.0",
     "@tiptap/extension-underline": "^3.18.0",
-    "@tiptap/pm": "^3.18.0",
+    "@tiptap/pm": "^3.19.0",
     "@tiptap/react": "^3.18.0",
     "@tiptap/starter-kit": "^3.18.0",
     "@types/sanitize-html": "^2.16.0",
