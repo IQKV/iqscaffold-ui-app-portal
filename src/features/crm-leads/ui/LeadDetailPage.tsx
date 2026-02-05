@@ -27,10 +27,11 @@ import {
 import { t } from "@lingui/core/macro";
 import { notifications } from "@mantine/notifications";
 import { useNavigate, useParams } from "@tanstack/react-router";
-import { useLeadQuery,
+import {
+  useLeadQuery,
   useConvertLeadMutation,
   LeadScoreBadge,
-  LeadSourceBadge
+  LeadSourceBadge,
 } from "@/entities/crm";
 import { LeadNotesSection } from "./LeadNotesSection";
 import { FollowUpSection } from "./FollowUpSection";

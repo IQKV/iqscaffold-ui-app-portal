@@ -33,10 +33,7 @@ import { LeadListSkeleton } from "./skeletons";
 import { LeadSource } from "@/shared/api/crm/types";
 import { useNavigate } from "@tanstack/react-router";
 import { useLeadList } from "../model/useLeadList";
-import {
-  useMediaQuery,
-  useDisclosure,
-} from "@mantine/hooks";
+import { useMediaQuery, useDisclosure } from "@mantine/hooks";
 import {
   useKeyboardNavigation,
   useAnnouncer,
@@ -571,11 +568,11 @@ export const LeadListPage: React.FC = () => {
                   onQuickActions={
                     !isMobile
                       ? {
-                        qualify: () => console.log("Qualify", lead.id),
-                        scheduleFollowUp: () =>
-                          console.log("Schedule follow-up", lead.id),
-                        viewDetails: () => handleLeadClick(lead.id),
-                      }
+                          qualify: () => console.log("Qualify", lead.id),
+                          scheduleFollowUp: () =>
+                            console.log("Schedule follow-up", lead.id),
+                          viewDetails: () => handleLeadClick(lead.id),
+                        }
                       : undefined
                   }
                 />

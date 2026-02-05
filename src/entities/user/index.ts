@@ -12,12 +12,12 @@ export * from "./ui/UserFormField";
 export * from "./api/queries";
 export * from "./api/mutations";
 export type {
-    UserDto,
-    CreateUserRequest,
-    UpdateUserRequest,
-    UserPageResponse,
-    PageParams,
-    BulkFeatureUpdateRequest,
+  UserDto,
+  CreateUserRequest,
+  UpdateUserRequest,
+  UserPageResponse,
+  PageParams,
+  BulkFeatureUpdateRequest,
 } from "@/shared/api";
 
 // Re-export commonly used utilities

@@ -13,11 +13,7 @@ import {
 } from "@mantine/core";
 import { IconEdit, IconTrash, IconPlus, IconSearch } from "@tabler/icons-react";
 import { DataTable, type DataTableColumn } from "@/shared/ui/data-table";
-import {
-  useUsersQuery,
-  useDeleteUserMutation,
-  UserDto,
-} from "@/entities/user";
+import { useUsersQuery, useDeleteUserMutation, UserDto } from "@/entities/user";
 import { useAuth } from "@/processes/auth";
 import { openConfirmModal } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
@@ -88,9 +84,15 @@ export function UsersDataGrid({
   );
 
   const getRoleBadgeColor = (authorities: string[]) => {
-    if (authorities.includes("SUPER_ADMIN")) { return "red"; }
-    if (authorities.includes("ADMIN")) { return "orange"; }
-    if (authorities.includes("USER")) { return "blue"; }
+    if (authorities.includes("SUPER_ADMIN")) {
+      return "red";
+    }
+    if (authorities.includes("ADMIN")) {
+      return "orange";
+    }
+    if (authorities.includes("USER")) {
+      return "blue";
+    }
     return "gray";
   };
 
@@ -200,7 +202,10 @@ export function UsersDataGrid({
     <Stack gap="md" data-testid="feature-users-data-grid">
       <Paper p="md" withBorder shadow="sm">
         <Group justify="space-between" mb="md">
-          <Title order={2} data-testid="users-title">{t`User Management`}</Title>
+          <Title
+            order={2}
+            data-testid="users-title"
+          >{t`User Management`}</Title>
           {canManageUsers() && (
             <Button
               leftSection={<IconPlus size={16} />}

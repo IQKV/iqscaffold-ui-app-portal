@@ -102,8 +102,8 @@ export function FollowUpList() {
   const filteredFollowUps = followUps.filter((followUp) =>
     debouncedSearch
       ? followUp.description
-        .toLowerCase()
-        .includes(debouncedSearch.toLowerCase())
+          .toLowerCase()
+          .includes(debouncedSearch.toLowerCase())
       : true
   );
 

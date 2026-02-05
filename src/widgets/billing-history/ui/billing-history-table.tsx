@@ -27,7 +27,10 @@ const PAGE_SIZE = DEFAULTS.PAGE_SIZE;
 
 export const BillingHistoryTable = () => {
   const [page, setPage] = useState(1);
-  const { data, isLoading } = usePaymentsQuery({ page: page - 1, size: PAGE_SIZE });
+  const { data, isLoading } = usePaymentsQuery({
+    page: page - 1,
+    size: PAGE_SIZE,
+  });
   const { canProcessRefunds, canViewPayments } = useAuth();
   const queryClient = useQueryClient();
   const refundMutation = useRefundPaymentMutation();

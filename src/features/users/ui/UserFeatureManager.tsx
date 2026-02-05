@@ -17,9 +17,7 @@ import {
   useFeatureContext,
   useFeatureManagement,
 } from "@/shared/lib/contexts/FeatureContext";
-import {
-  useUserFeaturesQuery,
-} from "@/entities/user";
+import { useUserFeaturesQuery } from "@/entities/user";
 import { notificationService } from "@/shared/lib/notifications";
 
 interface UserFeatureManagerProps {
@@ -104,7 +102,11 @@ export const UserFeatureManager: React.FC<UserFeatureManagerProps> = ({
         <Alert color="red" icon={<IconInfoCircle size="1rem" />}>
           <Group justify="space-between">
             <Text size="sm">{error}</Text>
-            <Button size="xs" variant="light" onClick={() => fetchUserFeatures()}>
+            <Button
+              size="xs"
+              variant="light"
+              onClick={() => fetchUserFeatures()}
+            >
               <IconRefresh size="0.8rem" />
             </Button>
           </Group>

@@ -301,10 +301,10 @@ export function EnhancedUsersDataGrid({
         title={
           selectedUser
             ? (() => {
-              const firstName = selectedUser.firstName;
-              const lastName = selectedUser.lastName;
-              return t`Manage Features - ${firstName} ${lastName}`;
-            })()
+                const firstName = selectedUser.firstName;
+                const lastName = selectedUser.lastName;
+                return t`Manage Features - ${firstName} ${lastName}`;
+              })()
             : t`Manage Features`
         }
         size="lg"

@@ -14,7 +14,11 @@ import {
 } from "@mantine/core";
 import { IconExternalLink, IconDownload, IconEye } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
-import { useInvoicesQuery, Invoice, InvoiceStatusBadge } from "@/entities/billing";
+import {
+  useInvoicesQuery,
+  Invoice,
+  InvoiceStatusBadge,
+} from "@/entities/billing";
 import { formatCurrency } from "@/shared/lib/format";
 
 interface InvoicesTableProps {

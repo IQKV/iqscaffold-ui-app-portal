@@ -56,7 +56,12 @@ export const ContactDetailPage: React.FC = () => {
   const [editModalOpened, setEditModalOpened] = useState(false);
 
   // Fetch contact data
-  const { data: contact, isLoading, error, refetch } = useContactQuery(contactId);
+  const {
+    data: contact,
+    isLoading,
+    error,
+    refetch,
+  } = useContactQuery(contactId);
 
   // Handle edit contact
   const handleEditContact = () => {

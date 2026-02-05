@@ -105,7 +105,8 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
   const { data: conversionMetrics } = useConversionMetricsQuery();
 
   // Move lead mutation
-  const { mutate: moveLeadToStage, isPending: isMoving } = useMoveLeadToStageMutation();
+  const { mutate: moveLeadToStage, isPending: isMoving } =
+    useMoveLeadToStageMutation();
 
   const leads = useMemo(() => {
     const content = (leadsResponse as any)?.content;
