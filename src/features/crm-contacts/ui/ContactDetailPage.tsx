@@ -30,7 +30,7 @@ import {
 import { t } from "@lingui/core/macro";
 import { notifications } from "@mantine/notifications";
 import { useNavigate, useParams } from "@tanstack/react-router";
-import { useContact } from "@/entities/crm";
+import { useContactQuery } from "@/entities/crm";
 import { ContactDetailSkeleton } from "./skeletons";
 import { ContactEditModal } from "./ContactEditModal";
 import { ContactNotesSection } from "./ContactNotesSection";
@@ -57,7 +57,7 @@ export const ContactDetailPage: React.FC = () => {
   const [editModalOpened, setEditModalOpened] = useState(false);
 
   // Fetch contact data
-  const { data: contact, isLoading, error, refetch } = useContact(contactId);
+  const { data: contact, isLoading, error, refetch } = useContactQuery(contactId);
 
   // Handle edit contact
   const handleEditContact = () => {

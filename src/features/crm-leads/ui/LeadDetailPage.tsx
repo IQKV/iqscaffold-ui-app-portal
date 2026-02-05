@@ -27,7 +27,7 @@ import {
 import { t } from "@lingui/core/macro";
 import { notifications } from "@mantine/notifications";
 import { useNavigate, useParams } from "@tanstack/react-router";
-import { useLead, useConvertLead } from "@/entities/crm";
+import { useLeadQuery, useConvertLeadMutation } from "@/entities/crm";
 import { LeadNotesSection } from "./LeadNotesSection";
 import { FollowUpSection } from "./FollowUpSection";
 import { ActivityTimeline } from "./ActivityTimeline";
@@ -52,7 +52,7 @@ export const LeadDetailPage: React.FC = () => {
   const [editModalOpened, setEditModalOpened] = useState(false);
 
   // Fetch lead data
-  const { data: lead, isLoading, error, refetch } = useLead(leadId);
+  const { data: lead, isLoading, error, refetch } = useLeadQuery(leadId);
 
   // Handle qualify lead
   const handleQualifyLead = () => {
@@ -61,7 +61,7 @@ export const LeadDetailPage: React.FC = () => {
   };
 
   // Handle convert lead
-  const convertLeadMutation = useConvertLead();
+  const convertLeadMutation = useConvertLeadMutation();
   const handleConvertLead = async () => {
     try {
       const response = await convertLeadMutation.mutateAsync(leadId);

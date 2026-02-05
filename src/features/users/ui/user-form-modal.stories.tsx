@@ -3,10 +3,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { UserFormModal } from "./user-form-modal";
-import { User } from "../api/users-api";
+import { UserDto } from "@/entities/user";
 import { http, HttpResponse } from "msw";
 
-const mockUser: User = {
+const mockUser: UserDto = {
   id: 1,
   username: "john_doe",
   email: "john.doe@example.com",

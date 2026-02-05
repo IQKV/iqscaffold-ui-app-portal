@@ -15,7 +15,7 @@ import {
 import { IconPlus, IconCreditCard, IconReceipt } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
 import { AuthGuard, useAuth } from "@/processes/auth";
-import { useActiveSubscription, SubscriptionPlan } from "@/entities/billing";
+import { useActiveSubscriptionQuery, SubscriptionPlan } from "@/entities/billing";
 import {
   SubscriptionCard,
   SubscriptionPlansGrid,
@@ -40,7 +40,7 @@ function SubscriptionsPage() {
     data: activeSubscription,
     isLoading,
     refetch,
-  } = useActiveSubscription();
+  } = useActiveSubscriptionQuery();
 
   if (!hasBillingAccess()) {
     return (

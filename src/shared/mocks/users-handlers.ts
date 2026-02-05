@@ -1,12 +1,12 @@
 import { http, HttpResponse } from "msw";
-import {
-  User,
-  UsersResponse,
-  UserResponse,
-} from "@/features/users/api/users-api";
+import { UserDto, type UserPageResponse } from "@/entities/user";
+
+// Response types for mock handlers
+type UsersResponse = UserPageResponse;
+type UserResponse = { data: UserDto };
 
 // Mock data
-const mockUsers: User[] = [
+const mockUsers: UserDto[] = [
   {
     id: 1,
     username: "john_doe",
@@ -105,15 +105,13 @@ export const usersHandlers = [
     const paginatedUsers = filteredUsers.slice(startIndex, endIndex);
 
     const response: UsersResponse = {
-      data: paginatedUsers,
-      pagination: {
-        page,
-        limit,
-        total: filteredUsers.length,
-        totalPages: Math.ceil(filteredUsers.length / limit),
-        hasNext: endIndex < filteredUsers.length,
-        hasPrev: page > 1,
-      },
+      content: paginatedUsers,
+      totalElements: filteredUsers.length,
+      totalPages: Math.ceil(filteredUsers.length / limit),
+      size: limit,
+      number: page - 1, // Spring uses 0-based page numbers
+      first: page === 1,
+      last: endIndex >= filteredUsers.length,
     };
 
     return HttpResponse.json(response);
@@ -149,7 +147,7 @@ export const usersHandlers = [
       );
     }
 
-    const newUser: User = {
+    const newUser: UserDto = {
       id: nextId,
       username: body.username,
       email: body.email,
@@ -198,7 +196,7 @@ export const usersHandlers = [
       }
     }
 
-    const updatedUser: User = {
+    const updatedUser: UserDto = {
       ...users[userIndex],
       ...body,
       authorities: body.authorities || users[userIndex].authorities,

@@ -45,7 +45,7 @@ export const contactKeys = {
 };
 
 // Lead Query Hooks
-export const useLeads = (params?: LeadListParams) => {
+export const useLeadsQuery = (params?: LeadListParams) => {
   const { isFeatureAvailable } = useCrmServiceHealth();
 
   return useQuery({
@@ -63,7 +63,7 @@ export const useLeads = (params?: LeadListParams) => {
   });
 };
 
-export const useLead = (id: string) => {
+export const useLeadQuery = (id: string) => {
   const { isFeatureAvailable } = useCrmServiceHealth();
 
   return useQuery({
@@ -80,7 +80,7 @@ export const useLead = (id: string) => {
   });
 };
 
-export const useLeadNotes = (leadId: string) => {
+export const useLeadNotesQuery = (leadId: string) => {
   const { isFeatureAvailable } = useCrmServiceHealth();
 
   return useQuery({
@@ -91,7 +91,7 @@ export const useLeadNotes = (leadId: string) => {
   });
 };
 
-export const useLeadActivities = (leadId: string) => {
+export const useLeadActivitiesQuery = (leadId: string) => {
   const { isFeatureAvailable } = useCrmServiceHealth();
 
   return useQuery({
@@ -103,7 +103,7 @@ export const useLeadActivities = (leadId: string) => {
 };
 
 // Pipeline Query Hooks
-export const usePipelineStages = () => {
+export const usePipelineStagesQuery = () => {
   return useQuery({
     queryKey: crmKeys.pipelineStages(),
     queryFn: () => crmApi.getPipelineStages(),
@@ -112,7 +112,7 @@ export const usePipelineStages = () => {
 };
 
 // Follow-up Query Hooks
-export const useFollowUps = (params?: FollowUpListParams) => {
+export const useFollowUpsQuery = (params?: FollowUpListParams) => {
   return useQuery({
     queryKey: crmKeys.followUpsList(params),
     queryFn: () => crmApi.getFollowUps(params),
@@ -120,7 +120,7 @@ export const useFollowUps = (params?: FollowUpListParams) => {
   });
 };
 
-export const useTodaysFollowUps = () => {
+export const useTodaysFollowUpsQuery = () => {
   return useQuery({
     queryKey: crmKeys.todaysFollowUps(),
     queryFn: () => crmApi.getTodaysFollowUps(),
@@ -129,7 +129,7 @@ export const useTodaysFollowUps = () => {
   });
 };
 
-export const useOverdueFollowUps = () => {
+export const useOverdueFollowUpsQuery = () => {
   return useQuery({
     queryKey: crmKeys.overdueFollowUps(),
     queryFn: () => crmApi.getOverdueFollowUps(),
@@ -139,7 +139,7 @@ export const useOverdueFollowUps = () => {
 };
 
 // Dashboard Query Hooks
-export const useDashboardStats = (params?: DashboardStatsParams) => {
+export const useDashboardStatsQuery = (params?: DashboardStatsParams) => {
   return useQuery({
     queryKey: crmKeys.dashboardStats(params),
     queryFn: () => crmApi.getDashboardStats(params),
@@ -147,7 +147,7 @@ export const useDashboardStats = (params?: DashboardStatsParams) => {
   });
 };
 
-export const useConversionMetrics = (params?: DashboardStatsParams) => {
+export const useConversionMetricsQuery = (params?: DashboardStatsParams) => {
   return useQuery({
     queryKey: crmKeys.conversionMetrics(params),
     queryFn: () => crmApi.getConversionMetrics(params),
@@ -156,7 +156,7 @@ export const useConversionMetrics = (params?: DashboardStatsParams) => {
 };
 
 // Contact Query Hooks
-export const useContacts = (params?: ContactListParams) => {
+export const useContactsQuery = (params?: ContactListParams) => {
   return useQuery({
     queryKey: contactKeys.list(params),
     queryFn: () => contactApi.getContacts(params),
@@ -165,7 +165,7 @@ export const useContacts = (params?: ContactListParams) => {
   });
 };
 
-export const useContact = (id: string | number) => {
+export const useContactQuery = (id: string | number) => {
   return useQuery({
     queryKey: contactKeys.detail(id),
     queryFn: () => contactApi.getContact(id),
@@ -174,7 +174,7 @@ export const useContact = (id: string | number) => {
   });
 };
 
-export const useContactsByCompany = (companyId: string | number) => {
+export const useContactsByCompanyQuery = (companyId: string | number) => {
   return useQuery({
     queryKey: contactKeys.company(companyId),
     queryFn: () => contactApi.getContactsByCompany(companyId),

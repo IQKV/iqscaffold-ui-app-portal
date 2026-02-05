@@ -22,12 +22,12 @@ import {
   GatewayConfigList,
 } from "@/features/gateway-config";
 import {
-  useGatewayConfigs,
-  useCreateGatewayConfig,
-  useActivateGateway,
-  useDeactivateGateway,
-  useSetPrimaryGateway,
-  useDeleteGatewayConfig,
+  useGatewayConfigsQuery,
+  useCreateGatewayConfigMutation,
+  useActivateGatewayMutation,
+  useDeactivateGatewayMutation,
+  useSetPrimaryGatewayMutation,
+  useDeleteGatewayConfigMutation,
 } from "@/entities/gateway-config";
 import { usePageTitle } from "@/shared/lib";
 import { notificationService } from "@/shared/lib/notifications";
@@ -49,12 +49,12 @@ function GatewayConfigPage() {
     useState<PaymentGatewayProvider | null>(null);
   const pageTitle = usePageTitle(t`Gateway Configuration`);
 
-  const { data: configs, isLoading, error } = useGatewayConfigs();
-  const createMutation = useCreateGatewayConfig();
-  const activateMutation = useActivateGateway();
-  const deactivateMutation = useDeactivateGateway();
-  const setPrimaryMutation = useSetPrimaryGateway();
-  const deleteMutation = useDeleteGatewayConfig();
+  const { data: configs, isLoading, error } = useGatewayConfigsQuery();
+  const createMutation = useCreateGatewayConfigMutation();
+  const activateMutation = useActivateGatewayMutation();
+  const deactivateMutation = useDeactivateGatewayMutation();
+  const setPrimaryMutation = useSetPrimaryGatewayMutation();
+  const deleteMutation = useDeleteGatewayConfigMutation();
 
   const canManage = canManageGatewayConfig(user);
   const canView = canViewGatewayConfig(user);

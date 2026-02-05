@@ -42,7 +42,7 @@ export const billingKeys = {
 
 // Payment Hooks
 
-export const usePayments = (params?: BillingHistoryParams) => {
+export const usePaymentsQuery = (params?: BillingHistoryParams) => {
     const { isFeatureAvailable } = useBillingServiceHealth();
 
     return useQuery({
@@ -58,7 +58,7 @@ export const usePayments = (params?: BillingHistoryParams) => {
     });
 };
 
-export const usePayment = (id: string) => {
+export const usePaymentQuery = (id: string) => {
     const { isFeatureAvailable } = useBillingServiceHealth();
 
     return useQuery({
@@ -76,7 +76,7 @@ export const usePayment = (id: string) => {
 
 // Subscription Hooks
 
-export const useSubscriptions = (params?: BillingHistoryParams) => {
+export const useSubscriptionsQuery = (params?: BillingHistoryParams) => {
     const { isFeatureAvailable } = useBillingServiceHealth();
 
     return useQuery({
@@ -92,7 +92,7 @@ export const useSubscriptions = (params?: BillingHistoryParams) => {
     });
 };
 
-export const useActiveSubscription = () => {
+export const useActiveSubscriptionQuery = () => {
     const { isFeatureAvailable } = useBillingServiceHealth();
 
     return useQuery({
@@ -108,7 +108,7 @@ export const useActiveSubscription = () => {
     });
 };
 
-export const useSubscription = (id: string) => {
+export const useSubscriptionQuery = (id: string) => {
     return useQuery({
         queryKey: billingKeys.subscription(id),
         queryFn: () => billingApi.getSubscription(id),
@@ -118,21 +118,21 @@ export const useSubscription = (id: string) => {
 
 // Subscription Plan Hooks
 
-export const useSubscriptionPlans = (params?: BillingHistoryParams) => {
+export const useSubscriptionPlansQuery = (params?: BillingHistoryParams) => {
     return useQuery({
         queryKey: billingKeys.subscriptionPlans(),
         queryFn: () => billingApi.listSubscriptionPlans(params),
     });
 };
 
-export const useActiveSubscriptionPlans = () => {
+export const useActiveSubscriptionPlansQuery = () => {
     return useQuery({
         queryKey: billingKeys.activeSubscriptionPlans(),
         queryFn: () => billingApi.listActiveSubscriptionPlans(),
     });
 };
 
-export const useSubscriptionPlan = (id: string) => {
+export const useSubscriptionPlanQuery = (id: string) => {
     return useQuery({
         queryKey: billingKeys.subscriptionPlan(id),
         queryFn: () => billingApi.getSubscriptionPlan(id),
@@ -142,14 +142,14 @@ export const useSubscriptionPlan = (id: string) => {
 
 // Invoice Hooks
 
-export const useInvoices = (params?: BillingHistoryParams) => {
+export const useInvoicesQuery = (params?: BillingHistoryParams) => {
     return useQuery({
         queryKey: billingKeys.invoices(),
         queryFn: () => billingApi.listInvoices(params),
     });
 };
 
-export const useInvoice = (id: string) => {
+export const useInvoiceQuery = (id: string) => {
     return useQuery({
         queryKey: billingKeys.invoice(id),
         queryFn: () => billingApi.getInvoice(id),
@@ -157,7 +157,7 @@ export const useInvoice = (id: string) => {
     });
 };
 
-export const useInvoicesBySubscription = (
+export const useInvoicesBySubscriptionQuery = (
     subscriptionId: string,
     params?: BillingHistoryParams
 ) => {
@@ -169,7 +169,7 @@ export const useInvoicesBySubscription = (
     });
 };
 
-export const useOpenInvoices = () => {
+export const useOpenInvoicesQuery = () => {
     return useQuery({
         queryKey: billingKeys.openInvoices(),
         queryFn: () => billingApi.listOpenInvoices(),
@@ -178,7 +178,7 @@ export const useOpenInvoices = () => {
 
 // Merchant Hooks
 
-export const useMerchantStatus = (organizationId: number) => {
+export const useMerchantStatusQuery = (organizationId: number) => {
     return useQuery({
         queryKey: billingKeys.merchantStatus(organizationId),
         queryFn: () => billingApi.getMerchantStatus(organizationId),
@@ -188,14 +188,14 @@ export const useMerchantStatus = (organizationId: number) => {
 
 // Payout Hooks
 
-export const usePayouts = (params?: BillingHistoryParams) => {
+export const usePayoutsQuery = (params?: BillingHistoryParams) => {
     return useQuery({
         queryKey: billingKeys.payoutHistory(params || {}),
         queryFn: () => billingApi.listPayouts(params),
     });
 };
 
-export const usePayout = (id: string) => {
+export const usePayoutQuery = (id: string) => {
     return useQuery({
         queryKey: billingKeys.payout(id),
         queryFn: () => billingApi.getPayout(id),

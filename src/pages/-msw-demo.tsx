@@ -9,8 +9,7 @@ import {
   Button,
 } from "@mantine/core";
 import { useMSWControl } from "@/shared/lib";
-import { useUsersQuery } from "@/features/users/model/use-users-query";
-import type { User } from "@/features/users/api/users-api";
+import { useUsersQuery, type UserDto } from "@/entities/user";
 
 export function MSWDemoPage() {
   const { config, isRunning, toggleMSW } = useMSWControl();
@@ -18,7 +17,7 @@ export function MSWDemoPage() {
     data: usersData,
     isLoading,
     error,
-  } = useUsersQuery({ page: 1, limit: 5 });
+  } = useUsersQuery({ page: 0, size: 5 }); // Spring uses 0-based page numbers
 
   return (
     <Container size="xl" py="xl">
@@ -100,8 +99,8 @@ export function MSWDemoPage() {
 
           {usersData && (
             <Stack gap="sm">
-              <Text fw={500}>Users ({usersData.data.length}):</Text>
-              {usersData.data.map((user: User) => (
+              <Text fw={500}>Users ({usersData.content.length}):</Text>
+              {usersData.content.map((user: UserDto) => (
                 <Card key={user.id} withBorder padding="sm">
                   <Group>
                     <div>

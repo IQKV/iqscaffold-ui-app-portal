@@ -19,7 +19,7 @@ import type {
 } from "@/shared/api/contact/types";
 
 // Lead Mutations
-export const useUpdateLead = () => {
+export const useUpdateLeadMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -38,7 +38,7 @@ export const useUpdateLead = () => {
     });
 };
 
-export const useBulkQualifyLeads = () => {
+export const useBulkQualifyLeadsMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -58,7 +58,7 @@ export const useBulkQualifyLeads = () => {
     });
 };
 
-export const useExportLeads = () => {
+export const useExportLeadsMutation = () => {
     return useMutation({
         mutationFn: (params?: any) => crmApi.exportLeads(params),
         onSuccess: (blob) => {
@@ -80,7 +80,7 @@ export const useExportLeads = () => {
     });
 };
 
-export const useCreateLead = () => {
+export const useCreateLeadMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -121,7 +121,7 @@ export const useCreateLead = () => {
     });
 };
 
-export const useDeleteLead = () => {
+export const useDeleteLeadMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -134,7 +134,7 @@ export const useDeleteLead = () => {
 };
 
 // Lead Notes Mutations
-export const useCreateLeadNote = () => {
+export const useCreateLeadNoteMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -156,7 +156,7 @@ export const useCreateLeadNote = () => {
     });
 };
 
-export const useUpdateLeadNote = () => {
+export const useUpdateLeadNoteMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -177,7 +177,7 @@ export const useUpdateLeadNote = () => {
     });
 };
 
-export const useDeleteLeadNote = () => {
+export const useDeleteLeadNoteMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -192,7 +192,7 @@ export const useDeleteLeadNote = () => {
 };
 
 // Pipeline Mutations
-export const useMoveLeadToStage = () => {
+export const useMoveLeadToStageMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -209,7 +209,7 @@ export const useMoveLeadToStage = () => {
     });
 };
 
-export const useCreatePipelineStage = () => {
+export const useCreatePipelineStageMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -221,7 +221,7 @@ export const useCreatePipelineStage = () => {
     });
 };
 
-export const useUpdatePipelineStage = () => {
+export const useUpdatePipelineStageMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -238,7 +238,7 @@ export const useUpdatePipelineStage = () => {
     });
 };
 
-export const useDeletePipelineStage = () => {
+export const useDeletePipelineStageMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -250,7 +250,7 @@ export const useDeletePipelineStage = () => {
     });
 };
 
-export const useReorderPipelineStage = () => {
+export const useReorderPipelineStageMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -263,7 +263,7 @@ export const useReorderPipelineStage = () => {
 };
 
 // Follow-up Mutations
-export const useCreateFollowUp = () => {
+export const useCreateFollowUpMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -282,7 +282,7 @@ export const useCreateFollowUp = () => {
     });
 };
 
-export const useUpdateFollowUp = () => {
+export const useUpdateFollowUpMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -299,7 +299,7 @@ export const useUpdateFollowUp = () => {
     });
 };
 
-export const useCompleteFollowUp = () => {
+export const useCompleteFollowUpMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -318,7 +318,7 @@ export const useCompleteFollowUp = () => {
     });
 };
 
-export const useDeleteFollowUp = () => {
+export const useDeleteFollowUpMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -332,7 +332,7 @@ export const useDeleteFollowUp = () => {
 };
 
 // Dashboard Mutations
-export const useConvertLead = () => {
+export const useConvertLeadMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -351,7 +351,7 @@ export const useConvertLead = () => {
 };
 
 // Contact Mutations
-export const useCreateContact = () => {
+export const useCreateContactMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -369,7 +369,7 @@ export const useCreateContact = () => {
     });
 };
 
-export const useUpdateContact = () => {
+export const useUpdateContactMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -393,7 +393,7 @@ export const useUpdateContact = () => {
     });
 };
 
-export const useDeleteContact = () => {
+export const useDeleteContactMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -411,7 +411,7 @@ export const useDeleteContact = () => {
     });
 };
 
-export const useUpdateContactLeadScore = () => {
+export const useUpdateContactLeadScoreMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -432,7 +432,7 @@ export const useUpdateContactLeadScore = () => {
     });
 };
 
-export const useBulkDeleteContacts = () => {
+export const useBulkDeleteContactsMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -452,7 +452,7 @@ export const useBulkDeleteContacts = () => {
     });
 };
 
-export const useBulkUpdateContactStatus = () => {
+export const useBulkUpdateContactStatusMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({

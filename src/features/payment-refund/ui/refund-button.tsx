@@ -3,7 +3,7 @@ import { ActionIcon, Tooltip } from "@mantine/core";
 import { IconCurrencyDollar } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
 import { RefundConfirmationDialog } from "./refund-confirmation-dialog";
-import { useRefundPayment } from "@/entities/billing";
+import { useRefundPaymentMutation } from "@/entities/billing";
 import { notificationService } from "@/shared/lib/notifications";
 
 interface RefundButtonProps {
@@ -22,7 +22,7 @@ export const RefundButton = ({
   onSuccess,
 }: RefundButtonProps) => {
   const [dialogOpened, setDialogOpened] = useState(false);
-  const refundMutation = useRefundPayment();
+  const refundMutation = useRefundPaymentMutation();
 
   const handleRefund = async () => {
     try {

@@ -7,7 +7,7 @@ import {
 } from "@/shared/api/billing/types";
 import { gatewayConfigKeys } from "./queries";
 
-export const useCreateGatewayConfig = () => {
+export const useCreateGatewayConfigMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (request: CreateGatewayConfigRequest) =>
@@ -18,7 +18,7 @@ export const useCreateGatewayConfig = () => {
     });
 };
 
-export const useUpdateGatewayConfig = () => {
+export const useUpdateGatewayConfigMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: ({
@@ -37,7 +37,7 @@ export const useUpdateGatewayConfig = () => {
     });
 };
 
-export const useDeleteGatewayConfig = () => {
+export const useDeleteGatewayConfigMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (provider: PaymentGatewayProvider) =>
@@ -48,7 +48,7 @@ export const useDeleteGatewayConfig = () => {
     });
 };
 
-export const useActivateGateway = () => {
+export const useActivateGatewayMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (provider: PaymentGatewayProvider) =>
@@ -62,7 +62,7 @@ export const useActivateGateway = () => {
     });
 };
 
-export const useDeactivateGateway = () => {
+export const useDeactivateGatewayMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (provider: PaymentGatewayProvider) =>
@@ -76,7 +76,7 @@ export const useDeactivateGateway = () => {
     });
 };
 
-export const useSetPrimaryGateway = () => {
+export const useSetPrimaryGatewayMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (provider: PaymentGatewayProvider) =>

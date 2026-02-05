@@ -18,8 +18,8 @@ import { ConversionChart } from "./ConversionChart";
 import { DateRangeFilter } from "./DateRangeFilter";
 import { DashboardSkeleton } from "./skeletons";
 import {
-  useDashboardStats,
-  useConversionMetrics,
+  useDashboardStatsQuery,
+  useConversionMetricsQuery,
 } from "@/entities/crm";
 import type { DashboardStatsParams } from "@/shared/api/crm/types";
 
@@ -50,13 +50,13 @@ export function CrmDashboard() {
     data: dashboardStats,
     isLoading: loadingStats,
     error: statsError,
-  } = useDashboardStats(dateRange);
+  } = useDashboardStatsQuery(dateRange);
 
   const {
     data: conversionMetrics,
     isLoading: loadingMetrics,
     error: metricsError,
-  } = useConversionMetrics(dateRange);
+  } = useConversionMetricsQuery(dateRange);
 
   const isLoading = loadingStats || loadingMetrics;
   const hasError = statsError || metricsError;

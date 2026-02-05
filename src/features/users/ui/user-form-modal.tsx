@@ -4,11 +4,15 @@ import { IconLock } from "@tabler/icons-react";
 import { useForm } from "@mantine/form";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { z } from "zod";
-import { UserFormField, getUserRoles, UserDto, CreateUserRequest, UpdateUserRequest } from "@/entities/user";
 import {
+  UserFormField,
+  getUserRoles,
+  UserDto,
+  CreateUserRequest,
+  UpdateUserRequest,
   useCreateUserMutation,
   useUpdateUserMutation,
-} from "../model/use-users-query";
+} from "@/entities/user";
 import { useAuth } from "@/processes/auth";
 import { notifications } from "@mantine/notifications";
 import { t } from "@lingui/core/macro";
@@ -121,20 +125,7 @@ export function UserFormModal({
         { id: user.id, userData: updateData },
         {
           onSuccess: () => {
-            notifications.show({
-              title: t`Success`,
-              message: t`User updated successfully`,
-              color: "green",
-            });
             onClose();
-          },
-          onError: (error) => {
-            const errorMessage = error.message;
-            notifications.show({
-              title: t`Error`,
-              message: t`Failed to update user: ${errorMessage}`,
-              color: "red",
-            });
           },
         }
       );
@@ -159,20 +150,7 @@ export function UserFormModal({
 
       createUserMutation.mutate(createData, {
         onSuccess: () => {
-          notifications.show({
-            title: t`Success`,
-            message: t`User created successfully`,
-            color: "green",
-          });
           onClose();
-        },
-        onError: (error) => {
-          const errorMessage = error.message;
-          notifications.show({
-            title: t`Error`,
-            message: t`Failed to create user: ${errorMessage}`,
-            color: "red",
-          });
         },
       });
     }

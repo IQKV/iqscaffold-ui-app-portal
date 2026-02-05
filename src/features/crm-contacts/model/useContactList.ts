@@ -1,10 +1,10 @@
 import { useState, useCallback } from "react";
 import {
-    useContacts,
-    useCreateContact,
-    useDeleteContact,
-    useBulkDeleteContacts,
-    useBulkUpdateContactStatus,
+    useContactsQuery,
+    useCreateContactMutation,
+    useDeleteContactMutation,
+    useBulkDeleteContactsMutation,
+    useBulkUpdateContactStatusMutation,
 } from "@/entities/crm";
 import { ContactStatus } from "@/shared/api";
 import { notifications } from "@mantine/notifications";
@@ -22,7 +22,7 @@ export function useContactList() {
         data: contactsData,
         isLoading,
         error,
-    } = useContacts({
+    } = useContactsQuery({
         page,
         size: 10,
         search: search || undefined,
@@ -30,10 +30,10 @@ export function useContactList() {
     });
 
     // Mutations
-    const { mutate: createContact, isPending: isCreating } = useCreateContact();
-    const { mutate: deleteContact } = useDeleteContact();
-    const bulkDeleteMutation = useBulkDeleteContacts();
-    const bulkUpdateStatusMutation = useBulkUpdateContactStatus();
+    const { mutate: createContact, isPending: isCreating } = useCreateContactMutation();
+    const { mutate: deleteContact } = useDeleteContactMutation();
+    const bulkDeleteMutation = useBulkDeleteContactsMutation();
+    const bulkUpdateStatusMutation = useBulkUpdateContactStatusMutation();
 
     // Handlers
     const handleSearchChange = useCallback((value: string) => {

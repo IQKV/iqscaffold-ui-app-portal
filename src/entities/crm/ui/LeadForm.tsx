@@ -5,7 +5,7 @@ import { zodResolver } from "mantine-form-zod-resolver";
 import { t } from "@lingui/core/macro";
 import { CrmFormField, getCrmLeadSources } from "./CrmFormField";
 import type { Lead, LeadSource } from "@/shared/api/crm/types";
-import { useCreateLead, useUpdateLead } from "../api/crm-queries";
+import { useCreateLeadMutation, useUpdateLeadMutation } from "@/entities/crm";
 import { notifications } from "@mantine/notifications";
 import {
   createLeadFormSchema,
@@ -40,8 +40,8 @@ const getLeadSourceOptions = getCrmLeadSources;
  * Requirements: 1.1, 1.4, 11.1, 11.2, 11.3, 14.1, 14.2, 14.6, 14.7
  */
 export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
-  const createLeadMutation = useCreateLead();
-  const updateLeadMutation = useUpdateLead();
+  const createLeadMutation = useCreateLeadMutation();
+  const updateLeadMutation = useUpdateLeadMutation();
   const modalRef = useRef<HTMLDivElement>(null);
   const { announce } = useAnnouncer();
 

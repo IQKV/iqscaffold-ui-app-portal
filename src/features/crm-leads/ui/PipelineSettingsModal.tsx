@@ -27,11 +27,11 @@ import {
 } from "@tabler/icons-react";
 import { t } from "@lingui/core/macro";
 import {
-  usePipelineStages,
-  useCreatePipelineStage,
-  useUpdatePipelineStage,
-  useDeletePipelineStage,
-  useReorderPipelineStage,
+  usePipelineStagesQuery,
+  useCreatePipelineStageMutation,
+  useUpdatePipelineStageMutation,
+  useDeletePipelineStageMutation,
+  useReorderPipelineStageMutation,
 } from "@/entities/crm";
 import { PipelineStage } from "@/shared/api/crm/types";
 import { notifications } from "@mantine/notifications";
@@ -45,15 +45,15 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
   opened,
   onClose,
 }) => {
-  const { data: stages = [], isLoading } = usePipelineStages();
+  const { data: stages = [], isLoading } = usePipelineStagesQuery();
   const [isAdding, setIsAdding] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
 
   // Mutations
-  const createMutation = useCreatePipelineStage();
-  const updateMutation = useUpdatePipelineStage();
-  const deleteMutation = useDeletePipelineStage();
-  const reorderMutation = useReorderPipelineStage();
+  const createMutation = useCreatePipelineStageMutation();
+  const updateMutation = useUpdatePipelineStageMutation();
+  const deleteMutation = useDeletePipelineStageMutation();
+  const reorderMutation = useReorderPipelineStageMutation();
 
   // New Stage form state
   const [newStage, setNewStage] = useState({

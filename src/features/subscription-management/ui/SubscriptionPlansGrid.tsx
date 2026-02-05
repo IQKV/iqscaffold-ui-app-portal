@@ -14,7 +14,7 @@ import {
 import { IconCheck, IconStar } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
 import {
-  useActiveSubscriptionPlans,
+  useActiveSubscriptionPlansQuery,
   SubscriptionPlan,
 } from "@/entities/billing";
 import { formatCurrency } from "@/shared/lib/format";
@@ -28,7 +28,7 @@ export function SubscriptionPlansGrid({
   onSelectPlan,
   currentPlanId,
 }: SubscriptionPlansGridProps) {
-  const { data: plans, isLoading, error } = useActiveSubscriptionPlans();
+  const { data: plans, isLoading, error } = useActiveSubscriptionPlansQuery();
 
   if (isLoading) {
     return (

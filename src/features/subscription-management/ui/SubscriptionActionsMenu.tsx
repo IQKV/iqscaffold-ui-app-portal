@@ -12,10 +12,10 @@ import { notifications } from "@mantine/notifications";
 import { modals } from "@mantine/modals";
 import {
   Subscription,
-  useCancelSubscription,
-  useCancelSubscriptionImmediately,
-  usePauseSubscription,
-  useResumeSubscription,
+  useCancelSubscriptionMutation,
+  useCancelSubscriptionImmediatelyMutation,
+  usePauseSubscriptionMutation,
+  useResumeSubscriptionMutation,
 } from "@/entities/billing";
 
 interface SubscriptionActionsMenuProps {
@@ -27,10 +27,10 @@ export function SubscriptionActionsMenu({
   subscription,
   onUpdate,
 }: SubscriptionActionsMenuProps) {
-  const cancelSubscription = useCancelSubscription();
-  const cancelImmediately = useCancelSubscriptionImmediately();
-  const pauseSubscription = usePauseSubscription();
-  const resumeSubscription = useResumeSubscription();
+  const cancelSubscription = useCancelSubscriptionMutation();
+  const cancelImmediately = useCancelSubscriptionImmediatelyMutation();
+  const pauseSubscription = usePauseSubscriptionMutation();
+  const resumeSubscription = useResumeSubscriptionMutation();
 
   const handleCancel = () => {
     modals.openConfirmModal({

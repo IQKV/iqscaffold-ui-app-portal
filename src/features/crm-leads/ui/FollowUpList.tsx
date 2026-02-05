@@ -32,11 +32,11 @@ import {
   IconChecks,
 } from "@tabler/icons-react";
 import {
-  useFollowUps,
-  useCreateFollowUp,
-  useUpdateFollowUp,
-  useCompleteFollowUp,
-  useDeleteFollowUp,
+  useFollowUpsQuery,
+  useCreateFollowUpMutation,
+  useUpdateFollowUpMutation,
+  useCompleteFollowUpMutation,
+  useDeleteFollowUpMutation,
 } from "@/entities/crm";
 import { FollowUpForm } from "@/entities/crm";
 import type { FollowUp } from "@/shared/api/crm/types";
@@ -88,15 +88,15 @@ export function FollowUpList() {
     data: followUpsResponse,
     isLoading,
     error,
-  } = useFollowUps(queryParams);
+  } = useFollowUpsQuery(queryParams);
   const followUps = followUpsResponse?.content || [];
   const totalPages = followUpsResponse?.totalPages || 1;
 
   // Mutation hooks
-  const createFollowUpMutation = useCreateFollowUp();
-  const updateFollowUpMutation = useUpdateFollowUp();
-  const completeFollowUpMutation = useCompleteFollowUp();
-  const deleteFollowUpMutation = useDeleteFollowUp();
+  const createFollowUpMutation = useCreateFollowUpMutation();
+  const updateFollowUpMutation = useUpdateFollowUpMutation();
+  const completeFollowUpMutation = useCompleteFollowUpMutation();
+  const deleteFollowUpMutation = useDeleteFollowUpMutation();
 
   // Filter follow-ups by search term (client-side for now)
   const filteredFollowUps = followUps.filter((followUp) =>

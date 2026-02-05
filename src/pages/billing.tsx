@@ -27,7 +27,7 @@ import { organizationApi } from "@/shared/api/organization-api";
 import { t } from "@lingui/macro";
 import { useQuery } from "@tanstack/react-query";
 import { canManageGatewayConfig } from "@/processes/auth/lib/billing-permissions";
-import { useActiveSubscription } from "@/entities/billing";
+import { useActiveSubscriptionQuery } from "@/entities/billing";
 import { SubscriptionCard } from "@/features/subscription-management";
 import { InvoicesTable } from "@/features/invoice-management";
 import {
@@ -58,7 +58,7 @@ function BillingPage() {
     enabled: hasBillingAccess(),
   });
 
-  const { data: activeSubscription } = useActiveSubscription();
+  const { data: activeSubscription } = useActiveSubscriptionQuery();
 
   const organizations =
     orgsData?.content.map((org) => ({ id: org.id, name: org.name })) || [];

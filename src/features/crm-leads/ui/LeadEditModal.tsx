@@ -14,7 +14,7 @@ import { useForm, zodResolver } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { t } from "@lingui/core/macro";
 import { z } from "zod";
-import { useUpdateLead } from "@/entities/crm";
+import { useUpdateLeadMutation } from "@/entities/crm";
 import type { Lead, LeadSource } from "@/shared/api/crm/types";
 
 const leadEditSchema = z.object({
@@ -67,7 +67,7 @@ export const LeadEditModal: React.FC<LeadEditModalProps> = ({
   lead,
   onSuccess,
 }) => {
-  const updateLeadMutation = useUpdateLead();
+  const updateLeadMutation = useUpdateLeadMutation();
 
   const form = useForm<LeadEditFormData>({
     validate: zodResolver(leadEditSchema),

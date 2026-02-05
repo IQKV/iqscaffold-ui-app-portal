@@ -36,10 +36,10 @@ import { PipelineSkeleton } from "./skeletons";
 import { LeadCard } from "@/entities/crm";
 import { LazyLoad } from "@/shared/ui";
 import {
-  usePipelineStages,
-  useLeads,
-  useMoveLeadToStage,
-  useConversionMetrics,
+  usePipelineStagesQuery,
+  useLeadsQuery,
+  useMoveLeadToStageMutation,
+  useConversionMetricsQuery,
 } from "@/entities/crm";
 import type { Lead } from "@/shared/api/crm/types";
 
@@ -92,20 +92,20 @@ export const PipelineView: React.FC<PipelineViewProps> = ({
     data: stages = [],
     isLoading: stagesLoading,
     error: stagesError,
-  } = usePipelineStages();
+  } = usePipelineStagesQuery();
 
   // Fetch all leads
   const {
     data: leadsResponse,
     isLoading: leadsLoading,
     error: leadsError,
-  } = useLeads();
+  } = useLeadsQuery();
 
   // Fetch conversion metrics
-  const { data: conversionMetrics } = useConversionMetrics();
+  const { data: conversionMetrics } = useConversionMetricsQuery();
 
   // Move lead mutation
-  const { mutate: moveLeadToStage, isPending: isMoving } = useMoveLeadToStage();
+  const { mutate: moveLeadToStage, isPending: isMoving } = useMoveLeadToStageMutation();
 
   const leads = useMemo(() => {
     const content = (leadsResponse as any)?.content;

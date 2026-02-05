@@ -18,9 +18,8 @@ import {
   useFeatureManagement,
 } from "@/shared/lib/contexts/FeatureContext";
 import {
-  userManagementApi,
-  UserFeaturesResponse,
-} from "@/shared/api/user-management-api";
+  useUserFeaturesQuery,
+} from "@/entities/user";
 import { notificationService } from "@/shared/lib/notifications";
 
 interface UserFeatureManagerProps {
@@ -44,35 +43,16 @@ export const UserFeatureManager: React.FC<UserFeatureManagerProps> = ({
   const { availableFeatures } = useFeatureContext();
   const { enableFeature, disableFeature } = useFeatureManagement();
 
-  const [userFeatures, setUserFeatures] = useState<UserFeaturesResponse | null>(
-    null
-  );
-  const [loading, setLoading] = useState(true);
+  const {
+    data: userFeatures,
+    isLoading: loading,
+    error: queryError,
+    refetch: fetchUserFeatures,
+  } = useUserFeaturesQuery(userId);
+
   const [updating, setUpdating] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
-  const fetchUserFeatures = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const response = await userManagementApi.getUserFeatures(userId);
-      setUserFeatures(response);
-    } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Failed to fetch user features";
-      setError(errorMessage);
-      notificationService.error({
-        title: "Failed to fetch user features",
-        message: errorMessage,
-      });
-    } finally {
-      setLoading(false);
-    }
-  }, [userId]);
-
-  useEffect(() => {
-    fetchUserFeatures();
-  }, [fetchUserFeatures]);
+  const error = queryError ? (queryError as Error).message : null;
 
   const handleFeatureToggle = async (featureCode: string, enabled: boolean) => {
     setUpdating(featureCode);
@@ -124,7 +104,7 @@ export const UserFeatureManager: React.FC<UserFeatureManagerProps> = ({
         <Alert color="red" icon={<IconInfoCircle size="1rem" />}>
           <Group justify="space-between">
             <Text size="sm">{error}</Text>
-            <Button size="xs" variant="light" onClick={fetchUserFeatures}>
+            <Button size="xs" variant="light" onClick={() => fetchUserFeatures()}>
               <IconRefresh size="0.8rem" />
             </Button>
           </Group>
@@ -163,7 +143,7 @@ export const UserFeatureManager: React.FC<UserFeatureManagerProps> = ({
           <Button
             size="xs"
             variant="light"
-            onClick={fetchUserFeatures}
+            onClick={() => fetchUserFeatures()}
             loading={loading}
           >
             <IconRefresh size="0.8rem" />

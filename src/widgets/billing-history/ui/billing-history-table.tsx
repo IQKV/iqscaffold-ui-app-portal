@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { DataTable } from "mantine-datatable";
 import {
-  usePayments,
+  usePaymentsQuery,
   PaymentStatusBadge,
-  useRefundPayment,
+  useRefundPaymentMutation,
   Payment,
   billingKeys,
 } from "@/entities/billing";
@@ -27,10 +27,10 @@ const PAGE_SIZE = DEFAULTS.PAGE_SIZE;
 
 export const BillingHistoryTable = () => {
   const [page, setPage] = useState(1);
-  const { data, isLoading } = usePayments({ page: page - 1, size: PAGE_SIZE });
+  const { data, isLoading } = usePaymentsQuery({ page: page - 1, size: PAGE_SIZE });
   const { canProcessRefunds, canViewPayments } = useAuth();
   const queryClient = useQueryClient();
-  const refundMutation = useRefundPayment();
+  const refundMutation = useRefundPaymentMutation();
 
   if (!canViewPayments()) {
     return (

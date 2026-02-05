@@ -10,21 +10,21 @@ export const gatewayConfigKeys = {
     detail: (provider: PaymentGatewayProvider) => [...gatewayConfigKeys.all, provider] as const,
 };
 
-export const useGatewayConfigs = () => {
+export const useGatewayConfigsQuery = () => {
     return useQuery({
         queryKey: gatewayConfigKeys.list(),
         queryFn: () => billingApi.listGatewayConfigs(),
     });
 };
 
-export const useActiveGatewayConfigs = () => {
+export const useActiveGatewayConfigsQuery = () => {
     return useQuery({
         queryKey: gatewayConfigKeys.active(),
         queryFn: () => billingApi.listActiveGatewayConfigs(),
     });
 };
 
-export const useGatewayConfig = (provider: PaymentGatewayProvider) => {
+export const useGatewayConfigQuery = (provider: PaymentGatewayProvider) => {
     return useQuery({
         queryKey: gatewayConfigKeys.detail(provider),
         queryFn: () => billingApi.getGatewayConfig(provider),
@@ -32,7 +32,7 @@ export const useGatewayConfig = (provider: PaymentGatewayProvider) => {
     });
 };
 
-export const usePrimaryGatewayConfig = () => {
+export const usePrimaryGatewayConfigQuery = () => {
     return useQuery({
         queryKey: gatewayConfigKeys.primary(),
         queryFn: () => billingApi.getPrimaryGatewayConfig(),

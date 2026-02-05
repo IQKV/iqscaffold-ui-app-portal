@@ -18,9 +18,9 @@ import {
   IconChevronRight,
 } from "@tabler/icons-react";
 import {
-  useTodaysFollowUps,
-  useOverdueFollowUps,
-  useCompleteFollowUp,
+  useTodaysFollowUpsQuery,
+  useOverdueFollowUpsQuery,
+  useCompleteFollowUpMutation,
 } from "@/entities/crm";
 import type { FollowUp } from "@/shared/api/crm/types";
 import { useNavigate } from "@tanstack/react-router";
@@ -43,13 +43,13 @@ export function FollowUpPanel() {
     data: todaysFollowUps,
     isLoading: loadingToday,
     error: errorToday,
-  } = useTodaysFollowUps();
+  } = useTodaysFollowUpsQuery();
   const {
     data: overdueFollowUps,
     isLoading: loadingOverdue,
     error: errorOverdue,
-  } = useOverdueFollowUps();
-  const completeFollowUpMutation = useCompleteFollowUp();
+  } = useOverdueFollowUpsQuery();
+  const completeFollowUpMutation = useCompleteFollowUpMutation();
 
   // Combine and sort follow-ups: overdue first, then by due time (Requirement 6.7)
   const allFollowUps = [

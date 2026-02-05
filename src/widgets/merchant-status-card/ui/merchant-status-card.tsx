@@ -11,7 +11,7 @@ import {
 } from "@mantine/core";
 import { MerchantOnboardingWizard } from "@/features/merchant-onboarding";
 import { useAuth } from "@/processes/auth";
-import { useMerchantStatus } from "@/entities/billing";
+import { useMerchantStatusQuery } from "@/entities/billing";
 import { t } from "@lingui/macro";
 import { IconAlertCircle, IconCheck, IconPlus } from "@tabler/icons-react";
 
@@ -28,7 +28,7 @@ export const MerchantStatusCard = ({
   );
   const [wizardOpened, setWizardOpened] = useState(false);
 
-  const { data: merchantStatus, isLoading } = useMerchantStatus(
+  const { data: merchantStatus, isLoading } = useMerchantStatusQuery(
     selectedOrgId || 0
   );
 

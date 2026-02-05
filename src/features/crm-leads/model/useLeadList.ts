@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from "react";
 import { useDebouncedValue } from "@mantine/hooks";
-import { useLeads, useBulkQualifyLeads, useExportLeads } from "@/entities/crm";
+import { useLeadsQuery, useBulkQualifyLeadsMutation, useExportLeadsMutation } from "@/entities/crm";
 import { LeadListParams, LeadSource } from "@/shared/api/crm/types";
 import { useAnnouncer } from "@/shared/lib/accessibility";
 import { t } from "@lingui/core/macro";
@@ -48,15 +48,15 @@ export function useLeadList() {
     ]);
 
     // Fetch leads with filters
-    const { data, isLoading, error, refetch } = useLeads(queryParams);
+    const { data, isLoading, error, refetch } = useLeadsQuery(queryParams);
 
     const leads = useMemo(() => (data as any)?.content || [], [data]);
     const totalPages = (data as any)?.totalPages || 0;
     const totalElements = (data as any)?.totalElements || 0;
 
     // Mutations
-    const bulkQualifyMutation = useBulkQualifyLeads();
-    const exportMutation = useExportLeads();
+    const bulkQualifyMutation = useBulkQualifyLeadsMutation();
+    const exportMutation = useExportLeadsMutation();
 
     // Handlers
     const handleClearFilters = useCallback(() => {

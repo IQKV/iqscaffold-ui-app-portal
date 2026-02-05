@@ -50,7 +50,7 @@ export function EnhancedUsersDataGrid({
   const { data, isLoading, error } = useUsersQuery({
     page: page - 1,
     size,
-    // search: debouncedSearch, // Note: entities/user/api/queries.ts might need search support
+    search: debouncedSearch,
   });
 
   const deleteUserMutation = useDeleteUserMutation();

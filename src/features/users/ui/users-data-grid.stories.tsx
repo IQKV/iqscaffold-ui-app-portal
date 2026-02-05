@@ -4,7 +4,7 @@ import { MantineProvider } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
 import { Notifications } from "@mantine/notifications";
 import { UsersDataGrid } from "./users-data-grid";
-import { User } from "../api/users-api";
+import { UserDto } from "@/entities/user";
 import { http, HttpResponse } from "msw";
 
 // Mock data for stories
@@ -114,7 +114,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     onCreateUser: () => console.log("Create user clicked"),
-    onEditUser: (user: User) => console.log("Edit user clicked", user),
+    onEditUser: (user: UserDto) => console.log("Edit user clicked", user),
   },
 };
 
@@ -132,7 +132,7 @@ export const Loading: Story = {
   },
   args: {
     onCreateUser: () => console.log("Create user clicked"),
-    onEditUser: (user: User) => console.log("Edit user clicked", user),
+    onEditUser: (user: UserDto) => console.log("Edit user clicked", user),
   },
 };
 
@@ -158,7 +158,7 @@ export const Empty: Story = {
   },
   args: {
     onCreateUser: () => console.log("Create user clicked"),
-    onEditUser: (user: User) => console.log("Edit user clicked", user),
+    onEditUser: (user: UserDto) => console.log("Edit user clicked", user),
   },
 };
 
@@ -177,7 +177,7 @@ export const Error: Story = {
   },
   args: {
     onCreateUser: () => console.log("Create user clicked"),
-    onEditUser: (user: User) => console.log("Edit user clicked", user),
+    onEditUser: (user: UserDto) => console.log("Edit user clicked", user),
   },
 };
 
@@ -222,6 +222,6 @@ export const LargeDataset: Story = {
   },
   args: {
     onCreateUser: () => console.log("Create user clicked"),
-    onEditUser: (user: User) => console.log("Edit user clicked", user),
+    onEditUser: (user: UserDto) => console.log("Edit user clicked", user),
   },
 };

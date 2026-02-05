@@ -14,7 +14,7 @@ import {
 } from "@mantine/core";
 import { IconExternalLink, IconDownload, IconEye } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
-import { useInvoices, Invoice, InvoiceStatusBadge } from "@/entities/billing";
+import { useInvoicesQuery, Invoice, InvoiceStatusBadge } from "@/entities/billing";
 import { formatCurrency } from "@/shared/lib/format";
 
 interface InvoicesTableProps {
@@ -25,7 +25,7 @@ export function InvoicesTable({ subscriptionId }: InvoicesTableProps) {
   const [page, setPage] = useState(0);
   const pageSize = 10;
 
-  const { data, isLoading, error } = useInvoices({
+  const { data, isLoading, error } = useInvoicesQuery({
     page,
     size: pageSize,
     sort: ["createdAt,desc"],

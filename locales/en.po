@@ -442,7 +442,7 @@ msgstr "Are you sure you want to reset the form?"
 msgid "Assigned to"
 msgstr "Assigned to"
 
-#: src/features/users/ui/user-form-modal.tsx:28
+#: src/features/users/ui/user-form-modal.tsx:32
 msgid "At least one authority is required"
 msgstr "At least one authority is required"
 
@@ -451,7 +451,7 @@ msgstr "At least one authority is required"
 #~ msgstr "At least one role is required"
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:316
-#: src/features/users/ui/user-form-modal.tsx:257
+#: src/features/users/ui/user-form-modal.tsx:235
 #: src/features/users/ui/users-data-grid.tsx:121
 msgid "Authorities"
 msgstr "Authorities"
@@ -588,7 +588,7 @@ msgstr "Call contact"
 #: src/features/security-settings/ui/security-settings-feature.tsx:41
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:137
 #: src/features/users/ui/enhanced-users-data-grid.tsx:71
-#: src/features/users/ui/user-form-modal.tsx:302
+#: src/features/users/ui/user-form-modal.tsx:280
 #: src/features/users/ui/users-data-grid.tsx:64
 #: src/pages/gateway-config.tsx:246
 #: src/shared/ui/confirmation-modal/confirm-context-modal.tsx:25
@@ -858,7 +858,7 @@ msgstr "Could not process refund. Please try again"
 #~ msgstr "Could not submit the form"
 
 #: src/entities/crm/ui/LeadForm.tsx:288
-#: src/features/users/ui/user-form-modal.tsx:309
+#: src/features/users/ui/user-form-modal.tsx:287
 msgid "Create"
 msgstr "Create"
 
@@ -880,7 +880,7 @@ msgstr "Created"
 msgid "Created successfully"
 msgstr "Created successfully"
 
-#: src/features/users/ui/user-form-modal.tsx:286
+#: src/features/users/ui/user-form-modal.tsx:264
 msgid "Created:"
 msgstr "Created:"
 
@@ -1218,7 +1218,7 @@ msgstr "Editing {userName}"
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:157
 #: src/features/crm-leads/ui/LeadEditModal.tsx:174
 #: src/features/users/ui/enhanced-users-data-grid.tsx:162
-#: src/features/users/ui/user-form-modal.tsx:215
+#: src/features/users/ui/user-form-modal.tsx:193
 msgid "Email"
 msgstr "Email"
 
@@ -1249,7 +1249,7 @@ msgstr "Email notifications are sent in your preferred language"
 msgid "Email Verification Status"
 msgstr "Email Verification Status"
 
-#: src/features/users/ui/user-form-modal.tsx:277
+#: src/features/users/ui/user-form-modal.tsx:255
 #: src/shared/lib/use-auth-api.ts:124
 msgid "Email Verified"
 msgstr "Email Verified"
@@ -1262,7 +1262,7 @@ msgstr "Enable logging"
 msgid "Enable MSW"
 msgstr "Enable MSW"
 
-#: src/features/users/ui/user-form-modal.tsx:270
+#: src/features/users/ui/user-form-modal.tsx:248
 #: src/features/users/ui/users-data-grid.tsx:140
 msgid "Enabled"
 msgstr "Enabled"
@@ -1296,14 +1296,14 @@ msgstr "Enter company name"
 #: src/entities/crm/ui/LeadForm.tsx:229
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:158
 #: src/features/crm-leads/ui/LeadEditModal.tsx:175
-#: src/features/users/ui/user-form-modal.tsx:216
+#: src/features/users/ui/user-form-modal.tsx:194
 msgid "Enter email address"
 msgstr "Enter email address"
 
 #: src/entities/crm/ui/LeadForm.tsx:205
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:143
 #: src/features/crm-leads/ui/LeadEditModal.tsx:160
-#: src/features/users/ui/user-form-modal.tsx:226
+#: src/features/users/ui/user-form-modal.tsx:204
 msgid "Enter first name"
 msgstr "Enter first name"
 
@@ -1319,7 +1319,7 @@ msgstr "Enter job title"
 #: src/entities/crm/ui/LeadForm.tsx:217
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:149
 #: src/features/crm-leads/ui/LeadEditModal.tsx:166
-#: src/features/users/ui/user-form-modal.tsx:235
+#: src/features/users/ui/user-form-modal.tsx:213
 msgid "Enter last name"
 msgstr "Enter last name"
 
@@ -1331,7 +1331,7 @@ msgstr "Enter last name"
 msgid "Enter note content..."
 msgstr "Enter note content..."
 
-#: src/features/users/ui/user-form-modal.tsx:246
+#: src/features/users/ui/user-form-modal.tsx:224
 msgid "Enter password"
 msgstr "Enter password"
 
@@ -1341,7 +1341,7 @@ msgstr "Enter password"
 msgid "Enter phone number"
 msgstr "Enter phone number"
 
-#: src/features/users/ui/user-form-modal.tsx:205
+#: src/features/users/ui/user-form-modal.tsx:183
 msgid "Enter username"
 msgstr "Enter username"
 
@@ -1403,9 +1403,7 @@ msgstr "Environment mode for the gateway"
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:111
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:131
 #: src/features/users/ui/enhanced-users-data-grid.tsx:85
-#: src/features/users/ui/user-form-modal.tsx:134
-#: src/features/users/ui/user-form-modal.tsx:144
-#: src/features/users/ui/user-form-modal.tsx:172
+#: src/features/users/ui/user-form-modal.tsx:135
 #: src/features/users/ui/users-data-grid.tsx:77
 #: src/pages/examples.tsx:335
 #: src/pages/gateway-config.tsx:72
@@ -1560,8 +1558,8 @@ msgstr "Failed to create subscription. Please try again."
 #~ msgstr "Failed to create user: {0}"
 
 #: src/features/users/ui/user-form-modal.tsx:173
-msgid "Failed to create user: {errorMessage}"
-msgstr "Failed to create user: {errorMessage}"
+#~ msgid "Failed to create user: {errorMessage}"
+#~ msgstr "Failed to create user: {errorMessage}"
 
 #: src/pages/gateway-config.tsx:103
 #: src/shared/constants/index.ts:122
@@ -1723,8 +1721,8 @@ msgstr "Failed to update stage"
 #~ msgstr "Failed to update user: {0}"
 
 #: src/features/users/ui/user-form-modal.tsx:135
-msgid "Failed to update user: {errorMessage}"
-msgstr "Failed to update user: {errorMessage}"
+#~ msgid "Failed to update user: {errorMessage}"
+#~ msgstr "Failed to update user: {errorMessage}"
 
 #: src/entities/user/lib/use-avatar.ts:67
 msgid "Failed to upload avatar. Please try again."
@@ -1809,11 +1807,11 @@ msgstr "Filter Leads"
 #: src/entities/crm/ui/LeadForm.tsx:204
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:142
 #: src/features/crm-leads/ui/LeadEditModal.tsx:159
-#: src/features/users/ui/user-form-modal.tsx:225
+#: src/features/users/ui/user-form-modal.tsx:203
 msgid "First Name"
 msgstr "First Name"
 
-#: src/features/users/ui/user-form-modal.tsx:20
+#: src/features/users/ui/user-form-modal.tsx:24
 msgid "First name must be at least 2 characters"
 msgstr "First name must be at least 2 characters"
 
@@ -2007,7 +2005,7 @@ msgid "Invalid date"
 msgstr "Invalid date"
 
 #: src/entities/form/model/validation-rules.ts:13
-#: src/features/users/ui/user-form-modal.tsx:19
+#: src/features/users/ui/user-form-modal.tsx:23
 msgid "Invalid email address"
 msgstr "Invalid email address"
 
@@ -2075,11 +2073,11 @@ msgstr "Last 90 days"
 #: src/entities/crm/ui/LeadForm.tsx:216
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:148
 #: src/features/crm-leads/ui/LeadEditModal.tsx:165
-#: src/features/users/ui/user-form-modal.tsx:234
+#: src/features/users/ui/user-form-modal.tsx:212
 msgid "Last Name"
 msgstr "Last Name"
 
-#: src/features/users/ui/user-form-modal.tsx:21
+#: src/features/users/ui/user-form-modal.tsx:25
 msgid "Last name must be at least 2 characters"
 msgstr "Last name must be at least 2 characters"
 
@@ -2685,7 +2683,7 @@ msgstr "Paid: {paidAmount}"
 msgid "Partner"
 msgstr "Partner"
 
-#: src/features/users/ui/user-form-modal.tsx:245
+#: src/features/users/ui/user-form-modal.tsx:223
 msgid "Password"
 msgstr "Password"
 
@@ -2697,14 +2695,14 @@ msgstr "Password Change Failed"
 msgid "Password Changed"
 msgstr "Password Changed"
 
-#: src/features/users/ui/user-form-modal.tsx:145
+#: src/features/users/ui/user-form-modal.tsx:136
 msgid "Password is required for new users"
 msgstr "Password is required for new users"
 
 #: src/entities/form/model/validation-rules.ts:41
 #: src/features/change-password-form/model/validation.ts:12
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:19
-#: src/features/users/ui/user-form-modal.tsx:24
+#: src/features/users/ui/user-form-modal.tsx:28
 msgid "Password must be at least 8 characters"
 msgstr "Password must be at least 8 characters"
 
@@ -3288,7 +3286,7 @@ msgstr "Select priority"
 msgid "Select status"
 msgstr "Select status"
 
-#: src/features/users/ui/user-form-modal.tsx:258
+#: src/features/users/ui/user-form-modal.tsx:236
 msgid "Select user authorities"
 msgstr "Select user authorities"
 
@@ -3521,8 +3519,6 @@ msgstr "Subscriptions"
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:108
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:125
 #: src/features/users/ui/enhanced-users-data-grid.tsx:77
-#: src/features/users/ui/user-form-modal.tsx:125
-#: src/features/users/ui/user-form-modal.tsx:163
 #: src/features/users/ui/users-data-grid.tsx:70
 #: src/pages/examples.tsx:326
 #: src/pages/gateway-config.tsx:66
@@ -3819,7 +3815,7 @@ msgstr "Unverified"
 
 #: src/entities/crm/ui/FollowUpForm.tsx:205
 #: src/entities/crm/ui/LeadForm.tsx:288
-#: src/features/users/ui/user-form-modal.tsx:309
+#: src/features/users/ui/user-form-modal.tsx:287
 msgid "Update"
 msgstr "Update"
 
@@ -3847,7 +3843,7 @@ msgstr "Updated"
 msgid "Updated successfully"
 msgstr "Updated successfully"
 
-#: src/features/users/ui/user-form-modal.tsx:289
+#: src/features/users/ui/user-form-modal.tsx:267
 msgid "Updated:"
 msgstr "Updated:"
 
@@ -3869,19 +3865,19 @@ msgid "Uploading..."
 msgstr "Uploading..."
 
 #: src/entities/user/ui/UserFormField.tsx:77
-#: src/features/users/ui/user-form-modal.tsx:309
+#: src/features/users/ui/user-form-modal.tsx:287
 #: src/features/users/ui/users-data-grid.tsx:104
 #: src/pages/examples.tsx:89
 msgid "User"
 msgstr "User"
 
-#: src/features/users/ui/user-form-modal.tsx:271
+#: src/features/users/ui/user-form-modal.tsx:249
 msgid "User can log in and access the system"
 msgstr "User can log in and access the system"
 
 #: src/features/users/ui/user-form-modal.tsx:164
-msgid "User created successfully"
-msgstr "User created successfully"
+#~ msgid "User created successfully"
+#~ msgstr "User created successfully"
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:78
 #: src/features/users/ui/users-data-grid.tsx:71
@@ -3908,14 +3904,14 @@ msgid "User Preferences Demo"
 msgstr "User Preferences Demo"
 
 #: src/features/users/ui/user-form-modal.tsx:126
-msgid "User updated successfully"
-msgstr "User updated successfully"
+#~ msgid "User updated successfully"
+#~ msgstr "User updated successfully"
 
-#: src/features/users/ui/user-form-modal.tsx:278
+#: src/features/users/ui/user-form-modal.tsx:256
 msgid "User's email address has been verified"
 msgstr "User's email address has been verified"
 
-#: src/features/users/ui/user-form-modal.tsx:204
+#: src/features/users/ui/user-form-modal.tsx:182
 msgid "Username"
 msgstr "Username"
 
@@ -3923,7 +3919,7 @@ msgstr "Username"
 msgid "Username must be 3-30 characters, letters, numbers, underscore, or dash only"
 msgstr "Username must be 3-30 characters, letters, numbers, underscore, or dash only"
 
-#: src/features/users/ui/user-form-modal.tsx:18
+#: src/features/users/ui/user-form-modal.tsx:22
 msgid "Username must be at least 3 characters"
 msgstr "Username must be at least 3 characters"
 

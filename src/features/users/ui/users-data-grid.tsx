@@ -43,7 +43,7 @@ export function UsersDataGrid({
   const { data, isLoading, error } = useUsersQuery({
     page: page - 1,
     size: pageSize,
-    // Note: backend might need a separate search param if it doesn't support search via filter
+    search: debouncedSearch,
   });
 
   const deleteUserMutation = useDeleteUserMutation();

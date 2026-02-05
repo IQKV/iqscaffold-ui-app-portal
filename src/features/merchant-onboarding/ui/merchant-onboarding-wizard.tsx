@@ -12,7 +12,7 @@ import {
 import { t } from "@lingui/macro";
 import { PaymentGatewayProvider } from "@/shared/api/billing/types";
 import { GatewaySelector } from "@/features/gateway-config";
-import { useActiveGatewayConfigs } from "@/entities/gateway-config";
+import { useActiveGatewayConfigsQuery } from "@/entities/gateway-config";
 import { billingApi } from "@/shared/api/billing";
 import { notificationService } from "@/shared/lib/notifications";
 import { IconAlertCircle } from "@tabler/icons-react";
@@ -35,7 +35,7 @@ export const MerchantOnboardingWizard = ({
   const [loading, setLoading] = useState(false);
 
   const { data: activeGateways, isLoading: gatewaysLoading } =
-    useActiveGatewayConfigs();
+    useActiveGatewayConfigsQuery();
 
   const handleNext = () => setActive((current) => current + 1);
   const handlePrev = () => setActive((current) => current - 1);

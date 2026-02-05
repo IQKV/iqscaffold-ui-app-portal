@@ -18,10 +18,10 @@ import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 import { t } from "@lingui/macro";
 import {
-  useLeadNotes,
-  useCreateLeadNote,
-  useUpdateLeadNote,
-  useDeleteLeadNote,
+  useLeadNotesQuery,
+  useCreateLeadNoteMutation,
+  useUpdateLeadNoteMutation,
+  useDeleteLeadNoteMutation,
 } from "@/entities/crm";
 import { LeadNote } from "@/shared/api/crm/types";
 
@@ -47,12 +47,12 @@ export const LeadNotesSection: React.FC<LeadNotesSectionProps> = ({
   const [editContent, setEditContent] = useState("");
 
   // Fetch notes
-  const { data: notes, isLoading, error } = useLeadNotes(leadId);
+  const { data: notes, isLoading, error } = useLeadNotesQuery(leadId);
 
   // Mutations
-  const createNote = useCreateLeadNote();
-  const updateNote = useUpdateLeadNote();
-  const deleteNote = useDeleteLeadNote();
+  const createNote = useCreateLeadNoteMutation();
+  const updateNote = useUpdateLeadNoteMutation();
+  const deleteNote = useDeleteLeadNoteMutation();
 
   // Handle create note
   const handleCreateNote = async () => {

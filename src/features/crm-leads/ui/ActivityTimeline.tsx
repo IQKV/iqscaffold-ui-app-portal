@@ -22,7 +22,7 @@ import {
   IconUserCheck,
 } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
-import { useLeadActivities } from "@/entities/crm";
+import { useLeadActivitiesQuery } from "@/entities/crm";
 import { ActivityLogEntry, ActivityType } from "@/shared/api/crm/types";
 
 interface ActivityTimelineProps {
@@ -43,7 +43,7 @@ export const ActivityTimeline: React.FC<ActivityTimelineProps> = ({
   leadId,
 }) => {
   // Fetch activities
-  const { data: activities, isLoading, error } = useLeadActivities(leadId);
+  const { data: activities, isLoading, error } = useLeadActivitiesQuery(leadId);
 
   // Format date
   const formatDate = (dateString: string) => {

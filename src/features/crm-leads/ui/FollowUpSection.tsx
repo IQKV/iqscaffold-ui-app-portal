@@ -24,11 +24,11 @@ import {
   IconDots,
 } from "@tabler/icons-react";
 import {
-  useFollowUps,
-  useCreateFollowUp,
-  useUpdateFollowUp,
-  useCompleteFollowUp,
-  useDeleteFollowUp,
+  useFollowUpsQuery,
+  useCreateFollowUpMutation,
+  useUpdateFollowUpMutation,
+  useCompleteFollowUpMutation,
+  useDeleteFollowUpMutation,
 } from "@/entities/crm";
 import { FollowUpForm } from "@/entities/crm";
 import type { FollowUp } from "@/shared/api/crm/types";
@@ -59,14 +59,14 @@ export function FollowUpSection({ leadId }: FollowUpSectionProps) {
     data: followUpsResponse,
     isLoading,
     error,
-  } = useFollowUps({ leadId });
+  } = useFollowUpsQuery({ leadId });
   const followUps = followUpsResponse?.content || [];
 
   // Mutation hooks
-  const createFollowUpMutation = useCreateFollowUp();
-  const updateFollowUpMutation = useUpdateFollowUp();
-  const completeFollowUpMutation = useCompleteFollowUp();
-  const deleteFollowUpMutation = useDeleteFollowUp();
+  const createFollowUpMutation = useCreateFollowUpMutation();
+  const updateFollowUpMutation = useUpdateFollowUpMutation();
+  const completeFollowUpMutation = useCompleteFollowUpMutation();
+  const deleteFollowUpMutation = useDeleteFollowUpMutation();
 
   // Handle create follow-up (Requirement 5.2)
   const handleCreate = async (data: {

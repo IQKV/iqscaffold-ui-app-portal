@@ -10,7 +10,7 @@ import {
 
 // Payment Mutations
 
-export const useRefundPayment = () => {
+export const useRefundPaymentMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (id: string) => billingApi.refundPayment(id),
@@ -22,7 +22,7 @@ export const useRefundPayment = () => {
 
 // Subscription Mutations
 
-export const useCreateSubscription = () => {
+export const useCreateSubscriptionMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (request: CreateSubscriptionRequest) =>
@@ -36,7 +36,7 @@ export const useCreateSubscription = () => {
     });
 };
 
-export const useUpdateSubscription = () => {
+export const useUpdateSubscriptionMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: ({
@@ -58,7 +58,7 @@ export const useUpdateSubscription = () => {
     });
 };
 
-export const useCancelSubscription = () => {
+export const useCancelSubscriptionMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (id: string) => billingApi.cancelSubscription(id),
@@ -72,7 +72,7 @@ export const useCancelSubscription = () => {
     });
 };
 
-export const useCancelSubscriptionImmediately = () => {
+export const useCancelSubscriptionImmediatelyMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (id: string) => billingApi.cancelSubscriptionImmediately(id),
@@ -86,7 +86,7 @@ export const useCancelSubscriptionImmediately = () => {
     });
 };
 
-export const usePauseSubscription = () => {
+export const usePauseSubscriptionMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (id: string) => billingApi.pauseSubscription(id),
@@ -100,7 +100,7 @@ export const usePauseSubscription = () => {
     });
 };
 
-export const useResumeSubscription = () => {
+export const useResumeSubscriptionMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (id: string) => billingApi.resumeSubscription(id),
@@ -116,7 +116,7 @@ export const useResumeSubscription = () => {
 
 // Subscription Plan Mutations
 
-export const useCreateSubscriptionPlan = () => {
+export const useCreateSubscriptionPlanMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (request: CreateSubscriptionPlanRequest) =>
@@ -132,7 +132,7 @@ export const useCreateSubscriptionPlan = () => {
     });
 };
 
-export const useUpdateSubscriptionPlan = () => {
+export const useUpdateSubscriptionPlanMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: ({
@@ -156,7 +156,7 @@ export const useUpdateSubscriptionPlan = () => {
     });
 };
 
-export const useSyncSubscriptionPlan = () => {
+export const useSyncSubscriptionPlanMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (id: string) => billingApi.syncSubscriptionPlan(id),
