@@ -3,7 +3,7 @@ import { getAuthConfig } from "@/app/config";
 import type { User, UserRegistration } from "@/entities/user";
 
 /**
- * Authentication API responses
+ * Authentication API responses for authenticated users
  */
 export interface TokenResponse {
   accessToken: string;
@@ -11,23 +11,6 @@ export interface TokenResponse {
   tokenType: string;
   expiresIn: number;
   user: User;
-}
-
-export interface UserRegistrationResponse {
-  userId: number;
-  username: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  emailVerified: boolean;
-  createdAt: string;
-  message: string;
-}
-
-export interface LoginCredentials {
-  username: string;
-  password: string;
-  rememberMe: boolean;
 }
 
 export interface RefreshTokenRequest {
@@ -60,33 +43,10 @@ export interface EmailStatusResponse {
 }
 
 /**
- * Authentication API
+ * Authentication API for authenticated users
+ * Unauthenticated flows (login, signup, forgot password, etc.) are handled by the auth portal
  */
 export const authApi = {
-  /**
-   * Login user
-   */
-  async login(credentials: LoginCredentials): Promise<TokenResponse> {
-    const config = getAuthConfig();
-    const response = await apiClient.post<TokenResponse>(
-      config.endpoints.login,
-      credentials
-    );
-    return response.data;
-  },
-
-  /**
-   * Register new user
-   */
-  async signup(data: UserRegistration): Promise<UserRegistrationResponse> {
-    const config = getAuthConfig();
-    const response = await apiClient.post<UserRegistrationResponse>(
-      config.endpoints.signup,
-      data
-    );
-    return response.data;
-  },
-
   /**
    * Refresh access token
    */
@@ -105,41 +65,6 @@ export const authApi = {
   async logout(): Promise<void> {
     const config = getAuthConfig();
     await apiClient.post(config.endpoints.logout);
-  },
-
-  /**
-   * Request password reset
-   */
-  async forgotPassword(email: string): Promise<void> {
-    const config = getAuthConfig();
-    await apiClient.post(config.endpoints.forgotPassword, { email });
-  },
-
-  /**
-   * Reset password with token
-   */
-  async resetPassword(token: string, newPassword: string): Promise<void> {
-    const config = getAuthConfig();
-    await apiClient.post(config.endpoints.resetPassword, {
-      token,
-      newPassword,
-    });
-  },
-
-  /**
-   * Verify email with token
-   */
-  async verifyEmail(token: string): Promise<void> {
-    const config = getAuthConfig();
-    await apiClient.post(config.endpoints.verifyEmail, { token });
-  },
-
-  /**
-   * Resend verification email
-   */
-  async resendVerification(email: string): Promise<void> {
-    const config = getAuthConfig();
-    await apiClient.post(config.endpoints.resendVerification, { email });
   },
 
   /**
@@ -177,7 +102,7 @@ export const authApi = {
   },
 
   /**
-   * Get email verification status
+   * Get email verification status for authenticated user
    */
   async getEmailStatus(email: string): Promise<EmailStatusResponse> {
     const config = getAuthConfig();

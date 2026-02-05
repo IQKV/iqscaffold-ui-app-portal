@@ -6,14 +6,8 @@ import {
 } from "@/shared/constants";
 
 export interface AuthEndpoints {
-  login: string;
-  signup: string;
   refresh: string;
   logout: string;
-  forgotPassword: string;
-  resetPassword: string;
-  verifyEmail: string;
-  resendVerification: string;
   validateToken: string;
   changePassword: string;
   logoutAll: string;
@@ -46,14 +40,8 @@ const buildAuthConfig = (): AuthConfig => {
 
   return {
     endpoints: {
-      login: API_ENDPOINTS.AUTH.LOGIN,
-      signup: API_ENDPOINTS.AUTH.SIGNUP,
       refresh: API_ENDPOINTS.AUTH.REFRESH,
       logout: API_ENDPOINTS.AUTH.LOGOUT,
-      forgotPassword: API_ENDPOINTS.AUTH.FORGOT_PASSWORD,
-      resetPassword: API_ENDPOINTS.AUTH.RESET_PASSWORD,
-      verifyEmail: API_ENDPOINTS.AUTH.VERIFY_EMAIL,
-      resendVerification: API_ENDPOINTS.AUTH.RESEND_VERIFICATION,
       validateToken: API_ENDPOINTS.AUTH.VALIDATE_TOKEN,
       changePassword: API_ENDPOINTS.USERS.CHANGE_PASSWORD,
       logoutAll: API_ENDPOINTS.AUTH.LOGOUT_ALL,
