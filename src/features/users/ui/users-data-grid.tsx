@@ -73,9 +73,10 @@ export function UsersDataGrid({
               });
             },
             onError: (err: any) => {
+              const errorMessage = err.message;
               notifications.show({
                 title: t`Error`,
-                message: t`Failed to delete user: ${err.message}`,
+                message: t`Failed to delete user: ${errorMessage}`,
                 color: "red",
               });
             },
@@ -87,9 +88,9 @@ export function UsersDataGrid({
   );
 
   const getRoleBadgeColor = (authorities: string[]) => {
-    if (authorities.includes("SUPER_ADMIN")) {return "red";}
-    if (authorities.includes("ADMIN")) {return "orange";}
-    if (authorities.includes("USER")) {return "blue";}
+    if (authorities.includes("SUPER_ADMIN")) { return "red"; }
+    if (authorities.includes("ADMIN")) { return "orange"; }
+    if (authorities.includes("USER")) { return "blue"; }
     return "gray";
   };
 
