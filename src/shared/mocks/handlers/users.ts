@@ -87,12 +87,25 @@ export const usersHandlers = [
     }
 
     const url = new URL(request.url);
-    const page = parseInt(url.searchParams.get("page") || "1", 10);
-    const limit = parseInt(url.searchParams.get("limit") || "10", 10);
+    const rawPage = url.searchParams.get("page");
+    const rawSize = url.searchParams.get("size") || url.searchParams.get("limit");
+    const pageParam = Number.parseInt(rawPage ?? "0", 10);
+    const sizeParam = Number.parseInt(rawSize ?? "10", 10);
+    // Support both 0-based (Spring-style) and 1-based page params
+    const pageIndex = Number.isNaN(pageParam)
+      ? 0
+      : pageParam > 0
+      ? pageParam - 1
+      : pageParam;
+    const pageSize = Number.isNaN(sizeParam) ? 10 : sizeParam;
     const search = url.searchParams.get("search") || "";
 
     if (config.enableLogging) {
-      console.log("👥 MSW: Get users", { page, limit, search });
+      console.log("👥 MSW: Get users", {
+        page: pageIndex,
+        size: pageSize,
+        search,
+      });
     }
 
     // Filter users based on search
@@ -111,21 +124,19 @@ export const usersHandlers = [
       );
     }
 
-    // Paginate results
-    const startIndex = (page - 1) * limit;
-    const endIndex = startIndex + limit;
+    // Paginate results using 0-based page index
+    const startIndex = pageIndex * pageSize;
+    const endIndex = startIndex + pageSize;
     const paginatedUsers = filteredUsers.slice(startIndex, endIndex);
 
     return HttpResponse.json({
-      data: paginatedUsers,
-      pagination: {
-        page,
-        limit,
-        total: filteredUsers.length,
-        totalPages: Math.ceil(filteredUsers.length / limit),
-        hasNext: endIndex < filteredUsers.length,
-        hasPrev: page > 1,
-      },
+      content: paginatedUsers,
+      totalElements: filteredUsers.length,
+      totalPages: Math.ceil(filteredUsers.length / pageSize),
+      size: pageSize,
+      number: pageIndex,
+      first: pageIndex === 0,
+      last: endIndex >= filteredUsers.length,
     });
   }),
 
