@@ -1,5 +1,5 @@
 import { Badge, MantineColor } from "@mantine/core";
-import { PaymentStatus } from "../model/types";
+import { PaymentStatus } from "../lib/types";
 
 interface PaymentStatusBadgeProps {
   status: PaymentStatus;

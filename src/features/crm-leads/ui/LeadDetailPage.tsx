@@ -27,13 +27,13 @@ import {
 import { t } from "@lingui/core/macro";
 import { notifications } from "@mantine/notifications";
 import { useNavigate, useParams } from "@tanstack/react-router";
-import { useLead, useConvertLead } from "@/entities/crm/api/crm-queries";
+import { useLead, useConvertLead } from "@/entities/crm";
 import { LeadNotesSection } from "./LeadNotesSection";
 import { FollowUpSection } from "./FollowUpSection";
 import { ActivityTimeline } from "./ActivityTimeline";
 import { LeadDetailSkeleton } from "./skeletons";
 import { LeadEditModal } from "./LeadEditModal";
-import { LeadScoreBadge, LeadSourceBadge } from "@/entities/crm/ui";
+import { LeadScoreBadge, LeadSourceBadge } from "@/entities/crm";
 
 /**
  * LeadDetailPage Component

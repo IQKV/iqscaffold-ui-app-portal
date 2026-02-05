@@ -7,9 +7,8 @@ import {
   Text,
   Divider,
 } from "@mantine/core";
-import { AvatarUpload } from "@/entities/user/ui/avatar-upload";
+import { AvatarUpload, useAvatarUrl } from "@/entities/user";
 import { useAuthStore } from "@/processes/auth/model/store";
-import { useAvatarUrl } from "@/entities/user/model/use-avatar";
 
 export function AvatarDemoPage() {
   const user = useAuthStore((s) => s.user);

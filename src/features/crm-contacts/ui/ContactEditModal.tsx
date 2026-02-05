@@ -13,7 +13,7 @@ import { useForm, zodResolver } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { t } from "@lingui/core/macro";
 import { z } from "zod";
-import { useUpdateContact } from "@/entities/crm/api/contact-queries";
+import { useUpdateContact } from "@/entities/crm";
 import { Contact, ContactStatus } from "@/shared/api/contact/types";
 
 const contactEditSchema = z.object({

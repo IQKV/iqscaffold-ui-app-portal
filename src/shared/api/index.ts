@@ -31,6 +31,8 @@ export type {
   CreateUserRequest,
   UpdateUserRequest,
   UserPageResponse,
+  PageParams,
+  BulkFeatureUpdateRequest,
 } from "./user-management-api";
 
 export { crmApi } from "./crm";

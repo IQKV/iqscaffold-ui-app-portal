@@ -27,17 +27,11 @@ import {
   IconCircleCheck,
 } from "@tabler/icons-react";
 import { t } from "@lingui/core/macro";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
-import { notifications } from "@mantine/notifications";
 import { modals } from "@mantine/modals";
-import { ContactStatus, contactApi } from "@/shared/api";
-import {
-  useContacts,
-  useCreateContact,
-  useDeleteContact,
-} from "@/entities/crm/api/contact-queries";
-import { ContactCard, ContactForm } from "@/entities/crm/ui";
+import { ContactStatus } from "@/shared/api";
+import { ContactCard, ContactForm } from "@/entities/crm";
+import { useContactList } from "../model/useContactList";
 
 /**
  * ContactListPage Component
@@ -53,134 +47,36 @@ import { ContactCard, ContactForm } from "@/entities/crm/ui";
  */
 export const ContactListPage: React.FC = () => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
-  // State
-  const [page, setPage] = useState(0);
-  const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState<ContactStatus | "">("");
-  const [createModalOpen, setCreateModalOpen] = useState(false);
-  const [selectedIds, setSelectedIds] = useState<number[]>([]);
-
-  // Fetch contacts using standardized hook
   const {
-    data: contactsData,
+    page,
+    setPage,
+    search,
+    handleSearchChange,
+    statusFilter,
+    handleStatusFilterChange,
+    selectedIds,
+    setSelectedIds,
+    contactsData,
     isLoading,
     error,
-  } = useContacts({
-    page,
-    size: 10,
-    search: search || undefined,
-    status: statusFilter || undefined,
-  });
+    isCreating,
+    isBulkDeleting,
+    isBulkUpdatingStatus,
+    toggleSelect,
+    toggleSelectAll,
+    handleCreateContact: onCreateContact,
+    handleDeleteContact: onDeleteContact,
+    handleBulkDelete,
+    handleBulkStatusUpdate,
+  } = useContactList();
 
-  // Create contact mutation
-  const { mutate: createContact, isPending: createLoading } =
-    useCreateContact();
-
-  // Delete contact mutation
-  const { mutate: deleteContact } = useDeleteContact();
-
-  // Bulk mutations
-  const bulkDeleteMutation = useMutation({
-    mutationFn: (contactIds: number[]) =>
-      contactApi.bulkDeleteContacts({ contactIds }),
-    onSuccess: (data: any) => {
-      queryClient.invalidateQueries({ queryKey: ["contact", "contacts"] });
-      setSelectedIds([]);
-      const successCount = data.successCount;
-      const failureCount = data.failureCount;
-      notifications.show({
-        title: t`Bulk Operation Successful`,
-        message: t`Deleted ${successCount} contacts. ${failureCount} failed.`,
-        color: "green",
-      });
-    },
-    onError: (error: any) => {
-      notifications.show({
-        title: t`Error`,
-        message: error.message || t`Bulk delete failed`,
-        color: "red",
-      });
-    },
-  });
-
-  const bulkUpdateStatusMutation = useMutation({
-    mutationFn: ({
-      contactIds,
-      status,
-    }: {
-      contactIds: number[];
-      status: ContactStatus;
-    }) => contactApi.bulkUpdateStatus({ contactIds, status }),
-    onSuccess: (data: any) => {
-      queryClient.invalidateQueries({ queryKey: ["contact", "contacts"] });
-      setSelectedIds([]);
-      const successCount = data.successCount;
-      const failureCount = data.failureCount;
-      notifications.show({
-        title: t`Bulk Operation Successful`,
-        message: t`Updated ${successCount} contacts. ${failureCount} failed.`,
-        color: "green",
-      });
-    },
-    onError: (error: any) => {
-      notifications.show({
-        title: t`Error`,
-        message: error.message || t`Bulk status update failed`,
-        color: "red",
-      });
-    },
-  });
+  const [createModalOpen, setCreateModalOpen] = useState(false);
 
   // Handlers
   const handleCreateContact = (values: any) => {
-    createContact(values, {
-      onSuccess: () => {
-        setCreateModalOpen(false);
-        notifications.show({
-          title: "Success",
-          message: "Contact created successfully",
-          color: "green",
-        });
-      },
-      onError: (error: any) => {
-        notifications.show({
-          title: "Error",
-          message: error.message || "Failed to create contact",
-          color: "red",
-        });
-      },
-    });
-  };
-
-  const handleDeleteContact = (id: number, name: string) => {
-    modals.openConfirmModal({
-      title: "Delete Contact",
-      children: (
-        <Text size="sm">
-          Are you sure you want to delete {name}? This action cannot be undone.
-        </Text>
-      ),
-      labels: { confirm: "Delete", cancel: "Cancel" },
-      confirmProps: { color: "red" },
-      onConfirm: () =>
-        deleteContact(id, {
-          onSuccess: () => {
-            notifications.show({
-              title: "Success",
-              message: "Contact deleted successfully",
-              color: "green",
-            });
-          },
-          onError: (error: any) => {
-            notifications.show({
-              title: "Error",
-              message: error.message || "Failed to delete contact",
-              color: "red",
-            });
-          },
-        }),
+    onCreateContact(values, () => {
+      setCreateModalOpen(false);
     });
   };
 
@@ -190,41 +86,6 @@ export const ContactListPage: React.FC = () => {
 
   const handleEditContact = (id: number) => {
     navigate({ to: `/crm/contacts/${id}` });
-  };
-
-  const toggleSelectAll = (checked: boolean) => {
-    if (checked && contactsData) {
-      setSelectedIds(contactsData.content.map((c) => c.id));
-    } else {
-      setSelectedIds([]);
-    }
-  };
-
-  const toggleSelect = (id: number, checked: boolean) => {
-    if (checked) {
-      setSelectedIds((prev) => [...prev, id]);
-    } else {
-      setSelectedIds((prev) => prev.filter((prevId) => prevId !== id));
-    }
-  };
-
-  const handleBulkDelete = () => {
-    const count = selectedIds.length;
-    modals.openConfirmModal({
-      title: t`Delete Multiple Contacts`,
-      children: (
-        <Text size="sm">
-          {t`Are you sure you want to delete ${count} contacts? This action cannot be undone.`}
-        </Text>
-      ),
-      labels: { confirm: t`Delete`, cancel: t`Cancel` },
-      confirmProps: { color: "red" },
-      onConfirm: () => bulkDeleteMutation.mutate(selectedIds),
-    });
-  };
-
-  const handleBulkStatusUpdate = (status: ContactStatus) => {
-    bulkUpdateStatusMutation.mutate({ contactIds: selectedIds, status });
   };
 
   return (
@@ -248,8 +109,7 @@ export const ContactListPage: React.FC = () => {
             leftSection={<IconSearch size={16} />}
             value={search}
             onChange={(e) => {
-              setSearch(e.currentTarget.value);
-              setPage(0); // Reset to first page on search
+              handleSearchChange(e.currentTarget.value);
             }}
             style={{ flex: 1 }}
           />
@@ -265,8 +125,7 @@ export const ContactListPage: React.FC = () => {
             ]}
             value={statusFilter}
             onChange={(value) => {
-              setStatusFilter(value as ContactStatus | "");
-              setPage(0); // Reset to first page on filter
+              handleStatusFilterChange(value as ContactStatus | "");
             }}
             clearable
             style={{ width: 200 }}
@@ -310,7 +169,7 @@ export const ContactListPage: React.FC = () => {
                       variant="light"
                       size="xs"
                       leftSection={<IconCircleCheck size={16} />}
-                      loading={bulkUpdateStatusMutation.isPending}
+                      loading={isBulkUpdatingStatus}
                     >
                       {t`Update Status`}
                     </Button>
@@ -345,7 +204,7 @@ export const ContactListPage: React.FC = () => {
                   size="xs"
                   leftSection={<IconTrash size={16} />}
                   onClick={handleBulkDelete}
-                  loading={bulkDeleteMutation.isPending}
+                  loading={isBulkDeleting}
                 >
                   {t`Delete Selected`}
                 </Button>
@@ -368,7 +227,7 @@ export const ContactListPage: React.FC = () => {
           {/* Contact list */}
           {contactsData && contactsData.content.length > 0 ? (
             <Stack gap="md">
-              {contactsData.content.map((contact) => (
+              {contactsData.content.map((contact: any) => (
                 <ContactCard
                   key={contact.id}
                   contact={contact}
@@ -379,7 +238,7 @@ export const ContactListPage: React.FC = () => {
                   onClick={() => handleViewContact(contact.id)}
                   onEdit={() => handleEditContact(contact.id)}
                   onDelete={() =>
-                    handleDeleteContact(
+                    onDeleteContact(
                       contact.id,
                       `${contact.firstName} ${contact.lastName}`
                     )
@@ -420,7 +279,7 @@ export const ContactListPage: React.FC = () => {
         <ContactForm
           onSubmit={handleCreateContact}
           onCancel={() => setCreateModalOpen(false)}
-          loading={createLoading}
+          loading={isCreating}
         />
       </Modal>
     </Container>

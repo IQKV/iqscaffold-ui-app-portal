@@ -37,8 +37,8 @@ import {
   useUpdateFollowUp,
   useCompleteFollowUp,
   useDeleteFollowUp,
-} from "@/entities/crm/api/crm-queries";
-import { FollowUpForm } from "@/entities/crm/ui/FollowUpForm";
+} from "@/entities/crm";
+import { FollowUpForm } from "@/entities/crm";
 import type { FollowUp } from "@/shared/api/crm/types";
 import { notifications } from "@mantine/notifications";
 import { modals } from "@mantine/modals";
@@ -102,8 +102,8 @@ export function FollowUpList() {
   const filteredFollowUps = followUps.filter((followUp) =>
     debouncedSearch
       ? followUp.description
-          .toLowerCase()
-          .includes(debouncedSearch.toLowerCase())
+        .toLowerCase()
+        .includes(debouncedSearch.toLowerCase())
       : true
   );
 

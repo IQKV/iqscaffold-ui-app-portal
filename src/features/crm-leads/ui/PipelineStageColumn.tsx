@@ -10,7 +10,7 @@ import {
   Center,
 } from "@mantine/core";
 import { useDroppable } from "@dnd-kit/core";
-import { LeadCard } from "@/entities/crm/ui";
+import { LeadCard } from "@/entities/crm";
 import type { PipelineStage, Lead } from "@/shared/api/crm/types";
 
 interface PipelineStageColumnProps {

@@ -32,7 +32,7 @@ import {
   useUpdatePipelineStage,
   useDeletePipelineStage,
   useReorderPipelineStage,
-} from "@/entities/crm/api/crm-queries";
+} from "@/entities/crm";
 import { PipelineStage } from "@/shared/api/crm/types";
 import { notifications } from "@mantine/notifications";
 

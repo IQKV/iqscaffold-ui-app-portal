@@ -55,3 +55,52 @@ export interface UserProfile {
   createdAt: string;
   updatedAt?: string;
 }
+export interface ManagementUser {
+  id: number;
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  enabled: boolean;
+  emailVerified: boolean;
+  authorities: string[];
+  tenantId: string;
+  createdAt: string;
+  updatedAt?: string;
+}
+
+export interface UsersResponse {
+  data: ManagementUser[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+    hasNext: boolean;
+    hasPrev: boolean;
+  };
+}
+
+export interface ManagementUserResponse {
+  data: ManagementUser;
+}
+
+export interface CreateUserRequest {
+  username: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  authorities?: string[];
+  tenantId?: string;
+}
+
+export interface UpdateUserRequest {
+  username?: string;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  enabled?: boolean;
+  emailVerified?: boolean;
+  authorities?: string[];
+}

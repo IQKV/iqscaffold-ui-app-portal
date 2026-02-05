@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { billingKeys } from "./billing-queries";
+import { billingKeys } from "./queries";
 
 describe("Billing Query Keys", () => {
   describe("billingKeys", () => {

@@ -13,8 +13,11 @@ import {
 } from "@mantine/core";
 import { IconEdit, IconTrash, IconPlus, IconSearch } from "@tabler/icons-react";
 import { DataTable, type DataTableColumn } from "@/shared/ui/data-table";
-import { useUsersQuery, useDeleteUserMutation } from "../hooks/use-users-query";
-import { User } from "../api/users-api";
+import {
+  useUsersQuery,
+  useDeleteUserMutation,
+  UserDto,
+} from "@/entities/user";
 import { useAuth } from "@/processes/auth";
 import { openConfirmModal } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
@@ -23,7 +26,7 @@ import { t } from "@lingui/core/macro";
 
 interface UsersDataGridProps {
   onCreateUser: () => void;
-  onEditUser: (user: User) => void;
+  onEditUser: (user: UserDto) => void;
 }
 
 export function UsersDataGrid({
@@ -35,18 +38,18 @@ export function UsersDataGrid({
   const [debouncedSearch] = useDebouncedValue(search, 300);
   const { canManageUsers } = useAuth();
 
-  const limit = 10;
+  const pageSize = 10;
 
   const { data, isLoading, error } = useUsersQuery({
-    page,
-    limit,
-    search: debouncedSearch,
+    page: page - 1,
+    size: pageSize,
+    // Note: backend might need a separate search param if it doesn't support search via filter
   });
 
   const deleteUserMutation = useDeleteUserMutation();
 
   const handleDeleteUser = useCallback(
-    (user: User) => {
+    (user: UserDto) => {
       openConfirmModal({
         title: t`Delete User`,
         children: (
@@ -69,11 +72,10 @@ export function UsersDataGrid({
                 color: "green",
               });
             },
-            onError: (error) => {
-              const errorMessage = error.message;
+            onError: (err: any) => {
               notifications.show({
                 title: t`Error`,
-                message: t`Failed to delete user: ${errorMessage}`,
+                message: t`Failed to delete user: ${err.message}`,
                 color: "red",
               });
             },
@@ -85,32 +87,23 @@ export function UsersDataGrid({
   );
 
   const getRoleBadgeColor = (authorities: string[]) => {
-    if (authorities.includes("SUPER_ADMIN")) {
-      return "red";
-    }
-    if (authorities.includes("ADMIN")) {
-      return "orange";
-    }
-    if (authorities.includes("USER")) {
-      return "blue";
-    }
+    if (authorities.includes("SUPER_ADMIN")) return "red";
+    if (authorities.includes("ADMIN")) return "orange";
+    if (authorities.includes("USER")) return "blue";
     return "gray";
   };
 
   const formatRoles = (authorities: string[]) => {
-    if (!authorities || authorities.length === 0) {
-      return "No authorities";
-    }
-    return authorities.join(", ");
+    return authorities?.length ? authorities.join(", ") : "No authorities";
   };
 
-  const columns = useMemo<DataTableColumn<User>[]>(
+  const columns = useMemo<DataTableColumn<UserDto>[]>(
     () => [
       {
         key: "name",
         title: t`User`,
         sortable: true,
-        render: (_, user: User) => (
+        render: (_, user) => (
           <Group gap="sm">
             <div>
               <Text fw={500}>
@@ -127,7 +120,7 @@ export function UsersDataGrid({
         key: "roles",
         title: t`Authorities`,
         sortable: true,
-        render: (_, user: User) => (
+        render: (_, user) => (
           <Badge color={getRoleBadgeColor(user.authorities)} variant="light">
             {formatRoles(user.authorities)}
           </Badge>
@@ -137,7 +130,7 @@ export function UsersDataGrid({
         key: "status",
         title: t`Status`,
         sortable: true,
-        render: (_, user: User) => (
+        render: (_, user) => (
           <Group gap="xs">
             <Badge
               color={user.enabled ? "green" : "red"}
@@ -160,45 +153,40 @@ export function UsersDataGrid({
         key: "createdAt",
         title: t`Created`,
         sortable: true,
-        render: (_, user: User) => (
+        render: (_, user) => (
           <Text size="sm">{new Date(user.createdAt).toLocaleDateString()}</Text>
         ),
       },
       {
         key: "actions",
         title: t`Actions`,
-        align: "center" as const,
-        render: (_, user: User) => (
+        align: "center",
+        render: (_, user) => (
           <Group gap="xs" justify="center">
             {canManageUsers() && (
-              <Tooltip label={t`Edit user`}>
-                <ActionIcon
-                  variant="subtle"
-                  color="blue"
-                  onClick={() => onEditUser(user)}
-                  data-testid={`btn-edit-user-${user.id}`}
-                >
-                  <IconEdit size={16} />
-                </ActionIcon>
-              </Tooltip>
-            )}
-            {canManageUsers() && (
-              <Tooltip label={t`Delete user`}>
-                <ActionIcon
-                  variant="subtle"
-                  color="red"
-                  onClick={() => handleDeleteUser(user)}
-                  loading={deleteUserMutation.isPending}
-                  data-testid={`btn-delete-user-${user.id}`}
-                >
-                  <IconTrash size={16} />
-                </ActionIcon>
-              </Tooltip>
-            )}
-            {!canManageUsers() && (
-              <Text size="xs" c="dimmed">
-                {t`View only`}
-              </Text>
+              <>
+                <Tooltip label={t`Edit user`}>
+                  <ActionIcon
+                    variant="subtle"
+                    color="blue"
+                    onClick={() => onEditUser(user)}
+                    data-testid={`btn-edit-user-${user.id}`}
+                  >
+                    <IconEdit size={16} />
+                  </ActionIcon>
+                </Tooltip>
+                <Tooltip label={t`Delete user`}>
+                  <ActionIcon
+                    variant="subtle"
+                    color="red"
+                    onClick={() => handleDeleteUser(user)}
+                    loading={deleteUserMutation.isPending}
+                    data-testid={`btn-delete-user-${user.id}`}
+                  >
+                    <IconTrash size={16} />
+                  </ActionIcon>
+                </Tooltip>
+              </>
             )}
           </Group>
         ),
@@ -207,23 +195,11 @@ export function UsersDataGrid({
     [onEditUser, deleteUserMutation.isPending, handleDeleteUser, canManageUsers]
   );
 
-  if (error) {
-    const errorMessage = error.message;
-    return (
-      <Paper p="md" withBorder>
-        <Text c="red">{t`Error loading users: ${errorMessage}`}</Text>
-      </Paper>
-    );
-  }
-
   return (
     <Stack gap="md" data-testid="feature-users-data-grid">
-      <Paper p="md" withBorder>
+      <Paper p="md" withBorder shadow="sm">
         <Group justify="space-between" mb="md">
-          <Title
-            order={2}
-            data-testid="users-title"
-          >{t`User Management`}</Title>
+          <Title order={2} data-testid="users-title">{t`User Management`}</Title>
           {canManageUsers() && (
             <Button
               leftSection={<IconPlus size={16} />}
@@ -246,12 +222,12 @@ export function UsersDataGrid({
 
         <DataTable
           columns={columns}
-          data={data?.data || []}
+          data={data?.content || []}
           loading={isLoading}
           pagination={{
             page,
-            total: data?.pagination.total || 0,
-            pageSize: limit,
+            total: data?.totalElements || 0,
+            pageSize: pageSize,
             onChange: setPage,
           }}
           emptyText={t`No users found`}

@@ -1,5 +1,5 @@
 import { Badge, BadgeProps } from "@mantine/core";
-import { SubscriptionStatus } from "../model/types";
+import { SubscriptionStatus } from "../lib/types";
 
 interface SubscriptionStatusBadgeProps extends Omit<
   BadgeProps,

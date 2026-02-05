@@ -9,7 +9,8 @@ import {
   Button,
 } from "@mantine/core";
 import { useMSWControl } from "@/shared/lib";
-import { useUsersQuery } from "@/features/users/hooks/use-users-query";
+import { useUsersQuery } from "@/features/users/model/use-users-query";
+import type { User } from "@/features/users/api/users-api";
 
 export function MSWDemoPage() {
   const { config, isRunning, toggleMSW } = useMSWControl();
@@ -100,7 +101,7 @@ export function MSWDemoPage() {
           {usersData && (
             <Stack gap="sm">
               <Text fw={500}>Users ({usersData.data.length}):</Text>
-              {usersData.data.map((user) => (
+              {usersData.data.map((user: User) => (
                 <Card key={user.id} withBorder padding="sm">
                   <Group>
                     <div>

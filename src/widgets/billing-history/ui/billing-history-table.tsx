@@ -5,6 +5,7 @@ import {
   PaymentStatusBadge,
   useRefundPayment,
   Payment,
+  billingKeys,
 } from "@/entities/billing";
 import { Stack, Text, Title, Group, ActionIcon, Tooltip } from "@mantine/core";
 import { modals } from "@mantine/modals";
@@ -15,7 +16,6 @@ import { formatCurrency } from "@/shared/lib/currency";
 import { useAuth } from "@/processes/auth";
 import { notificationService } from "@/shared/lib/notifications";
 import { useQueryClient } from "@tanstack/react-query";
-import { billingKeys } from "@/entities/billing/api/billing-queries";
 import {
   CONFIRMATION_MESSAGES,
   NOTIFICATION_MESSAGES,

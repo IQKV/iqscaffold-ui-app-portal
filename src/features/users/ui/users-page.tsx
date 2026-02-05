@@ -3,13 +3,13 @@ import { Container, Alert, Text } from "@mantine/core";
 import { IconLock } from "@tabler/icons-react";
 import { UsersDataGrid } from "./users-data-grid";
 import { UserFormModal } from "./user-form-modal";
-import { User } from "../api/users-api";
+import { UserDto } from "@/entities/user";
 import { useAuthStore, UserManagementGuard } from "@/processes/auth";
 import { t } from "@lingui/core/macro";
 
 export function UsersPage() {
   const [modalOpened, setModalOpened] = useState(false);
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [selectedUser, setSelectedUser] = useState<UserDto | null>(null);
   const status = useAuthStore((s) => s.status);
   const isAuthenticated = status === "authenticated";
 
@@ -34,7 +34,7 @@ export function UsersPage() {
     setModalOpened(true);
   };
 
-  const handleEditUser = (user: User) => {
+  const handleEditUser = (user: UserDto) => {
     setSelectedUser(user);
     setModalOpened(true);
   };

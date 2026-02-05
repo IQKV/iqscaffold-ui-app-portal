@@ -4,12 +4,11 @@ import { IconLock } from "@tabler/icons-react";
 import { useForm } from "@mantine/form";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { z } from "zod";
-import { UserFormField, getUserRoles } from "@/entities/user";
-import { User, CreateUserRequest, UpdateUserRequest } from "../api/users-api";
+import { UserFormField, getUserRoles, UserDto, CreateUserRequest, UpdateUserRequest } from "@/entities/user";
 import {
   useCreateUserMutation,
   useUpdateUserMutation,
-} from "../hooks/use-users-query";
+} from "../model/use-users-query";
 import { useAuth } from "@/processes/auth";
 import { notifications } from "@mantine/notifications";
 import { t } from "@lingui/core/macro";
@@ -36,7 +35,7 @@ type UserFormData = z.infer<ReturnType<typeof createUserFormSchema>>;
 interface UserFormModalProps {
   opened: boolean;
   onClose: () => void;
-  user?: User | null;
+  user?: UserDto | null;
   title: string;
 }
 

@@ -21,8 +21,7 @@ import {
   IconSettings,
 } from "@tabler/icons-react";
 import { DataTable, type DataTableColumn } from "mantine-datatable";
-import { useUsersQuery, useDeleteUserMutation } from "../hooks/use-users-query";
-import { User } from "../api/users-api";
+import { useUsersQuery, useDeleteUserMutation, UserDto } from "@/entities/user";
 import { UserFeatureManager } from "./UserFeatureManager";
 import { useAuth } from "@/processes/auth";
 import { openConfirmModal } from "@mantine/modals";
@@ -32,7 +31,7 @@ import { t } from "@lingui/core/macro";
 
 interface EnhancedUsersDataGridProps {
   onCreateUser: () => void;
-  onEditUser: (user: User) => void;
+  onEditUser: (user: UserDto) => void;
 }
 
 export function EnhancedUsersDataGrid({
@@ -42,22 +41,22 @@ export function EnhancedUsersDataGrid({
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebouncedValue(search, 300);
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [selectedUser, setSelectedUser] = useState<UserDto | null>(null);
   const [featureModalOpened, setFeatureModalOpened] = useState(false);
   const { canManageUsers } = useAuth();
 
-  const limit = 10;
+  const size = 10;
 
   const { data, isLoading, error } = useUsersQuery({
-    page,
-    limit,
-    search: debouncedSearch,
+    page: page - 1,
+    size,
+    // search: debouncedSearch, // Note: entities/user/api/queries.ts might need search support
   });
 
   const deleteUserMutation = useDeleteUserMutation();
 
   const handleDeleteUser = useCallback(
-    (user: User) => {
+    (user: UserDto) => {
       openConfirmModal({
         title: t`Delete User`,
         children: (
@@ -95,7 +94,7 @@ export function EnhancedUsersDataGrid({
     [deleteUserMutation]
   );
 
-  const handleManageFeatures = useCallback((user: User) => {
+  const handleManageFeatures = useCallback((user: UserDto) => {
     setSelectedUser(user);
     setFeatureModalOpened(true);
   }, []);
@@ -113,8 +112,8 @@ export function EnhancedUsersDataGrid({
     return "gray";
   };
 
-  const formatRoles = useCallback((authorities: string[]) => {
-    if (authorities.length === 0) {
+  const formatRoles = useCallback((authorities: string[] | undefined) => {
+    if (!authorities || authorities.length === 0) {
       return <Badge color="gray" size="sm">{t`No roles`}</Badge>;
     }
 
@@ -142,7 +141,7 @@ export function EnhancedUsersDataGrid({
     );
   }, []);
 
-  const columns: DataTableColumn<User>[] = useMemo(
+  const columns: DataTableColumn<UserDto>[] = useMemo(
     () => [
       {
         accessor: "fullName",
@@ -254,7 +253,7 @@ export function EnhancedUsersDataGrid({
   return (
     <>
       <Stack gap="md">
-        <Paper p="md" withBorder>
+        <Paper p="md" withBorder shadow="sm">
           <Group justify="space-between" mb="md">
             <Title order={2}>{t`User Management`}</Title>
             <Button
@@ -278,10 +277,10 @@ export function EnhancedUsersDataGrid({
 
           <DataTable
             columns={columns}
-            records={data?.data || []}
+            records={data?.content || []}
             fetching={isLoading}
-            totalRecords={data?.pagination.total || 0}
-            recordsPerPage={limit}
+            totalRecords={data?.totalElements || 0}
+            recordsPerPage={size}
             page={page}
             onPageChange={setPage}
             emptyState={
@@ -302,10 +301,10 @@ export function EnhancedUsersDataGrid({
         title={
           selectedUser
             ? (() => {
-                const firstName = selectedUser.firstName;
-                const lastName = selectedUser.lastName;
-                return t`Manage Features - ${firstName} ${lastName}`;
-              })()
+              const firstName = selectedUser.firstName;
+              const lastName = selectedUser.lastName;
+              return t`Manage Features - ${firstName} ${lastName}`;
+            })()
             : t`Manage Features`
         }
         size="lg"

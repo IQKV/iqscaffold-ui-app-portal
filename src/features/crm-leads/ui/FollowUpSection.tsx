@@ -29,8 +29,8 @@ import {
   useUpdateFollowUp,
   useCompleteFollowUp,
   useDeleteFollowUp,
-} from "@/entities/crm/api/crm-queries";
-import { FollowUpForm } from "@/entities/crm/ui/FollowUpForm";
+} from "@/entities/crm";
+import { FollowUpForm } from "@/entities/crm";
 import type { FollowUp } from "@/shared/api/crm/types";
 import { notifications } from "@mantine/notifications";
 import { modals } from "@mantine/modals";

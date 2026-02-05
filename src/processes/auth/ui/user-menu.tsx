@@ -1,7 +1,7 @@
 import { Menu, Avatar, Text } from "@mantine/core";
 import { IconLogout } from "@tabler/icons-react";
 import { useAuthStore } from "../model/store";
-import { getAvatarUrlWithCacheBusting } from "@/entities/user/model/use-avatar";
+import { getAvatarUrlWithCacheBusting } from "@/entities/user";
 
 export function UserMenu() {
   const user = useAuthStore((s) => s.user);

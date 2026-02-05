@@ -14,7 +14,7 @@ import { useForm, zodResolver } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { t } from "@lingui/core/macro";
 import { z } from "zod";
-import { useUpdateLead } from "@/entities/crm/api/crm-queries";
+import { useUpdateLead } from "@/entities/crm";
 import type { Lead, LeadSource } from "@/shared/api/crm/types";
 
 const leadEditSchema = z.object({

@@ -1,2 +1,2 @@
-export * from "./components/ContactListPage";
-export * from "./components/ContactDetailPage";
+export * from "./ui/ContactListPage";
+export * from "./ui/ContactDetailPage";

@@ -20,7 +20,7 @@ import { DashboardSkeleton } from "./skeletons";
 import {
   useDashboardStats,
   useConversionMetrics,
-} from "@/entities/crm/api/crm-queries";
+} from "@/entities/crm";
 import type { DashboardStatsParams } from "@/shared/api/crm/types";
 
 /**

@@ -20,7 +20,7 @@ import {
   useAvatarUpload,
   useAvatarDelete,
   getAvatarUrlWithCacheBusting,
-} from "../model/use-avatar";
+} from "../lib/use-avatar";
 import { useAuthStore } from "@/processes/auth/model/store";
 import { t } from "@lingui/macro";
 

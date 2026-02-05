@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ContactDetailPage } from "@/features/crm-contacts/components/ContactDetailPage";
+import { ContactDetailPage } from "@/features/crm-contacts";
 import { usePageTitle } from "@/shared/lib";
 import { t } from "@lingui/macro";
 

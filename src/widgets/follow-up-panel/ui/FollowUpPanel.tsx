@@ -21,7 +21,7 @@ import {
   useTodaysFollowUps,
   useOverdueFollowUps,
   useCompleteFollowUp,
-} from "@/entities/crm/api/crm-queries";
+} from "@/entities/crm";
 import type { FollowUp } from "@/shared/api/crm/types";
 import { useNavigate } from "@tanstack/react-router";
 import { notifications } from "@mantine/notifications";

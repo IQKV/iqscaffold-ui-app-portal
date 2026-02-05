@@ -7,7 +7,7 @@ import { apiRequest } from "./base";
 import type {
   UserPreference,
   UpdateUserPreferenceRequest,
-} from "@/entities/user/model/user-preference-types";
+} from "@/entities/user";
 
 const BASE_PATH = "/v1/users/me/preferences";
 

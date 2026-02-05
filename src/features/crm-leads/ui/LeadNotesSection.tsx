@@ -22,7 +22,7 @@ import {
   useCreateLeadNote,
   useUpdateLeadNote,
   useDeleteLeadNote,
-} from "@/entities/crm/api/crm-queries";
+} from "@/entities/crm";
 import { LeadNote } from "@/shared/api/crm/types";
 
 interface LeadNotesSectionProps {

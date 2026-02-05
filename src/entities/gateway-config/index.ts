@@ -1,13 +1,5 @@
-// Re-export gateway configuration hooks from billing entity
-export {
-  useGatewayConfigs,
-  useActiveGatewayConfigs,
-  useGatewayConfig,
-  usePrimaryGatewayConfig,
-  useCreateGatewayConfig,
-  useUpdateGatewayConfig,
-  useDeleteGatewayConfig,
-  useActivateGateway,
-  useDeactivateGateway,
-  useSetPrimaryGateway,
-} from "@/entities/billing";
+// Gateway Configuration Entity Public API
+
+export * from "./api/queries";
+export * from "./api/mutations";
+export * from "./lib/types";

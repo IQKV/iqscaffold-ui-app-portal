@@ -33,14 +33,14 @@ import { PipelineStageColumn } from "./PipelineStageColumn";
 import { PipelineMetrics } from "./PipelineMetrics";
 import { PipelineSettingsModal } from "./PipelineSettingsModal";
 import { PipelineSkeleton } from "./skeletons";
-import { LeadCard } from "@/entities/crm/ui";
+import { LeadCard } from "@/entities/crm";
 import { LazyLoad } from "@/shared/ui";
 import {
   usePipelineStages,
   useLeads,
   useMoveLeadToStage,
   useConversionMetrics,
-} from "@/entities/crm/api/crm-queries";
+} from "@/entities/crm";
 import type { Lead } from "@/shared/api/crm/types";
 
 interface PipelineViewProps {

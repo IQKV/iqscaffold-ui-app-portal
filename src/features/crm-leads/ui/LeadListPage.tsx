@@ -27,17 +27,13 @@ import {
   IconX,
   IconAdjustments,
 } from "@tabler/icons-react";
-import {
-  useLeads,
-  useBulkQualifyLeads,
-  useExportLeads,
-} from "@/entities/crm/api/crm-queries";
-import { LeadCard } from "@/entities/crm/ui";
+import { t } from "@lingui/core/macro";
+import { LeadCard } from "@/entities/crm";
 import { LeadListSkeleton } from "./skeletons";
-import { LeadListParams, LeadSource } from "@/shared/api/crm/types";
+import { LeadSource } from "@/shared/api/crm/types";
 import { useNavigate } from "@tanstack/react-router";
+import { useLeadList } from "../model/useLeadList";
 import {
-  useDebouncedValue,
   useMediaQuery,
   useDisclosure,
 } from "@mantine/hooks";
@@ -45,7 +41,6 @@ import {
   useKeyboardNavigation,
   useAnnouncer,
 } from "@/shared/lib/accessibility";
-import { t } from "@lingui/core/macro";
 
 /**
  * LeadListPage Component
@@ -68,62 +63,41 @@ export const LeadListPage: React.FC = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const { announce } = useAnnouncer();
 
+  const {
+    searchTerm,
+    setSearchTerm,
+    selectedSource,
+    setSelectedSource,
+    selectedStage,
+    setSelectedStage,
+    selectedUser,
+    setSelectedUser,
+    currentPage,
+    selectedLeads,
+    setSelectedLeads,
+    leads,
+    isLoading,
+    error,
+    refetch,
+    totalPages,
+    totalElements,
+    hasActiveFilters,
+    isExporting,
+    isBulkQualifying,
+    handleClearFilters,
+    handleSelectAll,
+    handleExport,
+    handleBulkQualify,
+    handlePageChange,
+  } = useLeadList();
+
   // Filter drawer state for mobile
   const [
     filterDrawerOpened,
     { open: openFilterDrawer, close: closeFilterDrawer },
   ] = useDisclosure(false);
 
-  // Filter state
-  const [searchTerm, setSearchTerm] = useState("");
-  const [debouncedSearch] = useDebouncedValue(searchTerm, 300);
-  const [selectedSource, setSelectedSource] = useState<string | null>(null);
-  const [selectedStage, setSelectedStage] = useState<string | null>(null);
-  const [selectedUser, setSelectedUser] = useState<string | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [selectedLeads, setSelectedLeads] = useState<string[]>([]);
-
-  // Bulk operations
-  const bulkQualifyMutation = useBulkQualifyLeads();
-  const exportMutation = useExportLeads();
   const [focusedLeadIndex, setFocusedLeadIndex] = useState(0);
-
-  // Build query params
-  const queryParams = useMemo<LeadListParams>(() => {
-    const params: LeadListParams = {
-      page: currentPage - 1, // API uses 0-based indexing
-      size: 20,
-      sort: "createdAt,desc",
-    };
-
-    if (debouncedSearch) {
-      params.search = debouncedSearch;
-    }
-    if (selectedSource) {
-      params.source = selectedSource as LeadSource;
-    }
-    if (selectedStage) {
-      params.stage = selectedStage;
-    }
-    if (selectedUser) {
-      params.assignedTo = selectedUser;
-    }
-
-    return params;
-  }, [
-    debouncedSearch,
-    selectedSource,
-    selectedStage,
-    selectedUser,
-    currentPage,
-  ]);
-
-  // Fetch leads with filters
-  const { data, isLoading, error, refetch } = useLeads(queryParams);
-
-  const leads = useMemo(() => (data as any)?.content || [], [data]);
-  const totalPages = (data as any)?.totalPages || 0;
-  const totalElements = (data as any)?.totalElements || 0;
 
   // Keyboard shortcuts
   const handleCreateLead = useCallback(() => {
@@ -136,20 +110,6 @@ export const LeadListPage: React.FC = () => {
     searchInputRef.current?.focus();
     announce("Search field focused", { priority: "polite" });
   }, [announce]);
-
-  const handleSelectAll = useCallback(() => {
-    if (leads.length === 0) {
-      return;
-    }
-
-    if (selectedLeads.length === leads.length) {
-      setSelectedLeads([]);
-      announce("All leads deselected", { priority: "polite" });
-    } else {
-      setSelectedLeads(leads.map((lead: any) => lead.id));
-      announce(`${leads.length} leads selected`, { priority: "polite" });
-    }
-  }, [leads, selectedLeads, announce]);
 
   // Setup keyboard shortcuts
   useKeyboardNavigation({
@@ -196,66 +156,6 @@ export const LeadListPage: React.FC = () => {
     enabled: !filterDrawerOpened,
   });
 
-  // Handle filter clearing
-  const handleClearFilters = () => {
-    setSearchTerm("");
-    setSelectedSource(null);
-    setSelectedStage(null);
-    setSelectedUser(null);
-    setCurrentPage(1);
-    announce("All filters cleared", { priority: "polite" });
-  };
-
-  // Check if any filters are active
-  const hasActiveFilters =
-    searchTerm || selectedSource || selectedStage || selectedUser;
-
-  // Handle lead selection for bulk actions
-  const handleLeadSelect = (leadId: string) => {
-    setSelectedLeads((prev) =>
-      prev.includes(leadId)
-        ? prev.filter((id) => id !== leadId)
-        : [...prev, leadId]
-    );
-  };
-
-  // Handle export
-  const handleExport = async () => {
-    try {
-      await exportMutation.mutateAsync(queryParams);
-      announce("Leads exported successfully", { priority: "polite" });
-    } catch (error) {
-      announce("Failed to export leads", { priority: "assertive" });
-    }
-  };
-
-  // Handle bulk actions
-  const handleBulkQualify = async () => {
-    if (selectedLeads.length === 0) {
-      announce("No leads selected for qualification", {
-        priority: "assertive",
-      });
-      return;
-    }
-
-    try {
-      await bulkQualifyMutation.mutateAsync(selectedLeads);
-      setSelectedLeads([]); // Clear selection after successful operation
-      announce(`Successfully qualified ${selectedLeads.length} leads`, {
-        priority: "polite",
-      });
-    } catch (error) {
-      announce("Failed to qualify leads", { priority: "assertive" });
-    }
-  };
-
-  // Handle page change - preserves filter state
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    setFocusedLeadIndex(0);
-    announce(`Page ${page} of ${totalPages}`, { priority: "polite" });
-  };
-
   // Handle lead click navigation
   const handleLeadClick = (leadId: string) => {
     navigate({ to: `/crm/leads/${leadId}` });
@@ -285,10 +185,10 @@ export const LeadListPage: React.FC = () => {
 
   // Announce filter changes
   React.useEffect(() => {
-    if (data && !isLoading) {
+    if (leads.length > 0 && !isLoading) {
       announce(`${totalElements} leads found`, { priority: "polite" });
     }
-  }, [data, isLoading, totalElements, announce]);
+  }, [leads, isLoading, totalElements, announce]);
 
   // Render loading state
   if (isLoading) {
@@ -431,8 +331,8 @@ export const LeadListPage: React.FC = () => {
                 leftSection={<IconDownload size={16} />}
                 variant="light"
                 onClick={handleExport}
-                loading={exportMutation.isPending}
-                disabled={exportMutation.isPending}
+                loading={isExporting}
+                disabled={isExporting}
                 size={isTablet ? "sm" : "md"}
               >
                 Export
@@ -602,8 +502,8 @@ export const LeadListPage: React.FC = () => {
                   size="xs"
                   variant="light"
                   onClick={handleBulkQualify}
-                  loading={bulkQualifyMutation.isPending}
-                  disabled={bulkQualifyMutation.isPending}
+                  loading={isBulkQualifying}
+                  disabled={isBulkQualifying}
                   fullWidth={isMobile}
                 >
                   Qualify Selected
@@ -612,7 +512,7 @@ export const LeadListPage: React.FC = () => {
                   size="xs"
                   variant="outline"
                   onClick={() => setSelectedLeads([])}
-                  disabled={bulkQualifyMutation.isPending}
+                  disabled={isBulkQualifying}
                   fullWidth={isMobile}
                 >
                   Clear Selection
@@ -671,11 +571,11 @@ export const LeadListPage: React.FC = () => {
                   onQuickActions={
                     !isMobile
                       ? {
-                          qualify: () => console.log("Qualify", lead.id),
-                          scheduleFollowUp: () =>
-                            console.log("Schedule follow-up", lead.id),
-                          viewDetails: () => handleLeadClick(lead.id),
-                        }
+                        qualify: () => console.log("Qualify", lead.id),
+                        scheduleFollowUp: () =>
+                          console.log("Schedule follow-up", lead.id),
+                        viewDetails: () => handleLeadClick(lead.id),
+                      }
                       : undefined
                   }
                 />
