@@ -29,13 +29,13 @@ import { t } from "@lingui/macro";
 import { useNavigate } from "@tanstack/react-router";
 import { notifications } from "@mantine/notifications";
 import { useMediaQuery } from "@mantine/hooks";
-import { PipelineStageColumn } from "./PipelineStageColumn";
+import { PipelineStageColumn } from "@/features/crm-leads";
 import { PipelineMetrics } from "./PipelineMetrics";
 import { PipelineSettingsModal } from "./PipelineSettingsModal";
 import { PipelineSkeleton } from "./skeletons";
-import { LeadCard } from "@/entities/crm";
 import { LazyLoad } from "@/shared/ui";
 import {
+  LeadCard,
   usePipelineStagesQuery,
   useLeadsQuery,
   useMoveLeadToStageMutation,

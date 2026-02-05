@@ -29,8 +29,8 @@ import {
   useUpdateFollowUpMutation,
   useCompleteFollowUpMutation,
   useDeleteFollowUpMutation,
+  FollowUpForm,
 } from "@/entities/crm";
-import { FollowUpForm } from "@/entities/crm";
 import type { FollowUp } from "@/shared/api/crm/types";
 import { notifications } from "@mantine/notifications";
 import { modals } from "@mantine/modals";
@@ -43,12 +43,10 @@ interface FollowUpSectionProps {
  * FollowUpSection - Component for managing follow-ups on lead detail page
  *
  * Features:
- * - Display all follow-ups for a specific lead (Requirement 5.3)
- * - Add scheduling form with date picker (Requirement 5.2)
- * - Implement editing and completion functionality (Requirement 5.4, 5.5, 5.6)
- * - Handle deletion with confirmation dialogs (Requirement 5.7)
- *
- * Requirements: 5.2, 5.3, 5.4, 5.5, 5.6, 5.7
+ * - Display all follow-ups for a specific lead
+ * - Add a scheduling form with date picker
+ * - Implement editing and completion functionality
+ * - Handle deletion with confirmation dialogs
  */
 export function FollowUpSection({ leadId }: FollowUpSectionProps) {
   const [isFormOpen, setIsFormOpen] = useState(false);

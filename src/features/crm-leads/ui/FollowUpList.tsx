@@ -37,8 +37,8 @@ import {
   useUpdateFollowUpMutation,
   useCompleteFollowUpMutation,
   useDeleteFollowUpMutation,
+  FollowUpForm,
 } from "@/entities/crm";
-import { FollowUpForm } from "@/entities/crm";
 import type { FollowUp } from "@/shared/api/crm/types";
 import { notifications } from "@mantine/notifications";
 import { modals } from "@mantine/modals";

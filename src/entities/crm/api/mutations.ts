@@ -89,7 +89,7 @@ export const useCreateLeadMutation = () => {
             await queryClient.cancelQueries({ queryKey: crmKeys.leads() });
             const previousLeads = queryClient.getQueryData(crmKeys.leadsList());
             queryClient.setQueryData(crmKeys.leadsList(), (old: any) => {
-                if (!old) return old;
+                if (!old) {return old;}
                 return {
                     ...old,
                     content: [

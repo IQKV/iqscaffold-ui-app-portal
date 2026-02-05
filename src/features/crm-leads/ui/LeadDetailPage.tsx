@@ -27,13 +27,16 @@ import {
 import { t } from "@lingui/core/macro";
 import { notifications } from "@mantine/notifications";
 import { useNavigate, useParams } from "@tanstack/react-router";
-import { useLeadQuery, useConvertLeadMutation } from "@/entities/crm";
+import { useLeadQuery,
+  useConvertLeadMutation,
+  LeadScoreBadge,
+  LeadSourceBadge
+} from "@/entities/crm";
 import { LeadNotesSection } from "./LeadNotesSection";
 import { FollowUpSection } from "./FollowUpSection";
 import { ActivityTimeline } from "./ActivityTimeline";
 import { LeadDetailSkeleton } from "./skeletons";
 import { LeadEditModal } from "./LeadEditModal";
-import { LeadScoreBadge, LeadSourceBadge } from "@/entities/crm";
 
 /**
  * LeadDetailPage Component
@@ -42,8 +45,6 @@ import { LeadScoreBadge, LeadSourceBadge } from "@/entities/crm";
  * - Tabbed interface (Overview, Notes, Activities, Follow-ups)
  * - Lead header with quick actions (qualify, convert, edit)
  * - Integration with LeadNotesSection and ActivityTimeline
- *
- * Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7
  */
 export const LeadDetailPage: React.FC = () => {
   const navigate = useNavigate();

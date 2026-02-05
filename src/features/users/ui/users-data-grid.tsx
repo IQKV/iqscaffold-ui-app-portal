@@ -87,9 +87,9 @@ export function UsersDataGrid({
   );
 
   const getRoleBadgeColor = (authorities: string[]) => {
-    if (authorities.includes("SUPER_ADMIN")) return "red";
-    if (authorities.includes("ADMIN")) return "orange";
-    if (authorities.includes("USER")) return "blue";
+    if (authorities.includes("SUPER_ADMIN")) {return "red";}
+    if (authorities.includes("ADMIN")) {return "orange";}
+    if (authorities.includes("USER")) {return "blue";}
     return "gray";
   };
 
@@ -227,7 +227,7 @@ export function UsersDataGrid({
           pagination={{
             page,
             total: data?.totalElements || 0,
-            pageSize: pageSize,
+            pageSize,
             onChange: setPage,
           }}
           emptyText={t`No users found`}

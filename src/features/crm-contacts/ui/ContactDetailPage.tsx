@@ -30,12 +30,11 @@ import {
 import { t } from "@lingui/core/macro";
 import { notifications } from "@mantine/notifications";
 import { useNavigate, useParams } from "@tanstack/react-router";
-import { useContactQuery } from "@/entities/crm";
+import { useContactQuery, LeadScoreBadge } from "@/entities/crm";
 import { ContactDetailSkeleton } from "./skeletons";
 import { ContactEditModal } from "./ContactEditModal";
 import { ContactNotesSection } from "./ContactNotesSection";
 import { ContactActivityTimeline } from "./ContactActivityTimeline";
-import { LeadScoreBadge } from "@/entities/crm";
 import { formatDate } from "@/shared/lib/utils";
 
 /**
