@@ -12,7 +12,13 @@ import {
   Title,
   Alert,
 } from "@mantine/core";
-import { IconEdit, IconTrash, IconPlus, IconSearch, IconAlertCircle } from "@tabler/icons-react";
+import {
+  IconEdit,
+  IconTrash,
+  IconPlus,
+  IconSearch,
+  IconAlertCircle,
+} from "@tabler/icons-react";
 import { DataTable, type DataTableColumn } from "@/shared/ui/data-table";
 import { useUsersQuery, useDeleteUserMutation, UserDto } from "@/entities/user";
 import { useAuth } from "@/processes/auth";

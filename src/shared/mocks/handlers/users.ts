@@ -88,15 +88,16 @@ export const usersHandlers = [
 
     const url = new URL(request.url);
     const rawPage = url.searchParams.get("page");
-    const rawSize = url.searchParams.get("size") || url.searchParams.get("limit");
+    const rawSize =
+      url.searchParams.get("size") || url.searchParams.get("limit");
     const pageParam = Number.parseInt(rawPage ?? "0", 10);
     const sizeParam = Number.parseInt(rawSize ?? "10", 10);
     // Support both 0-based (Spring-style) and 1-based page params
     const pageIndex = Number.isNaN(pageParam)
       ? 0
       : pageParam > 0
-      ? pageParam - 1
-      : pageParam;
+        ? pageParam - 1
+        : pageParam;
     const pageSize = Number.isNaN(sizeParam) ? 10 : sizeParam;
     const search = url.searchParams.get("search") || "";
 
