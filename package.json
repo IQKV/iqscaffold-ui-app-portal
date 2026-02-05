@@ -90,7 +90,7 @@
     "@tiptap/extension-underline": "^3.18.0",
     "@tiptap/pm": "^3.19.0",
     "@tiptap/react": "^3.18.0",
-    "@tiptap/starter-kit": "^3.18.0",
+    "@tiptap/starter-kit": "^3.19.0",
     "@types/sanitize-html": "^2.16.0",
     "@xyflow/react": "^12.10.0",
     "axios": "^1.13.4",
