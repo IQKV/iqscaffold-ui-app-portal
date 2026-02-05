@@ -10,8 +10,9 @@ import {
   Stack,
   Paper,
   Title,
+  Alert,
 } from "@mantine/core";
-import { IconEdit, IconTrash, IconPlus, IconSearch } from "@tabler/icons-react";
+import { IconEdit, IconTrash, IconPlus, IconSearch, IconAlertCircle } from "@tabler/icons-react";
 import { DataTable, type DataTableColumn } from "@/shared/ui/data-table";
 import { useUsersQuery, useDeleteUserMutation, UserDto } from "@/entities/user";
 import { useAuth } from "@/processes/auth";
@@ -200,6 +201,15 @@ export function UsersDataGrid({
 
   return (
     <Stack gap="md" data-testid="feature-users-data-grid">
+      {error && (
+        <Alert
+          icon={<IconAlertCircle size={16} />}
+          title={t`Error`}
+          color="red"
+        >
+          {t`Error loading users`}: {error.message}
+        </Alert>
+      )}
       <Paper p="md" withBorder shadow="sm">
         <Group justify="space-between" mb="md">
           <Title
