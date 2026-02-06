@@ -14,7 +14,6 @@ import {
 export function useAuth() {
   const user = useAuthStore((s) => s.user);
   const status = useAuthStore((s) => s.status);
-  const login = useAuthStore((s) => s.login);
   const logout = useAuthStore((s) => s.logout);
   const refresh = useAuthStore((s) => s.refresh);
 
@@ -156,7 +155,6 @@ export function useAuth() {
   return {
     user,
     status,
-    login,
     logout,
     refresh,
 

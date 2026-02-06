@@ -23,6 +23,7 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { errorFromAxios, formatErrorForDisplay } from "@/shared/lib/http-error";
 import { notificationService } from "@/shared/lib/notifications";
+import { spacing, typography, shadows } from "@/shared/lib/design-tokens";
 
 export interface ErrorBoundaryProps {
   children: React.ReactNode;
@@ -168,7 +169,7 @@ export function DefaultErrorFallback({
                     <Code
                       block
                       style={{
-                        fontSize: "10px",
+                        fontSize: typography.fontSize.xs,
                         maxHeight: "200px",
                         overflow: "auto",
                       }}

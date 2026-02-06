@@ -1,6 +1,9 @@
 /**
  * Custom hooks for authentication API operations
- * Provides React Query hooks for all auth endpoints
+ * Provides React Query hooks for authenticated user auth endpoints
+ * 
+ * Note: Unauthenticated flows (login, signup, forgot password, etc.) 
+ * are handled by the auth portal at auth.iqscaffold.com
  */
 
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -87,107 +90,5 @@ export function useEmailStatus(email: string, enabled = true) {
     queryFn: () => authApi.getEmailStatus(email),
     enabled: enabled && !!email,
     retry: false,
-  });
-}
-
-/**
- * Hook for resending verification email
- */
-export function useResendVerification() {
-  return useMutation({
-    mutationFn: (email: string) => authApi.resendVerification(email),
-    onSuccess: () => {
-      notifications.show({
-        title: t`Verification Email Sent`,
-        message: t`Please check your inbox for the verification link`,
-        color: "green",
-      });
-    },
-    onError: (error: any) => {
-      notifications.show({
-        title: t`Failed to Send Email`,
-        message: error?.message || t`Failed to send verification email`,
-        color: "red",
-      });
-    },
-  });
-}
-
-/**
- * Hook for verifying email
- */
-export function useVerifyEmail() {
-  return useMutation({
-    mutationFn: (token: string) => authApi.verifyEmail(token),
-    onSuccess: () => {
-      notifications.show({
-        title: t`Email Verified`,
-        message: t`Your email has been successfully verified`,
-        color: "green",
-      });
-    },
-    onError: (error: any) => {
-      notifications.show({
-        title: t`Verification Failed`,
-        message:
-          error?.message ||
-          t`Failed to verify email. The link may be invalid or expired.`,
-        color: "red",
-      });
-    },
-  });
-}
-
-/**
- * Hook for forgot password
- */
-export function useForgotPassword() {
-  return useMutation({
-    mutationFn: (email: string) => authApi.forgotPassword(email),
-    onSuccess: () => {
-      notifications.show({
-        title: t`Reset Link Sent`,
-        message: t`Please check your email for the password reset link`,
-        color: "green",
-      });
-    },
-    onError: (error: any) => {
-      notifications.show({
-        title: t`Failed to Send Reset Link`,
-        message: error?.message || t`Failed to send password reset link`,
-        color: "red",
-      });
-    },
-  });
-}
-
-/**
- * Hook for resetting password
- */
-export function useResetPassword() {
-  return useMutation({
-    mutationFn: ({
-      token,
-      newPassword,
-    }: {
-      token: string;
-      newPassword: string;
-    }) => authApi.resetPassword(token, newPassword),
-    onSuccess: () => {
-      notifications.show({
-        title: t`Password Reset Successful`,
-        message: t`Your password has been successfully reset`,
-        color: "green",
-      });
-    },
-    onError: (error: any) => {
-      notifications.show({
-        title: t`Password Reset Failed`,
-        message:
-          error?.message ||
-          t`Failed to reset password. The link may be invalid or expired.`,
-        color: "red",
-      });
-    },
   });
 }

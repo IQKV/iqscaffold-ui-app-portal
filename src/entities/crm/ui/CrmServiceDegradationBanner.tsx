@@ -1,5 +1,5 @@
 import React from "react";
-import { GenericServiceDegradationBanner } from "./GenericServiceDegradationBanner";
+import { GenericServiceDegradationBanner } from "@/shared/ui/GenericServiceDegradationBanner";
 import { useCrmServiceHealth } from "@/shared/lib/hooks/useCrmServiceHealth";
 import { t } from "@lingui/core/macro";
 

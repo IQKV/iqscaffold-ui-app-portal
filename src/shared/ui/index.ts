@@ -56,13 +56,33 @@ export {
   CompactFeatureUsage,
   FeatureUsageList,
 } from "./FeatureUsage";
-export { SubscriptionInfo, SubscriptionStatusBadge } from "./SubscriptionInfo";
 
-// Service health components
-export { CrmServiceDegradationBanner } from "./CrmServiceDegradationBanner";
-export { BillingServiceDegradationBanner } from "./BillingServiceDegradationBanner";
+// Generic service health components
 export { GenericServiceDegradationBanner } from "./GenericServiceDegradationBanner";
 
-// Access guards
+// Generic access guards
 export { ServiceAccessGuard } from "./guards/ServiceAccessGuard";
-export { BillingAccessGuard } from "./guards/BillingAccessGuard";
+
+// ============================================================================
+// BACKWARD COMPATIBILITY EXPORTS
+// ============================================================================
+// These components have been moved to their respective entity layers.
+// Re-exporting here for backward compatibility during migration.
+// TODO: Update all imports to use entity-specific paths and remove these exports
+
+// Billing components (moved to @/entities/billing/ui)
+export {
+  BillingServiceDegradationBanner,
+  SubscriptionInfo,
+  BillingAccessGuard,
+  BillingManagerGuard,
+} from "@/entities/billing/ui";
+
+// CRM components (moved to @/entities/crm/ui)
+export {
+  CrmServiceDegradationBanner,
+  CrmAccessGuard,
+  CrmContactManagerGuard,
+  CrmLeadManagerGuard,
+  CrmPipelineManagerGuard,
+} from "@/entities/crm/ui";

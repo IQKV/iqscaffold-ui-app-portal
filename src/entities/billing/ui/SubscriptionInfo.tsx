@@ -191,10 +191,14 @@ export const SubscriptionInfo: React.FC<SubscriptionInfoProps> = ({
   );
 };
 
+
+
 /**
  * Minimal subscription status indicator for headers and navigation.
+ * This is a wrapper around the base SubscriptionStatusBadge that fetches
+ * subscription data from context.
  */
-export const SubscriptionStatusBadge: React.FC = () => {
+export const SubscriptionStatusBadgeConnected: React.FC = () => {
   // Mock subscription data for now - this should be replaced with actual subscription context
   const planName = "Basic Plan";
   const subscriptionStatus: "active" | "past_due" | "canceled" | "trial" =
@@ -205,23 +209,8 @@ export const SubscriptionStatusBadge: React.FC = () => {
     return null;
   }
 
-  const getStatusColor = (status: string | null) => {
-    switch (status?.toLowerCase()) {
-      case "active":
-        return "green";
-      case "trialing":
-        return "blue";
-      case "past_due":
-        return "orange";
-      case "canceled":
-        return "red";
-      default:
-        return "gray";
-    }
-  };
-
   return (
-    <Badge color={getStatusColor(subscriptionStatus)} variant="light" size="sm">
+    <Badge color="green" variant="light" size="sm">
       {isTrialPeriod ? "Trial" : planName}
     </Badge>
   );

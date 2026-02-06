@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth } from "@/processes/auth";
-import { ServiceAccessGuard } from "./ServiceAccessGuard";
+import { ServiceAccessGuard } from "@/shared/ui/guards/ServiceAccessGuard";
 import { useCrmServiceHealth } from "@/shared/lib/hooks/useCrmServiceHealth";
 
 interface CrmAccessGuardProps {

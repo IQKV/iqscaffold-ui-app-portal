@@ -26,7 +26,7 @@ import {
   IconPlus,
 } from "@tabler/icons-react";
 import { CrmErrorBoundary } from "./CrmErrorBoundary.tsx";
-import { CrmServiceDegradationBanner } from "@/shared/ui/CrmServiceDegradationBanner";
+import { CrmServiceDegradationBanner } from "@/entities/crm/ui/CrmServiceDegradationBanner";
 
 export interface CrmLayoutProps {
   children: React.ReactNode;

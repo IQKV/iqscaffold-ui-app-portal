@@ -31,7 +31,6 @@ export interface LoginCredentials {
 
 export interface AuthActions {
   initialize: () => void;
-  login: (credentials: LoginCredentials) => Promise<void>;
   loginWithTokens: (tokens: {
     accessToken: string;
     refreshToken: string;

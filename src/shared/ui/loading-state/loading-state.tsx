@@ -14,6 +14,7 @@ import {
 import { IconWifi, IconRefresh } from "@tabler/icons-react";
 import { type AppError } from "@/shared/lib/http-error";
 import { t } from "@lingui/core/macro";
+import { spacing, zIndex, colors } from "@/shared/lib/design-tokens";
 
 interface LoadingStateProps {
   /** Loading message to display */
@@ -91,8 +92,8 @@ export function LoadingState({
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: "rgba(255, 255, 255, 0.8)",
-          zIndex: 1000,
+          backgroundColor: colors.background.overlay,
+          zIndex: zIndex.modal,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -263,7 +264,7 @@ export function TableLoading({
   return (
     <Stack gap="xs">
       {includeHeader && (
-        <Group gap="md" style={{ padding: "8px 0" }}>
+        <Group gap="md" style={{ padding: `${spacing.sm} 0` }}>
           {Array.from({ length: columns }).map((_, index) => (
             <Skeleton key={`header-${index}`} height={16} width="20%" />
           ))}
@@ -271,7 +272,7 @@ export function TableLoading({
       )}
 
       {Array.from({ length: rows }).map((_, rowIndex) => (
-        <Group key={`row-${rowIndex}`} gap="md" style={{ padding: "12px 0" }}>
+        <Group key={`row-${rowIndex}`} gap="md" style={{ padding: `${spacing.md} 0` }}>
           {Array.from({ length: columns }).map((_, colIndex) => (
             <Skeleton
               key={`cell-${rowIndex}-${colIndex}`}

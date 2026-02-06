@@ -19,8 +19,8 @@ import {
   IconStar,
 } from "@tabler/icons-react";
 import { AuthGuard, useAuth } from "@/processes/auth";
-import { BillingAccessGuard } from "@/shared/ui/guards/BillingAccessGuard";
-import { BillingServiceDegradationBanner } from "@/shared/ui/BillingServiceDegradationBanner";
+import { BillingAccessGuard } from "@/entities/billing/ui/guards/BillingAccessGuard";
+import { BillingServiceDegradationBanner } from "@/entities/billing/ui/BillingServiceDegradationBanner";
 import { BillingHistoryTable } from "@/widgets/billing-history";
 import { MerchantStatusCard } from "@/widgets/merchant-status-card";
 import { organizationApi } from "@/shared/api/organization-api";

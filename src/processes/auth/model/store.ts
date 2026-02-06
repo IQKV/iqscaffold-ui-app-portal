@@ -108,38 +108,9 @@ export const useAuthStore = create<AuthStore>()(
       },
 
       login: async (credentials: LoginCredentials) => {
-        set((s) => {
-          s.error = null;
-        });
-        const res = await authApi.login({
-          username: credentials.username,
-          password: credentials.password,
-          rememberMe: !!credentials.rememberMe,
-        });
-        const { user, exp } = decodeUser(res.accessToken);
-        setTokens({
-          accessToken: res.accessToken,
-          refreshToken: res.refreshToken,
-          expiresAt: exp ?? null,
-        });
-        set((s) => {
-          s.user = user;
-          s.tokens = {
-            accessToken: res.accessToken,
-            refreshToken: res.refreshToken,
-          };
-          s.expiresAt = exp ?? null;
-          s.status = user ? "authenticated" : "unauthenticated";
-          s.lastRefreshAt = Date.now();
-        });
-        // Set tenant context from user data
-        if (user?.tenantId) {
-          useTenantStore.getState().setTenantId(user.tenantId);
-        }
-        clearRefreshTimer();
-        if (exp) {
-          scheduleRefresh(exp - Date.now(), () => get().refresh());
-        }
+        // Login is handled by the auth portal
+        // This method should not be called directly
+        throw new Error("Login should be handled by the auth portal at auth.iqscaffold.com");
       },
 
       loginWithTokens: (tokens) => {

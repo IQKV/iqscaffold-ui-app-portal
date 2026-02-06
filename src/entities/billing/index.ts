@@ -6,3 +6,9 @@ export * from "./ui/PayoutStatusBadge";
 export * from "./ui/SubscriptionStatusBadge";
 export * from "./ui/InvoiceStatusBadge";
 export * from "./ui/BillingFormField";
+
+// Billing-specific UI components and guards
+export * from "./ui/BillingServiceDegradationBanner";
+export * from "./ui/SubscriptionInfo";
+export * from "./ui/guards";
+

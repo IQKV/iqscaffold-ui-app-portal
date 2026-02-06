@@ -15,8 +15,8 @@ import {
 import { IconPlus, IconAlertCircle, IconTrash } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
 import { AuthGuard, useAuth } from "@/processes/auth";
-import { BillingAccessGuard } from "@/shared/ui/guards/BillingAccessGuard";
-import { BillingServiceDegradationBanner } from "@/shared/ui/BillingServiceDegradationBanner";
+import { BillingAccessGuard } from "@/entities/billing/ui/guards/BillingAccessGuard";
+import { BillingServiceDegradationBanner } from "@/entities/billing/ui/BillingServiceDegradationBanner";
 import {
   GatewayConfigForm,
   GatewayConfigList,

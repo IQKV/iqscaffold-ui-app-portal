@@ -1,10 +1,20 @@
-// Feature-specific access guards
-export { BillingAccessGuard } from "./BillingAccessGuard";
-export { BillingManagerGuard } from "./BillingManagerGuard";
-export { CrmAccessGuard } from "./CrmAccessGuard";
-export { CrmLeadManagerGuard } from "./CrmLeadManagerGuard";
-export { CrmContactManagerGuard } from "./CrmContactManagerGuard";
-export { CrmPipelineManagerGuard } from "./CrmPipelineManagerGuard";
+// Generic access guard
+export { ServiceAccessGuard } from "./ServiceAccessGuard";
 
-// Re-export existing guards if they exist
-// Note: Add other existing guards here as needed
+// ============================================================================
+// BACKWARD COMPATIBILITY EXPORTS
+// ============================================================================
+// Feature-specific guards have been moved to their respective entity layers.
+// Re-exporting here for backward compatibility during migration.
+// TODO: Update all imports to use entity-specific paths and remove these exports
+
+// Billing guards (moved to @/entities/billing/ui/guards)
+export { BillingAccessGuard, BillingManagerGuard } from "@/entities/billing/ui";
+
+// CRM guards (moved to @/entities/crm/ui/guards)
+export {
+  CrmAccessGuard,
+  CrmLeadManagerGuard,
+  CrmContactManagerGuard,
+  CrmPipelineManagerGuard,
+} from "@/entities/crm/ui";

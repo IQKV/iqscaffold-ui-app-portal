@@ -13,3 +13,8 @@ export * from "./ui/LeadSourceBadge";
 export * from "./ui/CrmFormField";
 export * from "./lib";
 export * from "./lib/types";
+
+// CRM-specific UI components and guards
+export * from "./ui/CrmServiceDegradationBanner";
+export * from "./ui/guards";
+

@@ -36,3 +36,7 @@ export { useServiceHealth } from "./hooks/useServiceHealth";
 
 // Page utilities
 export { usePageTitle } from "./hooks/usePageTitle";
+
+// Design tokens
+export * from "./design-tokens";
+export type { DesignTokens } from "./design-tokens";

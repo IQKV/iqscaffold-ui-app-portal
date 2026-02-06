@@ -1,8 +1,6 @@
 export {
   authApi,
   type TokenResponse,
-  type UserRegistrationResponse,
-  type LoginCredentials,
   type RefreshTokenRequest,
   type ValidateTokenRequest,
   type ValidateTokenResponse,

@@ -3,9 +3,9 @@ import { t } from "@lingui/core/macro";
 import { UserMenu } from "@/processes/auth";
 import {
   ThemeToggle,
-  SubscriptionStatusBadge,
   SilentFeatureErrorBoundary,
 } from "@/shared/ui";
+import { SubscriptionStatusBadgeConnected } from "@/entities/billing/ui";
 
 interface HeaderProps {
   title?: string;
@@ -19,7 +19,7 @@ export function Header({ title = t`IQ Scaffold Platform` }: HeaderProps) {
       </Title>
       <Group gap="md">
         <SilentFeatureErrorBoundary>
-          <SubscriptionStatusBadge />
+          <SubscriptionStatusBadgeConnected />
         </SilentFeatureErrorBoundary>
         <ThemeToggle />
         <UserMenu />
