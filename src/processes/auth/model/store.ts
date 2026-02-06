@@ -110,7 +110,9 @@ export const useAuthStore = create<AuthStore>()(
       login: async (credentials: LoginCredentials) => {
         // Login is handled by the auth portal
         // This method should not be called directly
-        throw new Error("Login should be handled by the auth portal at auth.iqscaffold.com");
+        throw new Error(
+          "Login should be handled by the auth portal at auth.iqscaffold.com"
+        );
       },
 
       loginWithTokens: (tokens) => {

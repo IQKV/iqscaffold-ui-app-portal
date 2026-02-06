@@ -5,7 +5,15 @@
  * These examples can be used as reference when building new components.
  */
 
-import { Box, Button, Card, Text, Stack, Group, useMantineTheme } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Card,
+  Text,
+  Stack,
+  Group,
+  useMantineTheme,
+} from "@mantine/core";
 import {
   spacing,
   colors,
@@ -70,7 +78,11 @@ export function UtilityExample() {
         backgroundColor: getColorWithOpacity(colors.primary[500], 0.1),
 
         // Custom transition
-        transition: createTransition(["opacity", "transform"], "base", "easeInOut"),
+        transition: createTransition(
+          ["opacity", "transform"],
+          "base",
+          "easeInOut"
+        ),
 
         // Border
         border: `1px solid ${colors.border.default}`,

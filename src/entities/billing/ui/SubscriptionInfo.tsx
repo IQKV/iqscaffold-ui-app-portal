@@ -191,8 +191,6 @@ export const SubscriptionInfo: React.FC<SubscriptionInfoProps> = ({
   );
 };
 
-
-
 /**
  * Minimal subscription status indicator for headers and navigation.
  * This is a wrapper around the base SubscriptionStatusBadge that fetches

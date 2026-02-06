@@ -1,10 +1,7 @@
 import { Group, Title } from "@mantine/core";
 import { t } from "@lingui/core/macro";
 import { UserMenu } from "@/processes/auth";
-import {
-  ThemeToggle,
-  SilentFeatureErrorBoundary,
-} from "@/shared/ui";
+import { ThemeToggle, SilentFeatureErrorBoundary } from "@/shared/ui";
 import { SubscriptionStatusBadgeConnected } from "@/entities/billing/ui";
 
 interface HeaderProps {

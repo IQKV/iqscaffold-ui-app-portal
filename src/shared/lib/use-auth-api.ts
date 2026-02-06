@@ -1,8 +1,8 @@
 /**
  * Custom hooks for authentication API operations
  * Provides React Query hooks for authenticated user auth endpoints
- * 
- * Note: Unauthenticated flows (login, signup, forgot password, etc.) 
+ *
+ * Note: Unauthenticated flows (login, signup, forgot password, etc.)
  * are handled by the auth portal at auth.iqscaffold.com
  */
 

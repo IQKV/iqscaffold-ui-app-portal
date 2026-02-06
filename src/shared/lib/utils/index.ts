@@ -1,6 +1,6 @@
 /**
  * Utility functions for common operations
- * 
+ *
  * Note: Date utilities have been moved to @/shared/lib/dates
  */
 

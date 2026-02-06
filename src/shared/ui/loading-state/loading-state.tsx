@@ -272,7 +272,11 @@ export function TableLoading({
       )}
 
       {Array.from({ length: rows }).map((_, rowIndex) => (
-        <Group key={`row-${rowIndex}`} gap="md" style={{ padding: `${spacing.md} 0` }}>
+        <Group
+          key={`row-${rowIndex}`}
+          gap="md"
+          style={{ padding: `${spacing.md} 0` }}
+        >
           {Array.from({ length: columns }).map((_, colIndex) => (
             <Skeleton
               key={`cell-${rowIndex}-${colIndex}`}

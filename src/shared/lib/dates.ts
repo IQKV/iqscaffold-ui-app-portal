@@ -1,6 +1,6 @@
 /**
  * Date utility functions
- * 
+ *
  * All dates are stored in UTC in the database.
  * This module provides both dayjs-based (timezone-aware) and native Date API utilities.
  */
