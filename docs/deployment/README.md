@@ -53,7 +53,7 @@ The pipeline uses these Helm commands for deployment:
 
 ```bash
 # Development (WIP branches)
-helm upgrade --install --atomic --wait --timeout 5m quickstart-ui-app-portal ./ \
+helm upgrade --install --atomic --wait --timeout 5m iqscaffold-ui-app-portal ./ \
   --values ./values.yaml \
   --values ./values-dev.yaml \
   --set image.tag=wip \
@@ -61,7 +61,7 @@ helm upgrade --install --atomic --wait --timeout 5m quickstart-ui-app-portal ./ 
   --namespace iqscaffold-dev-env
 
 # Production (Tagged releases)
-helm upgrade --install --atomic --wait --timeout 5m quickstart-ui-app-portal ./ \
+helm upgrade --install --atomic --wait --timeout 5m iqscaffold-ui-app-portal ./ \
   --values ./values.yaml \
   --values ./values-production.yaml \
   --set image.tag=${DRONE_TAG} \
@@ -81,7 +81,7 @@ helm upgrade --install --atomic --wait --timeout 5m quickstart-ui-app-portal ./ 
 ```bash
 # Clone Helm charts
 git clone <HELM_CHARTS_REPOSITORY> charts
-cd charts/IQKV/quickstart-ui-app-portal
+cd charts/IQKV/iqscaffold-ui-app-portal
 
 # Deploy to development
 helm upgrade --install app-portal ./ \
@@ -207,13 +207,13 @@ Production deployments include:
 
 ```bash
 # Check service logs
-kubectl logs deployment/quickstart-ui-app-portal -n iqscaffold-dev-env
+kubectl logs deployment/iqscaffold-ui-app-portal -n iqscaffold-dev-env
 
 # Check pod status
-kubectl get pods -l app.kubernetes.io/name=quickstart-ui-app-portal -n iqscaffold-dev-env
+kubectl get pods -l app.kubernetes.io/name=iqscaffold-ui-app-portal -n iqscaffold-dev-env
 
 # Check ingress configuration
-kubectl describe ingress quickstart-ui-app-portal -n iqscaffold-dev-env
+kubectl describe ingress iqscaffold-ui-app-portal -n iqscaffold-dev-env
 ```
 
 </details>
@@ -223,14 +223,14 @@ kubectl describe ingress quickstart-ui-app-portal -n iqscaffold-dev-env
 
 ```bash
 # View ConfigMap
-kubectl describe configmap quickstart-ui-app-portal-config -n iqscaffold-dev-env
+kubectl describe configmap iqscaffold-ui-app-portal-config -n iqscaffold-dev-env
 
 # Check runtime configuration
-kubectl exec -it deployment/quickstart-ui-app-portal -n iqscaffold-dev-env -- \
+kubectl exec -it deployment/iqscaffold-ui-app-portal -n iqscaffold-dev-env -- \
   cat /usr/share/nginx/html/config.js
 
 # Verify init container logs
-kubectl logs deployment/quickstart-ui-app-portal -c config-init -n iqscaffold-dev-env
+kubectl logs deployment/iqscaffold-ui-app-portal -c config-init -n iqscaffold-dev-env
 ```
 
 </details>
@@ -240,7 +240,7 @@ kubectl logs deployment/quickstart-ui-app-portal -c config-init -n iqscaffold-de
 
 ```bash
 # Port forward to access health endpoints
-kubectl port-forward deployment/quickstart-ui-app-portal 8080:8080 -n iqscaffold-dev-env
+kubectl port-forward deployment/iqscaffold-ui-app-portal 8080:8080 -n iqscaffold-dev-env
 
 # Test health endpoints
 curl http://localhost:8080/
@@ -257,7 +257,7 @@ curl http://localhost:8080/health
 
 ```bash
 # Check SPA routing configuration
-kubectl exec -it deployment/quickstart-ui-app-portal -n iqscaffold-dev-env -- \
+kubectl exec -it deployment/iqscaffold-ui-app-portal -n iqscaffold-dev-env -- \
   cat /usr/share/nginx/site.conf
 
 # Test SPA routes
@@ -281,11 +281,11 @@ curl -H "Origin: https://auth.iqscaffold.com" \
 curl -v https://auth.iqscaffold.com/.well-known/openid_configuration
 
 # Check redirect configuration
-kubectl exec -it deployment/quickstart-ui-app-portal -n iqscaffold-dev-env -- \
+kubectl exec -it deployment/iqscaffold-ui-app-portal -n iqscaffold-dev-env -- \
   grep -i redirect /usr/share/nginx/html/config.js
 
 # Verify API server connectivity
-kubectl exec -it deployment/quickstart-ui-app-portal -n iqscaffold-dev-env -- \
+kubectl exec -it deployment/iqscaffold-ui-app-portal -n iqscaffold-dev-env -- \
   curl -v https://api.iqscaffold.com/health
 ```
 
@@ -298,10 +298,10 @@ kubectl exec -it deployment/quickstart-ui-app-portal -n iqscaffold-dev-env -- \
 
 ```bash
 # Rollback to previous version
-helm rollback quickstart-ui-app-portal -n iqscaffold-production-env
+helm rollback iqscaffold-ui-app-portal -n iqscaffold-production-env
 
 # Or uninstall completely
-helm uninstall quickstart-ui-app-portal -n iqscaffold-production-env
+helm uninstall iqscaffold-ui-app-portal -n iqscaffold-production-env
 ```
 
 </details>
