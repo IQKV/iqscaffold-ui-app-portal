@@ -23,10 +23,13 @@ test.describe("App Smoke Tests", () => {
     // Verify page loaded (either shows content or redirects to auth)
     const url = page.url();
     const isAuthenticated = !url.includes("/login");
-    
+
     if (isAuthenticated) {
       // If authenticated, verify navigation is present
-      const sidebar = await page.getByTestId("widget-sidebar").isVisible().catch(() => false);
+      const sidebar = await page
+        .getByTestId("widget-sidebar")
+        .isVisible()
+        .catch(() => false);
       if (sidebar) {
         await expect(page.getByTestId("widget-sidebar")).toBeVisible();
         console.log("✓ Homepage loaded with navigation (authenticated)");
@@ -34,7 +37,9 @@ test.describe("App Smoke Tests", () => {
         console.log("✓ Homepage loaded (content may be loading)");
       }
     } else {
-      console.log("✓ Homepage redirected to auth (expected for protected routes)");
+      console.log(
+        "✓ Homepage redirected to auth (expected for protected routes)"
+      );
     }
   });
 
@@ -49,7 +54,7 @@ test.describe("App Smoke Tests", () => {
       if (msg.type() === "error") {
         const text = msg.text();
         errors.push(text);
-        
+
         // Filter critical errors (exclude known warnings and 404s for resources)
         if (
           !text.includes("Download the React DevTools") &&
@@ -72,7 +77,9 @@ test.describe("App Smoke Tests", () => {
     // Verify no critical JavaScript errors
     expect(criticalErrors).toHaveLength(0);
 
-    console.log(`✓ No critical errors (${errors.length} total console messages)`);
+    console.log(
+      `✓ No critical errors (${errors.length} total console messages)`
+    );
   });
 
   test("authentication flow works", async ({ page }) => {
@@ -83,11 +90,11 @@ test.describe("App Smoke Tests", () => {
     const pageContent = await page.content();
     expect(pageContent).toBeTruthy();
     expect(pageContent.length).toBeGreaterThan(0);
-    
+
     // Check if redirected to auth or showing content
     const url = page.url();
     const isAuthenticated = !url.includes("/login");
-    
+
     if (isAuthenticated) {
       console.log("✓ Authentication flow: User is authenticated");
     } else {
@@ -101,20 +108,23 @@ test.describe("App Smoke Tests", () => {
 
     const url = page.url();
     const isAuthenticated = !url.includes("/login");
-    
+
     if (isAuthenticated) {
       // Try to find and click navigation elements
-      const navAbout = await page.getByTestId("nav-about").isVisible().catch(() => false);
-      
+      const navAbout = await page
+        .getByTestId("nav-about")
+        .isVisible()
+        .catch(() => false);
+
       if (navAbout) {
         await page.getByTestId("nav-about").click();
         await page.waitForLoadState("networkidle");
         await expect(page).toHaveURL("/about");
-        
+
         await page.getByTestId("nav-home").click();
         await page.waitForLoadState("networkidle");
         await expect(page).toHaveURL("/");
-        
+
         console.log("✓ Navigation and routing verified");
       } else {
         console.log("✓ Navigation not visible (may require authentication)");
@@ -132,17 +142,17 @@ test.describe("App Smoke Tests", () => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.waitForTimeout(500);
     expect(page.viewportSize()?.width).toBe(375);
-    
+
     // Test tablet viewport (iPad)
     await page.setViewportSize({ width: 768, height: 1024 });
     await page.waitForTimeout(500);
     expect(page.viewportSize()?.width).toBe(768);
-    
+
     // Test desktop viewport (Full HD)
     await page.setViewportSize({ width: 1920, height: 1080 });
     await page.waitForTimeout(500);
     expect(page.viewportSize()?.width).toBe(1920);
-    
+
     // Test large desktop viewport (4K)
     await page.setViewportSize({ width: 2560, height: 1440 });
     await page.waitForTimeout(500);
@@ -157,14 +167,16 @@ test.describe("App Smoke Tests", () => {
 
     const url = page.url();
     const isAuthenticated = !url.includes("/login");
-    
+
     if (isAuthenticated) {
       // Verify page is interactive
       const pageContent = await page.content();
       expect(pageContent).toBeTruthy();
       console.log("✓ Critical workflows: Page is interactive");
     } else {
-      console.log("✓ Critical workflows test skipped (requires authentication)");
+      console.log(
+        "✓ Critical workflows test skipped (requires authentication)"
+      );
     }
   });
 
@@ -172,24 +184,27 @@ test.describe("App Smoke Tests", () => {
     // Test 404 page
     await page.goto("/non-existent-page");
     await page.waitForLoadState("networkidle");
-    
+
     // Check if we got a 404 page or redirected to auth
     const url = page.url();
     const isAuthRedirect = url.includes("/login");
-    
+
     if (!isAuthRedirect) {
       // Try to find 404 page elements
-      const has404Page = await page.getByTestId("page-404").isVisible().catch(() => false);
-      
+      const has404Page = await page
+        .getByTestId("page-404")
+        .isVisible()
+        .catch(() => false);
+
       if (has404Page) {
         await expect(page.getByTestId("page-404")).toBeVisible();
         await expect(page.getByTestId("404-code")).toHaveText("404");
-        
+
         // Test "Go Home" button
         await page.getByTestId("btn-go-home").click();
         await page.waitForLoadState("networkidle");
         await expect(page).toHaveURL("/");
-        
+
         console.log("✓ Error handling and 404 page verified");
       } else {
         console.log("✓ Error handling: 404 page may require authentication");
@@ -209,7 +224,7 @@ test.describe("App Smoke Tests", () => {
 
     // Verify page loads within acceptable time (10 seconds)
     expect(loadTime).toBeLessThan(10000);
-    
+
     // Verify page content loaded
     const pageContent = await page.content();
     expect(pageContent.length).toBeGreaterThan(0);
@@ -224,7 +239,7 @@ test.describe("App Smoke Tests", () => {
     // Verify TanStack Router is working (URL is set)
     const url = page.url();
     expect(url).toBeTruthy();
-    
+
     // Verify page renders without integration errors
     const pageContent = await page.content();
     expect(pageContent).toContain("html");
@@ -240,15 +255,17 @@ test.describe("App Smoke Tests", () => {
     // Test keyboard navigation
     await page.keyboard.press("Tab");
     await page.waitForTimeout(200);
-    
+
     // Verify focus is visible (something should be focusable)
-    const focusedElement = await page.evaluate(() => document.activeElement?.tagName);
+    const focusedElement = await page.evaluate(
+      () => document.activeElement?.tagName
+    );
     expect(focusedElement).toBeTruthy();
-    
+
     // Verify semantic HTML structure
     const html = await page.locator("html").count();
     expect(html).toBe(1);
-    
+
     const body = await page.locator("body").count();
     expect(body).toBe(1);
 
@@ -261,16 +278,19 @@ test.describe("App Smoke Tests", () => {
 
     const url = page.url();
     const isAuthenticated = !url.includes("/login");
-    
+
     if (isAuthenticated) {
       // Check if CRM navigation is present (feature-gated)
-      const crmDashboard = await page.getByTestId("nav-crm-dashboard").isVisible().catch(() => false);
-      
+      const crmDashboard = await page
+        .getByTestId("nav-crm-dashboard")
+        .isVisible()
+        .catch(() => false);
+
       if (crmDashboard) {
         await page.getByTestId("nav-crm-dashboard").click();
         await page.waitForLoadState("networkidle");
         await expect(page).toHaveURL("/crm/dashboard");
-        
+
         console.log("✓ CRM navigation verified");
       } else {
         console.log("✓ CRM feature not enabled (skipped)");
@@ -286,16 +306,19 @@ test.describe("App Smoke Tests", () => {
 
     const url = page.url();
     const isAuthenticated = !url.includes("/login");
-    
+
     if (isAuthenticated) {
       // Check if Billing navigation is present (feature-gated)
-      const billingNav = await page.getByTestId("nav-billing").isVisible().catch(() => false);
-      
+      const billingNav = await page
+        .getByTestId("nav-billing")
+        .isVisible()
+        .catch(() => false);
+
       if (billingNav) {
         await page.getByTestId("nav-billing").click();
         await page.waitForLoadState("networkidle");
         await expect(page).toHaveURL("/billing");
-        
+
         console.log("✓ Billing navigation verified");
       } else {
         console.log("✓ Billing feature not enabled (skipped)");
