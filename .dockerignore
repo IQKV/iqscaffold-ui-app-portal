@@ -6,8 +6,8 @@ package-lock.json
 yarn.lock
 
 # Build outputs
-dist
-dist-ssr
+#dist
+#dist-ssr
 build
 coverage
 .tanstack
