@@ -217,7 +217,7 @@
     "vite-tsconfig-paths": "^6.0.5",
     "vitest": "3.2.4"
   },
-  "packageManager": "pnpm@10.23.0",
+  "packageManager": "pnpm@10.29.1",
   "msw": {
     "workerDirectory": [
       "public"

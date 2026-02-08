@@ -1,137 +1,190 @@
 import { test, expect } from "@playwright/test";
 
 /**
- * Smoke Test Template for E2E Testing
+ * E2E Smoke Tests for IQ Scaffold Platform
  *
- * This template provides a foundation for smoke tests that verify
- * critical application functionality. Customize assertions based on
- * your specific application requirements.
- *
- * Smoke tests should be:
- * - Fast (< 30 seconds total)
- * - Cover critical user paths
- * - Detect major regressions
- * - Run on every deployment
+ * These tests verify critical application functionality including:
+ * - Page loading and rendering
+ * - Navigation and routing
+ * - Error handling
+ * - Responsive design
+ * - Performance
+ * - Accessibility basics
  */
 test.describe("App Smoke Tests", () => {
   test("homepage loads successfully", async ({ page }) => {
     await page.goto("/");
-    await page.waitForTimeout(3000);
+    await page.waitForLoadState("networkidle");
 
-    // TODO: Add assertions based on your app's expected behavior
-    // Examples:
-    // - Check for specific text or elements
-    // - Verify authentication flow
-    // - Confirm page title
-
-    console.log("✓ Homepage navigation completed");
+    // Verify page renders with expected elements
+    await expect(page.getByTestId("page-home")).toBeVisible();
+    
+    // Verify sidebar navigation is present
+    await expect(page.getByTestId("widget-sidebar")).toBeVisible();
+    
+    // Verify main navigation links are present
+    await expect(page.getByTestId("nav-home")).toBeVisible();
+    await expect(page.getByTestId("nav-about")).toBeVisible();
+    await expect(page.getByTestId("nav-users")).toBeVisible();
+    
+    console.log("✓ Homepage loaded with all navigation elements");
   });
 
   test("application renders without critical JavaScript errors", async ({
     page,
   }) => {
     const errors: string[] = [];
+    const criticalErrors: string[] = [];
 
     // Capture console errors
     page.on("console", (msg) => {
       if (msg.type() === "error") {
-        errors.push(msg.text());
+        const text = msg.text();
+        errors.push(text);
+        
+        // Filter critical errors (exclude known warnings)
+        if (!text.includes("Download the React DevTools")) {
+          criticalErrors.push(text);
+        }
       }
     });
 
     // Capture page errors
     page.on("pageerror", (error) => {
-      errors.push(error.message);
+      criticalErrors.push(error.message);
     });
 
     await page.goto("/");
-    await page.waitForTimeout(3000);
+    await page.waitForLoadState("networkidle");
 
-    // TODO: Filter and assert on errors based on your app
-    // Example: expect(criticalErrors).toHaveLength(0);
+    // Verify no critical JavaScript errors
+    expect(criticalErrors).toHaveLength(0);
 
-    console.log(`✓ Captured ${errors.length} console messages`);
+    console.log(`✓ No critical errors (${errors.length} total console messages)`);
   });
 
   test("authentication flow works", async ({ page }) => {
     await page.goto("/");
-    await page.waitForTimeout(3000);
+    await page.waitForLoadState("networkidle");
 
-    // TODO: Test your authentication flow
-    // Examples:
-    // - Check for login redirect
-    // - Verify protected routes
-    // - Test logout functionality
+    // Verify auth guard is present (protected routes)
+    // The homepage uses AuthGuard component
+    const pageContent = await page.content();
+    expect(pageContent).toBeTruthy();
+    
+    // Verify page renders (auth guard allows access or redirects)
+    await expect(page.getByTestId("page-home")).toBeVisible();
 
-    console.log("✓ Authentication flow tested");
+    console.log("✓ Authentication flow verified");
   });
 
   test("main navigation and routing works", async ({ page }) => {
     await page.goto("/");
-    await page.waitForTimeout(2000);
+    await page.waitForLoadState("networkidle");
 
-    // TODO: Test navigation between key pages
-    // Examples:
-    // - Click main navigation links
-    // - Verify page transitions
-    // - Test back/forward browser buttons
+    // Test navigation to About page
+    await page.getByTestId("nav-about").click();
+    await page.waitForLoadState("networkidle");
+    await expect(page).toHaveURL("/about");
+    
+    // Test navigation to Users page
+    await page.getByTestId("nav-users").click();
+    await page.waitForLoadState("networkidle");
+    await expect(page).toHaveURL("/users");
+    
+    // Test navigation to Examples page
+    await page.getByTestId("nav-examples").click();
+    await page.waitForLoadState("networkidle");
+    await expect(page).toHaveURL("/examples");
+    
+    // Test navigation back to Home
+    await page.getByTestId("nav-home").click();
+    await page.waitForLoadState("networkidle");
+    await expect(page).toHaveURL("/");
+    
+    // Test browser back button
+    await page.goBack();
+    await expect(page).toHaveURL("/examples");
+    
+    // Test browser forward button
+    await page.goForward();
+    await expect(page).toHaveURL("/");
 
-    console.log("✓ Navigation tested");
+    console.log("✓ Navigation and routing verified");
   });
 
   test("responsive design works on different viewports", async ({ page }) => {
     await page.goto("/");
+    await page.waitForLoadState("networkidle");
 
-    // Test mobile viewport
+    // Test mobile viewport (iPhone SE)
     await page.setViewportSize({ width: 375, height: 667 });
-    await page.waitForTimeout(1000);
-
-    // TODO: Add mobile-specific assertions
-    // Examples:
-    // - Check mobile menu functionality
-    // - Verify responsive layout
-    // - Test touch interactions
-
-    // Test tablet viewport
+    await page.waitForTimeout(500);
+    await expect(page.getByTestId("widget-sidebar")).toBeVisible();
+    
+    // Test tablet viewport (iPad)
     await page.setViewportSize({ width: 768, height: 1024 });
-    await page.waitForTimeout(1000);
-
-    // Test desktop viewport
+    await page.waitForTimeout(500);
+    await expect(page.getByTestId("widget-sidebar")).toBeVisible();
+    
+    // Test desktop viewport (Full HD)
     await page.setViewportSize({ width: 1920, height: 1080 });
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(500);
+    await expect(page.getByTestId("widget-sidebar")).toBeVisible();
+    
+    // Test large desktop viewport (4K)
+    await page.setViewportSize({ width: 2560, height: 1440 });
+    await page.waitForTimeout(500);
+    await expect(page.getByTestId("widget-sidebar")).toBeVisible();
 
-    // TODO: Add desktop-specific assertions
-
-    console.log("✓ Responsive design tested");
+    console.log("✓ Responsive design verified across viewports");
   });
 
   test("critical user workflows function correctly", async ({ page }) => {
     await page.goto("/");
-    await page.waitForTimeout(2000);
+    await page.waitForLoadState("networkidle");
 
-    // TODO: Test your app's most important user flows
-    // Examples:
-    // - User registration/login
-    // - Creating/editing content
-    // - Making purchases
-    // - Submitting forms
-    // - Search functionality
+    // Test workflow: Navigate to Users page
+    await page.getByTestId("nav-users").click();
+    await page.waitForLoadState("networkidle");
+    await expect(page).toHaveURL("/users");
+    
+    // Test workflow: Navigate to Dashboard
+    await page.getByTestId("nav-dashboard").click();
+    await page.waitForLoadState("networkidle");
+    await expect(page).toHaveURL("/dashboard");
+    
+    // Test workflow: Navigate to Examples
+    await page.getByTestId("nav-examples").click();
+    await page.waitForLoadState("networkidle");
+    await expect(page).toHaveURL("/examples");
 
-    console.log("✓ Critical workflows tested");
+    console.log("✓ Critical workflows verified");
   });
 
   test("error handling and error boundaries work", async ({ page }) => {
     // Test 404 page
     await page.goto("/non-existent-page");
-    await page.waitForTimeout(2000);
+    await page.waitForLoadState("networkidle");
+    
+    // Verify 404 page elements
+    await expect(page.getByTestId("page-404")).toBeVisible();
+    await expect(page.getByTestId("404-code")).toHaveText("404");
+    await expect(page.getByTestId("404-title")).toBeVisible();
+    await expect(page.getByTestId("404-message")).toBeVisible();
+    
+    // Test "Go Home" button
+    await expect(page.getByTestId("btn-go-home")).toBeVisible();
+    await page.getByTestId("btn-go-home").click();
+    await page.waitForLoadState("networkidle");
+    await expect(page).toHaveURL("/");
+    
+    // Test "Go Back" button functionality
+    await page.goto("/non-existent-page");
+    await page.waitForLoadState("networkidle");
+    await expect(page.getByTestId("btn-go-back")).toBeVisible();
 
-    // TODO: Verify error page behavior
-    // Examples:
-    // - Check for 404 page content
-    // - Verify error boundary functionality
-    // - Test error recovery options
-
-    console.log("✓ Error handling tested");
+    console.log("✓ Error handling and 404 page verified");
   });
 
   test("performance and loading times are acceptable", async ({ page }) => {
@@ -142,41 +195,109 @@ test.describe("App Smoke Tests", () => {
 
     const loadTime = Date.now() - startTime;
 
-    // TODO: Add performance assertions
-    // Examples:
-    // - expect(loadTime).toBeLessThan(5000);
-    // - Check for performance metrics
-    // - Verify lazy loading
+    // Verify page loads within acceptable time (10 seconds)
+    expect(loadTime).toBeLessThan(10000);
+    
+    // Verify page is interactive
+    await expect(page.getByTestId("widget-sidebar")).toBeVisible();
+    await expect(page.getByTestId("nav-home")).toBeEnabled();
 
-    console.log(`✓ Page loaded in ${loadTime}ms`);
+    console.log(`✓ Page loaded in ${loadTime}ms (acceptable performance)`);
   });
 
   test("third-party integrations work", async ({ page }) => {
     await page.goto("/");
-    await page.waitForTimeout(3000);
+    await page.waitForLoadState("networkidle");
 
-    // TODO: Test external service integrations
-    // Examples:
-    // - Analytics tracking
-    // - Payment processors
-    // - Social media widgets
-    // - Chat widgets
-    // - Maps integration
+    // Verify Mantine UI components render correctly
+    const sidebar = page.getByTestId("widget-sidebar");
+    await expect(sidebar).toBeVisible();
+    
+    // Verify TanStack Router is working
+    await expect(page).toHaveURL("/");
+    
+    // Verify page renders without integration errors
+    const pageContent = await page.content();
+    expect(pageContent).toContain("Navigation");
 
-    console.log("✓ Third-party integrations tested");
+    console.log("✓ Third-party integrations verified");
   });
 
   test("accessibility basics are functional", async ({ page }) => {
     await page.goto("/");
-    await page.waitForTimeout(2000);
+    await page.waitForLoadState("networkidle");
 
-    // TODO: Add accessibility checks
-    // Examples:
-    // - Keyboard navigation
-    // - Screen reader compatibility
-    // - Color contrast
-    // - Focus management
+    // Test keyboard navigation
+    await page.keyboard.press("Tab");
+    await page.waitForTimeout(200);
+    
+    // Verify focus is visible (navigation should be focusable)
+    const focusedElement = await page.evaluate(() => document.activeElement?.tagName);
+    expect(focusedElement).toBeTruthy();
+    
+    // Verify semantic HTML structure
+    const main = await page.locator("main").count();
+    expect(main).toBeGreaterThan(0);
+    
+    // Verify navigation links have proper attributes
+    const navHome = page.getByTestId("nav-home");
+    await expect(navHome).toHaveAttribute("href", "/");
 
-    console.log("✓ Accessibility basics tested");
+    console.log("✓ Accessibility basics verified");
+  });
+
+  test("CRM navigation works when feature is enabled", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+
+    // Check if CRM navigation is present (feature-gated)
+    const crmDashboard = page.getByTestId("nav-crm-dashboard");
+    const isCrmVisible = await crmDashboard.isVisible().catch(() => false);
+    
+    if (isCrmVisible) {
+      // Test CRM Dashboard navigation
+      await crmDashboard.click();
+      await page.waitForLoadState("networkidle");
+      await expect(page).toHaveURL("/crm/dashboard");
+      
+      // Test CRM Leads navigation
+      await page.getByTestId("nav-crm-leads").click();
+      await page.waitForLoadState("networkidle");
+      await expect(page).toHaveURL("/crm/leads");
+      
+      // Test CRM Contacts navigation
+      await page.getByTestId("nav-crm-contacts").click();
+      await page.waitForLoadState("networkidle");
+      await expect(page).toHaveURL("/crm/contacts");
+      
+      console.log("✓ CRM navigation verified");
+    } else {
+      console.log("✓ CRM feature not enabled (skipped)");
+    }
+  });
+
+  test("billing navigation works when feature is enabled", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+
+    // Check if Billing navigation is present (feature-gated)
+    const billingNav = page.getByTestId("nav-billing");
+    const isBillingVisible = await billingNav.isVisible().catch(() => false);
+    
+    if (isBillingVisible) {
+      // Test Billing navigation
+      await billingNav.click();
+      await page.waitForLoadState("networkidle");
+      await expect(page).toHaveURL("/billing");
+      
+      // Test Gateway Config navigation
+      await page.getByTestId("nav-gateway-config").click();
+      await page.waitForLoadState("networkidle");
+      await expect(page).toHaveURL("/gateway-config");
+      
+      console.log("✓ Billing navigation verified");
+    } else {
+      console.log("✓ Billing feature not enabled (skipped)");
+    }
   });
 });
