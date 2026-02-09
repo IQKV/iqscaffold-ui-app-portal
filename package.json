@@ -135,7 +135,7 @@
     "@lingui/cli": "^5.9.0",
     "@lingui/swc-plugin": "^5.10.1",
     "@lingui/vite-plugin": "^5.9.0",
-    "@playwright/test": "1.58.1",
+    "@playwright/test": "1.58.2",
     "@release-it/conventional-changelog": "^10.0.5",
     "@storybook/addon-a11y": "^8.6.15",
     "@storybook/addon-essentials": "^8.6.14",
