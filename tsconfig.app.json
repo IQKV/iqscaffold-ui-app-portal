@@ -21,7 +21,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     /* Include Vitest types for testing */
-    "types": ["vitest/globals", "react", "react-dom"],
+    "types": ["vitest/globals", "react", "react-dom", "node"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
