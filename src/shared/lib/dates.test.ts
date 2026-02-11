@@ -121,13 +121,12 @@ describe("Date Utilities", () => {
         .fn()
         .mockReturnValue([{ type: "timeZoneName", value: "EST" }]);
 
-      vi.spyOn(Intl, "DateTimeFormat").mockImplementation(
-        () =>
-          ({
-            resolvedOptions: mockResolvedOptions,
-            formatToParts: mockFormatToParts,
-          }) as any
-      );
+      vi.spyOn(Intl, "DateTimeFormat").mockImplementation(function (this: any) {
+        return {
+          resolvedOptions: mockResolvedOptions,
+          formatToParts: mockFormatToParts,
+        } as any;
+      } as any);
 
       const utcDate = "2024-01-15T10:30:00Z";
       const result = dateToBrowserTz(utcDate);
@@ -145,13 +144,12 @@ describe("Date Utilities", () => {
         .fn()
         .mockReturnValue([{ type: "timeZoneName", value: "GMT" }]);
 
-      vi.spyOn(Intl, "DateTimeFormat").mockImplementation(
-        () =>
-          ({
-            resolvedOptions: mockResolvedOptions,
-            formatToParts: mockFormatToParts,
-          }) as any
-      );
+      vi.spyOn(Intl, "DateTimeFormat").mockImplementation(function (this: any) {
+        return {
+          resolvedOptions: mockResolvedOptions,
+          formatToParts: mockFormatToParts,
+        } as any;
+      } as any);
 
       const utcDate = "2024-06-15T14:30:00Z";
       const result = dateToBrowserTz(utcDate);
