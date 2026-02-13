@@ -214,7 +214,7 @@
     "vite-plugin-copy": "^0.1.6",
     "vite-plugin-image-optimizer": "^2.0.3",
     "vite-plugin-remove-console": "^2.2.0",
-    "vite-tsconfig-paths": "^6.1.0",
+    "vite-tsconfig-paths": "^6.1.1",
     "vitest": "4.0.18"
   },
   "packageManager": "pnpm@10.29.1",
