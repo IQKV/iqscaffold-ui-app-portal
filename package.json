@@ -130,7 +130,7 @@
   "devDependencies": {
     "@commitlint/cli": "^20.4.1",
     "@commitlint/config-conventional": "^20.4.1",
-    "@eslint-react/eslint-plugin": "^2.12.4",
+    "@eslint-react/eslint-plugin": "^2.13.0",
     "@eslint/js": "^9.39.2",
     "@lingui/cli": "^5.9.1",
     "@lingui/swc-plugin": "^5.11.0",
