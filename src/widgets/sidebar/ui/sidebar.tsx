@@ -10,13 +10,16 @@ import {
   IconLayoutKanban,
   IconChartBar,
   IconCalendarEvent,
+  IconMailForward,
 } from "@tabler/icons-react";
 import { Link, useLocation } from "@tanstack/react-router";
 import { FeatureGate, SilentFeatureErrorBoundary } from "@/shared/ui";
 import { t } from "@lingui/core/macro";
+import { useAuth } from "@/processes/auth";
 
 export function Sidebar() {
   const location = useLocation();
+  const { hasAnyAuthority } = useAuth();
 
   return (
     <Stack gap="md" data-testid="widget-sidebar">
@@ -50,6 +53,24 @@ export function Sidebar() {
         active={location.pathname === "/users"}
         data-testid="nav-users"
       />
+
+      {/* Team Section */}
+      {hasAnyAuthority(["ADMIN", "TENANT_ADMIN"]) && (
+        <>
+          <Text size="sm" fw={500} mt="md">
+            {t`Team`}
+          </Text>
+
+          <NavLink
+            component={Link}
+            to="/invitations"
+            label={t`Invitations`}
+            leftSection={<IconMailForward size="1rem" />}
+            active={location.pathname === "/invitations"}
+            data-testid="nav-invitations"
+          />
+        </>
+      )}
 
       <NavLink
         component={Link}

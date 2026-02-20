@@ -133,7 +133,7 @@ msgid "A lead with this email already exists"
 msgstr "A lead with this email already exists"
 
 #: src/pages/about.tsx:23
-#: src/widgets/sidebar/ui/sidebar.tsx:39
+#: src/widgets/sidebar/ui/sidebar.tsx:42
 msgid "About"
 msgstr "About"
 
@@ -145,6 +145,10 @@ msgstr "About This Template"
 msgid "Accept-Language header (from browser)"
 msgstr "Accept-Language header (from browser)"
 
+#: src/features/invitation-management/ui/InvitationList.tsx:272
+msgid "Accepted"
+msgstr "Accepted"
+
 #: src/pages/gateway-config.tsx:156
 #: src/pages/subscriptions.tsx:53
 msgid "Access Denied"
@@ -154,6 +158,7 @@ msgstr "Access Denied"
 msgid "Access Token"
 msgstr "Access Token"
 
+#: src/features/invitation-management/ui/InvitationList.tsx:215
 #: src/features/invoice-management/ui/InvoicesTable.tsx:78
 #: src/features/users/ui/enhanced-users-data-grid.tsx:197
 #: src/features/users/ui/users-data-grid.tsx:172
@@ -209,6 +214,10 @@ msgstr "Activity Timeline"
 msgid "Add"
 msgstr "Add"
 
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:242
+msgid "Add a personal message"
+msgstr "Add a personal message"
+
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:133
 msgid "Add any notes about this subscription..."
 msgstr "Add any notes about this subscription..."
@@ -262,6 +271,7 @@ msgid "Additional notes..."
 msgstr "Additional notes..."
 
 #: src/entities/user/ui/UserFormField.tsx:78
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:211
 msgid "Admin"
 msgstr "Admin"
 
@@ -302,6 +312,10 @@ msgstr "All API requests include Accept-Language and X-User-Locale headers"
 #~ msgid "All CRM Services Available"
 #~ msgstr "All CRM Services Available"
 
+#: src/features/invitation-management/ui/InvitationList.tsx:270
+msgid "All Statuses"
+msgstr "All Statuses"
+
 #: src/features/invoice-management/ui/InvoicesTable.tsx:75
 #: src/widgets/billing-history/ui/billing-history-table.tsx:106
 msgid "Amount"
@@ -317,9 +331,17 @@ msgstr "Amount Paid:"
 msgid "An error occurred"
 msgstr "An error occurred"
 
+#: src/shared/lib/use-invitation-api.ts:74
+msgid "An error occurred while creating the invitation"
+msgstr "An error occurred while creating the invitation"
+
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:83
 msgid "An error occurred while processing your CRM request."
 msgstr "An error occurred while processing your CRM request."
+
+#: src/shared/lib/use-invitation-api.ts:104
+msgid "An error occurred while revoking the invitation"
+msgstr "An error occurred while revoking the invitation"
 
 #: src/entities/crm/lib/use-form-submission.ts:165
 msgid "An unexpected error occurred"
@@ -438,6 +460,10 @@ msgstr "Are you sure you want to refund this payment? This action cannot be undo
 msgid "Are you sure you want to reset the form?"
 msgstr "Are you sure you want to reset the form?"
 
+#: src/features/invitation-management/ui/InvitationList.tsx:63
+msgid "Are you sure you want to revoke this invitation?"
+msgstr "Are you sure you want to revoke this invitation?"
+
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:225
 msgid "Assigned to"
 msgstr "Assigned to"
@@ -455,6 +481,11 @@ msgstr "At least one authority is required"
 #: src/features/users/ui/users-data-grid.tsx:131
 msgid "Authorities"
 msgstr "Authorities"
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:207
+#: src/features/invitation-management/ui/InvitationList.tsx:169
+msgid "Authority"
+msgstr "Authority"
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:337
 msgid "Authority management will be available in a future update."
@@ -528,8 +559,12 @@ msgstr "Backend user preference is updated via API"
 msgid "Basic User Access"
 msgstr "Basic User Access"
 
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:224
+msgid "Between 1 hour and 30 days (720 hours)"
+msgstr "Between 1 hour and 30 days (720 hours)"
+
 #: src/pages/billing.tsx:51
-#: src/widgets/sidebar/ui/sidebar.tsx:69
+#: src/widgets/sidebar/ui/sidebar.tsx:90
 msgid "Billing"
 msgstr "Billing"
 
@@ -558,6 +593,10 @@ msgstr "Built following Feature-Sliced Design methodology for maintainable and s
 #~ msgid "Bulk status update failed"
 #~ msgstr "Bulk status update failed"
 
+#: src/features/invitation-management/ui/InvitationList.tsx:208
+msgid "by"
+msgstr "by"
+
 #: src/shared/ui/msw-dev-tools.tsx:100
 msgid "Bypass (allow through)"
 msgstr "Bypass (allow through)"
@@ -583,6 +622,8 @@ msgstr "Call contact"
 #: src/features/crm-leads/ui/LeadNotesSection.tsx:256
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:347
 #: src/features/gateway-config/ui/gateway-config-form.tsx:190
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:264
+#: src/features/invitation-management/ui/InvitationList.tsx:72
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:166
 #: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:66
 #: src/features/security-settings/ui/security-settings-feature.tsx:41
@@ -708,12 +749,21 @@ msgid "Client Secret"
 msgstr "Client Secret"
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:375
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:177
 msgid "Close"
 msgstr "Close"
 
 #: src/features/crm-leads/ui/CrmLayout.tsx:296
 msgid "Close navigation"
 msgstr "Close navigation"
+
+#: src/features/invitation-management/ui/InvitationList.tsx:156
+msgid "Code invitation"
+msgstr "Code invitation"
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:189
+msgid "Code Invitation"
+msgstr "Code Invitation"
 
 #: src/pages/about.tsx:121
 msgid "Code Quality:"
@@ -821,7 +871,7 @@ msgstr "Contacted"
 #: src/entities/crm/ui/CrmServiceDegradationBanner.tsx:22
 #: src/features/crm-leads/ui/CrmLayout.tsx:84
 #: src/pages/crm.contacts.tsx:18
-#: src/widgets/sidebar/ui/sidebar.tsx:125
+#: src/widgets/sidebar/ui/sidebar.tsx:146
 msgid "Contacts"
 msgstr "Contacts"
 
@@ -836,6 +886,19 @@ msgstr "Conversion Rate"
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:272
 msgid "Convert to Contact"
 msgstr "Convert to Contact"
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:134
+#: src/features/invitation-management/ui/InvitationList.tsx:118
+msgid "Copied!"
+msgstr "Copied!"
+
+#: src/features/invitation-management/ui/InvitationList.tsx:118
+msgid "Copy invitation link"
+msgstr "Copy invitation link"
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:134
+msgid "Copy link"
+msgstr "Copy link"
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:66
 msgid "Could not initiate merchant onboarding. Please try again."
@@ -862,6 +925,12 @@ msgstr "Could not process refund. Please try again"
 msgid "Create"
 msgstr "Create"
 
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:159
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:271
+#: src/features/invitation-management/ui/InvitationList.tsx:263
+msgid "Create Invitation"
+msgstr "Create Invitation"
+
 #: src/features/users/ui/users-page.tsx:47
 msgid "Create New User"
 msgstr "Create New User"
@@ -871,6 +940,7 @@ msgstr "Create New User"
 msgid "Create Subscription"
 msgstr "Create Subscription"
 
+#: src/features/invitation-management/ui/InvitationList.tsx:200
 #: src/features/users/ui/enhanced-users-data-grid.tsx:190
 #: src/features/users/ui/users-data-grid.tsx:164
 msgid "Created"
@@ -886,7 +956,7 @@ msgstr "Created:"
 
 #: src/features/crm-leads/ui/CrmLayout.tsx:111
 #: src/features/crm-leads/ui/CrmLayout.tsx:301
-#: src/widgets/sidebar/ui/sidebar.tsx:98
+#: src/widgets/sidebar/ui/sidebar.tsx:119
 msgid "CRM"
 msgstr "CRM"
 
@@ -901,7 +971,7 @@ msgstr "CRM Contacts"
 #: src/features/crm-leads/ui/CrmDashboard.tsx:83
 #: src/pages/crm-dashboard.tsx:21
 #: src/pages/crm-dashboard.tsx:28
-#: src/widgets/sidebar/ui/sidebar.tsx:104
+#: src/widgets/sidebar/ui/sidebar.tsx:125
 msgid "CRM Dashboard"
 msgstr "CRM Dashboard"
 
@@ -981,6 +1051,10 @@ msgstr "Current Preference Values"
 msgid "Current Subscription"
 msgstr "Current Subscription"
 
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:241
+msgid "Custom Message (Optional)"
+msgstr "Custom Message (Optional)"
+
 #: src/features/crm-leads/ui/DateRangeFilter.tsx:164
 msgid "Custom Range"
 msgstr "Custom Range"
@@ -1006,7 +1080,7 @@ msgstr "Dark mode"
 #: src/features/dashboard/ui/dashboard-feature.tsx:15
 #: src/pages/dashboard.tsx:19
 #: src/pages/dashboard.tsx:28
-#: src/widgets/sidebar/ui/sidebar.tsx:88
+#: src/widgets/sidebar/ui/sidebar.tsx:109
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -1222,7 +1296,12 @@ msgstr "Editing {userName}"
 msgid "Email"
 msgstr "Email"
 
+#: src/features/invitation-management/ui/InvitationList.tsx:146
+msgid "Email / Details"
+msgstr "Email / Details"
+
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:63
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:198
 msgid "Email Address"
 msgstr "Email Address"
 
@@ -1233,9 +1312,17 @@ msgstr "Email Address"
 msgid "Email Campaign"
 msgstr "Email Campaign"
 
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:187
+msgid "Email Invitation"
+msgstr "Email Invitation"
+
 #: src/entities/crm/lib/validation-schemas.ts:25
 msgid "Email is required"
 msgstr "Email is required"
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:56
+msgid "Email is required for email invitations"
+msgstr "Email is required for email invitations"
 
 #: src/entities/crm/lib/validation-schemas.ts:27
 msgid "Email must be less than 255 characters"
@@ -1309,6 +1396,10 @@ msgstr "Enter first name"
 #: src/entities/crm/ui/FollowUpForm.tsx:150
 msgid "Enter follow-up description"
 msgstr "Enter follow-up description"
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:220
+msgid "Enter hours"
+msgstr "Enter hours"
 
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:171
 #: src/features/crm-leads/ui/LeadEditModal.tsx:196
@@ -1396,6 +1487,8 @@ msgstr "Environment mode for the gateway"
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:114
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:131
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:152
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:250
+#: src/features/invitation-management/ui/InvitationList.tsx:247
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:76
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:57
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:89
@@ -1436,6 +1529,10 @@ msgstr "Error loading contact"
 #: src/features/crm-leads/ui/CrmDashboard.tsx:98
 msgid "Error Loading Dashboard"
 msgstr "Error Loading Dashboard"
+
+#: src/features/invitation-management/ui/InvitationList.tsx:250
+msgid "Error loading invitations"
+msgstr "Error loading invitations"
 
 #: src/features/invoice-management/ui/InvoicesTable.tsx:52
 msgid "Error Loading Invoices"
@@ -1496,9 +1593,26 @@ msgid "every {count} years"
 msgstr "every {count} years"
 
 #: src/pages/examples.tsx:46
-#: src/widgets/sidebar/ui/sidebar.tsx:57
+#: src/widgets/sidebar/ui/sidebar.tsx:78
 msgid "Examples"
 msgstr "Examples"
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:219
+msgid "Expiration (hours)"
+msgstr "Expiration (hours)"
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:60
+msgid "Expiration must be between 1 and 720 hours"
+msgstr "Expiration must be between 1 and 720 hours"
+
+#: src/features/invitation-management/ui/InvitationList.tsx:273
+msgid "Expired"
+msgstr "Expired"
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:147
+#: src/features/invitation-management/ui/InvitationList.tsx:190
+msgid "Expires"
+msgstr "Expires"
 
 #: src/pages/examples.tsx:192
 msgid "Explore the various components and features available in this template"
@@ -1544,6 +1658,14 @@ msgstr "Failed to configure payment gateway"
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:80
 msgid "Failed to convert lead"
 msgstr "Failed to convert lead"
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:254
+msgid "Failed to create invitation"
+msgstr "Failed to create invitation"
+
+#: src/shared/lib/use-invitation-api.ts:72
+msgid "Failed to Create Invitation"
+msgstr "Failed to Create Invitation"
 
 #: src/entities/crm/ui/LeadForm.tsx:161
 msgid "Failed to create lead: {errorMessage}"
@@ -1675,6 +1797,10 @@ msgstr "Failed to reorder stage"
 msgid "Failed to resume subscription. Please try again."
 msgstr "Failed to resume subscription. Please try again."
 
+#: src/shared/lib/use-invitation-api.ts:102
+msgid "Failed to Revoke Invitation"
+msgstr "Failed to Revoke Invitation"
+
 #: src/entities/crm/ui/FollowUpForm.tsx:119
 msgid "Failed to schedule follow-up: {errorMessage}"
 msgstr "Failed to schedule follow-up: {errorMessage}"
@@ -1801,6 +1927,7 @@ msgid "Filter by stage"
 msgstr "Filter by stage"
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:353
+#: src/features/invitation-management/ui/InvitationList.tsx:268
 msgid "Filter by status"
 msgstr "Filter by status"
 
@@ -1844,9 +1971,13 @@ msgstr "Follow-up updated successfully"
 #: src/features/crm-leads/ui/FollowUpSection.tsx:173
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:291
 #: src/pages/crm-follow-ups.tsx:24
-#: src/widgets/sidebar/ui/sidebar.tsx:147
+#: src/widgets/sidebar/ui/sidebar.tsx:168
 msgid "Follow-ups"
 msgstr "Follow-ups"
+
+#: src/features/invitation-management/ui/InvitationList.tsx:66
+msgid "for"
+msgstr "for"
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:106
 msgid "For additional security, we recommend changing your password regularly and enabling two-factor authentication when available."
@@ -1890,7 +2021,7 @@ msgstr "Gateway"
 msgid "Gateway activated successfully"
 msgstr "Gateway activated successfully"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:77
+#: src/widgets/sidebar/ui/sidebar.tsx:98
 msgid "Gateway Config"
 msgstr "Gateway Config"
 
@@ -1962,7 +2093,7 @@ msgstr "High"
 
 #: src/features/crm-leads/ui/CrmLayout.tsx:107
 #: src/pages/index.tsx:12
-#: src/widgets/sidebar/ui/sidebar.tsx:30
+#: src/widgets/sidebar/ui/sidebar.tsx:33
 msgid "Home"
 msgstr "Home"
 
@@ -2021,6 +2152,40 @@ msgstr "Invalid phone number"
 msgid "Invalid URL"
 msgstr "Invalid URL"
 
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:159
+#: src/shared/lib/use-invitation-api.ts:65
+msgid "Invitation Created"
+msgstr "Invitation Created"
+
+#: src/shared/lib/use-invitation-api.ts:66
+msgid "Invitation has been created successfully"
+msgstr "Invitation has been created successfully"
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:171
+msgid "Invitation has been created successfully!"
+msgstr "Invitation has been created successfully!"
+
+#: src/shared/lib/use-invitation-api.ts:96
+msgid "Invitation has been revoked successfully"
+msgstr "Invitation has been revoked successfully"
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:123
+msgid "Invitation Link"
+msgstr "Invitation Link"
+
+#: src/shared/lib/use-invitation-api.ts:95
+msgid "Invitation Revoked"
+msgstr "Invitation Revoked"
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:184
+msgid "Invitation Type"
+msgstr "Invitation Type"
+
+#: src/features/invitation-management/ui/InvitationList.tsx:256
+#: src/widgets/sidebar/ui/sidebar.tsx:67
+msgid "Invitations"
+msgstr "Invitations"
+
 #: src/features/invoice-management/ui/InvoicesTable.tsx:73
 msgid "Invoice"
 msgstr "Invoice"
@@ -2036,7 +2201,7 @@ msgid "Invoices"
 msgstr "Invoices"
 
 #: src/pages/__root.tsx:26
-#: src/widgets/header/ui/header.tsx:14
+#: src/widgets/header/ui/header.tsx:11
 msgid "IQ Scaffold Platform"
 msgstr "IQ Scaffold Platform"
 
@@ -2143,7 +2308,7 @@ msgstr "leads"
 #: src/features/crm-leads/ui/DashboardStats.tsx:250
 #: src/features/crm-leads/ui/DashboardStats.tsx:289
 #: src/pages/crm.leads.tsx:17
-#: src/widgets/sidebar/ui/sidebar.tsx:114
+#: src/widgets/sidebar/ui/sidebar.tsx:135
 msgid "Leads"
 msgstr "Leads"
 
@@ -2158,6 +2323,10 @@ msgstr "Leads by Source"
 #: src/pages/about.tsx:39
 msgid "Learn more about the technologies and architecture used in this project"
 msgstr "Learn more about the technologies and architecture used in this project"
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:232
+msgid "Leave empty for unlimited"
+msgstr "Leave empty for unlimited"
 
 #: src/shared/ui/theme-toggle/theme-toggle.tsx:10
 msgid "Light mode"
@@ -2181,6 +2350,10 @@ msgstr "Loading available gateways..."
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:118
 msgid "Loading follow-ups..."
 msgstr "Loading follow-ups..."
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:112
+msgid "Loading invitation link..."
+msgstr "Loading invitation link..."
 
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:81
 msgid "Loading merchant status..."
@@ -2270,6 +2443,10 @@ msgstr "Manage Features"
 msgid "Manage Features - {firstName} {lastName}"
 msgstr "Manage Features - {firstName} {lastName}"
 
+#: src/pages/invitations.tsx:22
+msgid "Manage invitations for your organization"
+msgstr "Manage invitations for your organization"
+
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:163
 #: src/features/crm-leads/ui/PipelineView.tsx:272
 msgid "Manage Pipeline Stages"
@@ -2316,6 +2493,18 @@ msgstr "Mantine UI:"
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:254
 msgid "Mark as complete"
 msgstr "Mark as complete"
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:231
+msgid "Max Uses"
+msgstr "Max Uses"
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:66
+msgid "Max uses must be at least 1"
+msgstr "Max uses must be at least 1"
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:234
+msgid "Maximum number of times this link can be used"
+msgstr "Maximum number of times this link can be used"
 
 #: src/entities/crm/ui/CrmFormField.tsx:73
 msgid "Medium"
@@ -2405,7 +2594,7 @@ msgstr "Name must be at least 2 characters"
 msgid "Name must be less than 100 characters"
 msgstr "Name must be less than 100 characters"
 
-#: src/widgets/sidebar/ui/sidebar.tsx:24
+#: src/widgets/sidebar/ui/sidebar.tsx:27
 msgid "Navigation"
 msgstr "Navigation"
 
@@ -2482,6 +2671,10 @@ msgstr "No follow-ups scheduled for this lead yet."
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:139
 msgid "No follow-ups scheduled for today. Great job staying on top of things!"
 msgstr "No follow-ups scheduled for today. Great job staying on top of things!"
+
+#: src/features/invitation-management/ui/InvitationList.tsx:293
+msgid "No invitations found"
+msgstr "No invitations found"
 
 #: src/features/invoice-management/ui/InvoicesTable.tsx:60
 msgid "No Invoices"
@@ -2817,6 +3010,7 @@ msgstr "Payments"
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:357
 #: src/features/crm-leads/ui/FollowUpSection.tsx:230
+#: src/features/invitation-management/ui/InvitationList.tsx:271
 msgid "Pending"
 msgstr "Pending"
 
@@ -2850,7 +3044,7 @@ msgstr "Pick start date"
 #: src/features/crm-leads/ui/CrmLayout.tsx:90
 #: src/features/crm-leads/ui/CrmLayout.tsx:119
 #: src/pages/crm.pipeline.tsx:17
-#: src/widgets/sidebar/ui/sidebar.tsx:136
+#: src/widgets/sidebar/ui/sidebar.tsx:157
 msgid "Pipeline"
 msgstr "Pipeline"
 
@@ -3141,6 +3335,22 @@ msgstr "Revenue"
 msgid "Review your selections and click Continue to proceed with onboarding."
 msgstr "Review your selections and click Continue to proceed with onboarding."
 
+#: src/features/invitation-management/ui/InvitationList.tsx:72
+msgid "Revoke"
+msgstr "Revoke"
+
+#: src/features/invitation-management/ui/InvitationList.tsx:222
+msgid "Revoke invitation"
+msgstr "Revoke invitation"
+
+#: src/features/invitation-management/ui/InvitationList.tsx:60
+msgid "Revoke Invitation"
+msgstr "Revoke Invitation"
+
+#: src/features/invitation-management/ui/InvitationList.tsx:274
+msgid "Revoked"
+msgstr "Revoked"
+
 #: src/pages/examples.tsx:111
 msgid "Role"
 msgstr "Role"
@@ -3232,6 +3442,10 @@ msgstr "Security Settings"
 msgid "Select all"
 msgstr "Select all"
 
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:208
+msgid "Select authority"
+msgstr "Select authority"
+
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:178
 msgid "Select company"
 msgstr "Select company"
@@ -3289,6 +3503,10 @@ msgstr "Select priority"
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:201
 msgid "Select status"
 msgstr "Select status"
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:185
+msgid "Select type"
+msgstr "Select type"
 
 #: src/features/users/ui/user-form-modal.tsx:236
 msgid "Select user authorities"
@@ -3354,6 +3572,14 @@ msgstr "Set Prospect"
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:60
 msgid "Setup Required"
 msgstr "Setup Required"
+
+#: src/features/invitation-management/ui/InvitationList.tsx:155
+msgid "Shareable link"
+msgstr "Shareable link"
+
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:188
+msgid "Shareable Link"
+msgstr "Shareable Link"
 
 #: src/shared/constants/index.ts:133
 msgid "Showing cached data due to connectivity issues"
@@ -3445,6 +3671,7 @@ msgstr "Start Onboarding"
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:200
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:72
 #: src/features/gateway-config/ui/gateway-config-list.tsx:180
+#: src/features/invitation-management/ui/InvitationList.tsx:177
 #: src/features/invoice-management/ui/InvoicesTable.tsx:74
 #: src/features/users/ui/enhanced-users-data-grid.tsx:181
 #: src/features/users/ui/users-data-grid.tsx:141
@@ -3522,6 +3749,7 @@ msgstr "Subscriptions"
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:80
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:108
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:125
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:168
 #: src/features/users/ui/enhanced-users-data-grid.tsx:77
 #: src/features/users/ui/users-data-grid.tsx:73
 #: src/pages/examples.tsx:326
@@ -3569,6 +3797,10 @@ msgstr "TanStack Router:"
 #: src/entities/crm/ui/CrmFormField.tsx:81
 msgid "Task"
 msgstr "Task"
+
+#: src/widgets/sidebar/ui/sidebar.tsx:61
+msgid "Team"
+msgstr "Team"
 
 #: src/shared/ui/guards/ServiceAccessGuard.tsx:176
 msgid "Technical Details"
@@ -3654,6 +3886,7 @@ msgstr "There was a problem with the data you submitted. Please check your input
 msgid "These values are fetched using custom hooks"
 msgstr "These values are fetched using custom hooks"
 
+#: src/features/invitation-management/ui/InvitationList.tsx:69
 #: src/features/users/ui/enhanced-users-data-grid.tsx:68
 #: src/features/users/ui/users-data-grid.tsx:64
 msgid "This action cannot be undone."
@@ -3782,6 +4015,7 @@ msgstr "Two-Factor Auth"
 
 #: src/entities/crm/ui/FollowUpForm.tsx:183
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:195
+#: src/features/invitation-management/ui/InvitationList.tsx:136
 msgid "Type"
 msgstr "Type"
 
@@ -3869,6 +4103,7 @@ msgid "Uploading..."
 msgstr "Uploading..."
 
 #: src/entities/user/ui/UserFormField.tsx:77
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:210
 #: src/features/users/ui/user-form-modal.tsx:287
 #: src/features/users/ui/users-data-grid.tsx:114
 #: src/pages/examples.tsx:89
@@ -3890,7 +4125,7 @@ msgstr "User deleted successfully"
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:258
 #: src/features/users/ui/users-data-grid.tsx:224
-#: src/widgets/sidebar/ui/sidebar.tsx:48
+#: src/widgets/sidebar/ui/sidebar.tsx:51
 msgid "User Management"
 msgstr "User Management"
 
@@ -3915,6 +4150,10 @@ msgstr "User Preferences Demo"
 msgid "User's email address has been verified"
 msgstr "User's email address has been verified"
 
+#: src/features/invitation-management/ui/CreateInvitationModal.tsx:199
+msgid "user@example.com"
+msgstr "user@example.com"
+
 #: src/features/users/ui/user-form-modal.tsx:182
 msgid "Username"
 msgstr "Username"
@@ -3930,6 +4169,10 @@ msgstr "Username must be at least 3 characters"
 #: src/pages/users.tsx:12
 msgid "Users"
 msgstr "Users"
+
+#: src/features/invitation-management/ui/InvitationList.tsx:161
+msgid "Uses"
+msgstr "Uses"
 
 #: src/shared/constants/index.ts:113
 msgid "Validation failed"
