@@ -134,7 +134,7 @@
     "@eslint/js": "^9.39.2",
     "@lingui/cli": "^5.9.1",
     "@lingui/swc-plugin": "^5.11.0",
-    "@lingui/vite-plugin": "^5.9.1",
+    "@lingui/vite-plugin": "^5.9.2",
     "@playwright/test": "1.58.2",
     "@release-it/conventional-changelog": "^10.0.5",
     "@storybook/addon-a11y": "^8.6.16",
