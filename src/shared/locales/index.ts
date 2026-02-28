@@ -1,16 +1,18 @@
 import { i18n } from "@lingui/core";
 import { t } from "@lingui/core/macro";
 
-export type SupportedLocales = "en";
+export type SupportedLocales = "en" | "ru";
 
-export const availableLocales = ["en"];
+export const availableLocales = ["en", "ru"];
 
 export const localeToFlagEmojiMap: Record<SupportedLocales, string> = {
   en: "🇬🇧",
+  ru: "🇷🇺",
 };
 
 export const localeToNameMap: Record<SupportedLocales, string> = {
   en: `English`,
+  ru: `Русский`,
 };
 
 export const getLocaleName = (locale: SupportedLocales) => {

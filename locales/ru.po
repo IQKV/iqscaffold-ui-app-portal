@@ -1,162 +1,125 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-09-19 18:34+0300\n"
+"POT-Creation-Date: 2026-02-28 21:12+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: en\n"
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Plural-Forms: \n"
+"Language: ru
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"\n"
 
 #. js-lingui-explicit-id
 #: src/shared/ui/locale-switcher.tsx:64
 msgid "Language changed"
-msgstr "Language changed"
+msgstr ""
 
 #. js-lingui-explicit-id
 #: src/shared/ui/locale-switcher.tsx:65
 msgid "Your language preference has been updated"
-msgstr "Your language preference has been updated"
+msgstr ""
 
 #. js-lingui-explicit-id
 #: src/shared/ui/locale-switcher.tsx:71
 msgid "Language change failed"
-msgstr "Language change failed"
+msgstr ""
 
 #. js-lingui-explicit-id
 #: src/shared/ui/locale-switcher.tsx:72
 msgid "Failed to update language preference. Please try again."
-msgstr "Failed to update language preference. Please try again."
+msgstr ""
 
 #. js-lingui-explicit-id
 #: src/shared/ui/locale-switcher.tsx:83
 msgid "Language"
-msgstr "Language"
+msgstr ""
 
 #. js-lingui-explicit-id
 #: src/shared/ui/locale-switcher.tsx:84
 #: src/shared/ui/locale-switcher.tsx:148
 msgid "Select language"
-msgstr "Select language"
+msgstr ""
 
 #. js-lingui-explicit-id
 #: src/shared/ui/locale-switcher.tsx:125
 msgid "Language changed successfully"
-msgstr "Language changed successfully"
+msgstr ""
 
 #. js-lingui-explicit-id
 #: src/shared/ui/locale-switcher.tsx:131
 msgid "Failed to change language"
-msgstr "Failed to change language"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadNotesSection.tsx:278
 msgid " (edited)"
-msgstr " (edited)"
+msgstr ""
 
 #. placeholder {0}: localeToNameMap[locale]
 #: src/shared/locales/index.ts:18
 msgid "{0}"
-msgstr "{0}"
-
-#: src/features/crm-contacts/components/ContactListPage.tsx:295
-#~ msgid "{0} contacts selected"
-#~ msgstr "{0} contacts selected"
-
-#: src/pages/examples.tsx:161
-#~ msgid "{0} deleted successfully"
-#~ msgstr "{0} deleted successfully"
-
-#: src/features/crm-leads/components/PipelineView.tsx:163
-#~ msgid "{0} moved to {1}"
-#~ msgstr "{0} moved to {1}"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:263
 msgid "{completedCount} follow-up(s) marked as complete"
-msgstr "{completedCount} follow-up(s) marked as complete"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactListPage.tsx:161
 msgid "{count} contacts selected"
-msgstr "{count} contacts selected"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:303
 msgid "{deletedCount} follow-up(s) deleted successfully"
-msgstr "{deletedCount} follow-up(s) deleted successfully"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineView.tsx:174
 msgid "{leadName} moved to {stageName}"
-msgstr "{leadName} moved to {stageName}"
-
-#: src/shared/ui/guards/ServiceAccessGuard.tsx:88
-#~ msgid "{serviceName} Access Required"
-#~ msgstr "{serviceName} Access Required"
-
-#: src/shared/ui/guards/ServiceAccessGuard.tsx:69
-#~ msgid "{serviceName} Feature Not Available"
-#~ msgstr "{serviceName} Feature Not Available"
-
-#: src/shared/ui/guards/ServiceAccessGuard.tsx:135
-#~ msgid "{serviceName} services are currently experiencing issues. Our team has been notified and is working on a fix."
-#~ msgstr "{serviceName} services are currently experiencing issues. Our team has been notified and is working on a fix."
-
-#: src/shared/ui/guards/ServiceAccessGuard.tsx:134
-#~ msgid "{serviceName} services are temporarily unavailable due to multiple connection failures. Please try again later."
-#~ msgstr "{serviceName} services are temporarily unavailable due to multiple connection failures. Please try again later."
-
-#: src/shared/ui/guards/ServiceAccessGuard.tsx:130
-#~ msgid "{serviceName} Services Unavailable"
-#~ msgstr "{serviceName} Services Unavailable"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionPlansGrid.tsx:130
 msgid "{trialDays} day trial"
-msgstr "{trialDays} day trial"
+msgstr ""
 
 #: src/pages/examples.tsx:164
 msgid "{userName} deleted successfully"
-msgstr "{userName} deleted successfully"
+msgstr ""
 
 #: src/pages/__root.tsx:27
 msgid "%s | IQ Scaffold Platform"
-msgstr "%s | IQ Scaffold Platform"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:214
 #: src/features/crm-leads/ui/LeadEditModal.tsx:223
 msgid "0-100"
-msgstr "0-100"
+msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:216
 msgid "A lead with this email already exists"
-msgstr "A lead with this email already exists"
+msgstr ""
 
 #: src/pages/about.tsx:23
 #: src/widgets/sidebar/ui/sidebar.tsx:42
 msgid "About"
-msgstr "About"
+msgstr ""
 
 #: src/pages/about.tsx:36
 msgid "About This Template"
-msgstr "About This Template"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:177
 msgid "Accept-Language header (from browser)"
-msgstr "Accept-Language header (from browser)"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:271
 msgid "Accepted"
-msgstr "Accepted"
+msgstr ""
 
 #: src/pages/gateway-config.tsx:156
 #: src/pages/subscriptions.tsx:53
 msgid "Access Denied"
-msgstr "Access Denied"
+msgstr ""
 
 #: src/features/gateway-config/ui/square-config-form.tsx:19
 msgid "Access Token"
-msgstr "Access Token"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:214
 #: src/features/invoice-management/ui/InvoicesTable.tsx:78
@@ -165,15 +128,15 @@ msgstr "Access Token"
 #: src/pages/examples.tsx:134
 #: src/widgets/billing-history/ui/billing-history-table.tsx:116
 msgid "Actions"
-msgstr "Actions"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-list.tsx:155
 msgid "Activate"
-msgstr "Activate"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-form.tsx:174
 msgid "Activate immediately"
-msgstr "Activate immediately"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:95
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:204
@@ -183,431 +146,394 @@ msgstr "Activate immediately"
 #: src/features/users/ui/enhanced-users-data-grid.tsx:184
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:60
 msgid "Active"
-msgstr "Active"
+msgstr ""
 
 #: src/features/crm-leads/ui/DashboardStats.tsx:76
 msgid "Active Leads"
-msgstr "Active Leads"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:127
 msgid "Active Locale"
-msgstr "Active Locale"
+msgstr ""
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:80
 msgid "Active Sessions"
-msgstr "Active Sessions"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactDetailPage.tsx:276
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:290
 msgid "Activities"
-msgstr "Activities"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:107
 msgid "Activities will appear here as you interact with this contact."
-msgstr "Activities will appear here as you interact with this contact."
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:66
 msgid "Activity Timeline"
-msgstr "Activity Timeline"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:340
 msgid "Add"
-msgstr "Add"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:238
 msgid "Add a personal message"
-msgstr "Add a personal message"
+msgstr ""
 
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:133
 msgid "Add any notes about this subscription..."
-msgstr "Add any notes about this subscription..."
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactNotesSection.tsx:44
 msgid "Add First Note"
-msgstr "Add First Note"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-form.tsx:193
 #: src/pages/gateway-config.tsx:187
 msgid "Add Gateway"
-msgstr "Add Gateway"
+msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:185
 msgid "Add Lead"
-msgstr "Add Lead"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:306
 msgid "Add New Stage"
-msgstr "Add New Stage"
+msgstr ""
 
 #: src/pages/examples.tsx:287
 msgid "Add new user clicked"
-msgstr "Add new user clicked"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactNotesSection.tsx:30
 #: src/features/crm-leads/ui/LeadNotesSection.tsx:209
 msgid "Add Note"
-msgstr "Add Note"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactNotesSection.tsx:41
 msgid "Add notes to keep track of important information and interactions."
-msgstr "Add notes to keep track of important information and interactions."
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-form.tsx:128
 msgid "Add Payment Gateway"
-msgstr "Add Payment Gateway"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:360
 msgid "Add Stage"
-msgstr "Add Stage"
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:264
 #: src/features/users/ui/users-data-grid.tsx:231
 #: src/pages/examples.tsx:290
 msgid "Add User"
-msgstr "Add User"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-form.tsx:167
 msgid "Additional notes..."
-msgstr "Additional notes..."
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:78
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:207
 msgid "Admin"
-msgstr "Admin"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:84
 msgid "Admin Access"
-msgstr "Admin Access"
+msgstr ""
 
 #: src/pages/dashboard.tsx:50
 msgid "Advanced Analytics"
-msgstr "Advanced Analytics"
+msgstr ""
 
 #: src/pages/dashboard.tsx:44
 msgid "Advanced Analytics - Upgrade to Pro to unlock this feature"
-msgstr "Advanced Analytics - Upgrade to Pro to unlock this feature"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:356
 #: src/features/crm-leads/ui/FollowUpList.tsx:370
 msgid "All"
-msgstr "All"
+msgstr ""
 
 #: src/shared/ui/GenericServiceDegradationBanner.tsx:97
 msgid "All {serviceName} services are operating normally."
-msgstr "All {serviceName} services are operating normally."
+msgstr ""
 
 #: src/shared/ui/GenericServiceDegradationBanner.tsx:86
 msgid "All {serviceName} Services Available"
-msgstr "All {serviceName} Services Available"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:80
 msgid "All API requests include Accept-Language and X-User-Locale headers"
-msgstr "All API requests include Accept-Language and X-User-Locale headers"
-
-#: src/shared/ui/ServiceDegradationBanner.tsx:87
-#~ msgid "All CRM services are operating normally."
-#~ msgstr "All CRM services are operating normally."
-
-#: src/shared/ui/ServiceDegradationBanner.tsx:76
-#~ msgid "All CRM Services Available"
-#~ msgstr "All CRM Services Available"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:269
 msgid "All Statuses"
-msgstr "All Statuses"
+msgstr ""
 
 #: src/features/invoice-management/ui/InvoicesTable.tsx:75
 #: src/widgets/billing-history/ui/billing-history-table.tsx:106
 msgid "Amount"
-msgstr "Amount"
+msgstr ""
 
 #: src/features/invoice-management/ui/InvoiceCard.tsx:91
 msgid "Amount Paid:"
-msgstr "Amount Paid:"
+msgstr ""
 
 #: src/entities/crm/lib/use-form-submission.ts:107
 #: src/features/payment-checkout/ui/stripe-checkout-form.tsx:75
 #: src/features/payment-checkout/ui/stripe-checkout-form.tsx:76
 msgid "An error occurred"
-msgstr "An error occurred"
+msgstr ""
 
 #: src/shared/lib/use-invitation-api.ts:74
 msgid "An error occurred while creating the invitation"
-msgstr "An error occurred while creating the invitation"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:83
 msgid "An error occurred while processing your CRM request."
-msgstr "An error occurred while processing your CRM request."
+msgstr ""
 
 #: src/shared/lib/use-invitation-api.ts:104
 msgid "An error occurred while revoking the invitation"
-msgstr "An error occurred while revoking the invitation"
+msgstr ""
 
 #: src/entities/crm/lib/use-form-submission.ts:165
 msgid "An unexpected error occurred"
-msgstr "An unexpected error occurred"
+msgstr ""
 
 #: src/features/payment-checkout/ui/stripe-checkout-form.tsx:78
 #: src/features/payment-checkout/ui/stripe-checkout-form.tsx:79
 msgid "An unexpected error occurred."
-msgstr "An unexpected error occurred."
+msgstr ""
 
 #: src/features/gateway-config/ui/stripe-config-form.tsx:35
 msgid "API Key"
-msgstr "API Key"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:152
 msgid "API Request Headers"
-msgstr "API Request Headers"
+msgstr ""
 
 #: src/features/gateway-config/ui/square-config-form.tsx:51
 msgid "Application ID"
-msgstr "Application ID"
+msgstr ""
 
 #: src/features/gateway-config/ui/square-config-form.tsx:58
 msgid "Application ID for frontend use (optional)"
-msgstr "Application ID for frontend use (optional)"
+msgstr ""
 
 #: src/features/crm-leads/ui/DateRangeFilter.tsx:215
 msgid "Apply"
-msgstr "Apply"
+msgstr ""
 
 #: src/pages/about.tsx:97
 msgid "Architecture"
-msgstr "Architecture"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:72
 msgid "Are you sure you want to cancel your subscription immediately? This action cannot be undone and you will lose access right away."
-msgstr "Are you sure you want to cancel your subscription immediately? This action cannot be undone and you will lose access right away."
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:40
 msgid "Are you sure you want to cancel your subscription? It will remain active until the end of your current billing period."
-msgstr "Are you sure you want to cancel your subscription? It will remain active until the end of your current billing period."
-
-#: src/features/crm-contacts/components/ContactListPage.tsx:213
-#~ msgid "Are you sure you want to delete {0} contacts? This action cannot be undone."
-#~ msgstr "Are you sure you want to delete {0} contacts? This action cannot be undone."
+msgstr ""
 
 #: src/features/crm-contacts/model/useContactList.ts:95
 msgid "Are you sure you want to delete {count} contacts? This action cannot be undone."
-msgstr "Are you sure you want to delete {count} contacts? This action cannot be undone."
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:290
 msgid "Are you sure you want to delete {count} follow-up(s)? This action cannot be undone."
-msgstr "Are you sure you want to delete {count} follow-up(s)? This action cannot be undone."
+msgstr ""
 
 #: src/features/crm-contacts/model/useContactList.ts:82
 msgid "Are you sure you want to delete {name}? This action cannot be undone."
-msgstr "Are you sure you want to delete {name}? This action cannot be undone."
+msgstr ""
 
 #: src/pages/gateway-config.tsx:234
 msgid "Are you sure you want to delete the"
-msgstr "Are you sure you want to delete the"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:168
 #: src/features/crm-leads/ui/FollowUpSection.tsx:127
 msgid "Are you sure you want to delete this follow-up? This action cannot be undone."
-msgstr "Are you sure you want to delete this follow-up? This action cannot be undone."
-
-#: src/pages/gateway-config.tsx:117
-#~ msgid "Are you sure you want to delete this gateway configuration?"
-#~ msgstr "Are you sure you want to delete this gateway configuration?"
+msgstr ""
 
 #: src/shared/constants/index.ts:151
 msgid "Are you sure you want to delete this item? This action cannot be undone."
-msgstr "Are you sure you want to delete this item? This action cannot be undone."
+msgstr ""
 
 #: src/pages/examples.tsx:49
 msgid "Are you sure you want to delete this user? This action cannot be undone."
-msgstr "Are you sure you want to delete this user? This action cannot be undone."
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:64
 #: src/features/users/ui/users-data-grid.tsx:60
 msgid "Are you sure you want to delete user"
-msgstr "Are you sure you want to delete user"
+msgstr ""
 
 #: src/shared/constants/index.ts:154
 msgid "Are you sure you want to discard your changes?"
-msgstr "Are you sure you want to discard your changes?"
+msgstr ""
 
 #: src/shared/constants/index.ts:153
 msgid "Are you sure you want to log out?"
-msgstr "Are you sure you want to log out?"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:250
 msgid "Are you sure you want to mark {count} follow-up(s) as complete?"
-msgstr "Are you sure you want to mark {count} follow-up(s) as complete?"
+msgstr ""
 
 #: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:61
 msgid "Are you sure you want to proceed with this refund?"
-msgstr "Are you sure you want to proceed with this refund?"
+msgstr ""
 
 #: src/shared/ui/confirmation-modal/confirm-context-modal.tsx:23
 #: src/shared/ui/confirmation-modal/confirmation-modal.tsx:23
 #: src/shared/ui/confirmation-modal/open-confirm.ts:16
 msgid "Are you sure you want to proceed?"
-msgstr "Are you sure you want to proceed?"
-
-#: src/widgets/billing-history/ui/BillingHistoryTable.tsx:24
-#~ msgid "Are you sure you want to refund this payment?"
-#~ msgstr "Are you sure you want to refund this payment?"
+msgstr ""
 
 #: src/shared/constants/index.ts:152
 msgid "Are you sure you want to refund this payment? This action cannot be undone."
-msgstr "Are you sure you want to refund this payment? This action cannot be undone."
+msgstr ""
 
 #: src/shared/constants/index.ts:155
 msgid "Are you sure you want to reset the form?"
-msgstr "Are you sure you want to reset the form?"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:63
 msgid "Are you sure you want to revoke this invitation?"
-msgstr "Are you sure you want to revoke this invitation?"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:225
 msgid "Assigned to"
-msgstr "Assigned to"
+msgstr ""
 
 #: src/features/users/ui/user-form-modal.tsx:32
 msgid "At least one authority is required"
-msgstr "At least one authority is required"
-
-#: src/features/users/components/user-form-modal.tsx:27
-#~ msgid "At least one role is required"
-#~ msgstr "At least one role is required"
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:316
 #: src/features/users/ui/user-form-modal.tsx:235
 #: src/features/users/ui/users-data-grid.tsx:131
 msgid "Authorities"
-msgstr "Authorities"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:203
 #: src/features/invitation-management/ui/InvitationList.tsx:171
 msgid "Authority"
-msgstr "Authority"
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:337
 msgid "Authority management will be available in a future update."
-msgstr "Authority management will be available in a future update."
+msgstr ""
 
 #: src/pages/subscriptions.tsx:88
 msgid "Available Plans"
-msgstr "Available Plans"
+msgstr ""
 
 #: src/entities/user/lib/use-avatar.ts:96
 msgid "Avatar Deleted"
-msgstr "Avatar Deleted"
+msgstr ""
 
 #: src/entities/user/lib/use-avatar.ts:102
 msgid "Avatar Deletion Failed"
-msgstr "Avatar Deletion Failed"
+msgstr ""
 
 #: src/entities/user/lib/use-avatar.ts:60
 msgid "Avatar Updated"
-msgstr "Avatar Updated"
+msgstr ""
 
 #: src/entities/user/lib/use-avatar.ts:66
 msgid "Avatar Upload Failed"
-msgstr "Avatar Upload Failed"
+msgstr ""
 
 #: src/features/crm-leads/ui/ConversionChart.tsx:272
 msgid "Average Days"
-msgstr "Average Days"
+msgstr ""
 
 #: src/features/crm-leads/ui/ConversionChart.tsx:86
 msgid "Average days per stage"
-msgstr "Average days per stage"
+msgstr ""
 
 #: src/features/crm-leads/ui/ConversionChart.tsx:181
 msgid "Average Time"
-msgstr "Average Time"
+msgstr ""
 
 #: src/features/crm-leads/ui/ConversionChart.tsx:78
 msgid "Average time from lead creation to conversion"
-msgstr "Average time from lead creation to conversion"
+msgstr ""
 
 #: src/features/crm-leads/ui/ConversionChart.tsx:74
 msgid "Avg. Time to Convert"
-msgstr "Avg. Time to Convert"
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:171
 msgid "Back"
-msgstr "Back"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactDetailPage.tsx:111
 msgid "Back to Contacts"
-msgstr "Back to Contacts"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:123
 msgid "Back to Leads"
-msgstr "Back to Leads"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:161
 msgid "Backend Locale Resolution Priority"
-msgstr "Backend Locale Resolution Priority"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:87
 msgid "Backend responses (errors, validation messages) are in your language"
-msgstr "Backend responses (errors, validation messages) are in your language"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:74
 msgid "Backend user preference is updated via API"
-msgstr "Backend user preference is updated via API"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:83
 msgid "Basic User Access"
-msgstr "Basic User Access"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:220
 msgid "Between 1 hour and 30 days (720 hours)"
-msgstr "Between 1 hour and 30 days (720 hours)"
+msgstr ""
 
 #: src/pages/billing.tsx:51
 #: src/widgets/sidebar/ui/sidebar.tsx:90
 msgid "Billing"
-msgstr "Billing"
+msgstr ""
 
 #: src/pages/billing.tsx:77
 msgid "Billing & Payments"
-msgstr "Billing & Payments"
+msgstr ""
 
 #: src/features/invoice-management/ui/InvoiceCard.tsx:59
 msgid "Billing Period:"
-msgstr "Billing Period:"
+msgstr ""
 
 #: src/pages/about.tsx:104
 msgid "Built following Feature-Sliced Design methodology for maintainable and scalable frontend architecture."
-msgstr "Built following Feature-Sliced Design methodology for maintainable and scalable frontend architecture."
-
-#: src/features/crm-contacts/components/ContactListPage.tsx:102
-#~ msgid "Bulk delete failed"
-#~ msgstr "Bulk delete failed"
-
-#: src/features/crm-contacts/components/ContactListPage.tsx:94
-#: src/features/crm-contacts/components/ContactListPage.tsx:122
-#~ msgid "Bulk Operation Successful"
-#~ msgstr "Bulk Operation Successful"
-
-#: src/features/crm-contacts/components/ContactListPage.tsx:130
-#~ msgid "Bulk status update failed"
-#~ msgstr "Bulk status update failed"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:207
 msgid "by"
-msgstr "by"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:100
 msgid "Bypass (allow through)"
-msgstr "Bypass (allow through)"
+msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:78
 msgid "Call"
-msgstr "Call"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactDetailPage.tsx:158
 msgid "Call contact"
-msgstr "Call contact"
+msgstr ""
 
 #: src/entities/crm/ui/FollowUpForm.tsx:198
 #: src/entities/crm/ui/LeadForm.tsx:280
@@ -637,443 +563,407 @@ msgstr "Call contact"
 #: src/shared/ui/confirmation-modal/open-confirm.ts:18
 #: src/widgets/billing-history/ui/billing-history-table.tsx:50
 msgid "Cancel"
-msgstr "Cancel"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:184
 msgid "Cancel at Period End"
-msgstr "Cancel at Period End"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:192
 msgid "Cancel Immediately"
-msgstr "Cancel Immediately"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:75
 msgid "Cancel Now"
-msgstr "Cancel Now"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:37
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:43
 msgid "Cancel Subscription"
-msgstr "Cancel Subscription"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:69
 msgid "Cancel Subscription Immediately"
-msgstr "Cancel Subscription Immediately"
+msgstr ""
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:94
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:133
 msgid "Change Password"
-msgstr "Change Password"
+msgstr ""
 
 #: src/pages/preferences-demo.tsx:66
 msgid "Change your theme preference instantly"
-msgstr "Change your theme preference instantly"
+msgstr ""
 
 #: src/shared/constants/index.ts:94
 msgid "Changes saved successfully"
-msgstr "Changes saved successfully"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:127
 msgid "Changes take effect immediately. MSW will intercept API calls when enabled."
-msgstr "Changes take effect immediately. MSW will intercept API calls when enabled."
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:180
 msgid "Check your internet connection"
-msgstr "Check your internet connection"
+msgstr ""
 
 #: src/shared/ui/loading-state/loading-state.tsx:186
 msgid "Check your internet connection and try again"
-msgstr "Check your internet connection and try again"
+msgstr ""
 
 #: src/shared/ui/guards/ServiceAccessGuard.tsx:136
 msgid "Checking {serviceName} service availability..."
-msgstr "Checking {serviceName} service availability..."
-
-#: src/shared/ui/guards/CrmAccessGuard.tsx:106
-#~ msgid "Checking CRM service availability..."
-#~ msgstr "Checking CRM service availability..."
+msgstr ""
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:42
 msgid "Checking email status..."
-msgstr "Checking email status..."
+msgstr ""
 
 #: src/shared/ui/guards/ServiceAccessGuard.tsx:70
 msgid "Checking feature availability..."
-msgstr "Checking feature availability..."
+msgstr ""
 
 #: src/pages/checkout.tsx:32
 #: src/pages/checkout.tsx:54
 msgid "Checkout"
-msgstr "Checkout"
+msgstr ""
 
 #: src/pages/subscriptions.tsx:143
 msgid "Choose a subscription plan that fits your needs. You can upgrade or downgrade at any time."
-msgstr "Choose a subscription plan that fits your needs. You can upgrade or downgrade at any time."
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:94
 msgid "Choose the organization to onboard as a merchant."
-msgstr "Choose the organization to onboard as a merchant."
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:115
 msgid "Choose the payment gateway for merchant onboarding."
-msgstr "Choose the payment gateway for merchant onboarding."
+msgstr ""
 
 #: src/features/crm-leads/ui/DateRangeFilter.tsx:207
 msgid "Clear"
-msgstr "Clear"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadListPage.tsx:302
 #: src/features/crm-leads/ui/LeadListPage.tsx:458
 msgid "Clear all filters"
-msgstr "Clear all filters"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:186
 msgid "Clear your browser cache"
-msgstr "Clear your browser cache"
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:66
-#~ msgid "Click the plus button to open a modal with a sample form using Mantine components. This demonstrates Feature-Sliced Design architecture."
-#~ msgstr "Click the plus button to open a modal with a sample form using Mantine components. This demonstrates Feature-Sliced Design architecture."
+msgstr ""
 
 #: src/features/gateway-config/ui/paypal-config-form.tsx:19
 #: src/features/gateway-config/ui/stripe-config-form.tsx:55
 msgid "Client ID"
-msgstr "Client ID"
+msgstr ""
 
 #: src/features/gateway-config/ui/stripe-config-form.tsx:58
 msgid "Client ID for Stripe Connect (optional)"
-msgstr "Client ID for Stripe Connect (optional)"
+msgstr ""
 
 #: src/features/gateway-config/ui/paypal-config-form.tsx:30
 msgid "Client Secret"
-msgstr "Client Secret"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:375
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:173
 msgid "Close"
-msgstr "Close"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmLayout.tsx:296
 msgid "Close navigation"
-msgstr "Close navigation"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:158
 msgid "Code invitation"
-msgstr "Code invitation"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:185
 msgid "Code Invitation"
-msgstr "Code Invitation"
+msgstr ""
 
 #: src/pages/about.tsx:121
 msgid "Code Quality:"
-msgstr "Code Quality:"
+msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:63
 #: src/features/crm-leads/ui/LeadEditModal.tsx:209
 #: src/features/crm-leads/ui/LeadListPage.tsx:247
 #: src/features/crm-leads/ui/LeadListPage.tsx:409
 msgid "Cold Call"
-msgstr "Cold Call"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:209
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:330
 msgid "Color"
-msgstr "Color"
+msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:247
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:177
 #: src/features/crm-leads/ui/LeadEditModal.tsx:190
 msgid "Company"
-msgstr "Company"
+msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:38
 msgid "Company name must be less than 200 characters"
-msgstr "Company name must be less than 200 characters"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:253
 msgid "Complete"
-msgstr "Complete"
+msgstr ""
 
 #: src/pages/preferences-demo.tsx:56
 msgid "Complete demonstration of the user preferences API integration"
-msgstr "Complete demonstration of the user preferences API integration"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:395
 msgid "Complete Selected"
-msgstr "Complete Selected"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:247
 msgid "Complete Selected Follow-ups"
-msgstr "Complete Selected Follow-ups"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:358
 #: src/features/crm-leads/ui/FollowUpList.tsx:605
 #: src/features/crm-leads/ui/FollowUpSection.tsx:250
 #: src/features/crm-leads/ui/FollowUpSection.tsx:356
 msgid "Completed"
-msgstr "Completed"
+msgstr ""
 
 #: src/pages/examples.tsx:189
 msgid "Component Examples"
-msgstr "Component Examples"
+msgstr ""
 
 #: src/shared/ui/confirmation-modal/confirm-context-modal.tsx:24
 #: src/shared/ui/confirmation-modal/confirmation-modal.tsx:24
 #: src/shared/ui/confirmation-modal/open-confirm.ts:17
 msgid "Confirm"
-msgstr "Confirm"
+msgstr ""
 
 #: src/shared/ui/confirmation-modal/confirm-context-modal.tsx:22
 #: src/shared/ui/confirmation-modal/confirmation-modal.tsx:22
 #: src/shared/ui/confirmation-modal/open-confirm.ts:15
 msgid "Confirm Action"
-msgstr "Confirm Action"
+msgstr ""
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:126
 msgid "Confirm New Password"
-msgstr "Confirm New Password"
+msgstr ""
 
 #: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:25
 #: src/widgets/billing-history/ui/billing-history-table.tsx:48
 msgid "Confirm Refund"
-msgstr "Confirm Refund"
+msgstr ""
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:127
 msgid "Confirm your new password"
-msgstr "Confirm your new password"
+msgstr ""
 
 #: src/pages/examples.tsx:261
 msgid "Confirmation modals, notifications, loading states, and error boundaries."
-msgstr "Confirmation modals, notifications, loading states, and error boundaries."
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:60
 msgid "Connect with Stripe"
-msgstr "Connect with Stripe"
+msgstr ""
 
 #: src/shared/ui/loading-state/loading-state.tsx:203
 msgid "Connection Issue"
-msgstr "Connection Issue"
+msgstr ""
 
 #: src/pages/crm.contacts.$contactId.tsx:11
 msgid "Contact Details"
-msgstr "Contact Details"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:110
 msgid "Contact updated successfully"
-msgstr "Contact updated successfully"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadListPage.tsx:264
 #: src/features/crm-leads/ui/LeadListPage.tsx:428
 msgid "Contacted"
-msgstr "Contacted"
+msgstr ""
 
 #: src/entities/crm/ui/CrmServiceDegradationBanner.tsx:22
 #: src/features/crm-leads/ui/CrmLayout.tsx:84
 #: src/pages/crm.contacts.tsx:18
 #: src/widgets/sidebar/ui/sidebar.tsx:146
 msgid "Contacts"
-msgstr "Contacts"
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:186
 msgid "Continue to Gateway"
-msgstr "Continue to Gateway"
+msgstr ""
 
 #: src/features/crm-leads/ui/ConversionChart.tsx:66
 msgid "Conversion Rate"
-msgstr "Conversion Rate"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:272
 msgid "Convert to Contact"
-msgstr "Convert to Contact"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:132
 #: src/features/invitation-management/ui/InvitationList.tsx:120
 msgid "Copied!"
-msgstr "Copied!"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:120
 msgid "Copy invitation link"
-msgstr "Copy invitation link"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:132
 msgid "Copy link"
-msgstr "Copy link"
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:66
 msgid "Could not initiate merchant onboarding. Please try again."
-msgstr "Could not initiate merchant onboarding. Please try again."
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:44
 msgid "Could not initiate Stripe onboarding. Please try again later."
-msgstr "Could not initiate Stripe onboarding. Please try again later."
+msgstr ""
 
 #: src/shared/constants/index.ts:119
 msgid "Could not process refund. Please try again"
-msgstr "Could not process refund. Please try again"
-
-#: src/widgets/billing-history/ui/billing-history-table.tsx:58
-#~ msgid "Could not process refund. Please try again."
-#~ msgstr "Could not process refund. Please try again."
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:43
-#~ msgid "Could not submit the form"
-#~ msgstr "Could not submit the form"
+msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:288
 #: src/features/users/ui/user-form-modal.tsx:287
 msgid "Create"
-msgstr "Create"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:156
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:267
 #: src/features/invitation-management/ui/InvitationList.tsx:262
 msgid "Create Invitation"
-msgstr "Create Invitation"
+msgstr ""
 
 #: src/features/users/ui/users-page.tsx:47
 msgid "Create New User"
-msgstr "Create New User"
+msgstr ""
 
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:99
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:143
 msgid "Create Subscription"
-msgstr "Create Subscription"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:199
 #: src/features/users/ui/enhanced-users-data-grid.tsx:190
 #: src/features/users/ui/users-data-grid.tsx:164
 msgid "Created"
-msgstr "Created"
+msgstr ""
 
 #: src/shared/constants/index.ts:95
 msgid "Created successfully"
-msgstr "Created successfully"
+msgstr ""
 
 #: src/features/users/ui/user-form-modal.tsx:264
 msgid "Created:"
-msgstr "Created:"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmLayout.tsx:111
 #: src/features/crm-leads/ui/CrmLayout.tsx:301
 #: src/widgets/sidebar/ui/sidebar.tsx:119
 msgid "CRM"
-msgstr "CRM"
-
-#: src/shared/ui/guards/CrmAccessGuard.tsx:77
-#~ msgid "CRM Access Required"
-#~ msgstr "CRM Access Required"
+msgstr ""
 
 #: src/pages/crm.contacts.tsx:13
 msgid "CRM Contacts"
-msgstr "CRM Contacts"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmDashboard.tsx:83
 #: src/pages/crm-dashboard.tsx:21
 #: src/pages/crm-dashboard.tsx:28
 #: src/widgets/sidebar/ui/sidebar.tsx:125
 msgid "CRM Dashboard"
-msgstr "CRM Dashboard"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:95
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:240
 msgid "CRM Error"
-msgstr "CRM Error"
-
-#: src/shared/ui/guards/CrmAccessGuard.tsx:58
-#~ msgid "CRM Feature Not Available"
-#~ msgstr "CRM Feature Not Available"
+msgstr ""
 
 #: src/pages/crm-follow-ups.tsx:19
 msgid "CRM Follow-ups"
-msgstr "CRM Follow-ups"
+msgstr ""
 
 #: src/pages/crm.leads.tsx:12
 msgid "CRM Leads"
-msgstr "CRM Leads"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmLayout.tsx:264
 msgid "CRM Navigation"
-msgstr "CRM Navigation"
+msgstr ""
 
 #: src/pages/crm.pipeline.tsx:12
 msgid "CRM Pipeline"
-msgstr "CRM Pipeline"
-
-#: src/shared/ui/guards/CrmAccessGuard.tsx:122
-#~ msgid "CRM services are currently experiencing issues. Our team has been notified and is working on a fix."
-#~ msgstr "CRM services are currently experiencing issues. Our team has been notified and is working on a fix."
-
-#: src/shared/ui/guards/CrmAccessGuard.tsx:121
-#~ msgid "CRM services are temporarily unavailable due to multiple connection failures. Please try again later."
-#~ msgstr "CRM services are temporarily unavailable due to multiple connection failures. Please try again later."
-
-#: src/shared/ui/guards/CrmAccessGuard.tsx:117
-#~ msgid "CRM Services Unavailable"
-#~ msgstr "CRM Services Unavailable"
+msgstr ""
 
 #: src/pages/preferences-demo.tsx:109
 msgid "Currency"
-msgstr "Currency"
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:328
 msgid "Current Authorities"
-msgstr "Current Authorities"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:122
 msgid "Current Locale Status"
-msgstr "Current Locale Status"
+msgstr ""
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:105
 msgid "Current Password"
-msgstr "Current Password"
+msgstr ""
 
 #: src/features/change-password-form/model/validation.ts:9
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:16
 msgid "Current password is required"
-msgstr "Current password is required"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionCard.tsx:80
 msgid "Current period: {periodStart} - {periodEnd}"
-msgstr "Current period: {periodStart} - {periodEnd}"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionPlansGrid.tsx:114
 #: src/features/subscription-management/ui/SubscriptionPlansGrid.tsx:186
 msgid "Current Plan"
-msgstr "Current Plan"
+msgstr ""
 
 #: src/pages/preferences-demo.tsx:76
 msgid "Current Preference Values"
-msgstr "Current Preference Values"
+msgstr ""
 
 #: src/pages/billing.tsx:140
 #: src/pages/subscriptions.tsx:85
 msgid "Current Subscription"
-msgstr "Current Subscription"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:237
 msgid "Custom Message (Optional)"
-msgstr "Custom Message (Optional)"
+msgstr ""
 
 #: src/features/crm-leads/ui/DateRangeFilter.tsx:164
 msgid "Custom Range"
-msgstr "Custom Range"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:206
 msgid "Customer"
-msgstr "Customer"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionCard.tsx:91
 msgid "Customer ID: {customerId}"
-msgstr "Customer ID: {customerId}"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:168
 msgid "Customize your sales process by adding, removing, or reordering pipeline stages."
-msgstr "Customize your sales process by adding, removing, or reordering pipeline stages."
+msgstr ""
 
 #: src/shared/ui/theme-toggle/theme-toggle.tsx:10
 msgid "Dark mode"
-msgstr "Dark mode"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmLayout.tsx:72
 #: src/features/crm-leads/ui/CrmLayout.tsx:117
@@ -1082,44 +972,44 @@ msgstr "Dark mode"
 #: src/pages/dashboard.tsx:28
 #: src/widgets/sidebar/ui/sidebar.tsx:109
 msgid "Dashboard"
-msgstr "Dashboard"
+msgstr ""
 
 #: src/pages/examples.tsx:279
 msgid "Data Table Example"
-msgstr "Data Table Example"
+msgstr ""
 
 #: src/pages/examples.tsx:233
 msgid "Data Tables"
-msgstr "Data Tables"
+msgstr ""
 
 #: src/widgets/billing-history/ui/billing-history-table.tsx:100
 msgid "Date"
-msgstr "Date"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:208
 msgid "Date Formatting"
-msgstr "Date Formatting"
+msgstr ""
 
 #: src/features/crm-leads/ui/DateRangeFilter.tsx:111
 msgid "Date Range"
-msgstr "Date Range"
+msgstr ""
 
 #: src/features/crm-leads/ui/ConversionChart.tsx:181
 #: src/features/crm-leads/ui/ConversionChart.tsx:306
 msgid "days"
-msgstr "days"
+msgstr ""
 
 #: src/features/crm-leads/ui/ConversionChart.tsx:255
 msgid "Days"
-msgstr "Days"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-list.tsx:148
 msgid "Deactivate"
-msgstr "Deactivate"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:184
 msgid "Default locale (English)"
-msgstr "Default locale (English)"
+msgstr ""
 
 #: src/features/crm-contacts/model/useContactList.ts:83
 #: src/features/crm-contacts/model/useContactList.ts:96
@@ -1135,157 +1025,145 @@ msgstr "Default locale (English)"
 #: src/features/users/ui/users-data-grid.tsx:67
 #: src/pages/examples.tsx:50
 msgid "Delete"
-msgstr "Delete"
+msgstr ""
 
 #: src/features/crm-contacts/model/useContactList.ts:81
 msgid "Delete Contact"
-msgstr "Delete Contact"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:165
 #: src/features/crm-leads/ui/FollowUpSection.tsx:124
 msgid "Delete Follow-up"
-msgstr "Delete Follow-up"
+msgstr ""
 
 #: src/pages/gateway-config.tsx:254
 msgid "Delete Gateway"
-msgstr "Delete Gateway"
+msgstr ""
 
 #: src/pages/gateway-config.tsx:224
 msgid "Delete Gateway Configuration"
-msgstr "Delete Gateway Configuration"
+msgstr ""
 
 #: src/features/crm-contacts/model/useContactList.ts:94
 msgid "Delete Multiple Contacts"
-msgstr "Delete Multiple Contacts"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadNotesSection.tsx:290
 msgid "Delete note"
-msgstr "Delete note"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactListPage.tsx:209
 #: src/features/crm-leads/ui/FollowUpList.tsx:404
 msgid "Delete Selected"
-msgstr "Delete Selected"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:287
 msgid "Delete Selected Follow-ups"
-msgstr "Delete Selected Follow-ups"
+msgstr ""
 
 #: src/features/users/ui/users-data-grid.tsx:188
 msgid "Delete user"
-msgstr "Delete user"
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:61
 #: src/features/users/ui/enhanced-users-data-grid.tsx:221
 #: src/features/users/ui/users-data-grid.tsx:57
 #: src/pages/examples.tsx:48
 msgid "Delete User"
-msgstr "Delete User"
-
-#: src/features/crm-contacts/components/ContactListPage.tsx:126
-#~ msgid "Deleted {0} contacts. {1} failed."
-#~ msgstr "Deleted {0} contacts. {1} failed."
-
-#: src/features/crm-contacts/components/ContactListPage.tsx:95
-#~ msgid "Deleted {successCount} contacts. {failureCount} failed."
-#~ msgstr "Deleted {successCount} contacts. {failureCount} failed."
+msgstr ""
 
 #: src/shared/constants/index.ts:97
 msgid "Deleted successfully"
-msgstr "Deleted successfully"
+msgstr ""
 
 #: src/entities/crm/ui/FollowUpForm.tsx:149
 #: src/features/gateway-config/ui/gateway-config-form.tsx:166
 msgid "Description"
-msgstr "Description"
+msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:62
 msgid "Description must be at least 3 characters"
-msgstr "Description must be at least 3 characters"
+msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:63
 msgid "Description must be less than 500 characters"
-msgstr "Description must be less than 500 characters"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmLayout.tsx:132
 msgid "Details"
-msgstr "Details"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:79
 msgid "Disable MSW"
-msgstr "Disable MSW"
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:184
 #: src/features/users/ui/users-data-grid.tsx:150
 msgid "Disabled"
-msgstr "Disabled"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-form.tsx:158
 msgid "Display Name"
-msgstr "Display Name"
+msgstr ""
 
 #: src/features/invoice-management/ui/InvoiceCard.tsx:129
 #: src/features/invoice-management/ui/InvoicesTable.tsx:184
 msgid "Download PDF"
-msgstr "Download PDF"
+msgstr ""
 
 #: src/entities/crm/ui/FollowUpForm.tsx:162
 #: src/features/invoice-management/ui/InvoicesTable.tsx:77
 msgid "Due Date"
-msgstr "Due Date"
+msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:66
 msgid "Due date is required"
-msgstr "Due date is required"
+msgstr ""
 
 #: src/features/invoice-management/ui/InvoiceCard.tsx:70
 msgid "Due Date:"
-msgstr "Due Date:"
+msgstr ""
 
 #: src/pages/about.tsx:137
 msgid "Easy"
-msgstr "Easy"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:665
 #: src/features/crm-leads/ui/FollowUpSection.tsx:417
 msgid "Edit"
-msgstr "Edit"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactDetailPage.tsx:173
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:133
 msgid "Edit Contact"
-msgstr "Edit Contact"
+msgstr ""
 
 #: src/entities/crm/ui/FollowUpForm.tsx:134
 msgid "Edit Follow-up"
-msgstr "Edit Follow-up"
+msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:185
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:279
 #: src/features/crm-leads/ui/LeadEditModal.tsx:150
 msgid "Edit Lead"
-msgstr "Edit Lead"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadNotesSection.tsx:282
 msgid "Edit note"
-msgstr "Edit note"
+msgstr ""
 
 #: src/features/users/ui/users-data-grid.tsx:178
 msgid "Edit user"
-msgstr "Edit user"
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:211
 #: src/features/users/ui/users-page.tsx:47
 msgid "Edit User"
-msgstr "Edit User"
-
-#: src/pages/examples.tsx:150
-#~ msgid "Editing {0}"
-#~ msgstr "Editing {0}"
+msgstr ""
 
 #: src/pages/examples.tsx:152
 msgid "Editing {userName}"
-msgstr "Editing {userName}"
+msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:79
 #: src/entities/crm/ui/LeadForm.tsx:228
@@ -1294,178 +1172,166 @@ msgstr "Editing {userName}"
 #: src/features/users/ui/enhanced-users-data-grid.tsx:162
 #: src/features/users/ui/user-form-modal.tsx:193
 msgid "Email"
-msgstr "Email"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:148
 msgid "Email / Details"
-msgstr "Email / Details"
+msgstr ""
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:63
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:194
 msgid "Email Address"
-msgstr "Email Address"
+msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:64
 #: src/features/crm-leads/ui/LeadEditModal.tsx:210
 #: src/features/crm-leads/ui/LeadListPage.tsx:248
 #: src/features/crm-leads/ui/LeadListPage.tsx:410
 msgid "Email Campaign"
-msgstr "Email Campaign"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:183
 msgid "Email Invitation"
-msgstr "Email Invitation"
+msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:25
 msgid "Email is required"
-msgstr "Email is required"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:56
 msgid "Email is required for email invitations"
-msgstr "Email is required for email invitations"
+msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:27
 msgid "Email must be less than 255 characters"
-msgstr "Email must be less than 255 characters"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:94
 msgid "Email notifications are sent in your preferred language"
-msgstr "Email notifications are sent in your preferred language"
+msgstr ""
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:33
 msgid "Email Verification Status"
-msgstr "Email Verification Status"
+msgstr ""
 
 #: src/features/users/ui/user-form-modal.tsx:255
 msgid "Email Verified"
-msgstr "Email Verified"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:86
 msgid "Enable logging"
-msgstr "Enable logging"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:79
 msgid "Enable MSW"
-msgstr "Enable MSW"
+msgstr ""
 
 #: src/features/users/ui/user-form-modal.tsx:248
 #: src/features/users/ui/users-data-grid.tsx:150
 msgid "Enabled"
-msgstr "Enabled"
+msgstr ""
 
 #: src/pages/billing.tsx:192
 #: src/pages/dashboard.tsx:128
 msgid "Enabled Features"
-msgstr "Enabled Features"
+msgstr ""
 
 #: src/features/crm-leads/ui/DateRangeFilter.tsx:181
 msgid "End Date"
-msgstr "End Date"
+msgstr ""
 
 #: src/pages/about.tsx:114
 msgid "End-to-end type safety from API to UI components"
-msgstr "End-to-end type safety from API to UI components"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:224
 msgid "Enter additional notes"
-msgstr "Enter additional notes"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadEditModal.tsx:239
 msgid "Enter additional notes about this lead"
-msgstr "Enter additional notes about this lead"
+msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:248
 #: src/features/crm-leads/ui/LeadEditModal.tsx:191
 msgid "Enter company name"
-msgstr "Enter company name"
+msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:229
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:158
 #: src/features/crm-leads/ui/LeadEditModal.tsx:175
 #: src/features/users/ui/user-form-modal.tsx:194
 msgid "Enter email address"
-msgstr "Enter email address"
+msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:205
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:143
 #: src/features/crm-leads/ui/LeadEditModal.tsx:160
 #: src/features/users/ui/user-form-modal.tsx:204
 msgid "Enter first name"
-msgstr "Enter first name"
+msgstr ""
 
 #: src/entities/crm/ui/FollowUpForm.tsx:150
 msgid "Enter follow-up description"
-msgstr "Enter follow-up description"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:216
 msgid "Enter hours"
-msgstr "Enter hours"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:171
 #: src/features/crm-leads/ui/LeadEditModal.tsx:196
 msgid "Enter job title"
-msgstr "Enter job title"
+msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:217
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:149
 #: src/features/crm-leads/ui/LeadEditModal.tsx:166
 #: src/features/users/ui/user-form-modal.tsx:213
 msgid "Enter last name"
-msgstr "Enter last name"
-
-#: src/entities/crm/ui/LeadForm.tsx:208
-#~ msgid "Enter lead name"
-#~ msgstr "Enter lead name"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadNotesSection.tsx:211
 msgid "Enter note content..."
-msgstr "Enter note content..."
+msgstr ""
 
 #: src/features/users/ui/user-form-modal.tsx:224
 msgid "Enter password"
-msgstr "Enter password"
+msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:239
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:165
 #: src/features/crm-leads/ui/LeadEditModal.tsx:183
 msgid "Enter phone number"
-msgstr "Enter phone number"
+msgstr ""
 
 #: src/features/users/ui/user-form-modal.tsx:183
 msgid "Enter username"
-msgstr "Enter username"
+msgstr ""
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:106
 msgid "Enter your current password"
-msgstr "Enter your current password"
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:84
-#~ msgid "Enter your email"
-#~ msgstr "Enter your email"
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:77
-#~ msgid "Enter your name"
-#~ msgstr "Enter your name"
+msgstr ""
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:115
 msgid "Enter your new password"
-msgstr "Enter your new password"
+msgstr ""
 
 #: src/features/gateway-config/ui/braintree-config-form.tsx:52
 msgid "Environment"
-msgstr "Environment"
+msgstr ""
 
 #: src/features/gateway-config/ui/braintree-config-form.tsx:63
 msgid "Environment for Braintree API"
-msgstr "Environment for Braintree API"
+msgstr ""
 
 #: src/features/gateway-config/ui/paypal-config-form.tsx:62
 msgid "Environment mode for PayPal API"
-msgstr "Environment mode for PayPal API"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-form.tsx:154
 msgid "Environment mode for the gateway"
-msgstr "Environment mode for the gateway"
+msgstr ""
 
 #: src/entities/crm/lib/use-form-submission.ts:120
 #: src/entities/crm/lib/use-form-submission.ts:196
@@ -1508,462 +1374,414 @@ msgstr "Environment mode for the gateway"
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:81
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:127
 msgid "Error"
-msgstr "Error"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:102
 msgid "Error (throw error)"
-msgstr "Error (throw error)"
+msgstr ""
 
 #: src/shared/constants/index.ts:142
 msgid "Error has been reported to our team"
-msgstr "Error has been reported to our team"
+msgstr ""
 
 #: src/features/crm-leads/ui/ActivityTimeline.tsx:144
 msgid "Error loading activities"
-msgstr "Error loading activities"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactDetailPage.tsx:103
 msgid "Error loading contact"
-msgstr "Error loading contact"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmDashboard.tsx:98
 msgid "Error Loading Dashboard"
-msgstr "Error Loading Dashboard"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:249
 msgid "Error loading invitations"
-msgstr "Error loading invitations"
+msgstr ""
 
 #: src/features/invoice-management/ui/InvoicesTable.tsx:52
 msgid "Error Loading Invoices"
-msgstr "Error Loading Invoices"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:115
 msgid "Error loading lead"
-msgstr "Error loading lead"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadListPage.tsx:226
 msgid "Error loading leads"
-msgstr "Error loading leads"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadNotesSection.tsx:193
 msgid "Error loading notes"
-msgstr "Error loading notes"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineView.tsx:216
 msgid "Error Loading Pipeline"
-msgstr "Error Loading Pipeline"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionPlansGrid.tsx:43
 msgid "Error Loading Plans"
-msgstr "Error Loading Plans"
+msgstr ""
 
 #: src/features/users/ui/users-data-grid.tsx:216
 msgid "Error loading users"
-msgstr "Error loading users"
-
-#: src/features/users/components/users-data-grid.tsx:166
-#~ msgid "Error loading users: {0}"
-#~ msgstr "Error loading users: {0}"
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:248
 msgid "Error loading users: {errorMessage}"
-msgstr "Error loading users: {errorMessage}"
+msgstr ""
 
 #: src/pages/examples.tsx:332
 msgid "Error notification!"
-msgstr "Error notification!"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:107
 msgid "Error Reference ID:"
-msgstr "Error Reference ID:"
+msgstr ""
 
 #: src/pages/about.tsx:122
 msgid "ESLint, Prettier, and automated quality checks"
-msgstr "ESLint, Prettier, and automated quality checks"
+msgstr ""
 
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:91
 #: src/features/subscription-management/ui/SubscriptionPlansGrid.tsx:84
 msgid "every {count} months"
-msgstr "every {count} months"
+msgstr ""
 
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:92
 #: src/features/subscription-management/ui/SubscriptionPlansGrid.tsx:85
 msgid "every {count} years"
-msgstr "every {count} years"
+msgstr ""
 
 #: src/pages/examples.tsx:46
 #: src/widgets/sidebar/ui/sidebar.tsx:78
 msgid "Examples"
-msgstr "Examples"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:215
 msgid "Expiration (hours)"
-msgstr "Expiration (hours)"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:60
 msgid "Expiration must be between 1 and 720 hours"
-msgstr "Expiration must be between 1 and 720 hours"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:272
 msgid "Expired"
-msgstr "Expired"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:145
 #: src/features/invitation-management/ui/InvitationList.tsx:189
 msgid "Expires"
-msgstr "Expires"
+msgstr ""
 
 #: src/pages/examples.tsx:192
 msgid "Explore the various components and features available in this template"
-msgstr "Explore the various components and features available in this template"
+msgstr ""
 
 #: src/pages/gateway-config.tsx:88
 #: src/shared/constants/index.ts:121
 msgid "Failed to activate gateway"
-msgstr "Failed to activate gateway"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:58
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:90
 msgid "Failed to cancel subscription. Please try again."
-msgstr "Failed to cancel subscription. Please try again."
+msgstr ""
 
 #: src/shared/constants/index.ts:118
 msgid "Failed to change language"
-msgstr "Failed to change language"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:54
 msgid "Failed to change password. Please check your current password."
-msgstr "Failed to change password. Please check your current password."
+msgstr ""
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:53
 msgid "Failed to check email status. Please try again."
-msgstr "Failed to check email status. Please try again."
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:156
 #: src/features/crm-leads/ui/FollowUpSection.tsx:115
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:82
 msgid "Failed to complete follow-up: {errorMessage}"
-msgstr "Failed to complete follow-up: {errorMessage}"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:270
 msgid "Failed to complete some follow-ups"
-msgstr "Failed to complete some follow-ups"
+msgstr ""
 
 #: src/pages/gateway-config.tsx:73
 #: src/shared/constants/index.ts:120
 msgid "Failed to configure payment gateway"
-msgstr "Failed to configure payment gateway"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:80
 msgid "Failed to convert lead"
-msgstr "Failed to convert lead"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:250
 msgid "Failed to create invitation"
-msgstr "Failed to create invitation"
+msgstr ""
 
 #: src/shared/lib/use-invitation-api.ts:72
 msgid "Failed to Create Invitation"
-msgstr "Failed to Create Invitation"
+msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:161
 msgid "Failed to create lead: {errorMessage}"
-msgstr "Failed to create lead: {errorMessage}"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:87
 msgid "Failed to create stage"
-msgstr "Failed to create stage"
+msgstr ""
 
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:79
 msgid "Failed to create subscription. Please try again."
-msgstr "Failed to create subscription. Please try again."
-
-#: src/features/users/components/user-form-modal.tsx:149
-#~ msgid "Failed to create user: {0}"
-#~ msgstr "Failed to create user: {0}"
-
-#: src/features/users/ui/user-form-modal.tsx:173
-#~ msgid "Failed to create user: {errorMessage}"
-#~ msgstr "Failed to create user: {errorMessage}"
+msgstr ""
 
 #: src/pages/gateway-config.tsx:103
 #: src/shared/constants/index.ts:122
 msgid "Failed to deactivate gateway"
-msgstr "Failed to deactivate gateway"
+msgstr ""
 
 #: src/entities/user/lib/use-avatar.ts:103
 msgid "Failed to delete avatar. Please try again."
-msgstr "Failed to delete avatar. Please try again."
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:191
 #: src/features/crm-leads/ui/FollowUpSection.tsx:144
 msgid "Failed to delete follow-up: {errorMessage}"
-msgstr "Failed to delete follow-up: {errorMessage}"
+msgstr ""
 
 #: src/pages/gateway-config.tsx:144
 #: src/shared/constants/index.ts:124
 msgid "Failed to delete gateway"
-msgstr "Failed to delete gateway"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:310
 msgid "Failed to delete some follow-ups"
-msgstr "Failed to delete some follow-ups"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:132
 msgid "Failed to delete stage"
-msgstr "Failed to delete stage"
-
-#: src/features/users/ui/users-data-grid.tsx:78
-#~ msgid "Failed to delete user: {0}"
-#~ msgstr "Failed to delete user: {0}"
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:86
 #: src/features/users/ui/users-data-grid.tsx:82
 msgid "Failed to delete user: {errorMessage}"
-msgstr "Failed to delete user: {errorMessage}"
+msgstr ""
 
 #: src/features/crm-leads/ui/ActivityTimeline.tsx:145
 msgid "Failed to load activity history. Please try again."
-msgstr "Failed to load activity history. Please try again."
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactDetailPage.tsx:105
 msgid "Failed to load contact details. Please try again."
-msgstr "Failed to load contact details. Please try again."
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmDashboard.tsx:102
 msgid "Failed to load dashboard data. Please try again later."
-msgstr "Failed to load dashboard data. Please try again later."
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:430
 #: src/features/crm-leads/ui/FollowUpSection.tsx:201
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:130
 msgid "Failed to load follow-ups. Please try again later."
-msgstr "Failed to load follow-ups. Please try again later."
+msgstr ""
 
 #: src/pages/gateway-config.tsx:199
 msgid "Failed to load gateway configurations"
-msgstr "Failed to load gateway configurations"
+msgstr ""
 
 #: src/features/invoice-management/ui/InvoicesTable.tsx:53
 msgid "Failed to load invoices. Please try again later."
-msgstr "Failed to load invoices. Please try again later."
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:119
 msgid "Failed to load lead details. Please try again."
-msgstr "Failed to load lead details. Please try again."
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadListPage.tsx:228
 msgid "Failed to load leads. Please try again."
-msgstr "Failed to load leads. Please try again."
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadNotesSection.tsx:194
 msgid "Failed to load notes. Please try again."
-msgstr "Failed to load notes. Please try again."
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineView.tsx:221
 msgid "Failed to load pipeline data"
-msgstr "Failed to load pipeline data"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionPlansGrid.tsx:44
 msgid "Failed to load subscription plans. Please try again later."
-msgstr "Failed to load subscription plans. Please try again later."
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:77
 msgid "Failed to logout from all devices"
-msgstr "Failed to logout from all devices"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineView.tsx:180
 msgid "Failed to Move Lead"
-msgstr "Failed to Move Lead"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:112
 msgid "Failed to pause subscription. Please try again."
-msgstr "Failed to pause subscription. Please try again."
+msgstr ""
 
 #: src/features/payment-refund/ui/refund-button.tsx:39
 msgid "Failed to process the refund. Please try again."
-msgstr "Failed to process the refund. Please try again."
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:153
 msgid "Failed to reorder stage"
-msgstr "Failed to reorder stage"
-
-#: src/shared/lib/use-auth-api.ts:188
-#~ msgid "Failed to reset password. The link may be invalid or expired."
-#~ msgstr "Failed to reset password. The link may be invalid or expired."
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:132
 msgid "Failed to resume subscription. Please try again."
-msgstr "Failed to resume subscription. Please try again."
+msgstr ""
 
 #: src/shared/lib/use-invitation-api.ts:102
 msgid "Failed to Revoke Invitation"
-msgstr "Failed to Revoke Invitation"
+msgstr ""
 
 #: src/entities/crm/ui/FollowUpForm.tsx:119
 msgid "Failed to schedule follow-up: {errorMessage}"
-msgstr "Failed to schedule follow-up: {errorMessage}"
-
-#: src/shared/lib/use-auth-api.ts:108
-#~ msgid "Failed to Send Email"
-#~ msgstr "Failed to Send Email"
-
-#: src/shared/lib/use-auth-api.ts:157
-#~ msgid "Failed to send password reset link"
-#~ msgstr "Failed to send password reset link"
-
-#: src/shared/lib/use-auth-api.ts:156
-#~ msgid "Failed to Send Reset Link"
-#~ msgstr "Failed to Send Reset Link"
-
-#: src/shared/lib/use-auth-api.ts:109
-#~ msgid "Failed to send verification email"
-#~ msgstr "Failed to send verification email"
+msgstr ""
 
 #: src/pages/gateway-config.tsx:118
 #: src/shared/constants/index.ts:123
 msgid "Failed to set primary gateway"
-msgstr "Failed to set primary gateway"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:118
 msgid "Failed to update contact"
-msgstr "Failed to update contact"
+msgstr ""
 
 #: src/entities/crm/ui/FollowUpForm.tsx:118
 msgid "Failed to update follow-up: {errorMessage}"
-msgstr "Failed to update follow-up: {errorMessage}"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadEditModal.tsx:135
 msgid "Failed to update lead"
-msgstr "Failed to update lead"
+msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:122
 msgid "Failed to update lead: {errorMessage}"
-msgstr "Failed to update lead: {errorMessage}"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:115
 msgid "Failed to update stage"
-msgstr "Failed to update stage"
-
-#: src/features/users/components/user-form-modal.tsx:112
-#~ msgid "Failed to update user: {0}"
-#~ msgstr "Failed to update user: {0}"
-
-#: src/features/users/ui/user-form-modal.tsx:135
-#~ msgid "Failed to update user: {errorMessage}"
-#~ msgstr "Failed to update user: {errorMessage}"
+msgstr ""
 
 #: src/entities/user/lib/use-avatar.ts:67
 msgid "Failed to upload avatar. Please try again."
-msgstr "Failed to upload avatar. Please try again."
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:23
 msgid "Failed to validate token"
-msgstr "Failed to validate token"
-
-#: src/shared/lib/use-auth-api.ts:134
-#~ msgid "Failed to verify email. The link may be invalid or expired."
-#~ msgstr "Failed to verify email. The link may be invalid or expired."
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:128
 msgid "Fair"
-msgstr "Fair"
+msgstr ""
 
 #: src/features/crm-leads/ui/ConversionChart.tsx:287
 msgid "Fastest Stage"
-msgstr "Fastest Stage"
+msgstr ""
 
 #: src/pages/billing.tsx:178
 #: src/pages/dashboard.tsx:112
 msgid "Feature Usage"
-msgstr "Feature Usage"
+msgstr ""
 
 #: src/pages/about.tsx:109
 msgid "Feature-Sliced Design:"
-msgstr "Feature-Sliced Design:"
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:315
 msgid "Features"
-msgstr "Features"
+msgstr ""
 
 #: src/pages/billing.tsx:118
 msgid "Features & Usage"
-msgstr "Features & Usage"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionPlansGrid.tsx:158
 msgid "Features:"
-msgstr "Features:"
+msgstr ""
 
 #: src/shared/constants/index.ts:98
 msgid "File uploaded successfully"
-msgstr "File uploaded successfully"
+msgstr ""
 
 #: src/features/crm-leads/ui/DateRangeFilter.tsx:114
 msgid "Filter"
-msgstr "Filter"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadListPage.tsx:277
 #: src/features/crm-leads/ui/LeadListPage.tsx:443
 msgid "Filter by assigned user"
-msgstr "Filter by assigned user"
+msgstr ""
 
 #: src/features/crm-leads/ui/DateRangeFilter.tsx:125
 msgid "Filter by Date Range"
-msgstr "Filter by Date Range"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:367
 msgid "Filter by overdue"
-msgstr "Filter by overdue"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadListPage.tsx:242
 #: src/features/crm-leads/ui/LeadListPage.tsx:404
 msgid "Filter by source"
-msgstr "Filter by source"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadListPage.tsx:260
 #: src/features/crm-leads/ui/LeadListPage.tsx:424
 msgid "Filter by stage"
-msgstr "Filter by stage"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:353
 #: src/features/invitation-management/ui/InvitationList.tsx:267
 msgid "Filter by status"
-msgstr "Filter by status"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadListPage.tsx:478
 msgid "Filter Leads"
-msgstr "Filter Leads"
+msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:204
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:142
 #: src/features/crm-leads/ui/LeadEditModal.tsx:159
 #: src/features/users/ui/user-form-modal.tsx:203
 msgid "First Name"
-msgstr "First Name"
+msgstr ""
 
 #: src/features/users/ui/user-form-modal.tsx:24
 msgid "First name must be at least 2 characters"
-msgstr "First name must be at least 2 characters"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:178
 #: src/features/crm-leads/ui/FollowUpSection.tsx:137
 msgid "Follow-up deleted successfully"
-msgstr "Follow-up deleted successfully"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:149
 #: src/features/crm-leads/ui/FollowUpSection.tsx:108
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:75
 msgid "Follow-up marked as complete"
-msgstr "Follow-up marked as complete"
+msgstr ""
 
 #: src/entities/crm/ui/FollowUpForm.tsx:109
 msgid "Follow-up scheduled successfully"
-msgstr "Follow-up scheduled successfully"
+msgstr ""
 
 #: src/entities/crm/ui/FollowUpForm.tsx:108
 msgid "Follow-up updated successfully"
-msgstr "Follow-up updated successfully"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmLayout.tsx:96
 #: src/features/crm-leads/ui/CrmLayout.tsx:120
@@ -1973,334 +1791,322 @@ msgstr "Follow-up updated successfully"
 #: src/pages/crm-follow-ups.tsx:24
 #: src/widgets/sidebar/ui/sidebar.tsx:168
 msgid "Follow-ups"
-msgstr "Follow-ups"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:66
 msgid "for"
-msgstr "for"
+msgstr ""
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:106
 msgid "For additional security, we recommend changing your password regularly and enabling two-factor authentication when available."
-msgstr "For additional security, we recommend changing your password regularly and enabling two-factor authentication when available."
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:38
-#~ msgid "Form submitted!"
-#~ msgstr "Form submitted!"
+msgstr ""
 
 #: src/entities/billing/ui/BillingFormField.tsx:236
 msgid "Formatted: "
-msgstr "Formatted: "
-
-#: src/entities/billing/ui/BillingFormField.tsx:211
-#~ msgid "Formatted: {0}"
-#~ msgstr "Formatted: {0}"
+msgstr ""
 
 #: src/pages/examples.tsx:208
 msgid "Forms"
-msgstr "Forms"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:69
 msgid "Frontend UI updates to the selected language"
-msgstr "Frontend UI updates to the selected language"
+msgstr ""
 
 #: src/pages/preferences-demo.tsx:148
 msgid "Full Preferences Form"
-msgstr "Full Preferences Form"
+msgstr ""
 
 #: src/pages/examples.tsx:239
 msgid "Functional"
-msgstr "Functional"
+msgstr ""
 
 #: src/entities/billing/ui/BillingServiceDegradationBanner.tsx:24
 #: src/features/gateway-config/ui/gateway-config-list.tsx:178
 msgid "Gateway"
-msgstr "Gateway"
+msgstr ""
 
 #: src/pages/gateway-config.tsx:83
 #: src/shared/constants/index.ts:102
 msgid "Gateway activated successfully"
-msgstr "Gateway activated successfully"
+msgstr ""
 
 #: src/widgets/sidebar/ui/sidebar.tsx:98
 msgid "Gateway Config"
-msgstr "Gateway Config"
+msgstr ""
 
 #: src/pages/billing.tsx:94
 #: src/pages/gateway-config.tsx:50
 msgid "Gateway Configuration"
-msgstr "Gateway Configuration"
+msgstr ""
 
 #: src/pages/gateway-config.tsx:236
 msgid "gateway configuration?"
-msgstr "gateway configuration?"
+msgstr ""
 
 #: src/pages/gateway-config.tsx:98
 #: src/shared/constants/index.ts:103
 msgid "Gateway deactivated successfully"
-msgstr "Gateway deactivated successfully"
+msgstr ""
 
 #: src/pages/gateway-config.tsx:137
 #: src/shared/constants/index.ts:105
 msgid "Gateway deleted successfully"
-msgstr "Gateway deleted successfully"
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:154
 msgid "Gateway:"
-msgstr "Gateway:"
+msgstr ""
 
 #: src/pages/dashboard.tsx:97
 msgid "Generate detailed reports and export data."
-msgstr "Generate detailed reports and export data."
+msgstr ""
 
 #: src/pages/billing.tsx:151
 msgid "Get started with a subscription plan to unlock premium features."
-msgstr "Get started with a subscription plan to unlock premium features."
+msgstr ""
 
 #: src/pages/about.tsx:135
 msgid "Getting Started"
-msgstr "Getting Started"
+msgstr ""
 
 #: src/pages/404.tsx:51
 msgid "Go Back"
-msgstr "Go Back"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:167
 #: src/pages/404.tsx:59
 msgid "Go Home"
-msgstr "Go Home"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:152
 #: src/shared/ui/guards/ServiceAccessGuard.tsx:169
 msgid "Go to Dashboard"
-msgstr "Go to Dashboard"
+msgstr ""
 
 #: src/entities/billing/ui/BillingFormField.tsx:173
 #: src/entities/user/ui/UserFormField.tsx:136
 msgid "Good"
-msgstr "Good"
+msgstr ""
 
 #: src/features/dashboard/ui/dashboard-feature.tsx:41
 msgid "Growth"
-msgstr "Growth"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineMetrics.tsx:84
 msgid "Health"
-msgstr "Health"
+msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:74
 msgid "High"
-msgstr "High"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmLayout.tsx:107
 #: src/pages/index.tsx:12
 #: src/widgets/sidebar/ui/sidebar.tsx:33
 msgid "Home"
-msgstr "Home"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:59
 msgid "How it works"
-msgstr "How it works"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:94
 msgid "How to handle requests without mocks"
-msgstr "How to handle requests without mocks"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:96
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:205
 #: src/features/gateway-config/ui/gateway-status-badge.tsx:28
 msgid "Inactive"
-msgstr "Inactive"
+msgstr ""
 
 #: src/pages/examples.tsx:355
 msgid "Info"
-msgstr "Info"
+msgstr ""
 
 #: src/pages/examples.tsx:352
 msgid "Info notification!"
-msgstr "Info notification!"
+msgstr ""
 
 #: src/pages/examples.tsx:214
 msgid "Interactive"
-msgstr "Interactive"
+msgstr ""
 
 #: src/pages/examples.tsx:281
 msgid "Interactive data table with sorting, actions, and custom rendering"
-msgstr "Interactive data table with sorting, actions, and custom rendering"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:49
 msgid "Internationalization (i18n) Demo"
-msgstr "Internationalization (i18n) Demo"
+msgstr ""
 
 #: src/pages/checkout.tsx:39
 msgid "Invalid Checkout"
-msgstr "Invalid Checkout"
+msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:67
 msgid "Invalid date"
-msgstr "Invalid date"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:13
 #: src/features/users/ui/user-form-modal.tsx:23
 msgid "Invalid email address"
-msgstr "Invalid email address"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:69
 msgid "Invalid phone number"
-msgstr "Invalid phone number"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:80
 msgid "Invalid URL"
-msgstr "Invalid URL"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:156
 #: src/shared/lib/use-invitation-api.ts:65
 msgid "Invitation Created"
-msgstr "Invitation Created"
+msgstr ""
 
 #: src/shared/lib/use-invitation-api.ts:66
 msgid "Invitation has been created successfully"
-msgstr "Invitation has been created successfully"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:167
 msgid "Invitation has been created successfully!"
-msgstr "Invitation has been created successfully!"
+msgstr ""
 
 #: src/shared/lib/use-invitation-api.ts:96
 msgid "Invitation has been revoked successfully"
-msgstr "Invitation has been revoked successfully"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:121
 msgid "Invitation Link"
-msgstr "Invitation Link"
+msgstr ""
 
 #: src/shared/lib/use-invitation-api.ts:95
 msgid "Invitation Revoked"
-msgstr "Invitation Revoked"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:180
 msgid "Invitation Type"
-msgstr "Invitation Type"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:255
 #: src/widgets/sidebar/ui/sidebar.tsx:67
 msgid "Invitations"
-msgstr "Invitations"
+msgstr ""
 
 #: src/features/invoice-management/ui/InvoicesTable.tsx:73
 msgid "Invoice"
-msgstr "Invoice"
+msgstr ""
 
 #: src/features/invoice-management/ui/InvoiceCard.tsx:44
 msgid "Invoice {invoiceId}..."
-msgstr "Invoice {invoiceId}..."
+msgstr ""
 
 #: src/entities/billing/ui/BillingServiceDegradationBanner.tsx:23
 #: src/pages/billing.tsx:130
 #: src/pages/subscriptions.tsx:94
 msgid "Invoices"
-msgstr "Invoices"
+msgstr ""
 
 #: src/pages/__root.tsx:26
 #: src/widgets/header/ui/header.tsx:11
 msgid "IQ Scaffold Platform"
-msgstr "IQ Scaffold Platform"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:170
 #: src/features/crm-leads/ui/LeadEditModal.tsx:195
 msgid "Job Title"
-msgstr "Job Title"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:43
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:75
 msgid "Keep Subscription"
-msgstr "Keep Subscription"
+msgstr ""
 
 #: src/entities/billing/ui/BillingFormField.tsx:186
 msgid "Key strength:"
-msgstr "Key strength:"
+msgstr ""
 
 #: src/shared/constants/index.ts:99
 msgid "Language changed successfully"
-msgstr "Language changed successfully"
+msgstr ""
 
 #: src/features/crm-leads/ui/DateRangeFilter.tsx:148
 msgid "Last 30 days"
-msgstr "Last 30 days"
+msgstr ""
 
 #: src/features/crm-leads/ui/DateRangeFilter.tsx:140
 msgid "Last 7 days"
-msgstr "Last 7 days"
+msgstr ""
 
 #: src/features/crm-leads/ui/DateRangeFilter.tsx:156
 msgid "Last 90 days"
-msgstr "Last 90 days"
-
-#: src/shared/ui/ServiceDegradationBanner.tsx:102
-#~ msgid "Last checked: {0}"
-#~ msgstr "Last checked: {0}"
+msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:216
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:148
 #: src/features/crm-leads/ui/LeadEditModal.tsx:165
 #: src/features/users/ui/user-form-modal.tsx:212
 msgid "Last Name"
-msgstr "Last Name"
+msgstr ""
 
 #: src/features/users/ui/user-form-modal.tsx:25
 msgid "Last name must be at least 2 characters"
-msgstr "Last name must be at least 2 characters"
+msgstr ""
 
 #: src/pages/about.tsx:64
 msgid "Latest React with concurrent features and improved performance"
-msgstr "Latest React with concurrent features and improved performance"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:72
 msgid "Lead converted to contact successfully"
-msgstr "Lead converted to contact successfully"
+msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:148
 msgid "Lead created successfully"
-msgstr "Lead created successfully"
+msgstr ""
 
 #: src/pages/crm.leads.$leadId.tsx:12
 #: src/pages/crm.leads.$leadId.tsx:17
 msgid "Lead Details"
-msgstr "Lead Details"
+msgstr ""
 
 #: src/pages/dashboard.tsx:68
 msgid "Lead Management"
-msgstr "Lead Management"
+msgstr ""
 
 #: src/pages/dashboard.tsx:62
 msgid "Lead Management - Available in Business plan"
-msgstr "Lead Management - Available in Business plan"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineView.tsx:173
 msgid "Lead Moved"
-msgstr "Lead Moved"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:120
 msgid "Lead not found."
-msgstr "Lead not found."
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:213
 #: src/features/crm-leads/ui/LeadEditModal.tsx:222
 msgid "Lead Score"
-msgstr "Lead Score"
+msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:258
 #: src/features/crm-leads/ui/LeadEditModal.tsx:203
 msgid "Lead Source"
-msgstr "Lead Source"
+msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:109
 #: src/features/crm-leads/ui/LeadEditModal.tsx:127
 msgid "Lead updated successfully"
-msgstr "Lead updated successfully"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:247
 msgid "leads"
-msgstr "leads"
+msgstr ""
 
 #: src/entities/crm/ui/CrmServiceDegradationBanner.tsx:21
 #: src/features/crm-leads/ui/CrmLayout.tsx:78
@@ -2310,460 +2116,456 @@ msgstr "leads"
 #: src/pages/crm.leads.tsx:17
 #: src/widgets/sidebar/ui/sidebar.tsx:135
 msgid "Leads"
-msgstr "Leads"
+msgstr ""
 
 #: src/features/crm-leads/ui/DashboardStats.tsx:213
 msgid "Leads by Pipeline Stage"
-msgstr "Leads by Pipeline Stage"
+msgstr ""
 
 #: src/features/crm-leads/ui/DashboardStats.tsx:349
 msgid "Leads by Source"
-msgstr "Leads by Source"
+msgstr ""
 
 #: src/pages/about.tsx:39
 msgid "Learn more about the technologies and architecture used in this project"
-msgstr "Learn more about the technologies and architecture used in this project"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:228
 msgid "Leave empty for unlimited"
-msgstr "Leave empty for unlimited"
+msgstr ""
 
 #: src/shared/ui/theme-toggle/theme-toggle.tsx:10
 msgid "Light mode"
-msgstr "Light mode"
+msgstr ""
 
 #: src/pages/about.tsx:72
 msgid "Lightning-fast development server with instant HMR"
-msgstr "Lightning-fast development server with instant HMR"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-form.tsx:152
 #: src/features/gateway-config/ui/paypal-config-form.tsx:59
 msgid "Live (Production)"
-msgstr "Live (Production)"
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:119
 msgid "Loading available gateways..."
-msgstr "Loading available gateways..."
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:418
 #: src/features/crm-leads/ui/FollowUpSection.tsx:189
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:118
 msgid "Loading follow-ups..."
-msgstr "Loading follow-ups..."
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:110
 msgid "Loading invitation link..."
-msgstr "Loading invitation link..."
+msgstr ""
 
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:81
 msgid "Loading merchant status..."
-msgstr "Loading merchant status..."
+msgstr ""
 
 #: src/pages/subscriptions.tsx:103
 msgid "Loading subscription..."
-msgstr "Loading subscription..."
+msgstr ""
 
 #: src/shared/constants/index.ts:138
 #: src/shared/ui/loading-state/loading-state.tsx:69
 #: src/shared/ui/loading-state/loading-state.tsx:149
 msgid "Loading..."
-msgstr "Loading..."
+msgstr ""
 
 #: src/pages/preferences-demo.tsx:93
 msgid "Locale"
-msgstr "Locale"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:193
 msgid "Localized Content Examples"
-msgstr "Localized Content Examples"
+msgstr ""
 
 #: src/features/gateway-config/ui/square-config-form.tsx:30
 msgid "Location ID"
-msgstr "Location ID"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:87
 msgid "Log MSW requests to console"
-msgstr "Log MSW requests to console"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:69
 msgid "Logged Out from All Devices"
-msgstr "Logged Out from All Devices"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:76
 msgid "Logout Failed"
-msgstr "Logout Failed"
+msgstr ""
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:24
 #: src/features/security-settings/ui/security-settings-feature.tsx:40
 #: src/features/security-settings/ui/security-settings-feature.tsx:95
 msgid "Logout from All Devices"
-msgstr "Logout from All Devices"
+msgstr ""
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:83
 msgid "Logout from all devices where you're currently signed in. This is useful if you've lost a device or suspect unauthorized access."
-msgstr "Logout from all devices where you're currently signed in. This is useful if you've lost a device or suspect unauthorized access."
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadListPage.tsx:269
 #: src/features/crm-leads/ui/LeadListPage.tsx:433
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:203
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:324
 msgid "Lost"
-msgstr "Lost"
+msgstr ""
 
 #: src/features/crm-leads/ui/DashboardStats.tsx:90
 msgid "Lost Leads"
-msgstr "Lost Leads"
+msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:72
 msgid "Low"
-msgstr "Low"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:328
 msgid "Manage all your follow-up tasks"
-msgstr "Manage all your follow-up tasks"
+msgstr ""
 
 #: src/pages/preferences-demo.tsx:150
 msgid "Manage all your preferences in one place"
-msgstr "Manage all your preferences in one place"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:87
 msgid "Manage Billing"
-msgstr "Manage Billing"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:89
 msgid "Manage CRM"
-msgstr "Manage CRM"
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:201
 #: src/features/users/ui/enhanced-users-data-grid.tsx:308
 msgid "Manage Features"
-msgstr "Manage Features"
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:306
 msgid "Manage Features - {firstName} {lastName}"
-msgstr "Manage Features - {firstName} {lastName}"
+msgstr ""
 
 #: src/pages/invitations.tsx:22
 msgid "Manage invitations for your organization"
-msgstr "Manage invitations for your organization"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:163
 #: src/features/crm-leads/ui/PipelineView.tsx:272
 msgid "Manage Pipeline Stages"
-msgstr "Manage Pipeline Stages"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineView.tsx:242
 msgid "Manage Stages"
-msgstr "Manage Stages"
+msgstr ""
 
 #: src/pages/billing.tsx:85
 msgid "Manage Subscriptions"
-msgstr "Manage Subscriptions"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:91
 msgid "Manage Users"
-msgstr "Manage Users"
+msgstr ""
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:69
 msgid "Manage your account security and active sessions."
-msgstr "Manage your account security and active sessions."
+msgstr ""
 
 #: src/pages/gateway-config.tsx:179
 msgid "Manage your payment gateway integrations"
-msgstr "Manage your payment gateway integrations"
+msgstr ""
 
 #: src/pages/user-preferences.tsx:28
 msgid "Manage your personal settings and preferences"
-msgstr "Manage your personal settings and preferences"
+msgstr ""
 
 #: src/pages/dashboard.tsx:70
 msgid "Manage your sales leads and track conversion rates."
-msgstr "Manage your sales leads and track conversion rates."
-
-#: src/features/users/components/user-form-modal.tsx:44
-#~ msgid "Manager"
-#~ msgstr "Manager"
+msgstr ""
 
 #: src/pages/about.tsx:75
 msgid "Mantine UI:"
-msgstr "Mantine UI:"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:639
 #: src/features/crm-leads/ui/FollowUpSection.tsx:388
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:254
 msgid "Mark as complete"
-msgstr "Mark as complete"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:227
 msgid "Max Uses"
-msgstr "Max Uses"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:64
 msgid "Max uses must be at least 1"
-msgstr "Max uses must be at least 1"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:230
 msgid "Maximum number of times this link can be used"
-msgstr "Maximum number of times this link can be used"
+msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:73
 msgid "Medium"
-msgstr "Medium"
+msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:80
 msgid "Meeting"
-msgstr "Meeting"
+msgstr ""
 
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:49
 msgid "Merchant Account"
-msgstr "Merchant Account"
+msgstr ""
 
 #: src/features/gateway-config/ui/braintree-config-form.tsx:19
 msgid "Merchant ID"
-msgstr "Merchant ID"
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:87
 msgid "Merchant Onboarding"
-msgstr "Merchant Onboarding"
+msgstr ""
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:116
 msgid "Min 8 characters with uppercase, lowercase, number, and special character"
-msgstr "Min 8 characters with uppercase, lowercase, number, and special character"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-form.tsx:146
 #: src/features/gateway-config/ui/gateway-config-list.tsx:179
 #: src/features/gateway-config/ui/paypal-config-form.tsx:51
 msgid "Mode"
-msgstr "Mode"
+msgstr ""
 
 #: src/pages/about.tsx:53
 msgid "Modern"
-msgstr "Modern"
+msgstr ""
 
 #: src/pages/about.tsx:76
 msgid "Modern React components library with comprehensive theming"
-msgstr "Modern React components library with comprehensive theming"
+msgstr ""
 
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:88
 #: src/features/subscription-management/ui/SubscriptionPlansGrid.tsx:81
 msgid "monthly"
-msgstr "monthly"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:263
 msgid "Move Down"
-msgstr "Move Down"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:252
 msgid "Move Up"
-msgstr "Move Up"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:55
 msgid "MSW Dev Tools"
-msgstr "MSW Dev Tools"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:88
 msgid "Must be a number"
-msgstr "Must be a number"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:22
 msgid "Must be at least {min} characters"
-msgstr "Must be at least {min} characters"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:32
 msgid "Must be no more than {max} characters"
-msgstr "Must be no more than {max} characters"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:97
 msgid "Must contain only letters and numbers"
-msgstr "Must contain only letters and numbers"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-form.tsx:159
 msgid "My Payment Gateway"
-msgstr "My Payment Gateway"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:184
 #: src/features/users/ui/enhanced-users-data-grid.tsx:148
 msgid "Name"
-msgstr "Name"
+msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:19
 msgid "Name must be at least 2 characters"
-msgstr "Name must be at least 2 characters"
+msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:20
 msgid "Name must be less than 100 characters"
-msgstr "Name must be less than 100 characters"
+msgstr ""
 
 #: src/widgets/sidebar/ui/sidebar.tsx:27
 msgid "Navigation"
-msgstr "Navigation"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadListPage.tsx:267
 #: src/features/crm-leads/ui/LeadListPage.tsx:431
 msgid "Negotiation"
-msgstr "Negotiation"
+msgstr ""
 
 #: src/shared/constants/index.ts:111
 msgid "Network error occurred"
-msgstr "Network error occurred"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadListPage.tsx:263
 #: src/features/crm-leads/ui/LeadListPage.tsx:427
 msgid "New"
-msgstr "New"
+msgstr ""
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:114
 msgid "New Password"
-msgstr "New Password"
+msgstr ""
 
 #: src/features/change-password-form/model/validation.ts:35
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:42
 msgid "New password must be different from current password"
-msgstr "New password must be different from current password"
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:176
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:181
 msgid "Next"
-msgstr "Next"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:249
 msgid "Next Follow-up"
-msgstr "Next Follow-up"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:337
 msgid "No"
-msgstr "No"
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:123
 msgid "No Active Gateways"
-msgstr "No Active Gateways"
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:126
 msgid "No active payment gateways configured. Please configure a gateway first."
-msgstr "No active payment gateways configured. Please configure a gateway first."
+msgstr ""
 
 #: src/pages/billing.tsx:148
 #: src/pages/subscriptions.tsx:116
 msgid "No Active Subscription"
-msgstr "No Active Subscription"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:104
 msgid "No activities yet for this contact."
-msgstr "No activities yet for this contact."
+msgstr ""
 
 #: src/pages/billing.tsx:211
 #: src/pages/dashboard.tsx:143
 msgid "No features enabled"
-msgstr "No features enabled"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:441
 msgid "No follow-ups found matching your search."
-msgstr "No follow-ups found matching your search."
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:442
 msgid "No follow-ups found. Schedule your first follow-up to get started."
-msgstr "No follow-ups found. Schedule your first follow-up to get started."
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpSection.tsx:211
 msgid "No follow-ups scheduled for this lead yet."
-msgstr "No follow-ups scheduled for this lead yet."
+msgstr ""
 
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:139
 msgid "No follow-ups scheduled for today. Great job staying on top of things!"
-msgstr "No follow-ups scheduled for today. Great job staying on top of things!"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:292
 msgid "No invitations found"
-msgstr "No invitations found"
+msgstr ""
 
 #: src/features/invoice-management/ui/InvoicesTable.tsx:60
 msgid "No Invoices"
-msgstr "No Invoices"
+msgstr ""
 
 #: src/features/invoice-management/ui/InvoicesTable.tsx:61
 msgid "No invoices found."
-msgstr "No invoices found."
+msgstr ""
 
 #: src/entities/billing/ui/BillingFormField.tsx:164
 msgid "No key"
-msgstr "No key"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactNotesSection.tsx:38
 msgid "No notes yet for this contact."
-msgstr "No notes yet for this contact."
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:104
 msgid "No password"
-msgstr "No password"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-list.tsx:75
 msgid "No payment gateways configured yet."
-msgstr "No payment gateways configured yet."
+msgstr ""
 
 #: src/widgets/billing-history/ui/billing-history-table.tsx:139
 msgid "No payments found"
-msgstr "No payments found"
+msgstr ""
 
 #: src/features/crm-leads/ui/DashboardStats.tsx:218
 msgid "No pipeline data available"
-msgstr "No pipeline data available"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineView.tsx:232
 msgid "No Pipeline Stages"
-msgstr "No Pipeline Stages"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionPlansGrid.tsx:51
 msgid "No Plans Available"
-msgstr "No Plans Available"
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:117
 msgid "No roles"
-msgstr "No roles"
+msgstr ""
 
 #: src/features/crm-leads/ui/DashboardStats.tsx:354
 msgid "No source data available"
-msgstr "No source data available"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:367
 msgid "No Stages"
-msgstr "No Stages"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionPlansGrid.tsx:52
 msgid "No subscription plans are currently available."
-msgstr "No subscription plans are currently available."
+msgstr ""
 
 #: src/features/users/ui/users-data-grid.tsx:255
 #: src/pages/examples.tsx:298
 msgid "No users found"
-msgstr "No users found"
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:290
 msgid "No users have been created yet"
-msgstr "No users have been created yet"
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:289
 msgid "No users match your search criteria"
-msgstr "No users match your search criteria"
+msgstr ""
 
 #: src/features/crm-leads/ui/ConversionChart.tsx:229
 msgid "No velocity data available"
-msgstr "No velocity data available"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:145
 msgid "Not Set"
-msgstr "Not Set"
+msgstr ""
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:85
 msgid "Not Verified"
-msgstr "Not Verified"
+msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:82
 msgid "Note content is required"
-msgstr "Note content is required"
+msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:83
 msgid "Note must be less than 2000 characters"
-msgstr "Note must be less than 2000 characters"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactDetailPage.tsx:270
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:223
@@ -2772,273 +2574,253 @@ msgstr "Note must be less than 2000 characters"
 #: src/features/crm-leads/ui/LeadEditModal.tsx:238
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:131
 msgid "Notes"
-msgstr "Notes"
+msgstr ""
 
 #: src/pages/examples.tsx:310
 msgid "Notification Examples"
-msgstr "Notification Examples"
+msgstr ""
 
 #: src/pages/preferences-demo.tsx:117
 msgid "Notifications"
-msgstr "Notifications"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:222
 msgid "Number Formatting"
-msgstr "Number Formatting"
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:65
 #: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:43
 msgid "Onboarding Failed"
-msgstr "Onboarding Failed"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-form.tsx:183
 msgid "Only one gateway can be primary at a time"
-msgstr "Only one gateway can be primary at a time"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmLayout.tsx:296
 msgid "Open navigation"
-msgstr "Open navigation"
-
-#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:58
-#~ msgid "Open Stripe Dashboard"
-#~ msgstr "Open Stripe Dashboard"
+msgstr ""
 
 #: src/shared/constants/index.ts:93
 msgid "Operation completed successfully"
-msgstr "Operation completed successfully"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-form.tsx:170
 msgid "Optional description"
-msgstr "Optional description"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-form.tsx:162
 msgid "Optional friendly name for this configuration"
-msgstr "Optional friendly name for this configuration"
+msgstr ""
 
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:132
 msgid "Optional notes about this subscription"
-msgstr "Optional notes about this subscription"
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:97
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:66
 msgid "Organization"
-msgstr "Organization"
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:146
 msgid "Organization:"
-msgstr "Organization:"
+msgstr ""
 
 #: src/pages/about.tsx:110
 msgid "Organized by business features rather than technical layers"
-msgstr "Organized by business features rather than technical layers"
+msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:68
 #: src/features/crm-leads/ui/LeadEditModal.tsx:214
 #: src/features/crm-leads/ui/LeadListPage.tsx:252
 #: src/features/crm-leads/ui/LeadListPage.tsx:414
 msgid "Other"
-msgstr "Other"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:598
 #: src/features/crm-leads/ui/FollowUpSection.tsx:349
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:215
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:225
 msgid "Overdue"
-msgstr "Overdue"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:371
 msgid "Overdue Only"
-msgstr "Overdue Only"
+msgstr ""
 
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:123
 msgid "Override the default trial period for this subscription"
-msgstr "Override the default trial period for this subscription"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactDetailPage.tsx:267
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:288
 #: src/pages/billing.tsx:112
 msgid "Overview"
-msgstr "Overview"
+msgstr ""
 
 #: src/pages/404.tsx:21
 #: src/pages/404.tsx:37
 msgid "Page Not Found"
-msgstr "Page Not Found"
+msgstr ""
 
 #: src/features/invoice-management/ui/InvoiceCard.tsx:79
 msgid "Paid On:"
-msgstr "Paid On:"
+msgstr ""
 
 #: src/features/invoice-management/ui/InvoicesTable.tsx:151
 msgid "Paid: {paidAmount}"
-msgstr "Paid: {paidAmount}"
+msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:67
 #: src/features/crm-leads/ui/LeadEditModal.tsx:213
 #: src/features/crm-leads/ui/LeadListPage.tsx:251
 #: src/features/crm-leads/ui/LeadListPage.tsx:413
 msgid "Partner"
-msgstr "Partner"
+msgstr ""
 
 #: src/features/users/ui/user-form-modal.tsx:223
 msgid "Password"
-msgstr "Password"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:51
 msgid "Password Change Failed"
-msgstr "Password Change Failed"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:44
 msgid "Password Changed"
-msgstr "Password Changed"
+msgstr ""
 
 #: src/features/users/ui/user-form-modal.tsx:136
 msgid "Password is required for new users"
-msgstr "Password is required for new users"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:41
 #: src/features/change-password-form/model/validation.ts:12
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:19
 #: src/features/users/ui/user-form-modal.tsx:28
 msgid "Password must be at least 8 characters"
-msgstr "Password must be at least 8 characters"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:44
 #: src/features/change-password-form/model/validation.ts:19
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:26
 msgid "Password must contain at least one lowercase letter"
-msgstr "Password must contain at least one lowercase letter"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:50
 #: src/features/change-password-form/model/validation.ts:21
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:28
 msgid "Password must contain at least one number"
-msgstr "Password must contain at least one number"
+msgstr ""
 
 #: src/features/change-password-form/model/validation.ts:24
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:31
 msgid "Password must contain at least one special character"
-msgstr "Password must contain at least one special character"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:47
 #: src/features/change-password-form/model/validation.ts:15
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:22
 msgid "Password must contain at least one uppercase letter"
-msgstr "Password must contain at least one uppercase letter"
+msgstr ""
 
 #: src/shared/constants/index.ts:75
 msgid "Password must contain at least one uppercase letter, one lowercase letter, and one number"
-msgstr "Password must contain at least one uppercase letter, one lowercase letter, and one number"
-
-#: src/shared/lib/use-auth-api.ts:185
-#~ msgid "Password Reset Failed"
-#~ msgstr "Password Reset Failed"
-
-#: src/shared/lib/use-auth-api.ts:178
-#~ msgid "Password Reset Successful"
-#~ msgstr "Password Reset Successful"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:289
 msgid "Password should be strong for security. Include uppercase, lowercase, numbers, and special characters."
-msgstr "Password should be strong for security. Include uppercase, lowercase, numbers, and special characters."
-
-#: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:469
-#~ msgid "Password strength"
-#~ msgstr "Password strength"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:276
 msgid "Password strength:"
-msgstr "Password strength:"
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:59
 #: src/features/change-password-form/model/validation.ts:31
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:38
 msgid "Passwords do not match"
-msgstr "Passwords do not match"
-
-#: src/entities/crm/ui/FollowUpForm.tsx:176
-#~ msgid "Past Date Selected"
-#~ msgstr "Past Date Selected"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:162
 msgid "Pause Subscription"
-msgstr "Pause Subscription"
+msgstr ""
 
 #: src/features/payment-checkout/ui/stripe-checkout-form.tsx:105
 msgid "Pay now"
-msgstr "Pay now"
+msgstr ""
 
 #: src/features/payment-checkout/ui/stripe-checkout-form.tsx:88
 msgid "Payment Details"
-msgstr "Payment Details"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-selector.tsx:73
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:132
 msgid "Payment Gateway"
-msgstr "Payment Gateway"
+msgstr ""
 
 #: src/pages/gateway-config.tsx:177
 msgid "Payment Gateway Configuration"
-msgstr "Payment Gateway Configuration"
+msgstr ""
 
 #: src/pages/gateway-config.tsx:67
 #: src/shared/constants/index.ts:101
 msgid "Payment gateway configured successfully"
-msgstr "Payment gateway configured successfully"
+msgstr ""
 
 #: src/pages/billing.tsx:124
 #: src/widgets/billing-history/ui/billing-history-table.tsx:73
 msgid "Payment History"
-msgstr "Payment History"
+msgstr ""
 
 #: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:52
 #: src/widgets/billing-history/ui/billing-history-table.tsx:91
 msgid "Payment ID"
-msgstr "Payment ID"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionCard.tsx:52
 msgid "Payment Past Due"
-msgstr "Payment Past Due"
+msgstr ""
 
 #: src/features/payment-checkout/ui/stripe-checkout-form.tsx:42
 msgid "Payment succeeded!"
-msgstr "Payment succeeded!"
+msgstr ""
 
 #: src/entities/billing/ui/BillingServiceDegradationBanner.tsx:21
 msgid "Payments"
-msgstr "Payments"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:357
 #: src/features/crm-leads/ui/FollowUpSection.tsx:230
 #: src/features/invitation-management/ui/InvitationList.tsx:270
 msgid "Pending"
-msgstr "Pending"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:97
 msgid "Pending Verification"
-msgstr "Pending Verification"
+msgstr ""
 
 #: src/features/crm-leads/ui/ConversionChart.tsx:70
 msgid "Percentage of leads converted to won"
-msgstr "Percentage of leads converted to won"
+msgstr ""
 
 #: src/features/invoice-management/ui/InvoicesTable.tsx:76
 msgid "Period"
-msgstr "Period"
+msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:238
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:164
 #: src/features/crm-leads/ui/LeadEditModal.tsx:182
 msgid "Phone"
-msgstr "Phone"
+msgstr ""
 
 #: src/features/crm-leads/ui/DateRangeFilter.tsx:182
 msgid "Pick end date"
-msgstr "Pick end date"
+msgstr ""
 
 #: src/features/crm-leads/ui/DateRangeFilter.tsx:168
 msgid "Pick start date"
-msgstr "Pick start date"
+msgstr ""
 
 #: src/entities/crm/ui/CrmServiceDegradationBanner.tsx:23
 #: src/features/crm-leads/ui/CrmLayout.tsx:90
@@ -3046,627 +2828,582 @@ msgstr "Pick start date"
 #: src/pages/crm.pipeline.tsx:17
 #: src/widgets/sidebar/ui/sidebar.tsx:157
 msgid "Pipeline"
-msgstr "Pipeline"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineMetrics.tsx:77
 msgid "Pipeline health based on active leads percentage"
-msgstr "Pipeline health based on active leads percentage"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineMetrics.tsx:73
 msgid "Pipeline Metrics"
-msgstr "Pipeline Metrics"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineView.tsx:289
 msgid "Pipeline Overview"
-msgstr "Pipeline Overview"
+msgstr ""
 
 #: src/features/crm-leads/ui/ConversionChart.tsx:82
 msgid "Pipeline Velocity"
-msgstr "Pipeline Velocity"
-
-#: src/shared/lib/use-auth-api.ts:150
-#~ msgid "Please check your email for the password reset link"
-#~ msgstr "Please check your email for the password reset link"
-
-#: src/shared/lib/use-auth-api.ts:102
-#~ msgid "Please check your inbox for the verification link"
-#~ msgstr "Please check your inbox for the verification link"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineView.tsx:236
 msgid "Please configure pipeline stages to start using the kanban view."
-msgstr "Please configure pipeline stages to start using the kanban view."
+msgstr ""
 
 #: src/features/change-password-form/model/validation.ts:28
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:35
 msgid "Please confirm your new password"
-msgstr "Please confirm your new password"
+msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:26
 #: src/shared/constants/index.ts:72
 msgid "Please enter a valid email address"
-msgstr "Please enter a valid email address"
+msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:31
 msgid "Please enter a valid phone number"
-msgstr "Please enter a valid phone number"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:114
 msgid "Please provide this ID when contacting support."
-msgstr "Please provide this ID when contacting support."
+msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:75
 msgid "Please select a follow-up type"
-msgstr "Please select a follow-up type"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-form.tsx:50
 msgid "Please select a gateway provider"
-msgstr "Please select a gateway provider"
+msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:54
 msgid "Please select a lead source"
-msgstr "Please select a lead source"
+msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:71
 msgid "Please select a priority"
-msgstr "Please select a priority"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineView.tsx:181
 msgid "Please try again"
-msgstr "Please try again"
+msgstr ""
 
 #: src/pages/about.tsx:84
 msgid "Powerful data synchronization and caching"
-msgstr "Powerful data synchronization and caching"
+msgstr ""
 
 #: src/pages/preferences-demo.tsx:45
 msgid "Preferences Demo"
-msgstr "Preferences Demo"
+msgstr ""
 
 #: src/pages/dashboard.tsx:52
 msgid "Premium analytics dashboard with detailed insights and reporting."
-msgstr "Premium analytics dashboard with detailed insights and reporting."
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-status-badge.tsx:17
 msgid "Primary"
-msgstr "Primary"
+msgstr ""
 
 #: src/pages/gateway-config.tsx:113
 #: src/shared/constants/index.ts:104
 msgid "Primary gateway updated successfully"
-msgstr "Primary gateway updated successfully"
+msgstr ""
 
 #: src/entities/crm/ui/FollowUpForm.tsx:172
 msgid "Priority"
-msgstr "Priority"
+msgstr ""
 
 #: src/features/gateway-config/ui/braintree-config-form.tsx:41
 msgid "Private Key"
-msgstr "Private Key"
+msgstr ""
 
 #: src/shared/constants/index.ts:139
 msgid "Processing..."
-msgstr "Processing..."
+msgstr ""
 
 #: src/entities/billing/ui/BillingFormField.tsx:74
 msgid "Production"
-msgstr "Production"
+msgstr ""
 
 #: src/features/gateway-config/ui/braintree-config-form.tsx:60
 msgid "Production (Live)"
-msgstr "Production (Live)"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadListPage.tsx:266
 #: src/features/crm-leads/ui/LeadListPage.tsx:430
 msgid "Proposal"
-msgstr "Proposal"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:207
 msgid "Prospect"
-msgstr "Prospect"
+msgstr ""
 
 #: src/features/gateway-config/ui/braintree-config-form.tsx:30
 msgid "Public Key"
-msgstr "Public Key"
+msgstr ""
 
 #: src/features/gateway-config/ui/stripe-config-form.tsx:66
 msgid "Public key for frontend use (optional)"
-msgstr "Public key for frontend use (optional)"
+msgstr ""
 
 #: src/features/gateway-config/ui/stripe-config-form.tsx:63
 msgid "Publishable Key"
-msgstr "Publishable Key"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:210
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:264
 #: src/features/crm-leads/ui/LeadListPage.tsx:265
 #: src/features/crm-leads/ui/LeadListPage.tsx:429
 msgid "Qualified"
-msgstr "Qualified"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadEditModal.tsx:230
 msgid "Qualified Lead"
-msgstr "Qualified Lead"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadDetailPage.tsx:264
 msgid "Qualify Lead"
-msgstr "Qualify Lead"
+msgstr ""
 
 #: src/features/crm-leads/ui/DateRangeFilter.tsx:131
 msgid "Quick Select"
-msgstr "Quick Select"
+msgstr ""
 
 #: src/pages/preferences-demo.tsx:64
 msgid "Quick Theme Switcher"
-msgstr "Quick Theme Switcher"
+msgstr ""
 
 #: src/pages/about.tsx:63
 msgid "React 19:"
-msgstr "React 19:"
+msgstr ""
 
 #: src/pages/about.tsx:142
 msgid "Ready to start building? Check out the documentation and source code."
-msgstr "Ready to start building? Check out the documentation and source code."
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:58
 #: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:36
 msgid "Redirecting"
-msgstr "Redirecting"
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:59
 msgid "Redirecting to payment gateway for onboarding..."
-msgstr "Redirecting to payment gateway for onboarding..."
+msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:62
 #: src/features/crm-leads/ui/LeadEditModal.tsx:208
 #: src/features/crm-leads/ui/LeadListPage.tsx:246
 #: src/features/crm-leads/ui/LeadListPage.tsx:408
 msgid "Referral"
-msgstr "Referral"
+msgstr ""
 
 #: src/shared/ui/GenericServiceDegradationBanner.tsx:132
 msgid "Refresh"
-msgstr "Refresh"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:183
 msgid "Refresh the page"
-msgstr "Refresh the page"
+msgstr ""
 
 #: src/widgets/billing-history/ui/billing-history-table.tsx:50
 msgid "Refund"
-msgstr "Refund"
+msgstr ""
 
 #: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:38
 msgid "Refund Amount"
-msgstr "Refund Amount"
+msgstr ""
 
 #: src/features/payment-refund/ui/refund-button.tsx:38
 #: src/widgets/billing-history/ui/billing-history-table.tsx:62
 msgid "Refund Failed"
-msgstr "Refund Failed"
+msgstr ""
 
 #: src/widgets/billing-history/ui/billing-history-table.tsx:56
 msgid "Refund Initiated"
-msgstr "Refund Initiated"
+msgstr ""
 
 #: src/features/payment-refund/ui/refund-button.tsx:46
 #: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:69
 #: src/widgets/billing-history/ui/billing-history-table.tsx:121
 msgid "Refund Payment"
-msgstr "Refund Payment"
+msgstr ""
 
 #: src/features/payment-refund/ui/refund-button.tsx:31
 msgid "Refund Processed"
-msgstr "Refund Processed"
+msgstr ""
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:91
 msgid "Registered"
-msgstr "Registered"
+msgstr ""
 
 #: src/entities/user/ui/avatar-upload.tsx:115
 msgid "Remove"
-msgstr "Remove"
+msgstr ""
 
 #: src/entities/user/ui/avatar-upload.tsx:208
 msgid "Remove Avatar"
-msgstr "Remove Avatar"
+msgstr ""
 
 #: src/entities/user/ui/avatar-upload.tsx:208
 msgid "Removing..."
-msgstr "Removing..."
+msgstr ""
 
 #: src/pages/dashboard.tsx:95
 msgid "Reports"
-msgstr "Reports"
+msgstr ""
 
 #: src/shared/constants/index.ts:116
 msgid "Request timed out"
-msgstr "Request timed out"
+msgstr ""
 
 #: src/shared/ui/guards/ServiceAccessGuard.tsx:112
 msgid "Required Authority"
-msgstr "Required Authority"
+msgstr ""
 
 #: src/pages/checkout.tsx:40
 msgid "Required payment information is missing."
-msgstr "Required payment information is missing."
-
-#: src/shared/lib/use-auth-api.ts:149
-#~ msgid "Reset Link Sent"
-#~ msgstr "Reset Link Sent"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:114
 msgid "Reset to Browser Default"
-msgstr "Reset to Browser Default"
+msgstr ""
 
 #: src/shared/constants/index.ts:115
 msgid "Resource not found"
-msgstr "Resource not found"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:107
 msgid "Response delay (ms)"
-msgstr "Response delay (ms)"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:172
 msgid "Resume Subscription"
-msgstr "Resume Subscription"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactDetailPage.tsx:108
 #: src/features/crm-leads/ui/LeadListPage.tsx:230
 msgid "Retry"
-msgstr "Retry"
+msgstr ""
 
 #: src/shared/ui/loading-state/loading-state.tsx:197
 msgid "Retrying..."
-msgstr "Retrying..."
+msgstr ""
 
 #: src/pages/examples.tsx:264
 msgid "Reusable"
-msgstr "Reusable"
+msgstr ""
 
 #: src/pages/examples.tsx:211
 msgid "Reusable form components with validation, built using Mantine Form and custom validation rules."
-msgstr "Reusable form components with validation, built using Mantine Form and custom validation rules."
+msgstr ""
 
 #: src/features/dashboard/ui/dashboard-feature.tsx:35
 msgid "Revenue"
-msgstr "Revenue"
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:142
 msgid "Review your selections and click Continue to proceed with onboarding."
-msgstr "Review your selections and click Continue to proceed with onboarding."
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:72
 msgid "Revoke"
-msgstr "Revoke"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:221
 msgid "Revoke invitation"
-msgstr "Revoke invitation"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:60
 msgid "Revoke Invitation"
-msgstr "Revoke Invitation"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:273
 msgid "Revoked"
-msgstr "Revoked"
+msgstr ""
 
 #: src/pages/examples.tsx:111
 msgid "Role"
-msgstr "Role"
-
-#: src/features/users/components/user-form-modal.tsx:30
-#~ msgid "Role is required"
-#~ msgstr "Role is required"
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:176
 msgid "Roles"
-msgstr "Roles"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:57
 msgid "Running"
-msgstr "Running"
+msgstr ""
 
 #: src/pages/dashboard.tsx:86
 msgid "Sales Pipeline"
-msgstr "Sales Pipeline"
+msgstr ""
 
 #: src/pages/dashboard.tsx:80
 msgid "Sales Pipeline - Enterprise feature"
-msgstr "Sales Pipeline - Enterprise feature"
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:70
-#~ msgid "Sample Form"
-#~ msgstr "Sample Form"
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:60
-#: src/pages/examples.tsx:250
-#~ msgid "Sample Form Feature"
-#~ msgstr "Sample Form Feature"
+msgstr ""
 
 #: src/entities/billing/ui/BillingFormField.tsx:73
 msgid "Sandbox"
-msgstr "Sandbox"
+msgstr ""
 
 #: src/features/gateway-config/ui/braintree-config-form.tsx:59
 #: src/features/gateway-config/ui/paypal-config-form.tsx:58
 msgid "Sandbox (Test)"
-msgstr "Sandbox (Test)"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadNotesSection.tsx:264
 msgid "Save"
-msgstr "Save"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:244
 #: src/features/crm-leads/ui/LeadEditModal.tsx:259
 msgid "Save Changes"
-msgstr "Save Changes"
+msgstr ""
 
 #: src/pages/about.tsx:99
 msgid "Scalable"
-msgstr "Scalable"
+msgstr ""
 
 #: src/entities/crm/ui/FollowUpForm.tsx:205
 msgid "Schedule"
-msgstr "Schedule"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpSection.tsx:220
 msgid "Schedule First Follow-up"
-msgstr "Schedule First Follow-up"
+msgstr ""
 
 #: src/entities/crm/ui/FollowUpForm.tsx:134
 #: src/features/crm-leads/ui/FollowUpList.tsx:335
 #: src/features/crm-leads/ui/FollowUpList.tsx:452
 #: src/features/crm-leads/ui/FollowUpSection.tsx:180
 msgid "Schedule Follow-up"
-msgstr "Schedule Follow-up"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:345
 msgid "Search follow-ups..."
-msgstr "Search follow-ups..."
+msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:88
 msgid "Search term must be less than 100 characters"
-msgstr "Search term must be less than 100 characters"
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:270
 #: src/features/users/ui/users-data-grid.tsx:237
 msgid "Search users..."
-msgstr "Search users..."
+msgstr ""
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:65
 msgid "Security Settings"
-msgstr "Security Settings"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:471
 msgid "Select all"
-msgstr "Select all"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:204
 msgid "Select authority"
-msgstr "Select authority"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:178
 msgid "Select company"
-msgstr "Select company"
+msgstr ""
 
 #: src/features/crm-leads/ui/DateRangeFilter.tsx:115
 msgid "Select Date Range"
-msgstr "Select Date Range"
-
-#: src/entities/crm/ui/FollowUpForm.tsx:166
-#~ msgid "Select due date"
-#~ msgstr "Select due date"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:573
 msgid "Select follow-up"
-msgstr "Select follow-up"
+msgstr ""
 
 #: src/entities/crm/ui/FollowUpForm.tsx:184
 msgid "Select follow-up type"
-msgstr "Select follow-up type"
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:133
 msgid "Select gateway"
-msgstr "Select gateway"
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:112
 msgid "Select Gateway"
-msgstr "Select Gateway"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-selector.tsx:74
 msgid "Select gateway provider"
-msgstr "Select gateway provider"
+msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:259
 #: src/features/crm-leads/ui/LeadEditModal.tsx:204
 msgid "Select lead source"
-msgstr "Select lead source"
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:98
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:67
 msgid "Select organization"
-msgstr "Select organization"
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:91
 msgid "Select Organization"
-msgstr "Select Organization"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionPlansGrid.tsx:186
 msgid "Select Plan"
-msgstr "Select Plan"
+msgstr ""
 
 #: src/entities/crm/ui/FollowUpForm.tsx:173
 msgid "Select priority"
-msgstr "Select priority"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:201
 msgid "Select status"
-msgstr "Select status"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:181
 msgid "Select type"
-msgstr "Select type"
+msgstr ""
 
 #: src/features/users/ui/user-form-modal.tsx:236
 msgid "Select user authorities"
-msgstr "Select user authorities"
-
-#: src/features/users/components/user-form-modal.tsx:215
-#~ msgid "Select user role"
-#~ msgstr "Select user role"
-
-#: src/features/users/components/user-form-modal.tsx:258
-#~ msgid "Select user roles"
-#~ msgstr "Select user roles"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:329
 #: src/features/crm-leads/ui/FollowUpList.tsx:385
 msgid "selected"
-msgstr "selected"
+msgstr ""
 
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:104
 msgid "Selected Plan"
-msgstr "Selected Plan"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactDetailPage.tsx:146
 msgid "Send email"
-msgstr "Send email"
+msgstr ""
 
 #: src/shared/constants/index.ts:112
 msgid "Server error"
-msgstr "Server error"
+msgstr ""
 
 #: src/shared/ui/loading-state/loading-state.tsx:190
 msgid "Server is temporarily unavailable. Please try again"
-msgstr "Server is temporarily unavailable. Please try again"
+msgstr ""
 
 #: src/shared/constants/index.ts:132
 msgid "Service temporarily unavailable"
-msgstr "Service temporarily unavailable"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactListPage.tsx:183
 msgid "Set Active"
-msgstr "Set Active"
-
-#: src/features/crm-contacts/components/ContactListPage.tsx:337
-#~ msgid "Set Archived"
-#~ msgstr "Set Archived"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-list.tsx:126
 msgid "Set as primary"
-msgstr "Set as primary"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-form.tsx:180
 msgid "Set as primary gateway"
-msgstr "Set as primary gateway"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactListPage.tsx:190
 msgid "Set Inactive"
-msgstr "Set Inactive"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactListPage.tsx:197
 msgid "Set Prospect"
-msgstr "Set Prospect"
+msgstr ""
 
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:60
 msgid "Setup Required"
-msgstr "Setup Required"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:157
 msgid "Shareable link"
-msgstr "Shareable link"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:184
 msgid "Shareable Link"
-msgstr "Shareable Link"
+msgstr ""
 
 #: src/shared/constants/index.ts:133
 msgid "Showing cached data due to connectivity issues"
-msgstr "Showing cached data due to connectivity issues"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:108
 msgid "Simulate network latency"
-msgstr "Simulate network latency"
+msgstr ""
 
 #: src/features/crm-leads/ui/ConversionChart.tsx:295
 msgid "Slowest Stage"
-msgstr "Slowest Stage"
+msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:65
 #: src/features/crm-leads/ui/LeadEditModal.tsx:211
 #: src/features/crm-leads/ui/LeadListPage.tsx:249
 #: src/features/crm-leads/ui/LeadListPage.tsx:411
 msgid "Social Media"
-msgstr "Social Media"
+msgstr ""
 
 #: src/shared/ui/GenericServiceDegradationBanner.tsx:87
 msgid "Some {serviceName} Services Unavailable"
-msgstr "Some {serviceName} Services Unavailable"
-
-#: src/shared/ui/ServiceDegradationBanner.tsx:77
-#~ msgid "Some CRM Services Unavailable"
-#~ msgstr "Some CRM Services Unavailable"
+msgstr ""
 
 #: src/shared/ui/GenericServiceDegradationBanner.tsx:114
 msgid "Some features may be limited. We're working to restore full functionality."
-msgstr "Some features may be limited. We're working to restore full functionality."
+msgstr ""
 
 #: src/shared/constants/index.ts:110
 msgid "Something went wrong"
-msgstr "Something went wrong"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:87
 msgid "Something went wrong with the CRM system. Please try again or contact support if the problem persists."
-msgstr "Something went wrong with the CRM system. Please try again or contact support if the problem persists."
+msgstr ""
 
 #: src/features/payment-checkout/ui/stripe-checkout-form.tsx:52
 msgid "Something went wrong."
-msgstr "Something went wrong."
+msgstr ""
 
 #: src/shared/ui/loading-state/loading-state.tsx:192
 msgid "Something went wrong. Please try again"
-msgstr "Something went wrong. Please try again"
+msgstr ""
 
 #: src/pages/examples.tsx:236
 msgid "Sortable, filterable data tables with pagination and custom cell rendering."
-msgstr "Sortable, filterable data tables with pagination and custom cell rendering."
+msgstr ""
 
 #: src/pages/examples.tsx:178
 msgid "Sorting by {key} in {direction} order"
-msgstr "Sorting by {key} in {direction} order"
+msgstr ""
 
 #: src/features/gateway-config/ui/square-config-form.tsx:38
 msgid "Square location ID for payments"
-msgstr "Square location ID for payments"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:81
 msgid "Stage created successfully"
-msgstr "Stage created successfully"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:126
 msgid "Stage deleted successfully"
-msgstr "Stage deleted successfully"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:309
 msgid "Stage Name"
-msgstr "Stage Name"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:109
 msgid "Stage updated successfully"
-msgstr "Stage updated successfully"
+msgstr ""
 
 #: src/features/crm-leads/ui/ConversionChart.tsx:224
 msgid "Stage Velocity (Average Days per Stage)"
-msgstr "Stage Velocity (Average Days per Stage)"
+msgstr ""
 
 #: src/features/crm-leads/ui/DateRangeFilter.tsx:167
 msgid "Start Date"
-msgstr "Start Date"
+msgstr ""
 
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:93
 msgid "Start Onboarding"
-msgstr "Start Onboarding"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:200
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:72
@@ -3678,59 +3415,51 @@ msgstr "Start Onboarding"
 #: src/pages/examples.tsx:125
 #: src/widgets/billing-history/ui/billing-history-table.tsx:111
 msgid "Status"
-msgstr "Status"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:57
 msgid "Stopped"
-msgstr "Stopped"
+msgstr ""
 
 #: src/features/invoice-management/ui/InvoiceCard.tsx:102
 msgid "Stripe ID:"
-msgstr "Stripe ID:"
+msgstr ""
 
 #: src/entities/billing/ui/BillingFormField.tsx:175
 #: src/entities/user/ui/UserFormField.tsx:143
 msgid "Strong"
-msgstr "Strong"
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:100
-#~ msgid "Submit"
-#~ msgstr "Submit"
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:42
-#~ msgid "Submit Failed"
-#~ msgstr "Submit Failed"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:154
 msgid "Subscription Actions"
-msgstr "Subscription Actions"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:49
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:81
 msgid "Subscription Canceled"
-msgstr "Subscription Canceled"
+msgstr ""
 
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:63
 msgid "Subscription Created"
-msgstr "Subscription Created"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionCard.tsx:58
 msgid "Subscription Ending"
-msgstr "Subscription Ending"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:103
 msgid "Subscription Paused"
-msgstr "Subscription Paused"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:123
 msgid "Subscription Resumed"
-msgstr "Subscription Resumed"
+msgstr ""
 
 #: src/entities/billing/ui/BillingServiceDegradationBanner.tsx:22
 #: src/pages/subscriptions.tsx:40
 #: src/pages/subscriptions.tsx:76
 msgid "Subscriptions"
-msgstr "Subscriptions"
+msgstr ""
 
 #: src/entities/crm/lib/use-form-submission.ts:87
 #: src/entities/crm/lib/use-form-submission.ts:181
@@ -3760,347 +3489,307 @@ msgstr "Subscriptions"
 #: src/pages/gateway-config.tsx:136
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:74
 msgid "Success"
-msgstr "Success"
+msgstr ""
 
 #: src/pages/examples.tsx:322
 msgid "Success notification!"
-msgstr "Success notification!"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:79
 msgid "Super Admin"
-msgstr "Super Admin"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:85
 msgid "Super Admin Access"
-msgstr "Super Admin Access"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:98
 msgid "Suspended"
-msgstr "Suspended"
+msgstr ""
 
 #: src/shared/ui/theme-toggle/theme-toggle.tsx:16
 msgid "Switch to dark mode"
-msgstr "Switch to dark mode"
+msgstr ""
 
 #: src/shared/ui/theme-toggle/theme-toggle.tsx:16
 msgid "Switch to light mode"
-msgstr "Switch to light mode"
+msgstr ""
 
 #: src/pages/about.tsx:83
 msgid "TanStack Query:"
-msgstr "TanStack Query:"
+msgstr ""
 
 #: src/pages/about.tsx:79
 msgid "TanStack Router:"
-msgstr "TanStack Router:"
+msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:81
 msgid "Task"
-msgstr "Task"
+msgstr ""
 
 #: src/widgets/sidebar/ui/sidebar.tsx:61
 msgid "Team"
-msgstr "Team"
+msgstr ""
 
 #: src/shared/ui/guards/ServiceAccessGuard.tsx:176
 msgid "Technical Details"
-msgstr "Technical Details"
+msgstr ""
 
 #: src/pages/about.tsx:51
 msgid "Technology Stack"
-msgstr "Technology Stack"
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-form.tsx:151
 msgid "Test"
-msgstr "Test"
+msgstr ""
 
 #: src/pages/examples.tsx:313
 msgid "Test different types of notifications"
-msgstr "Test different types of notifications"
+msgstr ""
 
 #: src/pages/about.tsx:117
 msgid "Testing Ready:"
-msgstr "Testing Ready:"
+msgstr ""
 
 #: src/pages/about.tsx:118
 msgid "testing setup with Vitest and Playwright"
-msgstr "testing setup with Vitest and Playwright"
-
-#: src/shared/ui/guards/ServiceAccessGuard.tsx:72
-#~ msgid "The {serviceName} feature is not enabled for your account. Contact your administrator to enable {serviceName} functionality."
-#~ msgstr "The {serviceName} feature is not enabled for your account. Contact your administrator to enable {serviceName} functionality."
-
-#: src/shared/ui/guards/CrmAccessGuard.tsx:61
-#~ msgid "The CRM feature is not enabled for your account. Contact your administrator to enable CRM functionality."
-#~ msgstr "The CRM feature is not enabled for your account. Contact your administrator to enable CRM functionality."
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:69
 msgid "The CRM service is temporarily unavailable. Our team has been notified and is working on a fix."
-msgstr "The CRM service is temporarily unavailable. Our team has been notified and is working on a fix."
+msgstr ""
 
 #: src/shared/ui/GenericServiceDegradationBanner.tsx:103
 msgid "The following {serviceName} service is currently unavailable:"
-msgstr "The following {serviceName} service is currently unavailable:"
+msgstr ""
 
 #: src/shared/ui/GenericServiceDegradationBanner.tsx:104
 msgid "The following {serviceName} services are currently unavailable:"
-msgstr "The following {serviceName} services are currently unavailable:"
-
-#: src/shared/ui/ServiceDegradationBanner.tsx:93
-#~ msgid "The following CRM service is currently unavailable:"
-#~ msgstr "The following CRM service is currently unavailable:"
-
-#: src/shared/ui/ServiceDegradationBanner.tsx:94
-#~ msgid "The following CRM services are currently unavailable:"
-#~ msgstr "The following CRM services are currently unavailable:"
+msgstr ""
 
 #: src/pages/404.tsx:40
 msgid "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
-msgstr "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
+msgstr ""
 
 #: src/features/payment-refund/ui/refund-button.tsx:32
 msgid "The payment has been refunded successfully"
-msgstr "The payment has been refunded successfully"
+msgstr ""
 
 #: src/shared/constants/index.ts:100
 msgid "The payment is being refunded"
-msgstr "The payment is being refunded"
-
-#: src/widgets/billing-history/ui/billing-history-table.tsx:52
-#~ msgid "The payment is being refunded."
-#~ msgstr "The payment is being refunded."
+msgstr ""
 
 #: src/shared/ui/loading-state/loading-state.tsx:188
 msgid "The request timed out. Please try again"
-msgstr "The request timed out. Please try again"
+msgstr ""
 
 #: src/pages/preferences-demo.tsx:85
 msgid "Theme"
-msgstr "Theme"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:73
 msgid "There was a problem with the data you submitted. Please check your input and try again."
-msgstr "There was a problem with the data you submitted. Please check your input and try again."
+msgstr ""
 
 #: src/pages/preferences-demo.tsx:79
 msgid "These values are fetched using custom hooks"
-msgstr "These values are fetched using custom hooks"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:69
 #: src/features/users/ui/enhanced-users-data-grid.tsx:68
 #: src/features/users/ui/users-data-grid.tsx:64
 msgid "This action cannot be undone."
-msgstr "This action cannot be undone."
+msgstr ""
 
 #: src/pages/gateway-config.tsx:229
 msgid "This action cannot be undone. All configuration data for this gateway will be permanently deleted."
-msgstr "This action cannot be undone. All configuration data for this gateway will be permanently deleted."
+msgstr ""
 
 #: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:32
 msgid "This action cannot be undone. The full payment amount will be refunded to the customer."
-msgstr "This action cannot be undone. The full payment amount will be refunded to the customer."
+msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:209
 msgid "This date is in the past. Are you sure this is correct?"
-msgstr "This date is in the past. Are you sure this is correct?"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:52
 msgid "This demo shows the unified i18n approach across frontend and backend"
-msgstr "This demo shows the unified i18n approach across frontend and backend"
-
-#: src/pages/examples.tsx:253
-#~ msgid "This demonstrates a complete feature implementation following Feature-Sliced Design principles."
-#~ msgstr "This demonstrates a complete feature implementation following Feature-Sliced Design principles."
+msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:6
 msgid "This field is required"
-msgstr "This field is required"
+msgstr ""
 
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:83
 msgid "This organization is set up to receive payments."
-msgstr "This organization is set up to receive payments."
+msgstr ""
 
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:84
 msgid "This organization needs to complete payment gateway onboarding."
-msgstr "This organization needs to complete payment gateway onboarding."
+msgstr ""
 
 #: src/pages/about.tsx:58
 msgid "This template is built with cutting-edge technologies for optimal developer experience and performance."
-msgstr "This template is built with cutting-edge technologies for optimal developer experience and performance."
+msgstr ""
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:28
 msgid "This will log you out from all devices where you're currently signed in, including this device."
-msgstr "This will log you out from all devices where you're currently signed in, including this device."
+msgstr ""
 
 #: src/pages/preferences-demo.tsx:101
 msgid "Timezone"
-msgstr "Timezone"
-
-#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:47
-#~ msgid "To start receiving payments from your customers, you need to connect your Stripe account."
-#~ msgstr "To start receiving payments from your customers, you need to connect your Stripe account."
+msgstr ""
 
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:103
 msgid "Today's Follow-ups"
-msgstr "Today's Follow-ups"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:63
 msgid "Toggle MSW settings"
-msgstr "Toggle MSW settings"
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:22
 msgid "Token Validation Failed"
-msgstr "Token Validation Failed"
+msgstr ""
 
 #: src/shared/constants/index.ts:117
 msgid "Too many requests. Please try again later"
-msgstr "Too many requests. Please try again later"
+msgstr ""
 
 #: src/entities/billing/ui/BillingFormField.tsx:167
 msgid "Too short"
-msgstr "Too short"
+msgstr ""
 
 #: src/features/crm-leads/ui/DashboardStats.tsx:69
 msgid "Total Leads"
-msgstr "Total Leads"
+msgstr ""
 
 #: src/features/dashboard/ui/dashboard-feature.tsx:29
 msgid "Total Orders"
-msgstr "Total Orders"
+msgstr ""
 
 #: src/features/crm-leads/ui/ConversionChart.tsx:303
 msgid "Total Pipeline Time"
-msgstr "Total Pipeline Time"
+msgstr ""
 
 #: src/features/dashboard/ui/dashboard-feature.tsx:23
 msgid "Total Users"
-msgstr "Total Users"
+msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:66
 #: src/features/crm-leads/ui/LeadEditModal.tsx:212
 #: src/features/crm-leads/ui/LeadListPage.tsx:250
 #: src/features/crm-leads/ui/LeadListPage.tsx:412
 msgid "Trade Show"
-msgstr "Trade Show"
+msgstr ""
 
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:122
 msgid "Trial Days"
-msgstr "Trial Days"
+msgstr ""
 
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:48
 msgid "Trial days must be positive"
-msgstr "Trial days must be positive"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionCard.tsx:73
 msgid "Trial ends: {trialEndDate}"
-msgstr "Trial ends: {trialEndDate}"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:176
 msgid "Troubleshooting Tips:"
-msgstr "Troubleshooting Tips:"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:144
 #: src/shared/ui/guards/ServiceAccessGuard.tsx:161
 #: src/shared/ui/loading-state/loading-state.tsx:215
 msgid "Try Again"
-msgstr "Try Again"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:189
 msgid "Try again in a few minutes"
-msgstr "Try again in a few minutes"
+msgstr ""
 
 #: src/pages/preferences-demo.tsx:129
 msgid "Two-Factor Auth"
-msgstr "Two-Factor Auth"
+msgstr ""
 
 #: src/entities/crm/ui/FollowUpForm.tsx:183
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:195
 #: src/features/invitation-management/ui/InvitationList.tsx:138
 msgid "Type"
-msgstr "Type"
+msgstr ""
 
 #: src/pages/about.tsx:113
 msgid "Type Safety:"
-msgstr "Type Safety:"
+msgstr ""
 
 #: src/pages/about.tsx:68
 msgid "Type-safe development with enhanced developer experience"
-msgstr "Type-safe development with enhanced developer experience"
+msgstr ""
 
 #: src/pages/about.tsx:80
 msgid "Type-safe routing with code splitting"
-msgstr "Type-safe routing with code splitting"
+msgstr ""
 
 #: src/pages/about.tsx:67
 msgid "TypeScript:"
-msgstr "TypeScript:"
+msgstr ""
 
 #: src/pages/examples.tsx:258
 msgid "UI Components"
-msgstr "UI Components"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:65
 msgid "Unable to connect to CRM services. Please check your internet connection and try again."
-msgstr "Unable to connect to CRM services. Please check your internet connection and try again."
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:93
 msgid "Unhandled requests"
-msgstr "Unhandled requests"
+msgstr ""
 
 #: src/features/users/ui/users-data-grid.tsx:157
 msgid "Unverified"
-msgstr "Unverified"
+msgstr ""
 
 #: src/entities/crm/ui/FollowUpForm.tsx:205
 #: src/entities/crm/ui/LeadForm.tsx:288
 #: src/features/users/ui/user-form-modal.tsx:287
 msgid "Update"
-msgstr "Update"
+msgstr ""
 
 #: src/features/crm-contacts/ui/ContactListPage.tsx:174
 msgid "Update Status"
-msgstr "Update Status"
+msgstr ""
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:97
 msgid "Update your password to keep your account secure."
-msgstr "Update your password to keep your account secure."
+msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-list.tsx:181
 msgid "Updated"
-msgstr "Updated"
-
-#: src/features/crm-contacts/components/ContactListPage.tsx:152
-#~ msgid "Updated {0} contacts. {1} failed."
-#~ msgstr "Updated {0} contacts. {1} failed."
-
-#: src/features/crm-contacts/components/ContactListPage.tsx:123
-#~ msgid "Updated {successCount} contacts. {failureCount} failed."
-#~ msgstr "Updated {successCount} contacts. {failureCount} failed."
+msgstr ""
 
 #: src/shared/constants/index.ts:96
 msgid "Updated successfully"
-msgstr "Updated successfully"
+msgstr ""
 
 #: src/features/users/ui/user-form-modal.tsx:267
 msgid "Updated:"
-msgstr "Updated:"
+msgstr ""
 
 #: src/entities/user/ui/avatar-upload.tsx:99
 #: src/entities/user/ui/avatar-upload.tsx:195
 msgid "Upload Avatar"
-msgstr "Upload Avatar"
+msgstr ""
 
 #: src/entities/user/ui/avatar-upload.tsx:123
 msgid "Uploading"
-msgstr "Uploading"
-
-#: src/entities/user/ui/avatar-upload.tsx:118
-#~ msgid "Uploading {0}..."
-#~ msgstr "Uploading {0}..."
+msgstr ""
 
 #: src/entities/user/ui/avatar-upload.tsx:195
 msgid "Uploading..."
-msgstr "Uploading..."
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:77
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:206
@@ -4108,422 +3797,354 @@ msgstr "Uploading..."
 #: src/features/users/ui/users-data-grid.tsx:114
 #: src/pages/examples.tsx:89
 msgid "User"
-msgstr "User"
+msgstr ""
 
 #: src/features/users/ui/user-form-modal.tsx:249
 msgid "User can log in and access the system"
-msgstr "User can log in and access the system"
-
-#: src/features/users/ui/user-form-modal.tsx:164
-#~ msgid "User created successfully"
-#~ msgstr "User created successfully"
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:78
 #: src/features/users/ui/users-data-grid.tsx:74
 msgid "User deleted successfully"
-msgstr "User deleted successfully"
+msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:258
 #: src/features/users/ui/users-data-grid.tsx:224
 #: src/widgets/sidebar/ui/sidebar.tsx:51
 msgid "User Management"
-msgstr "User Management"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:136
 msgid "User Preference"
-msgstr "User Preference"
+msgstr ""
 
 #: src/pages/user-preferences.tsx:16
 #: src/pages/user-preferences.tsx:25
 msgid "User Preferences"
-msgstr "User Preferences"
+msgstr ""
 
 #: src/pages/preferences-demo.tsx:54
 msgid "User Preferences Demo"
-msgstr "User Preferences Demo"
-
-#: src/features/users/ui/user-form-modal.tsx:126
-#~ msgid "User updated successfully"
-#~ msgstr "User updated successfully"
+msgstr ""
 
 #: src/features/users/ui/user-form-modal.tsx:256
 msgid "User's email address has been verified"
-msgstr "User's email address has been verified"
+msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:195
 msgid "user@example.com"
-msgstr "user@example.com"
+msgstr ""
 
 #: src/features/users/ui/user-form-modal.tsx:182
 msgid "Username"
-msgstr "Username"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:252
 msgid "Username must be 3-30 characters, letters, numbers, underscore, or dash only"
-msgstr "Username must be 3-30 characters, letters, numbers, underscore, or dash only"
+msgstr ""
 
 #: src/features/users/ui/user-form-modal.tsx:22
 msgid "Username must be at least 3 characters"
-msgstr "Username must be at least 3 characters"
+msgstr ""
 
 #: src/pages/users.tsx:12
 msgid "Users"
-msgstr "Users"
+msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:163
 msgid "Uses"
-msgstr "Uses"
+msgstr ""
 
 #: src/shared/constants/index.ts:113
 msgid "Validation failed"
-msgstr "Validation failed"
-
-#: src/shared/lib/use-auth-api.ts:101
-#~ msgid "Verification Email Sent"
-#~ msgstr "Verification Email Sent"
-
-#: src/shared/lib/use-auth-api.ts:131
-#~ msgid "Verification Failed"
-#~ msgstr "Verification Failed"
+msgstr ""
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:85
 #: src/features/users/ui/enhanced-users-data-grid.tsx:168
 #: src/features/users/ui/users-data-grid.tsx:157
 msgid "Verified"
-msgstr "Verified"
-
-#: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:355
-#: src/shared/ui/enhanced-form-field/enhanced-form-field.tsx:366
-#~ msgid "Very Weak"
-#~ msgstr "Very Weak"
+msgstr ""
 
 #: src/pages/subscriptions.tsx:155
 msgid "View and download your subscription invoices."
-msgstr "View and download your subscription invoices."
+msgstr ""
 
 #: src/pages/subscriptions.tsx:132
 msgid "View Available Plans"
-msgstr "View Available Plans"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:86
 msgid "View Billing"
-msgstr "View Billing"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:88
 msgid "View CRM"
-msgstr "View CRM"
+msgstr ""
 
 #: src/features/invoice-management/ui/InvoiceCard.tsx:119
 #: src/features/invoice-management/ui/InvoicesTable.tsx:174
 msgid "View Invoice"
-msgstr "View Invoice"
+msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:630
 msgid "View Lead"
-msgstr "View Lead"
+msgstr ""
 
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:268
 msgid "View lead details"
-msgstr "View lead details"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:158
 msgid "View Leads"
-msgstr "View Leads"
+msgstr ""
 
 #: src/pages/about.tsx:154
 msgid "View on GitHub"
-msgstr "View on GitHub"
-
-#: src/features/users/components/users-data-grid.tsx:200
-#~ msgid "View only"
-#~ msgstr "View only"
+msgstr ""
 
 #: src/pages/billing.tsx:158
 msgid "View Plans"
-msgstr "View Plans"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:90
 msgid "View Users"
-msgstr "View Users"
-
-#: src/pages/examples.tsx:141
-#~ msgid "Viewing {0}"
-#~ msgstr "Viewing {0}"
+msgstr ""
 
 #: src/pages/examples.tsx:142
 msgid "Viewing {userName}"
-msgstr "Viewing {userName}"
+msgstr ""
 
 #: src/pages/dashboard.tsx:88
 msgid "Visual sales pipeline with drag-and-drop functionality."
-msgstr "Visual sales pipeline with drag-and-drop functionality."
+msgstr ""
 
 #: src/pages/about.tsx:71
 msgid "Vite:"
-msgstr "Vite:"
+msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:101
 msgid "Warn (log warning)"
-msgstr "Warn (log warning)"
+msgstr ""
 
 #: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:29
 #: src/pages/examples.tsx:346
 #: src/pages/gateway-config.tsx:228
 msgid "Warning"
-msgstr "Warning"
+msgstr ""
 
 #: src/pages/examples.tsx:342
 msgid "Warning notification!"
-msgstr "Warning notification!"
-
-#: src/features/sample-form/ui/sample-form-feature.tsx:39
-#~ msgid "We have received your submission."
-#~ msgstr "We have received your submission."
+msgstr ""
 
 #: src/entities/billing/ui/BillingFormField.tsx:170
 #: src/entities/user/ui/UserFormField.tsx:123
 msgid "Weak"
-msgstr "Weak"
+msgstr ""
 
 #: src/features/gateway-config/ui/paypal-config-form.tsx:41
 msgid "Webhook ID"
-msgstr "Webhook ID"
+msgstr ""
 
 #: src/features/gateway-config/ui/paypal-config-form.tsx:48
 msgid "Webhook ID for event notifications (optional)"
-msgstr "Webhook ID for event notifications (optional)"
+msgstr ""
 
 #: src/features/gateway-config/ui/stripe-config-form.tsx:45
 msgid "Webhook Secret"
-msgstr "Webhook Secret"
+msgstr ""
 
 #: src/features/gateway-config/ui/square-config-form.tsx:41
 msgid "Webhook Signature Key"
-msgstr "Webhook Signature Key"
+msgstr ""
 
 #: src/features/gateway-config/ui/square-config-form.tsx:48
 msgid "Webhook signature key for event validation (optional)"
-msgstr "Webhook signature key for event validation (optional)"
+msgstr ""
 
 #: src/features/gateway-config/ui/stripe-config-form.tsx:49
 msgid "Webhook signing secret for event validation"
-msgstr "Webhook signing secret for event validation"
+msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:61
 #: src/features/crm-leads/ui/LeadEditModal.tsx:207
 #: src/features/crm-leads/ui/LeadListPage.tsx:245
 #: src/features/crm-leads/ui/LeadListPage.tsx:407
 msgid "Website"
-msgstr "Website"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:197
 msgid "Welcome Message"
-msgstr "Welcome Message"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:201
 msgid "Welcome to IQ Scaffold! Your language preference is active."
-msgstr "Welcome to IQ Scaffold! Your language preference is active."
+msgstr ""
 
 #: src/pages/dashboard.tsx:31
 msgid "Welcome to your dashboard. Here's what you have access to:"
-msgstr "Welcome to your dashboard. Here's what you have access to:"
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:135
 msgid "What would you like to do?"
-msgstr "What would you like to do?"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:64
 msgid "When you change the language, the following happens:"
-msgstr "When you change the language, the following happens:"
+msgstr ""
 
 #: src/features/crm-leads/ui/LeadListPage.tsx:268
 #: src/features/crm-leads/ui/LeadListPage.tsx:432
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:202
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:323
 msgid "Won"
-msgstr "Won"
+msgstr ""
 
 #: src/features/crm-leads/ui/DashboardStats.tsx:83
 msgid "Won Leads"
-msgstr "Won Leads"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:169
 msgid "X-User-Locale header (from user preference)"
-msgstr "X-User-Locale header (from user preference)"
+msgstr ""
 
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:88
 #: src/features/subscription-management/ui/SubscriptionPlansGrid.tsx:81
 msgid "yearly"
-msgstr "yearly"
+msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:337
 msgid "Yes"
-msgstr "Yes"
+msgstr ""
 
 #: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:37
 msgid "You are being redirected to Stripe to complete your setup."
-msgstr "You are being redirected to Stripe to complete your setup."
+msgstr ""
 
 #: src/shared/constants/index.ts:114
 msgid "You are not authorized to perform this action"
-msgstr "You are not authorized to perform this action"
+msgstr ""
 
 #: src/pages/subscriptions.tsx:119
 msgid "You don't have an active subscription. Browse our available plans to get started."
-msgstr "You don't have an active subscription. Browse our available plans to get started."
-
-#: src/pages/billing.tsx:68
-#~ msgid "You don't have permission to access billing information. Please contact your administrator."
-#~ msgstr "You don't have permission to access billing information. Please contact your administrator."
+msgstr ""
 
 #: src/pages/subscriptions.tsx:54
 msgid "You don't have permission to access subscription information. Please contact your administrator."
-msgstr "You don't have permission to access subscription information. Please contact your administrator."
+msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:77
 msgid "You don't have permission to access this CRM feature. Please contact your administrator."
-msgstr "You don't have permission to access this CRM feature. Please contact your administrator."
+msgstr ""
 
 #: src/pages/gateway-config.tsx:159
 msgid "You don't have permission to view gateway configurations."
-msgstr "You don't have permission to view gateway configurations."
+msgstr ""
 
 #: src/widgets/billing-history/ui/billing-history-table.tsx:41
 msgid "You don't have permission to view payment history."
-msgstr "You don't have permission to view payment history."
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:70
 msgid "You have been logged out from all devices"
-msgstr "You have been logged out from all devices"
+msgstr ""
 
 #: src/pages/billing.tsx:102
 msgid "You have read-only access to billing information."
-msgstr "You have read-only access to billing information."
-
-#: src/entities/crm/ui/FollowUpForm.tsx:180
-#~ msgid "You have selected a date in the past. This follow-up will be marked as overdue."
-#~ msgstr "You have selected a date in the past. This follow-up will be marked as overdue."
+msgstr ""
 
 #: src/shared/constants/index.ts:129
 msgid "You have unsaved changes"
-msgstr "You have unsaved changes"
-
-#: src/shared/ui/guards/ServiceAccessGuard.tsx:91
-#~ msgid "You need {serviceName} access to view this page. Contact your administrator to request access to {serviceName} features."
-#~ msgstr "You need {serviceName} access to view this page. Contact your administrator to request access to {serviceName} features."
-
-#: src/shared/ui/guards/CrmAccessGuard.tsx:80
-#~ msgid "You need CRM access to view this page. Contact your administrator to request access to CRM features."
-#~ msgstr "You need CRM access to view this page. Contact your administrator to request access to CRM features."
-
-#: src/shared/ui/guards/ServiceAccessGuard.tsx:102
-#~ msgid "You need one of the following authorities: {0}."
-#~ msgstr "You need one of the following authorities: {0}."
-
-#: src/shared/ui/guards/CrmAccessGuard.tsx:91
-#~ msgid "You need one of the following authorities: CRM_ACCESS, CRM_LEAD_MANAGER, CRM_CONTACT_MANAGER, CRM_PIPELINE_MANAGER, or CRM_ADMIN."
-#~ msgstr "You need one of the following authorities: CRM_ACCESS, CRM_LEAD_MANAGER, CRM_CONTACT_MANAGER, CRM_PIPELINE_MANAGER, or CRM_ADMIN."
+msgstr ""
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:35
 msgid "You will need to sign in again on all devices."
-msgstr "You will need to sign in again on all devices."
+msgstr ""
 
 #: src/entities/user/lib/use-avatar.ts:97
 msgid "Your avatar has been successfully removed."
-msgstr "Your avatar has been successfully removed."
+msgstr ""
 
 #: src/entities/user/lib/use-avatar.ts:61
 msgid "Your avatar has been successfully updated."
-msgstr "Your avatar has been successfully updated."
+msgstr ""
 
 #: src/features/gateway-config/ui/braintree-config-form.tsx:27
 msgid "Your Braintree merchant ID"
-msgstr "Your Braintree merchant ID"
+msgstr ""
 
 #: src/features/gateway-config/ui/braintree-config-form.tsx:49
 msgid "Your Braintree private key"
-msgstr "Your Braintree private key"
+msgstr ""
 
 #: src/features/gateway-config/ui/braintree-config-form.tsx:38
 msgid "Your Braintree public key"
-msgstr "Your Braintree public key"
-
-#: src/shared/lib/use-auth-api.ts:125
-#~ msgid "Your email has been successfully verified"
-#~ msgstr "Your email has been successfully verified"
+msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:237
 msgid "Your language preference is synchronized across all devices when you're logged in. Backend services will send emails and API responses in your preferred language."
-msgstr "Your language preference is synchronized across all devices when you're logged in. Backend services will send emails and API responses in your preferred language."
+msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:45
 msgid "Your password has been successfully changed"
-msgstr "Your password has been successfully changed"
-
-#: src/shared/lib/use-auth-api.ts:179
-#~ msgid "Your password has been successfully reset"
-#~ msgstr "Your password has been successfully reset"
+msgstr ""
 
 #: src/features/payment-checkout/ui/stripe-checkout-form.tsx:46
 msgid "Your payment is processing."
-msgstr "Your payment is processing."
+msgstr ""
 
 #: src/features/payment-checkout/ui/stripe-checkout-form.tsx:49
 msgid "Your payment was not successful, please try again."
-msgstr "Your payment was not successful, please try again."
+msgstr ""
 
 #: src/features/gateway-config/ui/paypal-config-form.tsx:27
 msgid "Your PayPal REST API client ID"
-msgstr "Your PayPal REST API client ID"
+msgstr ""
 
 #: src/features/gateway-config/ui/paypal-config-form.tsx:38
 msgid "Your PayPal REST API client secret"
-msgstr "Your PayPal REST API client secret"
+msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:370
 msgid "Your pipeline has no stages. Create some to get started."
-msgstr "Your pipeline has no stages. Create some to get started."
+msgstr ""
 
 #: src/features/gateway-config/ui/square-config-form.tsx:27
 msgid "Your Square API access token"
-msgstr "Your Square API access token"
-
-#: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:46
-#~ msgid "Your Stripe Connect account is fully configured. You can now receive payments."
-#~ msgstr "Your Stripe Connect account is fully configured. You can now receive payments."
+msgstr ""
 
 #: src/features/gateway-config/ui/stripe-config-form.tsx:39
 msgid "Your Stripe secret API key"
-msgstr "Your Stripe secret API key"
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:50
 msgid "Your subscription has been canceled and will end at the current period."
-msgstr "Your subscription has been canceled and will end at the current period."
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:82
 msgid "Your subscription has been canceled immediately."
-msgstr "Your subscription has been canceled immediately."
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:104
 msgid "Your subscription has been paused."
-msgstr "Your subscription has been paused."
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:124
 msgid "Your subscription has been resumed."
-msgstr "Your subscription has been resumed."
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionCard.tsx:101
 msgid "Your subscription is active and will renew automatically."
-msgstr "Your subscription is active and will renew automatically."
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionCard.tsx:53
 msgid "Your subscription payment is overdue. Please update your payment method."
-msgstr "Your subscription payment is overdue. Please update your payment method."
+msgstr ""
 
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:66
 msgid "Your subscription to {planName} has been created successfully."
-msgstr "Your subscription to {planName} has been created successfully."
+msgstr ""
 
 #: src/features/subscription-management/ui/SubscriptionCard.tsx:61
 msgid "Your subscription will end on {endDate}."
-msgstr "Your subscription will end on {endDate}."
+msgstr ""
+
