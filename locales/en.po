@@ -59,7 +59,7 @@ msgid " (edited)"
 msgstr " (edited)"
 
 #. placeholder {0}: localeToNameMap[locale]
-#: src/shared/locales/index.ts:18
+#: src/shared/locales/index.ts:20
 msgid "{0}"
 msgstr "{0}"
 
@@ -2359,6 +2359,10 @@ msgstr "Loading invitation link..."
 msgid "Loading merchant status..."
 msgstr "Loading merchant status..."
 
+#: src/widgets/tenant-select/ui/tenant-select.tsx:56
+msgid "Loading organizations..."
+msgstr "Loading organizations..."
+
 #: src/pages/subscriptions.tsx:103
 msgid "Loading subscription..."
 msgstr "Loading subscription..."
@@ -2821,6 +2825,7 @@ msgstr "Optional notes about this subscription"
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:97
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:66
+#: src/widgets/tenant-select/ui/tenant-select.tsx:55
 msgid "Organization"
 msgstr "Organization"
 
@@ -3441,6 +3446,10 @@ msgstr "Security Settings"
 #: src/features/crm-leads/ui/FollowUpList.tsx:471
 msgid "Select all"
 msgstr "Select all"
+
+#: src/widgets/tenant-select/ui/tenant-select.tsx:56
+msgid "Select an organization"
+msgstr "Select an organization"
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:204
 msgid "Select authority"

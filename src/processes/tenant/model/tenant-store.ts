@@ -8,10 +8,12 @@ import { devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { resolveTenantId, setTenantInStorage } from "@/shared/lib/tenant-utils";
 import type { Tenant } from "@/shared/types/tenant";
+import { tenantApi, type TenantInfo } from "@/shared/api";
 
 export interface TenantState {
   currentTenantId: string | null;
   tenant: Tenant | null;
+  availableTenants: TenantInfo | null;
   isLoading: boolean;
   isInitialized: boolean;
   error: string | null;
@@ -23,6 +25,7 @@ export interface TenantActions {
   setTenant: (tenant: Tenant | null) => void;
   clearTenant: () => void;
   setError: (error: string | null) => void;
+  fetchAvailableTenants: () => Promise<void>;
 }
 
 export type TenantStore = TenantState & TenantActions;
@@ -30,6 +33,7 @@ export type TenantStore = TenantState & TenantActions;
 const initialState: TenantState = {
   currentTenantId: null,
   tenant: null,
+  availableTenants: null,
   isLoading: false,
   isInitialized: false,
   error: null,
@@ -126,6 +130,31 @@ const createTenantStore: TenantStoreCreator = (set) => ({
     set((state) => {
       state.error = error;
     });
+  },
+
+  /**
+   * Fetch available tenants from the backend
+   * This is a public endpoint that returns all active tenants
+   */
+  fetchAvailableTenants: async () => {
+    set((state) => {
+      state.isLoading = true;
+      state.error = null;
+    });
+
+    try {
+      const tenants = await tenantApi.getPublicTenants();
+      set((state) => {
+        state.availableTenants = tenants;
+        state.isLoading = false;
+      });
+    } catch (error) {
+      console.error("Failed to fetch available tenants:", error);
+      set((state) => {
+        state.isLoading = false;
+        state.error = "Failed to fetch available tenants";
+      });
+    }
   },
 });
 

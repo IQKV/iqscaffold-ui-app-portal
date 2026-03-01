@@ -5,8 +5,13 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: ru
+"Language: ru\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 
 #. js-lingui-explicit-id
 #: src/shared/ui/locale-switcher.tsx:64
@@ -54,7 +59,7 @@ msgid " (edited)"
 msgstr ""
 
 #. placeholder {0}: localeToNameMap[locale]
-#: src/shared/locales/index.ts:18
+#: src/shared/locales/index.ts:20
 msgid "{0}"
 msgstr ""
 
@@ -2165,6 +2170,10 @@ msgstr ""
 msgid "Loading merchant status..."
 msgstr ""
 
+#: src/widgets/tenant-select/ui/tenant-select.tsx:56
+msgid "Loading organizations..."
+msgstr ""
+
 #: src/pages/subscriptions.tsx:103
 msgid "Loading subscription..."
 msgstr ""
@@ -2619,6 +2628,7 @@ msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:97
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:66
+#: src/widgets/tenant-select/ui/tenant-select.tsx:55
 msgid "Organization"
 msgstr ""
 
@@ -3197,6 +3207,10 @@ msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:471
 msgid "Select all"
+msgstr ""
+
+#: src/widgets/tenant-select/ui/tenant-select.tsx:56
+msgid "Select an organization"
 msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:204
@@ -4147,4 +4161,3 @@ msgstr ""
 #: src/features/subscription-management/ui/SubscriptionCard.tsx:61
 msgid "Your subscription will end on {endDate}."
 msgstr ""
-

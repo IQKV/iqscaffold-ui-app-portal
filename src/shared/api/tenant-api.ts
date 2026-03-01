@@ -50,10 +50,33 @@ export interface TenantStatistics {
 }
 
 /**
+ * Public tenant information for discovery (no auth required)
+ */
+export interface TenantInfo {
+  [tenantId: string]: string; // tenantId -> organizationName
+}
+
+/**
  * Tenant Management API
  * Note: Most endpoints require SUPER_ADMIN role
  */
 export const tenantApi = {
+  /**
+   * Get all active tenants with their organization names (PUBLIC - no auth required)
+   * This is a public endpoint for tenant/organization discovery
+   *
+   * @returns Map of tenant IDs to organization names
+   * @example
+   * {
+   *   "default": "IQ Scaffold Platform",
+   *   "acme": "Acme Corporation"
+   * }
+   */
+  async getPublicTenants(): Promise<TenantInfo> {
+    const response = await apiClient.get<TenantInfo>("/api/v1/public/tenants");
+    return response.data;
+  },
+
   /**
    * Get tenant by ID (SUPER_ADMIN only)
    */

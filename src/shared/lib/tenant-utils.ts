@@ -37,16 +37,21 @@ export function setTenantInStorage(tenantId: string | null): void {
 }
 
 /**
- * Resolve tenant ID from storage (dev mode only)
- * In production, tenant ID comes from JWT token after authentication
+ * Resolve tenant ID for unauthenticated requests
+ * For authenticated requests, tenant comes from JWT token
  */
 export function resolveTenantId(): string | null {
-  // In development, allow override from storage
+  // In development, allow override from storage for testing
   if (import.meta.env.DEV) {
-    return getTenantFromStorage();
+    const storedTenant = getTenantFromStorage();
+    if (storedTenant) {
+      return storedTenant;
+    }
   }
 
-  return null;
+  // For unauthenticated requests (like login), use default tenant
+  // After authentication, tenant will come from JWT token
+  return "default";
 }
 
 /**
