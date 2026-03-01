@@ -5,7 +5,10 @@ import {
   FeatureAccessResponse,
   BulkFeatureUpdateResponse,
 } from "@/shared/api/user-management-api";
-import type { UserFeaturesResponse, FeatureDto } from "@/shared/api/billing/types";
+import type {
+  UserFeaturesResponse,
+  FeatureDto,
+} from "@/shared/api/billing/types";
 import { getConfig } from "@/app/config";
 import { ENV_KEYS } from "@/shared/constants";
 
@@ -99,7 +102,9 @@ export const featureHandlers = [
       allFeatures: mockAllFeatures,
       planName: "Professional",
       subscriptionStatus: "active",
-      currentPeriodEnd: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+      currentPeriodEnd: new Date(
+        Date.now() + 30 * 24 * 60 * 60 * 1000
+      ).toISOString(),
       isTrialPeriod: false,
       tenantId: "tenant-123",
     };

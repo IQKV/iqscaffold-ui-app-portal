@@ -32,7 +32,11 @@ interface FeatureContextValue {
     requiredAuthorities: string[]
   ) => boolean;
   getFeature: (featureCode: string) => FeatureDetail | undefined;
-  getFeatureSummary: (featureCode: string) => { code: string; name: string; description: string; enabled: boolean } | undefined;
+  getFeatureSummary: (
+    featureCode: string
+  ) =>
+    | { code: string; name: string; description: string; enabled: boolean }
+    | undefined;
   refetchFeatures: () => Promise<void>;
   refetchAvailableFeatures: () => Promise<void>;
 
@@ -160,9 +164,8 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
   autoFetch = true,
   refetchInterval = 0, // Disabled by default
 }) => {
-  const [userFeatures, setUserFeatures] = useState<BillingUserFeaturesResponse | null>(
-    null
-  );
+  const [userFeatures, setUserFeatures] =
+    useState<BillingUserFeaturesResponse | null>(null);
   const [availableFeatures, setAvailableFeatures] =
     useState<AvailableFeaturesResponse | null>(null);
   const [loading, setLoading] = useState(autoFetch);
