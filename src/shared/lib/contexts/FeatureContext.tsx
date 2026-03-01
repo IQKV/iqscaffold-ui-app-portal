@@ -246,7 +246,7 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
       const feature = userFeatures?.enabledFeatures.find(
         (f) => f.code === featureCode
       );
-      if (!feature) return undefined;
+      if (!feature) {return undefined;}
       return {
         code: feature.code,
         name: feature.name,
