@@ -1,4 +1,5 @@
 import { apiRequest } from "./base";
+import type { UserFeaturesResponse as BillingUserFeaturesResponse } from "./billing/types";
 
 /**
  * User DTO matching backend UserDto
@@ -325,11 +326,12 @@ export const userManagementApi = {
   },
 
   /**
-   * Get current user's features (for self-service access)
+   * Get current user's features from billing service
+   * Returns feature information based on subscription plan
    */
-  async getMyFeatures(): Promise<UserFeaturesResponse> {
-    return apiRequest<UserFeaturesResponse>({
-      url: "/v1/users/features/me",
+  async getMyFeatures(): Promise<BillingUserFeaturesResponse> {
+    return apiRequest<BillingUserFeaturesResponse>({
+      url: "/v1/features/my-features",
       method: "GET",
     });
   },

@@ -7,19 +7,18 @@ import React, {
   useMemo,
 } from "react";
 import {
-  UserFeaturesResponse,
-  FeatureSummary,
   AvailableFeaturesResponse,
   FeatureDetail,
   userManagementApi,
 } from "@/shared/api/user-management-api";
+import type { UserFeaturesResponse as BillingUserFeaturesResponse } from "@/shared/api/billing/types";
 import { notificationService } from "@/shared/lib/notifications";
 import { useAuthStore } from "@/processes/auth";
 import { hasAnyAuthorityWithInheritance } from "@/shared/constants/authorities";
 
 interface FeatureContextValue {
   // Data
-  userFeatures: UserFeaturesResponse | null;
+  userFeatures: BillingUserFeaturesResponse | null;
   availableFeatures: AvailableFeaturesResponse | null;
   enabledFeatures: string[];
   loading: boolean;
@@ -33,7 +32,7 @@ interface FeatureContextValue {
     requiredAuthorities: string[]
   ) => boolean;
   getFeature: (featureCode: string) => FeatureDetail | undefined;
-  getFeatureSummary: (featureCode: string) => FeatureSummary | undefined;
+  getFeatureSummary: (featureCode: string) => { code: string; name: string; description: string; enabled: boolean } | undefined;
   refetchFeatures: () => Promise<void>;
   refetchAvailableFeatures: () => Promise<void>;
 
@@ -161,7 +160,7 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
   autoFetch = true,
   refetchInterval = 0, // Disabled by default
 }) => {
-  const [userFeatures, setUserFeatures] = useState<UserFeaturesResponse | null>(
+  const [userFeatures, setUserFeatures] = useState<BillingUserFeaturesResponse | null>(
     null
   );
   const [availableFeatures, setAvailableFeatures] =
@@ -175,12 +174,13 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
     [user?.authorities]
   );
 
-  // Memoized enabled features list
+  // Memoized enabled features list from billing service response
+  // Memoized enabled features list from billing service response
   const enabledFeatures = useMemo(() => {
-    if (!userFeatures?.features) {
+    if (!userFeatures?.enabledFeatures) {
       return [];
     }
-    return userFeatures.features.map((f: FeatureSummary) => f.code);
+    return userFeatures.enabledFeatures.map((f) => f.code);
   }, [userFeatures]);
 
   // Feature access methods with authority validation
@@ -239,10 +239,17 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
   );
 
   const getFeatureSummary = useCallback(
-    (featureCode: string): FeatureSummary | undefined => {
-      return userFeatures?.features.find(
-        (f: FeatureSummary) => f.code === featureCode
+    (featureCode: string) => {
+      const feature = userFeatures?.enabledFeatures.find(
+        (f) => f.code === featureCode
       );
+      if (!feature) return undefined;
+      return {
+        code: feature.code,
+        name: feature.name,
+        description: feature.description,
+        enabled: feature.enabled,
+      };
     },
     [userFeatures]
   );
@@ -270,10 +277,13 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
 
       // Graceful degradation - set empty features
       setUserFeatures({
-        userId: user.userId,
-        username: user.username,
-        featureCount: 0,
-        features: [],
+        enabledFeatures: [],
+        allFeatures: [],
+        planName: "Unknown",
+        subscriptionStatus: "unknown",
+        currentPeriodEnd: "",
+        isTrialPeriod: false,
+        tenantId: user.tenantId || "unknown",
       });
     } finally {
       setLoading(false);

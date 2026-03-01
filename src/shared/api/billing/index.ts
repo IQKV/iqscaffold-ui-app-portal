@@ -67,8 +67,7 @@ export const billingApi = {
   // Feature Management APIs
 
   /**
-   * Get user's complete feature information (deprecated - use userManagementApi.getUserFeatures)
-   * @deprecated Use userManagementApi.getUserFeatures instead
+   * Get user's complete feature information including subscription details
    */
   getMyFeatures: () =>
     apiRequest<Types.UserFeaturesResponse>({
@@ -77,8 +76,7 @@ export const billingApi = {
     }),
 
   /**
-   * Get only enabled features (deprecated - use userManagementApi.getUserFeatures)
-   * @deprecated Use userManagementApi.getUserFeatures instead
+   * Get only enabled features (lightweight response)
    */
   getEnabledFeatures: () =>
     apiRequest<Types.FeatureDto[]>({

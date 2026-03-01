@@ -1,12 +1,11 @@
 import { http, HttpResponse } from "msw";
 import {
-  UserFeaturesResponse,
-  FeatureSummary,
   AvailableFeaturesResponse,
   FeatureDetail,
   FeatureAccessResponse,
   BulkFeatureUpdateResponse,
 } from "@/shared/api/user-management-api";
+import type { UserFeaturesResponse, FeatureDto } from "@/shared/api/billing/types";
 import { getConfig } from "@/app/config";
 import { ENV_KEYS } from "@/shared/constants";
 
@@ -48,19 +47,39 @@ const mockAvailableFeatures: FeatureDetail[] = [
   },
 ];
 
-// Mock user features (what the current user has enabled)
-const mockUserFeatures: FeatureSummary[] = [
+// Mock user features (billing service format)
+const mockEnabledFeatures: FeatureDto[] = [
   {
     code: "crm",
-    displayName: "Customer Relationship Management",
+    name: "Customer Relationship Management",
     description: "Manage leads, contacts, and sales pipeline",
+    category: "business",
     enabled: true,
   },
   {
     code: "analytics",
-    displayName: "Advanced Analytics",
+    name: "Advanced Analytics",
     description: "Access to advanced reporting and analytics dashboards",
+    category: "analytics",
     enabled: true,
+  },
+];
+
+const mockAllFeatures: FeatureDto[] = [
+  ...mockEnabledFeatures,
+  {
+    code: "billing",
+    name: "Billing & Payments",
+    description: "Manage subscriptions, payments, and invoicing",
+    category: "business",
+    enabled: false,
+  },
+  {
+    code: "api",
+    name: "Platform API Access",
+    description: "Access to platform APIs and integrations",
+    category: "integration",
+    enabled: false,
   },
 ];
 
@@ -73,16 +92,24 @@ userFeatureMap.set(2, new Set(["billing"]));
 userFeatureMap.set(3, new Set(["crm", "billing", "api"]));
 
 export const featureHandlers = [
-  // Get current user's features
-  http.get(`${API_BASE_URL}/v1/users/features/me`, () => {
+  // Get current user's features (billing service endpoint)
+  http.get(`${API_BASE_URL}/v1/features/my-features`, () => {
     const response: UserFeaturesResponse = {
-      userId: 1,
-      username: "current-user",
-      featureCount: mockUserFeatures.length,
-      features: mockUserFeatures,
+      enabledFeatures: mockEnabledFeatures,
+      allFeatures: mockAllFeatures,
+      planName: "Professional",
+      subscriptionStatus: "active",
+      currentPeriodEnd: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+      isTrialPeriod: false,
+      tenantId: "tenant-123",
     };
 
     return HttpResponse.json(response);
+  }),
+
+  // Get enabled features only (billing service endpoint)
+  http.get(`${API_BASE_URL}/v1/features/enabled`, () => {
+    return HttpResponse.json(mockEnabledFeatures);
   }),
 
   // Get available features (admin only)
