@@ -1,12 +1,14 @@
 import { http, HttpResponse } from "msw";
 import {
+  UserFeaturesResponse as AdminUserFeaturesResponse,
+  FeatureSummary,
   AvailableFeaturesResponse,
   FeatureDetail,
   FeatureAccessResponse,
   BulkFeatureUpdateResponse,
 } from "@/shared/api/user-management-api";
 import type {
-  UserFeaturesResponse,
+  UserFeaturesResponse as BillingUserFeaturesResponse,
   FeatureDto,
 } from "@/shared/api/billing/types";
 import { getConfig } from "@/app/config";
@@ -97,12 +99,12 @@ userFeatureMap.set(3, new Set(["crm", "billing", "api"]));
 export const featureHandlers = [
   // Get current user's features (billing service endpoint)
   http.get(`${API_BASE_URL}/v1/features/my-features`, () => {
-    const response: UserFeaturesResponse = {
+    const response: BillingUserFeaturesResponse = {
       enabledFeatures: mockEnabledFeatures,
       allFeatures: mockAllFeatures,
       planName: "Professional",
       subscriptionStatus: "active",
-      currentPeriodEnd: new Date(
+      subscriptionExpiresAt: new Date(
         Date.now() + 30 * 24 * 60 * 60 * 1000
       ).toISOString(),
       isTrialPeriod: false,
@@ -144,7 +146,7 @@ export const featureHandlers = [
       };
     });
 
-    const response: UserFeaturesResponse = {
+    const response: AdminUserFeaturesResponse = {
       userId,
       username: `user-${userId}`,
       featureCount: features.length,

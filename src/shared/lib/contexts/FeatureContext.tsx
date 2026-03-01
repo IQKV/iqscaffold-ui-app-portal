@@ -286,7 +286,7 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
         allFeatures: [],
         planName: "Unknown",
         subscriptionStatus: "unknown",
-        currentPeriodEnd: "",
+        subscriptionExpiresAt: "",
         isTrialPeriod: false,
         tenantId: user.tenantId || "unknown",
       });
