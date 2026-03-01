@@ -3,7 +3,6 @@ import {
   userManagementApi,
   type CreateUserRequest,
   type UpdateUserRequest,
-  type BulkFeatureUpdateRequest,
 } from "@/shared/api";
 import { notificationService } from "@/shared/lib/notifications";
 import { usersKeys } from "./queries";
@@ -89,26 +88,4 @@ export function useDeleteUserMutation() {
   });
 }
 
-/**
- * Hook to update user features
- */
-export function useUpdateUserFeaturesMutation() {
-  const queryClient = useQueryClient();
 
-  return useMutation({
-    mutationFn: ({
-      userId,
-      request,
-    }: {
-      userId: number;
-      request: BulkFeatureUpdateRequest;
-    }) => userManagementApi.bulkUpdateUserFeatures(userId, request),
-    onSuccess: (_, { userId }) => {
-      queryClient.invalidateQueries({ queryKey: usersKeys.features(userId) });
-      notificationService.success({
-        title: "Features Updated",
-        message: "User features have been updated successfully.",
-      });
-    },
-  });
-}
