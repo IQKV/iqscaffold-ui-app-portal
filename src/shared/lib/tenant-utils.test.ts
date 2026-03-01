@@ -65,16 +65,16 @@ describe("Tenant Utilities", () => {
       expect(resolveTenantId()).toBe("dev-tenant");
     });
 
-    it("returns null in production mode", () => {
+    it("returns default tenant in production mode", () => {
       vi.restoreAllMocks();
       vi.stubEnv("DEV", false);
       localStorage.setItem("tenantId", "prod-tenant");
-      expect(resolveTenantId()).toBeNull();
+      expect(resolveTenantId()).toBe("default");
     });
 
-    it("returns null when no tenant in dev mode", () => {
+    it("returns default tenant when no tenant in dev mode", () => {
       vi.restoreAllMocks();
-      expect(resolveTenantId()).toBeNull();
+      expect(resolveTenantId()).toBe("default");
     });
   });
 
