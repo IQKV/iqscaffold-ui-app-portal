@@ -22,7 +22,6 @@ import {
 } from "@tabler/icons-react";
 import { DataTable, type DataTableColumn } from "mantine-datatable";
 import { useUsersQuery, useDeleteUserMutation, UserDto } from "@/entities/user";
-import { UserFeatureManager } from "./UserFeatureManager";
 import { useAuth } from "@/processes/auth";
 import { openConfirmModal } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
@@ -310,18 +309,10 @@ export function EnhancedUsersDataGrid({
         size="lg"
       >
         {selectedUser && (
-          <Tabs defaultValue="features">
+          <Tabs defaultValue="authorities">
             <Tabs.List>
-              <Tabs.Tab value="features">{t`Features`}</Tabs.Tab>
               <Tabs.Tab value="authorities">{t`Authorities`}</Tabs.Tab>
             </Tabs.List>
-
-            <Tabs.Panel value="features" pt="md">
-              <UserFeatureManager
-                userId={selectedUser.id}
-                username={selectedUser.username}
-              />
-            </Tabs.Panel>
 
             <Tabs.Panel value="authorities" pt="md">
               <Paper p="md" withBorder>
@@ -335,6 +326,9 @@ export function EnhancedUsersDataGrid({
                 </Group>
                 <Text size="sm" c="dimmed" mt="sm">
                   {t`Authority management will be available in a future update.`}
+                </Text>
+                <Text size="sm" c="dimmed" mt="md">
+                  {t`Note: User features are now managed through subscription plans in the billing service.`}
                 </Text>
               </Paper>
             </Tabs.Panel>

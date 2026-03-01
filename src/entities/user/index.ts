@@ -17,7 +17,6 @@ export type {
   UpdateUserRequest,
   UserPageResponse,
   PageParams,
-  BulkFeatureUpdateRequest,
 } from "@/shared/api";
 
 // Re-export commonly used utilities
