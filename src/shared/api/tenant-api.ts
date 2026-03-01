@@ -73,7 +73,7 @@ export const tenantApi = {
    * }
    */
   async getPublicTenants(): Promise<TenantInfo> {
-    const response = await apiClient.get<TenantInfo>("/api/v1/public/tenants");
+    const response = await apiClient.get<TenantInfo>("/v1/public/tenants");
     return response.data;
   },
 
