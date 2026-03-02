@@ -20,10 +20,15 @@ export const CrmContactManagerGuard: React.FC<CrmContactManagerGuardProps> = ({
   fallback,
   showUpgrade = true,
 }) => {
-  const { canManageContacts, getCrmAuthorityLevel, getUserCrmAuthorities } =
-    useAuth();
+  const {
+    canManageContacts,
+    getCrmAuthorityLevel,
+    getUserCrmAuthorities,
+    isSuperAdmin,
+  } = useAuth();
 
-  if (canManageContacts()) {
+  // SUPER_ADMIN bypass: Always grant access to SUPER_ADMIN users
+  if (isSuperAdmin() || canManageContacts()) {
     return <>{children}</>;
   }
 

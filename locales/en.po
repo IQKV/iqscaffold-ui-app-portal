@@ -160,7 +160,7 @@ msgstr "Access Token"
 
 #: src/features/invitation-management/ui/InvitationList.tsx:214
 #: src/features/invoice-management/ui/InvoicesTable.tsx:78
-#: src/features/users/ui/enhanced-users-data-grid.tsx:197
+#: src/features/users/ui/enhanced-users-data-grid.tsx:196
 #: src/features/users/ui/users-data-grid.tsx:172
 #: src/pages/examples.tsx:134
 #: src/widgets/billing-history/ui/billing-history-table.tsx:116
@@ -180,7 +180,7 @@ msgstr "Activate immediately"
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:201
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:322
 #: src/features/gateway-config/ui/gateway-status-badge.tsx:28
-#: src/features/users/ui/enhanced-users-data-grid.tsx:184
+#: src/features/users/ui/enhanced-users-data-grid.tsx:183
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:60
 msgid "Active"
 msgstr "Active"
@@ -260,7 +260,7 @@ msgstr "Add Payment Gateway"
 msgid "Add Stage"
 msgstr "Add Stage"
 
-#: src/features/users/ui/enhanced-users-data-grid.tsx:264
+#: src/features/users/ui/enhanced-users-data-grid.tsx:263
 #: src/features/users/ui/users-data-grid.tsx:231
 #: src/pages/examples.tsx:290
 msgid "Add User"
@@ -421,7 +421,7 @@ msgstr "Are you sure you want to delete this item? This action cannot be undone.
 msgid "Are you sure you want to delete this user? This action cannot be undone."
 msgstr "Are you sure you want to delete this user? This action cannot be undone."
 
-#: src/features/users/ui/enhanced-users-data-grid.tsx:64
+#: src/features/users/ui/enhanced-users-data-grid.tsx:63
 #: src/features/users/ui/users-data-grid.tsx:60
 msgid "Are you sure you want to delete user"
 msgstr "Are you sure you want to delete user"
@@ -476,7 +476,7 @@ msgstr "At least one authority is required"
 #~ msgid "At least one role is required"
 #~ msgstr "At least one role is required"
 
-#: src/features/users/ui/enhanced-users-data-grid.tsx:316
+#: src/features/users/ui/enhanced-users-data-grid.tsx:314
 #: src/features/users/ui/user-form-modal.tsx:235
 #: src/features/users/ui/users-data-grid.tsx:131
 msgid "Authorities"
@@ -487,7 +487,7 @@ msgstr "Authorities"
 msgid "Authority"
 msgstr "Authority"
 
-#: src/features/users/ui/enhanced-users-data-grid.tsx:337
+#: src/features/users/ui/enhanced-users-data-grid.tsx:328
 msgid "Authority management will be available in a future update."
 msgstr "Authority management will be available in a future update."
 
@@ -628,7 +628,7 @@ msgstr "Call contact"
 #: src/features/payment-refund/ui/refund-confirmation-dialog.tsx:66
 #: src/features/security-settings/ui/security-settings-feature.tsx:41
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:140
-#: src/features/users/ui/enhanced-users-data-grid.tsx:71
+#: src/features/users/ui/enhanced-users-data-grid.tsx:70
 #: src/features/users/ui/user-form-modal.tsx:280
 #: src/features/users/ui/users-data-grid.tsx:67
 #: src/pages/gateway-config.tsx:246
@@ -685,7 +685,7 @@ msgstr "Check your internet connection"
 msgid "Check your internet connection and try again"
 msgstr "Check your internet connection and try again"
 
-#: src/shared/ui/guards/ServiceAccessGuard.tsx:136
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:142
 msgid "Checking {serviceName} service availability..."
 msgstr "Checking {serviceName} service availability..."
 
@@ -697,7 +697,7 @@ msgstr "Checking {serviceName} service availability..."
 msgid "Checking email status..."
 msgstr "Checking email status..."
 
-#: src/shared/ui/guards/ServiceAccessGuard.tsx:70
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:76
 msgid "Checking feature availability..."
 msgstr "Checking feature availability..."
 
@@ -941,7 +941,7 @@ msgid "Create Subscription"
 msgstr "Create Subscription"
 
 #: src/features/invitation-management/ui/InvitationList.tsx:199
-#: src/features/users/ui/enhanced-users-data-grid.tsx:190
+#: src/features/users/ui/enhanced-users-data-grid.tsx:189
 #: src/features/users/ui/users-data-grid.tsx:164
 msgid "Created"
 msgstr "Created"
@@ -1016,7 +1016,7 @@ msgstr "CRM Pipeline"
 msgid "Currency"
 msgstr "Currency"
 
-#: src/features/users/ui/enhanced-users-data-grid.tsx:328
+#: src/features/users/ui/enhanced-users-data-grid.tsx:319
 msgid "Current Authorities"
 msgstr "Current Authorities"
 
@@ -1131,7 +1131,7 @@ msgstr "Default locale (English)"
 #: src/features/crm-leads/ui/FollowUpSection.tsx:428
 #: src/features/crm-leads/ui/FollowUpSection.tsx:451
 #: src/features/gateway-config/ui/gateway-config-list.tsx:164
-#: src/features/users/ui/enhanced-users-data-grid.tsx:71
+#: src/features/users/ui/enhanced-users-data-grid.tsx:70
 #: src/features/users/ui/users-data-grid.tsx:67
 #: src/pages/examples.tsx:50
 msgid "Delete"
@@ -1175,8 +1175,8 @@ msgstr "Delete Selected Follow-ups"
 msgid "Delete user"
 msgstr "Delete user"
 
-#: src/features/users/ui/enhanced-users-data-grid.tsx:61
-#: src/features/users/ui/enhanced-users-data-grid.tsx:221
+#: src/features/users/ui/enhanced-users-data-grid.tsx:60
+#: src/features/users/ui/enhanced-users-data-grid.tsx:220
 #: src/features/users/ui/users-data-grid.tsx:57
 #: src/pages/examples.tsx:48
 msgid "Delete User"
@@ -1215,7 +1215,7 @@ msgstr "Details"
 msgid "Disable MSW"
 msgstr "Disable MSW"
 
-#: src/features/users/ui/enhanced-users-data-grid.tsx:184
+#: src/features/users/ui/enhanced-users-data-grid.tsx:183
 #: src/features/users/ui/users-data-grid.tsx:150
 msgid "Disabled"
 msgstr "Disabled"
@@ -1274,7 +1274,7 @@ msgstr "Edit note"
 msgid "Edit user"
 msgstr "Edit user"
 
-#: src/features/users/ui/enhanced-users-data-grid.tsx:211
+#: src/features/users/ui/enhanced-users-data-grid.tsx:210
 #: src/features/users/ui/users-page.tsx:47
 msgid "Edit User"
 msgstr "Edit User"
@@ -1291,7 +1291,7 @@ msgstr "Editing {userName}"
 #: src/entities/crm/ui/LeadForm.tsx:228
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:157
 #: src/features/crm-leads/ui/LeadEditModal.tsx:174
-#: src/features/users/ui/enhanced-users-data-grid.tsx:162
+#: src/features/users/ui/enhanced-users-data-grid.tsx:161
 #: src/features/users/ui/user-form-modal.tsx:193
 msgid "Email"
 msgstr "Email"
@@ -1494,7 +1494,7 @@ msgstr "Environment mode for the gateway"
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:89
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:111
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:131
-#: src/features/users/ui/enhanced-users-data-grid.tsx:85
+#: src/features/users/ui/enhanced-users-data-grid.tsx:84
 #: src/features/users/ui/user-form-modal.tsx:135
 #: src/features/users/ui/users-data-grid.tsx:81
 #: src/features/users/ui/users-data-grid.tsx:213
@@ -1566,7 +1566,7 @@ msgstr "Error loading users"
 #~ msgid "Error loading users: {0}"
 #~ msgstr "Error loading users: {0}"
 
-#: src/features/users/ui/enhanced-users-data-grid.tsx:248
+#: src/features/users/ui/enhanced-users-data-grid.tsx:247
 msgid "Error loading users: {errorMessage}"
 msgstr "Error loading users: {errorMessage}"
 
@@ -1718,7 +1718,7 @@ msgstr "Failed to delete stage"
 #~ msgid "Failed to delete user: {0}"
 #~ msgstr "Failed to delete user: {0}"
 
-#: src/features/users/ui/enhanced-users-data-grid.tsx:86
+#: src/features/users/ui/enhanced-users-data-grid.tsx:85
 #: src/features/users/ui/users-data-grid.tsx:82
 msgid "Failed to delete user: {errorMessage}"
 msgstr "Failed to delete user: {errorMessage}"
@@ -1884,8 +1884,8 @@ msgid "Feature-Sliced Design:"
 msgstr "Feature-Sliced Design:"
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:315
-msgid "Features"
-msgstr "Features"
+#~ msgid "Features"
+#~ msgstr "Features"
 
 #: src/pages/billing.tsx:118
 msgid "Features & Usage"
@@ -2070,7 +2070,7 @@ msgid "Go Home"
 msgstr "Go Home"
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:152
-#: src/shared/ui/guards/ServiceAccessGuard.tsx:169
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:175
 msgid "Go to Dashboard"
 msgstr "Go to Dashboard"
 
@@ -2359,7 +2359,7 @@ msgstr "Loading invitation link..."
 msgid "Loading merchant status..."
 msgstr "Loading merchant status..."
 
-#: src/widgets/tenant-select/ui/tenant-select.tsx:56
+#: src/widgets/tenant-select/ui/tenant-select.tsx:62
 msgid "Loading organizations..."
 msgstr "Loading organizations..."
 
@@ -2438,12 +2438,12 @@ msgstr "Manage Billing"
 msgid "Manage CRM"
 msgstr "Manage CRM"
 
-#: src/features/users/ui/enhanced-users-data-grid.tsx:201
-#: src/features/users/ui/enhanced-users-data-grid.tsx:308
+#: src/features/users/ui/enhanced-users-data-grid.tsx:200
+#: src/features/users/ui/enhanced-users-data-grid.tsx:307
 msgid "Manage Features"
 msgstr "Manage Features"
 
-#: src/features/users/ui/enhanced-users-data-grid.tsx:306
+#: src/features/users/ui/enhanced-users-data-grid.tsx:305
 msgid "Manage Features - {firstName} {lastName}"
 msgstr "Manage Features - {firstName} {lastName}"
 
@@ -2586,7 +2586,7 @@ msgid "My Payment Gateway"
 msgstr "My Payment Gateway"
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:184
-#: src/features/users/ui/enhanced-users-data-grid.tsx:148
+#: src/features/users/ui/enhanced-users-data-grid.tsx:147
 msgid "Name"
 msgstr "Name"
 
@@ -2720,7 +2720,7 @@ msgstr "No Pipeline Stages"
 msgid "No Plans Available"
 msgstr "No Plans Available"
 
-#: src/features/users/ui/enhanced-users-data-grid.tsx:117
+#: src/features/users/ui/enhanced-users-data-grid.tsx:116
 msgid "No roles"
 msgstr "No roles"
 
@@ -2741,11 +2741,11 @@ msgstr "No subscription plans are currently available."
 msgid "No users found"
 msgstr "No users found"
 
-#: src/features/users/ui/enhanced-users-data-grid.tsx:290
+#: src/features/users/ui/enhanced-users-data-grid.tsx:289
 msgid "No users have been created yet"
 msgstr "No users have been created yet"
 
-#: src/features/users/ui/enhanced-users-data-grid.tsx:289
+#: src/features/users/ui/enhanced-users-data-grid.tsx:288
 msgid "No users match your search criteria"
 msgstr "No users match your search criteria"
 
@@ -2768,6 +2768,10 @@ msgstr "Note content is required"
 #: src/entities/crm/lib/validation-schemas.ts:83
 msgid "Note must be less than 2000 characters"
 msgstr "Note must be less than 2000 characters"
+
+#: src/features/users/ui/enhanced-users-data-grid.tsx:331
+msgid "Note: User features are now managed through subscription plans in the billing service."
+msgstr "Note: User features are now managed through subscription plans in the billing service."
 
 #: src/features/crm-contacts/ui/ContactDetailPage.tsx:270
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:223
@@ -2825,7 +2829,7 @@ msgstr "Optional notes about this subscription"
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:97
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:66
-#: src/widgets/tenant-select/ui/tenant-select.tsx:55
+#: src/widgets/tenant-select/ui/tenant-select.tsx:60
 msgid "Organization"
 msgstr "Organization"
 
@@ -3287,7 +3291,7 @@ msgstr "Reports"
 msgid "Request timed out"
 msgstr "Request timed out"
 
-#: src/shared/ui/guards/ServiceAccessGuard.tsx:112
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:118
 msgid "Required Authority"
 msgstr "Required Authority"
 
@@ -3364,7 +3368,7 @@ msgstr "Role"
 #~ msgid "Role is required"
 #~ msgstr "Role is required"
 
-#: src/features/users/ui/enhanced-users-data-grid.tsx:176
+#: src/features/users/ui/enhanced-users-data-grid.tsx:175
 msgid "Roles"
 msgstr "Roles"
 
@@ -3434,7 +3438,7 @@ msgstr "Search follow-ups..."
 msgid "Search term must be less than 100 characters"
 msgstr "Search term must be less than 100 characters"
 
-#: src/features/users/ui/enhanced-users-data-grid.tsx:270
+#: src/features/users/ui/enhanced-users-data-grid.tsx:269
 #: src/features/users/ui/users-data-grid.tsx:237
 msgid "Search users..."
 msgstr "Search users..."
@@ -3447,7 +3451,7 @@ msgstr "Security Settings"
 msgid "Select all"
 msgstr "Select all"
 
-#: src/widgets/tenant-select/ui/tenant-select.tsx:56
+#: src/widgets/tenant-select/ui/tenant-select.tsx:62
 msgid "Select an organization"
 msgstr "Select an organization"
 
@@ -3682,7 +3686,7 @@ msgstr "Start Onboarding"
 #: src/features/gateway-config/ui/gateway-config-list.tsx:180
 #: src/features/invitation-management/ui/InvitationList.tsx:179
 #: src/features/invoice-management/ui/InvoicesTable.tsx:74
-#: src/features/users/ui/enhanced-users-data-grid.tsx:181
+#: src/features/users/ui/enhanced-users-data-grid.tsx:180
 #: src/features/users/ui/users-data-grid.tsx:141
 #: src/pages/examples.tsx:125
 #: src/widgets/billing-history/ui/billing-history-table.tsx:111
@@ -3759,7 +3763,7 @@ msgstr "Subscriptions"
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:108
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:125
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:164
-#: src/features/users/ui/enhanced-users-data-grid.tsx:77
+#: src/features/users/ui/enhanced-users-data-grid.tsx:76
 #: src/features/users/ui/users-data-grid.tsx:73
 #: src/pages/examples.tsx:326
 #: src/pages/gateway-config.tsx:66
@@ -3811,7 +3815,7 @@ msgstr "Task"
 msgid "Team"
 msgstr "Team"
 
-#: src/shared/ui/guards/ServiceAccessGuard.tsx:176
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:182
 msgid "Technical Details"
 msgstr "Technical Details"
 
@@ -3896,7 +3900,7 @@ msgid "These values are fetched using custom hooks"
 msgstr "These values are fetched using custom hooks"
 
 #: src/features/invitation-management/ui/InvitationList.tsx:69
-#: src/features/users/ui/enhanced-users-data-grid.tsx:68
+#: src/features/users/ui/enhanced-users-data-grid.tsx:67
 #: src/features/users/ui/users-data-grid.tsx:64
 msgid "This action cannot be undone."
 msgstr "This action cannot be undone."
@@ -4009,7 +4013,7 @@ msgid "Troubleshooting Tips:"
 msgstr "Troubleshooting Tips:"
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:144
-#: src/shared/ui/guards/ServiceAccessGuard.tsx:161
+#: src/shared/ui/guards/ServiceAccessGuard.tsx:167
 #: src/shared/ui/loading-state/loading-state.tsx:215
 msgid "Try Again"
 msgstr "Try Again"
@@ -4127,12 +4131,12 @@ msgstr "User can log in and access the system"
 #~ msgid "User created successfully"
 #~ msgstr "User created successfully"
 
-#: src/features/users/ui/enhanced-users-data-grid.tsx:78
+#: src/features/users/ui/enhanced-users-data-grid.tsx:77
 #: src/features/users/ui/users-data-grid.tsx:74
 msgid "User deleted successfully"
 msgstr "User deleted successfully"
 
-#: src/features/users/ui/enhanced-users-data-grid.tsx:258
+#: src/features/users/ui/enhanced-users-data-grid.tsx:257
 #: src/features/users/ui/users-data-grid.tsx:224
 #: src/widgets/sidebar/ui/sidebar.tsx:51
 msgid "User Management"
@@ -4196,7 +4200,7 @@ msgstr "Validation failed"
 #~ msgstr "Verification Failed"
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:85
-#: src/features/users/ui/enhanced-users-data-grid.tsx:168
+#: src/features/users/ui/enhanced-users-data-grid.tsx:167
 #: src/features/users/ui/users-data-grid.tsx:157
 msgid "Verified"
 msgstr "Verified"

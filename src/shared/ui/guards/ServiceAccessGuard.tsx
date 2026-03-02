@@ -60,6 +60,12 @@ export const ServiceAccessGuard: React.FC<ServiceAccessGuardProps> = ({
   requiredAuthorities = [],
 }) => {
   const { hasFeature, loading: featureLoading } = useFeatureContext();
+  const { isSuperAdmin } = useAuth();
+
+  // SUPER_ADMIN bypass: Always grant access to SUPER_ADMIN users
+  if (isSuperAdmin()) {
+    return <>{children}</>;
+  }
 
   // Check feature availability first
   if (featureLoading) {

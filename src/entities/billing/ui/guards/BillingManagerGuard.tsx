@@ -24,9 +24,11 @@ export const BillingManagerGuard: React.FC<BillingManagerGuardProps> = ({
     canModifyBilling,
     getBillingAuthorityLevel,
     getUserBillingAuthorities,
+    isSuperAdmin,
   } = useAuth();
 
-  if (canModifyBilling()) {
+  // SUPER_ADMIN bypass: Always grant access to SUPER_ADMIN users
+  if (isSuperAdmin() || canModifyBilling()) {
     return <>{children}</>;
   }
 

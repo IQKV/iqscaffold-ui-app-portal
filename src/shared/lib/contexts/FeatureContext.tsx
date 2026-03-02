@@ -178,6 +178,11 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
 
   const canAccessFeature = useCallback(
     (featureCode: string): boolean => {
+      // SUPER_ADMIN bypass: Always grant access to SUPER_ADMIN users
+      if (userAuthorities.includes("SUPER_ADMIN")) {
+        return true;
+      }
+
       // Check if user has the feature enabled
       if (!hasFeature(featureCode)) {
         return false;
@@ -200,6 +205,11 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
 
   const hasFeatureWithAuthority = useCallback(
     (featureCode: string, requiredAuthorities: string[]): boolean => {
+      // SUPER_ADMIN bypass: Always grant access to SUPER_ADMIN users
+      if (userAuthorities.includes("SUPER_ADMIN")) {
+        return true;
+      }
+
       // Check if user has the feature enabled
       if (!hasFeature(featureCode)) {
         return false;

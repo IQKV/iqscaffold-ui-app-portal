@@ -20,10 +20,15 @@ export const CrmLeadManagerGuard: React.FC<CrmLeadManagerGuardProps> = ({
   fallback,
   showUpgrade = true,
 }) => {
-  const { canManageLeads, getCrmAuthorityLevel, getUserCrmAuthorities } =
-    useAuth();
+  const {
+    canManageLeads,
+    getCrmAuthorityLevel,
+    getUserCrmAuthorities,
+    isSuperAdmin,
+  } = useAuth();
 
-  if (canManageLeads()) {
+  // SUPER_ADMIN bypass: Always grant access to SUPER_ADMIN users
+  if (isSuperAdmin() || canManageLeads()) {
     return <>{children}</>;
   }
 

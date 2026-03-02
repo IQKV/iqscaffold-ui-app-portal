@@ -18,10 +18,15 @@ interface CrmPipelineManagerGuardProps {
 export const CrmPipelineManagerGuard: React.FC<
   CrmPipelineManagerGuardProps
 > = ({ children, fallback, showUpgrade = true }) => {
-  const { canManagePipeline, getCrmAuthorityLevel, getUserCrmAuthorities } =
-    useAuth();
+  const {
+    canManagePipeline,
+    getCrmAuthorityLevel,
+    getUserCrmAuthorities,
+    isSuperAdmin,
+  } = useAuth();
 
-  if (canManagePipeline()) {
+  // SUPER_ADMIN bypass: Always grant access to SUPER_ADMIN users
+  if (isSuperAdmin() || canManagePipeline()) {
     return <>{children}</>;
   }
 

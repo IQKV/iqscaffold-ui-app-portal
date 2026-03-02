@@ -1,5 +1,6 @@
 import React from "react";
 import { useEnabledFeatures } from "@/shared/lib/contexts/FeatureContext";
+import { useAuth } from "@/processes/auth";
 import { Loader } from "@mantine/core";
 
 interface FeatureGateProps {
@@ -61,6 +62,12 @@ export const FeatureGate: React.FC<FeatureGateProps> = ({
   checkAuthorities = true,
 }) => {
   const { hasFeature, canAccessFeature, loading, error } = useEnabledFeatures();
+  const { isSuperAdmin } = useAuth();
+
+  // SUPER_ADMIN bypass: Always grant access to SUPER_ADMIN users
+  if (isSuperAdmin()) {
+    return <>{children}</>;
+  }
 
   // Show loading state if requested and still loading
   if (loading && showLoading) {
