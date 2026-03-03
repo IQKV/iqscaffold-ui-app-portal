@@ -1,8 +1,6 @@
 import { NavLink, Stack, Text } from "@mantine/core";
 import {
-  IconExposure,
   IconHome,
-  IconInfoCircle,
   IconUsers,
   IconCreditCard,
   IconSettings,
@@ -38,15 +36,6 @@ export function Sidebar() {
 
       <NavLink
         component={Link}
-        to="/about"
-        label={t`About`}
-        leftSection={<IconInfoCircle size="1rem" />}
-        active={location.pathname === "/about"}
-        data-testid="nav-about"
-      />
-
-      <NavLink
-        component={Link}
         to="/users"
         label={t`User Management`}
         leftSection={<IconUsers size="1rem" />}
@@ -71,15 +60,6 @@ export function Sidebar() {
           />
         </>
       )}
-
-      <NavLink
-        component={Link}
-        to="/examples"
-        label={t`Examples`}
-        leftSection={<IconExposure size="1rem" />}
-        active={location.pathname === "/examples"}
-        data-testid="nav-examples"
-      />
 
       {/* Billing Section */}
       <SilentFeatureErrorBoundary>

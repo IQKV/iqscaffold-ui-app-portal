@@ -11,7 +11,7 @@ import { usePageTitle } from "@/shared/lib";
  *
  * Requirements: 8.5
  */
-export const Route = createFileRoute("/crm-follow-ups")({
+export const Route = createFileRoute("/crm/follow-ups")({
   component: FollowUpsPageRoute,
 });
 

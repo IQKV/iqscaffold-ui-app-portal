@@ -44,13 +44,9 @@ test.describe("Example Smoke Tests", () => {
   test.skip("main navigation works", async ({ page }) => {
     await page.goto("/");
 
-    // Click on About link
-    await page.click("text=About");
-    await expect(page).toHaveURL(/about/);
-
-    // Click on Contact link
-    await page.click("text=Contact");
-    await expect(page).toHaveURL(/contact/);
+    // Click on Users link
+    await page.click("text=User Management");
+    await expect(page).toHaveURL(/users/);
 
     // Go back to home
     await page.click("text=Home");
@@ -104,8 +100,8 @@ test.describe("Example Smoke Tests", () => {
     await expect(page.locator("nav")).toBeVisible();
 
     // Click a menu item
-    await page.click("text=About");
-    await expect(page).toHaveURL(/about/);
+    await page.click("text=User Management");
+    await expect(page).toHaveURL(/users/);
   });
 
   test.skip("error page handles 404", async ({ page }) => {

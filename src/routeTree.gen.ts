@@ -15,17 +15,15 @@ import { Route as SubscriptionsRouteImport } from "./pages/subscriptions"
 import { Route as PreferencesDemoRouteImport } from "./pages/preferences-demo"
 import { Route as InvitationsRouteImport } from "./pages/invitations"
 import { Route as GatewayConfigRouteImport } from "./pages/gateway-config"
-import { Route as ExamplesRouteImport } from "./pages/examples"
 import { Route as DashboardRouteImport } from "./pages/dashboard"
-import { Route as CrmFollowUpsRouteImport } from "./pages/crm-follow-ups"
-import { Route as CrmDashboardRouteImport } from "./pages/crm-dashboard"
 import { Route as CheckoutRouteImport } from "./pages/checkout"
 import { Route as BillingRouteImport } from "./pages/billing"
-import { Route as AboutRouteImport } from "./pages/about"
 import { Route as R404RouteImport } from "./pages/404"
 import { Route as IndexRouteImport } from "./pages/index"
 import { Route as CrmPipelineRouteImport } from "./pages/crm.pipeline"
 import { Route as CrmLeadsRouteImport } from "./pages/crm.leads"
+import { Route as CrmFollowUpsRouteImport } from "./pages/crm.follow-ups"
+import { Route as CrmDashboardRouteImport } from "./pages/crm.dashboard"
 import { Route as CrmContactsRouteImport } from "./pages/crm.contacts"
 import { Route as CrmLeadsLeadIdRouteImport } from "./pages/crm.leads.$leadId"
 import { Route as CrmContactsContactIdRouteImport } from "./pages/crm.contacts.$contactId"
@@ -60,24 +58,9 @@ const GatewayConfigRoute = GatewayConfigRouteImport.update({
   path: "/gateway-config",
   getParentRoute: () => rootRouteImport,
 } as any)
-const ExamplesRoute = ExamplesRouteImport.update({
-  id: "/examples",
-  path: "/examples",
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: "/dashboard",
   path: "/dashboard",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CrmFollowUpsRoute = CrmFollowUpsRouteImport.update({
-  id: "/crm-follow-ups",
-  path: "/crm-follow-ups",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CrmDashboardRoute = CrmDashboardRouteImport.update({
-  id: "/crm-dashboard",
-  path: "/crm-dashboard",
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutRoute = CheckoutRouteImport.update({
@@ -88,11 +71,6 @@ const CheckoutRoute = CheckoutRouteImport.update({
 const BillingRoute = BillingRouteImport.update({
   id: "/billing",
   path: "/billing",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutRoute = AboutRouteImport.update({
-  id: "/about",
-  path: "/about",
   getParentRoute: () => rootRouteImport,
 } as any)
 const R404Route = R404RouteImport.update({
@@ -115,6 +93,16 @@ const CrmLeadsRoute = CrmLeadsRouteImport.update({
   path: "/crm/leads",
   getParentRoute: () => rootRouteImport,
 } as any)
+const CrmFollowUpsRoute = CrmFollowUpsRouteImport.update({
+  id: "/crm/follow-ups",
+  path: "/crm/follow-ups",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrmDashboardRoute = CrmDashboardRouteImport.update({
+  id: "/crm/dashboard",
+  path: "/crm/dashboard",
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CrmContactsRoute = CrmContactsRouteImport.update({
   id: "/crm/contacts",
   path: "/crm/contacts",
@@ -134,13 +122,9 @@ const CrmContactsContactIdRoute = CrmContactsContactIdRouteImport.update({
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
   "/404": typeof R404Route
-  "/about": typeof AboutRoute
   "/billing": typeof BillingRoute
   "/checkout": typeof CheckoutRoute
-  "/crm-dashboard": typeof CrmDashboardRoute
-  "/crm-follow-ups": typeof CrmFollowUpsRoute
   "/dashboard": typeof DashboardRoute
-  "/examples": typeof ExamplesRoute
   "/gateway-config": typeof GatewayConfigRoute
   "/invitations": typeof InvitationsRoute
   "/preferences-demo": typeof PreferencesDemoRoute
@@ -148,6 +132,8 @@ export interface FileRoutesByFullPath {
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
   "/crm/contacts": typeof CrmContactsRouteWithChildren
+  "/crm/dashboard": typeof CrmDashboardRoute
+  "/crm/follow-ups": typeof CrmFollowUpsRoute
   "/crm/leads": typeof CrmLeadsRouteWithChildren
   "/crm/pipeline": typeof CrmPipelineRoute
   "/crm/contacts/$contactId": typeof CrmContactsContactIdRoute
@@ -156,13 +142,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
   "/404": typeof R404Route
-  "/about": typeof AboutRoute
   "/billing": typeof BillingRoute
   "/checkout": typeof CheckoutRoute
-  "/crm-dashboard": typeof CrmDashboardRoute
-  "/crm-follow-ups": typeof CrmFollowUpsRoute
   "/dashboard": typeof DashboardRoute
-  "/examples": typeof ExamplesRoute
   "/gateway-config": typeof GatewayConfigRoute
   "/invitations": typeof InvitationsRoute
   "/preferences-demo": typeof PreferencesDemoRoute
@@ -170,6 +152,8 @@ export interface FileRoutesByTo {
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
   "/crm/contacts": typeof CrmContactsRouteWithChildren
+  "/crm/dashboard": typeof CrmDashboardRoute
+  "/crm/follow-ups": typeof CrmFollowUpsRoute
   "/crm/leads": typeof CrmLeadsRouteWithChildren
   "/crm/pipeline": typeof CrmPipelineRoute
   "/crm/contacts/$contactId": typeof CrmContactsContactIdRoute
@@ -179,13 +163,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   "/": typeof IndexRoute
   "/404": typeof R404Route
-  "/about": typeof AboutRoute
   "/billing": typeof BillingRoute
   "/checkout": typeof CheckoutRoute
-  "/crm-dashboard": typeof CrmDashboardRoute
-  "/crm-follow-ups": typeof CrmFollowUpsRoute
   "/dashboard": typeof DashboardRoute
-  "/examples": typeof ExamplesRoute
   "/gateway-config": typeof GatewayConfigRoute
   "/invitations": typeof InvitationsRoute
   "/preferences-demo": typeof PreferencesDemoRoute
@@ -193,6 +173,8 @@ export interface FileRoutesById {
   "/user-preferences": typeof UserPreferencesRoute
   "/users": typeof UsersRoute
   "/crm/contacts": typeof CrmContactsRouteWithChildren
+  "/crm/dashboard": typeof CrmDashboardRoute
+  "/crm/follow-ups": typeof CrmFollowUpsRoute
   "/crm/leads": typeof CrmLeadsRouteWithChildren
   "/crm/pipeline": typeof CrmPipelineRoute
   "/crm/contacts/$contactId": typeof CrmContactsContactIdRoute
@@ -203,13 +185,9 @@ export interface FileRouteTypes {
   fullPaths:
     | "/"
     | "/404"
-    | "/about"
     | "/billing"
     | "/checkout"
-    | "/crm-dashboard"
-    | "/crm-follow-ups"
     | "/dashboard"
-    | "/examples"
     | "/gateway-config"
     | "/invitations"
     | "/preferences-demo"
@@ -217,6 +195,8 @@ export interface FileRouteTypes {
     | "/user-preferences"
     | "/users"
     | "/crm/contacts"
+    | "/crm/dashboard"
+    | "/crm/follow-ups"
     | "/crm/leads"
     | "/crm/pipeline"
     | "/crm/contacts/$contactId"
@@ -225,13 +205,9 @@ export interface FileRouteTypes {
   to:
     | "/"
     | "/404"
-    | "/about"
     | "/billing"
     | "/checkout"
-    | "/crm-dashboard"
-    | "/crm-follow-ups"
     | "/dashboard"
-    | "/examples"
     | "/gateway-config"
     | "/invitations"
     | "/preferences-demo"
@@ -239,6 +215,8 @@ export interface FileRouteTypes {
     | "/user-preferences"
     | "/users"
     | "/crm/contacts"
+    | "/crm/dashboard"
+    | "/crm/follow-ups"
     | "/crm/leads"
     | "/crm/pipeline"
     | "/crm/contacts/$contactId"
@@ -247,13 +225,9 @@ export interface FileRouteTypes {
     | "__root__"
     | "/"
     | "/404"
-    | "/about"
     | "/billing"
     | "/checkout"
-    | "/crm-dashboard"
-    | "/crm-follow-ups"
     | "/dashboard"
-    | "/examples"
     | "/gateway-config"
     | "/invitations"
     | "/preferences-demo"
@@ -261,6 +235,8 @@ export interface FileRouteTypes {
     | "/user-preferences"
     | "/users"
     | "/crm/contacts"
+    | "/crm/dashboard"
+    | "/crm/follow-ups"
     | "/crm/leads"
     | "/crm/pipeline"
     | "/crm/contacts/$contactId"
@@ -270,13 +246,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
-  AboutRoute: typeof AboutRoute
   BillingRoute: typeof BillingRoute
   CheckoutRoute: typeof CheckoutRoute
-  CrmDashboardRoute: typeof CrmDashboardRoute
-  CrmFollowUpsRoute: typeof CrmFollowUpsRoute
   DashboardRoute: typeof DashboardRoute
-  ExamplesRoute: typeof ExamplesRoute
   GatewayConfigRoute: typeof GatewayConfigRoute
   InvitationsRoute: typeof InvitationsRoute
   PreferencesDemoRoute: typeof PreferencesDemoRoute
@@ -284,6 +256,8 @@ export interface RootRouteChildren {
   UserPreferencesRoute: typeof UserPreferencesRoute
   UsersRoute: typeof UsersRoute
   CrmContactsRoute: typeof CrmContactsRouteWithChildren
+  CrmDashboardRoute: typeof CrmDashboardRoute
+  CrmFollowUpsRoute: typeof CrmFollowUpsRoute
   CrmLeadsRoute: typeof CrmLeadsRouteWithChildren
   CrmPipelineRoute: typeof CrmPipelineRoute
 }
@@ -332,32 +306,11 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof GatewayConfigRouteImport
       parentRoute: typeof rootRouteImport
     }
-    "/examples": {
-      id: "/examples"
-      path: "/examples"
-      fullPath: "/examples"
-      preLoaderRoute: typeof ExamplesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     "/dashboard": {
       id: "/dashboard"
       path: "/dashboard"
       fullPath: "/dashboard"
       preLoaderRoute: typeof DashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/crm-follow-ups": {
-      id: "/crm-follow-ups"
-      path: "/crm-follow-ups"
-      fullPath: "/crm-follow-ups"
-      preLoaderRoute: typeof CrmFollowUpsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/crm-dashboard": {
-      id: "/crm-dashboard"
-      path: "/crm-dashboard"
-      fullPath: "/crm-dashboard"
-      preLoaderRoute: typeof CrmDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/checkout": {
@@ -372,13 +325,6 @@ declare module "@tanstack/react-router" {
       path: "/billing"
       fullPath: "/billing"
       preLoaderRoute: typeof BillingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/about": {
-      id: "/about"
-      path: "/about"
-      fullPath: "/about"
-      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/404": {
@@ -407,6 +353,20 @@ declare module "@tanstack/react-router" {
       path: "/crm/leads"
       fullPath: "/crm/leads"
       preLoaderRoute: typeof CrmLeadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/crm/follow-ups": {
+      id: "/crm/follow-ups"
+      path: "/crm/follow-ups"
+      fullPath: "/crm/follow-ups"
+      preLoaderRoute: typeof CrmFollowUpsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/crm/dashboard": {
+      id: "/crm/dashboard"
+      path: "/crm/dashboard"
+      fullPath: "/crm/dashboard"
+      preLoaderRoute: typeof CrmDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/crm/contacts": {
@@ -460,13 +420,9 @@ const CrmLeadsRouteWithChildren = CrmLeadsRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R404Route: R404Route,
-  AboutRoute: AboutRoute,
   BillingRoute: BillingRoute,
   CheckoutRoute: CheckoutRoute,
-  CrmDashboardRoute: CrmDashboardRoute,
-  CrmFollowUpsRoute: CrmFollowUpsRoute,
   DashboardRoute: DashboardRoute,
-  ExamplesRoute: ExamplesRoute,
   GatewayConfigRoute: GatewayConfigRoute,
   InvitationsRoute: InvitationsRoute,
   PreferencesDemoRoute: PreferencesDemoRoute,
@@ -474,6 +430,8 @@ const rootRouteChildren: RootRouteChildren = {
   UserPreferencesRoute: UserPreferencesRoute,
   UsersRoute: UsersRoute,
   CrmContactsRoute: CrmContactsRouteWithChildren,
+  CrmDashboardRoute: CrmDashboardRoute,
+  CrmFollowUpsRoute: CrmFollowUpsRoute,
   CrmLeadsRoute: CrmLeadsRouteWithChildren,
   CrmPipelineRoute: CrmPipelineRoute,
 }

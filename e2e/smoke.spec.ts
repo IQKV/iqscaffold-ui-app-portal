@@ -111,15 +111,15 @@ test.describe("App Smoke Tests", () => {
 
     if (isAuthenticated) {
       // Try to find and click navigation elements
-      const navAbout = await page
-        .getByTestId("nav-about")
+      const navUsers = await page
+        .getByTestId("nav-users")
         .isVisible()
         .catch(() => false);
 
-      if (navAbout) {
-        await page.getByTestId("nav-about").click();
+      if (navUsers) {
+        await page.getByTestId("nav-users").click();
         await page.waitForLoadState("networkidle");
-        await expect(page).toHaveURL("/about");
+        await expect(page).toHaveURL("/users");
 
         await page.getByTestId("nav-home").click();
         await page.waitForLoadState("networkidle");
