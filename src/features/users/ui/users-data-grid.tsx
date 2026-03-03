@@ -90,7 +90,10 @@ export function UsersDataGrid({
     [deleteUserMutation]
   );
 
-  const getRoleBadgeColor = (authorities: string[]) => {
+  const getRoleBadgeColor = (authorities: string[] | undefined) => {
+    if (!authorities || authorities.length === 0) {
+      return "gray";
+    }
     if (authorities.includes("SUPER_ADMIN")) {
       return "red";
     }
@@ -103,7 +106,7 @@ export function UsersDataGrid({
     return "gray";
   };
 
-  const formatRoles = (authorities: string[]) => {
+  const formatRoles = (authorities: string[] | undefined) => {
     return authorities?.length ? authorities.join(", ") : "No authorities";
   };
 

@@ -98,7 +98,10 @@ export function EnhancedUsersDataGrid({
     setFeatureModalOpened(true);
   }, []);
 
-  const getRoleBadgeColor = (authorities: string[]) => {
+  const getRoleBadgeColor = (authorities: string[] | undefined) => {
+    if (!authorities || authorities.length === 0) {
+      return "gray";
+    }
     if (authorities.includes("SUPER_ADMIN")) {
       return "red";
     }
@@ -318,11 +321,15 @@ export function EnhancedUsersDataGrid({
               <Paper p="md" withBorder>
                 <Text fw={500} mb="sm">{t`Current Authorities`}</Text>
                 <Group gap="xs">
-                  {selectedUser.authorities.map((authority) => (
+                  {selectedUser.authorities?.map((authority) => (
                     <Badge key={authority} variant="light">
                       {authority}
                     </Badge>
-                  ))}
+                  )) || (
+                    <Text size="sm" c="dimmed">
+                      {t`No authorities assigned`}
+                    </Text>
+                  )}
                 </Group>
                 <Text size="sm" c="dimmed" mt="sm">
                   {t`Authority management will be available in a future update.`}

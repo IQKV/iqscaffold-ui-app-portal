@@ -4,7 +4,7 @@ import { IconLock } from "@tabler/icons-react";
 import { UsersDataGrid } from "./users-data-grid";
 import { UserFormModal } from "./user-form-modal";
 import { UserDto } from "@/entities/user";
-import { useAuthStore, UserManagementGuard } from "@/processes/auth";
+import { useAuthStore } from "@/processes/auth";
 import { t } from "@lingui/core/macro";
 
 export function UsersPage() {
@@ -53,14 +53,12 @@ export function UsersPage() {
         onEditUser={handleEditUser}
       />
 
-      <UserManagementGuard>
-        <UserFormModal
-          opened={modalOpened}
-          onClose={handleCloseModal}
-          user={selectedUser}
-          title={modalTitle}
-        />
-      </UserManagementGuard>
+      <UserFormModal
+        opened={modalOpened}
+        onClose={handleCloseModal}
+        user={selectedUser}
+        title={modalTitle}
+      />
     </Container>
   );
 }
