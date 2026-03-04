@@ -363,6 +363,10 @@ function getLeadQualityColor(score: number): string {
  * This can be customized based on stage types
  */
 function getStageColor(stage: string): string {
+  if (!stage) {
+    return "gray";
+  }
+  
   const stageLower = stage.toLowerCase();
 
   if (stageLower.includes("new") || stageLower.includes("lead")) {

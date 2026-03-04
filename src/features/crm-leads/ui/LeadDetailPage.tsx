@@ -130,6 +130,10 @@ export const LeadDetailPage: React.FC = () => {
 
   // Get stage color
   const getStageColor = (stage: string): string => {
+    if (!stage) {
+      return "gray";
+    }
+    
     const stageLower = stage.toLowerCase();
 
     if (stageLower.includes("new") || stageLower.includes("lead")) {

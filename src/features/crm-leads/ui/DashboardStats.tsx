@@ -133,11 +133,12 @@ function KPICard({
   color,
   isMobile = false,
 }: KPICardProps) {
+  const safeTitle = title || "Unknown";
   return (
     <Paper
       p={isMobile ? "xs" : "md"}
       withBorder
-      data-testid={`kpi-card-${title.toLowerCase().replace(/\s+/g, "-")}`}
+      data-testid={`kpi-card-${safeTitle.toLowerCase().replace(/\s+/g, "-")}`}
     >
       <Group justify="space-between" wrap="nowrap">
         <Stack gap={2}>
@@ -152,7 +153,7 @@ function KPICard({
           <Text
             size={isMobile ? "lg" : "xl"}
             fw={700}
-            data-testid={`kpi-value-${title.toLowerCase().replace(/\s+/g, "-")}`}
+            data-testid={`kpi-value-${safeTitle.toLowerCase().replace(/\s+/g, "-")}`}
           >
             {value.toLocaleString()}
           </Text>

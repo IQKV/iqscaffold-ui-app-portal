@@ -119,11 +119,12 @@ function MetricCard({
   description,
   isMobile = false,
 }: MetricCardProps) {
+  const safeTitle = title || "Unknown";
   return (
     <Paper
       p={isMobile ? "xs" : "md"}
       withBorder
-      data-testid={`metric-card-${title.toLowerCase().replace(/\s+/g, "-")}`}
+      data-testid={`metric-card-${safeTitle.toLowerCase().replace(/\s+/g, "-")}`}
     >
       <Stack gap="xs">
         <Group justify="space-between" wrap="nowrap">
@@ -147,7 +148,7 @@ function MetricCard({
         <Text
           size={isMobile ? "lg" : "xl"}
           fw={700}
-          data-testid={`metric-value-${title.toLowerCase().replace(/\s+/g, "-")}`}
+          data-testid={`metric-value-${safeTitle.toLowerCase().replace(/\s+/g, "-")}`}
         >
           {value}
         </Text>
