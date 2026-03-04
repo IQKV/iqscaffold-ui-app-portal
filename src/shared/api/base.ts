@@ -38,10 +38,10 @@ apiClient.interceptors.request.use((config) => {
   if (token) {
     config.headers = config.headers ?? {};
     (config.headers as any).Authorization = `Bearer ${token}`;
-    
+
     // Extract user ID from JWT token and add X-User-ID header
     try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
+      const payload = JSON.parse(atob(token.split(".")[1]));
       const userId = payload.userId || payload.sub;
       if (userId) {
         (config.headers as any)["X-User-ID"] = userId.toString();
