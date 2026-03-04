@@ -45,18 +45,18 @@ export const FeatureUsage: React.FC<FeatureUsageProps> = ({
   label,
   size = "sm",
 }) => {
-  const { getFeature, getUsageInfo, loading } = useFeatures();
+  const { getFeature, getUsageInfo, loading, error } = useFeatures();
 
   const feature = getFeature(featureCode);
   const usageInfo = getUsageInfo(featureCode);
 
-  // Don't render if feature not found or no usage limit
-  if (loading || !feature || !usageInfo) {
+  // Don't render if loading, error, feature not found, or no usage limit
+  if (loading || error || !feature || !usageInfo) {
     return null;
   }
 
   // Determine progress bar color based on usage percentage
-  const getProgressColor = (percentage: number) => {
+  const getProgressColor = (percentage: number): string => {
     if (percentage >= 90) {
       return "red";
     }
@@ -70,7 +70,7 @@ export const FeatureUsage: React.FC<FeatureUsageProps> = ({
   };
 
   const progressColor = getProgressColor(usageInfo.percentage);
-  const displayLabel = label || feature.name;
+  const displayLabel = label || feature.name || featureCode;
 
   return (
     <Stack gap="xs">
@@ -86,27 +86,31 @@ export const FeatureUsage: React.FC<FeatureUsageProps> = ({
             </Tooltip>
           )}
 
-          <Badge size="xs" variant="light" color={progressColor}>
-            {Math.round(usageInfo.percentage)}%
-          </Badge>
+          {usageInfo && usageInfo.percentage !== undefined && (
+            <Badge size="xs" variant="light" color={progressColor || "blue"}>
+              {Math.round(usageInfo.percentage)}%
+            </Badge>
+          )}
         </Group>
       )}
 
-      <Progress
-        value={usageInfo.percentage}
-        color={progressColor}
-        size={size}
-        radius="sm"
-      />
+      {usageInfo && usageInfo.percentage !== undefined && (
+        <Progress
+          value={usageInfo.percentage}
+          color={progressColor || "blue"}
+          size={size}
+          radius="sm"
+        />
+      )}
 
-      {showDetails && (
+      {showDetails && usageInfo && (
         <Group justify="space-between">
           <Text size="xs" c="dimmed">
-            {usageInfo.current.toLocaleString()} /{" "}
-            {usageInfo.limit.toLocaleString()} used
+            {(usageInfo.current || 0).toLocaleString()} /{" "}
+            {(usageInfo.limit || 0).toLocaleString()} used
           </Text>
           <Text size="xs" c="dimmed">
-            {usageInfo.remaining.toLocaleString()} remaining
+            {(usageInfo.remaining || 0).toLocaleString()} remaining
           </Text>
         </Group>
       )}
@@ -137,7 +141,25 @@ export const FeatureUsageList: React.FC<FeatureUsageListProps> = ({
   featureCodes,
   compact = false,
 }) => {
-  const { getFeature, getUsageInfo } = useFeatures();
+  const { getFeature, getUsageInfo, loading, error } = useFeatures();
+
+  // Show loading state
+  if (loading) {
+    return (
+      <Text size="sm" c="dimmed">
+        Loading feature usage...
+      </Text>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <Text size="sm" c="red">
+        Unable to load feature usage information
+      </Text>
+    );
+  }
 
   // Filter to only features with usage limits
   const usageFeatures = featureCodes.filter((code) => {
@@ -147,7 +169,11 @@ export const FeatureUsageList: React.FC<FeatureUsageListProps> = ({
   });
 
   if (usageFeatures.length === 0) {
-    return null;
+    return (
+      <Text size="sm" c="dimmed">
+        No usage-based features available
+      </Text>
+    );
   }
 
   return (
