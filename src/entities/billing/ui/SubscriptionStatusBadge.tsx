@@ -26,6 +26,16 @@ export function SubscriptionStatusBadge({
 }: SubscriptionStatusBadgeProps) {
   const config = statusConfig[status];
 
+  // Handle unknown status values gracefully
+  if (!config) {
+    console.warn(`Unknown subscription status: ${status}`);
+    return (
+      <Badge color="gray" variant="light" {...props}>
+        {status || "Unknown"}
+      </Badge>
+    );
+  }
+
   return (
     <Badge color={config.color} variant="light" {...props}>
       {config.label}
