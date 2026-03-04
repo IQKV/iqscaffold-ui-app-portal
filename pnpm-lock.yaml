@@ -370,8 +370,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0(eslint@9.39.3(jiti@2.6.1))
       gitzy:
-        specifier: 6.5.8
-        version: 6.5.8
+        specifier: 6.5.9
+        version: 6.5.9
       globals:
         specifier: ^17.4.0
         version: 17.4.0
@@ -4726,8 +4726,8 @@ packages:
   git-url-parse@16.1.0:
     resolution: {integrity: sha512-cPLz4HuK86wClEW7iDdeAKcCVlWXmrLpb2L+G9goW0Z1dtpNS6BXXSOckUTlJT/LDQViE1QZKstNORzHsLnobw==}
 
-  gitzy@6.5.8:
-    resolution: {integrity: sha512-gV7Xs4q+KavwN4YgKSVTJ9RT7trvoiZ4hXqSlPPTL1ETs7vgfa4cYa2psaIGR7dUaWnhjyQk78/c6c4ClkkANA==}
+  gitzy@6.5.9:
+    resolution: {integrity: sha512-NseXyfcECEsfPSMEUPkgBhwVI6cOj7qutGpbhlpxK6hufkEwfBJCj6ZeTtnL2ipTOHXTsy7ewkiR9tTqu4Vm7A==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
 
@@ -12206,7 +12206,7 @@ snapshots:
     dependencies:
       git-up: 8.1.1
 
-  gitzy@6.5.8:
+  gitzy@6.5.9:
     dependencies:
       lilconfig: 3.1.3
       tinyexec: 1.0.2

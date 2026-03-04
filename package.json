@@ -180,7 +180,7 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-sonarjs": "^4.0.0",
-    "gitzy": "6.5.8",
+    "gitzy": "6.5.9",
     "globals": "^17.4.0",
     "happy-dom": "20.8.3",
     "husky": "^9.1.7",
