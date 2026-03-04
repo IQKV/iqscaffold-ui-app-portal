@@ -133,7 +133,7 @@ export const LeadDetailPage: React.FC = () => {
     if (!stage) {
       return "gray";
     }
-    
+
     const stageLower = stage.toLowerCase();
 
     if (stageLower.includes("new") || stageLower.includes("lead")) {
