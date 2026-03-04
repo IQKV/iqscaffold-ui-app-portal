@@ -41,7 +41,7 @@ apiClient.interceptors.request.use((config) => {
 
     // Extract user ID from JWT token and add X-User-ID header
     try {
-      const payload = JSON.parse(atob(token.split(".")[1]));
+      const payload = JSON.parse(atob(token.split(".")[1])) as { userId?: string | number; sub?: string | number };
       const userId = payload.userId || payload.sub;
       if (userId) {
         (config.headers as any)["X-User-ID"] = userId.toString();
