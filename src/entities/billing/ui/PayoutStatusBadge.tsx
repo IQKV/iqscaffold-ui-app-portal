@@ -5,15 +5,17 @@ interface PayoutStatusBadgeProps {
   status: PayoutStatus;
 }
 
-const statusConfig: Record<
-  PayoutStatus,
-  { color: MantineColor; label: string }
-> = {
+const statusConfig: Record<string, { color: MantineColor; label: string }> = {
   paid: { color: "green", label: "Paid" },
+  PAID: { color: "green", label: "Paid" },
   pending: { color: "yellow", label: "Pending" },
+  PENDING: { color: "yellow", label: "Pending" },
   in_transit: { color: "blue", label: "In Transit" },
+  IN_TRANSIT: { color: "blue", label: "In Transit" },
   canceled: { color: "gray", label: "Canceled" },
+  CANCELED: { color: "gray", label: "Canceled" },
   failed: { color: "red", label: "Failed" },
+  FAILED: { color: "red", label: "Failed" },
 };
 
 export const PayoutStatusBadge = ({ status }: PayoutStatusBadgeProps) => {

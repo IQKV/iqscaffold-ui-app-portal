@@ -8,12 +8,17 @@ interface InvoiceStatusBadgeProps extends Omit<
   status: InvoiceStatus;
 }
 
-const statusConfig: Record<InvoiceStatus, { color: string; label: string }> = {
+const statusConfig: Record<string, { color: string; label: string }> = {
   draft: { color: "gray", label: "Draft" },
+  DRAFT: { color: "gray", label: "Draft" },
   open: { color: "orange", label: "Open" },
+  OPEN: { color: "orange", label: "Open" },
   paid: { color: "green", label: "Paid" },
+  PAID: { color: "green", label: "Paid" },
   uncollectible: { color: "red", label: "Uncollectible" },
+  UNCOLLECTIBLE: { color: "red", label: "Uncollectible" },
   void: { color: "gray", label: "Void" },
+  VOID: { color: "gray", label: "Void" },
 };
 
 export function InvoiceStatusBadge({

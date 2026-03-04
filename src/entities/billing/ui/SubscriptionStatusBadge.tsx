@@ -8,16 +8,19 @@ interface SubscriptionStatusBadgeProps extends Omit<
   status: SubscriptionStatus;
 }
 
-const statusConfig: Record<
-  SubscriptionStatus,
-  { color: string; label: string }
-> = {
+const statusConfig: Record<string, { color: string; label: string }> = {
   active: { color: "green", label: "Active" },
+  ACTIVE: { color: "green", label: "Active" },
   trialing: { color: "blue", label: "Trial" },
+  TRIALING: { color: "blue", label: "Trial" },
   past_due: { color: "orange", label: "Past Due" },
+  PAST_DUE: { color: "orange", label: "Past Due" },
   canceled: { color: "red", label: "Canceled" },
+  CANCELED: { color: "red", label: "Canceled" },
   unpaid: { color: "red", label: "Unpaid" },
+  UNPAID: { color: "red", label: "Unpaid" },
   paused: { color: "gray", label: "Paused" },
+  PAUSED: { color: "gray", label: "Paused" },
 };
 
 export function SubscriptionStatusBadge({
