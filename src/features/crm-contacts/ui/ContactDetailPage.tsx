@@ -26,11 +26,13 @@ import {
   IconUser,
   IconCalendar,
   IconNotes,
+  IconTrash,
 } from "@tabler/icons-react";
 import { t } from "@lingui/core/macro";
 import { notifications } from "@mantine/notifications";
+import { modals } from "@mantine/modals";
 import { useNavigate, useParams } from "@tanstack/react-router";
-import { useContactQuery, LeadScoreBadge } from "@/entities/crm";
+import { useContactQuery, LeadScoreBadge, useDeleteContactMutation } from "@/entities/crm";
 import { ContactDetailSkeleton } from "./skeletons";
 import { ContactEditModal } from "./ContactEditModal";
 import { ContactNotesSection } from "./ContactNotesSection";
@@ -63,9 +65,46 @@ export const ContactDetailPage: React.FC = () => {
     refetch,
   } = useContactQuery(contactId);
 
+  // Delete mutation
+  const deleteContactMutation = useDeleteContactMutation();
+
   // Handle edit contact
   const handleEditContact = () => {
     setEditModalOpened(true);
+  };
+
+  // Handle delete contact
+  const handleDeleteContact = () => {
+    if (!contact) return;
+
+    modals.openConfirmModal({
+      title: t`Delete Contact`,
+      children: (
+        <Text>
+          {t`Are you sure you want to delete`} <strong>{contact.firstName} {contact.lastName}</strong>?
+          {" "}{t`This action cannot be undone.`}
+        </Text>
+      ),
+      labels: { confirm: t`Delete`, cancel: t`Cancel` },
+      confirmProps: { color: "red" },
+      onConfirm: async () => {
+        try {
+          await deleteContactMutation.mutateAsync(contact.id);
+          notifications.show({
+            title: t`Success`,
+            message: t`Contact deleted successfully`,
+            color: "green",
+          });
+          navigate({ to: "/crm/contacts" });
+        } catch (error: any) {
+          notifications.show({
+            title: t`Error`,
+            message: error.message || t`Failed to delete contact`,
+            color: "red",
+          });
+        }
+      },
+    });
   };
 
   // Handle email contact
@@ -169,8 +208,18 @@ export const ContactDetailPage: React.FC = () => {
             <Button
               leftSection={<IconEdit size={16} />}
               onClick={handleEditContact}
+              variant="default"
             >
               {t`Edit Contact`}
+            </Button>
+            <Button
+              leftSection={<IconTrash size={16} />}
+              onClick={handleDeleteContact}
+              color="red"
+              variant="light"
+              loading={deleteContactMutation.isPending}
+            >
+              {t`Delete`}
             </Button>
           </Group>
         </Group>

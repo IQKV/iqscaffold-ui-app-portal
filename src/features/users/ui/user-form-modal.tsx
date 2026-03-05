@@ -88,7 +88,8 @@ export function UserFormModal({
     } else {
       form.reset();
     }
-  }, [user, opened, form]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, opened]);
 
   // Check if user has permission to create/update users
   if (!canManageUsers()) {
