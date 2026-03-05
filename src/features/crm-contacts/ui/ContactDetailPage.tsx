@@ -32,7 +32,11 @@ import { t } from "@lingui/core/macro";
 import { notifications } from "@mantine/notifications";
 import { modals } from "@mantine/modals";
 import { useNavigate, useParams } from "@tanstack/react-router";
-import { useContactQuery, LeadScoreBadge, useDeleteContactMutation } from "@/entities/crm";
+import {
+  useContactQuery,
+  LeadScoreBadge,
+  useDeleteContactMutation,
+} from "@/entities/crm";
 import { ContactDetailSkeleton } from "./skeletons";
 import { ContactEditModal } from "./ContactEditModal";
 import { ContactNotesSection } from "./ContactNotesSection";
@@ -81,8 +85,11 @@ export const ContactDetailPage: React.FC = () => {
       title: t`Delete Contact`,
       children: (
         <Text>
-          {t`Are you sure you want to delete`} <strong>{contact.firstName} {contact.lastName}</strong>?
-          {" "}{t`This action cannot be undone.`}
+          {t`Are you sure you want to delete`}{" "}
+          <strong>
+            {contact.firstName} {contact.lastName}
+          </strong>
+          ? {t`This action cannot be undone.`}
         </Text>
       ),
       labels: { confirm: t`Delete`, cancel: t`Cancel` },
