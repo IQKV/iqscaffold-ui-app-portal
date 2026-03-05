@@ -129,7 +129,7 @@ export const LeadDetailPage: React.FC = () => {
   }
 
   // Get stage color
-  const getStageColor = (stage: string): string => {
+  const getStageColor = (stage: string | undefined): string => {
     if (!stage) {
       return "gray";
     }
