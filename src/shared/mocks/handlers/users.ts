@@ -173,7 +173,7 @@ export const usersHandlers = [
       );
     }
 
-    return HttpResponse.json({ data: user });
+    return HttpResponse.json(user);
   }),
 
   // Create user (signup)
@@ -233,7 +233,7 @@ export const usersHandlers = [
     mockUsers.push(newUser);
     nextUserId++;
 
-    return HttpResponse.json({ data: newUser }, { status: 201 });
+    return HttpResponse.json(newUser, { status: 201 });
   }),
 
   // Create user (admin endpoint)
@@ -293,7 +293,7 @@ export const usersHandlers = [
     mockUsers.push(newUser);
     nextUserId++;
 
-    return HttpResponse.json({ data: newUser }, { status: 201 });
+    return HttpResponse.json(newUser, { status: 201 });
   }),
 
   // Update user
@@ -369,7 +369,7 @@ export const usersHandlers = [
 
       mockUsers[userIndex] = updatedUser;
 
-      return HttpResponse.json({ data: updatedUser });
+      return HttpResponse.json(updatedUser);
     }
   ),
 
