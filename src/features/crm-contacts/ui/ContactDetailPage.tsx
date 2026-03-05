@@ -79,7 +79,9 @@ export const ContactDetailPage: React.FC = () => {
 
   // Handle delete contact
   const handleDeleteContact = () => {
-    if (!contact) return;
+    if (!contact) {
+      return;
+    }
 
     modals.openConfirmModal({
       title: t`Delete Contact`,
