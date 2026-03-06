@@ -18,8 +18,8 @@ importers:
         specifier: ^3.2.2
         version: 3.2.2(react@19.2.4)
       '@dr.pogodin/react-helmet':
-        specifier: ^3.0.6
-        version: 3.0.6(react@19.2.4)
+        specifier: ^3.1.0
+        version: 3.1.0(react@19.2.4)
       '@hookform/resolvers':
         specifier: ^5.2.2
         version: 5.2.2(react-hook-form@7.71.2(react@19.2.4))
@@ -766,8 +766,8 @@ packages:
     peerDependencies:
       react: '>=16.8.0'
 
-  '@dr.pogodin/react-helmet@3.0.6':
-    resolution: {integrity: sha512-RSxje6i2KS+Se4St0Idmisi3jCwHZDIEtBv+zQ1u0kzJeivzwoQHs54K2fJ//UsC7pQ45OsO+xhiKmvmJfx1YQ==}
+  '@dr.pogodin/react-helmet@3.1.0':
+    resolution: {integrity: sha512-Ns57qggCJsD9qTu6sJ8F6TTV7VDj5kzyLF88MCy5rPjqQn1t6d2F2J27reWuhLKQWyhQnKhr8OEM5Mkv1OFGaA==}
     peerDependencies:
       react: '19'
 
@@ -8063,7 +8063,7 @@ snapshots:
       react: 19.2.4
       tslib: 2.8.1
 
-  '@dr.pogodin/react-helmet@3.0.6(react@19.2.4)':
+  '@dr.pogodin/react-helmet@3.1.0(react@19.2.4)':
     dependencies:
       '@babel/runtime': 7.28.6
       react: 19.2.4
