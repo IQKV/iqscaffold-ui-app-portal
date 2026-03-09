@@ -26,7 +26,7 @@ const createUserFormSchema = () =>
     password: z
       .string()
       .min(8, t`Password must be at least 8 characters`)
-      .optional(),
+      .or(z.literal("")),
     authorities: z
       .array(z.string())
       .min(1, t`At least one authority is required`),
