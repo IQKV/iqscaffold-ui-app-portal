@@ -233,7 +233,7 @@ export const crmApi = {
    */
   reorderStage: (id: string, newOrder: number) =>
     apiRequest<Types.PipelineStage>({
-      url: `/v1/pipeline/stages/${id}/reorder`,
+      url: `/v1/pipeline/stages/${id}/order`,
       method: "PUT",
       params: { newOrder },
     }),
