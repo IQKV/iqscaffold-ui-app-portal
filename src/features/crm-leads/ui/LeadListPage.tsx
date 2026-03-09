@@ -28,12 +28,13 @@ import {
   IconAdjustments,
 } from "@tabler/icons-react";
 import { t } from "@lingui/core/macro";
-import { LeadCard } from "@/entities/crm";
+import { LeadCard, LeadForm, FollowUpForm, useQualifyLeadMutation, useCreateFollowUpMutation } from "@/entities/crm";
 import { LeadListSkeleton } from "./skeletons";
 import { LeadSource } from "@/shared/api/crm/types";
 import { useNavigate } from "@tanstack/react-router";
 import { useLeadList } from "../model/useLeadList";
 import { useMediaQuery, useDisclosure } from "@mantine/hooks";
+import { useUsersQuery } from "@/entities/users";
 import {
   useKeyboardNavigation,
   useAnnouncer,
@@ -94,14 +95,53 @@ export const LeadListPage: React.FC = () => {
     { open: openFilterDrawer, close: closeFilterDrawer },
   ] = useDisclosure(false);
 
+  // Lead form modal state
+  const [
+    leadFormOpened,
+    { open: openLeadForm, close: closeLeadForm },
+  ] = useDisclosure(false);
+
+  // Follow-up form modal state
+  const [
+    followUpFormOpened,
+    { open: openFollowUpForm, close: closeFollowUpForm },
+  ] = useDisclosure(false);
+  const [selectedLeadForFollowUp, setSelectedLeadForFollowUp] = useState<string | null>(null);
+
   const [focusedLeadIndex, setFocusedLeadIndex] = useState(0);
+
+  // Mutations for quick actions
+  const qualifyLeadMutation = useQualifyLeadMutation();
+  const createFollowUpMutation = useCreateFollowUpMutation();
+
+  // Fetch users for filter dropdown
+  const { data: usersData, isLoading: isLoadingUsers } = useUsersQuery({ active: true });
 
   // Keyboard shortcuts
   const handleCreateLead = useCallback(() => {
-    // TODO: Open lead form modal
-    console.log("Opening create lead form");
+    openLeadForm();
     announce("Opening create lead form", { priority: "polite" });
-  }, [announce]);
+  }, [openLeadForm, announce]);
+
+  // Quick action handlers
+  const handleQuickQualify = useCallback(async (leadId: string) => {
+    try {
+      await qualifyLeadMutation.mutateAsync(leadId);
+      announce("Lead qualified successfully", { priority: "polite" });
+    } catch (error) {
+      // Error is handled by the mutation
+    }
+  }, [qualifyLeadMutation, announce]);
+
+  const handleQuickScheduleFollowUp = useCallback((leadId: string) => {
+    setSelectedLeadForFollowUp(leadId);
+    openFollowUpForm();
+    announce("Opening schedule follow-up form", { priority: "polite" });
+  }, [openFollowUpForm, announce]);
+
+  const handleFollowUpSubmit = async (data: any) => {
+    await createFollowUpMutation.mutateAsync(data);
+  };
 
   const handleFocusSearch = useCallback(() => {
     searchInputRef.current?.focus();
@@ -276,14 +316,19 @@ export const LeadListPage: React.FC = () => {
       <Select
         placeholder={t`Filter by assigned user`}
         leftSection={<IconFilter size={16} />}
-        data={[
-          // TODO: Fetch from users API
-          { value: "user1", label: "John Doe" },
-          { value: "user2", label: "Jane Smith" },
-        ]}
+        data={
+          isLoadingUsers
+            ? []
+            : (usersData || []).map((user) => ({
+                value: user.id,
+                label: user.fullName || `${user.firstName} ${user.lastName}`,
+              }))
+        }
         value={selectedUser}
         onChange={setSelectedUser}
         clearable
+        disabled={isLoadingUsers}
+        searchable
       />
 
       {hasActiveFilters && (
@@ -306,6 +351,7 @@ export const LeadListPage: React.FC = () => {
   );
 
   return (
+    <>
     <Container
       size="xl"
       py={isMobile ? "sm" : "xl"}
@@ -442,14 +488,19 @@ export const LeadListPage: React.FC = () => {
                 <Select
                   placeholder={t`Filter by assigned user`}
                   leftSection={<IconFilter size={16} />}
-                  data={[
-                    // TODO: Fetch from users API
-                    { value: "user1", label: "John Doe" },
-                    { value: "user2", label: "Jane Smith" },
-                  ]}
+                  data={
+                    isLoadingUsers
+                      ? []
+                      : (usersData || []).map((user) => ({
+                          value: user.id,
+                          label: user.fullName || `${user.firstName} ${user.lastName}`,
+                        }))
+                  }
                   value={selectedUser}
                   onChange={setSelectedUser}
                   clearable
+                  disabled={isLoadingUsers}
+                  searchable
                   style={{ flex: 1 }}
                   size={isTablet ? "sm" : "md"}
                 />
@@ -568,9 +619,8 @@ export const LeadListPage: React.FC = () => {
                   onQuickActions={
                     !isMobile
                       ? {
-                          qualify: () => console.log("Qualify", lead.id),
-                          scheduleFollowUp: () =>
-                            console.log("Schedule follow-up", lead.id),
+                          qualify: () => handleQuickQualify(lead.id),
+                          scheduleFollowUp: () => handleQuickScheduleFollowUp(lead.id),
                           viewDetails: () => handleLeadClick(lead.id),
                         }
                       : undefined
@@ -597,5 +647,29 @@ export const LeadListPage: React.FC = () => {
         )}
       </Stack>
     </Container>
+
+      {/* Lead Form Modal */}
+      <LeadForm
+        opened={leadFormOpened}
+        onClose={() => {
+          closeLeadForm();
+          refetch();
+        }}
+      />
+
+      {/* Follow-up Form Modal */}
+      {selectedLeadForFollowUp && (
+        <FollowUpForm
+          opened={followUpFormOpened}
+          onClose={() => {
+            closeFollowUpForm();
+            setSelectedLeadForFollowUp(null);
+          }}
+          leadId={selectedLeadForFollowUp}
+          onSubmit={handleFollowUpSubmit}
+          isLoading={createFollowUpMutation.isPending}
+        />
+      )}
+    </>
   );
 };

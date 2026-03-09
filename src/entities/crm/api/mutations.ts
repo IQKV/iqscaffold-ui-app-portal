@@ -352,6 +352,50 @@ export const useConvertLeadMutation = () => {
     },
   });
 };
+export const useQualifyLeadMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (id: string) => crmApi.qualifyLead(id),
+    onSuccess: (updatedLead, id) => {
+      queryClient.setQueryData(crmKeys.lead(id), updatedLead);
+      queryClient.invalidateQueries({ queryKey: crmKeys.leads() });
+      queryClient.invalidateQueries({
+        queryKey: crmKeys.leadActivities(id),
+      });
+      notificationService.success({ message: "Lead qualified successfully" });
+    },
+    onError: (error: any) => {
+      notificationService.error({
+        message: error.message || "Failed to qualify lead",
+      });
+    },
+  });
+};
+
+export const useDisqualifyLeadMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (id: string) => crmApi.disqualifyLead(id),
+    onSuccess: (updatedLead, id) => {
+      queryClient.setQueryData(crmKeys.lead(id), updatedLead);
+      queryClient.invalidateQueries({ queryKey: crmKeys.leads() });
+      queryClient.invalidateQueries({
+        queryKey: crmKeys.leadActivities(id),
+      });
+      notificationService.success({
+        message: "Lead disqualified successfully",
+      });
+    },
+    onError: (error: any) => {
+      notificationService.error({
+        message: error.message || "Failed to disqualify lead",
+      });
+    },
+  });
+};
+
 
 // Contact Mutations
 export const useCreateContactMutation = () => {

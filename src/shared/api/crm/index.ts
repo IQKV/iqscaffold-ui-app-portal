@@ -105,6 +105,24 @@ export const crmApi = {
       url: `/v1/leads/${id}/convert`,
       method: "POST",
     }),
+  /**
+   * Qualify a lead
+   */
+  qualifyLead: (id: string) =>
+    apiRequest<Types.Lead>({
+      url: `/v1/leads/${id}/qualify`,
+      method: "POST",
+    }),
+
+  /**
+   * Disqualify a lead
+   */
+  disqualifyLead: (id: string) =>
+    apiRequest<Types.Lead>({
+      url: `/v1/leads/${id}/disqualify`,
+      method: "POST",
+    }),
+
 
   /**
    * Get lead counts by source

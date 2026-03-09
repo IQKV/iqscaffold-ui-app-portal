@@ -173,3 +173,48 @@ export interface PaginatedResponse<T> {
   last: boolean;
   first: boolean;
 }
+
+// Contact Notes Types
+export interface ContactNote {
+  id: number;
+  contactId: number;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  createdByUserId: string;
+  createdByName: string;
+}
+
+export interface CreateContactNoteRequest {
+  content: string;
+}
+
+export interface UpdateContactNoteRequest {
+  content: string;
+}
+
+// Contact Activity Types
+export interface ContactActivity {
+  id: number;
+  contactId: number;
+  activityType: ContactActivityType;
+  description: string;
+  timestamp: string;
+  performedByUserId: string;
+  performedByName: string;
+  metadata?: Record<string, any>;
+}
+
+export type ContactActivityType =
+  | "CONTACT_CREATED"
+  | "CONTACT_UPDATED"
+  | "STATUS_CHANGED"
+  | "NOTE_ADDED"
+  | "NOTE_UPDATED"
+  | "NOTE_DELETED"
+  | "LEAD_SCORE_UPDATED"
+  | "COMPANY_ASSOCIATED"
+  | "EMAIL_SENT"
+  | "CALL_MADE"
+  | "MEETING_SCHEDULED"
+  | "CONVERTED_FROM_LEAD";

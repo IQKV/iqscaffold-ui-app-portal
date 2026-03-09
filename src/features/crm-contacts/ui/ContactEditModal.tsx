@@ -14,6 +14,7 @@ import { notifications } from "@mantine/notifications";
 import { t } from "@lingui/core/macro";
 import { z } from "zod";
 import { useUpdateContactMutation } from "@/entities/crm";
+import { useCompaniesQuery } from "@/entities/companies";
 import { Contact, ContactStatus } from "@/shared/api/contact/types";
 
 const contactEditSchema = z.object({
@@ -57,6 +58,7 @@ export const ContactEditModal: React.FC<ContactEditModalProps> = ({
   onSuccess,
 }) => {
   const updateContactMutation = useUpdateContactMutation();
+  const { data: companiesData, isLoading: isLoadingCompanies } = useCompaniesQuery();
 
   const form = useForm<ContactEditFormData>({
     validate: zodResolver(contactEditSchema),
@@ -176,14 +178,17 @@ export const ContactEditModal: React.FC<ContactEditModalProps> = ({
           <Select
             label={t`Company`}
             placeholder={t`Select company`}
-            data={[
-              // TODO: Fetch from companies API
-              { value: "1", label: "Acme Corp" },
-              { value: "2", label: "Tech Solutions Inc" },
-              { value: "3", label: "Global Industries" },
-            ]}
+            data={
+              isLoadingCompanies
+                ? []
+                : (companiesData || []).map((company) => ({
+                    value: company.id,
+                    label: company.name,
+                  }))
+            }
             searchable
             clearable
+            disabled={isLoadingCompanies}
             {...form.getInputProps("companyId")}
             value={form.values.companyId?.toString() || null}
             onChange={(value) =>

@@ -246,8 +246,8 @@ function PipelineStageChart({
                   borderRadius: "4px",
                   fontSize: isMobile ? "12px" : "14px",
                 }}
-                formatter={(value: number | undefined) => [
-                  value ?? 0,
+                formatter={(value) => [
+                  typeof value === "number" ? value : 0,
                   t`Leads`,
                 ]}
               />

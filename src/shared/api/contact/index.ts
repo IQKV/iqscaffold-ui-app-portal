@@ -119,6 +119,62 @@ export const contactApi = {
       data: request,
     }),
 
+  // Contact Notes operations
+  /**
+   * Get all notes for a contact
+   */
+  getContactNotes: (contactId: string | number) =>
+    apiRequest<Types.ContactNote[]>({
+      url: `/v1/contacts/${contactId}/notes`,
+      method: "GET",
+    }),
+
+  /**
+   * Create a note for a contact
+   */
+  createContactNote: (
+    contactId: string | number,
+    request: Types.CreateContactNoteRequest
+  ) =>
+    apiRequest<Types.ContactNote>({
+      url: `/v1/contacts/${contactId}/notes`,
+      method: "POST",
+      data: request,
+    }),
+
+  /**
+   * Update a contact note
+   */
+  updateContactNote: (
+    contactId: string | number,
+    noteId: string | number,
+    request: Types.UpdateContactNoteRequest
+  ) =>
+    apiRequest<Types.ContactNote>({
+      url: `/v1/contacts/${contactId}/notes/${noteId}`,
+      method: "PUT",
+      data: request,
+    }),
+
+  /**
+   * Delete a contact note
+   */
+  deleteContactNote: (contactId: string | number, noteId: string | number) =>
+    apiRequest<void>({
+      url: `/v1/contacts/${contactId}/notes/${noteId}`,
+      method: "DELETE",
+    }),
+
+  // Contact Activities operations
+  /**
+   * Get all activities for a contact
+   */
+  getContactActivities: (contactId: string | number) =>
+    apiRequest<Types.ContactActivity[]>({
+      url: `/v1/contacts/${contactId}/activities`,
+      method: "GET",
+    }),
+
   // Company CRUD operations
   /**
    * Get companies with optional filtering and pagination

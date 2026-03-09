@@ -30,6 +30,7 @@ import { useNavigate, useParams } from "@tanstack/react-router";
 import {
   useLeadQuery,
   useConvertLeadMutation,
+  useQualifyLeadMutation,
   LeadScoreBadge,
   LeadSourceBadge,
 } from "@/entities/crm";
@@ -57,9 +58,23 @@ export const LeadDetailPage: React.FC = () => {
   const { data: lead, isLoading, error, refetch } = useLeadQuery(leadId);
 
   // Handle qualify lead
-  const handleQualifyLead = () => {
-    // TODO: Implement qualify lead functionality
-    console.log("Qualifying lead:", leadId);
+  const qualifyLeadMutation = useQualifyLeadMutation();
+  const handleQualifyLead = async () => {
+    try {
+      await qualifyLeadMutation.mutateAsync(leadId);
+      notifications.show({
+        title: t`Success`,
+        message: t`Lead qualified successfully`,
+        color: "green",
+      });
+      refetch();
+    } catch (error: any) {
+      notifications.show({
+        title: t`Error`,
+        message: error.message || t`Failed to qualify lead`,
+        color: "red",
+      });
+    }
   };
 
   // Handle convert lead
@@ -264,6 +279,7 @@ export const LeadDetailPage: React.FC = () => {
                 variant="light"
                 onClick={handleQualifyLead}
                 disabled={lead.isQualified}
+                loading={qualifyLeadMutation.isPending}
               >
                 {lead.isQualified ? t`Qualified` : t`Qualify Lead`}
               </Button>

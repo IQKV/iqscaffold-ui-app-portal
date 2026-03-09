@@ -54,6 +54,7 @@ msgstr ""
 msgid "Failed to change language"
 msgstr ""
 
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:277
 #: src/features/crm-leads/ui/LeadNotesSection.tsx:278
 msgid " (edited)"
 msgstr ""
@@ -91,7 +92,7 @@ msgstr ""
 msgid "%s | IQ Scaffold Platform"
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:214
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:219
 #: src/features/crm-leads/ui/LeadEditModal.tsx:223
 msgid "0-100"
 msgstr ""
@@ -110,8 +111,8 @@ msgstr ""
 #~ msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:177
-msgid "Accept-Language header (from browser)"
-msgstr ""
+#~ msgid "Accept-Language header (from browser)"
+#~ msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:271
 msgid "Accepted"
@@ -143,7 +144,7 @@ msgid "Activate immediately"
 msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:95
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:204
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:209
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:201
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:322
 #: src/features/gateway-config/ui/gateway-status-badge.tsx:28
@@ -157,25 +158,25 @@ msgid "Active Leads"
 msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:127
-msgid "Active Locale"
-msgstr ""
+#~ msgid "Active Locale"
+#~ msgstr ""
 
 #: src/features/security-settings/ui/security-settings-feature.tsx:80
 msgid "Active Sessions"
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactDetailPage.tsx:276
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:290
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:334
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:310
 msgid "Activities"
 msgstr ""
 
 #: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:107
-msgid "Activities will appear here as you interact with this contact."
-msgstr ""
+#~ msgid "Activities will appear here as you interact with this contact."
+#~ msgstr ""
 
 #: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:66
-msgid "Activity Timeline"
-msgstr ""
+#~ msgid "Activity Timeline"
+#~ msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:340
 msgid "Add"
@@ -190,8 +191,8 @@ msgid "Add any notes about this subscription..."
 msgstr ""
 
 #: src/features/crm-contacts/ui/ContactNotesSection.tsx:44
-msgid "Add First Note"
-msgstr ""
+#~ msgid "Add First Note"
+#~ msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-form.tsx:193
 #: src/pages/gateway-config.tsx:187
@@ -210,14 +211,15 @@ msgstr ""
 #~ msgid "Add new user clicked"
 #~ msgstr ""
 
-#: src/features/crm-contacts/ui/ContactNotesSection.tsx:30
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:208
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:222
 #: src/features/crm-leads/ui/LeadNotesSection.tsx:209
 msgid "Add Note"
 msgstr ""
 
 #: src/features/crm-contacts/ui/ContactNotesSection.tsx:41
-msgid "Add notes to keep track of important information and interactions."
-msgstr ""
+#~ msgid "Add notes to keep track of important information and interactions."
+#~ msgstr ""
 
 #: src/features/gateway-config/ui/gateway-config-form.tsx:128
 msgid "Add Payment Gateway"
@@ -267,8 +269,8 @@ msgid "All {serviceName} Services Available"
 msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:80
-msgid "All API requests include Accept-Language and X-User-Locale headers"
-msgstr ""
+#~ msgid "All API requests include Accept-Language and X-User-Locale headers"
+#~ msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:269
 msgid "All Statuses"
@@ -315,8 +317,8 @@ msgid "API Key"
 msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:152
-msgid "API Request Headers"
-msgstr ""
+#~ msgid "API Request Headers"
+#~ msgstr ""
 
 #: src/features/gateway-config/ui/square-config-form.tsx:51
 msgid "Application ID"
@@ -342,6 +344,10 @@ msgstr ""
 msgid "Are you sure you want to cancel your subscription? It will remain active until the end of your current billing period."
 msgstr ""
 
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:90
+msgid "Are you sure you want to delete"
+msgstr ""
+
 #: src/features/crm-contacts/model/useContactList.ts:95
 msgid "Are you sure you want to delete {count} contacts? This action cannot be undone."
 msgstr ""
@@ -365,6 +371,10 @@ msgstr ""
 
 #: src/shared/constants/index.ts:151
 msgid "Are you sure you want to delete this item? This action cannot be undone."
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:143
+msgid "Are you sure you want to delete this note? This action cannot be undone."
 msgstr ""
 
 #: src/pages/examples.tsx:49
@@ -410,7 +420,7 @@ msgstr ""
 msgid "Are you sure you want to revoke this invitation?"
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:225
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:244
 msgid "Assigned to"
 msgstr ""
 
@@ -419,7 +429,7 @@ msgid "At least one authority is required"
 msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:317
-#: src/features/users/ui/user-form-modal.tsx:235
+#: src/features/users/ui/user-form-modal.tsx:236
 #: src/features/users/ui/users-data-grid.tsx:134
 msgid "Authorities"
 msgstr ""
@@ -453,7 +463,7 @@ msgstr ""
 msgid "Avatar Upload Failed"
 msgstr ""
 
-#: src/features/crm-leads/ui/ConversionChart.tsx:272
+#: src/features/crm-leads/ui/ConversionChart.tsx:273
 msgid "Average Days"
 msgstr ""
 
@@ -461,7 +471,7 @@ msgstr ""
 msgid "Average days per stage"
 msgstr ""
 
-#: src/features/crm-leads/ui/ConversionChart.tsx:181
+#: src/features/crm-leads/ui/ConversionChart.tsx:182
 msgid "Average Time"
 msgstr ""
 
@@ -477,25 +487,25 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactDetailPage.tsx:111
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:159
 msgid "Back to Contacts"
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:123
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:138
 msgid "Back to Leads"
 msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:161
-msgid "Backend Locale Resolution Priority"
-msgstr ""
+#~ msgid "Backend Locale Resolution Priority"
+#~ msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:87
-msgid "Backend responses (errors, validation messages) are in your language"
-msgstr ""
+#~ msgid "Backend responses (errors, validation messages) are in your language"
+#~ msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:74
-msgid "Backend user preference is updated via API"
-msgstr ""
+#~ msgid "Backend user preference is updated via API"
+#~ msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:83
 msgid "Basic User Access"
@@ -522,6 +532,7 @@ msgstr ""
 #~ msgid "Built following Feature-Sliced Design methodology for maintainable and scalable frontend architecture."
 #~ msgstr ""
 
+#: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:226
 #: src/features/invitation-management/ui/InvitationList.tsx:207
 msgid "by"
 msgstr ""
@@ -534,15 +545,22 @@ msgstr ""
 msgid "Call"
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactDetailPage.tsx:158
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:206
 msgid "Call contact"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:150
+msgid "Call Made"
 msgstr ""
 
 #: src/entities/crm/ui/FollowUpForm.tsx:198
 #: src/entities/crm/ui/LeadForm.tsx:280
 #: src/features/crm-contacts/model/useContactList.ts:83
 #: src/features/crm-contacts/model/useContactList.ts:96
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:237
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:97
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:242
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:146
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:255
 #: src/features/crm-leads/ui/FollowUpList.tsx:171
 #: src/features/crm-leads/ui/FollowUpList.tsx:253
 #: src/features/crm-leads/ui/FollowUpList.tsx:293
@@ -558,7 +576,7 @@ msgstr ""
 #: src/features/security-settings/ui/security-settings-feature.tsx:41
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:140
 #: src/features/users/ui/enhanced-users-data-grid.tsx:70
-#: src/features/users/ui/user-form-modal.tsx:280
+#: src/features/users/ui/user-form-modal.tsx:281
 #: src/features/users/ui/users-data-grid.tsx:67
 #: src/pages/gateway-config.tsx:246
 #: src/shared/ui/confirmation-modal/confirm-context-modal.tsx:25
@@ -595,8 +613,8 @@ msgid "Change Password"
 msgstr ""
 
 #: src/pages/preferences-demo.tsx:66
-msgid "Change your theme preference instantly"
-msgstr ""
+#~ msgid "Change your theme preference instantly"
+#~ msgstr ""
 
 #: src/shared/constants/index.ts:94
 msgid "Changes saved successfully"
@@ -647,8 +665,8 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadListPage.tsx:302
-#: src/features/crm-leads/ui/LeadListPage.tsx:458
+#: src/features/crm-leads/ui/LeadListPage.tsx:347
+#: src/features/crm-leads/ui/LeadListPage.tsx:509
 msgid "Clear all filters"
 msgstr ""
 
@@ -692,8 +710,8 @@ msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:63
 #: src/features/crm-leads/ui/LeadEditModal.tsx:209
-#: src/features/crm-leads/ui/LeadListPage.tsx:247
-#: src/features/crm-leads/ui/LeadListPage.tsx:409
+#: src/features/crm-leads/ui/LeadListPage.tsx:287
+#: src/features/crm-leads/ui/LeadListPage.tsx:455
 msgid "Cold Call"
 msgstr ""
 
@@ -703,9 +721,13 @@ msgid "Color"
 msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:247
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:177
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:179
 #: src/features/crm-leads/ui/LeadEditModal.tsx:190
 msgid "Company"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:146
+msgid "Company Associated"
 msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:38
@@ -717,8 +739,8 @@ msgid "Complete"
 msgstr ""
 
 #: src/pages/preferences-demo.tsx:56
-msgid "Complete demonstration of the user preferences API integration"
-msgstr ""
+#~ msgid "Complete demonstration of the user preferences API integration"
+#~ msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:395
 msgid "Complete Selected"
@@ -776,16 +798,28 @@ msgstr ""
 msgid "Connection Issue"
 msgstr ""
 
+#: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:132
+msgid "Contact Created"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:104
+msgid "Contact deleted successfully"
+msgstr ""
+
 #: src/pages/crm.contacts.$contactId.tsx:11
 msgid "Contact Details"
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:110
+#: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:134
+msgid "Contact Updated"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:112
 msgid "Contact updated successfully"
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadListPage.tsx:264
-#: src/features/crm-leads/ui/LeadListPage.tsx:428
+#: src/features/crm-leads/ui/LeadListPage.tsx:304
+#: src/features/crm-leads/ui/LeadListPage.tsx:474
 msgid "Contacted"
 msgstr ""
 
@@ -804,8 +838,12 @@ msgstr ""
 msgid "Conversion Rate"
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:272
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:292
 msgid "Convert to Contact"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:154
+msgid "Converted from Lead"
 msgstr ""
 
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:132
@@ -834,7 +872,7 @@ msgid "Could not process refund. Please try again"
 msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:288
-#: src/features/users/ui/user-form-modal.tsx:287
+#: src/features/users/ui/user-form-modal.tsx:288
 msgid "Create"
 msgstr ""
 
@@ -863,7 +901,7 @@ msgstr ""
 msgid "Created successfully"
 msgstr ""
 
-#: src/features/users/ui/user-form-modal.tsx:264
+#: src/features/users/ui/user-form-modal.tsx:265
 msgid "Created:"
 msgstr ""
 
@@ -906,16 +944,16 @@ msgid "CRM Pipeline"
 msgstr ""
 
 #: src/pages/preferences-demo.tsx:109
-msgid "Currency"
-msgstr ""
+#~ msgid "Currency"
+#~ msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:322
 msgid "Current Authorities"
 msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:122
-msgid "Current Locale Status"
-msgstr ""
+#~ msgid "Current Locale Status"
+#~ msgstr ""
 
 #: src/features/change-password-form/ui/change-password-form-feature.tsx:105
 msgid "Current Password"
@@ -936,8 +974,8 @@ msgid "Current Plan"
 msgstr ""
 
 #: src/pages/preferences-demo.tsx:76
-msgid "Current Preference Values"
-msgstr ""
+#~ msgid "Current Preference Values"
+#~ msgstr ""
 
 #: src/pages/billing.tsx:140
 #: src/pages/subscriptions.tsx:85
@@ -952,7 +990,7 @@ msgstr ""
 msgid "Custom Range"
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:206
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:211
 msgid "Customer"
 msgstr ""
 
@@ -990,19 +1028,19 @@ msgid "Date"
 msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:208
-msgid "Date Formatting"
-msgstr ""
+#~ msgid "Date Formatting"
+#~ msgstr ""
 
 #: src/features/crm-leads/ui/DateRangeFilter.tsx:111
 msgid "Date Range"
 msgstr ""
 
-#: src/features/crm-leads/ui/ConversionChart.tsx:181
-#: src/features/crm-leads/ui/ConversionChart.tsx:306
+#: src/features/crm-leads/ui/ConversionChart.tsx:182
+#: src/features/crm-leads/ui/ConversionChart.tsx:307
 msgid "days"
 msgstr ""
 
-#: src/features/crm-leads/ui/ConversionChart.tsx:255
+#: src/features/crm-leads/ui/ConversionChart.tsx:256
 msgid "Days"
 msgstr ""
 
@@ -1011,11 +1049,14 @@ msgid "Deactivate"
 msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:184
-msgid "Default locale (English)"
-msgstr ""
+#~ msgid "Default locale (English)"
+#~ msgstr ""
 
 #: src/features/crm-contacts/model/useContactList.ts:83
 #: src/features/crm-contacts/model/useContactList.ts:96
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:97
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:231
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:146
 #: src/features/crm-leads/ui/FollowUpList.tsx:171
 #: src/features/crm-leads/ui/FollowUpList.tsx:293
 #: src/features/crm-leads/ui/FollowUpList.tsx:673
@@ -1030,6 +1071,7 @@ msgid "Delete"
 msgstr ""
 
 #: src/features/crm-contacts/model/useContactList.ts:81
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:87
 msgid "Delete Contact"
 msgstr ""
 
@@ -1050,8 +1092,13 @@ msgstr ""
 msgid "Delete Multiple Contacts"
 msgstr ""
 
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:289
 #: src/features/crm-leads/ui/LeadNotesSection.tsx:290
 msgid "Delete note"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:140
+msgid "Delete Note"
 msgstr ""
 
 #: src/features/crm-contacts/ui/ContactListPage.tsx:209
@@ -1134,8 +1181,8 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactDetailPage.tsx:173
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:133
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:222
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:135
 msgid "Edit Contact"
 msgstr ""
 
@@ -1144,11 +1191,12 @@ msgid "Edit Follow-up"
 msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:185
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:279
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:299
 #: src/features/crm-leads/ui/LeadEditModal.tsx:150
 msgid "Edit Lead"
 msgstr ""
 
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:281
 #: src/features/crm-leads/ui/LeadNotesSection.tsx:282
 msgid "Edit note"
 msgstr ""
@@ -1168,10 +1216,10 @@ msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:79
 #: src/entities/crm/ui/LeadForm.tsx:228
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:157
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:159
 #: src/features/crm-leads/ui/LeadEditModal.tsx:174
 #: src/features/users/ui/enhanced-users-data-grid.tsx:164
-#: src/features/users/ui/user-form-modal.tsx:193
+#: src/features/users/ui/user-form-modal.tsx:194
 msgid "Email"
 msgstr ""
 
@@ -1186,8 +1234,8 @@ msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:64
 #: src/features/crm-leads/ui/LeadEditModal.tsx:210
-#: src/features/crm-leads/ui/LeadListPage.tsx:248
-#: src/features/crm-leads/ui/LeadListPage.tsx:410
+#: src/features/crm-leads/ui/LeadListPage.tsx:288
+#: src/features/crm-leads/ui/LeadListPage.tsx:456
 msgid "Email Campaign"
 msgstr ""
 
@@ -1208,14 +1256,18 @@ msgid "Email must be less than 255 characters"
 msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:94
-msgid "Email notifications are sent in your preferred language"
+#~ msgid "Email notifications are sent in your preferred language"
+#~ msgstr ""
+
+#: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:148
+msgid "Email Sent"
 msgstr ""
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:33
 msgid "Email Verification Status"
 msgstr ""
 
-#: src/features/users/ui/user-form-modal.tsx:255
+#: src/features/users/ui/user-form-modal.tsx:256
 msgid "Email Verified"
 msgstr ""
 
@@ -1227,7 +1279,7 @@ msgstr ""
 msgid "Enable MSW"
 msgstr ""
 
-#: src/features/users/ui/user-form-modal.tsx:248
+#: src/features/users/ui/user-form-modal.tsx:249
 #: src/features/users/ui/users-data-grid.tsx:153
 msgid "Enabled"
 msgstr ""
@@ -1245,7 +1297,7 @@ msgstr ""
 #~ msgid "End-to-end type safety from API to UI components"
 #~ msgstr ""
 
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:224
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:229
 msgid "Enter additional notes"
 msgstr ""
 
@@ -1259,16 +1311,16 @@ msgid "Enter company name"
 msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:229
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:158
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:160
 #: src/features/crm-leads/ui/LeadEditModal.tsx:175
-#: src/features/users/ui/user-form-modal.tsx:194
+#: src/features/users/ui/user-form-modal.tsx:195
 msgid "Enter email address"
 msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:205
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:143
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:145
 #: src/features/crm-leads/ui/LeadEditModal.tsx:160
-#: src/features/users/ui/user-form-modal.tsx:204
+#: src/features/users/ui/user-form-modal.tsx:205
 msgid "Enter first name"
 msgstr ""
 
@@ -1280,33 +1332,34 @@ msgstr ""
 msgid "Enter hours"
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:171
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:173
 #: src/features/crm-leads/ui/LeadEditModal.tsx:196
 msgid "Enter job title"
 msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:217
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:149
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:151
 #: src/features/crm-leads/ui/LeadEditModal.tsx:166
-#: src/features/users/ui/user-form-modal.tsx:213
+#: src/features/users/ui/user-form-modal.tsx:214
 msgid "Enter last name"
 msgstr ""
 
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:210
 #: src/features/crm-leads/ui/LeadNotesSection.tsx:211
 msgid "Enter note content..."
 msgstr ""
 
-#: src/features/users/ui/user-form-modal.tsx:224
+#: src/features/users/ui/user-form-modal.tsx:225
 msgid "Enter password"
 msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:239
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:165
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:167
 #: src/features/crm-leads/ui/LeadEditModal.tsx:183
 msgid "Enter phone number"
 msgstr ""
 
-#: src/features/users/ui/user-form-modal.tsx:183
+#: src/features/users/ui/user-form-modal.tsx:184
 msgid "Enter username"
 msgstr ""
 
@@ -1339,7 +1392,11 @@ msgstr ""
 #: src/entities/crm/ui/FollowUpForm.tsx:116
 #: src/entities/crm/ui/LeadForm.tsx:125
 #: src/entities/crm/ui/LeadForm.tsx:164
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:117
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:110
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:119
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:83
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:130
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:159
 #: src/features/crm-leads/ui/FollowUpList.tsx:155
 #: src/features/crm-leads/ui/FollowUpList.tsx:190
 #: src/features/crm-leads/ui/FollowUpList.tsx:269
@@ -1348,7 +1405,8 @@ msgstr ""
 #: src/features/crm-leads/ui/FollowUpSection.tsx:114
 #: src/features/crm-leads/ui/FollowUpSection.tsx:143
 #: src/features/crm-leads/ui/FollowUpSection.tsx:198
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:79
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:73
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:94
 #: src/features/crm-leads/ui/LeadEditModal.tsx:134
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:86
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:114
@@ -1362,7 +1420,7 @@ msgstr ""
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:111
 #: src/features/subscription-management/ui/SubscriptionActionsMenu.tsx:131
 #: src/features/users/ui/enhanced-users-data-grid.tsx:84
-#: src/features/users/ui/user-form-modal.tsx:135
+#: src/features/users/ui/user-form-modal.tsx:136
 #: src/features/users/ui/users-data-grid.tsx:81
 #: src/features/users/ui/users-data-grid.tsx:216
 #: src/pages/gateway-config.tsx:72
@@ -1384,11 +1442,12 @@ msgstr ""
 msgid "Error has been reported to our team"
 msgstr ""
 
+#: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:172
 #: src/features/crm-leads/ui/ActivityTimeline.tsx:144
 msgid "Error loading activities"
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactDetailPage.tsx:103
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:151
 msgid "Error loading contact"
 msgstr ""
 
@@ -1404,14 +1463,15 @@ msgstr ""
 msgid "Error Loading Invoices"
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:115
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:130
 msgid "Error loading lead"
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadListPage.tsx:226
+#: src/features/crm-leads/ui/LeadListPage.tsx:266
 msgid "Error loading leads"
 msgstr ""
 
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:192
 #: src/features/crm-leads/ui/LeadNotesSection.tsx:193
 msgid "Error loading notes"
 msgstr ""
@@ -1517,7 +1577,7 @@ msgstr ""
 msgid "Failed to configure payment gateway"
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:80
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:95
 msgid "Failed to convert lead"
 msgstr ""
 
@@ -1531,6 +1591,10 @@ msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:161
 msgid "Failed to create lead: {errorMessage}"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:84
+msgid "Failed to create note"
 msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:87
@@ -1550,6 +1614,10 @@ msgstr ""
 msgid "Failed to delete avatar. Please try again."
 msgstr ""
 
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:111
+msgid "Failed to delete contact"
+msgstr ""
+
 #: src/features/crm-leads/ui/FollowUpList.tsx:191
 #: src/features/crm-leads/ui/FollowUpSection.tsx:144
 msgid "Failed to delete follow-up: {errorMessage}"
@@ -1558,6 +1626,10 @@ msgstr ""
 #: src/pages/gateway-config.tsx:144
 #: src/shared/constants/index.ts:124
 msgid "Failed to delete gateway"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:160
+msgid "Failed to delete note"
 msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:310
@@ -1573,11 +1645,12 @@ msgstr ""
 msgid "Failed to delete user: {errorMessage}"
 msgstr ""
 
+#: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:173
 #: src/features/crm-leads/ui/ActivityTimeline.tsx:145
 msgid "Failed to load activity history. Please try again."
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactDetailPage.tsx:105
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:153
 msgid "Failed to load contact details. Please try again."
 msgstr ""
 
@@ -1599,14 +1672,15 @@ msgstr ""
 msgid "Failed to load invoices. Please try again later."
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:119
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:134
 msgid "Failed to load lead details. Please try again."
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadListPage.tsx:228
+#: src/features/crm-leads/ui/LeadListPage.tsx:268
 msgid "Failed to load leads. Please try again."
 msgstr ""
 
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:193
 #: src/features/crm-leads/ui/LeadNotesSection.tsx:194
 msgid "Failed to load notes. Please try again."
 msgstr ""
@@ -1635,6 +1709,10 @@ msgstr ""
 msgid "Failed to process the refund. Please try again."
 msgstr ""
 
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:74
+msgid "Failed to qualify lead"
+msgstr ""
+
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:153
 msgid "Failed to reorder stage"
 msgstr ""
@@ -1656,7 +1734,7 @@ msgstr ""
 msgid "Failed to set primary gateway"
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:118
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:120
 msgid "Failed to update contact"
 msgstr ""
 
@@ -1670,6 +1748,10 @@ msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:122
 msgid "Failed to update lead: {errorMessage}"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:131
+msgid "Failed to update note"
 msgstr ""
 
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:115
@@ -1688,7 +1770,7 @@ msgstr ""
 msgid "Fair"
 msgstr ""
 
-#: src/features/crm-leads/ui/ConversionChart.tsx:287
+#: src/features/crm-leads/ui/ConversionChart.tsx:288
 msgid "Fastest Stage"
 msgstr ""
 
@@ -1721,8 +1803,8 @@ msgstr ""
 msgid "Filter"
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadListPage.tsx:277
-#: src/features/crm-leads/ui/LeadListPage.tsx:443
+#: src/features/crm-leads/ui/LeadListPage.tsx:317
+#: src/features/crm-leads/ui/LeadListPage.tsx:489
 msgid "Filter by assigned user"
 msgstr ""
 
@@ -1734,13 +1816,13 @@ msgstr ""
 msgid "Filter by overdue"
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadListPage.tsx:242
-#: src/features/crm-leads/ui/LeadListPage.tsx:404
+#: src/features/crm-leads/ui/LeadListPage.tsx:282
+#: src/features/crm-leads/ui/LeadListPage.tsx:450
 msgid "Filter by source"
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadListPage.tsx:260
-#: src/features/crm-leads/ui/LeadListPage.tsx:424
+#: src/features/crm-leads/ui/LeadListPage.tsx:300
+#: src/features/crm-leads/ui/LeadListPage.tsx:470
 msgid "Filter by stage"
 msgstr ""
 
@@ -1749,14 +1831,14 @@ msgstr ""
 msgid "Filter by status"
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadListPage.tsx:478
+#: src/features/crm-leads/ui/LeadListPage.tsx:529
 msgid "Filter Leads"
 msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:204
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:142
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:144
 #: src/features/crm-leads/ui/LeadEditModal.tsx:159
-#: src/features/users/ui/user-form-modal.tsx:203
+#: src/features/users/ui/user-form-modal.tsx:204
 msgid "First Name"
 msgstr ""
 
@@ -1787,7 +1869,7 @@ msgstr ""
 #: src/features/crm-leads/ui/CrmLayout.tsx:120
 #: src/features/crm-leads/ui/FollowUpList.tsx:325
 #: src/features/crm-leads/ui/FollowUpSection.tsx:173
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:291
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:311
 #: src/pages/crm.follow-ups.tsx:24
 #: src/widgets/sidebar/ui/sidebar.tsx:148
 msgid "Follow-ups"
@@ -1810,12 +1892,12 @@ msgstr ""
 #~ msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:69
-msgid "Frontend UI updates to the selected language"
-msgstr ""
+#~ msgid "Frontend UI updates to the selected language"
+#~ msgstr ""
 
 #: src/pages/preferences-demo.tsx:148
-msgid "Full Preferences Form"
-msgstr ""
+#~ msgid "Full Preferences Form"
+#~ msgstr ""
 
 #: src/pages/examples.tsx:239
 #~ msgid "Functional"
@@ -1908,15 +1990,15 @@ msgid "Home"
 msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:59
-msgid "How it works"
-msgstr ""
+#~ msgid "How it works"
+#~ msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:94
 msgid "How to handle requests without mocks"
 msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:96
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:205
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:210
 #: src/features/gateway-config/ui/gateway-status-badge.tsx:28
 msgid "Inactive"
 msgstr ""
@@ -1938,8 +2020,8 @@ msgstr ""
 #~ msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:49
-msgid "Internationalization (i18n) Demo"
-msgstr ""
+#~ msgid "Internationalization (i18n) Demo"
+#~ msgstr ""
 
 #: src/pages/checkout.tsx:39
 msgid "Invalid Checkout"
@@ -2015,7 +2097,7 @@ msgstr ""
 msgid "IQ Scaffold Platform"
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:170
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:172
 #: src/features/crm-leads/ui/LeadEditModal.tsx:195
 msgid "Job Title"
 msgstr ""
@@ -2046,9 +2128,9 @@ msgid "Last 90 days"
 msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:216
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:148
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:150
 #: src/features/crm-leads/ui/LeadEditModal.tsx:165
-#: src/features/users/ui/user-form-modal.tsx:212
+#: src/features/users/ui/user-form-modal.tsx:213
 msgid "Last Name"
 msgstr ""
 
@@ -2060,7 +2142,7 @@ msgstr ""
 #~ msgid "Latest React with concurrent features and improved performance"
 #~ msgstr ""
 
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:72
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:87
 msgid "Lead converted to contact successfully"
 msgstr ""
 
@@ -2085,13 +2167,21 @@ msgstr ""
 msgid "Lead Moved"
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:120
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:135
 msgid "Lead not found."
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:213
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:67
+msgid "Lead qualified successfully"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:218
 #: src/features/crm-leads/ui/LeadEditModal.tsx:222
 msgid "Lead Score"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:144
+msgid "Lead Score Updated"
 msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:258
@@ -2111,18 +2201,18 @@ msgstr ""
 #: src/entities/crm/ui/CrmServiceDegradationBanner.tsx:21
 #: src/features/crm-leads/ui/CrmLayout.tsx:78
 #: src/features/crm-leads/ui/CrmLayout.tsx:118
-#: src/features/crm-leads/ui/DashboardStats.tsx:250
-#: src/features/crm-leads/ui/DashboardStats.tsx:289
+#: src/features/crm-leads/ui/DashboardStats.tsx:251
+#: src/features/crm-leads/ui/DashboardStats.tsx:290
 #: src/pages/crm.leads.tsx:17
 #: src/widgets/sidebar/ui/sidebar.tsx:115
 msgid "Leads"
 msgstr ""
 
-#: src/features/crm-leads/ui/DashboardStats.tsx:213
+#: src/features/crm-leads/ui/DashboardStats.tsx:214
 msgid "Leads by Pipeline Stage"
 msgstr ""
 
-#: src/features/crm-leads/ui/DashboardStats.tsx:349
+#: src/features/crm-leads/ui/DashboardStats.tsx:350
 msgid "Leads by Source"
 msgstr ""
 
@@ -2180,12 +2270,12 @@ msgid "Loading..."
 msgstr ""
 
 #: src/pages/preferences-demo.tsx:93
-msgid "Locale"
-msgstr ""
+#~ msgid "Locale"
+#~ msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:193
-msgid "Localized Content Examples"
-msgstr ""
+#~ msgid "Localized Content Examples"
+#~ msgstr ""
 
 #: src/features/gateway-config/ui/square-config-form.tsx:30
 msgid "Location ID"
@@ -2213,8 +2303,8 @@ msgstr ""
 msgid "Logout from all devices where you're currently signed in. This is useful if you've lost a device or suspect unauthorized access."
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadListPage.tsx:269
-#: src/features/crm-leads/ui/LeadListPage.tsx:433
+#: src/features/crm-leads/ui/LeadListPage.tsx:309
+#: src/features/crm-leads/ui/LeadListPage.tsx:479
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:203
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:324
 msgid "Lost"
@@ -2233,8 +2323,8 @@ msgid "Manage all your follow-up tasks"
 msgstr ""
 
 #: src/pages/preferences-demo.tsx:150
-msgid "Manage all your preferences in one place"
-msgstr ""
+#~ msgid "Manage all your preferences in one place"
+#~ msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:87
 msgid "Manage Billing"
@@ -2318,6 +2408,10 @@ msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:80
 msgid "Meeting"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:152
+msgid "Meeting Scheduled"
 msgstr ""
 
 #: src/widgets/merchant-status-card/ui/merchant-status-card.tsx:49
@@ -2404,8 +2498,8 @@ msgstr ""
 msgid "Navigation"
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadListPage.tsx:267
-#: src/features/crm-leads/ui/LeadListPage.tsx:431
+#: src/features/crm-leads/ui/LeadListPage.tsx:307
+#: src/features/crm-leads/ui/LeadListPage.tsx:477
 msgid "Negotiation"
 msgstr ""
 
@@ -2413,8 +2507,8 @@ msgstr ""
 msgid "Network error occurred"
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadListPage.tsx:263
-#: src/features/crm-leads/ui/LeadListPage.tsx:427
+#: src/features/crm-leads/ui/LeadListPage.tsx:303
+#: src/features/crm-leads/ui/LeadListPage.tsx:473
 msgid "New"
 msgstr ""
 
@@ -2432,7 +2526,7 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:249
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:268
 msgid "Next Follow-up"
 msgstr ""
 
@@ -2454,7 +2548,11 @@ msgid "No Active Subscription"
 msgstr ""
 
 #: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:104
-msgid "No activities yet for this contact."
+#~ msgid "No activities yet for this contact."
+#~ msgstr ""
+
+#: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:188
+msgid "No activity history yet."
 msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:330
@@ -2499,7 +2597,11 @@ msgid "No key"
 msgstr ""
 
 #: src/features/crm-contacts/ui/ContactNotesSection.tsx:38
-msgid "No notes yet for this contact."
+#~ msgid "No notes yet for this contact."
+#~ msgstr ""
+
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:232
+msgid "No notes yet. Add your first note above."
 msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:104
@@ -2514,7 +2616,7 @@ msgstr ""
 msgid "No payments found"
 msgstr ""
 
-#: src/features/crm-leads/ui/DashboardStats.tsx:218
+#: src/features/crm-leads/ui/DashboardStats.tsx:219
 msgid "No pipeline data available"
 msgstr ""
 
@@ -2530,7 +2632,7 @@ msgstr ""
 msgid "No roles"
 msgstr ""
 
-#: src/features/crm-leads/ui/DashboardStats.tsx:354
+#: src/features/crm-leads/ui/DashboardStats.tsx:355
 msgid "No source data available"
 msgstr ""
 
@@ -2554,34 +2656,62 @@ msgstr ""
 msgid "No users match your search criteria"
 msgstr ""
 
-#: src/features/crm-leads/ui/ConversionChart.tsx:229
+#: src/features/crm-leads/ui/ConversionChart.tsx:230
 msgid "No velocity data available"
 msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:145
-msgid "Not Set"
-msgstr ""
+#~ msgid "Not Set"
+#~ msgstr ""
 
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:85
 msgid "Not Verified"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:138
+msgid "Note Added"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:62
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:107
+msgid "Note content cannot be empty"
 msgstr ""
 
 #: src/entities/crm/lib/validation-schemas.ts:82
 msgid "Note content is required"
 msgstr ""
 
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:76
+msgid "Note created successfully"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:142
+msgid "Note Deleted"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:154
+msgid "Note deleted successfully"
+msgstr ""
+
 #: src/entities/crm/lib/validation-schemas.ts:83
 msgid "Note must be less than 2000 characters"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:140
+msgid "Note Updated"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:122
+msgid "Note updated successfully"
 msgstr ""
 
 #: src/features/users/ui/enhanced-users-data-grid.tsx:338
 msgid "Note: User features are now managed through subscription plans in the billing service."
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactDetailPage.tsx:270
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:223
-#: src/features/crm-contacts/ui/ContactNotesSection.tsx:27
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:289
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:328
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:228
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:309
 #: src/features/crm-leads/ui/LeadEditModal.tsx:238
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:131
 msgid "Notes"
@@ -2592,12 +2722,12 @@ msgstr ""
 #~ msgstr ""
 
 #: src/pages/preferences-demo.tsx:117
-msgid "Notifications"
-msgstr ""
+#~ msgid "Notifications"
+#~ msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:222
-msgid "Number Formatting"
-msgstr ""
+#~ msgid "Number Formatting"
+#~ msgstr ""
 
 #: src/features/merchant-onboarding/ui/merchant-onboarding-wizard.tsx:65
 #: src/features/merchant-onboarding/ui/stripe-connect-button.tsx:43
@@ -2644,14 +2774,14 @@ msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:68
 #: src/features/crm-leads/ui/LeadEditModal.tsx:214
-#: src/features/crm-leads/ui/LeadListPage.tsx:252
-#: src/features/crm-leads/ui/LeadListPage.tsx:414
+#: src/features/crm-leads/ui/LeadListPage.tsx:292
+#: src/features/crm-leads/ui/LeadListPage.tsx:460
 msgid "Other"
 msgstr ""
 
 #: src/features/crm-leads/ui/FollowUpList.tsx:598
 #: src/features/crm-leads/ui/FollowUpSection.tsx:349
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:215
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:234
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:225
 msgid "Overdue"
 msgstr ""
@@ -2664,8 +2794,8 @@ msgstr ""
 msgid "Override the default trial period for this subscription"
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactDetailPage.tsx:267
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:288
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:325
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:308
 #: src/pages/billing.tsx:112
 msgid "Overview"
 msgstr ""
@@ -2685,12 +2815,12 @@ msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:67
 #: src/features/crm-leads/ui/LeadEditModal.tsx:213
-#: src/features/crm-leads/ui/LeadListPage.tsx:251
-#: src/features/crm-leads/ui/LeadListPage.tsx:413
+#: src/features/crm-leads/ui/LeadListPage.tsx:291
+#: src/features/crm-leads/ui/LeadListPage.tsx:459
 msgid "Partner"
 msgstr ""
 
-#: src/features/users/ui/user-form-modal.tsx:223
+#: src/features/users/ui/user-form-modal.tsx:224
 msgid "Password"
 msgstr ""
 
@@ -2702,7 +2832,7 @@ msgstr ""
 msgid "Password Changed"
 msgstr ""
 
-#: src/features/users/ui/user-form-modal.tsx:136
+#: src/features/users/ui/user-form-modal.tsx:137
 msgid "Password is required for new users"
 msgstr ""
 
@@ -2821,7 +2951,7 @@ msgid "Period"
 msgstr ""
 
 #: src/entities/crm/ui/LeadForm.tsx:238
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:164
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:166
 #: src/features/crm-leads/ui/LeadEditModal.tsx:182
 msgid "Phone"
 msgstr ""
@@ -2905,8 +3035,8 @@ msgstr ""
 #~ msgstr ""
 
 #: src/pages/preferences-demo.tsx:45
-msgid "Preferences Demo"
-msgstr ""
+#~ msgid "Preferences Demo"
+#~ msgstr ""
 
 #: src/pages/dashboard.tsx:52
 msgid "Premium analytics dashboard with detailed insights and reporting."
@@ -2941,12 +3071,12 @@ msgstr ""
 msgid "Production (Live)"
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadListPage.tsx:266
-#: src/features/crm-leads/ui/LeadListPage.tsx:430
+#: src/features/crm-leads/ui/LeadListPage.tsx:306
+#: src/features/crm-leads/ui/LeadListPage.tsx:476
 msgid "Proposal"
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:207
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:212
 msgid "Prospect"
 msgstr ""
 
@@ -2962,10 +3092,10 @@ msgstr ""
 msgid "Publishable Key"
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:210
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:264
-#: src/features/crm-leads/ui/LeadListPage.tsx:265
-#: src/features/crm-leads/ui/LeadListPage.tsx:429
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:229
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:284
+#: src/features/crm-leads/ui/LeadListPage.tsx:305
+#: src/features/crm-leads/ui/LeadListPage.tsx:475
 msgid "Qualified"
 msgstr ""
 
@@ -2973,7 +3103,7 @@ msgstr ""
 msgid "Qualified Lead"
 msgstr ""
 
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:264
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:284
 msgid "Qualify Lead"
 msgstr ""
 
@@ -2982,8 +3112,8 @@ msgid "Quick Select"
 msgstr ""
 
 #: src/pages/preferences-demo.tsx:64
-msgid "Quick Theme Switcher"
-msgstr ""
+#~ msgid "Quick Theme Switcher"
+#~ msgstr ""
 
 #: src/pages/about.tsx:63
 #~ msgid "React 19:"
@@ -3004,8 +3134,8 @@ msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:62
 #: src/features/crm-leads/ui/LeadEditModal.tsx:208
-#: src/features/crm-leads/ui/LeadListPage.tsx:246
-#: src/features/crm-leads/ui/LeadListPage.tsx:408
+#: src/features/crm-leads/ui/LeadListPage.tsx:286
+#: src/features/crm-leads/ui/LeadListPage.tsx:454
 msgid "Referral"
 msgstr ""
 
@@ -3077,8 +3207,8 @@ msgid "Required payment information is missing."
 msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:114
-msgid "Reset to Browser Default"
-msgstr ""
+#~ msgid "Reset to Browser Default"
+#~ msgstr ""
 
 #: src/shared/constants/index.ts:115
 msgid "Resource not found"
@@ -3092,8 +3222,8 @@ msgstr ""
 msgid "Resume Subscription"
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactDetailPage.tsx:108
-#: src/features/crm-leads/ui/LeadListPage.tsx:230
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:156
+#: src/features/crm-leads/ui/LeadListPage.tsx:270
 msgid "Retry"
 msgstr ""
 
@@ -3162,11 +3292,12 @@ msgstr ""
 msgid "Sandbox (Test)"
 msgstr ""
 
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:263
 #: src/features/crm-leads/ui/LeadNotesSection.tsx:264
 msgid "Save"
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:244
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:249
 #: src/features/crm-leads/ui/LeadEditModal.tsx:259
 msgid "Save Changes"
 msgstr ""
@@ -3219,7 +3350,7 @@ msgstr ""
 msgid "Select authority"
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:178
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:180
 msgid "Select company"
 msgstr ""
 
@@ -3269,7 +3400,7 @@ msgstr ""
 msgid "Select priority"
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:201
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:206
 msgid "Select status"
 msgstr ""
 
@@ -3277,7 +3408,7 @@ msgstr ""
 msgid "Select type"
 msgstr ""
 
-#: src/features/users/ui/user-form-modal.tsx:236
+#: src/features/users/ui/user-form-modal.tsx:237
 msgid "Select user authorities"
 msgstr ""
 
@@ -3290,7 +3421,7 @@ msgstr ""
 msgid "Selected Plan"
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactDetailPage.tsx:146
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:194
 msgid "Send email"
 msgstr ""
 
@@ -3346,14 +3477,14 @@ msgstr ""
 msgid "Simulate network latency"
 msgstr ""
 
-#: src/features/crm-leads/ui/ConversionChart.tsx:295
+#: src/features/crm-leads/ui/ConversionChart.tsx:296
 msgid "Slowest Stage"
 msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:65
 #: src/features/crm-leads/ui/LeadEditModal.tsx:211
-#: src/features/crm-leads/ui/LeadListPage.tsx:249
-#: src/features/crm-leads/ui/LeadListPage.tsx:411
+#: src/features/crm-leads/ui/LeadListPage.tsx:289
+#: src/features/crm-leads/ui/LeadListPage.tsx:457
 msgid "Social Media"
 msgstr ""
 
@@ -3409,7 +3540,7 @@ msgstr ""
 msgid "Stage updated successfully"
 msgstr ""
 
-#: src/features/crm-leads/ui/ConversionChart.tsx:224
+#: src/features/crm-leads/ui/ConversionChart.tsx:225
 msgid "Stage Velocity (Average Days per Stage)"
 msgstr ""
 
@@ -3421,7 +3552,7 @@ msgstr ""
 msgid "Start Onboarding"
 msgstr ""
 
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:200
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:205
 #: src/features/email-status-checker/ui/email-status-checker-feature.tsx:72
 #: src/features/gateway-config/ui/gateway-config-list.tsx:180
 #: src/features/invitation-management/ui/InvitationList.tsx:179
@@ -3430,6 +3561,10 @@ msgstr ""
 #: src/features/users/ui/users-data-grid.tsx:144
 #: src/widgets/billing-history/ui/billing-history-table.tsx:111
 msgid "Status"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactActivityTimeline.tsx:136
+msgid "Status Changed"
 msgstr ""
 
 #: src/shared/ui/msw-dev-tools.tsx:57
@@ -3481,14 +3616,19 @@ msgstr ""
 #: src/entities/crm/ui/FollowUpForm.tsx:106
 #: src/entities/crm/ui/LeadForm.tsx:108
 #: src/entities/crm/ui/LeadForm.tsx:147
-#: src/features/crm-contacts/ui/ContactEditModal.tsx:109
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:103
+#: src/features/crm-contacts/ui/ContactEditModal.tsx:111
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:75
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:121
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:153
 #: src/features/crm-leads/ui/FollowUpList.tsx:148
 #: src/features/crm-leads/ui/FollowUpList.tsx:177
 #: src/features/crm-leads/ui/FollowUpList.tsx:262
 #: src/features/crm-leads/ui/FollowUpList.tsx:302
 #: src/features/crm-leads/ui/FollowUpSection.tsx:107
 #: src/features/crm-leads/ui/FollowUpSection.tsx:136
-#: src/features/crm-leads/ui/LeadDetailPage.tsx:71
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:66
+#: src/features/crm-leads/ui/LeadDetailPage.tsx:86
 #: src/features/crm-leads/ui/LeadEditModal.tsx:126
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:80
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:108
@@ -3598,17 +3738,18 @@ msgid "The request timed out. Please try again"
 msgstr ""
 
 #: src/pages/preferences-demo.tsx:85
-msgid "Theme"
-msgstr ""
+#~ msgid "Theme"
+#~ msgstr ""
 
 #: src/features/crm-leads/ui/CrmErrorBoundary.tsx:73
 msgid "There was a problem with the data you submitted. Please check your input and try again."
 msgstr ""
 
 #: src/pages/preferences-demo.tsx:79
-msgid "These values are fetched using custom hooks"
-msgstr ""
+#~ msgid "These values are fetched using custom hooks"
+#~ msgstr ""
 
+#: src/features/crm-contacts/ui/ContactDetailPage.tsx:94
 #: src/features/invitation-management/ui/InvitationList.tsx:69
 #: src/features/users/ui/enhanced-users-data-grid.tsx:67
 #: src/features/users/ui/users-data-grid.tsx:64
@@ -3628,8 +3769,8 @@ msgid "This date is in the past. Are you sure this is correct?"
 msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:52
-msgid "This demo shows the unified i18n approach across frontend and backend"
-msgstr ""
+#~ msgid "This demo shows the unified i18n approach across frontend and backend"
+#~ msgstr ""
 
 #: src/entities/form/model/validation-rules.ts:6
 msgid "This field is required"
@@ -3652,8 +3793,8 @@ msgid "This will log you out from all devices where you're currently signed in, 
 msgstr ""
 
 #: src/pages/preferences-demo.tsx:101
-msgid "Timezone"
-msgstr ""
+#~ msgid "Timezone"
+#~ msgstr ""
 
 #: src/widgets/follow-up-panel/ui/FollowUpPanel.tsx:103
 msgid "Today's Follow-ups"
@@ -3683,7 +3824,7 @@ msgstr ""
 msgid "Total Orders"
 msgstr ""
 
-#: src/features/crm-leads/ui/ConversionChart.tsx:303
+#: src/features/crm-leads/ui/ConversionChart.tsx:304
 msgid "Total Pipeline Time"
 msgstr ""
 
@@ -3693,8 +3834,8 @@ msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:66
 #: src/features/crm-leads/ui/LeadEditModal.tsx:212
-#: src/features/crm-leads/ui/LeadListPage.tsx:250
-#: src/features/crm-leads/ui/LeadListPage.tsx:412
+#: src/features/crm-leads/ui/LeadListPage.tsx:290
+#: src/features/crm-leads/ui/LeadListPage.tsx:458
 msgid "Trade Show"
 msgstr ""
 
@@ -3725,8 +3866,8 @@ msgid "Try again in a few minutes"
 msgstr ""
 
 #: src/pages/preferences-demo.tsx:129
-msgid "Two-Factor Auth"
-msgstr ""
+#~ msgid "Two-Factor Auth"
+#~ msgstr ""
 
 #: src/entities/crm/ui/FollowUpForm.tsx:183
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:195
@@ -3768,7 +3909,7 @@ msgstr ""
 
 #: src/entities/crm/ui/FollowUpForm.tsx:205
 #: src/entities/crm/ui/LeadForm.tsx:288
-#: src/features/users/ui/user-form-modal.tsx:287
+#: src/features/users/ui/user-form-modal.tsx:288
 msgid "Update"
 msgstr ""
 
@@ -3788,7 +3929,7 @@ msgstr ""
 msgid "Updated successfully"
 msgstr ""
 
-#: src/features/users/ui/user-form-modal.tsx:267
+#: src/features/users/ui/user-form-modal.tsx:268
 msgid "Updated:"
 msgstr ""
 
@@ -3807,12 +3948,12 @@ msgstr ""
 
 #: src/entities/user/ui/UserFormField.tsx:77
 #: src/features/invitation-management/ui/CreateInvitationModal.tsx:206
-#: src/features/users/ui/user-form-modal.tsx:287
+#: src/features/users/ui/user-form-modal.tsx:288
 #: src/features/users/ui/users-data-grid.tsx:117
 msgid "User"
 msgstr ""
 
-#: src/features/users/ui/user-form-modal.tsx:249
+#: src/features/users/ui/user-form-modal.tsx:250
 msgid "User can log in and access the system"
 msgstr ""
 
@@ -3828,8 +3969,8 @@ msgid "User Management"
 msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:136
-msgid "User Preference"
-msgstr ""
+#~ msgid "User Preference"
+#~ msgstr ""
 
 #: src/pages/user-preferences.tsx:16
 #: src/pages/user-preferences.tsx:25
@@ -3837,10 +3978,10 @@ msgid "User Preferences"
 msgstr ""
 
 #: src/pages/preferences-demo.tsx:54
-msgid "User Preferences Demo"
-msgstr ""
+#~ msgid "User Preferences Demo"
+#~ msgstr ""
 
-#: src/features/users/ui/user-form-modal.tsx:256
+#: src/features/users/ui/user-form-modal.tsx:257
 msgid "User's email address has been verified"
 msgstr ""
 
@@ -3848,7 +3989,7 @@ msgstr ""
 msgid "user@example.com"
 msgstr ""
 
-#: src/features/users/ui/user-form-modal.tsx:182
+#: src/features/users/ui/user-form-modal.tsx:183
 msgid "Username"
 msgstr ""
 
@@ -3866,6 +4007,11 @@ msgstr ""
 
 #: src/features/invitation-management/ui/InvitationList.tsx:163
 msgid "Uses"
+msgstr ""
+
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:61
+#: src/features/crm-contacts/ui/ContactNotesSection.tsx:106
+msgid "Validation Error"
 msgstr ""
 
 #: src/shared/constants/index.ts:113
@@ -3979,18 +4125,18 @@ msgstr ""
 
 #: src/entities/crm/ui/CrmFormField.tsx:61
 #: src/features/crm-leads/ui/LeadEditModal.tsx:207
-#: src/features/crm-leads/ui/LeadListPage.tsx:245
-#: src/features/crm-leads/ui/LeadListPage.tsx:407
+#: src/features/crm-leads/ui/LeadListPage.tsx:285
+#: src/features/crm-leads/ui/LeadListPage.tsx:453
 msgid "Website"
 msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:197
-msgid "Welcome Message"
-msgstr ""
+#~ msgid "Welcome Message"
+#~ msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:201
-msgid "Welcome to IQ Scaffold! Your language preference is active."
-msgstr ""
+#~ msgid "Welcome to IQ Scaffold! Your language preference is active."
+#~ msgstr ""
 
 #: src/pages/dashboard.tsx:31
 msgid "Welcome to your dashboard. Here's what you have access to:"
@@ -4001,11 +4147,11 @@ msgid "What would you like to do?"
 msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:64
-msgid "When you change the language, the following happens:"
-msgstr ""
+#~ msgid "When you change the language, the following happens:"
+#~ msgstr ""
 
-#: src/features/crm-leads/ui/LeadListPage.tsx:268
-#: src/features/crm-leads/ui/LeadListPage.tsx:432
+#: src/features/crm-leads/ui/LeadListPage.tsx:308
+#: src/features/crm-leads/ui/LeadListPage.tsx:478
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:202
 #: src/features/crm-leads/ui/PipelineSettingsModal.tsx:323
 msgid "Won"
@@ -4016,8 +4162,8 @@ msgid "Won Leads"
 msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:169
-msgid "X-User-Locale header (from user preference)"
-msgstr ""
+#~ msgid "X-User-Locale header (from user preference)"
+#~ msgstr ""
 
 #: src/features/subscription-management/ui/CreateSubscriptionModal.tsx:88
 #: src/features/subscription-management/ui/SubscriptionPlansGrid.tsx:81
@@ -4093,8 +4239,8 @@ msgid "Your Braintree public key"
 msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:237
-msgid "Your language preference is synchronized across all devices when you're logged in. Backend services will send emails and API responses in your preferred language."
-msgstr ""
+#~ msgid "Your language preference is synchronized across all devices when you're logged in. Backend services will send emails and API responses in your preferred language."
+#~ msgstr ""
 
 #: src/shared/lib/use-auth-api.ts:45
 msgid "Your password has been successfully changed"
