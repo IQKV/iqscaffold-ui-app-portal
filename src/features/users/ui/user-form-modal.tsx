@@ -74,8 +74,8 @@ export function UserFormModal({
   });
 
   useEffect(() => {
-    if (user) {
-      form.setValues({
+    if (user && opened) {
+      form.setInitialValues({
         username: user.username,
         email: user.email,
         firstName: user.firstName,
@@ -85,7 +85,18 @@ export function UserFormModal({
         emailVerified: user.emailVerified,
         password: "", // Don't populate password for editing
       });
-    } else {
+      form.reset();
+    } else if (!user && opened) {
+      form.setInitialValues({
+        username: "",
+        email: "",
+        firstName: "",
+        lastName: "",
+        password: "",
+        authorities: ["USER"],
+        enabled: true,
+        emailVerified: false,
+      });
       form.reset();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
