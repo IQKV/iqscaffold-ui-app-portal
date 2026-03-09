@@ -140,8 +140,20 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
     currentOrder: number,
     direction: "up" | "down"
   ) => {
+    // Validate currentOrder is a valid number
+    if (typeof currentOrder !== "number" || isNaN(currentOrder)) {
+      notifications.show({
+        title: t`Error`,
+        message: t`Invalid stage order`,
+        color: "red",
+      });
+      return;
+    }
+
     const newOrder = direction === "up" ? currentOrder - 1 : currentOrder + 1;
-    if (newOrder < 0 || newOrder >= stages.length) {
+    
+    // Validate newOrder is valid and within bounds
+    if (isNaN(newOrder) || newOrder < 0 || newOrder >= stages.length) {
       return;
     }
 
@@ -254,7 +266,7 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
                           variant="subtle"
                           disabled={index === 0}
                           onClick={() =>
-                            handleReorder(stage.id, stage.orderIndex, "up")
+                            handleReorder(stage.id, index, "up")
                           }
                         >
                           <IconArrowUp size={16} />
@@ -265,7 +277,7 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
                           variant="subtle"
                           disabled={index === stages.length - 1}
                           onClick={() =>
-                            handleReorder(stage.id, stage.orderIndex, "down")
+                            handleReorder(stage.id, index, "down")
                           }
                         >
                           <IconArrowDown size={16} />
