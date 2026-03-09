@@ -151,7 +151,7 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
     }
 
     const newOrder = direction === "up" ? currentOrder - 1 : currentOrder + 1;
-    
+
     // Validate newOrder is valid and within bounds
     if (isNaN(newOrder) || newOrder < 0 || newOrder >= stages.length) {
       return;
@@ -265,9 +265,7 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
                         <ActionIcon
                           variant="subtle"
                           disabled={index === 0}
-                          onClick={() =>
-                            handleReorder(stage.id, index, "up")
-                          }
+                          onClick={() => handleReorder(stage.id, index, "up")}
                         >
                           <IconArrowUp size={16} />
                         </ActionIcon>
@@ -276,9 +274,7 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
                         <ActionIcon
                           variant="subtle"
                           disabled={index === stages.length - 1}
-                          onClick={() =>
-                            handleReorder(stage.id, index, "down")
-                          }
+                          onClick={() => handleReorder(stage.id, index, "down")}
                         >
                           <IconArrowDown size={16} />
                         </ActionIcon>
