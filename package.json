@@ -131,7 +131,7 @@
     "@commitlint/cli": "^20.4.3",
     "@commitlint/config-conventional": "^20.4.3",
     "@eslint-react/eslint-plugin": "^2.13.0",
-    "@eslint/js": "^9.39.3",
+    "@eslint/js": "^9.39.4",
     "@lingui/cli": "^5.9.2",
     "@lingui/swc-plugin": "^5.11.0",
     "@lingui/vite-plugin": "^5.9.2",
