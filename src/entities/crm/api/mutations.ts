@@ -396,7 +396,6 @@ export const useDisqualifyLeadMutation = () => {
   });
 };
 
-
 // Contact Mutations
 export const useCreateContactMutation = () => {
   const queryClient = useQueryClient();

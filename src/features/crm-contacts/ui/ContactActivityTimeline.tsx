@@ -48,8 +48,11 @@ export const ContactActivityTimeline: React.FC<
   ContactActivityTimelineProps
 > = ({ contactId }) => {
   // Fetch activities
-  const { data: activities, isLoading, error } =
-    useContactActivitiesQuery(contactId);
+  const {
+    data: activities,
+    isLoading,
+    error,
+  } = useContactActivitiesQuery(contactId);
 
   // Format date
   const formatDate = (dateString: string) => {

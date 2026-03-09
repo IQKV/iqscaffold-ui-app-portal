@@ -28,7 +28,13 @@ import {
   IconAdjustments,
 } from "@tabler/icons-react";
 import { t } from "@lingui/core/macro";
-import { LeadCard, LeadForm, FollowUpForm, useQualifyLeadMutation, useCreateFollowUpMutation } from "@/entities/crm";
+import {
+  LeadCard,
+  LeadForm,
+  FollowUpForm,
+  useQualifyLeadMutation,
+  useCreateFollowUpMutation,
+} from "@/entities/crm";
 import { LeadListSkeleton } from "./skeletons";
 import { LeadSource } from "@/shared/api/crm/types";
 import { useNavigate } from "@tanstack/react-router";
@@ -96,17 +102,17 @@ export const LeadListPage: React.FC = () => {
   ] = useDisclosure(false);
 
   // Lead form modal state
-  const [
-    leadFormOpened,
-    { open: openLeadForm, close: closeLeadForm },
-  ] = useDisclosure(false);
+  const [leadFormOpened, { open: openLeadForm, close: closeLeadForm }] =
+    useDisclosure(false);
 
   // Follow-up form modal state
   const [
     followUpFormOpened,
     { open: openFollowUpForm, close: closeFollowUpForm },
   ] = useDisclosure(false);
-  const [selectedLeadForFollowUp, setSelectedLeadForFollowUp] = useState<string | null>(null);
+  const [selectedLeadForFollowUp, setSelectedLeadForFollowUp] = useState<
+    string | null
+  >(null);
 
   const [focusedLeadIndex, setFocusedLeadIndex] = useState(0);
 
@@ -115,7 +121,9 @@ export const LeadListPage: React.FC = () => {
   const createFollowUpMutation = useCreateFollowUpMutation();
 
   // Fetch users for filter dropdown
-  const { data: usersData, isLoading: isLoadingUsers } = useUsersQuery({ active: true });
+  const { data: usersData, isLoading: isLoadingUsers } = useUsersQuery({
+    active: true,
+  });
 
   // Keyboard shortcuts
   const handleCreateLead = useCallback(() => {
@@ -124,20 +132,26 @@ export const LeadListPage: React.FC = () => {
   }, [openLeadForm, announce]);
 
   // Quick action handlers
-  const handleQuickQualify = useCallback(async (leadId: string) => {
-    try {
-      await qualifyLeadMutation.mutateAsync(leadId);
-      announce("Lead qualified successfully", { priority: "polite" });
-    } catch (error) {
-      // Error is handled by the mutation
-    }
-  }, [qualifyLeadMutation, announce]);
+  const handleQuickQualify = useCallback(
+    async (leadId: string) => {
+      try {
+        await qualifyLeadMutation.mutateAsync(leadId);
+        announce("Lead qualified successfully", { priority: "polite" });
+      } catch (error) {
+        // Error is handled by the mutation
+      }
+    },
+    [qualifyLeadMutation, announce]
+  );
 
-  const handleQuickScheduleFollowUp = useCallback((leadId: string) => {
-    setSelectedLeadForFollowUp(leadId);
-    openFollowUpForm();
-    announce("Opening schedule follow-up form", { priority: "polite" });
-  }, [openFollowUpForm, announce]);
+  const handleQuickScheduleFollowUp = useCallback(
+    (leadId: string) => {
+      setSelectedLeadForFollowUp(leadId);
+      openFollowUpForm();
+      announce("Opening schedule follow-up form", { priority: "polite" });
+    },
+    [openFollowUpForm, announce]
+  );
 
   const handleFollowUpSubmit = async (data: any) => {
     await createFollowUpMutation.mutateAsync(data);
@@ -352,301 +366,310 @@ export const LeadListPage: React.FC = () => {
 
   return (
     <>
-    <Container
-      size="xl"
-      py={isMobile ? "sm" : "xl"}
-      px={isMobile ? "xs" : "md"}
-    >
-      <Stack gap="lg">
-        {/* Header */}
-        <Group justify="space-between" wrap={isMobile ? "wrap" : "nowrap"}>
-          <div style={{ flex: isMobile ? "1 1 100%" : "auto" }}>
-            <Text size={isMobile ? "lg" : "xl"} fw={700}>
-              Leads
-            </Text>
-            <Text size="sm" c="dimmed">
-              {totalElements} total leads
-            </Text>
-          </div>
-          <Group gap="xs" style={{ flex: isMobile ? "1 1 100%" : "auto" }}>
-            {!isMobile && (
-              <Button
-                leftSection={<IconDownload size={16} />}
-                variant="light"
-                onClick={handleExport}
-                loading={isExporting}
-                disabled={isExporting}
-                size={isTablet ? "sm" : "md"}
-              >
-                Export
-              </Button>
-            )}
-            <Button
-              leftSection={<IconPlus size={16} />}
-              onClick={handleCreateLead}
-              size={isMobile ? "sm" : isTablet ? "sm" : "md"}
-              fullWidth={isMobile}
-            >
-              Add Lead
-            </Button>
-          </Group>
-        </Group>
-
-        {/* Search and Filters */}
-        <Paper p={isMobile ? "sm" : "md"} withBorder>
-          <Stack gap="md">
-            {/* Search bar - always visible */}
-            <Group gap="xs" wrap="nowrap">
-              <TextInput
-                ref={searchInputRef}
-                placeholder={
-                  isMobile
-                    ? "Search leads..."
-                    : "Search by name, email, company, or phone..."
-                }
-                leftSection={<IconSearch size={16} />}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.currentTarget.value)}
-                rightSection={
-                  searchTerm && (
-                    <ActionIcon
-                      variant="subtle"
-                      onClick={() => setSearchTerm("")}
-                      size="sm"
-                      aria-label="Clear search"
-                    >
-                      <IconX size={16} />
-                    </ActionIcon>
-                  )
-                }
-                style={{ flex: 1 }}
-                styles={{
-                  input: {
-                    fontSize: isMobile ? "14px" : "16px",
-                    minHeight: isMobile ? "40px" : "36px",
-                  },
-                }}
-                aria-label="Search leads"
-              />
-
-              {/* Mobile filter button */}
-              {isMobile && (
-                <ActionIcon
+      <Container
+        size="xl"
+        py={isMobile ? "sm" : "xl"}
+        px={isMobile ? "xs" : "md"}
+      >
+        <Stack gap="lg">
+          {/* Header */}
+          <Group justify="space-between" wrap={isMobile ? "wrap" : "nowrap"}>
+            <div style={{ flex: isMobile ? "1 1 100%" : "auto" }}>
+              <Text size={isMobile ? "lg" : "xl"} fw={700}>
+                Leads
+              </Text>
+              <Text size="sm" c="dimmed">
+                {totalElements} total leads
+              </Text>
+            </div>
+            <Group gap="xs" style={{ flex: isMobile ? "1 1 100%" : "auto" }}>
+              {!isMobile && (
+                <Button
+                  leftSection={<IconDownload size={16} />}
                   variant="light"
-                  size="lg"
-                  onClick={openFilterDrawer}
-                  color={hasActiveFilters ? "blue" : "gray"}
-                  aria-label="Open filters"
+                  onClick={handleExport}
+                  loading={isExporting}
+                  disabled={isExporting}
+                  size={isTablet ? "sm" : "md"}
                 >
-                  <IconAdjustments size={20} />
-                </ActionIcon>
+                  Export
+                </Button>
               )}
+              <Button
+                leftSection={<IconPlus size={16} />}
+                onClick={handleCreateLead}
+                size={isMobile ? "sm" : isTablet ? "sm" : "md"}
+                fullWidth={isMobile}
+              >
+                Add Lead
+              </Button>
             </Group>
+          </Group>
 
-            {/* Desktop/Tablet filter controls */}
-            {!isMobile && (
-              <Group>
-                <Select
-                  placeholder={t`Filter by source`}
-                  leftSection={<IconFilter size={16} />}
-                  data={[
-                    { value: "WEBSITE", label: t`Website` },
-                    { value: "REFERRAL", label: t`Referral` },
-                    { value: "COLD_CALL", label: t`Cold Call` },
-                    { value: "EMAIL_CAMPAIGN", label: t`Email Campaign` },
-                    { value: "SOCIAL_MEDIA", label: t`Social Media` },
-                    { value: "TRADE_SHOW", label: t`Trade Show` },
-                    { value: "PARTNER", label: t`Partner` },
-                    { value: "OTHER", label: t`Other` },
-                  ]}
-                  value={selectedSource}
-                  onChange={setSelectedSource}
-                  clearable
-                  style={{ flex: 1 }}
-                  size={isTablet ? "sm" : "md"}
-                />
-
-                <Select
-                  placeholder={t`Filter by stage`}
-                  leftSection={<IconFilter size={16} />}
-                  data={[
-                    { value: "New", label: t`New` },
-                    { value: "Contacted", label: t`Contacted` },
-                    { value: "Qualified", label: t`Qualified` },
-                    { value: "Proposal", label: t`Proposal` },
-                    { value: "Negotiation", label: t`Negotiation` },
-                    { value: "Won", label: t`Won` },
-                    { value: "Lost", label: t`Lost` },
-                  ]}
-                  value={selectedStage}
-                  onChange={setSelectedStage}
-                  clearable
-                  style={{ flex: 1 }}
-                  size={isTablet ? "sm" : "md"}
-                />
-
-                <Select
-                  placeholder={t`Filter by assigned user`}
-                  leftSection={<IconFilter size={16} />}
-                  data={
-                    isLoadingUsers
-                      ? []
-                      : (usersData || []).map((user) => ({
-                          value: user.id,
-                          label: user.fullName || `${user.firstName} ${user.lastName}`,
-                        }))
+          {/* Search and Filters */}
+          <Paper p={isMobile ? "sm" : "md"} withBorder>
+            <Stack gap="md">
+              {/* Search bar - always visible */}
+              <Group gap="xs" wrap="nowrap">
+                <TextInput
+                  ref={searchInputRef}
+                  placeholder={
+                    isMobile
+                      ? "Search leads..."
+                      : "Search by name, email, company, or phone..."
                   }
-                  value={selectedUser}
-                  onChange={setSelectedUser}
-                  clearable
-                  disabled={isLoadingUsers}
-                  searchable
+                  leftSection={<IconSearch size={16} />}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.currentTarget.value)}
+                  rightSection={
+                    searchTerm && (
+                      <ActionIcon
+                        variant="subtle"
+                        onClick={() => setSearchTerm("")}
+                        size="sm"
+                        aria-label="Clear search"
+                      >
+                        <IconX size={16} />
+                      </ActionIcon>
+                    )
+                  }
                   style={{ flex: 1 }}
-                  size={isTablet ? "sm" : "md"}
+                  styles={{
+                    input: {
+                      fontSize: isMobile ? "14px" : "16px",
+                      minHeight: isMobile ? "40px" : "36px",
+                    },
+                  }}
+                  aria-label="Search leads"
                 />
 
-                {hasActiveFilters && (
-                  <Tooltip label={t`Clear all filters`}>
-                    <ActionIcon
-                      variant="light"
-                      color="red"
-                      onClick={handleClearFilters}
-                      size={isTablet ? "md" : "lg"}
-                    >
-                      <IconX size={16} />
-                    </ActionIcon>
-                  </Tooltip>
+                {/* Mobile filter button */}
+                {isMobile && (
+                  <ActionIcon
+                    variant="light"
+                    size="lg"
+                    onClick={openFilterDrawer}
+                    color={hasActiveFilters ? "blue" : "gray"}
+                    aria-label="Open filters"
+                  >
+                    <IconAdjustments size={20} />
+                  </ActionIcon>
                 )}
               </Group>
-            )}
-          </Stack>
-        </Paper>
 
-        {/* Mobile Filter Drawer */}
-        <Drawer
-          opened={filterDrawerOpened}
-          onClose={closeFilterDrawer}
-          title={t`Filter Leads`}
-          position="right"
-          size="sm"
-          padding="md"
-        >
-          {renderFilterControls()}
-        </Drawer>
+              {/* Desktop/Tablet filter controls */}
+              {!isMobile && (
+                <Group>
+                  <Select
+                    placeholder={t`Filter by source`}
+                    leftSection={<IconFilter size={16} />}
+                    data={[
+                      { value: "WEBSITE", label: t`Website` },
+                      { value: "REFERRAL", label: t`Referral` },
+                      { value: "COLD_CALL", label: t`Cold Call` },
+                      { value: "EMAIL_CAMPAIGN", label: t`Email Campaign` },
+                      { value: "SOCIAL_MEDIA", label: t`Social Media` },
+                      { value: "TRADE_SHOW", label: t`Trade Show` },
+                      { value: "PARTNER", label: t`Partner` },
+                      { value: "OTHER", label: t`Other` },
+                    ]}
+                    value={selectedSource}
+                    onChange={setSelectedSource}
+                    clearable
+                    style={{ flex: 1 }}
+                    size={isTablet ? "sm" : "md"}
+                  />
 
-        {/* Bulk actions */}
-        {selectedLeads.length > 0 && (
-          <Paper p={isMobile ? "sm" : "md"} withBorder bg="blue.0">
-            <Group justify="space-between" wrap={isMobile ? "wrap" : "nowrap"}>
-              <Text
-                size="sm"
-                fw={500}
-                style={{ flex: isMobile ? "1 1 100%" : "auto" }}
-              >
-                {selectedLeads.length} lead(s) selected
-              </Text>
-              <Group gap="xs" style={{ flex: isMobile ? "1 1 100%" : "auto" }}>
-                <Button
-                  size="xs"
-                  variant="light"
-                  onClick={handleBulkQualify}
-                  loading={isBulkQualifying}
-                  disabled={isBulkQualifying}
-                  fullWidth={isMobile}
-                >
-                  Qualify Selected
-                </Button>
-                <Button
-                  size="xs"
-                  variant="outline"
-                  onClick={() => setSelectedLeads([])}
-                  disabled={isBulkQualifying}
-                  fullWidth={isMobile}
-                >
-                  Clear Selection
-                </Button>
-              </Group>
-            </Group>
+                  <Select
+                    placeholder={t`Filter by stage`}
+                    leftSection={<IconFilter size={16} />}
+                    data={[
+                      { value: "New", label: t`New` },
+                      { value: "Contacted", label: t`Contacted` },
+                      { value: "Qualified", label: t`Qualified` },
+                      { value: "Proposal", label: t`Proposal` },
+                      { value: "Negotiation", label: t`Negotiation` },
+                      { value: "Won", label: t`Won` },
+                      { value: "Lost", label: t`Lost` },
+                    ]}
+                    value={selectedStage}
+                    onChange={setSelectedStage}
+                    clearable
+                    style={{ flex: 1 }}
+                    size={isTablet ? "sm" : "md"}
+                  />
+
+                  <Select
+                    placeholder={t`Filter by assigned user`}
+                    leftSection={<IconFilter size={16} />}
+                    data={
+                      isLoadingUsers
+                        ? []
+                        : (usersData || []).map((user) => ({
+                            value: user.id,
+                            label:
+                              user.fullName ||
+                              `${user.firstName} ${user.lastName}`,
+                          }))
+                    }
+                    value={selectedUser}
+                    onChange={setSelectedUser}
+                    clearable
+                    disabled={isLoadingUsers}
+                    searchable
+                    style={{ flex: 1 }}
+                    size={isTablet ? "sm" : "md"}
+                  />
+
+                  {hasActiveFilters && (
+                    <Tooltip label={t`Clear all filters`}>
+                      <ActionIcon
+                        variant="light"
+                        color="red"
+                        onClick={handleClearFilters}
+                        size={isTablet ? "md" : "lg"}
+                      >
+                        <IconX size={16} />
+                      </ActionIcon>
+                    </Tooltip>
+                  )}
+                </Group>
+              )}
+            </Stack>
           </Paper>
-        )}
 
-        {/* Lead list */}
-        {leads.length === 0 ? (
-          <Paper p="xl" withBorder>
-            <Center>
-              <Stack align="center" gap="md">
-                <Text size="lg" c="dimmed">
-                  No leads found
+          {/* Mobile Filter Drawer */}
+          <Drawer
+            opened={filterDrawerOpened}
+            onClose={closeFilterDrawer}
+            title={t`Filter Leads`}
+            position="right"
+            size="sm"
+            padding="md"
+          >
+            {renderFilterControls()}
+          </Drawer>
+
+          {/* Bulk actions */}
+          {selectedLeads.length > 0 && (
+            <Paper p={isMobile ? "sm" : "md"} withBorder bg="blue.0">
+              <Group
+                justify="space-between"
+                wrap={isMobile ? "wrap" : "nowrap"}
+              >
+                <Text
+                  size="sm"
+                  fw={500}
+                  style={{ flex: isMobile ? "1 1 100%" : "auto" }}
+                >
+                  {selectedLeads.length} lead(s) selected
                 </Text>
-                {hasActiveFilters ? (
+                <Group
+                  gap="xs"
+                  style={{ flex: isMobile ? "1 1 100%" : "auto" }}
+                >
                   <Button
+                    size="xs"
                     variant="light"
-                    onClick={handleClearFilters}
+                    onClick={handleBulkQualify}
+                    loading={isBulkQualifying}
+                    disabled={isBulkQualifying}
                     fullWidth={isMobile}
                   >
-                    Clear filters
+                    Qualify Selected
                   </Button>
-                ) : (
-                  <Button onClick={handleCreateLead} fullWidth={isMobile}>
-                    Create your first lead
+                  <Button
+                    size="xs"
+                    variant="outline"
+                    onClick={() => setSelectedLeads([])}
+                    disabled={isBulkQualifying}
+                    fullWidth={isMobile}
+                  >
+                    Clear Selection
                   </Button>
-                )}
-              </Stack>
-            </Center>
-          </Paper>
-        ) : (
-          <Stack
-            gap={isMobile ? "sm" : "md"}
-            role="list"
-            aria-label="Leads list"
-          >
-            {leads.map((lead: any, index: number) => (
-              <div
-                key={lead.id}
-                role="listitem"
-                style={{
-                  cursor: "pointer",
-                  minHeight: isMobile ? "44px" : "auto",
-                }}
-              >
-                <LeadCard
-                  lead={lead}
-                  variant={isMobile ? "compact" : "list"}
-                  showQuickActions={!isMobile}
-                  tabIndex={index === focusedLeadIndex ? 0 : -1}
-                  onKeyDown={(e) => handleLeadKeyDown(e, lead.id, index)}
-                  onClick={() => handleLeadClick(lead.id)}
-                  onQuickActions={
-                    !isMobile
-                      ? {
-                          qualify: () => handleQuickQualify(lead.id),
-                          scheduleFollowUp: () => handleQuickScheduleFollowUp(lead.id),
-                          viewDetails: () => handleLeadClick(lead.id),
-                        }
-                      : undefined
-                  }
-                />
-              </div>
-            ))}
-          </Stack>
-        )}
+                </Group>
+              </Group>
+            </Paper>
+          )}
 
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <Group justify="center">
-            <Pagination
-              total={totalPages}
-              value={currentPage}
-              onChange={handlePageChange}
-              size={isMobile ? "sm" : "md"}
-              // Mobile-friendly: show fewer siblings on small screens
-              siblings={isMobile ? 0 : 1}
-              boundaries={isMobile ? 1 : 1}
-            />
-          </Group>
-        )}
-      </Stack>
-    </Container>
+          {/* Lead list */}
+          {leads.length === 0 ? (
+            <Paper p="xl" withBorder>
+              <Center>
+                <Stack align="center" gap="md">
+                  <Text size="lg" c="dimmed">
+                    No leads found
+                  </Text>
+                  {hasActiveFilters ? (
+                    <Button
+                      variant="light"
+                      onClick={handleClearFilters}
+                      fullWidth={isMobile}
+                    >
+                      Clear filters
+                    </Button>
+                  ) : (
+                    <Button onClick={handleCreateLead} fullWidth={isMobile}>
+                      Create your first lead
+                    </Button>
+                  )}
+                </Stack>
+              </Center>
+            </Paper>
+          ) : (
+            <Stack
+              gap={isMobile ? "sm" : "md"}
+              role="list"
+              aria-label="Leads list"
+            >
+              {leads.map((lead: any, index: number) => (
+                <div
+                  key={lead.id}
+                  role="listitem"
+                  style={{
+                    cursor: "pointer",
+                    minHeight: isMobile ? "44px" : "auto",
+                  }}
+                >
+                  <LeadCard
+                    lead={lead}
+                    variant={isMobile ? "compact" : "list"}
+                    showQuickActions={!isMobile}
+                    tabIndex={index === focusedLeadIndex ? 0 : -1}
+                    onKeyDown={(e) => handleLeadKeyDown(e, lead.id, index)}
+                    onClick={() => handleLeadClick(lead.id)}
+                    onQuickActions={
+                      !isMobile
+                        ? {
+                            qualify: () => handleQuickQualify(lead.id),
+                            scheduleFollowUp: () =>
+                              handleQuickScheduleFollowUp(lead.id),
+                            viewDetails: () => handleLeadClick(lead.id),
+                          }
+                        : undefined
+                    }
+                  />
+                </div>
+              ))}
+            </Stack>
+          )}
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <Group justify="center">
+              <Pagination
+                total={totalPages}
+                value={currentPage}
+                onChange={handlePageChange}
+                size={isMobile ? "sm" : "md"}
+                // Mobile-friendly: show fewer siblings on small screens
+                siblings={isMobile ? 0 : 1}
+                boundaries={isMobile ? 1 : 1}
+              />
+            </Group>
+          )}
+        </Stack>
+      </Container>
 
       {/* Lead Form Modal */}
       <LeadForm

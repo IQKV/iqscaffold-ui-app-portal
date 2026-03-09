@@ -58,7 +58,8 @@ export const ContactEditModal: React.FC<ContactEditModalProps> = ({
   onSuccess,
 }) => {
   const updateContactMutation = useUpdateContactMutation();
-  const { data: companiesData, isLoading: isLoadingCompanies } = useCompaniesQuery();
+  const { data: companiesData, isLoading: isLoadingCompanies } =
+    useCompaniesQuery();
 
   const form = useForm<ContactEditFormData>({
     validate: zodResolver(contactEditSchema),

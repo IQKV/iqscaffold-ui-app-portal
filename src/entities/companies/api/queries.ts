@@ -5,7 +5,8 @@ import type { CompanyListParams } from "@/shared/api/companies/types";
 export const companiesKeys = {
   all: ["companies"] as const,
   lists: () => [...companiesKeys.all, "list"] as const,
-  list: (params?: CompanyListParams) => [...companiesKeys.lists(), params] as const,
+  list: (params?: CompanyListParams) =>
+    [...companiesKeys.lists(), params] as const,
   details: () => [...companiesKeys.all, "detail"] as const,
   detail: (id: string) => [...companiesKeys.details(), id] as const,
 };
