@@ -1159,8 +1159,8 @@ pnpm e2e:headed             # Run E2E in headed mode
 pnpm lint                   # Run ESLint
 pnpm lint:fix               # Fix ESLint issues
 pnpm lint:stylelint         # Lint CSS/SCSS
-pnpm prettier:check         # Check formatting
-pnpm prettier:write         # Format code
+pnpm formatter:check        # Check formatting
+pnpm formatter:write        # Format code
 pnpm type-check             # TypeScript type checking
 pnpm knip                   # Find dead code
 
@@ -1627,7 +1627,7 @@ chore: update dependencies
 
 # lint-staged configuration
 {
-  "*": ["pnpm prettier:check"],
+  "*": ["pnpm formatter:check"],
   "package.json": ["sort-package-json"]
 }
 ```

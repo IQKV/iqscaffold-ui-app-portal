@@ -31,8 +31,8 @@
     "node_modules:cleanup": "rm -rf node_modules",
     "playwright:install": "playwright install --with-deps",
     "prepare": "husky",
-    "prettier:check": "prettier . --check --ignore-unknown",
-    "prettier:write": "prettier . --write",
+    "formatter:check": "prettier . --check --ignore-unknown",
+    "formatter:write": "prettier . --write",
     "preview": "vite preview",
     "release": "release-it --ci",
     "storybook": "storybook dev -p 6006",
@@ -46,7 +46,7 @@
   },
   "lint-staged": {
     "*": [
-      "pnpm prettier:check"
+      "pnpm formatter:check"
     ],
     "package.json": [
       "sort-package-json"
