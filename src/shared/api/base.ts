@@ -173,6 +173,8 @@ apiClient.interceptors.response.use(
       } catch (refreshErr) {
         clearTokens();
         rejectQueue(refreshErr);
+        // Don't show error notification for failed refresh attempts
+        // The auth store will handle logout and redirect
         return Promise.reject(refreshErr);
       } finally {
         isRefreshing = false;
@@ -183,10 +185,13 @@ apiClient.interceptors.response.use(
     const appError = errorFromAxios(error);
 
     // Show global error notification for server errors (unless suppressed)
+    // Don't show notifications for auth-related 401 errors or missing services (503)
     if (
-      appError.errorType === "server" ||
+      (appError.errorType === "server" ||
       appError.errorType === "network" ||
-      appError.errorType === "timeout"
+      appError.errorType === "timeout") &&
+      error.response?.status !== 401 &&
+      error.response?.status !== 503 // Suppress 503 errors for missing services
     ) {
       const cfg = original as any;
       if (!cfg?.__suppressGlobalError) {

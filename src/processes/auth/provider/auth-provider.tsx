@@ -12,16 +12,16 @@ export function AuthProvider({ children }: PropsWithChildren) {
     const refreshToken = urlParams.get("refresh_token");
 
     if (accessToken && refreshToken) {
-      // Store tokens and authenticate user
+      // Store tokens and authenticate user SYNCHRONOUSLY
       loginWithTokens({ accessToken, refreshToken });
 
       // Clean URL immediately to remove tokens from browser history
       const cleanUrl = window.location.pathname + window.location.hash;
       window.history.replaceState({}, document.title, cleanUrl);
-    } else {
-      // Normal initialization from localStorage
-      initialize();
     }
+    
+    // Always initialize to handle existing tokens or set unauthenticated state
+    initialize();
   }, [initialize, loginWithTokens]);
 
   return children as any;
