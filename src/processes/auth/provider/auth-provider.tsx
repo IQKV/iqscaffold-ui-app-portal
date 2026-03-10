@@ -19,7 +19,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
       const cleanUrl = window.location.pathname + window.location.hash;
       window.history.replaceState({}, document.title, cleanUrl);
     }
-    
+
     // Always initialize to handle existing tokens or set unauthenticated state
     initialize();
   }, [initialize, loginWithTokens]);

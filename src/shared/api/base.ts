@@ -188,8 +188,8 @@ apiClient.interceptors.response.use(
     // Don't show notifications for auth-related 401 errors or missing services (503)
     if (
       (appError.errorType === "server" ||
-      appError.errorType === "network" ||
-      appError.errorType === "timeout") &&
+        appError.errorType === "network" ||
+        appError.errorType === "timeout") &&
       error.response?.status !== 401 &&
       error.response?.status !== 503 // Suppress 503 errors for missing services
     ) {
