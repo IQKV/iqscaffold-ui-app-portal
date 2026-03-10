@@ -20,9 +20,7 @@ export interface PaginationParams {
   search?: string;
 }
 
-export const createPaginationParams = (
-  params: PaginationParams
-): URLSearchParams => {
+export const createPaginationParams = (params: PaginationParams): URLSearchParams => {
   const searchParams = new URLSearchParams();
 
   if (params.page && params.page > 1) {
@@ -48,16 +46,10 @@ export const createPaginationParams = (
   return searchParams;
 };
 
-export const parsePaginationParams = (
-  searchParams: URLSearchParams
-): PaginationParams => {
+export const parsePaginationParams = (searchParams: URLSearchParams): PaginationParams => {
   return {
-    page: searchParams.get("page")
-      ? parseInt(searchParams.get("page")!, 10)
-      : 1,
-    per_page: searchParams.get("per_page")
-      ? parseInt(searchParams.get("per_page")!, 10)
-      : 10,
+    page: searchParams.get("page") ? parseInt(searchParams.get("page")!, 10) : 1,
+    per_page: searchParams.get("per_page") ? parseInt(searchParams.get("per_page")!, 10) : 10,
     sort: searchParams.get("sort") || undefined,
     direction: (searchParams.get("direction") as "asc" | "desc") || "asc",
     search: searchParams.get("search") || undefined,

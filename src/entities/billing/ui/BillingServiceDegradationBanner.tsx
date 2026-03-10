@@ -12,9 +12,9 @@ interface BillingServiceDegradationBannerProps {
  * Banner component that displays Billing service degradation information
  * Shows which Billing services are unavailable and provides retry options
  */
-export const BillingServiceDegradationBanner: React.FC<
-  BillingServiceDegradationBannerProps
-> = ({ alwaysShow = false }) => {
+export const BillingServiceDegradationBanner: React.FC<BillingServiceDegradationBannerProps> = ({
+  alwaysShow = false,
+}) => {
   const serviceHealth = useBillingServiceHealth();
 
   const serviceDisplayNames = {

@@ -92,29 +92,21 @@ describe("Auth Utils", () => {
 
   describe("hasAnyPermission", () => {
     it("returns true when user has any permission", () => {
-      expect(hasAnyPermission(mockUser, ["read:users", "delete:users"])).toBe(
-        true
-      );
+      expect(hasAnyPermission(mockUser, ["read:users", "delete:users"])).toBe(true);
     });
 
     it("returns false when user has no permissions", () => {
-      expect(hasAnyPermission(mockUser, ["delete:users", "admin:all"])).toBe(
-        false
-      );
+      expect(hasAnyPermission(mockUser, ["delete:users", "admin:all"])).toBe(false);
     });
   });
 
   describe("hasAllPermissions", () => {
     it("returns true when user has all permissions", () => {
-      expect(hasAllPermissions(mockUser, ["read:users", "write:users"])).toBe(
-        true
-      );
+      expect(hasAllPermissions(mockUser, ["read:users", "write:users"])).toBe(true);
     });
 
     it("returns false when user is missing a permission", () => {
-      expect(hasAllPermissions(mockUser, ["read:users", "delete:users"])).toBe(
-        false
-      );
+      expect(hasAllPermissions(mockUser, ["read:users", "delete:users"])).toBe(false);
     });
   });
 

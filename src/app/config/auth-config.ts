@@ -1,9 +1,4 @@
-import {
-  API_ENDPOINTS,
-  DEFAULTS,
-  STORAGE_KEYS,
-  ENV_KEYS,
-} from "@/shared/constants";
+import { API_ENDPOINTS, DEFAULTS, STORAGE_KEYS, ENV_KEYS } from "@/shared/constants";
 
 export interface AuthEndpoints {
   refresh: string;
@@ -33,10 +28,8 @@ export interface AuthConfig {
 
 // Build auth configuration from environment variables with fallbacks
 const buildAuthConfig = (): AuthConfig => {
-  const authDomain =
-    import.meta.env[ENV_KEYS.AUTH_DOMAIN_AUTH] ?? DEFAULTS.AUTH_DOMAIN;
-  const appDomain =
-    import.meta.env[ENV_KEYS.AUTH_DOMAIN_APP] ?? DEFAULTS.APP_DOMAIN;
+  const authDomain = import.meta.env[ENV_KEYS.AUTH_DOMAIN_AUTH] ?? DEFAULTS.AUTH_DOMAIN;
+  const appDomain = import.meta.env[ENV_KEYS.AUTH_DOMAIN_APP] ?? DEFAULTS.APP_DOMAIN;
 
   return {
     endpoints: {
@@ -52,12 +45,9 @@ const buildAuthConfig = (): AuthConfig => {
       refreshTokenKey: STORAGE_KEYS.REFRESH_TOKEN,
     },
     redirects: {
-      afterLogin:
-        import.meta.env[ENV_KEYS.AUTH_REDIRECT_AFTER_LOGIN] ?? appDomain,
-      afterLogout:
-        import.meta.env[ENV_KEYS.AUTH_REDIRECT_AFTER_LOGOUT] ?? authDomain,
-      afterSignup:
-        import.meta.env[ENV_KEYS.AUTH_REDIRECT_AFTER_SIGNUP] ?? authDomain,
+      afterLogin: import.meta.env[ENV_KEYS.AUTH_REDIRECT_AFTER_LOGIN] ?? appDomain,
+      afterLogout: import.meta.env[ENV_KEYS.AUTH_REDIRECT_AFTER_LOGOUT] ?? authDomain,
+      afterSignup: import.meta.env[ENV_KEYS.AUTH_REDIRECT_AFTER_SIGNUP] ?? authDomain,
     },
     domains: {
       auth: authDomain,
@@ -78,7 +68,7 @@ export const configureAuth = (
     tokenStorage?: Partial<AuthConfig["tokenStorage"]>;
     redirects?: Partial<AuthConfig["redirects"]>;
     domains?: Partial<AuthConfig["domains"]>;
-  }
+  },
 ) => {
   authConfig = {
     ...authConfig,

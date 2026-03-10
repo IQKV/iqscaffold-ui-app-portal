@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Stack,
-  Text,
-  Badge,
-  Group,
-  Card,
-  Box,
-  Loader,
-  Center,
-} from "@mantine/core";
+import { Stack, Text, Badge, Group, Card, Box, Loader, Center } from "@mantine/core";
 import { useDroppable } from "@dnd-kit/core";
 import { LeadCard } from "@/entities/crm";
 import type { PipelineStage, Lead } from "@/shared/api/crm/types";
@@ -55,18 +46,12 @@ export const PipelineStageColumn: React.FC<PipelineStageColumnProps> = ({
   });
 
   // Filter overdue leads if highlighting is enabled
-  const overdueLeads = highlightOverdue
-    ? leads.filter((lead) => lead.isOverdue)
-    : [];
+  const overdueLeads = highlightOverdue ? leads.filter((lead) => lead.isOverdue) : [];
 
   // Calculate stage metrics
   const leadCount = leads.length;
-  const conversionRate = stage.conversionRate
-    ? `${stage.conversionRate.toFixed(1)}%`
-    : null;
-  const avgTime = stage.averageTimeInStage
-    ? `${stage.averageTimeInStage}d`
-    : null;
+  const conversionRate = stage.conversionRate ? `${stage.conversionRate.toFixed(1)}%` : null;
+  const avgTime = stage.averageTimeInStage ? `${stage.averageTimeInStage}d` : null;
 
   return (
     <Box

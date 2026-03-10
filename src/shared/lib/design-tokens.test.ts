@@ -281,23 +281,17 @@ describe("Design Tokens", () => {
 
     describe("getColorWithOpacity", () => {
       it("should add opacity to hex color", () => {
-        expect(getColorWithOpacity("#2196f3", 0.5)).toBe(
-          "rgba(33, 150, 243, 0.5)"
-        );
+        expect(getColorWithOpacity("#2196f3", 0.5)).toBe("rgba(33, 150, 243, 0.5)");
       });
 
       it("should handle hex without #", () => {
-        expect(getColorWithOpacity("2196f3", 0.5)).toBe(
-          "rgba(33, 150, 243, 0.5)"
-        );
+        expect(getColorWithOpacity("2196f3", 0.5)).toBe("rgba(33, 150, 243, 0.5)");
       });
 
       it("should handle different opacity values", () => {
         expect(getColorWithOpacity("#2196f3", 0)).toBe("rgba(33, 150, 243, 0)");
         expect(getColorWithOpacity("#2196f3", 1)).toBe("rgba(33, 150, 243, 1)");
-        expect(getColorWithOpacity("#2196f3", 0.25)).toBe(
-          "rgba(33, 150, 243, 0.25)"
-        );
+        expect(getColorWithOpacity("#2196f3", 0.25)).toBe("rgba(33, 150, 243, 0.25)");
       });
     });
 
@@ -382,13 +376,7 @@ describe("Design Tokens", () => {
 
   describe("Token Consistency", () => {
     it("should have consistent spacing scale", () => {
-      const spacingValues = [
-        spacing.xs,
-        spacing.sm,
-        spacing.md,
-        spacing.lg,
-        spacing.xl,
-      ];
+      const spacingValues = [spacing.xs, spacing.sm, spacing.md, spacing.lg, spacing.xl];
       spacingValues.forEach((value) => {
         expect(value).toMatch(/^\d+(\.\d+)?rem$/);
       });

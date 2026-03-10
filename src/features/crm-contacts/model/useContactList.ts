@@ -30,8 +30,7 @@ export function useContactList() {
   });
 
   // Mutations
-  const { mutate: createContact, isPending: isCreating } =
-    useCreateContactMutation();
+  const { mutate: createContact, isPending: isCreating } = useCreateContactMutation();
   const { mutate: deleteContact } = useDeleteContactMutation();
   const bulkDeleteMutation = useBulkDeleteContactsMutation();
   const bulkUpdateStatusMutation = useBulkUpdateContactStatusMutation();
@@ -48,9 +47,7 @@ export function useContactList() {
   }, []);
 
   const toggleSelect = useCallback((id: number, checked: boolean) => {
-    setSelectedIds((prev) =>
-      checked ? [...prev, id] : prev.filter((prevId) => prevId !== id)
-    );
+    setSelectedIds((prev) => (checked ? [...prev, id] : prev.filter((prevId) => prevId !== id)));
   }, []);
 
   const toggleSelectAll = useCallback(
@@ -61,7 +58,7 @@ export function useContactList() {
         setSelectedIds([]);
       }
     },
-    [contactsData]
+    [contactsData],
   );
 
   const handleCreateContact = useCallback(
@@ -72,7 +69,7 @@ export function useContactList() {
         },
       });
     },
-    [createContact]
+    [createContact],
   );
 
   const handleDeleteContact = useCallback(
@@ -85,7 +82,7 @@ export function useContactList() {
         onConfirm: () => deleteContact(id),
       });
     },
-    [deleteContact]
+    [deleteContact],
   );
 
   const handleBulkDelete = useCallback(() => {
@@ -109,10 +106,10 @@ export function useContactList() {
         { contactIds: selectedIds, status },
         {
           onSuccess: () => setSelectedIds([]),
-        }
+        },
       );
     },
-    [selectedIds, bulkUpdateStatusMutation]
+    [selectedIds, bulkUpdateStatusMutation],
   );
 
   return {

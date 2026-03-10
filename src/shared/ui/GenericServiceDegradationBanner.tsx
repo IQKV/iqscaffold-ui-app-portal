@@ -24,21 +24,13 @@ interface GenericServiceDegradationBannerProps {
  * Generic banner component that displays service degradation information
  * Shows which services are unavailable and provides retry options
  */
-export const GenericServiceDegradationBanner: React.FC<
-  GenericServiceDegradationBannerProps
-> = ({
+export const GenericServiceDegradationBanner: React.FC<GenericServiceDegradationBannerProps> = ({
   serviceName,
   serviceHealth,
   serviceDisplayNames = {},
   alwaysShow = false,
 }) => {
-  const {
-    isHealthy,
-    services,
-    circuitBreakerOpen,
-    retryConnection,
-    lastChecked,
-  } = serviceHealth;
+  const { isHealthy, services, circuitBreakerOpen, retryConnection, lastChecked } = serviceHealth;
 
   // Don't show if all services are healthy (unless alwaysShow is true)
   if (isHealthy && !alwaysShow) {
@@ -59,10 +51,7 @@ export const GenericServiceDegradationBanner: React.FC<
   }
 
   const getServiceDisplayName = (service: string) => {
-    return (
-      serviceDisplayNames[service] ||
-      service.charAt(0).toUpperCase() + service.slice(1)
-    );
+    return serviceDisplayNames[service] || service.charAt(0).toUpperCase() + service.slice(1);
   };
 
   const getSeverityColor = () => {
@@ -93,9 +82,7 @@ export const GenericServiceDegradationBanner: React.FC<
       <Group justify="space-between" align="flex-start">
         <div>
           {unavailableServices.length === 0 ? (
-            <Text size="sm">
-              {t`All ${serviceName} services are operating normally.`}
-            </Text>
+            <Text size="sm">{t`All ${serviceName} services are operating normally.`}</Text>
           ) : (
             <>
               <Text size="sm" mb="xs">

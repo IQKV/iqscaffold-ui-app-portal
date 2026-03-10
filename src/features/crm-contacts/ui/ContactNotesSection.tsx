@@ -39,9 +39,7 @@ interface ContactNotesSectionProps {
  *
  * Follows the same pattern as LeadNotesSection for consistency
  */
-export const ContactNotesSection: React.FC<ContactNotesSectionProps> = ({
-  contactId,
-}) => {
+export const ContactNotesSection: React.FC<ContactNotesSectionProps> = ({ contactId }) => {
   const [newNoteContent, setNewNoteContent] = useState("");
   const [editingNoteId, setEditingNoteId] = useState<number | null>(null);
   const [editContent, setEditContent] = useState("");
@@ -197,7 +195,7 @@ export const ContactNotesSection: React.FC<ContactNotesSectionProps> = ({
 
   // Sort notes by creation date descending
   const sortedNotes = [...(notes || [])].sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
   );
 
   return (
@@ -279,10 +277,7 @@ export const ContactNotesSection: React.FC<ContactNotesSectionProps> = ({
                     </div>
                     <Group gap="xs">
                       <Tooltip label={t`Edit note`}>
-                        <ActionIcon
-                          variant="subtle"
-                          onClick={() => handleStartEdit(note)}
-                        >
+                        <ActionIcon variant="subtle" onClick={() => handleStartEdit(note)}>
                           <IconEdit size={16} />
                         </ActionIcon>
                       </Tooltip>

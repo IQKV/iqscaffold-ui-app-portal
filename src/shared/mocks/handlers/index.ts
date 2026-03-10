@@ -17,10 +17,4 @@ export const handlers = [
 ];
 
 // Export individual handler groups for selective use
-export {
-  authHandlers,
-  usersHandlers,
-  contactsHandlers,
-  crmHandlers,
-  featureHandlers,
-};
+export { authHandlers, usersHandlers, contactsHandlers, crmHandlers, featureHandlers };

@@ -80,24 +80,18 @@ export const usersHandlers = [
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
-          ? Math.random() * (config.delay.max - config.delay.min) +
-              config.delay.min
-          : config.delay
+          ? Math.random() * (config.delay.max - config.delay.min) + config.delay.min
+          : config.delay,
       );
     }
 
     const url = new URL(request.url);
     const rawPage = url.searchParams.get("page");
-    const rawSize =
-      url.searchParams.get("size") || url.searchParams.get("limit");
+    const rawSize = url.searchParams.get("size") || url.searchParams.get("limit");
     const pageParam = Number.parseInt(rawPage ?? "0", 10);
     const sizeParam = Number.parseInt(rawSize ?? "10", 10);
     // Support both 0-based (Spring-style) and 1-based page params
-    const pageIndex = Number.isNaN(pageParam)
-      ? 0
-      : pageParam > 0
-        ? pageParam - 1
-        : pageParam;
+    const pageIndex = Number.isNaN(pageParam) ? 0 : pageParam > 0 ? pageParam - 1 : pageParam;
     const pageSize = Number.isNaN(sizeParam) ? 10 : sizeParam;
     const search = url.searchParams.get("search") || "";
 
@@ -119,9 +113,7 @@ export const usersHandlers = [
           user.lastName.toLowerCase().includes(searchLower) ||
           user.username.toLowerCase().includes(searchLower) ||
           user.email.toLowerCase().includes(searchLower) ||
-          user.authorities.some((authority) =>
-            authority.toLowerCase().includes(searchLower)
-          )
+          user.authorities.some((authority) => authority.toLowerCase().includes(searchLower)),
       );
     }
 
@@ -146,9 +138,8 @@ export const usersHandlers = [
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
-          ? Math.random() * (config.delay.max - config.delay.min) +
-              config.delay.min
-          : config.delay
+          ? Math.random() * (config.delay.max - config.delay.min) + config.delay.min
+          : config.delay,
       );
     }
 
@@ -169,7 +160,7 @@ export const usersHandlers = [
           status: 404,
           detail: `User with ID ${id} was not found.`,
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -181,9 +172,8 @@ export const usersHandlers = [
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
-          ? Math.random() * (config.delay.max - config.delay.min) +
-              config.delay.min
-          : config.delay
+          ? Math.random() * (config.delay.max - config.delay.min) + config.delay.min
+          : config.delay,
       );
     }
 
@@ -203,7 +193,7 @@ export const usersHandlers = [
 
     // Check if username or email already exists
     const existingUser = mockUsers.find(
-      (u) => u.username === body.username || u.email === body.email
+      (u) => u.username === body.username || u.email === body.email,
     );
     if (existingUser) {
       return HttpResponse.json(
@@ -213,7 +203,7 @@ export const usersHandlers = [
           status: 409,
           detail: "Username or email already exists.",
         },
-        { status: 409 }
+        { status: 409 },
       );
     }
 
@@ -241,9 +231,8 @@ export const usersHandlers = [
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
-          ? Math.random() * (config.delay.max - config.delay.min) +
-              config.delay.min
-          : config.delay
+          ? Math.random() * (config.delay.max - config.delay.min) + config.delay.min
+          : config.delay,
       );
     }
 
@@ -263,7 +252,7 @@ export const usersHandlers = [
 
     // Check if username or email already exists
     const existingUser = mockUsers.find(
-      (u) => u.username === body.username || u.email === body.email
+      (u) => u.username === body.username || u.email === body.email,
     );
     if (existingUser) {
       return HttpResponse.json(
@@ -273,7 +262,7 @@ export const usersHandlers = [
           status: 409,
           detail: "Username or email already exists.",
         },
-        { status: 409 }
+        { status: 409 },
       );
     }
 
@@ -297,90 +286,85 @@ export const usersHandlers = [
   }),
 
   // Update user
-  http.put(
-    `${API_BASE_URL}/v1/admin/users/:id`,
-    async ({ params, request }) => {
-      if (config.delay) {
-        await delay(
-          typeof config.delay === "object"
-            ? Math.random() * (config.delay.max - config.delay.min) +
-                config.delay.min
-            : config.delay
-        );
-      }
+  http.put(`${API_BASE_URL}/v1/admin/users/:id`, async ({ params, request }) => {
+    if (config.delay) {
+      await delay(
+        typeof config.delay === "object"
+          ? Math.random() * (config.delay.max - config.delay.min) + config.delay.min
+          : config.delay,
+      );
+    }
 
-      const { id } = params;
-      const body = (await request.json()) as {
-        username?: string;
-        email?: string;
-        firstName?: string;
-        lastName?: string;
-        authorities?: string[];
-        enabled?: boolean;
-        emailVerified?: boolean;
-      };
+    const { id } = params;
+    const body = (await request.json()) as {
+      username?: string;
+      email?: string;
+      firstName?: string;
+      lastName?: string;
+      authorities?: string[];
+      enabled?: boolean;
+      emailVerified?: boolean;
+    };
 
-      if (config.enableLogging) {
-        console.log("✏️ MSW: Update user", { id, ...body });
-      }
+    if (config.enableLogging) {
+      console.log("✏️ MSW: Update user", { id, ...body });
+    }
 
-      const userId = parseInt(id as string, 10);
-      const userIndex = mockUsers.findIndex((u) => u.id === userId);
+    const userId = parseInt(id as string, 10);
+    const userIndex = mockUsers.findIndex((u) => u.id === userId);
 
-      if (userIndex === -1) {
+    if (userIndex === -1) {
+      return HttpResponse.json(
+        {
+          type: "https://example.com/problems/user-not-found",
+          title: "User Not Found",
+          status: 404,
+          detail: `User with ID ${id} was not found.`,
+        },
+        { status: 404 },
+      );
+    }
+
+    // Check if username or email already exists (excluding current user)
+    if (body.username || body.email) {
+      const existingUser = mockUsers.find(
+        (u) =>
+          u.id !== userId &&
+          ((body.username && u.username === body.username) ||
+            (body.email && u.email === body.email)),
+      );
+      if (existingUser) {
         return HttpResponse.json(
           {
-            type: "https://example.com/problems/user-not-found",
-            title: "User Not Found",
-            status: 404,
-            detail: `User with ID ${id} was not found.`,
+            type: "https://example.com/problems/user-exists",
+            title: "User Already Exists",
+            status: 409,
+            detail: "Username or email already exists.",
           },
-          { status: 404 }
+          { status: 409 },
         );
       }
-
-      // Check if username or email already exists (excluding current user)
-      if (body.username || body.email) {
-        const existingUser = mockUsers.find(
-          (u) =>
-            u.id !== userId &&
-            ((body.username && u.username === body.username) ||
-              (body.email && u.email === body.email))
-        );
-        if (existingUser) {
-          return HttpResponse.json(
-            {
-              type: "https://example.com/problems/user-exists",
-              title: "User Already Exists",
-              status: 409,
-              detail: "Username or email already exists.",
-            },
-            { status: 409 }
-          );
-        }
-      }
-
-      const updatedUser = {
-        ...mockUsers[userIndex],
-        ...body,
-        authorities: body.authorities || mockUsers[userIndex].authorities,
-        updatedAt: new Date().toISOString(),
-      };
-
-      mockUsers[userIndex] = updatedUser;
-
-      return HttpResponse.json(updatedUser);
     }
-  ),
+
+    const updatedUser = {
+      ...mockUsers[userIndex],
+      ...body,
+      authorities: body.authorities || mockUsers[userIndex].authorities,
+      updatedAt: new Date().toISOString(),
+    };
+
+    mockUsers[userIndex] = updatedUser;
+
+    return HttpResponse.json(updatedUser);
+  }),
 
   // Delete user
   http.delete(`${API_BASE_URL}/v1/admin/users/:id`, async ({ params }) => {
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
-          ? Math.random() * (config.delay.max - config.delay.min) +
-              config.delay.min
-          : config.delay
+          ? Math.random() * (config.delay.max - config.delay.min) + config.delay.min
+          : config.delay,
       );
     }
 
@@ -401,7 +385,7 @@ export const usersHandlers = [
           status: 404,
           detail: `User with ID ${id} was not found.`,
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
 

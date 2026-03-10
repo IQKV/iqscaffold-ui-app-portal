@@ -93,9 +93,7 @@ export const invitationApi = {
   /**
    * Create a new invitation
    */
-  async createInvitation(
-    data: CreateInvitationRequest
-  ): Promise<OrganizationInvitationDto> {
+  async createInvitation(data: CreateInvitationRequest): Promise<OrganizationInvitationDto> {
     return apiRequest<OrganizationInvitationDto>({
       url: "/api/v1/invitations",
       method: "POST",
@@ -106,9 +104,7 @@ export const invitationApi = {
   /**
    * Get paginated list of invitations
    */
-  async listInvitations(
-    params?: InvitationListParams
-  ): Promise<InvitationPageResponse> {
+  async listInvitations(params?: InvitationListParams): Promise<InvitationPageResponse> {
     return apiRequest<InvitationPageResponse>({
       url: "/api/v1/invitations",
       method: "GET",
@@ -129,9 +125,7 @@ export const invitationApi = {
   /**
    * Get invitation link
    */
-  async getInvitationLink(
-    invitationId: number
-  ): Promise<InvitationLinkResponse> {
+  async getInvitationLink(invitationId: number): Promise<InvitationLinkResponse> {
     return apiRequest<InvitationLinkResponse>({
       url: `/api/v1/invitations/${invitationId}/link`,
       method: "GET",

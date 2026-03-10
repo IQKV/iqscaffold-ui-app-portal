@@ -44,7 +44,7 @@ describe("HTTP Error Utilities", () => {
           type: PROBLEM_TYPES.NETWORK_ERROR,
           title: "Request Canceled",
           detail: "The request was canceled before completion",
-        })
+        }),
       );
     });
 
@@ -60,9 +60,7 @@ describe("HTTP Error Utilities", () => {
       const result = normalizeAxiosError(networkError);
 
       expect(result.errorType).toBe("network");
-      expect(result.message).toBe(
-        "Network error. Please check your connection"
-      );
+      expect(result.message).toBe("Network error. Please check your connection");
       expect(result.retryable).toBe(true);
       expect(result.type).toBe(PROBLEM_TYPES.NETWORK_ERROR);
       expect(result.title).toBe("Network Error");
@@ -129,7 +127,7 @@ describe("HTTP Error Utilities", () => {
       expect(result.errorType).toBe("validation");
       expect(result.status).toBe(422);
       expect(result.message).toBe(
-        "Validation failed: Email is required, Name must be at least 2 characters"
+        "Validation failed: Email is required, Name must be at least 2 characters",
       );
       expect(result.type).toBe(PROBLEM_TYPES.VALIDATION_ERROR);
       expect(result.title).toBe("Validation Error");

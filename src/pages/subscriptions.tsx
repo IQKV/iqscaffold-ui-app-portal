@@ -15,10 +15,7 @@ import {
 import { IconPlus, IconCreditCard, IconReceipt } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
 import { AuthGuard, useAuth } from "@/processes/auth";
-import {
-  useActiveSubscriptionQuery,
-  SubscriptionPlan,
-} from "@/entities/billing";
+import { useActiveSubscriptionQuery, SubscriptionPlan } from "@/entities/billing";
 import {
   SubscriptionCard,
   SubscriptionPlansGrid,
@@ -34,16 +31,10 @@ export const Route = createFileRoute("/subscriptions")({
 function SubscriptionsPage() {
   const { hasBillingAccess, user } = useAuth();
   const [createModalOpened, setCreateModalOpened] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan | null>(
-    null
-  );
+  const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan | null>(null);
   const pageTitle = usePageTitle(t`Subscriptions`);
 
-  const {
-    data: activeSubscription,
-    isLoading,
-    refetch,
-  } = useActiveSubscriptionQuery();
+  const { data: activeSubscription, isLoading, refetch } = useActiveSubscriptionQuery();
 
   if (!hasBillingAccess()) {
     return (
@@ -78,19 +69,13 @@ function SubscriptionsPage() {
 
           <Tabs defaultValue="current" variant="outline">
             <Tabs.List>
-              <Tabs.Tab
-                value="current"
-                leftSection={<IconCreditCard size={16} />}
-              >
+              <Tabs.Tab value="current" leftSection={<IconCreditCard size={16} />}>
                 {t`Current Subscription`}
               </Tabs.Tab>
               <Tabs.Tab value="plans" leftSection={<IconPlus size={16} />}>
                 {t`Available Plans`}
               </Tabs.Tab>
-              <Tabs.Tab
-                value="invoices"
-                leftSection={<IconReceipt size={16} />}
-              >
+              <Tabs.Tab value="invoices" leftSection={<IconReceipt size={16} />}>
                 {t`Invoices`}
               </Tabs.Tab>
             </Tabs.List>
@@ -121,9 +106,7 @@ function SubscriptionsPage() {
                       <Button
                         variant="light"
                         onClick={() => {
-                          const tabsElement = document.querySelector(
-                            '[data-value="plans"]'
-                          );
+                          const tabsElement = document.querySelector('[data-value="plans"]');
                           if (tabsElement) {
                             (tabsElement as HTMLElement).click();
                           }
@@ -151,9 +134,7 @@ function SubscriptionsPage() {
 
             <Tabs.Panel value="invoices" pt="md">
               <Stack gap="md">
-                <Text c="dimmed">
-                  {t`View and download your subscription invoices.`}
-                </Text>
+                <Text c="dimmed">{t`View and download your subscription invoices.`}</Text>
                 <InvoicesTable />
               </Stack>
             </Tabs.Panel>

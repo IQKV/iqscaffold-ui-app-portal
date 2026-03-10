@@ -13,10 +13,7 @@ export function UserMenu() {
 
   const initials =
     `${user.firstName?.[0] ?? user.username[0]}${user.lastName?.[0] ?? ""}`.toUpperCase();
-  const avatarUrl = getAvatarUrlWithCacheBusting(
-    user.avatarUrl,
-    user.avatarUpdatedAt
-  );
+  const avatarUrl = getAvatarUrlWithCacheBusting(user.avatarUrl, user.avatarUpdatedAt);
 
   return (
     <Menu shadow="md" width={200}>

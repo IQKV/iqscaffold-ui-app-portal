@@ -52,9 +52,7 @@ export const featureHandlers = [
       allFeatures: mockAllFeatures,
       planName: "Professional",
       subscriptionStatus: "active",
-      subscriptionExpiresAt: new Date(
-        Date.now() + 30 * 24 * 60 * 60 * 1000
-      ).toISOString(),
+      subscriptionExpiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
       isTrialPeriod: false,
       tenantId: "tenant-123",
     };

@@ -1,14 +1,5 @@
 import { useState } from "react";
-import {
-  Card,
-  Text,
-  Title,
-  Stack,
-  Group,
-  Badge,
-  Button,
-  Select,
-} from "@mantine/core";
+import { Card, Text, Title, Stack, Group, Badge, Button, Select } from "@mantine/core";
 import { MerchantOnboardingWizard } from "@/features/merchant-onboarding";
 import { useAuth } from "@/processes/auth";
 import { useMerchantStatusQuery } from "@/entities/billing";
@@ -19,18 +10,14 @@ interface MerchantStatusCardProps {
   organizations: Array<{ id: number; name: string }>;
 }
 
-export const MerchantStatusCard = ({
-  organizations,
-}: MerchantStatusCardProps) => {
+export const MerchantStatusCard = ({ organizations }: MerchantStatusCardProps) => {
   const { canManageMerchants } = useAuth();
   const [selectedOrgId, setSelectedOrgId] = useState<number | null>(
-    organizations.length > 0 ? organizations[0].id : null
+    organizations.length > 0 ? organizations[0].id : null,
   );
   const [wizardOpened, setWizardOpened] = useState(false);
 
-  const { data: merchantStatus, isLoading } = useMerchantStatusQuery(
-    selectedOrgId || 0
-  );
+  const { data: merchantStatus, isLoading } = useMerchantStatusQuery(selectedOrgId || 0);
 
   const onboardingStatus = !merchantStatus
     ? "NONE"
@@ -70,9 +57,7 @@ export const MerchantStatusCard = ({
                 label: org.name,
               }))}
               value={selectedOrgId?.toString() || null}
-              onChange={(value) =>
-                setSelectedOrgId(value ? parseInt(value, 10) : null)
-              }
+              onChange={(value) => setSelectedOrgId(value ? parseInt(value, 10) : null)}
             />
           )}
 

@@ -12,37 +12,20 @@ describe("Billing Query Keys", () => {
     });
 
     it("generates correct payment key with id", () => {
-      expect(billingKeys.payment("pay_123")).toEqual([
-        "billing",
-        "payments",
-        "pay_123",
-      ]);
+      expect(billingKeys.payment("pay_123")).toEqual(["billing", "payments", "pay_123"]);
     });
 
     it("generates correct history key with params", () => {
       const params = { page: 1, limit: 10 };
-      expect(billingKeys.history(params)).toEqual([
-        "billing",
-        "payments",
-        "history",
-        params,
-      ]);
+      expect(billingKeys.history(params)).toEqual(["billing", "payments", "history", params]);
     });
 
     it("generates correct merchant status key", () => {
-      expect(billingKeys.merchantStatus()).toEqual([
-        "billing",
-        "merchant-status",
-        undefined,
-      ]);
+      expect(billingKeys.merchantStatus()).toEqual(["billing", "merchant-status", undefined]);
     });
 
     it("generates correct merchant status key with organizationId", () => {
-      expect(billingKeys.merchantStatus(123)).toEqual([
-        "billing",
-        "merchant-status",
-        123,
-      ]);
+      expect(billingKeys.merchantStatus(123)).toEqual(["billing", "merchant-status", 123]);
     });
 
     it("generates correct payouts key", () => {
@@ -50,21 +33,12 @@ describe("Billing Query Keys", () => {
     });
 
     it("generates correct payout key with id", () => {
-      expect(billingKeys.payout("po_456")).toEqual([
-        "billing",
-        "payouts",
-        "po_456",
-      ]);
+      expect(billingKeys.payout("po_456")).toEqual(["billing", "payouts", "po_456"]);
     });
 
     it("generates correct payout history key with params", () => {
       const params = { page: 2, limit: 20 };
-      expect(billingKeys.payoutHistory(params)).toEqual([
-        "billing",
-        "payouts",
-        "history",
-        params,
-      ]);
+      expect(billingKeys.payoutHistory(params)).toEqual(["billing", "payouts", "history", params]);
     });
 
     it("generates unique keys for different params", () => {

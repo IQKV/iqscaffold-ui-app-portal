@@ -164,7 +164,7 @@ export const contactsHandlers = [
           contact.firstName.toLowerCase().includes(searchLower) ||
           contact.lastName.toLowerCase().includes(searchLower) ||
           contact.email.toLowerCase().includes(searchLower) ||
-          contact.jobTitle?.toLowerCase().includes(searchLower)
+          contact.jobTitle?.toLowerCase().includes(searchLower),
       );
     }
 
@@ -206,7 +206,7 @@ export const contactsHandlers = [
           error: "Contact not found",
           message: `Contact with ID ${id} does not exist`,
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -229,7 +229,7 @@ export const contactsHandlers = [
           error: "Duplicate email",
           message: `Contact with email ${body.email} already exists`,
         },
-        { status: 409 }
+        { status: 409 },
       );
     }
 
@@ -273,7 +273,7 @@ export const contactsHandlers = [
           error: "Contact not found",
           message: `Contact with ID ${id} does not exist`,
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -286,7 +286,7 @@ export const contactsHandlers = [
             error: "Duplicate email",
             message: `Contact with email ${body.email} already exists`,
           },
-          { status: 409 }
+          { status: 409 },
         );
       }
     }
@@ -319,7 +319,7 @@ export const contactsHandlers = [
           error: "Contact not found",
           message: `Contact with ID ${id} does not exist`,
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -329,55 +329,49 @@ export const contactsHandlers = [
   }),
 
   // Get contacts by company
-  http.get(
-    `${API_BASE_URL}/v1/contacts/company/:companyId`,
-    async ({ params }) => {
-      if (config.delay) {
-        await delay(config.delay);
-      }
-
-      const { companyId } = params;
-      const companyIdNum = parseInt(companyId as string, 10);
-      const contacts = mockContacts.filter((c) => c.companyId === companyIdNum);
-
-      return HttpResponse.json(contacts);
+  http.get(`${API_BASE_URL}/v1/contacts/company/:companyId`, async ({ params }) => {
+    if (config.delay) {
+      await delay(config.delay);
     }
-  ),
+
+    const { companyId } = params;
+    const companyIdNum = parseInt(companyId as string, 10);
+    const contacts = mockContacts.filter((c) => c.companyId === companyIdNum);
+
+    return HttpResponse.json(contacts);
+  }),
 
   // Update lead score
-  http.patch(
-    `${API_BASE_URL}/v1/contacts/:id/score`,
-    async ({ params, request }) => {
-      if (config.delay) {
-        await delay(config.delay);
-      }
-
-      const { id } = params;
-      const contactId = parseInt(id as string, 10);
-      const body = (await request.json()) as { leadScore: number };
-
-      const contactIndex = mockContacts.findIndex((c) => c.id === contactId);
-
-      if (contactIndex === -1) {
-        return HttpResponse.json(
-          {
-            error: "Contact not found",
-            message: `Contact with ID ${id} does not exist`,
-          },
-          { status: 404 }
-        );
-      }
-
-      mockContacts[contactIndex] = {
-        ...mockContacts[contactIndex],
-        leadScore: body.leadScore,
-        updatedAt: new Date().toISOString(),
-        lastModifiedBy: "current-user",
-      };
-
-      return HttpResponse.json(mockContacts[contactIndex]);
+  http.patch(`${API_BASE_URL}/v1/contacts/:id/score`, async ({ params, request }) => {
+    if (config.delay) {
+      await delay(config.delay);
     }
-  ),
+
+    const { id } = params;
+    const contactId = parseInt(id as string, 10);
+    const body = (await request.json()) as { leadScore: number };
+
+    const contactIndex = mockContacts.findIndex((c) => c.id === contactId);
+
+    if (contactIndex === -1) {
+      return HttpResponse.json(
+        {
+          error: "Contact not found",
+          message: `Contact with ID ${id} does not exist`,
+        },
+        { status: 404 },
+      );
+    }
+
+    mockContacts[contactIndex] = {
+      ...mockContacts[contactIndex],
+      leadScore: body.leadScore,
+      updatedAt: new Date().toISOString(),
+      lastModifiedBy: "current-user",
+    };
+
+    return HttpResponse.json(mockContacts[contactIndex]);
+  }),
 
   // Bulk create contacts
   http.post(`${API_BASE_URL}/v1/contacts/bulk`, async ({ request }) => {
@@ -391,9 +385,7 @@ export const contactsHandlers = [
 
     body.contacts.forEach((contactRequest, index) => {
       // Check for duplicate email
-      const existingContact = mockContacts.find(
-        (c) => c.email === contactRequest.email
-      );
+      const existingContact = mockContacts.find((c) => c.email === contactRequest.email);
       if (existingContact) {
         errors.push({
           id: index,
@@ -517,9 +509,7 @@ export const contactsHandlers = [
     const errors: Array<{ id: number; error: string }> = [];
 
     body.updates.forEach((update) => {
-      const contactIndex = mockContacts.findIndex(
-        (c) => c.id === update.contactId
-      );
+      const contactIndex = mockContacts.findIndex((c) => c.id === update.contactId);
 
       if (contactIndex === -1) {
         errors.push({
@@ -570,7 +560,7 @@ export const contactsHandlers = [
         (company) =>
           company.name.toLowerCase().includes(searchLower) ||
           company.email?.toLowerCase().includes(searchLower) ||
-          company.website?.toLowerCase().includes(searchLower)
+          company.website?.toLowerCase().includes(searchLower),
       );
     }
 
@@ -612,7 +602,7 @@ export const contactsHandlers = [
           error: "Company not found",
           message: `Company with ID ${id} does not exist`,
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -658,7 +648,7 @@ export const contactsHandlers = [
           error: "Company not found",
           message: `Company with ID ${id} does not exist`,
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -687,7 +677,7 @@ export const contactsHandlers = [
           error: "Company not found",
           message: `Company with ID ${id} does not exist`,
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
 

@@ -12,13 +12,7 @@ import {
   Title,
   Alert,
 } from "@mantine/core";
-import {
-  IconEdit,
-  IconTrash,
-  IconPlus,
-  IconSearch,
-  IconAlertCircle,
-} from "@tabler/icons-react";
+import { IconEdit, IconTrash, IconPlus, IconSearch, IconAlertCircle } from "@tabler/icons-react";
 import { DataTable, type DataTableColumn } from "@/shared/ui/data-table";
 import { useUsersQuery, useDeleteUserMutation, UserDto } from "@/entities/user";
 import { useAuth } from "@/processes/auth";
@@ -32,10 +26,7 @@ interface UsersDataGridProps {
   onEditUser: (user: UserDto) => void;
 }
 
-export function UsersDataGrid({
-  onCreateUser,
-  onEditUser,
-}: UsersDataGridProps) {
+export function UsersDataGrid({ onCreateUser, onEditUser }: UsersDataGridProps) {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebouncedValue(search, 300);
@@ -87,7 +78,7 @@ export function UsersDataGrid({
         },
       });
     },
-    [deleteUserMutation]
+    [deleteUserMutation],
   );
 
   const getRoleBadgeColor = (authorities: string[] | undefined) => {
@@ -145,18 +136,10 @@ export function UsersDataGrid({
         sortable: true,
         render: (_, user) => (
           <Group gap="xs">
-            <Badge
-              color={user.enabled ? "green" : "red"}
-              variant="light"
-              size="sm"
-            >
+            <Badge color={user.enabled ? "green" : "red"} variant="light" size="sm">
               {user.enabled ? t`Enabled` : t`Disabled`}
             </Badge>
-            <Badge
-              color={user.emailVerified ? "green" : "yellow"}
-              variant="light"
-              size="sm"
-            >
+            <Badge color={user.emailVerified ? "green" : "yellow"} variant="light" size="sm">
               {user.emailVerified ? t`Verified` : t`Unverified`}
             </Badge>
           </Group>
@@ -166,9 +149,7 @@ export function UsersDataGrid({
         key: "createdAt",
         title: t`Created`,
         sortable: true,
-        render: (_, user) => (
-          <Text size="sm">{new Date(user.createdAt).toLocaleDateString()}</Text>
-        ),
+        render: (_, user) => <Text size="sm">{new Date(user.createdAt).toLocaleDateString()}</Text>,
       },
       {
         key: "actions",
@@ -205,26 +186,19 @@ export function UsersDataGrid({
         ),
       },
     ],
-    [onEditUser, deleteUserMutation.isPending, handleDeleteUser, canManageUsers]
+    [onEditUser, deleteUserMutation.isPending, handleDeleteUser, canManageUsers],
   );
 
   return (
     <Stack gap="md" data-testid="feature-users-data-grid">
       {error && (
-        <Alert
-          icon={<IconAlertCircle size={16} />}
-          title={t`Error`}
-          color="red"
-        >
+        <Alert icon={<IconAlertCircle size={16} />} title={t`Error`} color="red">
           {t`Error loading users`}: {error.message}
         </Alert>
       )}
       <Paper p="md" withBorder shadow="sm">
         <Group justify="space-between" mb="md">
-          <Title
-            order={2}
-            data-testid="users-title"
-          >{t`User Management`}</Title>
+          <Title order={2} data-testid="users-title">{t`User Management`}</Title>
           {canManageUsers() && (
             <Button
               leftSection={<IconPlus size={16} />}

@@ -11,12 +11,7 @@ import {
   Tooltip,
 } from "@mantine/core";
 import { t } from "@lingui/core/macro";
-import {
-  IconCheck,
-  IconClock,
-  IconAlertCircle,
-  IconChevronRight,
-} from "@tabler/icons-react";
+import { IconCheck, IconClock, IconAlertCircle, IconChevronRight } from "@tabler/icons-react";
 import {
   useTodaysFollowUpsQuery,
   useOverdueFollowUpsQuery,
@@ -52,10 +47,7 @@ export function FollowUpPanel() {
   const completeFollowUpMutation = useCompleteFollowUpMutation();
 
   // Combine and sort follow-ups: overdue first, then by due time (Requirement 6.7)
-  const allFollowUps = [
-    ...(overdueFollowUps || []),
-    ...(todaysFollowUps || []),
-  ].sort((a, b) => {
+  const allFollowUps = [...(overdueFollowUps || []), ...(todaysFollowUps || [])].sort((a, b) => {
     // Overdue items first
     if (a.isOverdue && !b.isOverdue) {
       return -1;
@@ -122,11 +114,7 @@ export function FollowUpPanel() {
 
         {/* Error state */}
         {hasError && !isLoading && (
-          <Alert
-            icon={<IconAlertCircle size={16} />}
-            title={t`Error`}
-            color="red"
-          >
+          <Alert icon={<IconAlertCircle size={16} />} title={t`Error`} color="red">
             {t`Failed to load follow-ups. Please try again later.`}
           </Alert>
         )}
@@ -176,12 +164,7 @@ interface FollowUpItemProps {
  * - Quick completion action (Requirement 6.4)
  * - Navigation to lead detail (Requirement 6.3)
  */
-function FollowUpItem({
-  followUp,
-  onComplete,
-  onNavigate,
-  isCompleting,
-}: FollowUpItemProps) {
+function FollowUpItem({ followUp, onComplete, onNavigate, isCompleting }: FollowUpItemProps) {
   const dueTime = new Date(followUp.dueDate).toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
@@ -266,12 +249,7 @@ function FollowUpItem({
 
           {/* Navigate to lead button (Requirement 6.3) */}
           <Tooltip label={t`View lead details`}>
-            <ActionIcon
-              color="blue"
-              variant="light"
-              onClick={onNavigate}
-              size="sm"
-            >
+            <ActionIcon color="blue" variant="light" onClick={onNavigate} size="sm">
               <IconChevronRight size={16} />
             </ActionIcon>
           </Tooltip>

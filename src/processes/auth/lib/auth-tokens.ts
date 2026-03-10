@@ -34,9 +34,7 @@ function readFromStorage(): TokenPair {
   const cfg = getAuthConfig();
   const accessToken = localStorage.getItem(cfg.tokenStorage.accessTokenKey);
   const refreshToken = localStorage.getItem(cfg.tokenStorage.refreshTokenKey);
-  const expiresAtStr = localStorage.getItem(
-    `${cfg.tokenStorage.accessTokenKey}:exp`
-  );
+  const expiresAtStr = localStorage.getItem(`${cfg.tokenStorage.accessTokenKey}:exp`);
   return {
     accessToken,
     refreshToken,
@@ -57,10 +55,7 @@ function writeToStorage(tokens: TokenPair) {
     localStorage.removeItem(cfg.tokenStorage.refreshTokenKey);
   }
   if (tokens.expiresAt != null) {
-    localStorage.setItem(
-      `${cfg.tokenStorage.accessTokenKey}:exp`,
-      String(tokens.expiresAt)
-    );
+    localStorage.setItem(`${cfg.tokenStorage.accessTokenKey}:exp`, String(tokens.expiresAt));
   } else {
     localStorage.removeItem(`${cfg.tokenStorage.accessTokenKey}:exp`);
   }

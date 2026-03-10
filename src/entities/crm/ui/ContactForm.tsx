@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  TextInput,
-  Select,
-  Textarea,
-  NumberInput,
-  Stack,
-  Group,
-  Button,
-} from "@mantine/core";
+import { TextInput, Select, Textarea, NumberInput, Stack, Group, Button } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import {
   IconUser,
@@ -89,21 +81,15 @@ export const ContactForm: React.FC<ContactFormProps> = ({
         return null;
       },
       phone: (value?: string) =>
-        value && value.length > 20
-          ? "Phone must be less than 20 characters"
-          : null,
+        value && value.length > 20 ? "Phone must be less than 20 characters" : null,
       jobTitle: (value?: string) =>
-        value && value.length > 100
-          ? "Job title must be less than 100 characters"
-          : null,
+        value && value.length > 100 ? "Job title must be less than 100 characters" : null,
       leadScore: (value?: number) =>
         value !== undefined && (value < 0 || value > 100)
           ? "Lead score must be between 0 and 100"
           : null,
       notes: (value?: string) =>
-        value && value.length > 1000
-          ? "Notes must be less than 1000 characters"
-          : null,
+        value && value.length > 1000 ? "Notes must be less than 1000 characters" : null,
     },
   });
 

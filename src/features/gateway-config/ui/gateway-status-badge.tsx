@@ -7,10 +7,7 @@ interface GatewayStatusBadgeProps {
   isPrimary?: boolean;
 }
 
-export const GatewayStatusBadge = ({
-  isActive,
-  isPrimary = false,
-}: GatewayStatusBadgeProps) => {
+export const GatewayStatusBadge = ({ isActive, isPrimary = false }: GatewayStatusBadgeProps) => {
   if (isPrimary) {
     return (
       <Badge color="blue" leftSection={<IconStar size={12} />} variant="filled">

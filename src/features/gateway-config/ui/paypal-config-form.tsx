@@ -8,11 +8,7 @@ interface PayPalConfigFormProps {
   errors?: Record<string, string>;
 }
 
-export const PayPalConfigForm = ({
-  value,
-  onChange,
-  errors = {},
-}: PayPalConfigFormProps) => {
+export const PayPalConfigForm = ({ value, onChange, errors = {} }: PayPalConfigFormProps) => {
   return (
     <Stack gap="md">
       <TextInput
@@ -20,9 +16,7 @@ export const PayPalConfigForm = ({
         placeholder="AeB..."
         required
         value={value.clientId || ""}
-        onChange={(e) =>
-          onChange({ ...value, clientId: e.currentTarget.value })
-        }
+        onChange={(e) => onChange({ ...value, clientId: e.currentTarget.value })}
         error={errors.clientId}
         description={t`Your PayPal REST API client ID`}
       />
@@ -31,9 +25,7 @@ export const PayPalConfigForm = ({
         placeholder="EL..."
         required
         value={value.clientSecret || ""}
-        onChange={(e) =>
-          onChange({ ...value, clientSecret: e.currentTarget.value })
-        }
+        onChange={(e) => onChange({ ...value, clientSecret: e.currentTarget.value })}
         error={errors.clientSecret}
         description={t`Your PayPal REST API client secret`}
       />
@@ -41,9 +33,7 @@ export const PayPalConfigForm = ({
         label={t`Webhook ID`}
         placeholder="WH-..."
         value={value.webhookId || ""}
-        onChange={(e) =>
-          onChange({ ...value, webhookId: e.currentTarget.value })
-        }
+        onChange={(e) => onChange({ ...value, webhookId: e.currentTarget.value })}
         error={errors.webhookId}
         description={t`Webhook ID for event notifications (optional)`}
       />
@@ -51,9 +41,7 @@ export const PayPalConfigForm = ({
         label={t`Mode`}
         required
         value={value.mode || "sandbox"}
-        onChange={(val) =>
-          onChange({ ...value, mode: val as "sandbox" | "live" })
-        }
+        onChange={(val) => onChange({ ...value, mode: val as "sandbox" | "live" })}
         data={[
           { value: "sandbox", label: t`Sandbox (Test)` },
           { value: "live", label: t`Live (Production)` },

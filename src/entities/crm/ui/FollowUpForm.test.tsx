@@ -24,32 +24,20 @@ describe("FollowUpForm", () => {
     it("should render the form in create mode", () => {
       render(
         <TestWrapper>
-          <FollowUpForm
-            opened
-            onClose={mockOnClose}
-            leadId={leadId}
-            onSubmit={mockOnSubmit}
-          />
-        </TestWrapper>
+          <FollowUpForm opened onClose={mockOnClose} leadId={leadId} onSubmit={mockOnSubmit} />
+        </TestWrapper>,
       );
 
       expect(screen.getByTestId("modal-follow-up-form")).toBeInTheDocument();
       expect(screen.getByText("Schedule Follow-up")).toBeInTheDocument();
-      expect(screen.getByTestId("btn-submit-follow-up-form")).toHaveTextContent(
-        "Schedule"
-      );
+      expect(screen.getByTestId("btn-submit-follow-up-form")).toHaveTextContent("Schedule");
     });
 
     it("should have default values for priority and type", () => {
       render(
         <TestWrapper>
-          <FollowUpForm
-            opened
-            onClose={mockOnClose}
-            leadId={leadId}
-            onSubmit={mockOnSubmit}
-          />
-        </TestWrapper>
+          <FollowUpForm opened onClose={mockOnClose} leadId={leadId} onSubmit={mockOnSubmit} />
+        </TestWrapper>,
       );
 
       // Check that default values are set (MEDIUM priority, CALL type)
@@ -62,13 +50,8 @@ describe("FollowUpForm", () => {
 
       render(
         <TestWrapper>
-          <FollowUpForm
-            opened
-            onClose={mockOnClose}
-            leadId={leadId}
-            onSubmit={mockOnSubmit}
-          />
-        </TestWrapper>
+          <FollowUpForm opened onClose={mockOnClose} leadId={leadId} onSubmit={mockOnSubmit} />
+        </TestWrapper>,
       );
 
       // Try to submit without filling required fields
@@ -84,13 +67,8 @@ describe("FollowUpForm", () => {
 
       render(
         <TestWrapper>
-          <FollowUpForm
-            opened
-            onClose={mockOnClose}
-            leadId={leadId}
-            onSubmit={mockOnSubmit}
-          />
-        </TestWrapper>
+          <FollowUpForm opened onClose={mockOnClose} leadId={leadId} onSubmit={mockOnSubmit} />
+        </TestWrapper>,
       );
 
       // Fill in the description
@@ -109,7 +87,7 @@ describe("FollowUpForm", () => {
             description: "Follow up on product demo",
             priority: "MEDIUM",
             type: "CALL",
-          })
+          }),
         );
       });
     });
@@ -138,13 +116,11 @@ describe("FollowUpForm", () => {
             followUp={mockFollowUp}
             onSubmit={mockOnSubmit}
           />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       expect(screen.getByText("Edit Follow-up")).toBeInTheDocument();
-      expect(screen.getByTestId("btn-submit-follow-up-form")).toHaveTextContent(
-        "Update"
-      );
+      expect(screen.getByTestId("btn-submit-follow-up-form")).toHaveTextContent("Update");
     });
 
     it("should pre-populate form with follow-up data", () => {
@@ -157,7 +133,7 @@ describe("FollowUpForm", () => {
             followUp={mockFollowUp}
             onSubmit={mockOnSubmit}
           />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       const descriptionField = screen.getByLabelText(/description/i);
@@ -176,7 +152,7 @@ describe("FollowUpForm", () => {
             followUp={mockFollowUp}
             onSubmit={mockOnSubmit}
           />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       // Update the description
@@ -196,7 +172,7 @@ describe("FollowUpForm", () => {
             description: "Updated follow-up description",
             priority: "HIGH",
             type: "MEETING",
-          })
+          }),
         );
       });
     }, 15000);
@@ -226,14 +202,12 @@ describe("FollowUpForm", () => {
             followUp={pastFollowUp}
             onSubmit={mockOnSubmit}
           />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       // Check for past date warning
       await waitFor(() => {
-        expect(
-          screen.getByText(/This date is in the past/i)
-        ).toBeInTheDocument();
+        expect(screen.getByText(/This date is in the past/i)).toBeInTheDocument();
       });
     });
 
@@ -260,7 +234,7 @@ describe("FollowUpForm", () => {
             followUp={pastFollowUp}
             onSubmit={mockOnSubmit}
           />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       // Submit the form
@@ -280,13 +254,8 @@ describe("FollowUpForm", () => {
 
       render(
         <TestWrapper>
-          <FollowUpForm
-            opened
-            onClose={mockOnClose}
-            leadId={leadId}
-            onSubmit={mockOnSubmit}
-          />
-        </TestWrapper>
+          <FollowUpForm opened onClose={mockOnClose} leadId={leadId} onSubmit={mockOnSubmit} />
+        </TestWrapper>,
       );
 
       const cancelButton = screen.getByTestId("btn-cancel-follow-up-form");
@@ -305,7 +274,7 @@ describe("FollowUpForm", () => {
             onSubmit={mockOnSubmit}
             isLoading
           />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       const cancelButton = screen.getByTestId("btn-cancel-follow-up-form");
@@ -317,13 +286,8 @@ describe("FollowUpForm", () => {
 
       const { rerender } = render(
         <TestWrapper>
-          <FollowUpForm
-            opened
-            onClose={mockOnClose}
-            leadId={leadId}
-            onSubmit={mockOnSubmit}
-          />
-        </TestWrapper>
+          <FollowUpForm opened onClose={mockOnClose} leadId={leadId} onSubmit={mockOnSubmit} />
+        </TestWrapper>,
       );
 
       // Fill in some data
@@ -339,18 +303,13 @@ describe("FollowUpForm", () => {
             leadId={leadId}
             onSubmit={mockOnSubmit}
           />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       rerender(
         <TestWrapper>
-          <FollowUpForm
-            opened
-            onClose={mockOnClose}
-            leadId={leadId}
-            onSubmit={mockOnSubmit}
-          />
-        </TestWrapper>
+          <FollowUpForm opened onClose={mockOnClose} leadId={leadId} onSubmit={mockOnSubmit} />
+        </TestWrapper>,
       );
 
       // Form should be reset
@@ -363,13 +322,8 @@ describe("FollowUpForm", () => {
     it("should allow selecting different priorities", async () => {
       render(
         <TestWrapper>
-          <FollowUpForm
-            opened
-            onClose={mockOnClose}
-            leadId={leadId}
-            onSubmit={mockOnSubmit}
-          />
-        </TestWrapper>
+          <FollowUpForm opened onClose={mockOnClose} leadId={leadId} onSubmit={mockOnSubmit} />
+        </TestWrapper>,
       );
 
       // Priority field should be present with default value
@@ -381,13 +335,8 @@ describe("FollowUpForm", () => {
     it("should allow selecting different follow-up types", async () => {
       render(
         <TestWrapper>
-          <FollowUpForm
-            opened
-            onClose={mockOnClose}
-            leadId={leadId}
-            onSubmit={mockOnSubmit}
-          />
-        </TestWrapper>
+          <FollowUpForm opened onClose={mockOnClose} leadId={leadId} onSubmit={mockOnSubmit} />
+        </TestWrapper>,
       );
 
       // Type field should be present with default value
@@ -405,13 +354,8 @@ describe("FollowUpForm", () => {
 
       render(
         <TestWrapper>
-          <FollowUpForm
-            opened
-            onClose={mockOnClose}
-            leadId={leadId}
-            onSubmit={mockOnSubmit}
-          />
-        </TestWrapper>
+          <FollowUpForm opened onClose={mockOnClose} leadId={leadId} onSubmit={mockOnSubmit} />
+        </TestWrapper>,
       );
 
       // Fill in required fields
@@ -445,7 +389,7 @@ describe("FollowUpForm", () => {
             onSubmit={mockOnSubmit}
             title={customTitle}
           />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       expect(screen.getByText(customTitle)).toBeInTheDocument();

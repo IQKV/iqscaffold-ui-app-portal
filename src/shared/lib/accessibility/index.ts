@@ -33,7 +33,7 @@ export const useKeyboardNavigation = ({
           s.key.toLowerCase() === event.key.toLowerCase() &&
           !!s.ctrl === event.ctrlKey &&
           !!s.alt === event.altKey &&
-          !!s.shift === event.shiftKey
+          !!s.shift === event.shiftKey,
       );
 
       if (shortcut) {
@@ -43,7 +43,7 @@ export const useKeyboardNavigation = ({
         shortcut.action();
       }
     },
-    [shortcuts, enabled]
+    [shortcuts, enabled],
   );
 
   useEffect(() => {
@@ -77,7 +77,7 @@ export const useAnnouncer = () => {
         document.body.removeChild(announcement);
       }, 1000);
     },
-    []
+    [],
   );
 
   return { announce };

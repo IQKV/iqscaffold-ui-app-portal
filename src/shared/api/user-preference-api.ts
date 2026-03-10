@@ -4,10 +4,7 @@
  */
 
 import { apiRequest } from "./base";
-import type {
-  UserPreference,
-  UpdateUserPreferenceRequest,
-} from "@/entities/user";
+import type { UserPreference, UpdateUserPreferenceRequest } from "@/entities/user";
 
 const BASE_PATH = "/v1/users/me/preferences";
 
@@ -27,9 +24,7 @@ export const userPreferenceApi = {
    * Update current user's preferences
    * All fields are optional - only provided fields will be updated
    */
-  updateMyPreferences: async (
-    data: UpdateUserPreferenceRequest
-  ): Promise<UserPreference> => {
+  updateMyPreferences: async (data: UpdateUserPreferenceRequest): Promise<UserPreference> => {
     return apiRequest<UserPreference>({
       method: "PATCH",
       url: BASE_PATH,

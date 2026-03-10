@@ -21,7 +21,7 @@ describe("RFC 9457 Problem Details", () => {
         "Validation Error",
         400,
         "The request body is invalid",
-        "/users/123"
+        "/users/123",
       );
 
       expect(problem).toEqual({
@@ -46,7 +46,7 @@ describe("RFC 9457 Problem Details", () => {
             { field: "name", message: "Name is required" },
           ],
           timestamp: "2023-10-01T12:00:00Z",
-        }
+        },
       );
 
       expect(problem).toEqual({
@@ -63,10 +63,7 @@ describe("RFC 9457 Problem Details", () => {
     });
 
     it("omits undefined optional fields", () => {
-      const problem = createProblemDetail(
-        "https://example.com/probs/server-error",
-        "Server Error"
-      );
+      const problem = createProblemDetail("https://example.com/probs/server-error", "Server Error");
 
       expect(problem).toEqual({
         type: "https://example.com/probs/server-error",
@@ -165,52 +162,32 @@ describe("RFC 9457 Problem Details", () => {
     });
 
     it("determines validation error from status and field errors", () => {
-      expect(
-        determineErrorType(400, undefined, undefined, undefined, true)
-      ).toBe("validation");
-      expect(
-        determineErrorType(422, undefined, undefined, undefined, true)
-      ).toBe("validation");
+      expect(determineErrorType(400, undefined, undefined, undefined, true)).toBe("validation");
+      expect(determineErrorType(422, undefined, undefined, undefined, true)).toBe("validation");
     });
 
     it("determines client error from status without field errors", () => {
-      expect(
-        determineErrorType(400, undefined, undefined, undefined, false)
-      ).toBe("client");
+      expect(determineErrorType(400, undefined, undefined, undefined, false)).toBe("client");
       expect(determineErrorType(404)).toBe("client");
     });
 
     it("determines timeout error from status and message", () => {
       expect(determineErrorType(408)).toBe("timeout");
-      expect(determineErrorType(undefined, "Request timed out")).toBe(
-        "timeout"
-      );
-      expect(determineErrorType(undefined, "Connection timeout")).toBe(
-        "timeout"
-      );
+      expect(determineErrorType(undefined, "Request timed out")).toBe("timeout");
+      expect(determineErrorType(undefined, "Connection timeout")).toBe("timeout");
     });
 
     it("determines network error from message and code", () => {
       expect(determineErrorType(undefined, "Network error")).toBe("network");
-      expect(determineErrorType(undefined, "Connection refused")).toBe(
-        "network"
-      );
-      expect(determineErrorType(undefined, undefined, "ECONNREFUSED")).toBe(
-        "network"
-      );
-      expect(determineErrorType(undefined, undefined, "ENOTFOUND")).toBe(
-        "network"
-      );
+      expect(determineErrorType(undefined, "Connection refused")).toBe("network");
+      expect(determineErrorType(undefined, undefined, "ECONNREFUSED")).toBe("network");
+      expect(determineErrorType(undefined, undefined, "ENOTFOUND")).toBe("network");
     });
 
     it("determines rate limit error", () => {
       expect(determineErrorType(429)).toBe("rate-limit");
-      expect(determineErrorType(undefined, "Rate limit exceeded")).toBe(
-        "rate-limit"
-      );
-      expect(determineErrorType(undefined, "Too many requests")).toBe(
-        "rate-limit"
-      );
+      expect(determineErrorType(undefined, "Rate limit exceeded")).toBe("rate-limit");
+      expect(determineErrorType(undefined, "Too many requests")).toBe("rate-limit");
     });
 
     it("determines server error from status", () => {
@@ -222,28 +199,13 @@ describe("RFC 9457 Problem Details", () => {
 
     it("determines error type from problem type", () => {
       expect(
-        determineErrorType(
-          undefined,
-          undefined,
-          undefined,
-          PROBLEM_TYPES.AUTHENTICATION_REQUIRED
-        )
+        determineErrorType(undefined, undefined, undefined, PROBLEM_TYPES.AUTHENTICATION_REQUIRED),
       ).toBe("auth");
       expect(
-        determineErrorType(
-          undefined,
-          undefined,
-          undefined,
-          PROBLEM_TYPES.VALIDATION_ERROR
-        )
+        determineErrorType(undefined, undefined, undefined, PROBLEM_TYPES.VALIDATION_ERROR),
       ).toBe("validation");
       expect(
-        determineErrorType(
-          undefined,
-          undefined,
-          undefined,
-          PROBLEM_TYPES.RATE_LIMIT_EXCEEDED
-        )
+        determineErrorType(undefined, undefined, undefined, PROBLEM_TYPES.RATE_LIMIT_EXCEEDED),
       ).toBe("rate-limit");
     });
 
@@ -277,9 +239,7 @@ describe("RFC 9457 Problem Details", () => {
     });
 
     it("includes jitter", () => {
-      const delays = Array.from({ length: 10 }, () =>
-        calculateRetryDelay(1, config)
-      );
+      const delays = Array.from({ length: 10 }, () => calculateRetryDelay(1, config));
       const uniqueDelays = new Set(delays);
 
       // With jitter, we should get different delays
@@ -386,19 +346,10 @@ describe("RFC 9457 Problem Details", () => {
 
   describe("ERROR_PATTERNS", () => {
     it("has patterns for all error types", () => {
-      const errorTypes = [
-        "auth",
-        "validation",
-        "timeout",
-        "network",
-        "rate-limit",
-        "server",
-      ];
+      const errorTypes = ["auth", "validation", "timeout", "network", "rate-limit", "server"];
 
       for (const errorType of errorTypes) {
-        expect(
-          ERROR_PATTERNS[errorType as keyof typeof ERROR_PATTERNS]
-        ).toBeDefined();
+        expect(ERROR_PATTERNS[errorType as keyof typeof ERROR_PATTERNS]).toBeDefined();
       }
     });
 
@@ -406,30 +357,22 @@ describe("RFC 9457 Problem Details", () => {
       for (const [errorType, pattern] of Object.entries(ERROR_PATTERNS)) {
         if ("statusCodes" in pattern && pattern.statusCodes) {
           expect(Array.isArray(pattern.statusCodes)).toBe(true);
-          expect(
-            pattern.statusCodes.every((code: any) => typeof code === "number")
-          ).toBe(true);
+          expect(pattern.statusCodes.every((code: any) => typeof code === "number")).toBe(true);
         }
 
         if ("messagePatterns" in pattern && pattern.messagePatterns) {
           expect(Array.isArray(pattern.messagePatterns)).toBe(true);
-          expect(
-            pattern.messagePatterns.every((p: any) => p instanceof RegExp)
-          ).toBe(true);
+          expect(pattern.messagePatterns.every((p: any) => p instanceof RegExp)).toBe(true);
         }
 
         if ("codes" in pattern && pattern.codes) {
           expect(Array.isArray(pattern.codes)).toBe(true);
-          expect(
-            pattern.codes.every((code: any) => typeof code === "string")
-          ).toBe(true);
+          expect(pattern.codes.every((code: any) => typeof code === "string")).toBe(true);
         }
 
         if (pattern.typePatterns) {
           expect(Array.isArray(pattern.typePatterns)).toBe(true);
-          expect(
-            pattern.typePatterns.every((type) => typeof type === "string")
-          ).toBe(true);
+          expect(pattern.typePatterns.every((type) => typeof type === "string")).toBe(true);
         }
       }
     });

@@ -8,11 +8,7 @@ export interface Tokens {
   refreshToken: string | null;
 }
 
-export type AuthStatus =
-  | "idle"
-  | "initializing"
-  | "authenticated"
-  | "unauthenticated";
+export type AuthStatus = "idle" | "initializing" | "authenticated" | "unauthenticated";
 
 export interface AuthState {
   status: AuthStatus;
@@ -31,10 +27,7 @@ export interface LoginCredentials {
 
 export interface AuthActions {
   initialize: () => void;
-  loginWithTokens: (tokens: {
-    accessToken: string;
-    refreshToken: string;
-  }) => void;
+  loginWithTokens: (tokens: { accessToken: string; refreshToken: string }) => void;
   refresh: () => Promise<void>;
   logout: (options?: { silent?: boolean }) => Promise<void>;
   updateUser: (updates: Partial<UserContext>) => void;

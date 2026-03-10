@@ -106,8 +106,8 @@ export const FeatureUsage: React.FC<FeatureUsageProps> = ({
       {showDetails && usageInfo && (
         <Group justify="space-between">
           <Text size="xs" c="dimmed">
-            {(usageInfo.current || 0).toLocaleString()} /{" "}
-            {(usageInfo.limit || 0).toLocaleString()} used
+            {(usageInfo.current || 0).toLocaleString()} / {(usageInfo.limit || 0).toLocaleString()}{" "}
+            used
           </Text>
           <Text size="xs" c="dimmed">
             {(usageInfo.remaining || 0).toLocaleString()} remaining
@@ -121,11 +121,9 @@ export const FeatureUsage: React.FC<FeatureUsageProps> = ({
 /**
  * Compact version of FeatureUsage for dashboard widgets and cards.
  */
-export const CompactFeatureUsage: React.FC<
-  Omit<FeatureUsageProps, "showName" | "showDetails">
-> = (props) => (
-  <FeatureUsage {...props} showName={false} showDetails={false} size="xs" />
-);
+export const CompactFeatureUsage: React.FC<Omit<FeatureUsageProps, "showName" | "showDetails">> = (
+  props,
+) => <FeatureUsage {...props} showName={false} showDetails={false} size="xs" />;
 
 /**
  * Component for displaying multiple feature usages in a grid or list.
@@ -183,7 +181,7 @@ export const FeatureUsageList: React.FC<FeatureUsageListProps> = ({
           <CompactFeatureUsage key={featureCode} featureCode={featureCode} />
         ) : (
           <FeatureUsage key={featureCode} featureCode={featureCode} />
-        )
+        ),
       )}
     </Stack>
   );

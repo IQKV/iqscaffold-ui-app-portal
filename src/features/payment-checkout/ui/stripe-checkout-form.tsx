@@ -1,9 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  PaymentElement,
-  useElements,
-  useStripe,
-} from "@stripe/react-stripe-js";
+import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { Button, Alert, Stack, Text } from "@mantine/core";
 import { t } from "@lingui/macro";
 
@@ -13,11 +9,7 @@ interface StripeCheckoutFormProps {
   returnUrl: string;
 }
 
-export const StripeCheckoutForm = ({
-  onSuccess,
-  onError,
-  returnUrl,
-}: StripeCheckoutFormProps) => {
+export const StripeCheckoutForm = ({ onSuccess, onError, returnUrl }: StripeCheckoutFormProps) => {
   const stripe = useStripe();
   const elements = useElements();
   const [message, setMessage] = useState<string | null>(null);
@@ -29,7 +21,7 @@ export const StripeCheckoutForm = ({
     }
 
     const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
+      "payment_intent_client_secret",
     );
 
     if (!clientSecret) {
@@ -88,9 +80,7 @@ export const StripeCheckoutForm = ({
         <Text size="lg" fw={500}>{t`Payment Details`}</Text>
 
         {message && (
-          <Alert color={message.includes("succeeded") ? "green" : "red"}>
-            {message}
-          </Alert>
+          <Alert color={message.includes("succeeded") ? "green" : "red"}>{message}</Alert>
         )}
 
         <PaymentElement id="payment-element" options={{ layout: "tabs" }} />

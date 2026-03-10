@@ -20,7 +20,7 @@ function getGlobal(): any {
 
 export function getDirectRuntimeOverrides(
   keys: readonly string[] = ENV_KEYS,
-  w: any = getGlobal()
+  w: any = getGlobal(),
 ): EnvDict {
   const out: EnvDict = {};
   for (const k of keys) {
@@ -38,23 +38,14 @@ export function resolveClientBuildEnv(): EnvDict {
   return { ...base, ...direct };
 }
 
-export const clientBuildEnv: Readonly<EnvDict> = Object.freeze(
-  resolveClientBuildEnv()
-);
+export const clientBuildEnv: Readonly<EnvDict> = Object.freeze(resolveClientBuildEnv());
 
-export const getConfig = (
-  key: string,
-  fallback?: string
-): string | undefined => {
-  return (
-    (clientBuildEnv as Record<string, string | undefined>)[key] ?? fallback
-  );
+export const getConfig = (key: string, fallback?: string): string | undefined => {
+  return (clientBuildEnv as Record<string, string | undefined>)[key] ?? fallback;
 };
 
 export const hasConfig = (key: string): boolean => {
-  return (
-    (clientBuildEnv as Record<string, string | undefined>)[key] !== undefined
-  );
+  return (clientBuildEnv as Record<string, string | undefined>)[key] !== undefined;
 };
 
 export const getConfigOrThrow = (key: string): string => {

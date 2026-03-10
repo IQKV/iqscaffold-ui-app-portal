@@ -21,8 +21,7 @@ export const StripePaymentWidget = ({
   onSuccess,
 }: StripePaymentWidgetProps) => {
   const { colorScheme } = useMantineColorScheme();
-  const [stripePromise, setStripePromise] =
-    useState<Promise<Stripe | null> | null>(null);
+  const [stripePromise, setStripePromise] = useState<Promise<Stripe | null> | null>(null);
 
   useEffect(() => {
     setStripePromise(getStripe(publicKey, accountId));

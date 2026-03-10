@@ -161,5 +161,5 @@ const createTenantStore: TenantStoreCreator = (set) => ({
 export const useTenantStore = create<TenantStore>()(
   devtools(immer(createTenantStore), {
     name: "tenant-store",
-  })
+  }),
 );

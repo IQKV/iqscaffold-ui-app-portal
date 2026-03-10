@@ -52,7 +52,7 @@ export const createCrmValidationSchemas = () => ({
     ] as const,
     {
       errorMap: () => ({ message: t`Please select a lead source` }),
-    }
+    },
   ),
 
   // Follow-up form validation schemas
@@ -91,21 +91,16 @@ export const createCrmValidationSchemas = () => ({
 });
 
 // Lazy initialization proxy for validation schemas
-let _crmValidationSchemas: ReturnType<
-  typeof createCrmValidationSchemas
-> | null = null;
+let _crmValidationSchemas: ReturnType<typeof createCrmValidationSchemas> | null = null;
 
-export const crmValidationSchemas = new Proxy(
-  {} as ReturnType<typeof createCrmValidationSchemas>,
-  {
-    get(target, prop) {
-      if (!_crmValidationSchemas) {
-        _crmValidationSchemas = createCrmValidationSchemas();
-      }
-      return _crmValidationSchemas[prop as keyof typeof _crmValidationSchemas];
-    },
-  }
-);
+export const crmValidationSchemas = new Proxy({} as ReturnType<typeof createCrmValidationSchemas>, {
+  get(target, prop) {
+    if (!_crmValidationSchemas) {
+      _crmValidationSchemas = createCrmValidationSchemas();
+    }
+    return _crmValidationSchemas[prop as keyof typeof _crmValidationSchemas];
+  },
+});
 
 /**
  * Lead form schema with all validations
@@ -139,9 +134,7 @@ export const createFollowUpFormSchema = () => {
   });
 };
 
-export type FollowUpFormData = z.infer<
-  ReturnType<typeof createFollowUpFormSchema>
->;
+export type FollowUpFormData = z.infer<ReturnType<typeof createFollowUpFormSchema>>;
 
 /**
  * Note form schema
@@ -183,9 +176,7 @@ export const isToday = (date: Date): boolean => {
 /**
  * Utility to format validation errors for display
  */
-export const formatValidationError = (
-  error: z.ZodError
-): Record<string, string> => {
+export const formatValidationError = (error: z.ZodError): Record<string, string> => {
   const errors: Record<string, string> = {};
   error.errors.forEach((err) => {
     const path = err.path.join(".");
@@ -203,8 +194,7 @@ export const isDuplicateEmailError = (error: any): boolean => {
   return (
     errorMessage.toLowerCase().includes("duplicate") ||
     errorMessage.toLowerCase().includes("already exists") ||
-    (errorMessage.toLowerCase().includes("email") &&
-      errorMessage.toLowerCase().includes("taken"))
+    (errorMessage.toLowerCase().includes("email") && errorMessage.toLowerCase().includes("taken"))
   );
 };
 

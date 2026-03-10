@@ -1,12 +1,4 @@
-import {
-  Card,
-  Text,
-  Group,
-  Stack,
-  Button,
-  Badge,
-  Divider,
-} from "@mantine/core";
+import { Card, Text, Group, Stack, Button, Badge, Divider } from "@mantine/core";
 import { IconExternalLink, IconDownload } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
 import { Invoice, InvoiceStatusBadge } from "@/entities/billing";
@@ -59,8 +51,7 @@ export function InvoiceCard({ invoice }: InvoiceCardProps) {
               {t`Billing Period:`}
             </Text>
             <Text size="sm">
-              {formatDate(invoice.periodStart)} -{" "}
-              {formatDate(invoice.periodEnd)}
+              {formatDate(invoice.periodStart)} - {formatDate(invoice.periodEnd)}
             </Text>
           </Group>
 
@@ -84,17 +75,16 @@ export function InvoiceCard({ invoice }: InvoiceCardProps) {
             </Group>
           )}
 
-          {invoice.amountPaid > 0 &&
-            invoice.amountPaid !== invoice.amountDue && (
-              <Group justify="space-between">
-                <Text size="sm" c="dimmed">
-                  {t`Amount Paid:`}
-                </Text>
-                <Text size="sm" c="green">
-                  {formatCurrency(invoice.amountPaid / 100, invoice.currency)}
-                </Text>
-              </Group>
-            )}
+          {invoice.amountPaid > 0 && invoice.amountPaid !== invoice.amountDue && (
+            <Group justify="space-between">
+              <Text size="sm" c="dimmed">
+                {t`Amount Paid:`}
+              </Text>
+              <Text size="sm" c="green">
+                {formatCurrency(invoice.amountPaid / 100, invoice.currency)}
+              </Text>
+            </Group>
+          )}
 
           {invoice.stripeInvoiceId && (
             <Group justify="space-between">

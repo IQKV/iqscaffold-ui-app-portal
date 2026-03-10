@@ -68,15 +68,7 @@ export function usePaginationOptimization<T>({
         });
       }
     });
-  }, [
-    queryClient,
-    queryKey,
-    fetchFn,
-    currentPage,
-    totalPages,
-    prefetchPages,
-    staleTime,
-  ]);
+  }, [queryClient, queryKey, fetchFn, currentPage, totalPages, prefetchPages, staleTime]);
 
   // Get cached page data for instant display
   const getCachedPage = useCallback(
@@ -84,7 +76,7 @@ export function usePaginationOptimization<T>({
       const pageQueryKey = [...queryKey, { page }];
       return queryClient.getQueryData<T>(pageQueryKey);
     },
-    [queryClient, queryKey]
+    [queryClient, queryKey],
   );
 
   // Invalidate old pages to free memory

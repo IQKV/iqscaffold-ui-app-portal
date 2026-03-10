@@ -27,8 +27,7 @@ describe("Retry Utilities", () => {
     vi.useFakeTimers();
 
     // Capture and replace unhandled rejection handlers during tests
-    originalUnhandledRejectionListeners =
-      process.listeners("unhandledRejection");
+    originalUnhandledRejectionListeners = process.listeners("unhandledRejection");
     process.removeAllListeners("unhandledRejection");
     process.on("unhandledRejection", (reason) => {
       // Ignore network errors from our retry tests as they are expected
@@ -208,9 +207,7 @@ describe("Retry Utilities", () => {
 
       (apiClient.request as any).mockRejectedValueOnce(serverError);
 
-      await expect(
-        executeWithRetry(mockRequest, { shouldRetry })
-      ).rejects.toEqual(serverError);
+      await expect(executeWithRetry(mockRequest, { shouldRetry })).rejects.toEqual(serverError);
 
       expect(shouldRetry).toHaveBeenCalledWith(serverError, 1);
       expect(apiClient.request).toHaveBeenCalledTimes(1);
@@ -282,9 +279,7 @@ describe("Retry Utilities", () => {
     });
 
     it("adds jitter", () => {
-      const delays = Array.from({ length: 10 }, () =>
-        exponentialBackoff(1, 1000, 30000, 2, 0.5)
-      );
+      const delays = Array.from({ length: 10 }, () => exponentialBackoff(1, 1000, 30000, 2, 0.5));
 
       // With jitter, delays should vary
       const uniqueDelays = new Set(delays);
@@ -331,9 +326,7 @@ describe("Retry Utilities", () => {
       expect(circuitBreaker.getState().failures).toBe(3);
 
       // Next call should fail immediately without calling the function
-      await expect(circuitBreaker.execute(testFunction)).rejects.toThrow(
-        "Circuit breaker is open"
-      );
+      await expect(circuitBreaker.execute(testFunction)).rejects.toThrow("Circuit breaker is open");
 
       expect(testFunction).toHaveBeenCalledTimes(3); // Not called again
     });

@@ -15,7 +15,7 @@ type PreferenceKey = keyof UserPreference;
  */
 export function usePreferenceValue<K extends PreferenceKey>(
   key: K,
-  defaultValue?: UserPreference[K]
+  defaultValue?: UserPreference[K],
 ): UserPreference[K] | undefined {
   const { data: preferences } = useUserPreferences();
   return preferences?.[key] ?? defaultValue;

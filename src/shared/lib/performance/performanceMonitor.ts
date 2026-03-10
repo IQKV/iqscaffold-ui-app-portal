@@ -97,7 +97,7 @@ class PerformanceMonitor {
     method: string,
     duration: number,
     status: number,
-    success: boolean
+    success: boolean,
   ) {
     if (!this.isEnabled) {
       return;
@@ -118,7 +118,7 @@ class PerformanceMonitor {
     // Check against API budget
     if (duration > PERFORMANCE_BUDGETS.API_RESPONSE) {
       console.warn(
-        `[Performance] Slow API call: ${method} ${endpoint} took ${duration}ms (budget: ${PERFORMANCE_BUDGETS.API_RESPONSE}ms)`
+        `[Performance] Slow API call: ${method} ${endpoint} took ${duration}ms (budget: ${PERFORMANCE_BUDGETS.API_RESPONSE}ms)`,
       );
     }
 
@@ -135,7 +135,7 @@ class PerformanceMonitor {
     action: string,
     component: string,
     duration?: number,
-    metadata?: Record<string, any>
+    metadata?: Record<string, any>,
   ) {
     if (!this.isEnabled) {
       return;
@@ -155,7 +155,7 @@ class PerformanceMonitor {
     // Check against interaction budget
     if (duration && duration > PERFORMANCE_BUDGETS.INTERACTION) {
       console.warn(
-        `[Performance] Slow interaction: ${action} in ${component} took ${duration}ms (budget: ${PERFORMANCE_BUDGETS.INTERACTION}ms)`
+        `[Performance] Slow interaction: ${action} in ${component} took ${duration}ms (budget: ${PERFORMANCE_BUDGETS.INTERACTION}ms)`,
       );
     }
   }
@@ -179,7 +179,7 @@ class PerformanceMonitor {
 
     if (duration > PERFORMANCE_BUDGETS.COMPONENT_RENDER) {
       console.warn(
-        `[Performance] Slow render: ${componentName} took ${duration}ms (budget: ${PERFORMANCE_BUDGETS.COMPONENT_RENDER}ms)`
+        `[Performance] Slow render: ${componentName} took ${duration}ms (budget: ${PERFORMANCE_BUDGETS.COMPONENT_RENDER}ms)`,
       );
     }
   }
@@ -190,7 +190,7 @@ class PerformanceMonitor {
   async measureAsync<T>(
     name: string,
     operation: () => Promise<T>,
-    metadata?: Record<string, any>
+    metadata?: Record<string, any>,
   ): Promise<T> {
     if (!this.isEnabled) {
       return operation();
@@ -247,9 +247,8 @@ class PerformanceMonitor {
       medianDuration: this.median(durations),
       p95Duration: this.percentile(durations, 95),
       errorRate: (errors / this.apiMetrics.length) * 100,
-      slowCalls: this.apiMetrics.filter(
-        (m) => m.duration > PERFORMANCE_BUDGETS.API_RESPONSE
-      ).length,
+      slowCalls: this.apiMetrics.filter((m) => m.duration > PERFORMANCE_BUDGETS.API_RESPONSE)
+        .length,
     };
   }
 
@@ -257,9 +256,7 @@ class PerformanceMonitor {
    * Calculate render statistics
    */
   private calculateRenderStats() {
-    const renderMetrics = this.metrics.filter(
-      (m) => m.name === "component_render"
-    );
+    const renderMetrics = this.metrics.filter((m) => m.name === "component_render");
 
     if (renderMetrics.length === 0) {
       return null;
@@ -272,9 +269,8 @@ class PerformanceMonitor {
       averageDuration: this.average(durations),
       medianDuration: this.median(durations),
       p95Duration: this.percentile(durations, 95),
-      slowRenders: renderMetrics.filter(
-        (m) => m.value > PERFORMANCE_BUDGETS.COMPONENT_RENDER
-      ).length,
+      slowRenders: renderMetrics.filter((m) => m.value > PERFORMANCE_BUDGETS.COMPONENT_RENDER)
+        .length,
     };
   }
 
@@ -286,18 +282,15 @@ class PerformanceMonitor {
       return null;
     }
 
-    const withDuration = this.interactionMetrics.filter(
-      (m) => m.duration !== undefined
-    );
+    const withDuration = this.interactionMetrics.filter((m) => m.duration !== undefined);
     const durations = withDuration.map((m) => m.duration!);
 
     return {
       count: this.interactionMetrics.length,
       averageDuration: durations.length > 0 ? this.average(durations) : 0,
       medianDuration: durations.length > 0 ? this.median(durations) : 0,
-      slowInteractions: withDuration.filter(
-        (m) => m.duration! > PERFORMANCE_BUDGETS.INTERACTION
-      ).length,
+      slowInteractions: withDuration.filter((m) => m.duration! > PERFORMANCE_BUDGETS.INTERACTION)
+        .length,
     };
   }
 
@@ -305,15 +298,11 @@ class PerformanceMonitor {
    * Check performance budget
    */
   private checkBudget(name: string, value: number) {
-    const budgetKey = name
-      .toUpperCase()
-      .replace(/_/g, "_") as keyof typeof PERFORMANCE_BUDGETS;
+    const budgetKey = name.toUpperCase().replace(/_/g, "_") as keyof typeof PERFORMANCE_BUDGETS;
     const budget = PERFORMANCE_BUDGETS[budgetKey];
 
     if (budget && value > budget) {
-      console.warn(
-        `[Performance Budget] ${name} exceeded budget: ${value}ms > ${budget}ms`
-      );
+      console.warn(`[Performance Budget] ${name} exceeded budget: ${value}ms > ${budget}ms`);
     }
   }
 
@@ -351,9 +340,7 @@ class PerformanceMonitor {
     }
     const sorted = [...values].sort((a, b) => a - b);
     const mid = Math.floor(sorted.length / 2);
-    return sorted.length % 2 === 0
-      ? (sorted[mid - 1] + sorted[mid]) / 2
-      : sorted[mid];
+    return sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid];
   }
 
   /**
@@ -398,8 +385,7 @@ export function usePerformanceMonitor() {
   return {
     trackMetric: performanceMonitor.trackMetric.bind(performanceMonitor),
     trackAPICall: performanceMonitor.trackAPICall.bind(performanceMonitor),
-    trackInteraction:
-      performanceMonitor.trackInteraction.bind(performanceMonitor),
+    trackInteraction: performanceMonitor.trackInteraction.bind(performanceMonitor),
     measureRender: performanceMonitor.measureRender.bind(performanceMonitor),
     measureAsync: performanceMonitor.measureAsync.bind(performanceMonitor),
     getStats: performanceMonitor.getStats.bind(performanceMonitor),

@@ -49,9 +49,7 @@ export const getUserCurrency = (): string => {
     if (locale.includes("AU")) {
       return "AUD";
     }
-    if (
-      ["FR", "DE", "IT", "ES", "NL", "BE", "IE"].some((c) => locale.includes(c))
-    ) {
+    if (["FR", "DE", "IT", "ES", "NL", "BE", "IE"].some((c) => locale.includes(c))) {
       return "EUR";
     }
 

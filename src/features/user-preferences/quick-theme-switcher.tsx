@@ -5,11 +5,7 @@
 
 import { SegmentedControl } from "@mantine/core";
 import { IconSun, IconMoon, IconDeviceDesktop } from "@tabler/icons-react";
-import {
-  useUserPreferences,
-  useUpdateUserPreferences,
-  type ThemeOption,
-} from "@/entities/user";
+import { useUserPreferences, useUpdateUserPreferences, type ThemeOption } from "@/entities/user";
 
 export function QuickThemeSwitcher() {
   const { data: preferences } = useUserPreferences();

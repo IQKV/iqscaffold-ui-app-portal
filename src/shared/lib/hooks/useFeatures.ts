@@ -1,10 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { billingApi } from "@/shared/api/billing";
-import {
-  UserFeaturesResponse,
-  FeatureDto,
-  FeatureUsageInfo,
-} from "@/shared/api/billing/types";
+import { UserFeaturesResponse, FeatureDto, FeatureUsageInfo } from "@/shared/api/billing/types";
 import { notificationService } from "@/shared/lib/notifications";
 
 interface UseFeaturesReturn {
@@ -53,8 +49,7 @@ export const useFeatures = (): UseFeaturesReturn => {
 
       setFeatures(response);
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Failed to fetch features";
+      const errorMessage = err instanceof Error ? err.message : "Failed to fetch features";
       setError(errorMessage);
 
       // Don't show notification for initial load failures to avoid spam
@@ -80,18 +75,16 @@ export const useFeatures = (): UseFeaturesReturn => {
 
   const hasFeature = useCallback(
     (featureCode: string): boolean => {
-      return (
-        features?.enabledFeatures.some((f) => f.code === featureCode) ?? false
-      );
+      return features?.enabledFeatures.some((f) => f.code === featureCode) ?? false;
     },
-    [features]
+    [features],
   );
 
   const getFeature = useCallback(
     (featureCode: string): FeatureDto | undefined => {
       return features?.enabledFeatures.find((f) => f.code === featureCode);
     },
-    [features]
+    [features],
   );
 
   const getUsageInfo = useCallback(
@@ -111,7 +104,7 @@ export const useFeatures = (): UseFeaturesReturn => {
         remaining: Math.max(0, limit - current),
       };
     },
-    [getFeature]
+    [getFeature],
   );
 
   const refetch = useCallback(async () => {

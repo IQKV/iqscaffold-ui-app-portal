@@ -68,10 +68,7 @@ export const contactApi = {
   /**
    * Update contact lead score
    */
-  updateLeadScore: (
-    id: string | number,
-    request: Types.UpdateLeadScoreRequest
-  ) =>
+  updateLeadScore: (id: string | number, request: Types.UpdateLeadScoreRequest) =>
     apiRequest<Types.Contact>({
       url: `/v1/contacts/${id}/score`,
       method: "PATCH",
@@ -132,10 +129,7 @@ export const contactApi = {
   /**
    * Create a note for a contact
    */
-  createContactNote: (
-    contactId: string | number,
-    request: Types.CreateContactNoteRequest
-  ) =>
+  createContactNote: (contactId: string | number, request: Types.CreateContactNoteRequest) =>
     apiRequest<Types.ContactNote>({
       url: `/v1/contacts/${contactId}/notes`,
       method: "POST",
@@ -148,7 +142,7 @@ export const contactApi = {
   updateContactNote: (
     contactId: string | number,
     noteId: string | number,
-    request: Types.UpdateContactNoteRequest
+    request: Types.UpdateContactNoteRequest,
   ) =>
     apiRequest<Types.ContactNote>({
       url: `/v1/contacts/${contactId}/notes/${noteId}`,

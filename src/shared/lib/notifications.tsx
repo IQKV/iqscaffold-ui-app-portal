@@ -44,11 +44,7 @@ interface EnhancedNotificationOptions extends NotificationOptions {
 }
 
 export const notificationService = {
-  success: ({
-    title = "Success",
-    message,
-    autoClose = 4000,
-  }: NotificationOptions) => {
+  success: ({ title = "Success", message, autoClose = 4000 }: NotificationOptions) => {
     notifications.show({
       title,
       message,
@@ -58,11 +54,7 @@ export const notificationService = {
     });
   },
 
-  error: ({
-    title = "Error",
-    message,
-    autoClose = 6000,
-  }: NotificationOptions) => {
+  error: ({ title = "Error", message, autoClose = 6000 }: NotificationOptions) => {
     notifications.show({
       title,
       message,
@@ -72,11 +64,7 @@ export const notificationService = {
     });
   },
 
-  warning: ({
-    title = "Warning",
-    message,
-    autoClose = 5000,
-  }: NotificationOptions) => {
+  warning: ({ title = "Warning", message, autoClose = 5000 }: NotificationOptions) => {
     notifications.show({
       title,
       message,
@@ -86,11 +74,7 @@ export const notificationService = {
     });
   },
 
-  info: ({
-    title = "Info",
-    message,
-    autoClose = 4000,
-  }: NotificationOptions) => {
+  info: ({ title = "Info", message, autoClose = 4000 }: NotificationOptions) => {
     notifications.show({
       title,
       message,
@@ -100,10 +84,7 @@ export const notificationService = {
     });
   },
 
-  loading: ({
-    title = "Loading",
-    message,
-  }: Omit<NotificationOptions, "autoClose">) => {
+  loading: ({ title = "Loading", message }: Omit<NotificationOptions, "autoClose">) => {
     return notifications.show({
       id: "loading",
       title,
@@ -116,11 +97,7 @@ export const notificationService = {
 
   updateLoading: (
     id: string,
-    {
-      title,
-      message,
-      type = "success",
-    }: NotificationOptions & { type?: "success" | "error" }
+    { title, message, type = "success" }: NotificationOptions & { type?: "success" | "error" },
   ) => {
     const config = {
       success: { color: "green", icon: <IconCheck size="1rem" /> },
@@ -183,19 +160,14 @@ export const notificationService = {
           </Badge>
         )}
 
-        {retryAction &&
-          (errorType === "network" || errorType === "timeout") && (
-            <Anchor
-              size="xs"
-              onClick={retryAction}
-              style={{ cursor: "pointer" }}
-            >
-              <Group gap={4}>
-                <IconRefresh size={12} />
-                Try again
-              </Group>
-            </Anchor>
-          )}
+        {retryAction && (errorType === "network" || errorType === "timeout") && (
+          <Anchor size="xs" onClick={retryAction} style={{ cursor: "pointer" }}>
+            <Group gap={4}>
+              <IconRefresh size={12} />
+              Try again
+            </Group>
+          </Anchor>
+        )}
 
         {showTechnicalDetails && problemType && (
           <Text size="xs" c="dimmed" fs="italic">
@@ -243,10 +215,7 @@ export const notificationService = {
   /**
    * Show notification from AppError with enhanced Mantine integration
    */
-  fromAppError: (
-    error: AppError,
-    options: Partial<ProblemDetailNotificationOptions> = {}
-  ) => {
+  fromAppError: (error: AppError, options: Partial<ProblemDetailNotificationOptions> = {}) => {
     return notificationService.problemError({
       title: options.title || error.title || "Error",
       message: options.message || error.detail || error.message,
@@ -298,7 +267,7 @@ export const notificationService = {
       message: string;
       type: "success" | "error";
       autoClose?: number | false;
-    }
+    },
   ) => {
     const config = {
       success: {
@@ -433,9 +402,7 @@ function getErrorColor(errorType?: AppErrorType): string {
 /**
  * Get error severity level for notification behavior
  */
-function getErrorSeverity(
-  errorType?: AppErrorType
-): "low" | "medium" | "high" | "critical" {
+function getErrorSeverity(errorType?: AppErrorType): "low" | "medium" | "high" | "critical" {
   switch (errorType) {
     case "server":
       return "critical";

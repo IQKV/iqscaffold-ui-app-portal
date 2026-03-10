@@ -53,7 +53,7 @@ const SelectItem = forwardRef<HTMLDivElement, ItemProps>(
         <Text size="sm">{label}</Text>
       </Group>
     </div>
-  )
+  ),
 );
 
 SelectItem.displayName = "SelectItem";

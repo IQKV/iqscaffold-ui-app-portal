@@ -80,9 +80,7 @@ describe("Tenant Utilities", () => {
 
   describe("createTenantCacheKey", () => {
     it("creates cache key with tenant ID", () => {
-      expect(createTenantCacheKey("tenant-123", "users")).toBe(
-        "tenant-123:users"
-      );
+      expect(createTenantCacheKey("tenant-123", "users")).toBe("tenant-123:users");
     });
 
     it("uses default when tenant ID is null", () => {
@@ -91,7 +89,7 @@ describe("Tenant Utilities", () => {
 
     it("handles complex keys", () => {
       expect(createTenantCacheKey("tenant-456", "users:list:page:1")).toBe(
-        "tenant-456:users:list:page:1"
+        "tenant-456:users:list:page:1",
       );
     });
   });

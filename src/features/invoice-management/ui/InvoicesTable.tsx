@@ -14,11 +14,7 @@ import {
 } from "@mantine/core";
 import { IconExternalLink, IconDownload, IconEye } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
-import {
-  useInvoicesQuery,
-  Invoice,
-  InvoiceStatusBadge,
-} from "@/entities/billing";
+import { useInvoicesQuery, Invoice, InvoiceStatusBadge } from "@/entities/billing";
 import { formatCurrency } from "@/shared/lib/format";
 
 interface InvoicesTableProps {
@@ -144,10 +140,7 @@ function InvoiceRow({ invoice }: InvoiceRowProps) {
           {invoice.amountPaid > 0 && (
             <Text size="xs" c="green">
               {(() => {
-                const paidAmount = formatCurrency(
-                  invoice.amountPaid / 100,
-                  invoice.currency
-                );
+                const paidAmount = formatCurrency(invoice.amountPaid / 100, invoice.currency);
                 return t`Paid: ${paidAmount}`;
               })()}
             </Text>
@@ -160,9 +153,7 @@ function InvoiceRow({ invoice }: InvoiceRowProps) {
         </Text>
       </Table.Td>
       <Table.Td>
-        <Text size="sm">
-          {invoice.dueDate ? formatDate(invoice.dueDate) : "-"}
-        </Text>
+        <Text size="sm">{invoice.dueDate ? formatDate(invoice.dueDate) : "-"}</Text>
       </Table.Td>
       <Table.Td>
         <Group gap="xs">

@@ -13,17 +13,14 @@ import type { ContactListParams } from "@/shared/api/contact/types";
 export const crmKeys = {
   all: ["crm"] as const,
   leads: () => [...crmKeys.all, "leads"] as const,
-  leadsList: (params?: LeadListParams) =>
-    [...crmKeys.leads(), "list", params] as const,
+  leadsList: (params?: LeadListParams) => [...crmKeys.leads(), "list", params] as const,
   lead: (id: string) => [...crmKeys.leads(), id] as const,
   leadNotes: (leadId: string) => [...crmKeys.lead(leadId), "notes"] as const,
-  leadActivities: (leadId: string) =>
-    [...crmKeys.lead(leadId), "activities"] as const,
+  leadActivities: (leadId: string) => [...crmKeys.lead(leadId), "activities"] as const,
   pipeline: () => [...crmKeys.all, "pipeline"] as const,
   pipelineStages: () => [...crmKeys.pipeline(), "stages"] as const,
   followUps: () => [...crmKeys.all, "follow-ups"] as const,
-  followUpsList: (params?: FollowUpListParams) =>
-    [...crmKeys.followUps(), "list", params] as const,
+  followUpsList: (params?: FollowUpListParams) => [...crmKeys.followUps(), "list", params] as const,
   todaysFollowUps: () => [...crmKeys.followUps(), "today"] as const,
   overdueFollowUps: () => [...crmKeys.followUps(), "overdue"] as const,
   dashboard: () => [...crmKeys.all, "dashboard"] as const,
@@ -36,12 +33,10 @@ export const crmKeys = {
 export const contactKeys = {
   all: ["contacts"] as const,
   lists: () => [...contactKeys.all, "list"] as const,
-  list: (params?: ContactListParams) =>
-    [...contactKeys.lists(), params] as const,
+  list: (params?: ContactListParams) => [...contactKeys.lists(), params] as const,
   details: () => [...contactKeys.all, "detail"] as const,
   detail: (id: string | number) => [...contactKeys.details(), id] as const,
-  company: (companyId: string | number) =>
-    [...contactKeys.all, "company", companyId] as const,
+  company: (companyId: string | number) => [...contactKeys.all, "company", companyId] as const,
 };
 
 // Lead Query Hooks

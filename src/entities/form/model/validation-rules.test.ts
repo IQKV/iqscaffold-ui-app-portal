@@ -114,15 +114,11 @@ describe("Form Validation Rules", () => {
     });
 
     it("returns null when passwords match", () => {
-      expect(
-        confirmPassword("Password123", { password: "Password123" })
-      ).toBeNull();
+      expect(confirmPassword("Password123", { password: "Password123" })).toBeNull();
     });
 
     it("returns error when passwords do not match", () => {
-      expect(
-        confirmPassword("Password123", { password: "Different123" })
-      ).toBeTruthy();
+      expect(confirmPassword("Password123", { password: "Different123" })).toBeTruthy();
     });
 
     it("handles missing values object", () => {

@@ -93,14 +93,7 @@ export const getCrmFollowUpTypes = () => [
  */
 export function CrmFormField(props: CrmFormFieldProps) {
   const { _ } = useLingui();
-  const {
-    name,
-    label,
-    form,
-    disabled = false,
-    withAsterisk = false,
-    description,
-  } = props;
+  const { name, label, form, disabled = false, withAsterisk = false, description } = props;
 
   const labelText = typeof label === "string" ? label : _(label);
   const placeholderText = props.placeholder
@@ -134,10 +127,7 @@ export function CrmFormField(props: CrmFormFieldProps) {
         <Stack gap="xs">
           <TextInput {...fieldProps} type={props.type} maxLength={maxLength} />
           {showCharacterCount && maxLength && (
-            <Text
-              size="xs"
-              c={currentLength > maxLength * 0.9 ? "orange" : "dimmed"}
-            >
+            <Text size="xs" c={currentLength > maxLength * 0.9 ? "orange" : "dimmed"}>
               {currentLength}/{maxLength}
             </Text>
           )}
@@ -160,10 +150,7 @@ export function CrmFormField(props: CrmFormFieldProps) {
             maxRows={rows + 2}
           />
           {showCharacterCount && maxLength && (
-            <Text
-              size="xs"
-              c={currentLength > maxLength * 0.9 ? "orange" : "dimmed"}
-            >
+            <Text size="xs" c={currentLength > maxLength * 0.9 ? "orange" : "dimmed"}>
               {currentLength}/{maxLength}
             </Text>
           )}
@@ -174,38 +161,19 @@ export function CrmFormField(props: CrmFormFieldProps) {
     case "select": {
       const { data, searchable = false, clearable = false } = props;
 
-      return (
-        <Select
-          {...fieldProps}
-          data={data}
-          searchable={searchable}
-          clearable={clearable}
-        />
-      );
+      return <Select {...fieldProps} data={data} searchable={searchable} clearable={clearable} />;
     }
 
     case "date": {
       const { minDate, maxDate, showPastDateWarning = false } = props;
       const selectedDate = form.values[name];
-      const showWarning =
-        showPastDateWarning &&
-        selectedDate &&
-        isPastDate(new Date(selectedDate));
+      const showWarning = showPastDateWarning && selectedDate && isPastDate(new Date(selectedDate));
 
       return (
         <Stack gap="xs">
-          <DateInput
-            {...fieldProps}
-            minDate={minDate}
-            maxDate={maxDate}
-            valueFormat="YYYY-MM-DD"
-          />
+          <DateInput {...fieldProps} minDate={minDate} maxDate={maxDate} valueFormat="YYYY-MM-DD" />
           {showWarning && (
-            <Alert
-              icon={<IconCalendarExclamation size={16} />}
-              color="orange"
-              variant="light"
-            >
+            <Alert icon={<IconCalendarExclamation size={16} />} color="orange" variant="light">
               {t`This date is in the past. Are you sure this is correct?`}
             </Alert>
           )}

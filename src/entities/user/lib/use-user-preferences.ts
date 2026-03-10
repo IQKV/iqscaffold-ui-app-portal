@@ -4,10 +4,7 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { userPreferenceApi } from "@/shared/api";
-import type {
-  UserPreference,
-  UpdateUserPreferenceRequest,
-} from "./user-preference-types";
+import type { UserPreference, UpdateUserPreferenceRequest } from "./user-preference-types";
 import { notificationService } from "@/shared/lib/notifications";
 
 export const USER_PREFERENCES_QUERY_KEY = ["user", "preferences"] as const;
@@ -31,8 +28,7 @@ export function useUpdateUserPreferences() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: UpdateUserPreferenceRequest) =>
-      userPreferenceApi.updateMyPreferences(data),
+    mutationFn: (data: UpdateUserPreferenceRequest) => userPreferenceApi.updateMyPreferences(data),
     onSuccess: (updatedPreferences: UserPreference) => {
       // Update cache with new data
       queryClient.setQueryData(USER_PREFERENCES_QUERY_KEY, updatedPreferences);

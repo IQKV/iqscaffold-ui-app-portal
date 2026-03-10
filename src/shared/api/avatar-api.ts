@@ -30,9 +30,7 @@ export const avatarApi = {
    * Returns presigned URL for secure access
    */
   async getAvatarUrl(): Promise<AvatarUrlResponse> {
-    const response = await apiClient.get<AvatarUrlResponse>(
-      API_ENDPOINTS.USERS.AVATAR
-    );
+    const response = await apiClient.get<AvatarUrlResponse>(API_ENDPOINTS.USERS.AVATAR);
     return response.data;
   },
 
@@ -51,7 +49,7 @@ export const avatarApi = {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      }
+      },
     );
     return response.data;
   },

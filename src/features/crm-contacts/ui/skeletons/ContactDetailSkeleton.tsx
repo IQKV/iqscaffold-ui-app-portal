@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Container,
-  Stack,
-  Group,
-  Skeleton,
-  Paper,
-  Box,
-  Divider,
-} from "@mantine/core";
+import { Container, Stack, Group, Skeleton, Paper, Box, Divider } from "@mantine/core";
 
 /**
  * ContactDetailSkeleton Component

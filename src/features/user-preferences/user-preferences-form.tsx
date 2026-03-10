@@ -127,8 +127,7 @@ export function UserPreferencesForm() {
       centered: true,
       children: (
         <Text size="sm">
-          Are you sure you want to reset all preferences to defaults? This
-          action cannot be undone.
+          Are you sure you want to reset all preferences to defaults? This action cannot be undone.
         </Text>
       ),
       labels: { confirm: "Reset to Defaults", cancel: "Cancel" },
@@ -139,12 +138,7 @@ export function UserPreferencesForm() {
 
   if (error) {
     return (
-      <Alert
-        icon={<IconAlertCircle size={16} />}
-        title="Error"
-        color="red"
-        variant="filled"
-      >
+      <Alert icon={<IconAlertCircle size={16} />} title="Error" color="red" variant="filled">
         Failed to load preferences. Please try again later.
       </Alert>
     );
@@ -158,16 +152,9 @@ export function UserPreferencesForm() {
       pos="relative"
       data-testid="feature-user-preferences-form"
     >
-      <LoadingOverlay
-        visible={
-          isLoading || updateMutation.isPending || deleteMutation.isPending
-        }
-      />
+      <LoadingOverlay visible={isLoading || updateMutation.isPending || deleteMutation.isPending} />
 
-      <form
-        onSubmit={form.onSubmit(handleSubmit)}
-        data-testid="form-user-preferences"
-      >
+      <form onSubmit={form.onSubmit(handleSubmit)} data-testid="form-user-preferences">
         <Stack gap="xl">
           {/* Localization Section */}
           <div>

@@ -16,8 +16,7 @@ export function useCreateOrganizationMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: CreateOrganizationRequest) =>
-      organizationApi.createOrganization(data),
+    mutationFn: (data: CreateOrganizationRequest) => organizationApi.createOrganization(data),
     onSuccess: (newOrganization: OrganizationDto) => {
       // Invalidate organization list queries
       queryClient.invalidateQueries({
@@ -32,8 +31,7 @@ export function useCreateOrganizationMutation() {
     onError: (error: any) => {
       notificationService.error({
         title: "Failed to Create Organization",
-        message:
-          error.message || "An error occurred while creating the organization.",
+        message: error.message || "An error occurred while creating the organization.",
       });
     },
   });
@@ -47,18 +45,13 @@ export function useUpdateOrganizationMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({
-      id,
-      data,
-    }: {
-      id: number;
-      data: UpdateOrganizationRequest;
-    }) => organizationApi.updateOrganization(id, data),
+    mutationFn: ({ id, data }: { id: number; data: UpdateOrganizationRequest }) =>
+      organizationApi.updateOrganization(id, data),
     onSuccess: (updatedOrganization: OrganizationDto) => {
       // Update specific organization in cache
       queryClient.setQueryData(
         organizationKeys.detail(updatedOrganization.id),
-        updatedOrganization
+        updatedOrganization,
       );
 
       // Invalidate organization list queries
@@ -74,8 +67,7 @@ export function useUpdateOrganizationMutation() {
     onError: (error: any) => {
       notificationService.error({
         title: "Failed to Update Organization",
-        message:
-          error.message || "An error occurred while updating the organization.",
+        message: error.message || "An error occurred while updating the organization.",
       });
     },
   });
@@ -109,8 +101,7 @@ export function useDeleteOrganizationMutation() {
     onError: (error: any) => {
       notificationService.error({
         title: "Failed to Delete Organization",
-        message:
-          error.message || "An error occurred while deleting the organization.",
+        message: error.message || "An error occurred while deleting the organization.",
       });
     },
   });

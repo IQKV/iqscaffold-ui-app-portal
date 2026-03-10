@@ -44,19 +44,6 @@
     "test:wath": "vitest",
     "type-check": "tsc --noEmit"
   },
-  "lint-staged": {
-    "*": [
-      "pnpm formatter:check"
-    ],
-    "package.json": [
-      "sort-package-json"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
-  },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
@@ -220,6 +207,19 @@
     "vite-plugin-remove-console": "^2.2.0",
     "vite-tsconfig-paths": "^6.1.1",
     "vitest": "4.0.18"
+  },
+  "lint-staged": {
+    "*": [
+      "pnpm formatter:check"
+    ],
+    "package.json": [
+      "sort-package-json"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   },
   "packageManager": "pnpm@10.30.3",
   "msw": {

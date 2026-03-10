@@ -1,20 +1,7 @@
 import React from "react";
 import { useAuth } from "@/processes/auth";
-import {
-  Alert,
-  Button,
-  Stack,
-  Text,
-  Title,
-  Group,
-  Loader,
-} from "@mantine/core";
-import {
-  IconUsers,
-  IconLock,
-  IconAlertTriangle,
-  IconRefresh,
-} from "@tabler/icons-react";
+import { Alert, Button, Stack, Text, Title, Group, Loader } from "@mantine/core";
+import { IconUsers, IconLock, IconAlertTriangle, IconRefresh } from "@tabler/icons-react";
 import { useFeatureContext } from "@/shared/lib/contexts/FeatureContext";
 import { t } from "@lingui/core/macro";
 
@@ -88,8 +75,8 @@ export const ServiceAccessGuard: React.FC<ServiceAccessGuardProps> = ({
           {serviceName} Feature Not Available
         </Title>
         <Text ta="center" c="dimmed" maw={400}>
-          The {serviceName} feature is not enabled for your account. Contact
-          your administrator to enable {serviceName} functionality.
+          The {serviceName} feature is not enabled for your account. Contact your administrator to
+          enable {serviceName} functionality.
         </Text>
       </Stack>
     );
@@ -108,8 +95,8 @@ export const ServiceAccessGuard: React.FC<ServiceAccessGuardProps> = ({
           {serviceName} Access Required
         </Title>
         <Text ta="center" c="dimmed" maw={400}>
-          You need {serviceName} access to view this page. Contact your
-          administrator to request access to {serviceName} features.
+          You need {serviceName} access to view this page. Contact your administrator to request
+          access to {serviceName} features.
         </Text>
 
         {showUpgrade && requiredAuthorities.length > 0 && (
@@ -120,8 +107,7 @@ export const ServiceAccessGuard: React.FC<ServiceAccessGuardProps> = ({
             variant="light"
           >
             <Text size="sm">
-              You need one of the following authorities:{" "}
-              {requiredAuthorities.join(", ")}.
+              You need one of the following authorities: {requiredAuthorities.join(", ")}.
             </Text>
           </Alert>
         )}
@@ -131,8 +117,7 @@ export const ServiceAccessGuard: React.FC<ServiceAccessGuardProps> = ({
 
   // Check service health if enabled and provided
   if (checkServiceHealth && serviceHealth) {
-    const { isHealthy, isLoading, circuitBreakerOpen, retryConnection, error } =
-      serviceHealth;
+    const { isHealthy, isLoading, circuitBreakerOpen, retryConnection, error } = serviceHealth;
 
     if (isLoading) {
       return (

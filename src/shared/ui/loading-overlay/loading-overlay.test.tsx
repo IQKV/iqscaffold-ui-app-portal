@@ -12,7 +12,7 @@ describe("LoadingOverlay", () => {
     render(
       <TestWrapper>
         <LoadingOverlay visible={false} />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
@@ -22,7 +22,7 @@ describe("LoadingOverlay", () => {
     render(
       <TestWrapper>
         <LoadingOverlay visible />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(screen.getByText("Loading...")).toBeInTheDocument();
@@ -32,7 +32,7 @@ describe("LoadingOverlay", () => {
     render(
       <TestWrapper>
         <LoadingOverlay visible message="Please wait..." />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(screen.getByText("Please wait...")).toBeInTheDocument();
@@ -43,7 +43,7 @@ describe("LoadingOverlay", () => {
     render(
       <TestWrapper>
         <LoadingOverlay visible />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(screen.getByText("Loading...")).toBeInTheDocument();
@@ -53,7 +53,7 @@ describe("LoadingOverlay", () => {
     render(
       <TestWrapper>
         <LoadingOverlay visible />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     // Mantine Loader component should be present

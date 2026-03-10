@@ -57,10 +57,7 @@ export function resolveTenantId(): string | null {
 /**
  * Create tenant-aware cache key
  */
-export function createTenantCacheKey(
-  tenantId: string | null,
-  key: string
-): string {
+export function createTenantCacheKey(tenantId: string | null, key: string): string {
   const tenant = tenantId || "default";
   return `${tenant}:${key}`;
 }

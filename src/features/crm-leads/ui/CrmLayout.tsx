@@ -103,9 +103,7 @@ export function CrmLayout({
   // Generate breadcrumbs from current path
   const breadcrumbs = React.useMemo(() => {
     const pathSegments = location.pathname.split("/").filter(Boolean);
-    const items: Array<{ label: string; href: string }> = [
-      { label: t`Home`, href: "/" },
-    ];
+    const items: Array<{ label: string; href: string }> = [{ label: t`Home`, href: "/" }];
 
     if (pathSegments.length > 0 && pathSegments[0] === "crm") {
       items.push({ label: t`CRM`, href: "/crm/dashboard" });
@@ -281,20 +279,13 @@ export function CrmLayout({
         <Stack gap={isMobile ? "sm" : "lg"}>
           {/* Mobile Header with Burger Menu */}
           {isMobile && (
-            <Group
-              justify="space-between"
-              mb="xs"
-              component="header"
-              role="banner"
-            >
+            <Group justify="space-between" mb="xs" component="header" role="banner">
               <Group gap="sm">
                 <Burger
                   opened={mobileNavOpened}
                   onClick={toggleMobileNav}
                   size="sm"
-                  aria-label={
-                    mobileNavOpened ? t`Close navigation` : t`Open navigation`
-                  }
+                  aria-label={mobileNavOpened ? t`Close navigation` : t`Open navigation`}
                   aria-expanded={mobileNavOpened}
                 />
                 <Text fw={600} size="lg" component="h1">
@@ -314,12 +305,7 @@ export function CrmLayout({
                     {item.label}
                   </span>
                 ) : (
-                  <Anchor
-                    key={item.href}
-                    component={Link}
-                    to={item.href}
-                    size="sm"
-                  >
+                  <Anchor key={item.href} component={Link} to={item.href} size="sm">
                     {item.label}
                   </Anchor>
                 );

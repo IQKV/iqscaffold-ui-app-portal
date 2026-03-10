@@ -27,9 +27,7 @@ const createUserFormSchema = () =>
       .string()
       .min(8, t`Password must be at least 8 characters`)
       .or(z.literal("")),
-    authorities: z
-      .array(z.string())
-      .min(1, t`At least one authority is required`),
+    authorities: z.array(z.string()).min(1, t`At least one authority is required`),
     enabled: z.boolean(),
     emailVerified: z.boolean(),
   });
@@ -45,19 +43,13 @@ interface UserFormModalProps {
 
 const getRoleOptions = getUserRoles;
 
-export function UserFormModal({
-  opened,
-  onClose,
-  user,
-  title,
-}: UserFormModalProps) {
+export function UserFormModal({ opened, onClose, user, title }: UserFormModalProps) {
   const createUserMutation = useCreateUserMutation();
   const updateUserMutation = useUpdateUserMutation();
   const { canManageUsers } = useAuth();
 
   const isEditing = !!user;
-  const isLoading =
-    createUserMutation.isPending || updateUserMutation.isPending;
+  const isLoading = createUserMutation.isPending || updateUserMutation.isPending;
 
   const form = useForm<UserFormData>({
     validate: zodResolver(createUserFormSchema()),
@@ -106,15 +98,9 @@ export function UserFormModal({
   if (!canManageUsers()) {
     return (
       <Modal opened={opened} onClose={onClose} title={title} size="md" centered>
-        <Alert
-          variant="light"
-          color="red"
-          title="Access Denied"
-          icon={<IconLock size={16} />}
-        >
+        <Alert variant="light" color="red" title="Access Denied" icon={<IconLock size={16} />}>
           <Text size="sm">
-            You need administrator privileges to {isEditing ? "edit" : "create"}{" "}
-            users.
+            You need administrator privileges to {isEditing ? "edit" : "create"} users.
           </Text>
         </Alert>
       </Modal>
@@ -139,7 +125,7 @@ export function UserFormModal({
           onSuccess: () => {
             onClose();
           },
-        }
+        },
       );
     } else {
       if (!values.password) {
@@ -182,11 +168,7 @@ export function UserFormModal({
       centered
       data-testid="modal-user-form"
     >
-      <form
-        onSubmit={form.onSubmit(handleSubmit)}
-        noValidate
-        data-testid="form-user"
-      >
+      <form onSubmit={form.onSubmit(handleSubmit)} noValidate data-testid="form-user">
         <Stack gap="md">
           <UserFormField
             type="username"
@@ -291,11 +273,7 @@ export function UserFormModal({
             >
               {t`Cancel`}
             </Button>
-            <Button
-              type="submit"
-              loading={isLoading}
-              data-testid="btn-submit-user-form"
-            >
+            <Button type="submit" loading={isLoading} data-testid="btn-submit-user-form">
               {isEditing ? t`Update` : t`Create`} {t`User`}
             </Button>
           </Group>

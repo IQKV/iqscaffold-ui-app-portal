@@ -17,10 +17,7 @@ import {
 import { useForm } from "@mantine/form";
 import { IconCheck, IconCopy, IconAlertCircle } from "@tabler/icons-react";
 import { t } from "@lingui/core/macro";
-import {
-  useCreateInvitation,
-  useInvitationLink,
-} from "@/shared/lib/use-invitation-api";
+import { useCreateInvitation, useInvitationLink } from "@/shared/lib/use-invitation-api";
 import {
   InvitationType,
   type CreateInvitationRequest,
@@ -32,12 +29,10 @@ interface CreateInvitationModalProps {
   onClose: () => void;
 }
 
-export function CreateInvitationModal({
-  opened,
-  onClose,
-}: CreateInvitationModalProps) {
-  const [createdInvitation, setCreatedInvitation] =
-    useState<OrganizationInvitationDto | null>(null);
+export function CreateInvitationModal({ opened, onClose }: CreateInvitationModalProps) {
+  const [createdInvitation, setCreatedInvitation] = useState<OrganizationInvitationDto | null>(
+    null,
+  );
 
   const createInvitationMutation = useCreateInvitation();
 
@@ -56,9 +51,7 @@ export function CreateInvitationModal({
           ? t`Email is required for email invitations`
           : null,
       expirationHours: (value) =>
-        value < 1 || value > 720
-          ? t`Expiration must be between 1 and 720 hours`
-          : null,
+        value < 1 || value > 720 ? t`Expiration must be between 1 and 720 hours` : null,
       maxUses: (value, values) =>
         values.type === InvitationType.LINK && value !== undefined && value < 1
           ? t`Max uses must be at least 1`
@@ -99,11 +92,7 @@ export function CreateInvitationModal({
     onClose();
   };
 
-  const InvitationLinkDisplay = ({
-    invitationId,
-  }: {
-    invitationId: number;
-  }) => {
+  const InvitationLinkDisplay = ({ invitationId }: { invitationId: number }) => {
     const { data: linkData, isLoading } = useInvitationLink(invitationId);
 
     if (isLoading) {
@@ -159,11 +148,7 @@ export function CreateInvitationModal({
     >
       {createdInvitation ? (
         <Stack gap="md">
-          <Alert
-            icon={<IconCheck size={16} />}
-            title={t`Success`}
-            color="green"
-          >
+          <Alert icon={<IconCheck size={16} />} title={t`Success`} color="green">
             {t`Invitation has been created successfully!`}
           </Alert>
 
@@ -241,22 +226,13 @@ export function CreateInvitationModal({
             />
 
             {createInvitationMutation.isError && (
-              <Alert
-                icon={<IconAlertCircle size={16} />}
-                title={t`Error`}
-                color="red"
-              >
-                {createInvitationMutation.error?.message ||
-                  t`Failed to create invitation`}
+              <Alert icon={<IconAlertCircle size={16} />} title={t`Error`} color="red">
+                {createInvitationMutation.error?.message || t`Failed to create invitation`}
               </Alert>
             )}
 
             <Group justify="flex-end" mt="md">
-              <Button
-                variant="subtle"
-                onClick={handleClose}
-                data-testid="btn-cancel"
-              >
+              <Button variant="subtle" onClick={handleClose} data-testid="btn-cancel">
                 {t`Cancel`}
               </Button>
               <Button

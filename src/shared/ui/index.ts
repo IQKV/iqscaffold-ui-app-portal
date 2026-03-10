@@ -1,30 +1,17 @@
 // Shared UI public API
 export { AppLayout } from "./app-layout";
 export { LoadingOverlay } from "./loading-overlay";
-export {
-  DataTable,
-  type DataTableColumn,
-  type DataTableProps,
-} from "./data-table";
+export { DataTable, type DataTableColumn, type DataTableProps } from "./data-table";
 export { ConfirmationModal, useConfirmationModal } from "./confirmation-modal";
 export { ThemeToggle } from "./theme-toggle";
 export { LocaleSwitcher, CompactLocaleSwitcher } from "./locale-switcher";
 
 // Enhanced error handling components
-export {
-  ErrorBoundary,
-  DefaultErrorFallback,
-} from "./error-boundary/error-boundary";
+export { ErrorBoundary, DefaultErrorFallback } from "./error-boundary/error-boundary";
 
-export type {
-  ErrorBoundaryProps,
-  ErrorFallbackProps,
-} from "./error-boundary/error-boundary";
+export type { ErrorBoundaryProps, ErrorFallbackProps } from "./error-boundary/error-boundary";
 
-export {
-  useErrorHandler,
-  withErrorBoundary,
-} from "./error-boundary/error-boundary-utils";
+export { useErrorHandler, withErrorBoundary } from "./error-boundary/error-boundary-utils";
 
 // Enhanced loading states
 export {
@@ -47,15 +34,8 @@ export { PerformanceDashboard } from "./performance-dashboard";
 // Feature management components
 export { FeatureGate } from "./FeatureGate";
 export { withFeatureGate } from "./feature-gate-utils";
-export {
-  FeatureErrorBoundary,
-  SilentFeatureErrorBoundary,
-} from "./FeatureErrorBoundary";
-export {
-  FeatureUsage,
-  CompactFeatureUsage,
-  FeatureUsageList,
-} from "./FeatureUsage";
+export { FeatureErrorBoundary, SilentFeatureErrorBoundary } from "./FeatureErrorBoundary";
+export { FeatureUsage, CompactFeatureUsage, FeatureUsageList } from "./FeatureUsage";
 
 // Generic service health components
 export { GenericServiceDegradationBanner } from "./GenericServiceDegradationBanner";

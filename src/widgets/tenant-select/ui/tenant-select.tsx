@@ -31,8 +31,7 @@ export function TenantSelect({
   error,
   "data-testid": dataTestId = "tenant-select",
 }: TenantSelectProps) {
-  const { availableTenants, fetchAvailableTenants, isLoading } =
-    useTenantStore();
+  const { availableTenants, fetchAvailableTenants, isLoading } = useTenantStore();
 
   // Fetch tenants on mount
   useEffect(() => {
@@ -47,20 +46,16 @@ export function TenantSelect({
       return [];
     }
 
-    return Object.entries(availableTenants).map(
-      ([tenantId, organizationName]) => ({
-        value: tenantId,
-        label: organizationName,
-      })
-    );
+    return Object.entries(availableTenants).map(([tenantId, organizationName]) => ({
+      value: tenantId,
+      label: organizationName,
+    }));
   }, [availableTenants]);
 
   return (
     <Select
       label={t`Organization`}
-      placeholder={
-        isLoading ? t`Loading organizations...` : t`Select an organization`
-      }
+      placeholder={isLoading ? t`Loading organizations...` : t`Select an organization`}
       data={options}
       value={value}
       onChange={onChange}

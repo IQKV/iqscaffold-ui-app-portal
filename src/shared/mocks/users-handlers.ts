@@ -93,9 +93,7 @@ export const usersHandlers = [
           user.lastName.toLowerCase().includes(searchLower) ||
           user.username.toLowerCase().includes(searchLower) ||
           user.email.toLowerCase().includes(searchLower) ||
-          user.authorities.some((authority) =>
-            authority.toLowerCase().includes(searchLower)
-          )
+          user.authorities.some((authority) => authority.toLowerCase().includes(searchLower)),
       );
     }
 
@@ -136,15 +134,10 @@ export const usersHandlers = [
     const body = (await request.json()) as any;
 
     // Check if username or email already exists
-    const existingUser = users.find(
-      (u) => u.username === body.username || u.email === body.email
-    );
+    const existingUser = users.find((u) => u.username === body.username || u.email === body.email);
 
     if (existingUser) {
-      return HttpResponse.json(
-        { error: "Username or email already exists" },
-        { status: 409 }
-      );
+      return HttpResponse.json({ error: "Username or email already exists" }, { status: 409 });
     }
 
     const newUser: UserDto = {
@@ -185,14 +178,11 @@ export const usersHandlers = [
         (u) =>
           u.id !== userId &&
           ((body.username && u.username === body.username) ||
-            (body.email && u.email === body.email))
+            (body.email && u.email === body.email)),
       );
 
       if (conflictingUser) {
-        return HttpResponse.json(
-          { error: "Username or email already exists" },
-          { status: 409 }
-        );
+        return HttpResponse.json({ error: "Username or email already exists" }, { status: 409 });
       }
     }
 

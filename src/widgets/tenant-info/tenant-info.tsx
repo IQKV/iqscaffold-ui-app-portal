@@ -54,11 +54,7 @@ export function TenantInfo({ showInProduction = false }: TenantInfoProps) {
                   <Text size="xs" c="dimmed">
                     Status:
                   </Text>
-                  <Badge
-                    size="sm"
-                    color={tenant.enabled ? "green" : "red"}
-                    variant="light"
-                  >
+                  <Badge size="sm" color={tenant.enabled ? "green" : "red"} variant="light">
                     {tenant.enabled ? "Active" : "Disabled"}
                   </Badge>
                 </Group>

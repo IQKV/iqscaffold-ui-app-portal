@@ -10,11 +10,7 @@ export type {
 export type { PaymentGatewayProvider } from "@/shared/api/billing/types";
 
 // Query Hooks
-export {
-  organizationKeys,
-  useOrganizationsQuery,
-  useOrganizationQuery,
-} from "./api/queries";
+export { organizationKeys, useOrganizationsQuery, useOrganizationQuery } from "./api/queries";
 
 // Mutation Hooks
 export {

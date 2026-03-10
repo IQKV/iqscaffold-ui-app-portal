@@ -43,10 +43,8 @@ vi.mock("@/processes/auth", () => {
       isAuthenticated: true,
       isLoading: false,
       hasRole: (role: string) => user.roles.includes(role),
-      hasAnyRole: (roles: string[]) =>
-        roles.some((role) => user.roles.includes(role)),
-      hasAllRoles: (roles: string[]) =>
-        roles.every((role) => user.roles.includes(role)),
+      hasAnyRole: (roles: string[]) => roles.some((role) => user.roles.includes(role)),
+      hasAllRoles: (roles: string[]) => roles.every((role) => user.roles.includes(role)),
       hasPermission: () => false,
       isAdmin: () => true,
       isSuperAdmin: () => false,
@@ -71,11 +69,8 @@ describe("UsersDataGrid", () => {
   it("renders users data grid with mock data", async () => {
     render(
       <AdminTestWrapper>
-        <UsersDataGrid
-          onCreateUser={mockOnCreateUser}
-          onEditUser={mockOnEditUser}
-        />
-      </AdminTestWrapper>
+        <UsersDataGrid onCreateUser={mockOnCreateUser} onEditUser={mockOnEditUser} />
+      </AdminTestWrapper>,
     );
 
     // Check if the title is rendered
@@ -93,23 +88,16 @@ describe("UsersDataGrid", () => {
     });
 
     // Check if user data is displayed
-    expect(
-      screen.getByText("@john_doe • john.doe@example.com")
-    ).toBeInTheDocument();
+    expect(screen.getByText("@john_doe • john.doe@example.com")).toBeInTheDocument();
     expect(screen.getByText("Jane Smith")).toBeInTheDocument();
-    expect(
-      screen.getByText("@jane_smith • jane.smith@example.com")
-    ).toBeInTheDocument();
+    expect(screen.getByText("@jane_smith • jane.smith@example.com")).toBeInTheDocument();
   });
 
   it("calls onCreateUser when Add User button is clicked", async () => {
     render(
       <AdminTestWrapper>
-        <UsersDataGrid
-          onCreateUser={mockOnCreateUser}
-          onEditUser={mockOnEditUser}
-        />
-      </AdminTestWrapper>
+        <UsersDataGrid onCreateUser={mockOnCreateUser} onEditUser={mockOnEditUser} />
+      </AdminTestWrapper>,
     );
 
     const addButton = screen.getByText("Add User");
@@ -121,11 +109,8 @@ describe("UsersDataGrid", () => {
   it("calls onEditUser when edit button is clicked", async () => {
     render(
       <AdminTestWrapper>
-        <UsersDataGrid
-          onCreateUser={mockOnCreateUser}
-          onEditUser={mockOnEditUser}
-        />
-      </AdminTestWrapper>
+        <UsersDataGrid onCreateUser={mockOnCreateUser} onEditUser={mockOnEditUser} />
+      </AdminTestWrapper>,
     );
 
     // Wait for users to load
@@ -137,7 +122,7 @@ describe("UsersDataGrid", () => {
     const editButtons = screen.getAllByRole("button");
     // Find the edit button by looking for the edit icon
     const editButton = editButtons.find((button) =>
-      button.querySelector("svg")?.classList.contains("tabler-icon-edit")
+      button.querySelector("svg")?.classList.contains("tabler-icon-edit"),
     );
     expect(editButton).toBeDefined();
     await userEvent.click(editButton!);
@@ -149,18 +134,15 @@ describe("UsersDataGrid", () => {
         username: "john_doe",
         firstName: "John",
         lastName: "Doe",
-      })
+      }),
     );
   });
 
   it("filters users based on search input", async () => {
     render(
       <AdminTestWrapper>
-        <UsersDataGrid
-          onCreateUser={mockOnCreateUser}
-          onEditUser={mockOnEditUser}
-        />
-      </AdminTestWrapper>
+        <UsersDataGrid onCreateUser={mockOnCreateUser} onEditUser={mockOnEditUser} />
+      </AdminTestWrapper>,
     );
 
     // Wait for users to load
@@ -179,18 +161,15 @@ describe("UsersDataGrid", () => {
         expect(screen.getByText("Jane Smith")).toBeInTheDocument();
         expect(screen.queryByText("John Doe")).not.toBeInTheDocument();
       },
-      { timeout: 2000 } // Increase timeout to account for debounce + API call
+      { timeout: 2000 }, // Increase timeout to account for debounce + API call
     );
   });
 
   it("displays role badges with correct colors", async () => {
     render(
       <AdminTestWrapper>
-        <UsersDataGrid
-          onCreateUser={mockOnCreateUser}
-          onEditUser={mockOnEditUser}
-        />
-      </AdminTestWrapper>
+        <UsersDataGrid onCreateUser={mockOnCreateUser} onEditUser={mockOnEditUser} />
+      </AdminTestWrapper>,
     );
 
     // Wait for users to load
@@ -208,11 +187,8 @@ describe("UsersDataGrid", () => {
   it("handles delete user confirmation", async () => {
     render(
       <AdminTestWrapper>
-        <UsersDataGrid
-          onCreateUser={mockOnCreateUser}
-          onEditUser={mockOnEditUser}
-        />
-      </AdminTestWrapper>
+        <UsersDataGrid onCreateUser={mockOnCreateUser} onEditUser={mockOnEditUser} />
+      </AdminTestWrapper>,
     );
 
     // Wait for users to load
@@ -224,7 +200,7 @@ describe("UsersDataGrid", () => {
     const deleteButtons = screen.getAllByRole("button");
     // Find the delete button by looking for the trash icon
     const deleteButton = deleteButtons.find((button) =>
-      button.querySelector("svg")?.classList.contains("tabler-icon-trash")
+      button.querySelector("svg")?.classList.contains("tabler-icon-trash"),
     );
     expect(deleteButton).toBeDefined();
     await userEvent.click(deleteButton!);
@@ -232,9 +208,7 @@ describe("UsersDataGrid", () => {
     // Check if confirmation modal appears
     await waitFor(() => {
       expect(screen.getByText("Delete User")).toBeInTheDocument();
-      expect(
-        screen.getByText(/Are you sure you want to delete user/)
-      ).toBeInTheDocument();
+      expect(screen.getByText(/Are you sure you want to delete user/)).toBeInTheDocument();
     });
 
     // Click cancel
@@ -251,20 +225,14 @@ describe("UsersDataGrid", () => {
     // Mock API error
     server.use(
       http.get("/v1/admin/users", () => {
-        return HttpResponse.json(
-          { error: "Internal server error" },
-          { status: 500 }
-        );
-      })
+        return HttpResponse.json({ error: "Internal server error" }, { status: 500 });
+      }),
     );
 
     render(
       <AdminTestWrapper>
-        <UsersDataGrid
-          onCreateUser={mockOnCreateUser}
-          onEditUser={mockOnEditUser}
-        />
-      </AdminTestWrapper>
+        <UsersDataGrid onCreateUser={mockOnCreateUser} onEditUser={mockOnEditUser} />
+      </AdminTestWrapper>,
     );
 
     // Wait for error message
@@ -289,16 +257,13 @@ describe("UsersDataGrid", () => {
             hasPrev: false,
           },
         });
-      })
+      }),
     );
 
     render(
       <AdminTestWrapper>
-        <UsersDataGrid
-          onCreateUser={mockOnCreateUser}
-          onEditUser={mockOnEditUser}
-        />
-      </AdminTestWrapper>
+        <UsersDataGrid onCreateUser={mockOnCreateUser} onEditUser={mockOnEditUser} />
+      </AdminTestWrapper>,
     );
 
     // Check if loading text is displayed (DataTable shows "Loading..." in cells)

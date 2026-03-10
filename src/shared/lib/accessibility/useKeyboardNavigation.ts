@@ -30,9 +30,7 @@ export interface UseKeyboardNavigationOptions {
  * @param options - Configuration options for keyboard navigation
  * @returns Object with keyboard navigation utilities
  */
-export function useKeyboardNavigation(
-  options: UseKeyboardNavigationOptions = {}
-) {
+export function useKeyboardNavigation(options: UseKeyboardNavigationOptions = {}) {
   const { shortcuts = [], enabled = true, scope = "local" } = options;
   const shortcutsRef = useRef(shortcuts);
 
@@ -50,8 +48,7 @@ export function useKeyboardNavigation(
       const activeShortcuts = shortcutsRef.current;
 
       for (const shortcut of activeShortcuts) {
-        const keyMatches =
-          event.key.toLowerCase() === shortcut.key.toLowerCase();
+        const keyMatches = event.key.toLowerCase() === shortcut.key.toLowerCase();
         const ctrlMatches = shortcut.ctrl
           ? event.ctrlKey || event.metaKey
           : !event.ctrlKey && !event.metaKey;
@@ -67,7 +64,7 @@ export function useKeyboardNavigation(
         }
       }
     },
-    [enabled]
+    [enabled],
   );
 
   useEffect(() => {
@@ -90,10 +87,7 @@ export function useKeyboardNavigation(
  * @param containerRef - Ref to the container element
  * @param enabled - Whether the focus trap is enabled
  */
-export function useFocusTrap(
-  containerRef: React.RefObject<HTMLElement>,
-  enabled: boolean = true
-) {
+export function useFocusTrap(containerRef: React.RefObject<HTMLElement>, enabled: boolean = true) {
   useEffect(() => {
     if (!enabled || !containerRef.current) {
       return;
@@ -101,7 +95,7 @@ export function useFocusTrap(
 
     const container = containerRef.current;
     const focusableElements = container.querySelectorAll<HTMLElement>(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
     );
 
     const firstElement = focusableElements[0];
@@ -146,7 +140,7 @@ export function useFocusTrap(
 export function useRovingTabIndex(
   itemCount: number,
   onSelect?: (index: number) => void,
-  orientation: "horizontal" | "vertical" = "vertical"
+  orientation: "horizontal" | "vertical" = "vertical",
 ) {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -179,7 +173,7 @@ export function useRovingTabIndex(
           break;
       }
     },
-    [itemCount, activeIndex, onSelect, orientation]
+    [itemCount, activeIndex, onSelect, orientation],
   );
 
   return {

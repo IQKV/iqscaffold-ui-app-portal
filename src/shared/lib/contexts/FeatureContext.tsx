@@ -1,11 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  useCallback,
-  useMemo,
-} from "react";
+import React, { createContext, useContext, useEffect, useState, useCallback, useMemo } from "react";
 import { userManagementApi } from "@/shared/api/user-management-api";
 import type { UserFeaturesResponse as BillingUserFeaturesResponse } from "@/shared/api/billing/types";
 import { notificationService } from "@/shared/lib/notifications";
@@ -22,15 +15,10 @@ interface FeatureContextValue {
   // Methods
   hasFeature: (featureCode: string) => boolean;
   canAccessFeature: (featureCode: string) => boolean;
-  hasFeatureWithAuthority: (
-    featureCode: string,
-    requiredAuthorities: string[]
-  ) => boolean;
+  hasFeatureWithAuthority: (featureCode: string, requiredAuthorities: string[]) => boolean;
   getFeatureSummary: (
-    featureCode: string
-  ) =>
-    | { code: string; name: string; description: string; enabled: boolean }
-    | undefined;
+    featureCode: string,
+  ) => { code: string; name: string; description: string; enabled: boolean } | undefined;
   refetchFeatures: () => Promise<void>;
 }
 
@@ -40,27 +28,9 @@ interface FeatureContextValue {
  */
 const FEATURE_AUTHORITY_MAPPING: Record<string, string[]> = {
   // Billing features
-  billing: [
-    "BILLING_ACCESS",
-    "BILLING_MANAGER",
-    "BILLING_ADMIN",
-    "ADMIN",
-    "SUPER_ADMIN",
-  ],
-  payments: [
-    "BILLING_ACCESS",
-    "BILLING_MANAGER",
-    "BILLING_ADMIN",
-    "ADMIN",
-    "SUPER_ADMIN",
-  ],
-  subscriptions: [
-    "BILLING_ACCESS",
-    "BILLING_MANAGER",
-    "BILLING_ADMIN",
-    "ADMIN",
-    "SUPER_ADMIN",
-  ],
+  billing: ["BILLING_ACCESS", "BILLING_MANAGER", "BILLING_ADMIN", "ADMIN", "SUPER_ADMIN"],
+  payments: ["BILLING_ACCESS", "BILLING_MANAGER", "BILLING_ADMIN", "ADMIN", "SUPER_ADMIN"],
+  subscriptions: ["BILLING_ACCESS", "BILLING_MANAGER", "BILLING_ADMIN", "ADMIN", "SUPER_ADMIN"],
   invoices: ["BILLING_MANAGER", "BILLING_ADMIN", "ADMIN", "SUPER_ADMIN"],
   refunds: ["BILLING_MANAGER", "BILLING_ADMIN", "ADMIN", "SUPER_ADMIN"],
   gateway_config: ["BILLING_ADMIN", "ADMIN", "SUPER_ADMIN"],
@@ -76,40 +46,12 @@ const FEATURE_AUTHORITY_MAPPING: Record<string, string[]> = {
     "ADMIN",
     "SUPER_ADMIN",
   ],
-  leads: [
-    "CRM_ACCESS",
-    "CRM_LEAD_MANAGER",
-    "CRM_ADMIN",
-    "ADMIN",
-    "SUPER_ADMIN",
-  ],
-  contacts: [
-    "CRM_ACCESS",
-    "CRM_CONTACT_MANAGER",
-    "CRM_ADMIN",
-    "ADMIN",
-    "SUPER_ADMIN",
-  ],
-  pipeline: [
-    "CRM_ACCESS",
-    "CRM_PIPELINE_MANAGER",
-    "CRM_ADMIN",
-    "ADMIN",
-    "SUPER_ADMIN",
-  ],
+  leads: ["CRM_ACCESS", "CRM_LEAD_MANAGER", "CRM_ADMIN", "ADMIN", "SUPER_ADMIN"],
+  contacts: ["CRM_ACCESS", "CRM_CONTACT_MANAGER", "CRM_ADMIN", "ADMIN", "SUPER_ADMIN"],
+  pipeline: ["CRM_ACCESS", "CRM_PIPELINE_MANAGER", "CRM_ADMIN", "ADMIN", "SUPER_ADMIN"],
   lead_management: ["CRM_LEAD_MANAGER", "CRM_ADMIN", "ADMIN", "SUPER_ADMIN"],
-  contact_management: [
-    "CRM_CONTACT_MANAGER",
-    "CRM_ADMIN",
-    "ADMIN",
-    "SUPER_ADMIN",
-  ],
-  pipeline_management: [
-    "CRM_PIPELINE_MANAGER",
-    "CRM_ADMIN",
-    "ADMIN",
-    "SUPER_ADMIN",
-  ],
+  contact_management: ["CRM_CONTACT_MANAGER", "CRM_ADMIN", "ADMIN", "SUPER_ADMIN"],
+  pipeline_management: ["CRM_PIPELINE_MANAGER", "CRM_ADMIN", "ADMIN", "SUPER_ADMIN"],
 
   // API features
   api_access: ["API_ACCESS", "ADMIN", "SUPER_ADMIN"],
@@ -148,16 +90,12 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
   autoFetch = true,
   refetchInterval = 0, // Disabled by default
 }) => {
-  const [userFeatures, setUserFeatures] =
-    useState<BillingUserFeaturesResponse | null>(null);
+  const [userFeatures, setUserFeatures] = useState<BillingUserFeaturesResponse | null>(null);
   const [loading, setLoading] = useState(autoFetch);
   const [error, setError] = useState<string | null>(null);
 
   const user = useAuthStore((state) => state.user);
-  const userAuthorities = useMemo(
-    () => user?.authorities ?? [],
-    [user?.authorities]
-  );
+  const userAuthorities = useMemo(() => user?.authorities ?? [], [user?.authorities]);
 
   // Memoized enabled features list from billing service response
   // Memoized enabled features list from billing service response
@@ -173,7 +111,7 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
     (featureCode: string): boolean => {
       return enabledFeatures.includes(featureCode);
     },
-    [enabledFeatures]
+    [enabledFeatures],
   );
 
   const canAccessFeature = useCallback(
@@ -195,12 +133,9 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
         return true;
       }
 
-      return hasAnyAuthorityWithInheritance(
-        userAuthorities,
-        requiredAuthorities
-      );
+      return hasAnyAuthorityWithInheritance(userAuthorities, requiredAuthorities);
     },
-    [hasFeature, userAuthorities]
+    [hasFeature, userAuthorities],
   );
 
   const hasFeatureWithAuthority = useCallback(
@@ -216,19 +151,14 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
       }
 
       // Check if user has any of the required authorities
-      return hasAnyAuthorityWithInheritance(
-        userAuthorities,
-        requiredAuthorities
-      );
+      return hasAnyAuthorityWithInheritance(userAuthorities, requiredAuthorities);
     },
-    [hasFeature, userAuthorities]
+    [hasFeature, userAuthorities],
   );
 
   const getFeatureSummary = useCallback(
     (featureCode: string) => {
-      const feature = userFeatures?.enabledFeatures.find(
-        (f) => f.code === featureCode
-      );
+      const feature = userFeatures?.enabledFeatures.find((f) => f.code === featureCode);
       if (!feature) {
         return undefined;
       }
@@ -239,7 +169,7 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
         enabled: feature.enabled,
       };
     },
-    [userFeatures]
+    [userFeatures],
   );
 
   // Fetch user features
@@ -255,8 +185,7 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
       const response = await userManagementApi.getMyFeatures();
       setUserFeatures(response);
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Failed to fetch user features";
+      const errorMessage = err instanceof Error ? err.message : "Failed to fetch user features";
       setError(errorMessage);
       notificationService.error({
         title: "Failed to load user features",
@@ -318,14 +247,10 @@ export const FeatureProvider: React.FC<FeatureProviderProps> = ({
       hasFeatureWithAuthority,
       getFeatureSummary,
       refetchFeatures,
-    ]
+    ],
   );
 
-  return (
-    <FeatureContext.Provider value={contextValue}>
-      {children}
-    </FeatureContext.Provider>
-  );
+  return <FeatureContext.Provider value={contextValue}>{children}</FeatureContext.Provider>;
 };
 
 /**
@@ -350,7 +275,7 @@ export const useFeatureAccess = (featureCode: string) => {
       hasFeature: hasFeature(featureCode),
       canAccess: canAccessFeature(featureCode),
     }),
-    [featureCode, hasFeature, canAccessFeature]
+    [featureCode, hasFeature, canAccessFeature],
   );
 };
 
@@ -382,8 +307,7 @@ export const useFeatureContext = (): FeatureContextValue => {
  * Returns only the essential feature checking functions
  */
 export const useEnabledFeatures = () => {
-  const { hasFeature, canAccessFeature, enabledFeatures, loading, error } =
-    useFeatures();
+  const { hasFeature, canAccessFeature, enabledFeatures, loading, error } = useFeatures();
 
   return {
     hasFeature,

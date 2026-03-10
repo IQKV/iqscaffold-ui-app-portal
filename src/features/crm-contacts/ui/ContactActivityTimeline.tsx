@@ -25,10 +25,7 @@ import {
 } from "@tabler/icons-react";
 import { t } from "@lingui/core/macro";
 import { useContactActivitiesQuery } from "@/entities/contact";
-import type {
-  ContactActivity,
-  ContactActivityType,
-} from "@/shared/api/contact/types";
+import type { ContactActivity, ContactActivityType } from "@/shared/api/contact/types";
 
 interface ContactActivityTimelineProps {
   contactId: string;
@@ -44,15 +41,9 @@ interface ContactActivityTimelineProps {
  *
  * Follows the same pattern as LeadActivityTimeline for consistency
  */
-export const ContactActivityTimeline: React.FC<
-  ContactActivityTimelineProps
-> = ({ contactId }) => {
+export const ContactActivityTimeline: React.FC<ContactActivityTimelineProps> = ({ contactId }) => {
   // Fetch activities
-  const {
-    data: activities,
-    isLoading,
-    error,
-  } = useContactActivitiesQuery(contactId);
+  const { data: activities, isLoading, error } = useContactActivitiesQuery(contactId);
 
   // Format date
   const formatDate = (dateString: string) => {
@@ -180,7 +171,7 @@ export const ContactActivityTimeline: React.FC<
 
   // Sort activities by timestamp descending
   const sortedActivities = [...(activities || [])].sort(
-    (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+    (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
   );
 
   // Render empty state
@@ -200,11 +191,7 @@ export const ContactActivityTimeline: React.FC<
         <Timeline.Item
           key={activity.id}
           bullet={
-            <ThemeIcon
-              size={32}
-              variant="light"
-              color={getActivityColor(activity.activityType)}
-            >
+            <ThemeIcon size={32} variant="light" color={getActivityColor(activity.activityType)}>
               {getActivityIcon(activity.activityType)}
             </ThemeIcon>
           }
@@ -230,23 +217,22 @@ export const ContactActivityTimeline: React.FC<
               </Text>
 
               {/* Metadata (if any) */}
-              {activity.metadata &&
-                Object.keys(activity.metadata).length > 0 && (
-                  <Paper p="xs" bg="gray.0" withBorder>
-                    <Stack gap={4}>
-                      {Object.entries(activity.metadata).map(([key, value]) => (
-                        <Group key={key} gap="xs">
-                          <Text size="xs" fw={500}>
-                            {key}:
-                          </Text>
-                          <Text size="xs" c="dimmed">
-                            {String(value)}
-                          </Text>
-                        </Group>
-                      ))}
-                    </Stack>
-                  </Paper>
-                )}
+              {activity.metadata && Object.keys(activity.metadata).length > 0 && (
+                <Paper p="xs" bg="gray.0" withBorder>
+                  <Stack gap={4}>
+                    {Object.entries(activity.metadata).map(([key, value]) => (
+                      <Group key={key} gap="xs">
+                        <Text size="xs" fw={500}>
+                          {key}:
+                        </Text>
+                        <Text size="xs" c="dimmed">
+                          {String(value)}
+                        </Text>
+                      </Group>
+                    ))}
+                  </Stack>
+                </Paper>
+              )}
             </Stack>
           </Paper>
         </Timeline.Item>

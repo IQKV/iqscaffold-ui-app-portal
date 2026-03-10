@@ -45,7 +45,7 @@ const meta: Meta<typeof UserFormModal> = {
                 createdAt: new Date().toISOString(),
               },
             },
-            { status: 201 }
+            { status: 201 },
           );
         }),
         http.put("/v1/users/:id", async ({ request }) => {
@@ -121,10 +121,7 @@ export const CreateUserWithError: Story = {
     msw: {
       handlers: [
         http.post("/v1/auth/signup", () => {
-          return HttpResponse.json(
-            { error: "Username or email already exists" },
-            { status: 409 }
-          );
+          return HttpResponse.json({ error: "Username or email already exists" }, { status: 409 });
         }),
       ],
     },
@@ -141,10 +138,7 @@ export const EditUserWithError: Story = {
     msw: {
       handlers: [
         http.put("/v1/users/:id", () => {
-          return HttpResponse.json(
-            { error: "User not found" },
-            { status: 404 }
-          );
+          return HttpResponse.json({ error: "User not found" }, { status: 404 });
         }),
       ],
     },
@@ -179,7 +173,7 @@ export const Loading: Story = {
                 createdAt: new Date().toISOString(),
               },
             },
-            { status: 201 }
+            { status: 201 },
           );
         }),
       ],

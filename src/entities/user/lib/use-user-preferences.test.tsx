@@ -37,9 +37,7 @@ const createWrapper = () => {
   });
 
   const Wrapper = ({ children }: { children: ReactNode }) => {
-    return (
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    );
+    return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
   };
 
   return Wrapper;
@@ -75,9 +73,7 @@ describe("useUserPreferences", () => {
       updatedAt: "2025-11-22T10:00:00",
     };
 
-    vi.mocked(userPreferenceApi.getMyPreferences).mockResolvedValue(
-      mockPreferences
-    );
+    vi.mocked(userPreferenceApi.getMyPreferences).mockResolvedValue(mockPreferences);
 
     const { result } = renderHook(() => useUserPreferences(), {
       wrapper: createWrapper(),
@@ -136,9 +132,7 @@ describe("useUpdateUserPreferences", () => {
       updatedAt: "2025-11-22T10:30:00",
     };
 
-    vi.mocked(userPreferenceApi.updateMyPreferences).mockResolvedValue(
-      mockResponse
-    );
+    vi.mocked(userPreferenceApi.updateMyPreferences).mockResolvedValue(mockResponse);
 
     const { result } = renderHook(() => useUpdateUserPreferences(), {
       wrapper: createWrapper(),
@@ -148,9 +142,7 @@ describe("useUpdateUserPreferences", () => {
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
 
-    expect(userPreferenceApi.updateMyPreferences).toHaveBeenCalledWith(
-      updateData
-    );
+    expect(userPreferenceApi.updateMyPreferences).toHaveBeenCalledWith(updateData);
     expect(result.current.data).toEqual(mockResponse);
   });
 });

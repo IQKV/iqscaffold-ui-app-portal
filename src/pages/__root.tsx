@@ -16,16 +16,13 @@ const TanStackRouterDevtools =
           default: res.TanStackRouterDevtools,
           // For Embedded Mode
           // default: res.TanStackRouterDevtoolsPanel
-        }))
+        })),
       );
 
 function RootComponent() {
   return (
     <AppLayout>
-      <Helmet
-        defaultTitle={t`IQ Scaffold Platform`}
-        titleTemplate={t`%s | IQ Scaffold Platform`}
-      />
+      <Helmet defaultTitle={t`IQ Scaffold Platform`} titleTemplate={t`%s | IQ Scaffold Platform`} />
       <Outlet />
       <TanStackRouterDevtools />
     </AppLayout>

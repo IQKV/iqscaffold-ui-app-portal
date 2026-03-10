@@ -135,11 +135,7 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
     }
   };
 
-  const handleReorder = async (
-    id: string,
-    currentOrder: number,
-    direction: "up" | "down"
-  ) => {
+  const handleReorder = async (id: string, currentOrder: number, direction: "up" | "down") => {
     // Validate currentOrder is a valid number
     if (typeof currentOrder !== "number" || isNaN(currentOrder)) {
       notifications.show({
@@ -169,12 +165,7 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
   };
 
   return (
-    <Modal
-      opened={opened}
-      onClose={onClose}
-      title={t`Manage Pipeline Stages`}
-      size="lg"
-    >
+    <Modal opened={opened} onClose={onClose} title={t`Manage Pipeline Stages`} size="lg">
       <Stack gap="md">
         <Text size="sm" c="dimmed">
           {t`Customize your sales process by adding, removing, or reordering pipeline stages.`}
@@ -206,9 +197,7 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
                       <Select
                         label={t`Type`}
                         value={editStage.type}
-                        onChange={(val) =>
-                          setEditStage({ ...editStage, type: val as any })
-                        }
+                        onChange={(val) => setEditStage({ ...editStage, type: val as any })}
                         data={[
                           { value: "ACTIVE", label: t`Active` },
                           { value: "WON", label: t`Won` },
@@ -220,9 +209,7 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
                       <ColorInput
                         label={t`Color`}
                         value={editStage.color}
-                        onChange={(val) =>
-                          setEditStage({ ...editStage, color: val })
-                        }
+                        onChange={(val) => setEditStage({ ...editStage, color: val })}
                         style={{ flex: 1 }}
                       />
                       <Group gap="xs">
@@ -233,11 +220,7 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
                         >
                           <IconCheck size={16} />
                         </Button>
-                        <Button
-                          variant="subtle"
-                          color="gray"
-                          onClick={() => setEditingId(null)}
-                        >
+                        <Button variant="subtle" color="gray" onClick={() => setEditingId(null)}>
                           <IconX size={16} />
                         </Button>
                       </Group>
@@ -247,12 +230,7 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
                   // View Row
                   <Group justify="space-between">
                     <Group gap="md">
-                      <Box
-                        w={12}
-                        h={24}
-                        bg={stage.color}
-                        style={{ borderRadius: 2 }}
-                      />
+                      <Box w={12} h={24} bg={stage.color} style={{ borderRadius: 2 }} />
                       <div>
                         <Text fw={500}>{stage.name}</Text>
                         <Text size="xs" c="dimmed">
@@ -293,10 +271,7 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
                         variant="subtle"
                         color="red"
                         onClick={() => handleDelete(stage.id)}
-                        loading={
-                          deleteMutation.isPending &&
-                          deleteMutation.variables === stage.id
-                        }
+                        loading={deleteMutation.isPending && deleteMutation.variables === stage.id}
                       >
                         <IconTrash size={16} />
                       </ActionIcon>
@@ -316,16 +291,12 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
                 <TextInput
                   placeholder={t`Stage Name`}
                   value={newStage.name}
-                  onChange={(e) =>
-                    setNewStage({ ...newStage, name: e.currentTarget.value })
-                  }
+                  onChange={(e) => setNewStage({ ...newStage, name: e.currentTarget.value })}
                   required
                 />
                 <Select
                   value={newStage.type}
-                  onChange={(val) =>
-                    setNewStage({ ...newStage, type: val as any })
-                  }
+                  onChange={(val) => setNewStage({ ...newStage, type: val as any })}
                   data={[
                     { value: "ACTIVE", label: t`Active` },
                     { value: "WON", label: t`Won` },
@@ -341,17 +312,10 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
                   style={{ flex: 1 }}
                 />
                 <Group gap="xs">
-                  <Button
-                    onClick={handleCreate}
-                    loading={createMutation.isPending}
-                  >
+                  <Button onClick={handleCreate} loading={createMutation.isPending}>
                     {t`Add`}
                   </Button>
-                  <Button
-                    variant="subtle"
-                    color="gray"
-                    onClick={() => setIsAdding(false)}
-                  >
+                  <Button variant="subtle" color="gray" onClick={() => setIsAdding(false)}>
                     {t`Cancel`}
                   </Button>
                 </Group>
@@ -370,11 +334,7 @@ export const PipelineSettingsModal: React.FC<PipelineSettingsModalProps> = ({
         )}
 
         {stages.length === 0 && !isLoading && (
-          <Alert
-            icon={<IconAlertCircle size={16} />}
-            title={t`No Stages`}
-            color="blue"
-          >
+          <Alert icon={<IconAlertCircle size={16} />} title={t`No Stages`} color="blue">
             {t`Your pipeline has no stages. Create some to get started.`}
           </Alert>
         )}

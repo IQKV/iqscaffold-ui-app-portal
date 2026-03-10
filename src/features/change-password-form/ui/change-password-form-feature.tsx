@@ -11,28 +11,15 @@ import { z } from "zod";
 // Validation schema
 const changePasswordSchema = z
   .object({
-    currentPassword: z
-      .string()
-      .min(1, i18n._(msg`Current password is required`)),
+    currentPassword: z.string().min(1, i18n._(msg`Current password is required`)),
     newPassword: z
       .string()
       .min(8, i18n._(msg`Password must be at least 8 characters`))
-      .regex(
-        /[A-Z]/,
-        i18n._(msg`Password must contain at least one uppercase letter`)
-      )
-      .regex(
-        /[a-z]/,
-        i18n._(msg`Password must contain at least one lowercase letter`)
-      )
+      .regex(/[A-Z]/, i18n._(msg`Password must contain at least one uppercase letter`))
+      .regex(/[a-z]/, i18n._(msg`Password must contain at least one lowercase letter`))
       .regex(/[0-9]/, i18n._(msg`Password must contain at least one number`))
-      .regex(
-        /[^A-Za-z0-9]/,
-        i18n._(msg`Password must contain at least one special character`)
-      ),
-    confirmPassword: z
-      .string()
-      .min(1, i18n._(msg`Please confirm your new password`)),
+      .regex(/[^A-Za-z0-9]/, i18n._(msg`Password must contain at least one special character`)),
+    confirmPassword: z.string().min(1, i18n._(msg`Please confirm your new password`)),
   })
   .refine((data) => data.newPassword === data.confirmPassword, {
     message: i18n._(msg`Passwords do not match`),

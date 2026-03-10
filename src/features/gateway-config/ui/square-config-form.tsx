@@ -8,11 +8,7 @@ interface SquareConfigFormProps {
   errors?: Record<string, string>;
 }
 
-export const SquareConfigForm = ({
-  value,
-  onChange,
-  errors = {},
-}: SquareConfigFormProps) => {
+export const SquareConfigForm = ({ value, onChange, errors = {} }: SquareConfigFormProps) => {
   return (
     <Stack gap="md">
       <PasswordInput
@@ -20,9 +16,7 @@ export const SquareConfigForm = ({
         placeholder="EAAAl..."
         required
         value={value.accessToken || ""}
-        onChange={(e) =>
-          onChange({ ...value, accessToken: e.currentTarget.value })
-        }
+        onChange={(e) => onChange({ ...value, accessToken: e.currentTarget.value })}
         error={errors.accessToken}
         description={t`Your Square API access token`}
       />
@@ -31,9 +25,7 @@ export const SquareConfigForm = ({
         placeholder="L..."
         required
         value={value.locationId || ""}
-        onChange={(e) =>
-          onChange({ ...value, locationId: e.currentTarget.value })
-        }
+        onChange={(e) => onChange({ ...value, locationId: e.currentTarget.value })}
         error={errors.locationId}
         description={t`Square location ID for payments`}
       />
@@ -41,9 +33,7 @@ export const SquareConfigForm = ({
         label={t`Webhook Signature Key`}
         placeholder="whsec_..."
         value={value.webhookSignatureKey || ""}
-        onChange={(e) =>
-          onChange({ ...value, webhookSignatureKey: e.currentTarget.value })
-        }
+        onChange={(e) => onChange({ ...value, webhookSignatureKey: e.currentTarget.value })}
         error={errors.webhookSignatureKey}
         description={t`Webhook signature key for event validation (optional)`}
       />
@@ -51,9 +41,7 @@ export const SquareConfigForm = ({
         label={t`Application ID`}
         placeholder="sq0idp..."
         value={value.applicationId || ""}
-        onChange={(e) =>
-          onChange({ ...value, applicationId: e.currentTarget.value })
-        }
+        onChange={(e) => onChange({ ...value, applicationId: e.currentTarget.value })}
         error={errors.applicationId}
         description={t`Application ID for frontend use (optional)`}
       />

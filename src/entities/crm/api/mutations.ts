@@ -13,10 +13,7 @@ import type {
   CreateFollowUpRequest,
   UpdateFollowUpRequest,
 } from "@/shared/api/crm/types";
-import type {
-  CreateContactRequest,
-  UpdateContactRequest,
-} from "@/shared/api/contact/types";
+import type { CreateContactRequest, UpdateContactRequest } from "@/shared/api/contact/types";
 
 // Lead Mutations
 export const useUpdateLeadMutation = () => {
@@ -141,13 +138,8 @@ export const useCreateLeadNoteMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({
-      leadId,
-      data,
-    }: {
-      leadId: string;
-      data: CreateLeadNoteRequest;
-    }) => crmApi.createLeadNote(leadId, data),
+    mutationFn: ({ leadId, data }: { leadId: string; data: CreateLeadNoteRequest }) =>
+      crmApi.createLeadNote(leadId, data),
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
         queryKey: crmKeys.leadNotes(variables.leadId),
@@ -216,8 +208,7 @@ export const useCreatePipelineStageMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: CreatePipelineStageRequest) =>
-      crmApi.createPipelineStage(data),
+    mutationFn: (data: CreatePipelineStageRequest) => crmApi.createPipelineStage(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: crmKeys.pipelineStages() });
     },
@@ -228,13 +219,8 @@ export const useUpdatePipelineStageMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({
-      id,
-      data,
-    }: {
-      id: string;
-      data: UpdatePipelineStageRequest;
-    }) => crmApi.updatePipelineStage(id, data),
+    mutationFn: ({ id, data }: { id: string; data: UpdatePipelineStageRequest }) =>
+      crmApi.updatePipelineStage(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: crmKeys.pipelineStages() });
     },
@@ -419,13 +405,8 @@ export const useUpdateContactMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({
-      id,
-      data,
-    }: {
-      id: string | number;
-      data: UpdateContactRequest;
-    }) => contactApi.updateContact(id, data),
+    mutationFn: ({ id, data }: { id: string | number; data: UpdateContactRequest }) =>
+      contactApi.updateContact(id, data),
     onSuccess: (updatedContact, { id }) => {
       queryClient.setQueryData(contactKeys.detail(id), updatedContact);
       queryClient.invalidateQueries({ queryKey: contactKeys.lists() });
@@ -482,8 +463,7 @@ export const useBulkDeleteContactsMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (contactIds: number[]) =>
-      contactApi.bulkDeleteContacts({ contactIds }),
+    mutationFn: (contactIds: number[]) => contactApi.bulkDeleteContacts({ contactIds }),
     onSuccess: (data: any) => {
       queryClient.invalidateQueries({ queryKey: contactKeys.lists() });
       notificationService.success({
@@ -502,13 +482,8 @@ export const useBulkUpdateContactStatusMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({
-      contactIds,
-      status,
-    }: {
-      contactIds: number[];
-      status: any;
-    }) => contactApi.bulkUpdateStatus({ contactIds, status }),
+    mutationFn: ({ contactIds, status }: { contactIds: number[]; status: any }) =>
+      contactApi.bulkUpdateStatus({ contactIds, status }),
     onSuccess: (data: any) => {
       queryClient.invalidateQueries({ queryKey: contactKeys.lists() });
       notificationService.success({

@@ -5,10 +5,7 @@ interface PaymentStatusBadgeProps {
   status: PaymentStatus;
 }
 
-const statusConfig: Record<
-  PaymentStatus,
-  { color: MantineColor; label: string }
-> = {
+const statusConfig: Record<PaymentStatus, { color: MantineColor; label: string }> = {
   PENDING: { color: "yellow", label: "Pending" },
   SUCCEEDED: { color: "green", label: "Succeeded" },
   FAILED: { color: "red", label: "Failed" },

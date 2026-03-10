@@ -52,9 +52,7 @@ export const getSupportedLocale = (userLocale: string) => {
   }
 
   const mainLanguage = normalizedLocale.split("-")[0];
-  const mainLocale = availableLocales.find((locale) =>
-    locale.startsWith(mainLanguage)
-  );
+  const mainLocale = availableLocales.find((locale) => locale.startsWith(mainLanguage));
   if (mainLocale) {
     return mainLocale;
   }

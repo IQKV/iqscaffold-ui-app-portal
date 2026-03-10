@@ -1,25 +1,8 @@
 import React from "react";
-import {
-  Container,
-  Text,
-  Button,
-  Stack,
-  Alert,
-  Group,
-  Paper,
-  Badge,
-} from "@mantine/core";
-import {
-  IconAlertTriangle,
-  IconRefresh,
-  IconHome,
-  IconDatabase,
-} from "@tabler/icons-react";
+import { Container, Text, Button, Stack, Alert, Group, Paper, Badge } from "@mantine/core";
+import { IconAlertTriangle, IconRefresh, IconHome, IconDatabase } from "@tabler/icons-react";
 import { t } from "@lingui/core/macro";
-import {
-  ErrorBoundary,
-  type ErrorBoundaryProps,
-} from "@/shared/ui/error-boundary";
+import { ErrorBoundary, type ErrorBoundaryProps } from "@/shared/ui/error-boundary";
 import { errorFromAxios, formatErrorForDisplay } from "@/shared/lib/http-error";
 import { notificationService } from "@/shared/lib/notifications";
 
@@ -78,10 +61,7 @@ function CrmErrorFallback({ error, resetError }: CrmErrorFallbackProps) {
     }
 
     if (isCrmBusinessError) {
-      return (
-        displayError.message ||
-        t`An error occurred while processing your CRM request.`
-      );
+      return displayError.message || t`An error occurred while processing your CRM request.`;
     }
 
     return t`Something went wrong with the CRM system. Please try again or contact support if the problem persists.`;
@@ -117,12 +97,7 @@ function CrmErrorFallback({ error, resetError }: CrmErrorFallbackProps) {
             )}
 
             {appError.errorType && (
-              <Badge
-                size="sm"
-                variant="light"
-                color="red"
-                leftSection={<IconDatabase size={12} />}
-              >
+              <Badge size="sm" variant="light" color="red" leftSection={<IconDatabase size={12} />}>
                 {appError.errorType.toUpperCase()}
               </Badge>
             )}
@@ -136,11 +111,7 @@ function CrmErrorFallback({ error, resetError }: CrmErrorFallbackProps) {
           </Text>
 
           <Group justify="center" gap="md">
-            <Button
-              leftSection={<IconRefresh size="1rem" />}
-              onClick={resetError}
-              variant="filled"
-            >
+            <Button leftSection={<IconRefresh size="1rem" />} onClick={resetError} variant="filled">
               {t`Try Again`}
             </Button>
 
@@ -265,9 +236,7 @@ export function CrmErrorBoundary({
  * ```
  */
 // eslint-disable-next-line react-refresh/only-export-components
-export function withCrmErrorBoundary<P extends object>(
-  Component: React.ComponentType<P>
-) {
+export function withCrmErrorBoundary<P extends object>(Component: React.ComponentType<P>) {
   const WrappedComponent = (props: P) => (
     <CrmErrorBoundary>
       <Component {...props} />

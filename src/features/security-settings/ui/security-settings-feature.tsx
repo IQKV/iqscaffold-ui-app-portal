@@ -1,10 +1,6 @@
 import { Button, Card, Stack, Text, Group, Alert } from "@mantine/core";
 import { modals } from "@mantine/modals";
-import {
-  IconShieldLock,
-  IconDevices,
-  IconAlertTriangle,
-} from "@tabler/icons-react";
+import { IconShieldLock, IconDevices, IconAlertTriangle } from "@tabler/icons-react";
 import { t } from "@lingui/core/macro";
 import { useLogoutAll } from "@/shared/lib/use-auth-api";
 import { useAuthStore } from "@/processes/auth";
@@ -13,9 +9,7 @@ interface SecuritySettingsFeatureProps {
   showTitle?: boolean;
 }
 
-export function SecuritySettingsFeature({
-  showTitle = true,
-}: SecuritySettingsFeatureProps) {
+export function SecuritySettingsFeature({ showTitle = true }: SecuritySettingsFeatureProps) {
   const logoutAll = useLogoutAll();
   const logout = useAuthStore((state) => state.logout);
 
@@ -27,11 +21,7 @@ export function SecuritySettingsFeature({
           <Text size="sm">
             {t`This will log you out from all devices where you're currently signed in, including this device.`}
           </Text>
-          <Alert
-            icon={<IconAlertTriangle size={16} />}
-            color="yellow"
-            variant="light"
-          >
+          <Alert icon={<IconAlertTriangle size={16} />} color="yellow" variant="light">
             {t`You will need to sign in again on all devices.`}
           </Alert>
         </Stack>
@@ -97,11 +87,7 @@ export function SecuritySettingsFeature({
           </Stack>
         </Card>
 
-        <Alert
-          icon={<IconAlertTriangle size={16} />}
-          color="blue"
-          variant="light"
-        >
+        <Alert icon={<IconAlertTriangle size={16} />} color="blue" variant="light">
           <Text size="sm">
             {t`For additional security, we recommend changing your password regularly and enabling two-factor authentication when available.`}
           </Text>

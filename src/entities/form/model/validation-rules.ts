@@ -28,9 +28,7 @@ export const maxLength =
     if (!value) {
       return null;
     }
-    return value.length > max
-      ? t`Must be no more than ${max} characters`
-      : null;
+    return value.length > max ? t`Must be no more than ${max} characters` : null;
   };
 
 export const passwordStrength: FormValidationRule<string> = (value) => {
@@ -64,9 +62,7 @@ export const phoneNumber: FormValidationRule<string> = (value) => {
     return null;
   }
   const phoneRegex = /^[+]?[1-9][\d]{0,15}$/;
-  return phoneRegex.test(value.replace(/\s/g, ""))
-    ? null
-    : t`Invalid phone number`;
+  return phoneRegex.test(value.replace(/\s/g, "")) ? null : t`Invalid phone number`;
 };
 
 export const url: FormValidationRule<string> = (value) => {
@@ -92,7 +88,5 @@ export const alphanumeric: FormValidationRule<string> = (value) => {
   if (!value) {
     return null;
   }
-  return /^[a-zA-Z0-9]+$/.test(value)
-    ? null
-    : t`Must contain only letters and numbers`;
+  return /^[a-zA-Z0-9]+$/.test(value) ? null : t`Must contain only letters and numbers`;
 };

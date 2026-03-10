@@ -21,8 +21,7 @@ import {
 export const invitationKeys = {
   all: ["invitations"] as const,
   lists: () => [...invitationKeys.all, "list"] as const,
-  list: (params?: InvitationListParams) =>
-    [...invitationKeys.lists(), params] as const,
+  list: (params?: InvitationListParams) => [...invitationKeys.lists(), params] as const,
   detail: (id: number) => [...invitationKeys.all, "detail", id] as const,
   link: (id: number) => [...invitationKeys.all, "link", id] as const,
 };
@@ -55,8 +54,7 @@ export function useCreateInvitation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: CreateInvitationRequest) =>
-      invitationApi.createInvitation(data),
+    mutationFn: (data: CreateInvitationRequest) => invitationApi.createInvitation(data),
     onSuccess: (data: OrganizationInvitationDto) => {
       // Invalidate invitation lists to refetch
       queryClient.invalidateQueries({ queryKey: invitationKeys.lists() });
@@ -70,8 +68,7 @@ export function useCreateInvitation() {
     onError: (error: any) => {
       notifications.show({
         title: t`Failed to Create Invitation`,
-        message:
-          error?.message || t`An error occurred while creating the invitation`,
+        message: error?.message || t`An error occurred while creating the invitation`,
         color: "red",
       });
     },
@@ -85,8 +82,7 @@ export function useRevokeInvitation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (invitationId: number) =>
-      invitationApi.revokeInvitation(invitationId),
+    mutationFn: (invitationId: number) => invitationApi.revokeInvitation(invitationId),
     onSuccess: () => {
       // Invalidate invitation lists to refetch
       queryClient.invalidateQueries({ queryKey: invitationKeys.lists() });
@@ -100,8 +96,7 @@ export function useRevokeInvitation() {
     onError: (error: any) => {
       notifications.show({
         title: t`Failed to Revoke Invitation`,
-        message:
-          error?.message || t`An error occurred while revoking the invitation`,
+        message: error?.message || t`An error occurred while revoking the invitation`,
         color: "red",
       });
     },

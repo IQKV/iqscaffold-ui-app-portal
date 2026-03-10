@@ -13,10 +13,7 @@ import {
 } from "@mantine/core";
 import { IconCheck, IconStar } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
-import {
-  useActiveSubscriptionPlansQuery,
-  SubscriptionPlan,
-} from "@/entities/billing";
+import { useActiveSubscriptionPlansQuery, SubscriptionPlan } from "@/entities/billing";
 import { formatCurrency } from "@/shared/lib/format";
 
 interface SubscriptionPlansGridProps {
@@ -24,10 +21,7 @@ interface SubscriptionPlansGridProps {
   currentPlanId?: string;
 }
 
-export function SubscriptionPlansGrid({
-  onSelectPlan,
-  currentPlanId,
-}: SubscriptionPlansGridProps) {
+export function SubscriptionPlansGrid({ onSelectPlan, currentPlanId }: SubscriptionPlansGridProps) {
   const { data: plans, isLoading, error } = useActiveSubscriptionPlansQuery();
 
   if (isLoading) {
@@ -80,9 +74,7 @@ function PlanCard({ plan, onSelect, isCurrentPlan }: PlanCardProps) {
     if (count === 1) {
       return interval === "month" ? t`monthly` : t`yearly`;
     }
-    return interval === "month"
-      ? t`every ${count} months`
-      : t`every ${count} years`;
+    return interval === "month" ? t`every ${count} months` : t`every ${count} years`;
   };
 
   const features = plan.features ? Object.entries(plan.features) : [];
@@ -95,9 +87,7 @@ function PlanCard({ plan, onSelect, isCurrentPlan }: PlanCardProps) {
       h="100%"
       style={{
         position: "relative",
-        border: isCurrentPlan
-          ? "2px solid var(--mantine-color-blue-6)"
-          : undefined,
+        border: isCurrentPlan ? "2px solid var(--mantine-color-blue-6)" : undefined,
       }}
     >
       {isCurrentPlan && (

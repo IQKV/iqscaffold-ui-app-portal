@@ -37,15 +37,11 @@ test.describe("App Smoke Tests", () => {
         console.log("✓ Homepage loaded (content may be loading)");
       }
     } else {
-      console.log(
-        "✓ Homepage redirected to auth (expected for protected routes)"
-      );
+      console.log("✓ Homepage redirected to auth (expected for protected routes)");
     }
   });
 
-  test("application renders without critical JavaScript errors", async ({
-    page,
-  }) => {
+  test("application renders without critical JavaScript errors", async ({ page }) => {
     const errors: string[] = [];
     const criticalErrors: string[] = [];
 
@@ -77,9 +73,7 @@ test.describe("App Smoke Tests", () => {
     // Verify no critical JavaScript errors
     expect(criticalErrors).toHaveLength(0);
 
-    console.log(
-      `✓ No critical errors (${errors.length} total console messages)`
-    );
+    console.log(`✓ No critical errors (${errors.length} total console messages)`);
   });
 
   test("authentication flow works", async ({ page }) => {
@@ -174,9 +168,7 @@ test.describe("App Smoke Tests", () => {
       expect(pageContent).toBeTruthy();
       console.log("✓ Critical workflows: Page is interactive");
     } else {
-      console.log(
-        "✓ Critical workflows test skipped (requires authentication)"
-      );
+      console.log("✓ Critical workflows test skipped (requires authentication)");
     }
   });
 
@@ -257,9 +249,7 @@ test.describe("App Smoke Tests", () => {
     await page.waitForTimeout(200);
 
     // Verify focus is visible (something should be focusable)
-    const focusedElement = await page.evaluate(
-      () => document.activeElement?.tagName
-    );
+    const focusedElement = await page.evaluate(() => document.activeElement?.tagName);
     expect(focusedElement).toBeTruthy();
 
     // Verify semantic HTML structure

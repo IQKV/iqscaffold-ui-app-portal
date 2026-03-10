@@ -144,13 +144,7 @@ export const LeadEditModal: React.FC<LeadEditModalProps> = ({
   };
 
   return (
-    <Modal
-      opened={opened}
-      onClose={handleClose}
-      title={t`Edit Lead`}
-      size="md"
-      centered
-    >
+    <Modal opened={opened} onClose={handleClose} title={t`Edit Lead`} size="md" centered>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack gap="md">
           {/* Name Fields */}
@@ -244,11 +238,7 @@ export const LeadEditModal: React.FC<LeadEditModalProps> = ({
 
           {/* Actions */}
           <Group justify="flex-end" mt="md">
-            <Button
-              variant="outline"
-              onClick={handleClose}
-              disabled={updateLeadMutation.isPending}
-            >
+            <Button variant="outline" onClick={handleClose} disabled={updateLeadMutation.isPending}>
               {t`Cancel`}
             </Button>
             <Button

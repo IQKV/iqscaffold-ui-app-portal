@@ -42,10 +42,7 @@ const FormWrapper = ({
   buttonText = "Schedule Follow-up",
   buttonColor,
 }: {
-  children: (
-    opened: boolean,
-    setOpened: (opened: boolean) => void
-  ) => React.ReactNode;
+  children: (opened: boolean, setOpened: (opened: boolean) => void) => React.ReactNode;
   buttonText?: string;
   buttonColor?: string;
 }) => {

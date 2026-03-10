@@ -1,10 +1,7 @@
 import { useState, useCallback } from "react";
 import { notifications } from "@mantine/notifications";
 import { t } from "@lingui/core/macro";
-import {
-  isDuplicateEmailError,
-  getDuplicateEmailMessage,
-} from "./validation-schemas";
+import { isDuplicateEmailError, getDuplicateEmailMessage } from "./validation-schemas";
 
 /**
  * Form submission state management hook
@@ -128,7 +125,7 @@ export function useFormSubmission<TData = any, TResult = any>({
         return { success: false, error };
       }
     },
-    [onSubmit, onSuccess, onError, successMessage, errorMessage]
+    [onSubmit, onSuccess, onError, successMessage, errorMessage],
   );
 
   const reset = useCallback(() => {

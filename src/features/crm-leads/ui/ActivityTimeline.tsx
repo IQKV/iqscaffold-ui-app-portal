@@ -39,9 +39,7 @@ interface ActivityTimelineProps {
  *
  * Requirements: 4.3, 7.1, 7.2, 7.3
  */
-export const ActivityTimeline: React.FC<ActivityTimelineProps> = ({
-  leadId,
-}) => {
+export const ActivityTimeline: React.FC<ActivityTimelineProps> = ({ leadId }) => {
   // Fetch activities
   const { data: activities, isLoading, error } = useLeadActivitiesQuery(leadId);
 
@@ -149,7 +147,7 @@ export const ActivityTimeline: React.FC<ActivityTimelineProps> = ({
 
   // Sort activities by timestamp descending
   const sortedActivities = [...(activities || [])].sort(
-    (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+    (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
   );
 
   // Render empty state
@@ -169,11 +167,7 @@ export const ActivityTimeline: React.FC<ActivityTimelineProps> = ({
         <Timeline.Item
           key={activity.id}
           bullet={
-            <ThemeIcon
-              size={32}
-              variant="light"
-              color={getActivityColor(activity.activityType)}
-            >
+            <ThemeIcon size={32} variant="light" color={getActivityColor(activity.activityType)}>
               {getActivityIcon(activity.activityType)}
             </ThemeIcon>
           }
@@ -199,23 +193,22 @@ export const ActivityTimeline: React.FC<ActivityTimelineProps> = ({
               </Text>
 
               {/* Metadata (if any) */}
-              {activity.metadata &&
-                Object.keys(activity.metadata).length > 0 && (
-                  <Paper p="xs" bg="gray.0" withBorder>
-                    <Stack gap={4}>
-                      {Object.entries(activity.metadata).map(([key, value]) => (
-                        <Group key={key} gap="xs">
-                          <Text size="xs" fw={500}>
-                            {key}:
-                          </Text>
-                          <Text size="xs" c="dimmed">
-                            {String(value)}
-                          </Text>
-                        </Group>
-                      ))}
-                    </Stack>
-                  </Paper>
-                )}
+              {activity.metadata && Object.keys(activity.metadata).length > 0 && (
+                <Paper p="xs" bg="gray.0" withBorder>
+                  <Stack gap={4}>
+                    {Object.entries(activity.metadata).map(([key, value]) => (
+                      <Group key={key} gap="xs">
+                        <Text size="xs" fw={500}>
+                          {key}:
+                        </Text>
+                        <Text size="xs" c="dimmed">
+                          {String(value)}
+                        </Text>
+                      </Group>
+                    ))}
+                  </Stack>
+                </Paper>
+              )}
             </Stack>
           </Paper>
         </Timeline.Item>

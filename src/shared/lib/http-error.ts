@@ -15,10 +15,7 @@ import {
 export type { AppError, AppErrorType, ProblemDetail };
 
 function extractRequestId(from: any): string | undefined {
-  const headers = (from?.headers ?? {}) as Record<
-    string,
-    string | string[] | undefined
-  >;
+  const headers = (from?.headers ?? {}) as Record<string, string | string[] | undefined>;
   const id =
     headers["x-request-id"] ??
     headers["x-correlation-id"] ??
@@ -119,13 +116,10 @@ export function normalizeAxiosError(err: unknown): AppError {
   // Network or timeout
   if (isAxios && !ax.response) {
     const code = ax.code;
-    const isTimeout =
-      code === "ECONNABORTED" || /timeout/i.test(ax.message || "");
+    const isTimeout = code === "ECONNABORTED" || /timeout/i.test(ax.message || "");
 
     const errorType = isTimeout ? "timeout" : "network";
-    const message = isTimeout
-      ? "Request timed out"
-      : "Network error. Please check your connection";
+    const message = isTimeout ? "Request timed out" : "Network error. Please check your connection";
 
     const networkError: AppError = {
       errorType,
@@ -135,9 +129,7 @@ export function normalizeAxiosError(err: unknown): AppError {
       retryable: true,
       requestId: extractRequestId(ax),
       retryConfig: DEFAULT_RETRY_CONFIGS[errorType] || undefined,
-      type: isTimeout
-        ? PROBLEM_TYPES.TIMEOUT_ERROR
-        : PROBLEM_TYPES.NETWORK_ERROR,
+      type: isTimeout ? PROBLEM_TYPES.TIMEOUT_ERROR : PROBLEM_TYPES.NETWORK_ERROR,
       title: isTimeout ? "Request Timeout" : "Network Error",
       detail: message,
     };
@@ -169,14 +161,12 @@ export function normalizeAxiosError(err: unknown): AppError {
 
     // Flatten validation errors for message combination
     const flattenedErrors = flattenValidationErrors(
-      (data as any)?.errors ?? (data as any)?.violations
+      (data as any)?.errors ?? (data as any)?.violations,
     );
 
     // Use flattened errors if available, otherwise use field error messages
     const allErrors =
-      flattenedErrors.length > 0
-        ? flattenedErrors
-        : Object.values(fieldErrors).flat();
+      flattenedErrors.length > 0 ? flattenedErrors : Object.values(fieldErrors).flat();
 
     // Enhanced error type detection
     const errorType = determineErrorType(
@@ -184,7 +174,7 @@ export function normalizeAxiosError(err: unknown): AppError {
       message,
       ax.code,
       problemDetail?.type,
-      hasFieldErrors
+      hasFieldErrors,
     );
 
     const retryable =
@@ -194,17 +184,14 @@ export function normalizeAxiosError(err: unknown): AppError {
       (errorType === "server" && status >= 500);
 
     // Combine message with validation errors if present
-    const combinedMessage =
-      allErrors.length > 0 ? `${message}: ${allErrors.join(", ")}` : message;
+    const combinedMessage = allErrors.length > 0 ? `${message}: ${allErrors.join(", ")}` : message;
 
     // Create Problem Detail
     const problemType = getProblemTypeForError(errorType, status);
     const problemTitle = getProblemTitleForError(errorType, status);
 
     // Get extension members but exclude standard RFC 9457 fields and our AppError fields
-    const extensionMembers = problemDetail
-      ? extractExtensionMembers(problemDetail)
-      : {};
+    const extensionMembers = problemDetail ? extractExtensionMembers(problemDetail) : {};
     const { message: _, ...safeExtensions } = extensionMembers; // Remove message to avoid override
 
     const appError: AppError = {
@@ -217,16 +204,12 @@ export function normalizeAxiosError(err: unknown): AppError {
       retryable,
       cause: err,
       fieldErrors: hasFieldErrors ? fieldErrors : undefined,
-      retryConfig: retryable
-        ? DEFAULT_RETRY_CONFIGS[errorType] || undefined
-        : undefined,
+      retryConfig: retryable ? DEFAULT_RETRY_CONFIGS[errorType] || undefined : undefined,
       // RFC 9457 Problem Detail fields
       type: problemDetail?.type ?? problemType,
       title: problemDetail?.title ?? problemTitle,
       detail: problemDetail?.detail ?? combinedMessage,
-      instance:
-        problemDetail?.instance ??
-        (hdrRequestId ? `/errors/${hdrRequestId}` : undefined),
+      instance: problemDetail?.instance ?? (hdrRequestId ? `/errors/${hdrRequestId}` : undefined),
       // Extension members (excluding message to prevent override)
       ...safeExtensions,
     };
@@ -252,10 +235,7 @@ export function normalizeAxiosError(err: unknown): AppError {
 /**
  * Get Problem Detail type for error type and status
  */
-function getProblemTypeForError(
-  errorType: AppErrorType,
-  status?: number
-): string {
+function getProblemTypeForError(errorType: AppErrorType, status?: number): string {
   switch (errorType) {
     case "auth":
       return status === 401
@@ -281,15 +261,10 @@ function getProblemTypeForError(
 /**
  * Get Problem Detail title for error type and status
  */
-function getProblemTitleForError(
-  errorType: AppErrorType,
-  status?: number
-): string {
+function getProblemTitleForError(errorType: AppErrorType, status?: number): string {
   switch (errorType) {
     case "auth":
-      return status === 401
-        ? "Authentication Required"
-        : "Authorization Failed";
+      return status === 401 ? "Authentication Required" : "Authorization Failed";
     case "validation":
       return "Validation Error";
     case "rate-limit":
@@ -323,7 +298,7 @@ function getFieldErrorsFromData(data: any): Record<string, string[]> {
   if (Array.isArray(violations)) {
     for (const v of violations) {
       const field = normalizeFieldKey(
-        (v as any)?.field || (v as any)?.propertyPath || (v as any)?.name || ""
+        (v as any)?.field || (v as any)?.propertyPath || (v as any)?.name || "",
       );
       const msg =
         (v as any)?.message ||
@@ -339,9 +314,7 @@ function getFieldErrorsFromData(data: any): Record<string, string[]> {
   }
 
   // errors: { field: [messages] } or { field: "message" }
-  const errorsObj = (data as any)?.errors as
-    | Record<string, unknown>
-    | undefined;
+  const errorsObj = (data as any)?.errors as Record<string, unknown> | undefined;
   if (errorsObj && typeof errorsObj === "object" && !Array.isArray(errorsObj)) {
     for (const key of Object.keys(errorsObj)) {
       const field = normalizeFieldKey(key);
@@ -410,16 +383,10 @@ export function toMantineErrors(err: unknown): Record<string, string> {
   return res;
 }
 
-export function getErrorMessage(
-  err: unknown,
-  fallback = "Something went wrong"
-): string {
+export function getErrorMessage(err: unknown, fallback = "Something went wrong"): string {
   const appErr = normalizeAxiosError(err);
   // Optionally include request id for server/unknown cases to aid debugging
-  if (
-    appErr.requestId &&
-    (appErr.errorType === "server" || appErr.errorType === "unknown")
-  ) {
+  if (appErr.requestId && (appErr.errorType === "server" || appErr.errorType === "unknown")) {
     return `${appErr.message} (ref: ${appErr.requestId})`;
   }
   return appErr.message || fallback;
@@ -443,8 +410,7 @@ export function formatErrorForDisplay(error: AppError): {
   type?: string;
 } {
   return {
-    title:
-      error.title || getProblemTitleForError(error.errorType, error.status),
+    title: error.title || getProblemTitleForError(error.errorType, error.status),
     message: error.detail || error.message,
     referenceId: error.requestId,
     type: error.type,

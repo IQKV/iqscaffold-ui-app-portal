@@ -1,9 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  userManagementApi,
-  type CreateUserRequest,
-  type UpdateUserRequest,
-} from "@/shared/api";
+import { userManagementApi, type CreateUserRequest, type UpdateUserRequest } from "@/shared/api";
 import { notificationService } from "@/shared/lib/notifications";
 import { usersKeys } from "./queries";
 
@@ -14,8 +10,7 @@ export function useCreateUserMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (userData: CreateUserRequest) =>
-      userManagementApi.createUser(userData),
+    mutationFn: (userData: CreateUserRequest) => userManagementApi.createUser(userData),
     onSuccess: (newUser) => {
       queryClient.invalidateQueries({ queryKey: usersKeys.lists() });
       notificationService.success({
@@ -39,13 +34,8 @@ export function useUpdateUserMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({
-      id,
-      userData,
-    }: {
-      id: number;
-      userData: UpdateUserRequest;
-    }) => userManagementApi.updateUser(id, userData),
+    mutationFn: ({ id, userData }: { id: number; userData: UpdateUserRequest }) =>
+      userManagementApi.updateUser(id, userData),
     onSuccess: (updatedUser) => {
       queryClient.setQueryData(usersKeys.detail(updatedUser.id), updatedUser);
       queryClient.invalidateQueries({ queryKey: usersKeys.lists() });

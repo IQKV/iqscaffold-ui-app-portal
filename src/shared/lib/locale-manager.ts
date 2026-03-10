@@ -43,7 +43,7 @@ import { queryClient } from "@/shared/lib/query-client";
  */
 export async function changeLocale(
   newLocale: string,
-  updateBackend: boolean = true
+  updateBackend: boolean = true,
 ): Promise<void> {
   try {
     // 1. Update frontend UI locale

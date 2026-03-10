@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  describe,
-  it,
-  expect,
-  beforeEach,
-  beforeAll,
-  afterAll,
-  vi,
-} from "vitest";
+import { describe, it, expect, beforeEach, beforeAll, afterAll, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MantineProvider } from "@mantine/core";
@@ -54,7 +46,7 @@ describe("ErrorBoundary", () => {
         <ErrorBoundary>
           <ThrowError shouldThrow={false} />
         </ErrorBoundary>
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(screen.getByText("No error")).toBeInTheDocument();
@@ -66,14 +58,12 @@ describe("ErrorBoundary", () => {
         <ErrorBoundary>
           <ThrowError shouldThrow />
         </ErrorBoundary>
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(screen.getByText("Something went wrong")).toBeInTheDocument();
     expect(screen.getByText("Test error message")).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: /try again/i })
-    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /try again/i })).toBeInTheDocument();
   });
 
   it("renders custom fallback when provided", () => {
@@ -84,7 +74,7 @@ describe("ErrorBoundary", () => {
         <ErrorBoundary fallback={CustomFallback}>
           <ThrowError shouldThrow />
         </ErrorBoundary>
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(screen.getByText("Custom error fallback")).toBeInTheDocument();
@@ -101,12 +91,10 @@ describe("ErrorBoundary", () => {
         <ErrorBoundary>
           <ThrowErrorWithoutMessage />
         </ErrorBoundary>
-      </TestWrapper>
+      </TestWrapper>,
     );
 
-    expect(
-      screen.getByText("An unexpected error occurred")
-    ).toBeInTheDocument();
+    expect(screen.getByText("An unexpected error occurred")).toBeInTheDocument();
   });
 
   it("renders try again button that can be clicked", async () => {
@@ -117,7 +105,7 @@ describe("ErrorBoundary", () => {
         <ErrorBoundary>
           <ThrowError shouldThrow />
         </ErrorBoundary>
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     // Should show error UI with try again button
@@ -140,13 +128,13 @@ describe("ErrorBoundary", () => {
         <ErrorBoundary>
           <ThrowError shouldThrow />
         </ErrorBoundary>
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(console.error).toHaveBeenCalledWith(
       "ErrorBoundary caught an error:",
       expect.any(Error),
-      expect.any(Object)
+      expect.any(Object),
     );
   });
 });

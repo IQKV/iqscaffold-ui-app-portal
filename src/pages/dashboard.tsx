@@ -1,12 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Title, Paper, Text, Grid, Stack } from "@mantine/core";
 import { AuthGuard } from "@/processes/auth";
-import {
-  FeatureGate,
-  SubscriptionInfo,
-  FeatureUsageList,
-  FeatureErrorBoundary,
-} from "@/shared/ui";
+import { FeatureGate, SubscriptionInfo, FeatureUsageList, FeatureErrorBoundary } from "@/shared/ui";
 import { useFeatureContext, usePageTitle } from "@/shared/lib";
 import { t } from "@lingui/macro";
 
@@ -112,12 +107,7 @@ function DashboardPage() {
                     {t`Feature Usage`}
                   </Title>
                   <FeatureUsageList
-                    featureCodes={[
-                      "api_calls",
-                      "storage_gb",
-                      "monthly_reports",
-                      "team_members",
-                    ]}
+                    featureCodes={["api_calls", "storage_gb", "monthly_reports", "team_members"]}
                     compact
                   />
                 </Paper>
@@ -131,10 +121,7 @@ function DashboardPage() {
                     <Stack gap="xs">
                       {enabledFeatures.map((feature) => (
                         <Text key={feature} size="sm">
-                          •{" "}
-                          {feature
-                            .replace(/_/g, " ")
-                            .replace(/\b\w/g, (l) => l.toUpperCase())}
+                          • {feature.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())}
                         </Text>
                       ))}
                     </Stack>

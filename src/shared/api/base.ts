@@ -2,12 +2,7 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosInstance } from "axios";
 import { getConfig, getAuthConfig } from "@/app/config";
 import { errorFromAxios, formatErrorForDisplay } from "@/shared/lib/http-error";
 import { notificationService } from "@/shared/lib/notifications";
-import {
-  getAccessToken,
-  getRefreshToken,
-  setTokens,
-  clearTokens,
-} from "@/shared/lib/auth-tokens";
+import { getAccessToken, getRefreshToken, setTokens, clearTokens } from "@/shared/lib/auth-tokens";
 import { useTenantStore } from "@/processes/tenant";
 import { i18n } from "@lingui/core";
 import { getUserLocalePreference } from "@/shared/lib/locale-preference";
@@ -93,9 +88,7 @@ let pendingQueue: Array<{
 }> = [];
 
 function enqueueRequest(): Promise<string | null> {
-  return new Promise((resolve, reject) =>
-    pendingQueue.push({ resolve, reject })
-  );
+  return new Promise((resolve, reject) => pendingQueue.push({ resolve, reject }));
 }
 
 function resolveQueue(token: string | null) {
@@ -206,7 +199,7 @@ apiClient.interceptors.response.use(
     }
 
     return Promise.reject(appError);
-  }
+  },
 );
 
 /**

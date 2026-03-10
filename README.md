@@ -388,7 +388,7 @@ const mutation = useFormMutation<ResponseType, FormValues>(
     notifyError: { title: t`Error`, fallback: t`Failed to submit` },
     clearOnSuccess: true,
     focusErrorField: true,
-  }
+  },
 );
 ```
 

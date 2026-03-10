@@ -94,10 +94,7 @@ export const ContactListPage: React.FC = () => {
         {/* Header */}
         <Group justify="space-between">
           <Title order={2}>Contacts</Title>
-          <Button
-            leftSection={<IconPlus size={16} />}
-            onClick={() => setCreateModalOpen(true)}
-          >
+          <Button leftSection={<IconPlus size={16} />} onClick={() => setCreateModalOpen(true)}>
             New Contact
           </Button>
         </Group>
@@ -149,9 +146,7 @@ export const ContactListPage: React.FC = () => {
                     selectedIds.length < (contactsData?.content.length || 0)
                   }
                   checked={
-                    contactsData
-                      ? selectedIds.length === contactsData.content.length
-                      : false
+                    contactsData ? selectedIds.length === contactsData.content.length : false
                   }
                   onChange={(e) => toggleSelectAll(e.currentTarget.checked)}
                 />
@@ -175,25 +170,13 @@ export const ContactListPage: React.FC = () => {
                     </Button>
                   </Menu.Target>
                   <Menu.Dropdown>
-                    <Menu.Item
-                      onClick={() =>
-                        handleBulkStatusUpdate(ContactStatus.ACTIVE)
-                      }
-                    >
+                    <Menu.Item onClick={() => handleBulkStatusUpdate(ContactStatus.ACTIVE)}>
                       {t`Set Active`}
                     </Menu.Item>
-                    <Menu.Item
-                      onClick={() =>
-                        handleBulkStatusUpdate(ContactStatus.INACTIVE)
-                      }
-                    >
+                    <Menu.Item onClick={() => handleBulkStatusUpdate(ContactStatus.INACTIVE)}>
                       {t`Set Inactive`}
                     </Menu.Item>
-                    <Menu.Item
-                      onClick={() =>
-                        handleBulkStatusUpdate(ContactStatus.PROSPECT)
-                      }
-                    >
+                    <Menu.Item onClick={() => handleBulkStatusUpdate(ContactStatus.PROSPECT)}>
                       {t`Set Prospect`}
                     </Menu.Item>
                   </Menu.Dropdown>
@@ -238,10 +221,7 @@ export const ContactListPage: React.FC = () => {
                   onClick={() => handleViewContact(contact.id)}
                   onEdit={() => handleEditContact(contact.id)}
                   onDelete={() =>
-                    onDeleteContact(
-                      contact.id,
-                      `${contact.firstName} ${contact.lastName}`
-                    )
+                    onDeleteContact(contact.id, `${contact.firstName} ${contact.lastName}`)
                   }
                 />
               ))}

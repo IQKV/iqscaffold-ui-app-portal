@@ -41,10 +41,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useLeadList } from "../model/useLeadList";
 import { useMediaQuery, useDisclosure } from "@mantine/hooks";
 import { useUsersQuery } from "@/entities/users";
-import {
-  useKeyboardNavigation,
-  useAnnouncer,
-} from "@/shared/lib/accessibility";
+import { useKeyboardNavigation, useAnnouncer } from "@/shared/lib/accessibility";
 
 /**
  * LeadListPage Component
@@ -96,23 +93,16 @@ export const LeadListPage: React.FC = () => {
   } = useLeadList();
 
   // Filter drawer state for mobile
-  const [
-    filterDrawerOpened,
-    { open: openFilterDrawer, close: closeFilterDrawer },
-  ] = useDisclosure(false);
-
-  // Lead form modal state
-  const [leadFormOpened, { open: openLeadForm, close: closeLeadForm }] =
+  const [filterDrawerOpened, { open: openFilterDrawer, close: closeFilterDrawer }] =
     useDisclosure(false);
 
+  // Lead form modal state
+  const [leadFormOpened, { open: openLeadForm, close: closeLeadForm }] = useDisclosure(false);
+
   // Follow-up form modal state
-  const [
-    followUpFormOpened,
-    { open: openFollowUpForm, close: closeFollowUpForm },
-  ] = useDisclosure(false);
-  const [selectedLeadForFollowUp, setSelectedLeadForFollowUp] = useState<
-    string | null
-  >(null);
+  const [followUpFormOpened, { open: openFollowUpForm, close: closeFollowUpForm }] =
+    useDisclosure(false);
+  const [selectedLeadForFollowUp, setSelectedLeadForFollowUp] = useState<string | null>(null);
 
   const [focusedLeadIndex, setFocusedLeadIndex] = useState(0);
 
@@ -141,7 +131,7 @@ export const LeadListPage: React.FC = () => {
         // Error is handled by the mutation
       }
     },
-    [qualifyLeadMutation, announce]
+    [qualifyLeadMutation, announce],
   );
 
   const handleQuickScheduleFollowUp = useCallback(
@@ -150,7 +140,7 @@ export const LeadListPage: React.FC = () => {
       openFollowUpForm();
       announce("Opening schedule follow-up form", { priority: "polite" });
     },
-    [openFollowUpForm, announce]
+    [openFollowUpForm, announce],
   );
 
   const handleFollowUpSubmit = async (data: any) => {
@@ -213,11 +203,7 @@ export const LeadListPage: React.FC = () => {
   };
 
   // Handle lead keyboard navigation
-  const handleLeadKeyDown = (
-    event: React.KeyboardEvent,
-    leadId: string,
-    index: number
-  ) => {
+  const handleLeadKeyDown = (event: React.KeyboardEvent, leadId: string, index: number) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       handleLeadClick(leadId);
@@ -366,11 +352,7 @@ export const LeadListPage: React.FC = () => {
 
   return (
     <>
-      <Container
-        size="xl"
-        py={isMobile ? "sm" : "xl"}
-        px={isMobile ? "xs" : "md"}
-      >
+      <Container size="xl" py={isMobile ? "sm" : "xl"} px={isMobile ? "xs" : "md"}>
         <Stack gap="lg">
           {/* Header */}
           <Group justify="space-between" wrap={isMobile ? "wrap" : "nowrap"}>
@@ -414,9 +396,7 @@ export const LeadListPage: React.FC = () => {
                 <TextInput
                   ref={searchInputRef}
                   placeholder={
-                    isMobile
-                      ? "Search leads..."
-                      : "Search by name, email, company, or phone..."
+                    isMobile ? "Search leads..." : "Search by name, email, company, or phone..."
                   }
                   leftSection={<IconSearch size={16} />}
                   value={searchTerm}
@@ -507,9 +487,7 @@ export const LeadListPage: React.FC = () => {
                         ? []
                         : (usersData || []).map((user) => ({
                             value: user.id,
-                            label:
-                              user.fullName ||
-                              `${user.firstName} ${user.lastName}`,
+                            label: user.fullName || `${user.firstName} ${user.lastName}`,
                           }))
                     }
                     value={selectedUser}
@@ -553,21 +531,11 @@ export const LeadListPage: React.FC = () => {
           {/* Bulk actions */}
           {selectedLeads.length > 0 && (
             <Paper p={isMobile ? "sm" : "md"} withBorder bg="blue.0">
-              <Group
-                justify="space-between"
-                wrap={isMobile ? "wrap" : "nowrap"}
-              >
-                <Text
-                  size="sm"
-                  fw={500}
-                  style={{ flex: isMobile ? "1 1 100%" : "auto" }}
-                >
+              <Group justify="space-between" wrap={isMobile ? "wrap" : "nowrap"}>
+                <Text size="sm" fw={500} style={{ flex: isMobile ? "1 1 100%" : "auto" }}>
                   {selectedLeads.length} lead(s) selected
                 </Text>
-                <Group
-                  gap="xs"
-                  style={{ flex: isMobile ? "1 1 100%" : "auto" }}
-                >
+                <Group gap="xs" style={{ flex: isMobile ? "1 1 100%" : "auto" }}>
                   <Button
                     size="xs"
                     variant="light"
@@ -601,11 +569,7 @@ export const LeadListPage: React.FC = () => {
                     No leads found
                   </Text>
                   {hasActiveFilters ? (
-                    <Button
-                      variant="light"
-                      onClick={handleClearFilters}
-                      fullWidth={isMobile}
-                    >
+                    <Button variant="light" onClick={handleClearFilters} fullWidth={isMobile}>
                       Clear filters
                     </Button>
                   ) : (
@@ -617,11 +581,7 @@ export const LeadListPage: React.FC = () => {
               </Center>
             </Paper>
           ) : (
-            <Stack
-              gap={isMobile ? "sm" : "md"}
-              role="list"
-              aria-label="Leads list"
-            >
+            <Stack gap={isMobile ? "sm" : "md"} role="list" aria-label="Leads list">
               {leads.map((lead: any, index: number) => (
                 <div
                   key={lead.id}
@@ -642,8 +602,7 @@ export const LeadListPage: React.FC = () => {
                       !isMobile
                         ? {
                             qualify: () => handleQuickQualify(lead.id),
-                            scheduleFollowUp: () =>
-                              handleQuickScheduleFollowUp(lead.id),
+                            scheduleFollowUp: () => handleQuickScheduleFollowUp(lead.id),
                             viewDetails: () => handleLeadClick(lead.id),
                           }
                         : undefined

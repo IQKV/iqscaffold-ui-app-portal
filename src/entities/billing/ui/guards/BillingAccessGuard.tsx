@@ -17,9 +17,7 @@ interface BillingAccessGuardProps {
  * Guard component that restricts access to Billing features.
  * Uses the generic ServiceAccessGuard with Billing-specific configuration.
  */
-export const BillingAccessGuard: React.FC<BillingAccessGuardProps> = (
-  props
-) => {
+export const BillingAccessGuard: React.FC<BillingAccessGuardProps> = (props) => {
   const { hasBillingAccess } = useAuth();
   const serviceHealth = useBillingServiceHealth();
 

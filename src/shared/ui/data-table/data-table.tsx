@@ -1,11 +1,4 @@
-import {
-  Table,
-  ScrollArea,
-  Text,
-  ActionIcon,
-  Group,
-  Pagination,
-} from "@mantine/core";
+import { Table, ScrollArea, Text, ActionIcon, Group, Pagination } from "@mantine/core";
 import { IconChevronUp, IconChevronDown } from "@tabler/icons-react";
 import { useState } from "react";
 
@@ -48,8 +41,7 @@ export function DataTable<T = any>({
       return;
     }
 
-    const newDirection =
-      sortKey === key && sortDirection === "asc" ? "desc" : "asc";
+    const newDirection = sortKey === key && sortDirection === "asc" ? "desc" : "asc";
     setSortKey(key);
     setSortDirection(newDirection);
     onSort(key, newDirection);
@@ -59,11 +51,7 @@ export function DataTable<T = any>({
     if (sortKey !== key) {
       return null;
     }
-    return sortDirection === "asc" ? (
-      <IconChevronUp size={14} />
-    ) : (
-      <IconChevronDown size={14} />
-    );
+    return sortDirection === "asc" ? <IconChevronUp size={14} /> : <IconChevronDown size={14} />;
   };
 
   if (loading) {
@@ -158,11 +146,7 @@ export function DataTable<T = any>({
                     data-testid={`table-cell-${column.key}-${index}`}
                   >
                     {column.render
-                      ? column.render(
-                          (record as any)[column.key],
-                          record,
-                          index
-                        )
+                      ? column.render((record as any)[column.key], record, index)
                       : (record as any)[column.key]}
                   </Table.Td>
                 ))}

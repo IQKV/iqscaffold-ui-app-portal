@@ -8,11 +8,10 @@ import { PerformanceTracker } from "./PerformanceTracker";
  */
 export function withPerformanceTracking<P extends object>(
   Component: React.ComponentType<P>,
-  componentName?: string
+  componentName?: string,
 ) {
   const WrappedComponent = (props: P) => {
-    const name =
-      componentName || Component.displayName || Component.name || "Unknown";
+    const name = componentName || Component.displayName || Component.name || "Unknown";
 
     return (
       <PerformanceTracker name={name}>

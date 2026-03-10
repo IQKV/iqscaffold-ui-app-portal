@@ -9,10 +9,7 @@ import { FeatureGate } from "./FeatureGate";
  * const ProtectedComponent = withFeatureGate('advanced_analytics')(MyComponent);
  * ```
  */
-export const withFeatureGate = (
-  feature: string,
-  fallback?: React.ReactNode
-) => {
+export const withFeatureGate = (feature: string, fallback?: React.ReactNode) => {
   return function <P extends object>(Component: React.ComponentType<P>) {
     const WrappedComponent: React.FC<P> = (props) => (
       <FeatureGate feature={feature} fallback={fallback}>

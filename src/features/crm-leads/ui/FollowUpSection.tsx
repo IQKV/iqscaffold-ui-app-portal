@@ -53,11 +53,7 @@ export function FollowUpSection({ leadId }: FollowUpSectionProps) {
   const [editingFollowUp, setEditingFollowUp] = useState<FollowUp | null>(null);
 
   // Query hooks
-  const {
-    data: followUpsResponse,
-    isLoading,
-    error,
-  } = useFollowUpsQuery({ leadId });
+  const { data: followUpsResponse, isLoading, error } = useFollowUpsQuery({ leadId });
   const followUps = followUpsResponse?.content || [];
 
   // Mutation hooks
@@ -172,11 +168,7 @@ export function FollowUpSection({ leadId }: FollowUpSectionProps) {
         <Text fw={600} size="lg">
           {t`Follow-ups`}
         </Text>
-        <Button
-          leftSection={<IconPlus size={16} />}
-          onClick={() => setIsFormOpen(true)}
-          size="sm"
-        >
+        <Button leftSection={<IconPlus size={16} />} onClick={() => setIsFormOpen(true)} size="sm">
           {t`Schedule Follow-up`}
         </Button>
       </Group>
@@ -193,11 +185,7 @@ export function FollowUpSection({ leadId }: FollowUpSectionProps) {
 
       {/* Error state */}
       {error && !isLoading && (
-        <Alert
-          icon={<IconAlertCircle size={16} />}
-          title={t`Error`}
-          color="red"
-        >
+        <Alert icon={<IconAlertCircle size={16} />} title={t`Error`} color="red">
           {t`Failed to load follow-ups. Please try again later.`}
         </Alert>
       )}
@@ -268,9 +256,7 @@ export function FollowUpSection({ leadId }: FollowUpSectionProps) {
         leadId={leadId}
         followUp={editingFollowUp}
         onSubmit={editingFollowUp ? handleUpdate : handleCreate}
-        isLoading={
-          createFollowUpMutation.isPending || updateFollowUpMutation.isPending
-        }
+        isLoading={createFollowUpMutation.isPending || updateFollowUpMutation.isPending}
       />
     </Stack>
   );
@@ -353,8 +339,7 @@ function FollowUpCard({
             {/* Completed badge */}
             {isCompleted && followUp.completedAt && (
               <Badge color="green" size="xs" variant="light">
-                {t`Completed`}{" "}
-                {new Date(followUp.completedAt).toLocaleDateString()}
+                {t`Completed`} {new Date(followUp.completedAt).toLocaleDateString()}
               </Badge>
             )}
           </Group>
@@ -410,10 +395,7 @@ function FollowUpCard({
               <Menu.Dropdown>
                 {/* Edit action (Requirement 5.5) */}
                 {onEdit && (
-                  <Menu.Item
-                    leftSection={<IconEdit size={14} />}
-                    onClick={onEdit}
-                  >
+                  <Menu.Item leftSection={<IconEdit size={14} />} onClick={onEdit}>
                     {t`Edit`}
                   </Menu.Item>
                 )}

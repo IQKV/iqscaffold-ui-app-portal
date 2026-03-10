@@ -316,11 +316,7 @@ export const AllVariantsComparison: Story = {
           </div>
           <div style={{ width: "250px" }}>
             <h3>Compact Variant</h3>
-            <LeadCard
-              lead={mockLeadHighScore}
-              variant="compact"
-              showQuickActions={false}
-            />
+            <LeadCard lead={mockLeadHighScore} variant="compact" showQuickActions={false} />
           </div>
         </div>
       </MantineProvider>

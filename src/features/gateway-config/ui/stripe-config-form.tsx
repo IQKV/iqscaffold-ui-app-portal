@@ -11,11 +11,7 @@ interface StripeConfigFormProps {
   errors?: Record<string, string>;
 }
 
-export const StripeConfigForm = ({
-  value,
-  onChange,
-  errors = {},
-}: StripeConfigFormProps) => {
+export const StripeConfigForm = ({ value, onChange, errors = {} }: StripeConfigFormProps) => {
   // Create a form to work with BillingFormField
   const form = useForm({
     initialValues: value,

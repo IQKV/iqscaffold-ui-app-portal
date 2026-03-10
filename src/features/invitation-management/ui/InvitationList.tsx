@@ -76,7 +76,7 @@ export function InvitationList({ onCreateInvitation }: InvitationListProps) {
         },
       });
     },
-    [revokeInvitationMutation]
+    [revokeInvitationMutation],
   );
 
   const getStatusBadgeColor = (status: InvitationStatus) => {
@@ -118,11 +118,7 @@ export function InvitationList({ onCreateInvitation }: InvitationListProps) {
       <CopyButton value={linkData.fullUrl}>
         {({ copied, copy }) => (
           <Tooltip label={copied ? t`Copied!` : t`Copy invitation link`}>
-            <ActionIcon
-              variant="subtle"
-              color={copied ? "teal" : "blue"}
-              onClick={copy}
-            >
+            <ActionIcon variant="subtle" color={copied ? "teal" : "blue"} onClick={copy}>
               {copied ? <IconCheck size={16} /> : <IconCopy size={16} />}
             </ActionIcon>
           </Tooltip>
@@ -153,9 +149,7 @@ export function InvitationList({ onCreateInvitation }: InvitationListProps) {
               <Text size="sm">{invitation.inviteeEmail}</Text>
             ) : (
               <Text size="sm" c="dimmed">
-                {invitation.type === InvitationType.LINK
-                  ? t`Shareable link`
-                  : t`Code invitation`}
+                {invitation.type === InvitationType.LINK ? t`Shareable link` : t`Code invitation`}
               </Text>
             )}
             {invitation.maxUses && (
@@ -170,9 +164,7 @@ export function InvitationList({ onCreateInvitation }: InvitationListProps) {
         key: "authority",
         title: t`Authority`,
         sortable: true,
-        render: (_, invitation) => (
-          <Badge variant="light">{invitation.authority}</Badge>
-        ),
+        render: (_, invitation) => <Badge variant="light">{invitation.authority}</Badge>,
       },
       {
         key: "status",
@@ -189,9 +181,7 @@ export function InvitationList({ onCreateInvitation }: InvitationListProps) {
         title: t`Expires`,
         sortable: true,
         render: (_, invitation) => (
-          <Text size="sm">
-            {new Date(invitation.expiresAt).toLocaleDateString()}
-          </Text>
+          <Text size="sm">{new Date(invitation.expiresAt).toLocaleDateString()}</Text>
         ),
       },
       {
@@ -200,9 +190,7 @@ export function InvitationList({ onCreateInvitation }: InvitationListProps) {
         sortable: true,
         render: (_, invitation) => (
           <div>
-            <Text size="sm">
-              {new Date(invitation.createdAt).toLocaleDateString()}
-            </Text>
+            <Text size="sm">{new Date(invitation.createdAt).toLocaleDateString()}</Text>
             <Text size="xs" c="dimmed">
               {t`by`} {invitation.invitedByUsername}
             </Text>
@@ -235,17 +223,13 @@ export function InvitationList({ onCreateInvitation }: InvitationListProps) {
         ),
       },
     ],
-    [handleRevokeInvitation, revokeInvitationMutation.isPending]
+    [handleRevokeInvitation, revokeInvitationMutation.isPending],
   );
 
   return (
     <Stack gap="md" data-testid="feature-invitation-list">
       {error && (
-        <Alert
-          icon={<IconAlertCircle size={16} />}
-          title={t`Error`}
-          color="red"
-        >
+        <Alert icon={<IconAlertCircle size={16} />} title={t`Error`} color="red">
           {t`Error loading invitations`}: {error.message}
         </Alert>
       )}

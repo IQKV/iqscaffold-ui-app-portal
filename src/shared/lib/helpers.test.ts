@@ -106,11 +106,7 @@ describe("Helpers", () => {
       mockLocation.href = "https://example.com";
       addQueryStringToUrl("newParam", "newValue");
 
-      expect(mockPushState).toHaveBeenCalledWith(
-        {},
-        "",
-        "https://example.com/?newParam=newValue"
-      );
+      expect(mockPushState).toHaveBeenCalledWith({}, "", "https://example.com/?newParam=newValue");
     });
 
     it("does not add duplicate parameter", () => {
@@ -119,11 +115,7 @@ describe("Helpers", () => {
       addQueryStringToUrl("existing", "newValue");
 
       // The function still calls pushState but URL should remain the same
-      expect(mockPushState).toHaveBeenCalledWith(
-        {},
-        "",
-        "https://example.com/?existing=param"
-      );
+      expect(mockPushState).toHaveBeenCalledWith({}, "", "https://example.com/?existing=param");
     });
   });
 
@@ -132,11 +124,7 @@ describe("Helpers", () => {
       mockLocation.href = "https://example.com?param1=value1&param2=value2";
       removeQueryStringFromUrl("param1");
 
-      expect(mockPushState).toHaveBeenCalledWith(
-        {},
-        "",
-        "https://example.com/?param2=value2"
-      );
+      expect(mockPushState).toHaveBeenCalledWith({}, "", "https://example.com/?param2=value2");
     });
 
     it("does nothing if parameter does not exist", () => {
@@ -145,11 +133,7 @@ describe("Helpers", () => {
       removeQueryStringFromUrl("nonexistent");
 
       // The function still calls pushState but URL should remain the same
-      expect(mockPushState).toHaveBeenCalledWith(
-        {},
-        "",
-        "https://example.com/?existing=param"
-      );
+      expect(mockPushState).toHaveBeenCalledWith({}, "", "https://example.com/?existing=param");
     });
   });
 

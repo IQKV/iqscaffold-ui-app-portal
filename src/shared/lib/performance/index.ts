@@ -14,7 +14,4 @@ export { PerformanceTracker } from "./PerformanceTracker";
 
 export { withPerformanceTracking } from "./withPerformanceTracking";
 
-export {
-  setupAPIPerformanceMonitoring,
-  getAPIPerformanceStats,
-} from "./apiPerformanceInterceptor";
+export { setupAPIPerformanceMonitoring, getAPIPerformanceStats } from "./apiPerformanceInterceptor";

@@ -111,7 +111,7 @@ export function useAvatarDelete() {
  */
 export function getAvatarUrlWithCacheBusting(
   avatarUrl?: string,
-  avatarUpdatedAt?: string
+  avatarUpdatedAt?: string,
 ): string | undefined {
   if (!avatarUrl) {
     return undefined;

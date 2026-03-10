@@ -5,11 +5,7 @@
 
 // Store and state management
 export { useTenantStore } from "./model/tenant-store";
-export type {
-  TenantState,
-  TenantActions,
-  TenantStore,
-} from "./model/tenant-store";
+export type { TenantState, TenantActions, TenantStore } from "./model/tenant-store";
 
 // Selectors and hooks
 export {

@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Card,
-  Group,
-  Stack,
-  Text,
-  Badge,
-  SimpleGrid,
-  Tooltip,
-} from "@mantine/core";
+import { Card, Group, Stack, Text, Badge, SimpleGrid, Tooltip } from "@mantine/core";
 import { IconTrendingUp, IconClock, IconTarget } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
 import type { PipelineStage, ConversionMetrics } from "@/shared/api/crm/types";
@@ -42,17 +34,13 @@ export const PipelineMetrics: React.FC<PipelineMetricsProps> = ({
   extraActions,
 }) => {
   // Calculate total leads across all stages
-  const totalLeads = stages.reduce(
-    (sum, stage) => sum + (stage.leadCount || 0),
-    0
-  );
+  const totalLeads = stages.reduce((sum, stage) => sum + (stage.leadCount || 0), 0);
 
   // Calculate pipeline health score (percentage of leads in active stages)
   const activeLeads = stages
     .filter((stage) => stage.type === "ACTIVE")
     .reduce((sum, stage) => sum + (stage.leadCount || 0), 0);
-  const healthScore =
-    totalLeads > 0 ? Math.round((activeLeads / totalLeads) * 100) : 0;
+  const healthScore = totalLeads > 0 ? Math.round((activeLeads / totalLeads) * 100) : 0;
 
   // Get health color based on score
   const getHealthColor = (score: number): string => {
@@ -73,9 +61,7 @@ export const PipelineMetrics: React.FC<PipelineMetricsProps> = ({
             {t`Pipeline Metrics`}
           </Text>
           <Group gap="sm">
-            <Tooltip
-              label={t`Pipeline health based on active leads percentage`}
-            >
+            <Tooltip label={t`Pipeline health based on active leads percentage`}>
               <Badge
                 size="lg"
                 color={getHealthColor(healthScore)}
@@ -149,31 +135,24 @@ export const PipelineMetrics: React.FC<PipelineMetricsProps> = ({
         </SimpleGrid>
 
         {/* Stage Velocity Details */}
-        {showVelocity &&
-          conversionMetrics &&
-          conversionMetrics.stageVelocity && (
-            <Card shadow="xs" padding="md" radius="md" withBorder>
-              <Stack gap="sm">
-                <Text size="sm" fw={600}>
-                  Stage Velocity (Avg. Days)
-                </Text>
-                <Group gap="md">
-                  {Object.entries(conversionMetrics.stageVelocity).map(
-                    ([stageName, days]) => (
-                      <Tooltip
-                        key={stageName}
-                        label={`Average time in ${stageName}`}
-                      >
-                        <Badge variant="light" size="lg">
-                          {stageName}: {days}d
-                        </Badge>
-                      </Tooltip>
-                    )
-                  )}
-                </Group>
-              </Stack>
-            </Card>
-          )}
+        {showVelocity && conversionMetrics && conversionMetrics.stageVelocity && (
+          <Card shadow="xs" padding="md" radius="md" withBorder>
+            <Stack gap="sm">
+              <Text size="sm" fw={600}>
+                Stage Velocity (Avg. Days)
+              </Text>
+              <Group gap="md">
+                {Object.entries(conversionMetrics.stageVelocity).map(([stageName, days]) => (
+                  <Tooltip key={stageName} label={`Average time in ${stageName}`}>
+                    <Badge variant="light" size="lg">
+                      {stageName}: {days}d
+                    </Badge>
+                  </Tooltip>
+                ))}
+              </Group>
+            </Stack>
+          </Card>
+        )}
 
         {/* Stage Distribution */}
         <Card shadow="xs" padding="md" radius="md" withBorder>
@@ -183,15 +162,8 @@ export const PipelineMetrics: React.FC<PipelineMetricsProps> = ({
             </Text>
             <Group gap="md">
               {stages.map((stage) => (
-                <Tooltip
-                  key={stage.id}
-                  label={`${stage.leadCount || 0} leads in ${stage.name}`}
-                >
-                  <Badge
-                    variant="filled"
-                    size="lg"
-                    style={{ backgroundColor: stage.color }}
-                  >
+                <Tooltip key={stage.id} label={`${stage.leadCount || 0} leads in ${stage.name}`}>
+                  <Badge variant="filled" size="lg" style={{ backgroundColor: stage.color }}>
                     {stage.name}: {stage.leadCount || 0}
                   </Badge>
                 </Tooltip>

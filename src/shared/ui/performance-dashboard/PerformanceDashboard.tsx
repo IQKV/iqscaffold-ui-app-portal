@@ -13,10 +13,7 @@ import {
   Code,
 } from "@mantine/core";
 import { IconChartBar, IconRefresh, IconDownload } from "@tabler/icons-react";
-import {
-  usePerformanceMonitor,
-  PERFORMANCE_BUDGETS,
-} from "@/shared/lib/performance";
+import { usePerformanceMonitor, PERFORMANCE_BUDGETS } from "@/shared/lib/performance";
 
 /**
  * PerformanceDashboard Component
@@ -32,10 +29,7 @@ interface PerformanceDashboardProps {
   onClose: () => void;
 }
 
-export const PerformanceDashboard: React.FC<PerformanceDashboardProps> = ({
-  opened,
-  onClose,
-}) => {
+export const PerformanceDashboard: React.FC<PerformanceDashboardProps> = ({ opened, onClose }) => {
   const { getStats, exportMetrics } = usePerformanceMonitor();
   const [stats, setStats] = useState<ReturnType<typeof getStats>>(null);
 
@@ -157,11 +151,11 @@ export const PerformanceDashboard: React.FC<PerformanceDashboardProps> = ({
                         <Progress
                           value={getBudgetUsage(
                             stats.api.averageDuration,
-                            PERFORMANCE_BUDGETS.API_RESPONSE
+                            PERFORMANCE_BUDGETS.API_RESPONSE,
                           )}
                           color={getBudgetColor(
                             stats.api.averageDuration,
-                            PERFORMANCE_BUDGETS.API_RESPONSE
+                            PERFORMANCE_BUDGETS.API_RESPONSE,
                           )}
                           size="sm"
                           style={{ flex: 1 }}
@@ -180,11 +174,11 @@ export const PerformanceDashboard: React.FC<PerformanceDashboardProps> = ({
                         <Progress
                           value={getBudgetUsage(
                             stats.api.p95Duration,
-                            PERFORMANCE_BUDGETS.API_RESPONSE
+                            PERFORMANCE_BUDGETS.API_RESPONSE,
                           )}
                           color={getBudgetColor(
                             stats.api.p95Duration,
-                            PERFORMANCE_BUDGETS.API_RESPONSE
+                            PERFORMANCE_BUDGETS.API_RESPONSE,
                           )}
                           size="sm"
                           style={{ flex: 1 }}
@@ -196,11 +190,7 @@ export const PerformanceDashboard: React.FC<PerformanceDashboardProps> = ({
                       <Text size="xs" c="dimmed">
                         Error Rate
                       </Text>
-                      <Text
-                        size="lg"
-                        fw={600}
-                        c={stats.api.errorRate > 5 ? "red" : "green"}
-                      >
+                      <Text size="lg" fw={600} c={stats.api.errorRate > 5 ? "red" : "green"}>
                         {stats.api.errorRate.toFixed(1)}%
                       </Text>
                     </div>
@@ -209,11 +199,7 @@ export const PerformanceDashboard: React.FC<PerformanceDashboardProps> = ({
                       <Text size="xs" c="dimmed">
                         Slow Calls
                       </Text>
-                      <Text
-                        size="lg"
-                        fw={600}
-                        c={stats.api.slowCalls > 0 ? "orange" : "green"}
-                      >
+                      <Text size="lg" fw={600} c={stats.api.slowCalls > 0 ? "orange" : "green"}>
                         {stats.api.slowCalls}
                       </Text>
                     </div>
@@ -247,11 +233,11 @@ export const PerformanceDashboard: React.FC<PerformanceDashboardProps> = ({
                         <Progress
                           value={getBudgetUsage(
                             stats.render.averageDuration,
-                            PERFORMANCE_BUDGETS.COMPONENT_RENDER
+                            PERFORMANCE_BUDGETS.COMPONENT_RENDER,
                           )}
                           color={getBudgetColor(
                             stats.render.averageDuration,
-                            PERFORMANCE_BUDGETS.COMPONENT_RENDER
+                            PERFORMANCE_BUDGETS.COMPONENT_RENDER,
                           )}
                           size="sm"
                           style={{ flex: 1 }}
@@ -270,11 +256,11 @@ export const PerformanceDashboard: React.FC<PerformanceDashboardProps> = ({
                         <Progress
                           value={getBudgetUsage(
                             stats.render.p95Duration,
-                            PERFORMANCE_BUDGETS.COMPONENT_RENDER
+                            PERFORMANCE_BUDGETS.COMPONENT_RENDER,
                           )}
                           color={getBudgetColor(
                             stats.render.p95Duration,
-                            PERFORMANCE_BUDGETS.COMPONENT_RENDER
+                            PERFORMANCE_BUDGETS.COMPONENT_RENDER,
                           )}
                           size="sm"
                           style={{ flex: 1 }}
@@ -329,11 +315,7 @@ export const PerformanceDashboard: React.FC<PerformanceDashboardProps> = ({
                       <Text
                         size="lg"
                         fw={600}
-                        c={
-                          stats.interaction.slowInteractions > 0
-                            ? "orange"
-                            : "green"
-                        }
+                        c={stats.interaction.slowInteractions > 0 ? "orange" : "green"}
                       >
                         {stats.interaction.slowInteractions}
                       </Text>

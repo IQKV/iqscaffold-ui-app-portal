@@ -1,9 +1,4 @@
-import {
-  HTTP_STATUS,
-  ERROR_TYPES,
-  PROBLEM_TYPES,
-  RETRY_CONFIG,
-} from "@/shared/constants";
+import { HTTP_STATUS, ERROR_TYPES, PROBLEM_TYPES, RETRY_CONFIG } from "@/shared/constants";
 
 /**
  * RFC 9457 Problem Details for HTTP APIs
@@ -107,7 +102,7 @@ export function createProblemDetail(
   status?: number,
   detail?: string,
   instance?: string,
-  extensions?: Record<string, unknown>
+  extensions?: Record<string, unknown>,
 ): ProblemDetail {
   const problem: ProblemDetail = {
     type,
@@ -124,9 +119,7 @@ export function createProblemDetail(
 /**
  * Validate a Problem Detail object according to RFC 9457
  */
-export function validateProblemDetail(
-  problem: unknown
-): problem is ProblemDetail {
+export function validateProblemDetail(problem: unknown): problem is ProblemDetail {
   if (!problem || typeof problem !== "object" || Array.isArray(problem)) {
     return false;
   }
@@ -164,16 +157,8 @@ export function validateProblemDetail(
 /**
  * Extract extension members from a Problem Detail object
  */
-export function extractExtensionMembers(
-  problem: ProblemDetail
-): Record<string, unknown> {
-  const standardMembers = new Set([
-    "type",
-    "title",
-    "status",
-    "detail",
-    "instance",
-  ]);
+export function extractExtensionMembers(problem: ProblemDetail): Record<string, unknown> {
+  const standardMembers = new Set(["type", "title", "status", "detail", "instance"]);
   const extensions: Record<string, unknown> = {};
 
   for (const [key, value] of Object.entries(problem)) {
@@ -213,10 +198,7 @@ export const ERROR_PATTERNS: Record<string, ErrorPattern> = {
     ] as const,
   },
   [ERROR_TYPES.VALIDATION]: {
-    statusCodes: [
-      HTTP_STATUS.BAD_REQUEST,
-      HTTP_STATUS.UNPROCESSABLE_ENTITY,
-    ] as const,
+    statusCodes: [HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.UNPROCESSABLE_ENTITY] as const,
     messagePatterns: [
       /validation/i,
       /invalid.*input/i,
@@ -262,18 +244,14 @@ export function determineErrorType(
   message?: string,
   code?: string,
   type?: string,
-  hasFieldErrors = false
+  hasFieldErrors = false,
 ): AppErrorType {
   // Check each error pattern
   for (const [errorType, pattern] of Object.entries(ERROR_PATTERNS)) {
     // Check status codes
     if (status && pattern.statusCodes?.includes(status)) {
       // Special case for validation: check if it has field errors
-      if (
-        errorType === "validation" &&
-        pattern.hasFieldErrors &&
-        !hasFieldErrors
-      ) {
+      if (errorType === "validation" && pattern.hasFieldErrors && !hasFieldErrors) {
         continue;
       }
       return errorType as AppErrorType;
@@ -301,10 +279,7 @@ export function determineErrorType(
 
   // Fallback logic
   if (status) {
-    if (
-      status >= HTTP_STATUS.BAD_REQUEST &&
-      status < HTTP_STATUS.INTERNAL_SERVER_ERROR
-    ) {
+    if (status >= HTTP_STATUS.BAD_REQUEST && status < HTTP_STATUS.INTERNAL_SERVER_ERROR) {
       return ERROR_TYPES.CLIENT;
     }
     if (status >= HTTP_STATUS.INTERNAL_SERVER_ERROR && status < 600) {
@@ -318,12 +293,8 @@ export function determineErrorType(
 /**
  * Calculate retry delay with exponential backoff and jitter
  */
-export function calculateRetryDelay(
-  attempt: number,
-  config: RetryConfig
-): number {
-  const exponentialDelay =
-    config.baseDelay * config.backoffMultiplier ** (attempt - 1);
+export function calculateRetryDelay(attempt: number, config: RetryConfig): number {
+  const exponentialDelay = config.baseDelay * config.backoffMultiplier ** (attempt - 1);
   const cappedDelay = Math.min(exponentialDelay, config.maxDelay);
 
   // Add jitter to prevent thundering herd

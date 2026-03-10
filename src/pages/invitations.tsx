@@ -2,10 +2,7 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Container, Stack, Text } from "@mantine/core";
 import { t } from "@lingui/core/macro";
-import {
-  InvitationList,
-  CreateInvitationModal,
-} from "@/features/invitation-management";
+import { InvitationList, CreateInvitationModal } from "@/features/invitation-management";
 
 export const Route = createFileRoute("/invitations")({
   component: InvitationsPage,

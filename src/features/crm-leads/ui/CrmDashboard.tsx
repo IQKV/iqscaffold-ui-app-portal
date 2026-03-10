@@ -1,13 +1,4 @@
-import {
-  Container,
-  Title,
-  Stack,
-  Group,
-  Paper,
-  Text,
-  Loader,
-  Alert,
-} from "@mantine/core";
+import { Container, Title, Stack, Group, Paper, Text, Loader, Alert } from "@mantine/core";
 import { t } from "@lingui/core/macro";
 import { IconAlertCircle } from "@tabler/icons-react";
 import { useState } from "react";
@@ -17,10 +8,7 @@ import { DashboardStats } from "./DashboardStats";
 import { ConversionChart } from "./ConversionChart";
 import { DateRangeFilter } from "./DateRangeFilter";
 import { DashboardSkeleton } from "./skeletons";
-import {
-  useDashboardStatsQuery,
-  useConversionMetricsQuery,
-} from "@/entities/crm";
+import { useDashboardStatsQuery, useConversionMetricsQuery } from "@/entities/crm";
 import type { DashboardStatsParams } from "@/shared/api/crm/types";
 
 /**
@@ -41,9 +29,7 @@ export function CrmDashboard() {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   // Date range state for filtering (Requirement 7.5)
-  const [dateRange, setDateRange] = useState<DashboardStatsParams | undefined>(
-    undefined
-  );
+  const [dateRange, setDateRange] = useState<DashboardStatsParams | undefined>(undefined);
 
   // Fetch dashboard data with date range filtering
   const {
@@ -70,11 +56,7 @@ export function CrmDashboard() {
     >
       <Stack gap={isMobile ? "md" : "xl"}>
         {/* Header with date range filter */}
-        <Group
-          justify="space-between"
-          align="center"
-          wrap={isMobile ? "wrap" : "nowrap"}
-        >
+        <Group justify="space-between" align="center" wrap={isMobile ? "wrap" : "nowrap"}>
           <Title
             order={isMobile ? 2 : 1}
             size={isMobile ? "h3" : "h1"}
@@ -84,11 +66,7 @@ export function CrmDashboard() {
           </Title>
 
           {/* Date range filtering (Requirement 7.5, 12.5) */}
-          <DateRangeFilter
-            value={dateRange}
-            onChange={setDateRange}
-            isMobile={isMobile}
-          />
+          <DateRangeFilter value={dateRange} onChange={setDateRange} isMobile={isMobile} />
         </Group>
 
         {/* Error state (Requirement 7.7) */}
@@ -113,11 +91,7 @@ export function CrmDashboard() {
             <FollowUpPanel />
 
             {/* Dashboard statistics cards and charts (Requirement 7.1-7.4, 12.5) */}
-            <DashboardStats
-              stats={dashboardStats}
-              dateRange={dateRange}
-              isMobile={isMobile}
-            />
+            <DashboardStats stats={dashboardStats} dateRange={dateRange} isMobile={isMobile} />
 
             {/* Conversion metrics and charts (Requirement 7.2, 7.5, 7.6, 12.5) */}
             <ConversionChart

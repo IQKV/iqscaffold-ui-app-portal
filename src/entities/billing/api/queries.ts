@@ -19,22 +19,12 @@ export const billingKeys = {
   subscription: (id: string) => [...billingKeys.subscriptions(), id] as const,
   activeSubscription: () => [...billingKeys.subscriptions(), "active"] as const,
   subscriptionPlans: () => [...billingKeys.all, "subscription-plans"] as const,
-  subscriptionPlan: (id: string) =>
-    [...billingKeys.subscriptionPlans(), id] as const,
-  activeSubscriptionPlans: () =>
-    [...billingKeys.subscriptionPlans(), "active"] as const,
+  subscriptionPlan: (id: string) => [...billingKeys.subscriptionPlans(), id] as const,
+  activeSubscriptionPlans: () => [...billingKeys.subscriptionPlans(), "active"] as const,
   invoices: () => [...billingKeys.all, "invoices"] as const,
   invoice: (id: string) => [...billingKeys.invoices(), id] as const,
-  invoicesBySubscription: (
-    subscriptionId: string,
-    params: BillingHistoryParams
-  ) =>
-    [
-      ...billingKeys.invoices(),
-      "subscription",
-      subscriptionId,
-      params,
-    ] as const,
+  invoicesBySubscription: (subscriptionId: string, params: BillingHistoryParams) =>
+    [...billingKeys.invoices(), "subscription", subscriptionId, params] as const,
   openInvoices: () => [...billingKeys.invoices(), "open"] as const,
 };
 
@@ -157,12 +147,11 @@ export const useInvoiceQuery = (id: string) => {
 
 export const useInvoicesBySubscriptionQuery = (
   subscriptionId: string,
-  params?: BillingHistoryParams
+  params?: BillingHistoryParams,
 ) => {
   return useQuery({
     queryKey: billingKeys.invoicesBySubscription(subscriptionId, params || {}),
-    queryFn: () =>
-      billingApi.listInvoicesBySubscription(subscriptionId, params),
+    queryFn: () => billingApi.listInvoicesBySubscription(subscriptionId, params),
     enabled: !!subscriptionId,
   });
 };

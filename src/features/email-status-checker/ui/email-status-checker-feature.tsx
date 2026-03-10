@@ -1,10 +1,5 @@
 import { Card, Stack, Text, Badge, Group, Loader, Alert } from "@mantine/core";
-import {
-  IconMail,
-  IconCheck,
-  IconX,
-  IconAlertCircle,
-} from "@tabler/icons-react";
+import { IconMail, IconCheck, IconX, IconAlertCircle } from "@tabler/icons-react";
 import { t } from "@lingui/core/macro";
 import { useEmailStatus } from "@/shared/lib/use-auth-api";
 
@@ -45,11 +40,7 @@ export function EmailStatusCheckerFeature({
         )}
 
         {error && (
-          <Alert
-            icon={<IconAlertCircle size={16} />}
-            color="red"
-            variant="light"
-          >
+          <Alert icon={<IconAlertCircle size={16} />} color="red" variant="light">
             {t`Failed to check email status. Please try again.`}
           </Alert>
         )}
@@ -74,13 +65,7 @@ export function EmailStatusCheckerFeature({
                   <Badge
                     color={data.emailVerified ? "green" : "yellow"}
                     variant="light"
-                    leftSection={
-                      data.emailVerified ? (
-                        <IconCheck size={12} />
-                      ) : (
-                        <IconX size={12} />
-                      )
-                    }
+                    leftSection={data.emailVerified ? <IconCheck size={12} /> : <IconX size={12} />}
                   >
                     {data.emailVerified ? t`Verified` : t`Not Verified`}
                   </Badge>
@@ -99,13 +84,7 @@ export function EmailStatusCheckerFeature({
 
             {data.message && (
               <Alert
-                icon={
-                  data.emailVerified ? (
-                    <IconCheck size={16} />
-                  ) : (
-                    <IconAlertCircle size={16} />
-                  )
-                }
+                icon={data.emailVerified ? <IconCheck size={16} /> : <IconAlertCircle size={16} />}
                 color={data.emailVerified ? "green" : "yellow"}
                 variant="light"
               >

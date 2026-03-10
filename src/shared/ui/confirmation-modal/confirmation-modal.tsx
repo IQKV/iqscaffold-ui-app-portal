@@ -37,12 +37,7 @@ export function ConfirmationModal({
       onClose={onClose}
       title={
         <Group gap="xs">
-          {danger && (
-            <IconAlertTriangle
-              size="1.2rem"
-              color="var(--mantine-color-red-6)"
-            />
-          )}
+          {danger && <IconAlertTriangle size="1.2rem" color="var(--mantine-color-red-6)" />}
           <Title order={4}>{title}</Title>
         </Group>
       }
@@ -56,11 +51,7 @@ export function ConfirmationModal({
           <Button variant="subtle" onClick={onClose} disabled={loading}>
             {cancelLabel}
           </Button>
-          <Button
-            color={danger ? "red" : confirmColor}
-            onClick={handleConfirm}
-            loading={loading}
-          >
+          <Button color={danger ? "red" : confirmColor} onClick={handleConfirm} loading={loading}>
             {confirmLabel}
           </Button>
         </Group>

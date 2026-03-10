@@ -130,9 +130,7 @@ export const LeadDetailPage: React.FC = () => {
         <Alert color="red" title={t`Error loading lead`}>
           <Stack gap="sm">
             <Text>
-              {error
-                ? t`Failed to load lead details. Please try again.`
-                : t`Lead not found.`}
+              {error ? t`Failed to load lead details. Please try again.` : t`Lead not found.`}
             </Text>
             <Button onClick={handleBack} variant="light">
               {t`Back to Leads`}
@@ -358,9 +356,7 @@ export const LeadDetailPage: React.FC = () => {
                         <Text size="sm" c="dimmed" style={{ width: 150 }}>
                           Current Stage:
                         </Text>
-                        <Badge color={getStageColor(lead.currentStage)}>
-                          {lead.currentStage}
-                        </Badge>
+                        <Badge color={getStageColor(lead.currentStage)}>{lead.currentStage}</Badge>
                       </Group>
                       <Group>
                         <Text size="sm" c="dimmed" style={{ width: 150 }}>
@@ -373,9 +369,7 @@ export const LeadDetailPage: React.FC = () => {
                           <Text size="sm" c="dimmed" style={{ width: 150 }}>
                             Conversion Probability:
                           </Text>
-                          <Text size="sm">
-                            {Math.round(lead.conversionProbability * 100)}%
-                          </Text>
+                          <Text size="sm">{Math.round(lead.conversionProbability * 100)}%</Text>
                         </Group>
                       )}
                     </Stack>

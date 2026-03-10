@@ -16,11 +16,7 @@ import { formatCurrency } from "@/shared/lib/currency";
 import { useAuth } from "@/processes/auth";
 import { notificationService } from "@/shared/lib/notifications";
 import { useQueryClient } from "@tanstack/react-query";
-import {
-  CONFIRMATION_MESSAGES,
-  NOTIFICATION_MESSAGES,
-  DEFAULTS,
-} from "@/shared/constants";
+import { CONFIRMATION_MESSAGES, NOTIFICATION_MESSAGES, DEFAULTS } from "@/shared/constants";
 import { i18n } from "@lingui/core";
 
 const PAGE_SIZE = DEFAULTS.PAGE_SIZE;
@@ -98,8 +94,7 @@ export const BillingHistoryTable = () => {
           {
             accessor: "createdAt",
             title: t`Date`,
-            render: ({ createdAt }) =>
-              dayjs(createdAt).format("YYYY-MM-DD HH:mm"),
+            render: ({ createdAt }) => dayjs(createdAt).format("YYYY-MM-DD HH:mm"),
           },
           {
             accessor: "amount",
@@ -122,10 +117,7 @@ export const BillingHistoryTable = () => {
                     <ActionIcon
                       color="red"
                       variant="subtle"
-                      loading={
-                        refundMutation.isPending &&
-                        refundMutation.variables === record.id
-                      }
+                      loading={refundMutation.isPending && refundMutation.variables === record.id}
                       onClick={() => handleRefund(record.id)}
                     >
                       <IconRotate2 size={16} />

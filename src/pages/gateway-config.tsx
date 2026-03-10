@@ -17,10 +17,7 @@ import { t } from "@lingui/macro";
 import { AuthGuard, useAuth } from "@/processes/auth";
 import { BillingAccessGuard } from "@/entities/billing/ui/guards/BillingAccessGuard";
 import { BillingServiceDegradationBanner } from "@/entities/billing/ui/BillingServiceDegradationBanner";
-import {
-  GatewayConfigForm,
-  GatewayConfigList,
-} from "@/features/gateway-config";
+import { GatewayConfigForm, GatewayConfigList } from "@/features/gateway-config";
 import {
   useGatewayConfigsQuery,
   useCreateGatewayConfigMutation,
@@ -45,8 +42,7 @@ function GatewayConfigPage() {
   const { user } = useAuth();
   const [formOpened, setFormOpened] = useState(false);
   const [deleteConfirmOpened, setDeleteConfirmOpened] = useState(false);
-  const [providerToDelete, setProviderToDelete] =
-    useState<PaymentGatewayProvider | null>(null);
+  const [providerToDelete, setProviderToDelete] = useState<PaymentGatewayProvider | null>(null);
   const pageTitle = usePageTitle(t`Gateway Configuration`);
 
   const { data: configs, isLoading, error } = useGatewayConfigsQuery();
@@ -151,11 +147,7 @@ function GatewayConfigPage() {
       <AuthGuard>
         {pageTitle}
         <Container size="xl" py="xl">
-          <Alert
-            color="red"
-            title={t`Access Denied`}
-            icon={<IconAlertCircle />}
-          >
+          <Alert color="red" title={t`Access Denied`} icon={<IconAlertCircle />}>
             {t`You don't have permission to view gateway configurations.`}
           </Alert>
         </Container>
@@ -180,10 +172,7 @@ function GatewayConfigPage() {
                 </Text>
               </div>
               {canManage && (
-                <Button
-                  leftSection={<IconPlus size={18} />}
-                  onClick={() => setFormOpened(true)}
-                >
+                <Button leftSection={<IconPlus size={18} />} onClick={() => setFormOpened(true)}>
                   {t`Add Gateway`}
                 </Button>
               )}
@@ -231,8 +220,7 @@ function GatewayConfigPage() {
 
               {providerToDelete && (
                 <Text size="sm">
-                  {t`Are you sure you want to delete the`}{" "}
-                  <strong>{providerToDelete}</strong>{" "}
+                  {t`Are you sure you want to delete the`} <strong>{providerToDelete}</strong>{" "}
                   {t`gateway configuration?`}
                 </Text>
               )}

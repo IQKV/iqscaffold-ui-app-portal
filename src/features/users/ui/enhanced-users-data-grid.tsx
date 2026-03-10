@@ -13,13 +13,7 @@ import {
   Modal,
   Tabs,
 } from "@mantine/core";
-import {
-  IconEdit,
-  IconTrash,
-  IconPlus,
-  IconSearch,
-  IconSettings,
-} from "@tabler/icons-react";
+import { IconEdit, IconTrash, IconPlus, IconSearch, IconSettings } from "@tabler/icons-react";
 import { DataTable, type DataTableColumn } from "mantine-datatable";
 import { useUsersQuery, useDeleteUserMutation, UserDto } from "@/entities/user";
 import { useAuth } from "@/processes/auth";
@@ -33,10 +27,7 @@ interface EnhancedUsersDataGridProps {
   onEditUser: (user: UserDto) => void;
 }
 
-export function EnhancedUsersDataGrid({
-  onCreateUser,
-  onEditUser,
-}: EnhancedUsersDataGridProps) {
+export function EnhancedUsersDataGrid({ onCreateUser, onEditUser }: EnhancedUsersDataGridProps) {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebouncedValue(search, 300);
@@ -90,7 +81,7 @@ export function EnhancedUsersDataGrid({
         },
       });
     },
-    [deleteUserMutation]
+    [deleteUserMutation],
   );
 
   const handleManageFeatures = useCallback((user: UserDto) => {
@@ -190,9 +181,7 @@ export function EnhancedUsersDataGrid({
       {
         accessor: "createdAt",
         title: t`Created`,
-        render: (user) => (
-          <Text size="sm">{new Date(user.createdAt).toLocaleDateString()}</Text>
-        ),
+        render: (user) => <Text size="sm">{new Date(user.createdAt).toLocaleDateString()}</Text>,
       },
       {
         accessor: "actions",
@@ -234,13 +223,7 @@ export function EnhancedUsersDataGrid({
         ),
       },
     ],
-    [
-      onEditUser,
-      handleDeleteUser,
-      handleManageFeatures,
-      canManageUsers,
-      formatRoles,
-    ]
+    [onEditUser, handleDeleteUser, handleManageFeatures, canManageUsers, formatRoles],
   );
 
   if (error) {

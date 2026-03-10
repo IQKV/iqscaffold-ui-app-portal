@@ -60,13 +60,9 @@ export function FollowUpList() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebouncedValue(search, 300);
-  const [completedFilter, setCompletedFilter] = useState<string | null>(
-    "pending"
-  );
+  const [completedFilter, setCompletedFilter] = useState<string | null>("pending");
   const [overdueFilter, setOverdueFilter] = useState<string | null>(null);
-  const [selectedFollowUps, setSelectedFollowUps] = useState<Set<string>>(
-    new Set()
-  );
+  const [selectedFollowUps, setSelectedFollowUps] = useState<Set<string>>(new Set());
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingFollowUp, setEditingFollowUp] = useState<FollowUp | null>(null);
 
@@ -75,20 +71,12 @@ export function FollowUpList() {
     page: page - 1,
     size: 20,
     completed:
-      completedFilter === "completed"
-        ? true
-        : completedFilter === "pending"
-          ? false
-          : undefined,
+      completedFilter === "completed" ? true : completedFilter === "pending" ? false : undefined,
     overdue: overdueFilter === "overdue" ? true : undefined,
   };
 
   // Query hooks
-  const {
-    data: followUpsResponse,
-    isLoading,
-    error,
-  } = useFollowUpsQuery(queryParams);
+  const { data: followUpsResponse, isLoading, error } = useFollowUpsQuery(queryParams);
   const followUps = followUpsResponse?.content || [];
   const totalPages = followUpsResponse?.totalPages || 1;
 
@@ -101,10 +89,8 @@ export function FollowUpList() {
   // Filter follow-ups by search term (client-side for now)
   const filteredFollowUps = followUps.filter((followUp) =>
     debouncedSearch
-      ? followUp.description
-          ?.toLowerCase()
-          .includes(debouncedSearch.toLowerCase())
-      : true
+      ? followUp.description?.toLowerCase().includes(debouncedSearch.toLowerCase())
+      : true,
   );
 
   // Handle create follow-up
@@ -246,17 +232,13 @@ export function FollowUpList() {
     modals.openConfirmModal({
       title: t`Complete Selected Follow-ups`,
       children: (
-        <Text size="sm">
-          {t`Are you sure you want to mark ${count} follow-up(s) as complete?`}
-        </Text>
+        <Text size="sm">{t`Are you sure you want to mark ${count} follow-up(s) as complete?`}</Text>
       ),
       labels: { confirm: t`Complete`, cancel: t`Cancel` },
       confirmProps: { color: "green" },
       onConfirm: async () => {
         try {
-          await Promise.all(
-            selectedIds.map((id) => completeFollowUpMutation.mutateAsync(id))
-          );
+          await Promise.all(selectedIds.map((id) => completeFollowUpMutation.mutateAsync(id)));
           const completedCount = selectedIds.length;
           notifications.show({
             title: t`Success`,
@@ -294,9 +276,7 @@ export function FollowUpList() {
       confirmProps: { color: "red" },
       onConfirm: async () => {
         try {
-          await Promise.all(
-            selectedIds.map((id) => deleteFollowUpMutation.mutateAsync(id))
-          );
+          await Promise.all(selectedIds.map((id) => deleteFollowUpMutation.mutateAsync(id)));
           const deletedCount = selectedIds.length;
           notifications.show({
             title: t`Success`,
@@ -328,10 +308,7 @@ export function FollowUpList() {
               {t`Manage all your follow-up tasks`}
             </Text>
           </div>
-          <Button
-            leftSection={<IconPlus size={16} />}
-            onClick={() => setIsFormOpen(true)}
-          >
+          <Button leftSection={<IconPlus size={16} />} onClick={() => setIsFormOpen(true)}>
             {t`Schedule Follow-up`}
           </Button>
         </Group>
@@ -422,11 +399,7 @@ export function FollowUpList() {
 
         {/* Error state */}
         {error && !isLoading && (
-          <Alert
-            icon={<IconAlertCircle size={16} />}
-            title={t`Error`}
-            color="red"
-          >
+          <Alert icon={<IconAlertCircle size={16} />} title={t`Error`} color="red">
             {t`Failed to load follow-ups. Please try again later.`}
           </Alert>
         )}
@@ -464,8 +437,7 @@ export function FollowUpList() {
               <Checkbox
                 checked={selectedFollowUps.size === filteredFollowUps.length}
                 indeterminate={
-                  selectedFollowUps.size > 0 &&
-                  selectedFollowUps.size < filteredFollowUps.length
+                  selectedFollowUps.size > 0 && selectedFollowUps.size < filteredFollowUps.length
                 }
                 onChange={handleSelectAll}
                 label={t`Select all`}
@@ -504,9 +476,7 @@ export function FollowUpList() {
           leadId={editingFollowUp?.leadId || ""}
           followUp={editingFollowUp}
           onSubmit={editingFollowUp ? handleUpdate : handleCreate}
-          isLoading={
-            createFollowUpMutation.isPending || updateFollowUpMutation.isPending
-          }
+          isLoading={createFollowUpMutation.isPending || updateFollowUpMutation.isPending}
         />
       </Stack>
     </Container>
@@ -602,8 +572,7 @@ function FollowUpCard({
             {/* Completed badge */}
             {isCompleted && followUp.completedAt && (
               <Badge color="green" size="xs" variant="light">
-                {t`Completed`}{" "}
-                {new Date(followUp.completedAt).toLocaleDateString()}
+                {t`Completed`} {new Date(followUp.completedAt).toLocaleDateString()}
               </Badge>
             )}
           </Group>
@@ -658,10 +627,7 @@ function FollowUpCard({
               </Menu.Target>
 
               <Menu.Dropdown>
-                <Menu.Item
-                  leftSection={<IconEdit size={14} />}
-                  onClick={onEdit}
-                >
+                <Menu.Item leftSection={<IconEdit size={14} />} onClick={onEdit}>
                   {t`Edit`}
                 </Menu.Item>
                 <Menu.Item

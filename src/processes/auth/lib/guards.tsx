@@ -25,12 +25,7 @@ export function AuthGuard({ children }: PropsWithChildren) {
 }
 
 const DefaultUnauthorizedFallback = ({ message }: { message: string }) => (
-  <Alert
-    variant="light"
-    color="red"
-    title="Access Denied"
-    icon={<IconLock size={16} />}
-  >
+  <Alert variant="light" color="red" title="Access Denied" icon={<IconLock size={16} />}>
     <Text size="sm">{message}</Text>
   </Alert>
 );
@@ -48,9 +43,7 @@ export function RoleGuard({
 }) {
   const { hasAnyAuthority, hasAllAuthorities } = useAuth();
   const roleArray = Array.isArray(roles) ? roles : [roles];
-  const hasAccess = requireAll
-    ? hasAllAuthorities(roleArray)
-    : hasAnyAuthority(roleArray);
+  const hasAccess = requireAll ? hasAllAuthorities(roleArray) : hasAnyAuthority(roleArray);
   if (!hasAccess) {
     return (
       (fallback as any) || (
@@ -75,9 +68,7 @@ export function PermissionGuard({
   fallback?: ReactNode;
 }) {
   const { hasPermission } = useAuth();
-  const permissionArray = Array.isArray(permissions)
-    ? permissions
-    : [permissions];
+  const permissionArray = Array.isArray(permissions) ? permissions : [permissions];
   const hasAccess = requireAll
     ? permissionArray.every((p) => hasPermission(p))
     : permissionArray.some((p) => hasPermission(p));
@@ -93,13 +84,7 @@ export function PermissionGuard({
   return <>{children}</>;
 }
 
-export function AdminGuard({
-  children,
-  fallback,
-}: {
-  children: ReactNode;
-  fallback?: ReactNode;
-}) {
+export function AdminGuard({ children, fallback }: { children: ReactNode; fallback?: ReactNode }) {
   const { isAdmin } = useAuth();
   if (!isAdmin()) {
     return (

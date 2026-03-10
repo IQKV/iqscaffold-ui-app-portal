@@ -12,8 +12,7 @@ export interface AppMSWConfig {
  * This allows runtime configuration of MSW behavior
  */
 export function getAppMSWConfig(): AppMSWConfig {
-  const isTest =
-    import.meta.env.MODE === "test" || process.env.NODE_ENV === "test";
+  const isTest = import.meta.env.MODE === "test" || process.env.NODE_ENV === "test";
   const isDev = import.meta.env.DEV;
 
   // Enable MSW by default in test environment, or when explicitly enabled

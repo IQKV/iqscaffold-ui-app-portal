@@ -8,10 +8,8 @@ export const contactKeys = {
   list: (params?: any) => [...contactKeys.lists(), params] as const,
   details: () => [...contactKeys.all, "detail"] as const,
   detail: (id: string | number) => [...contactKeys.details(), id] as const,
-  company: (companyId: string | number) =>
-    [...contactKeys.all, "company", companyId] as const,
-  notes: (contactId: string | number) =>
-    [...contactKeys.detail(contactId), "notes"] as const,
+  company: (companyId: string | number) => [...contactKeys.all, "company", companyId] as const,
+  notes: (contactId: string | number) => [...contactKeys.detail(contactId), "notes"] as const,
   activities: (contactId: string | number) =>
     [...contactKeys.detail(contactId), "activities"] as const,
 };

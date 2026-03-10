@@ -54,7 +54,7 @@ export interface RetryOptions {
  */
 export async function executeWithRetry<T>(
   requestConfig: AxiosRequestConfig,
-  options: RetryOptions = {}
+  options: RetryOptions = {},
 ): Promise<T> {
   const context: RetryContext = {
     attempt: 0,
@@ -118,7 +118,7 @@ export async function executeWithRetry<T>(
  */
 export function createRetryableRequest<T>(
   requestConfig: AxiosRequestConfig,
-  retryOptions?: RetryOptions
+  retryOptions?: RetryOptions,
 ) {
   return () => executeWithRetry<T>(requestConfig, retryOptions);
 }
@@ -126,10 +126,7 @@ export function createRetryableRequest<T>(
 /**
  * Retry wrapper for existing async functions
  */
-export async function withRetry<T>(
-  fn: () => Promise<T>,
-  options: RetryOptions = {}
-): Promise<T> {
+export async function withRetry<T>(fn: () => Promise<T>, options: RetryOptions = {}): Promise<T> {
   const context: RetryContext = {
     attempt: 0,
     maxAttempts: options.retryConfig?.maxAttempts || 3,
@@ -185,7 +182,7 @@ export function exponentialBackoff(
   baseDelay = 1000,
   maxDelay = 30000,
   multiplier = 2,
-  jitter = 0.1
+  jitter = 0.1,
 ): number {
   const exponentialDelay = baseDelay * multiplier ** (attempt - 1);
   const cappedDelay = Math.min(exponentialDelay, maxDelay);
@@ -206,7 +203,7 @@ export class CircuitBreaker {
 
   constructor(
     private failureThreshold = 5,
-    private recoveryTimeout = 60000 // 1 minute
+    private recoveryTimeout = 60000, // 1 minute
   ) {}
 
   async execute<T>(fn: () => Promise<T>): Promise<T> {

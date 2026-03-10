@@ -1,14 +1,5 @@
 import React, { useMemo } from "react";
-import {
-  Card,
-  Stack,
-  Group,
-  Text,
-  Badge,
-  Button,
-  Tooltip,
-  Box,
-} from "@mantine/core";
+import { Card, Stack, Group, Text, Badge, Button, Tooltip, Box } from "@mantine/core";
 import { Lead } from "@/shared/api/crm/types";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
@@ -57,12 +48,11 @@ export const LeadCard: React.FC<LeadCardProps> = ({
   onClick,
 }) => {
   // Drag and drop setup for kanban view
-  const { attributes, listeners, setNodeRef, transform, isDragging } =
-    useDraggable({
-      id: lead.id,
-      disabled: !draggable,
-      data: { lead },
-    });
+  const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
+    id: lead.id,
+    disabled: !draggable,
+    data: { lead },
+  });
 
   const style = {
     transform: CSS.Translate.toString(transform),

@@ -70,17 +70,14 @@ export const HTTP_STATUS = {
 export const VALIDATION_MESSAGES = {
   REQUIRED: (fieldName = "This field") => `${fieldName} is required`,
   EMAIL_INVALID: msg`Please enter a valid email address`,
-  PASSWORD_MIN_LENGTH: (minLength = 8) =>
-    `Password must be at least ${minLength} characters long`,
+  PASSWORD_MIN_LENGTH: (minLength = 8) => `Password must be at least ${minLength} characters long`,
   PASSWORD_COMPLEXITY: msg`Password must contain at least one uppercase letter, one lowercase letter, and one number`,
   MIN_LENGTH: (fieldName: string, minLength: number) =>
     `${fieldName} must be at least ${minLength} characters long`,
   MAX_LENGTH: (fieldName: string, maxLength: number) =>
     `${fieldName} must be no more than ${maxLength} characters long`,
-  MIN_VALUE: (fieldName: string, min: number) =>
-    `${fieldName} must be at least ${min}`,
-  MAX_VALUE: (fieldName: string, max: number) =>
-    `${fieldName} must be no more than ${max}`,
+  MIN_VALUE: (fieldName: string, min: number) => `${fieldName} must be at least ${min}`,
+  MAX_VALUE: (fieldName: string, max: number) => `${fieldName} must be no more than ${max}`,
 } as const;
 
 // =============================================================================
@@ -137,8 +134,7 @@ export const NOTIFICATION_MESSAGES = {
   INFO: {
     LOADING: msg`Loading...`,
     PROCESSING: msg`Processing...`,
-    RETRYING: (attempt: number, maxAttempts: number) =>
-      `Attempt ${attempt} of ${maxAttempts}...`,
+    RETRYING: (attempt: number, maxAttempts: number) => `Attempt ${attempt} of ${maxAttempts}...`,
     ERROR_REPORTED: msg`Error has been reported to our team`,
   },
 } as const;

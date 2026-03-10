@@ -1,12 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import dayjs from "dayjs";
-import {
-  prettyDate,
-  formatDate,
-  relativeDate,
-  utcToTz,
-  dateToBrowserTz,
-} from "./dates";
+import { prettyDate, formatDate, relativeDate, utcToTz, dateToBrowserTz } from "./dates";
 
 // Mock dayjs to control time-based tests
 const mockNow = dayjs("2024-01-15T12:00:00Z");
@@ -117,9 +111,7 @@ describe("Date Utilities", () => {
         timeZone: "America/New_York",
       });
 
-      const mockFormatToParts = vi
-        .fn()
-        .mockReturnValue([{ type: "timeZoneName", value: "EST" }]);
+      const mockFormatToParts = vi.fn().mockReturnValue([{ type: "timeZoneName", value: "EST" }]);
 
       vi.spyOn(Intl, "DateTimeFormat").mockImplementation(function (this: any) {
         return {
@@ -140,9 +132,7 @@ describe("Date Utilities", () => {
         timeZone: "Europe/London",
       });
 
-      const mockFormatToParts = vi
-        .fn()
-        .mockReturnValue([{ type: "timeZoneName", value: "GMT" }]);
+      const mockFormatToParts = vi.fn().mockReturnValue([{ type: "timeZoneName", value: "GMT" }]);
 
       vi.spyOn(Intl, "DateTimeFormat").mockImplementation(function (this: any) {
         return {

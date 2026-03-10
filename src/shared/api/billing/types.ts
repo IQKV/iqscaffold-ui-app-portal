@@ -161,12 +161,7 @@ export interface InvoiceResponse {
   updatedAt: string;
 }
 
-export type InvoiceStatus =
-  | "draft"
-  | "open"
-  | "paid"
-  | "uncollectible"
-  | "void";
+export type InvoiceStatus = "draft" | "open" | "paid" | "uncollectible" | "void";
 
 export interface OnboardRequest {
   organizationId: number;
@@ -218,12 +213,7 @@ export interface PayoutResponse {
   merchantAccountId: string;
 }
 
-export type PayoutStatus =
-  | "paid"
-  | "pending"
-  | "in_transit"
-  | "canceled"
-  | "failed";
+export type PayoutStatus = "paid" | "pending" | "in_transit" | "canceled" | "failed";
 
 // Gateway Configuration Types
 

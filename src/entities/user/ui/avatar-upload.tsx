@@ -10,17 +10,8 @@ import {
   Loader,
   Box,
 } from "@mantine/core";
-import {
-  IconCamera,
-  IconTrash,
-  IconUpload,
-  IconUser,
-} from "@tabler/icons-react";
-import {
-  useAvatarUpload,
-  useAvatarDelete,
-  getAvatarUrlWithCacheBusting,
-} from "../lib/use-avatar";
+import { IconCamera, IconTrash, IconUpload, IconUser } from "@tabler/icons-react";
+import { useAvatarUpload, useAvatarDelete, getAvatarUrlWithCacheBusting } from "../lib/use-avatar";
 import { useAuthStore } from "@/processes/auth/model/store";
 import { t } from "@lingui/macro";
 
@@ -48,10 +39,7 @@ export function AvatarUpload({
     return null;
   }
 
-  const avatarUrl = getAvatarUrlWithCacheBusting(
-    user.avatarUrl,
-    user.avatarUpdatedAt
-  );
+  const avatarUrl = getAvatarUrlWithCacheBusting(user.avatarUrl, user.avatarUpdatedAt);
   const initials =
     `${user.firstName?.[0] ?? user.username[0]}${user.lastName?.[0] ?? ""}`.toUpperCase();
   const isLoading = uploadMutation.isPending || deleteMutation.isPending;
@@ -131,12 +119,7 @@ export function AvatarUpload({
   return (
     <Menu shadow="md" width={200} position="bottom-end">
       <Menu.Target>
-        <ActionIcon
-          variant="transparent"
-          size={size}
-          radius="xl"
-          style={{ position: "relative" }}
-        >
+        <ActionIcon variant="transparent" size={size} radius="xl" style={{ position: "relative" }}>
           <Avatar src={avatarUrl} size={size} radius="xl" color="indigo">
             {isLoading ? <Loader size="sm" /> : initials}
           </Avatar>
@@ -187,11 +170,7 @@ export function AvatarUpload({
             disabled={isLoading}
           >
             {(props) => (
-              <Menu.Item
-                {...props}
-                leftSection={<IconUpload size={16} />}
-                disabled={isLoading}
-              >
+              <Menu.Item {...props} leftSection={<IconUpload size={16} />} disabled={isLoading}>
                 {uploadMutation.isPending ? t`Uploading...` : t`Upload Avatar`}
               </Menu.Item>
             )}

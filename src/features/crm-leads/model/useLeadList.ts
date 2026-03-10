@@ -1,10 +1,6 @@
 import { useState, useMemo, useCallback } from "react";
 import { useDebouncedValue } from "@mantine/hooks";
-import {
-  useLeadsQuery,
-  useBulkQualifyLeadsMutation,
-  useExportLeadsMutation,
-} from "@/entities/crm";
+import { useLeadsQuery, useBulkQualifyLeadsMutation, useExportLeadsMutation } from "@/entities/crm";
 import { LeadListParams, LeadSource } from "@/shared/api/crm/types";
 import { useAnnouncer } from "@/shared/lib/accessibility";
 import { t } from "@lingui/core/macro";
@@ -43,13 +39,7 @@ export function useLeadList() {
     }
 
     return params;
-  }, [
-    debouncedSearch,
-    selectedSource,
-    selectedStage,
-    selectedUser,
-    currentPage,
-  ]);
+  }, [debouncedSearch, selectedSource, selectedStage, selectedUser, currentPage]);
 
   // Fetch leads with filters
   const { data, isLoading, error, refetch } = useLeadsQuery(queryParams);
@@ -74,9 +64,7 @@ export function useLeadList() {
 
   const handleLeadSelect = useCallback((leadId: string) => {
     setSelectedLeads((prev) =>
-      prev.includes(leadId)
-        ? prev.filter((id) => id !== leadId)
-        : [...prev, leadId]
+      prev.includes(leadId) ? prev.filter((id) => id !== leadId) : [...prev, leadId],
     );
   }, []);
 
@@ -129,7 +117,7 @@ export function useLeadList() {
       setCurrentPage(page);
       announce(`Page ${page} of ${totalPages}`, { priority: "polite" });
     },
-    [totalPages, announce]
+    [totalPages, announce],
   );
 
   return {
@@ -154,12 +142,7 @@ export function useLeadList() {
     refetch,
     totalPages,
     totalElements,
-    hasActiveFilters: !!(
-      searchTerm ||
-      selectedSource ||
-      selectedStage ||
-      selectedUser
-    ),
+    hasActiveFilters: !!(searchTerm || selectedSource || selectedStage || selectedUser),
 
     // Mutations
     isExporting: exportMutation.isPending,

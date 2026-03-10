@@ -197,7 +197,7 @@ export function canDeleteFollowUps(user: UserContext | null): boolean {
  * Get user's CRM authority level for UI display
  */
 export function getCrmAuthorityLevel(
-  user: UserContext | null
+  user: UserContext | null,
 ): "none" | "access" | "manager" | "admin" {
   if (!user?.authorities) {
     return "none";
@@ -207,11 +207,7 @@ export function getCrmAuthorityLevel(
     return "admin";
   }
 
-  if (
-    canManageLeads(user) ||
-    canManageContacts(user) ||
-    canManagePipeline(user)
-  ) {
+  if (canManageLeads(user) || canManageContacts(user) || canManagePipeline(user)) {
     return "manager";
   }
 
@@ -238,7 +234,5 @@ export function getUserCrmAuthorities(user: UserContext | null): string[] {
     AUTHORITY_CRM_ADMIN,
   ];
 
-  return user.authorities.filter((auth) =>
-    crmAuthorities.includes(auth as any)
-  );
+  return user.authorities.filter((auth) => crmAuthorities.includes(auth as any));
 }

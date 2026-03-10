@@ -35,13 +35,7 @@ export function PreferenceCard() {
   }
 
   return (
-    <Card
-      shadow="sm"
-      padding="lg"
-      radius="md"
-      withBorder
-      data-testid="preference-card"
-    >
+    <Card shadow="sm" padding="lg" radius="md" withBorder data-testid="preference-card">
       <Stack gap="md">
         <Text fw={500} size="lg" data-testid="preference-card-title">
           Your Preferences
@@ -119,13 +113,8 @@ export function PreferenceCard() {
           <Text size="sm" c="dimmed">
             2FA:
           </Text>
-          <Badge
-            variant="light"
-            color={preferences.twoFactorEnabled ? "green" : "gray"}
-          >
-            {preferences.twoFactorEnabled
-              ? `Enabled (${preferences.twoFactorMethod})`
-              : "Disabled"}
+          <Badge variant="light" color={preferences.twoFactorEnabled ? "green" : "gray"}>
+            {preferences.twoFactorEnabled ? `Enabled (${preferences.twoFactorMethod})` : "Disabled"}
           </Badge>
         </Group>
       </Stack>

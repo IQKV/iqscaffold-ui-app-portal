@@ -81,9 +81,7 @@ export const tenantApi = {
    * Get tenant by ID (SUPER_ADMIN only)
    */
   async getTenant(tenantId: string): Promise<TenantResponse> {
-    const response = await apiClient.get<TenantResponse>(
-      `/v1/admin/tenants/${tenantId}`
-    );
+    const response = await apiClient.get<TenantResponse>(`/v1/admin/tenants/${tenantId}`);
     return response.data;
   },
 
@@ -101,40 +99,28 @@ export const tenantApi = {
    * Create new tenant (SUPER_ADMIN only)
    */
   async createTenant(data: CreateTenantRequest): Promise<TenantResponse> {
-    const response = await apiClient.post<TenantResponse>(
-      "/v1/admin/tenants",
-      data
-    );
+    const response = await apiClient.post<TenantResponse>("/v1/admin/tenants", data);
     return response.data;
   },
 
   /**
    * Update tenant (SUPER_ADMIN only)
    */
-  async updateTenant(
-    tenantId: string,
-    data: UpdateTenantRequest
-  ): Promise<TenantResponse> {
-    const response = await apiClient.put<TenantResponse>(
-      `/v1/admin/tenants/${tenantId}`,
-      data
-    );
+  async updateTenant(tenantId: string, data: UpdateTenantRequest): Promise<TenantResponse> {
+    const response = await apiClient.put<TenantResponse>(`/v1/admin/tenants/${tenantId}`, data);
     return response.data;
   },
 
   /**
    * Enable or disable tenant (SUPER_ADMIN only)
    */
-  async setTenantEnabled(
-    tenantId: string,
-    enabled: boolean
-  ): Promise<TenantResponse> {
+  async setTenantEnabled(tenantId: string, enabled: boolean): Promise<TenantResponse> {
     const response = await apiClient.patch<TenantResponse>(
       `/v1/admin/tenants/${tenantId}/enabled`,
       null,
       {
         params: { enabled },
-      }
+      },
     );
     return response.data;
   },
@@ -150,9 +136,7 @@ export const tenantApi = {
    * Get tenant statistics (SUPER_ADMIN only)
    */
   async getTenantStatistics(): Promise<TenantStatistics[]> {
-    const response = await apiClient.get<TenantStatistics[]>(
-      "/v1/admin/tenants/statistics"
-    );
+    const response = await apiClient.get<TenantStatistics[]>("/v1/admin/tenants/statistics");
     return response.data;
   },
 };

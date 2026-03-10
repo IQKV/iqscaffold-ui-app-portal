@@ -66,10 +66,9 @@ describe("useFormMutation", () => {
   it("clears form errors on successful mutation", async () => {
     mockMutationFn.mockResolvedValue("success");
 
-    const { result } = renderHook(
-      () => useFormMutation(mockForm, mockMutationFn),
-      { wrapper: createWrapper() }
-    );
+    const { result } = renderHook(() => useFormMutation(mockForm, mockMutationFn), {
+      wrapper: createWrapper(),
+    });
 
     result.current.mutate("test data");
 
@@ -91,7 +90,7 @@ describe("useFormMutation", () => {
             message: "Operation completed",
           },
         }),
-      { wrapper: createWrapper() }
+      { wrapper: createWrapper() },
     );
 
     result.current.mutate("test data");
@@ -114,7 +113,7 @@ describe("useFormMutation", () => {
         useFormMutation(mockForm, mockMutationFn, {
           notifySuccess: false,
         }),
-      { wrapper: createWrapper() }
+      { wrapper: createWrapper() },
     );
 
     result.current.mutate("test data");
@@ -138,7 +137,7 @@ describe("useFormMutation", () => {
             fallback: "Something went wrong",
           },
         }),
-      { wrapper: createWrapper() }
+      { wrapper: createWrapper() },
     );
 
     result.current.mutate("test data");
@@ -155,7 +154,7 @@ describe("useFormMutation", () => {
       }),
       expect.objectContaining({
         title: "Error!",
-      })
+      }),
     );
   });
 
@@ -168,7 +167,7 @@ describe("useFormMutation", () => {
         useFormMutation(mockForm, mockMutationFn, {
           notifyError: false,
         }),
-      { wrapper: createWrapper() }
+      { wrapper: createWrapper() },
     );
 
     result.current.mutate("test data");
@@ -189,7 +188,7 @@ describe("useFormMutation", () => {
         useFormMutation(mockForm, mockMutationFn, {
           onSuccess,
         }),
-      { wrapper: createWrapper() }
+      { wrapper: createWrapper() },
     );
 
     result.current.mutate("test data");
@@ -211,7 +210,7 @@ describe("useFormMutation", () => {
         useFormMutation(mockForm, mockMutationFn, {
           onError,
         }),
-      { wrapper: createWrapper() }
+      { wrapper: createWrapper() },
     );
 
     result.current.mutate("test data");
@@ -231,7 +230,7 @@ describe("useFormMutation", () => {
         retryable: false,
       }),
       "test data",
-      undefined
+      undefined,
     );
   });
 
@@ -251,7 +250,7 @@ describe("useFormMutation", () => {
         useFormMutation(mockForm, mockMutationFn, {
           mapField,
         }),
-      { wrapper: createWrapper() }
+      { wrapper: createWrapper() },
     );
 
     result.current.mutate("test data");

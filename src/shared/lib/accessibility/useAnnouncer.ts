@@ -53,30 +53,26 @@ export function useAnnouncer() {
     }
   }, []);
 
-  const announce = useCallback(
-    (message: string, options: AnnouncerOptions = {}) => {
-      const { priority = "polite", timeout = 1000 } = options;
-      const announcerId =
-        priority === "assertive" ? "announcer-assertive" : "announcer-polite";
-      const announcer = document.getElementById(announcerId);
+  const announce = useCallback((message: string, options: AnnouncerOptions = {}) => {
+    const { priority = "polite", timeout = 1000 } = options;
+    const announcerId = priority === "assertive" ? "announcer-assertive" : "announcer-polite";
+    const announcer = document.getElementById(announcerId);
 
-      if (announcer) {
-        // Clear previous message
-        announcer.textContent = "";
+    if (announcer) {
+      // Clear previous message
+      announcer.textContent = "";
 
-        // Set new message after a brief delay to ensure screen readers pick it up
+      // Set new message after a brief delay to ensure screen readers pick it up
+      setTimeout(() => {
+        announcer.textContent = message;
+
+        // Clear message after timeout
         setTimeout(() => {
-          announcer.textContent = message;
-
-          // Clear message after timeout
-          setTimeout(() => {
-            announcer.textContent = "";
-          }, timeout);
-        }, 100);
-      }
-    },
-    []
-  );
+          announcer.textContent = "";
+        }, timeout);
+      }, 100);
+    }
+  }, []);
 
   return { announce };
 }

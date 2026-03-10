@@ -8,11 +8,7 @@ interface BraintreeConfigFormProps {
   errors?: Record<string, string>;
 }
 
-export const BraintreeConfigForm = ({
-  value,
-  onChange,
-  errors = {},
-}: BraintreeConfigFormProps) => {
+export const BraintreeConfigForm = ({ value, onChange, errors = {} }: BraintreeConfigFormProps) => {
   return (
     <Stack gap="md">
       <TextInput
@@ -20,9 +16,7 @@ export const BraintreeConfigForm = ({
         placeholder="merchant_id"
         required
         value={value.merchantId || ""}
-        onChange={(e) =>
-          onChange({ ...value, merchantId: e.currentTarget.value })
-        }
+        onChange={(e) => onChange({ ...value, merchantId: e.currentTarget.value })}
         error={errors.merchantId}
         description={t`Your Braintree merchant ID`}
       />
@@ -31,9 +25,7 @@ export const BraintreeConfigForm = ({
         placeholder="public_key"
         required
         value={value.publicKey || ""}
-        onChange={(e) =>
-          onChange({ ...value, publicKey: e.currentTarget.value })
-        }
+        onChange={(e) => onChange({ ...value, publicKey: e.currentTarget.value })}
         error={errors.publicKey}
         description={t`Your Braintree public key`}
       />
@@ -42,9 +34,7 @@ export const BraintreeConfigForm = ({
         placeholder="private_key"
         required
         value={value.privateKey || ""}
-        onChange={(e) =>
-          onChange({ ...value, privateKey: e.currentTarget.value })
-        }
+        onChange={(e) => onChange({ ...value, privateKey: e.currentTarget.value })}
         error={errors.privateKey}
         description={t`Your Braintree private key`}
       />
@@ -52,9 +42,7 @@ export const BraintreeConfigForm = ({
         label={t`Environment`}
         required
         value={value.environment || "sandbox"}
-        onChange={(val) =>
-          onChange({ ...value, environment: val as "sandbox" | "production" })
-        }
+        onChange={(val) => onChange({ ...value, environment: val as "sandbox" | "production" })}
         data={[
           { value: "sandbox", label: t`Sandbox (Test)` },
           { value: "production", label: t`Production (Live)` },

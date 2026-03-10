@@ -23,10 +23,8 @@ export function useAuth() {
 
     // Legacy authority helpers (maintained for backward compatibility)
     const hasAuthority = (authority: string) => authorities.includes(authority);
-    const hasAnyAuthority = (a: string[]) =>
-      a.some((x) => authorities.includes(x));
-    const hasAllAuthorities = (a: string[]) =>
-      a.every((x) => authorities.includes(x));
+    const hasAnyAuthority = (a: string[]) => a.some((x) => authorities.includes(x));
+    const hasAllAuthorities = (a: string[]) => a.every((x) => authorities.includes(x));
 
     // New authority helpers with inheritance
     const hasAuthorityWithInheritance = (authority: string) =>
@@ -38,9 +36,7 @@ export function useAuth() {
 
     // Core authority helpers
     const isAdmin = () =>
-      hasAuthority("ADMIN") ||
-      hasAuthority("TENANT_OWNER") ||
-      hasAuthority("SUPER_ADMIN");
+      hasAuthority("ADMIN") || hasAuthority("TENANT_OWNER") || hasAuthority("SUPER_ADMIN");
     const isSuperAdmin = () => hasAuthority("SUPER_ADMIN");
     const isTenantOwner = () => hasAuthority("TENANT_OWNER");
     const canManageUsers = () => isAdmin();
@@ -48,21 +44,17 @@ export function useAuth() {
     // Billing permissions (updated)
     const hasBillingAccess = () => billingPerms.hasBillingAccess(user);
     const canModifyBilling = () => billingPerms.canModifyBilling(user);
-    const hasReadOnlyBillingAccess = () =>
-      billingPerms.hasReadOnlyBillingAccess(user);
+    const hasReadOnlyBillingAccess = () => billingPerms.hasReadOnlyBillingAccess(user);
     const canProcessRefunds = () => billingPerms.canProcessRefunds(user);
     const canManageMerchants = () => billingPerms.canManageMerchants(user);
     const canViewPayments = () => billingPerms.canViewPayments(user);
     const canViewPayouts = () => billingPerms.canViewPayouts(user);
     const isBillingAdmin = () => billingPerms.hasAdminAccess(user);
-    const canManageGatewayConfig = () =>
-      billingPerms.canManageGatewayConfig(user);
+    const canManageGatewayConfig = () => billingPerms.canManageGatewayConfig(user);
     const canViewGatewayConfig = () => billingPerms.canViewGatewayConfig(user);
-    const canManageSubscriptions = () =>
-      billingPerms.canManageSubscriptions(user);
+    const canManageSubscriptions = () => billingPerms.canManageSubscriptions(user);
     const canCreatePayments = () => billingPerms.canCreatePayments(user);
-    const canManageSubscriptionPlans = () =>
-      billingPerms.canManageSubscriptionPlans(user);
+    const canManageSubscriptionPlans = () => billingPerms.canManageSubscriptionPlans(user);
 
     // CRM permissions (new)
     const hasCrmAccess = () => crmPerms.hasCrmAccess(user);
@@ -72,26 +64,21 @@ export function useAuth() {
     const isCrmAdmin = () => crmPerms.isCrmAdmin(user);
     const canDeleteLeads = () => crmPerms.canDeleteLeads(user);
     const canDeleteContacts = () => crmPerms.canDeleteContacts(user);
-    const canManagePipelineStages = () =>
-      crmPerms.canManagePipelineStages(user);
+    const canManagePipelineStages = () => crmPerms.canManagePipelineStages(user);
     const canViewCrmDashboard = () => crmPerms.canViewCrmDashboard(user);
     const canConvertLeads = () => crmPerms.canConvertLeads(user);
     const canManageFollowUps = () => crmPerms.canManageFollowUps(user);
     const canDeleteFollowUps = () => crmPerms.canDeleteFollowUps(user);
 
     // Authority level helpers
-    const getBillingAuthorityLevel = () =>
-      billingPerms.getBillingAuthorityLevel(user);
+    const getBillingAuthorityLevel = () => billingPerms.getBillingAuthorityLevel(user);
     const getCrmAuthorityLevel = () => crmPerms.getCrmAuthorityLevel(user);
-    const getUserBillingAuthorities = () =>
-      billingPerms.getUserBillingAuthorities(user);
+    const getUserBillingAuthorities = () => billingPerms.getUserBillingAuthorities(user);
     const getUserCrmAuthorities = () => crmPerms.getUserCrmAuthorities(user);
 
     // Legacy compatibility (deprecated)
     const isFinanceViewer = () => {
-      console.warn(
-        "isFinanceViewer is deprecated, use hasReadOnlyBillingAccess instead"
-      );
+      console.warn("isFinanceViewer is deprecated, use hasReadOnlyBillingAccess instead");
       return billingPerms.hasReadOnlyBillingAccess(user);
     };
 

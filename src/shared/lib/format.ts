@@ -10,10 +10,7 @@ export const formatCurrency = (value: number | string, currency = "USD") => {
   return formatter.format(numericValue);
 };
 
-export const formatDate = (
-  date: string | Date,
-  options?: Intl.DateTimeFormatOptions
-) => {
+export const formatDate = (date: string | Date, options?: Intl.DateTimeFormatOptions) => {
   const locale = typeof window !== "undefined" ? navigator.language : "en-US";
   const dateObj = typeof date === "string" ? new Date(date) : date;
 
@@ -25,10 +22,7 @@ export const formatDate = (
   });
 };
 
-export const formatDateTime = (
-  date: string | Date,
-  options?: Intl.DateTimeFormatOptions
-) => {
+export const formatDateTime = (date: string | Date, options?: Intl.DateTimeFormatOptions) => {
   const locale = typeof window !== "undefined" ? navigator.language : "en-US";
   const dateObj = typeof date === "string" ? new Date(date) : date;
 
@@ -42,10 +36,7 @@ export const formatDateTime = (
   });
 };
 
-export const formatNumber = (
-  value: number,
-  options?: Intl.NumberFormatOptions
-) => {
+export const formatNumber = (value: number, options?: Intl.NumberFormatOptions) => {
   const locale = typeof window !== "undefined" ? navigator.language : "en-US";
   const formatter = new Intl.NumberFormat(locale, options);
 

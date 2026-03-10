@@ -3,11 +3,7 @@ import { Modal, Button, Group, Stack, Alert } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { t } from "@lingui/core/macro";
-import {
-  CrmFormField,
-  getCrmPriorities,
-  getCrmFollowUpTypes,
-} from "./CrmFormField";
+import { CrmFormField, getCrmPriorities, getCrmFollowUpTypes } from "./CrmFormField";
 import type { FollowUp } from "@/shared/api/crm/types";
 import { notifications } from "@mantine/notifications";
 import { IconAlertCircle } from "@tabler/icons-react";
@@ -89,8 +85,7 @@ export function FollowUpForm({
   }, [followUp, opened]);
 
   // Check if the selected date is in the past (Requirement 11.4)
-  const isPastDateSelected =
-    form.values.dueDate && isPastDate(form.values.dueDate);
+  const isPastDateSelected = form.values.dueDate && isPastDate(form.values.dueDate);
 
   const handleSubmit = async (values: FollowUpFormData) => {
     try {
@@ -136,11 +131,7 @@ export function FollowUpForm({
       centered
       data-testid="modal-follow-up-form"
     >
-      <form
-        onSubmit={form.onSubmit(handleSubmit)}
-        noValidate
-        data-testid="form-follow-up"
-      >
+      <form onSubmit={form.onSubmit(handleSubmit)} noValidate data-testid="form-follow-up">
         <Stack gap="md">
           {/* Description field - Required (Requirement 5.1) */}
           <CrmFormField
@@ -197,11 +188,7 @@ export function FollowUpForm({
             >
               {t`Cancel`}
             </Button>
-            <Button
-              type="submit"
-              loading={isLoading}
-              data-testid="btn-submit-follow-up-form"
-            >
+            <Button type="submit" loading={isLoading} data-testid="btn-submit-follow-up-form">
               {isEditing ? t`Update` : t`Schedule`}
             </Button>
           </Group>

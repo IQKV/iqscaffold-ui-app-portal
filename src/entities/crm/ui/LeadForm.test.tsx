@@ -53,7 +53,7 @@ describe("LeadForm", () => {
       render(
         <TestWrapper>
           <LeadForm opened onClose={mockOnClose} lead={null} />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       expect(screen.getByTestId("modal-lead-form")).toBeInTheDocument();
@@ -69,7 +69,7 @@ describe("LeadForm", () => {
       render(
         <TestWrapper>
           <LeadForm opened onClose={mockOnClose} lead={null} />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       expect(screen.getByText(/add lead/i)).toBeInTheDocument();
@@ -78,13 +78,8 @@ describe("LeadForm", () => {
     it("should show custom title when provided", () => {
       render(
         <TestWrapper>
-          <LeadForm
-            opened
-            onClose={mockOnClose}
-            lead={null}
-            title="Create New Lead"
-          />
-        </TestWrapper>
+          <LeadForm opened onClose={mockOnClose} lead={null} title="Create New Lead" />
+        </TestWrapper>,
       );
 
       expect(screen.getByText("Create New Lead")).toBeInTheDocument();
@@ -94,7 +89,7 @@ describe("LeadForm", () => {
       render(
         <TestWrapper>
           <LeadForm opened onClose={mockOnClose} lead={null} />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       // Check for required fields (firstName, lastName, email, source)
@@ -114,15 +109,11 @@ describe("LeadForm", () => {
       render(
         <TestWrapper>
           <LeadForm opened onClose={mockOnClose} lead={mockLead} />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
-      expect(screen.getByLabelText(/first name/i)).toHaveValue(
-        mockLead.firstName
-      );
-      expect(screen.getByLabelText(/last name/i)).toHaveValue(
-        mockLead.lastName
-      );
+      expect(screen.getByLabelText(/first name/i)).toHaveValue(mockLead.firstName);
+      expect(screen.getByLabelText(/last name/i)).toHaveValue(mockLead.lastName);
       expect(screen.getByLabelText(/email/i)).toHaveValue(mockLead.email);
       expect(screen.getByLabelText(/phone/i)).toHaveValue(mockLead.phone);
       expect(screen.getByLabelText(/company/i)).toHaveValue(mockLead.company);
@@ -132,7 +123,7 @@ describe("LeadForm", () => {
       render(
         <TestWrapper>
           <LeadForm opened onClose={mockOnClose} lead={mockLead} />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       expect(screen.getByText(/edit lead/i)).toBeInTheDocument();
@@ -142,12 +133,10 @@ describe("LeadForm", () => {
       render(
         <TestWrapper>
           <LeadForm opened onClose={mockOnClose} lead={mockLead} />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
-      expect(screen.getByTestId("btn-submit-lead-form")).toHaveTextContent(
-        /update/i
-      );
+      expect(screen.getByTestId("btn-submit-lead-form")).toHaveTextContent(/update/i);
     });
   });
 
@@ -158,16 +147,14 @@ describe("LeadForm", () => {
       render(
         <TestWrapper>
           <LeadForm opened onClose={mockOnClose} lead={null} />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       const submitButton = screen.getByTestId("btn-submit-lead-form");
       await user.click(submitButton);
 
       await waitFor(() => {
-        const errorMessages = screen.getAllByText(
-          /name must be at least 2 characters/i
-        );
+        const errorMessages = screen.getAllByText(/name must be at least 2 characters/i);
         expect(errorMessages.length).toBeGreaterThan(0);
       });
     });
@@ -178,7 +165,7 @@ describe("LeadForm", () => {
       render(
         <TestWrapper>
           <LeadForm opened onClose={mockOnClose} lead={null} />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       const emailInput = screen.getByLabelText(/email/i);
@@ -188,9 +175,7 @@ describe("LeadForm", () => {
       await user.click(submitButton);
 
       await waitFor(() => {
-        expect(
-          screen.getByText(/please enter a valid email address/i)
-        ).toBeInTheDocument();
+        expect(screen.getByText(/please enter a valid email address/i)).toBeInTheDocument();
       });
     });
 
@@ -200,7 +185,7 @@ describe("LeadForm", () => {
       render(
         <TestWrapper>
           <LeadForm opened onClose={mockOnClose} lead={null} />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       const firstNameInput = screen.getByLabelText(/first name/i);
@@ -213,10 +198,7 @@ describe("LeadForm", () => {
       await user.click(submitButton);
 
       await waitFor(() => {
-        expect(screen.getByLabelText(/email/i)).toHaveAttribute(
-          "aria-invalid",
-          "true"
-        );
+        expect(screen.getByLabelText(/email/i)).toHaveAttribute("aria-invalid", "true");
       });
     });
 
@@ -226,7 +208,7 @@ describe("LeadForm", () => {
       render(
         <TestWrapper>
           <LeadForm opened onClose={mockOnClose} lead={null} />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       const firstNameInput = screen.getByLabelText(/first name/i);
@@ -257,7 +239,7 @@ describe("LeadForm", () => {
       render(
         <TestWrapper>
           <LeadForm opened onClose={mockOnClose} lead={null} />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       const sourceSelect = screen.getByRole("textbox", {
@@ -270,7 +252,7 @@ describe("LeadForm", () => {
       render(
         <TestWrapper>
           <LeadForm opened onClose={mockOnClose} lead={null} />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       const sourceSelect = screen.getByRole("textbox", {
@@ -288,7 +270,7 @@ describe("LeadForm", () => {
       render(
         <TestWrapper>
           <LeadForm opened onClose={mockOnClose} lead={null} />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       const cancelButton = screen.getByTestId("btn-cancel-lead-form");
@@ -303,7 +285,7 @@ describe("LeadForm", () => {
       render(
         <TestWrapper>
           <LeadForm opened onClose={mockOnClose} lead={null} />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       const firstNameInput = screen.getByLabelText(/first name/i);
@@ -321,7 +303,7 @@ describe("LeadForm", () => {
       render(
         <TestWrapper>
           <LeadForm opened={false} onClose={mockOnClose} lead={null} />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       // Modal root may exist but content should not be visible
@@ -332,7 +314,7 @@ describe("LeadForm", () => {
       render(
         <TestWrapper>
           <LeadForm opened onClose={mockOnClose} lead={null} />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       expect(screen.getByTestId("modal-lead-form")).toBeInTheDocument();
@@ -346,7 +328,7 @@ describe("LeadForm", () => {
       render(
         <TestWrapper>
           <LeadForm opened onClose={mockOnClose} lead={null} />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       const firstNameInput = screen.getByLabelText(/first name/i);
@@ -368,7 +350,7 @@ describe("LeadForm", () => {
       render(
         <TestWrapper>
           <LeadForm opened onClose={mockOnClose} lead={null} />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       const firstNameInput = screen.getByLabelText(/first name/i);

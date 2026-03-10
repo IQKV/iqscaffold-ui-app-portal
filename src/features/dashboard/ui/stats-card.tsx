@@ -17,13 +17,7 @@ export function StatsCard({ title, value, change, icon }: StatsCardProps) {
     <Paper withBorder p="md" radius="md" data-testid={testId}>
       <Group justify="space-between">
         <div>
-          <Text
-            size="xs"
-            c="dimmed"
-            fw={500}
-            tt="uppercase"
-            data-testid={`${testId}-title`}
-          >
+          <Text size="xs" c="dimmed" fw={500} tt="uppercase" data-testid={`${testId}-title`}>
             {title}
           </Text>
           <Text size="xl" fw={700} mt="xs" data-testid={`${testId}-value`}>
@@ -31,11 +25,7 @@ export function StatsCard({ title, value, change, icon }: StatsCardProps) {
           </Text>
           {change !== undefined && (
             <Group gap="xs" mt="xs">
-              <ThemeIcon
-                color={isPositive ? "teal" : "red"}
-                variant="light"
-                size="sm"
-              >
+              <ThemeIcon color={isPositive ? "teal" : "red"} variant="light" size="sm">
                 <ChangeIcon size={16} />
               </ThemeIcon>
               <Text

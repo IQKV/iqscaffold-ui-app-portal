@@ -57,9 +57,7 @@ describe("TenantInfo", () => {
 
       render(<TenantInfo />, { wrapper: TestWrapper });
 
-      expect(
-        screen.getByText("No tenant context (system mode)")
-      ).toBeInTheDocument();
+      expect(screen.getByText("No tenant context (system mode)")).toBeInTheDocument();
     });
 
     it("shows dev hint in development mode", () => {
@@ -68,9 +66,7 @@ describe("TenantInfo", () => {
 
       render(<TenantInfo />, { wrapper: TestWrapper });
 
-      expect(
-        screen.getByText(/Dev: Set tenant via localStorage/)
-      ).toBeInTheDocument();
+      expect(screen.getByText(/Dev: Set tenant via localStorage/)).toBeInTheDocument();
     });
   });
 
@@ -117,9 +113,7 @@ describe("TenantInfo", () => {
 
       render(<TenantInfo showInProduction />, { wrapper: TestWrapper });
 
-      expect(
-        screen.queryByText(/Dev: Set tenant via localStorage/)
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText(/Dev: Set tenant via localStorage/)).not.toBeInTheDocument();
     });
   });
 });

@@ -62,8 +62,7 @@ export function DefaultErrorFallback({
   const handleReportError = () => {
     notificationService.info({
       title: "Error Reported",
-      message:
-        "Thank you for reporting this issue. Our team has been notified.",
+      message: "Thank you for reporting this issue. Our team has been notified.",
     });
 
     // Here you would typically send the error to your error reporting service
@@ -86,8 +85,7 @@ export function DefaultErrorFallback({
         >
           <Stack gap="sm">
             <Text size="sm">
-              {displayError.message ||
-                "An unexpected error occurred while loading this page."}
+              {displayError.message || "An unexpected error occurred while loading this page."}
             </Text>
 
             {displayError.referenceId && (
@@ -108,19 +106,11 @@ export function DefaultErrorFallback({
         </Alert>
 
         <Group gap="md">
-          <Button
-            leftSection={<IconRefresh size="1rem" />}
-            onClick={resetError}
-            variant="filled"
-          >
+          <Button leftSection={<IconRefresh size="1rem" />} onClick={resetError} variant="filled">
             Try Again
           </Button>
 
-          <Button
-            leftSection={<IconHome size="1rem" />}
-            onClick={handleGoHome}
-            variant="light"
-          >
+          <Button leftSection={<IconHome size="1rem" />} onClick={handleGoHome} variant="light">
             Go Home
           </Button>
 
@@ -199,10 +189,7 @@ export function DefaultErrorFallback({
 /**
  * Enhanced Error Boundary with Mantine integration
  */
-export class ErrorBoundary extends React.Component<
-  ErrorBoundaryProps,
-  ErrorBoundaryState
-> {
+export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false, error: null, errorInfo: null };
@@ -274,7 +261,7 @@ export function useErrorHandler() {
  */
 export function withErrorBoundary<P extends object>(
   Component: React.ComponentType<P>,
-  errorBoundaryProps?: Omit<ErrorBoundaryProps, "children">
+  errorBoundaryProps?: Omit<ErrorBoundaryProps, "children">,
 ) {
   const WrappedComponent = (props: P) => (
     <ErrorBoundary {...errorBoundaryProps}>

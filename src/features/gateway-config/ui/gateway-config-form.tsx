@@ -1,14 +1,5 @@
 import { useState } from "react";
-import {
-  Modal,
-  Stack,
-  TextInput,
-  Textarea,
-  Select,
-  Switch,
-  Group,
-  Button,
-} from "@mantine/core";
+import { Modal, Stack, TextInput, Textarea, Select, Switch, Group, Button } from "@mantine/core";
 import { t } from "@lingui/macro";
 import {
   PaymentGatewayProvider,
@@ -85,49 +76,20 @@ export const GatewayConfigForm = ({
   const renderProviderForm = () => {
     switch (provider) {
       case PaymentGatewayProvider.STRIPE:
-        return (
-          <StripeConfigForm
-            value={configData}
-            onChange={setConfigData}
-            errors={errors}
-          />
-        );
+        return <StripeConfigForm value={configData} onChange={setConfigData} errors={errors} />;
       case PaymentGatewayProvider.PAYPAL:
-        return (
-          <PayPalConfigForm
-            value={configData}
-            onChange={setConfigData}
-            errors={errors}
-          />
-        );
+        return <PayPalConfigForm value={configData} onChange={setConfigData} errors={errors} />;
       case PaymentGatewayProvider.SQUARE:
-        return (
-          <SquareConfigForm
-            value={configData}
-            onChange={setConfigData}
-            errors={errors}
-          />
-        );
+        return <SquareConfigForm value={configData} onChange={setConfigData} errors={errors} />;
       case PaymentGatewayProvider.BRAINTREE:
-        return (
-          <BraintreeConfigForm
-            value={configData}
-            onChange={setConfigData}
-            errors={errors}
-          />
-        );
+        return <BraintreeConfigForm value={configData} onChange={setConfigData} errors={errors} />;
       default:
         return null;
     }
   };
 
   return (
-    <Modal
-      opened={opened}
-      onClose={handleClose}
-      title={t`Add Payment Gateway`}
-      size="lg"
-    >
+    <Modal opened={opened} onClose={handleClose} title={t`Add Payment Gateway`} size="lg">
       <Stack gap="md">
         <GatewaySelector
           value={provider}

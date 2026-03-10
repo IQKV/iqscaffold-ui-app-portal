@@ -23,10 +23,7 @@ interface SubscriptionActionsMenuProps {
   onUpdate?: () => void;
 }
 
-export function SubscriptionActionsMenu({
-  subscription,
-  onUpdate,
-}: SubscriptionActionsMenuProps) {
+export function SubscriptionActionsMenu({ subscription, onUpdate }: SubscriptionActionsMenuProps) {
   const cancelSubscription = useCancelSubscriptionMutation();
   const cancelImmediately = useCancelSubscriptionImmediatelyMutation();
   const pauseSubscription = usePauseSubscriptionMutation();
@@ -138,9 +135,7 @@ export function SubscriptionActionsMenu({
 
   const canPause = subscription.status === "active";
   const canResume = subscription.status === "paused";
-  const canCancel = ["active", "trialing", "past_due"].includes(
-    subscription.status
-  );
+  const canCancel = ["active", "trialing", "past_due"].includes(subscription.status);
 
   return (
     <Menu shadow="md" width={200}>

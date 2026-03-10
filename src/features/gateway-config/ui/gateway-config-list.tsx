@@ -1,13 +1,4 @@
-import {
-  Table,
-  Group,
-  ActionIcon,
-  Menu,
-  Text,
-  Badge,
-  Tooltip,
-  Avatar,
-} from "@mantine/core";
+import { Table, Group, ActionIcon, Menu, Text, Badge, Tooltip, Avatar } from "@mantine/core";
 import {
   IconDots,
   IconEdit,
@@ -20,10 +11,7 @@ import {
   IconCreditCard,
 } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
-import {
-  GatewayConfigSummary,
-  PaymentGatewayProvider,
-} from "@/shared/api/billing/types";
+import { GatewayConfigSummary, PaymentGatewayProvider } from "@/shared/api/billing/types";
 import { GatewayStatusBadge } from "./gateway-status-badge";
 
 interface GatewayConfigListProps {
@@ -81,11 +69,7 @@ export const GatewayConfigList = ({
     <Table.Tr key={config.id}>
       <Table.Td>
         <Group gap="sm">
-          <Avatar
-            color={getGatewayColor(config.gatewayProvider)}
-            size="sm"
-            radius="sm"
-          >
+          <Avatar color={getGatewayColor(config.gatewayProvider)} size="sm" radius="sm">
             {getGatewayIcon(config.gatewayProvider)}
           </Avatar>
           <div>
@@ -101,18 +85,12 @@ export const GatewayConfigList = ({
         </Group>
       </Table.Td>
       <Table.Td>
-        <Badge
-          variant="light"
-          color={config.mode === "live" ? "green" : "yellow"}
-        >
+        <Badge variant="light" color={config.mode === "live" ? "green" : "yellow"}>
           {config.mode}
         </Badge>
       </Table.Td>
       <Table.Td>
-        <GatewayStatusBadge
-          isActive={config.isActive}
-          isPrimary={config.isPrimary}
-        />
+        <GatewayStatusBadge isActive={config.isActive} isPrimary={config.isPrimary} />
       </Table.Td>
       <Table.Td>
         <Text size="sm" c="dimmed">

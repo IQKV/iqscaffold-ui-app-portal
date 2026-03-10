@@ -9,11 +9,7 @@ import pluginRouter from "@tanstack/eslint-plugin-router";
 
 export default tseslint.config(
   {
-    ignores: [
-      "dist",
-      "src/mocks",
-      "src/shared/ui/error-boundary/error-boundary.tsx",
-    ],
+    ignores: ["dist", "src/mocks", "src/shared/ui/error-boundary/error-boundary.tsx"],
   },
   {
     extends: [mantine],
@@ -36,15 +32,12 @@ export default tseslint.config(
       "@typescript-eslint/no-unused-vars": "off",
       "no-console": "off",
       "@tanstack/router/create-route-property-order": "error",
-      "react-refresh/only-export-components": [
-        "warn",
-        { allowConstantExport: true },
-      ],
+      "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
       "lingui/t-call-in-function": 2,
       "lingui/no-single-variables-to-translate": 2,
       "lingui/no-expression-in-message": 2,
       "lingui/no-single-tag-to-translate": 2,
       "lingui/no-trans-inside-trans": 2,
     },
-  }
+  },
 );

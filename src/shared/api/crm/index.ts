@@ -156,11 +156,7 @@ export const crmApi = {
   /**
    * Update a lead note
    */
-  updateLeadNote: (
-    leadId: string,
-    noteId: string,
-    request: Types.UpdateLeadNoteRequest
-  ) =>
+  updateLeadNote: (leadId: string, noteId: string, request: Types.UpdateLeadNoteRequest) =>
     apiRequest<Types.LeadNote>({
       url: `/v1/leads/${leadId}/notes/${noteId}`,
       method: "PUT",
@@ -209,10 +205,7 @@ export const crmApi = {
   /**
    * Update a pipeline stage
    */
-  updatePipelineStage: (
-    id: string,
-    request: Types.UpdatePipelineStageRequest
-  ) =>
+  updatePipelineStage: (id: string, request: Types.UpdatePipelineStageRequest) =>
     apiRequest<Types.PipelineStage>({
       url: `/v1/pipeline/stages/${id}`,
       method: "PUT",

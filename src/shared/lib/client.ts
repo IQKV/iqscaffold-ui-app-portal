@@ -1,8 +1,4 @@
-import axios, {
-  AxiosError,
-  AxiosRequestConfig,
-  InternalAxiosRequestConfig,
-} from "axios";
+import axios, { AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig } from "axios";
 import { getConfig } from "@/app/config";
 import { normalizeAxiosError } from "./http-error";
 import { notificationService } from "./notifications";
@@ -33,15 +29,13 @@ api.interceptors.request.use(
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 api.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
-    const original = error.config as
-      | (AxiosRequestConfig & { _retry?: boolean })
-      | undefined;
+    const original = error.config as (AxiosRequestConfig & { _retry?: boolean }) | undefined;
     const status = error.response?.status;
 
     // If no response or different error, propagate
@@ -60,5 +54,5 @@ api.interceptors.response.use(
       }
     }
     return Promise.reject(normalized);
-  }
+  },
 );

@@ -50,8 +50,7 @@ export function useChangePassword() {
       notifications.show({
         title: t`Password Change Failed`,
         message:
-          error?.message ||
-          t`Failed to change password. Please check your current password.`,
+          error?.message || t`Failed to change password. Please check your current password.`,
         color: "red",
       });
     },

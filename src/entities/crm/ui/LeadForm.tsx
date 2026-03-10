@@ -46,8 +46,7 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
   const { announce } = useAnnouncer();
 
   const isEditing = !!lead;
-  const isLoading =
-    createLeadMutation.isPending || updateLeadMutation.isPending;
+  const isLoading = createLeadMutation.isPending || updateLeadMutation.isPending;
 
   // Focus trap for modal
   // useFocusTrap(modalRef as any, opened);
@@ -114,8 +113,7 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
           },
           onError: (error: any) => {
             // Handle duplicate email error (Requirement 11.3)
-            const errorMessage =
-              error?.response?.data?.message || error.message;
+            const errorMessage = error?.response?.data?.message || error.message;
 
             const message = isDuplicateEmailError(error)
               ? getDuplicateEmailMessage()
@@ -128,7 +126,7 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
             });
             announce(`Error: ${message}`, { priority: "assertive" });
           },
-        }
+        },
       );
     } else {
       // Create new lead (Requirement 1.1, 1.2)
@@ -153,8 +151,7 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
           },
           onError: (error: any) => {
             // Handle duplicate email error (Requirement 11.3)
-            const errorMessage =
-              error?.response?.data?.message || error.message;
+            const errorMessage = error?.response?.data?.message || error.message;
 
             const message = isDuplicateEmailError(error)
               ? getDuplicateEmailMessage()
@@ -167,7 +164,7 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
             });
             announce(`Error: ${message}`, { priority: "assertive" });
           },
-        }
+        },
       );
     }
   };
@@ -264,12 +261,7 @@ export function LeadForm({ opened, onClose, lead, title }: LeadFormProps) {
             />
 
             {/* Form actions */}
-            <Group
-              justify="flex-end"
-              mt="md"
-              role="group"
-              aria-label="Form actions"
-            >
+            <Group justify="flex-end" mt="md" role="group" aria-label="Form actions">
               <Button
                 variant="subtle"
                 onClick={handleClose}

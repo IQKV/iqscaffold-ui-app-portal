@@ -1,14 +1,5 @@
 import { useState } from "react";
-import {
-  Modal,
-  Stepper,
-  Button,
-  Group,
-  Select,
-  Stack,
-  Text,
-  Alert,
-} from "@mantine/core";
+import { Modal, Stepper, Button, Group, Select, Stack, Text, Alert } from "@mantine/core";
 import { t } from "@lingui/macro";
 import { PaymentGatewayProvider } from "@/shared/api/billing/types";
 import { GatewaySelector } from "@/features/gateway-config";
@@ -30,12 +21,10 @@ export const MerchantOnboardingWizard = ({
 }: MerchantOnboardingWizardProps) => {
   const [active, setActive] = useState(0);
   const [organizationId, setOrganizationId] = useState<number | null>(null);
-  const [gatewayProvider, setGatewayProvider] =
-    useState<PaymentGatewayProvider | null>(null);
+  const [gatewayProvider, setGatewayProvider] = useState<PaymentGatewayProvider | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const { data: activeGateways, isLoading: gatewaysLoading } =
-    useActiveGatewayConfigsQuery();
+  const { data: activeGateways, isLoading: gatewaysLoading } = useActiveGatewayConfigsQuery();
 
   const handleNext = () => setActive((current) => current + 1);
   const handlePrev = () => setActive((current) => current - 1);
@@ -81,12 +70,7 @@ export const MerchantOnboardingWizard = ({
   const canProceedStep2 = gatewayProvider !== null;
 
   return (
-    <Modal
-      opened={opened}
-      onClose={handleClose}
-      title={t`Merchant Onboarding`}
-      size="lg"
-    >
+    <Modal opened={opened} onClose={handleClose} title={t`Merchant Onboarding`} size="lg">
       <Stepper active={active} onStepClick={setActive}>
         <Stepper.Step label={t`Select Organization`}>
           <Stack gap="md" mt="md">
@@ -101,9 +85,7 @@ export const MerchantOnboardingWizard = ({
                 label: org.name,
               }))}
               value={organizationId?.toString() || null}
-              onChange={(value) =>
-                setOrganizationId(value ? parseInt(value, 10) : null)
-              }
+              onChange={(value) => setOrganizationId(value ? parseInt(value, 10) : null)}
               required
             />
           </Stack>
@@ -118,11 +100,7 @@ export const MerchantOnboardingWizard = ({
             {gatewaysLoading ? (
               <Text size="sm">{t`Loading available gateways...`}</Text>
             ) : !activeGateways || activeGateways.length === 0 ? (
-              <Alert
-                icon={<IconAlertCircle />}
-                title={t`No Active Gateways`}
-                color="yellow"
-              >
+              <Alert icon={<IconAlertCircle />} title={t`No Active Gateways`} color="yellow">
                 {t`No active payment gateways configured. Please configure a gateway first.`}
               </Alert>
             ) : (

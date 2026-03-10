@@ -1,14 +1,4 @@
-import {
-  Card,
-  Text,
-  Group,
-  Stack,
-  Badge,
-  Button,
-  ActionIcon,
-  Menu,
-  Alert,
-} from "@mantine/core";
+import { Card, Text, Group, Stack, Badge, Button, ActionIcon, Menu, Alert } from "@mantine/core";
 import { IconDots, IconCalendar, IconCreditCard } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
 import { Subscription, SubscriptionStatusBadge } from "@/entities/billing";
@@ -20,10 +10,7 @@ interface SubscriptionCardProps {
   onUpdate?: () => void;
 }
 
-export function SubscriptionCard({
-  subscription,
-  onUpdate,
-}: SubscriptionCardProps) {
+export function SubscriptionCard({ subscription, onUpdate }: SubscriptionCardProps) {
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString();
   };
@@ -42,10 +29,7 @@ export function SubscriptionCard({
             </Text>
             <SubscriptionStatusBadge status={subscription.status} />
           </Stack>
-          <SubscriptionActionsMenu
-            subscription={subscription}
-            onUpdate={onUpdate}
-          />
+          <SubscriptionActionsMenu subscription={subscription} onUpdate={onUpdate} />
         </Group>
 
         {isPastDue && (
@@ -73,9 +57,7 @@ export function SubscriptionCard({
                     return t`Trial ends: ${trialEndDate}`;
                   })()
                 : (() => {
-                    const periodStart = formatDate(
-                      subscription.currentPeriodStart
-                    );
+                    const periodStart = formatDate(subscription.currentPeriodStart);
                     const periodEnd = formatDate(subscription.currentPeriodEnd);
                     return t`Current period: ${periodStart} - ${periodEnd}`;
                   })()}
@@ -95,12 +77,11 @@ export function SubscriptionCard({
           )}
         </Stack>
 
-        {subscription.status === "active" &&
-          !subscription.cancelAtPeriodEnd && (
-            <Text size="sm" c="green">
-              {t`Your subscription is active and will renew automatically.`}
-            </Text>
-          )}
+        {subscription.status === "active" && !subscription.cancelAtPeriodEnd && (
+          <Text size="sm" c="green">
+            {t`Your subscription is active and will renew automatically.`}
+          </Text>
+        )}
       </Stack>
     </Card>
   );

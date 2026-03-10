@@ -10,8 +10,7 @@ import { gatewayConfigKeys } from "./queries";
 export const useCreateGatewayConfigMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (request: CreateGatewayConfigRequest) =>
-      billingApi.createGatewayConfig(request),
+    mutationFn: (request: CreateGatewayConfigRequest) => billingApi.createGatewayConfig(request),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: gatewayConfigKeys.list() });
     },
@@ -40,8 +39,7 @@ export const useUpdateGatewayConfigMutation = () => {
 export const useDeleteGatewayConfigMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (provider: PaymentGatewayProvider) =>
-      billingApi.deleteGatewayConfig(provider),
+    mutationFn: (provider: PaymentGatewayProvider) => billingApi.deleteGatewayConfig(provider),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: gatewayConfigKeys.list() });
     },
@@ -51,8 +49,7 @@ export const useDeleteGatewayConfigMutation = () => {
 export const useActivateGatewayMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (provider: PaymentGatewayProvider) =>
-      billingApi.activateGateway(provider),
+    mutationFn: (provider: PaymentGatewayProvider) => billingApi.activateGateway(provider),
     onSuccess: (_, provider) => {
       queryClient.invalidateQueries({ queryKey: gatewayConfigKeys.list() });
       queryClient.invalidateQueries({
@@ -65,8 +62,7 @@ export const useActivateGatewayMutation = () => {
 export const useDeactivateGatewayMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (provider: PaymentGatewayProvider) =>
-      billingApi.deactivateGateway(provider),
+    mutationFn: (provider: PaymentGatewayProvider) => billingApi.deactivateGateway(provider),
     onSuccess: (_, provider) => {
       queryClient.invalidateQueries({ queryKey: gatewayConfigKeys.list() });
       queryClient.invalidateQueries({
@@ -79,8 +75,7 @@ export const useDeactivateGatewayMutation = () => {
 export const useSetPrimaryGatewayMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (provider: PaymentGatewayProvider) =>
-      billingApi.setPrimaryGateway(provider),
+    mutationFn: (provider: PaymentGatewayProvider) => billingApi.setPrimaryGateway(provider),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: gatewayConfigKeys.list() });
       queryClient.invalidateQueries({

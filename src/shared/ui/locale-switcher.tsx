@@ -69,9 +69,7 @@ export function LocaleSwitcher({
 
       notificationService.error({
         title: i18n._("Language change failed"),
-        message: i18n._(
-          "Failed to update language preference. Please try again."
-        ),
+        message: i18n._("Failed to update language preference. Please try again."),
       });
     } finally {
       setIsChanging(false);

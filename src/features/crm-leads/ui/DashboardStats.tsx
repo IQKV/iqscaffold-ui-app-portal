@@ -1,13 +1,4 @@
-import {
-  SimpleGrid,
-  Paper,
-  Stack,
-  Text,
-  Group,
-  ThemeIcon,
-  Card,
-  Title,
-} from "@mantine/core";
+import { SimpleGrid, Paper, Stack, Text, Group, ThemeIcon, Card, Title } from "@mantine/core";
 import { t } from "@lingui/core/macro";
 import {
   IconUsers,
@@ -53,18 +44,11 @@ interface DashboardStatsProps {
  *
  * Requirements: 7.1, 7.2, 7.3, 7.4, 7.6, 12.5
  */
-export function DashboardStats({
-  stats,
-  dateRange,
-  isMobile = false,
-}: DashboardStatsProps) {
+export function DashboardStats({ stats, dateRange, isMobile = false }: DashboardStatsProps) {
   return (
     <Stack gap={isMobile ? "md" : "xl"}>
       {/* KPI Cards (Requirement 7.3, 12.5) */}
-      <SimpleGrid
-        cols={{ base: 2, sm: 2, lg: 4 }}
-        spacing={isMobile ? "xs" : "lg"}
-      >
+      <SimpleGrid cols={{ base: 2, sm: 2, lg: 4 }} spacing={isMobile ? "xs" : "lg"}>
         <KPICard
           title={t`Total Leads`}
           value={stats.totalLeads}
@@ -98,16 +82,10 @@ export function DashboardStats({
       {/* Charts - Stacked on mobile (Requirement 12.5) */}
       <SimpleGrid cols={{ base: 1, lg: 2 }} spacing={isMobile ? "md" : "lg"}>
         {/* Pipeline Stage Distribution Chart (Requirement 7.1) */}
-        <PipelineStageChart
-          leadsByStage={stats.leadsByStage}
-          isMobile={isMobile}
-        />
+        <PipelineStageChart leadsByStage={stats.leadsByStage} isMobile={isMobile} />
 
         {/* Lead Source Pie Chart (Requirement 7.4) */}
-        <LeadSourceChart
-          leadsBySource={stats.leadsBySource}
-          isMobile={isMobile}
-        />
+        <LeadSourceChart leadsBySource={stats.leadsBySource} isMobile={isMobile} />
       </SimpleGrid>
     </Stack>
   );
@@ -126,13 +104,7 @@ interface KPICardProps {
  * Displays a single metric with an icon and color
  * Mobile-optimized with smaller padding and text
  */
-function KPICard({
-  title,
-  value,
-  icon,
-  color,
-  isMobile = false,
-}: KPICardProps) {
+function KPICard({ title, value, icon, color, isMobile = false }: KPICardProps) {
   const safeTitle = title || "Unknown";
   return (
     <Paper
@@ -142,12 +114,7 @@ function KPICard({
     >
       <Group justify="space-between" wrap="nowrap">
         <Stack gap={2}>
-          <Text
-            size={isMobile ? "10px" : "xs"}
-            c="dimmed"
-            tt="uppercase"
-            fw={700}
-          >
+          <Text size={isMobile ? "10px" : "xs"} c="dimmed" tt="uppercase" fw={700}>
             {title}
           </Text>
           <Text
@@ -158,12 +125,7 @@ function KPICard({
             {value.toLocaleString()}
           </Text>
         </Stack>
-        <ThemeIcon
-          size={isMobile ? "lg" : "xl"}
-          radius="md"
-          variant="light"
-          color={color}
-        >
+        <ThemeIcon size={isMobile ? "lg" : "xl"} radius="md" variant="light" color={color}>
           {icon}
         </ThemeIcon>
       </Group>
@@ -187,10 +149,7 @@ interface PipelineStageChartProps {
  *
  * Requirements: 7.1, 7.6, 12.5
  */
-function PipelineStageChart({
-  leadsByStage,
-  isMobile = false,
-}: PipelineStageChartProps) {
+function PipelineStageChart({ leadsByStage, isMobile = false }: PipelineStageChartProps) {
   // Transform data for chart
   const chartData = Object.entries(leadsByStage).map(([stage, count]) => ({
     stage,
@@ -246,17 +205,11 @@ function PipelineStageChart({
                   borderRadius: "4px",
                   fontSize: isMobile ? "12px" : "14px",
                 }}
-                formatter={(value) => [
-                  typeof value === "number" ? value : 0,
-                  t`Leads`,
-                ]}
+                formatter={(value) => [typeof value === "number" ? value : 0, t`Leads`]}
               />
               <Bar dataKey="count" fill="#228be6" radius={[8, 8, 0, 0]}>
                 {chartData.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                  />
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Bar>
             </BarChart>
@@ -311,10 +264,7 @@ const LeadSourceTooltip = ({ active, payload, total, isMobile }: any) => {
  *
  * Requirements: 7.4, 7.6, 12.5
  */
-function LeadSourceChart({
-  leadsBySource,
-  isMobile = false,
-}: LeadSourceChartProps) {
+function LeadSourceChart({ leadsBySource, isMobile = false }: LeadSourceChartProps) {
   // Transform data for chart
   const chartData = Object.entries(leadsBySource).map(([source, count]) => ({
     name: source,
@@ -365,25 +315,17 @@ function LeadSourceChart({
                 label={
                   isMobile
                     ? false
-                    : ({ name, percent }) =>
-                        `${name} (${((percent ?? 0) * 100).toFixed(0)}%)`
+                    : ({ name, percent }) => `${name} (${((percent ?? 0) * 100).toFixed(0)}%)`
                 }
                 outerRadius={isMobile ? 60 : 80}
                 fill="#8884d8"
                 dataKey="value"
               >
                 {chartData.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                  />
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
-              <Tooltip
-                content={
-                  <LeadSourceTooltip total={total} isMobile={isMobile} />
-                }
-              />
+              <Tooltip content={<LeadSourceTooltip total={total} isMobile={isMobile} />} />
               {!isMobile && <Legend wrapperStyle={{ fontSize: "12px" }} />}
             </PieChart>
           </ResponsiveContainer>

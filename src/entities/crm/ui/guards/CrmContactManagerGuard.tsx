@@ -20,12 +20,8 @@ export const CrmContactManagerGuard: React.FC<CrmContactManagerGuardProps> = ({
   fallback,
   showUpgrade = true,
 }) => {
-  const {
-    canManageContacts,
-    getCrmAuthorityLevel,
-    getUserCrmAuthorities,
-    isSuperAdmin,
-  } = useAuth();
+  const { canManageContacts, getCrmAuthorityLevel, getUserCrmAuthorities, isSuperAdmin } =
+    useAuth();
 
   // SUPER_ADMIN bypass: Always grant access to SUPER_ADMIN users
   if (isSuperAdmin() || canManageContacts()) {
@@ -43,8 +39,8 @@ export const CrmContactManagerGuard: React.FC<CrmContactManagerGuardProps> = ({
         Contact Management Access Required
       </Title>
       <Text ta="center" c="dimmed" maw={400}>
-        You need contact management permissions to access this feature. Contact
-        your administrator to request contact management access.
+        You need contact management permissions to access this feature. Contact your administrator
+        to request contact management access.
       </Text>
 
       {showUpgrade && (
@@ -54,12 +50,9 @@ export const CrmContactManagerGuard: React.FC<CrmContactManagerGuardProps> = ({
           color="green"
           variant="light"
         >
-          <Text size="sm">
-            This feature requires one of the following authorities:
-          </Text>
+          <Text size="sm">This feature requires one of the following authorities:</Text>
           <Text size="sm" mt="xs">
-            • <strong>CRM_CONTACT_MANAGER</strong> - Contact management
-            permissions
+            • <strong>CRM_CONTACT_MANAGER</strong> - Contact management permissions
             <br />• <strong>CRM_ADMIN</strong> - Full CRM administration
             <br />• <strong>ADMIN</strong> - Platform administration
           </Text>

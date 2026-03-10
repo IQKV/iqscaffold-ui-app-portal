@@ -1,8 +1,4 @@
-import type {
-  AxiosInstance,
-  InternalAxiosRequestConfig,
-  AxiosResponse,
-} from "axios";
+import type { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from "axios";
 import { performanceMonitor } from "./performanceMonitor";
 
 /**
@@ -21,10 +17,7 @@ interface RequestMetadata {
 }
 
 // Store request metadata using a WeakMap to avoid memory leaks
-const requestMetadata = new WeakMap<
-  InternalAxiosRequestConfig,
-  RequestMetadata
->();
+const requestMetadata = new WeakMap<InternalAxiosRequestConfig, RequestMetadata>();
 
 /**
  * Setup API performance monitoring interceptors
@@ -45,7 +38,7 @@ export function setupAPIPerformanceMonitoring(axiosInstance: AxiosInstance) {
     },
     (error) => {
       return Promise.reject(error);
-    }
+    },
   );
 
   // Response interceptor - calculate duration and track
@@ -61,7 +54,7 @@ export function setupAPIPerformanceMonitoring(axiosInstance: AxiosInstance) {
           metadata.method,
           duration,
           response.status,
-          true
+          true,
         );
 
         // Clean up metadata
@@ -83,7 +76,7 @@ export function setupAPIPerformanceMonitoring(axiosInstance: AxiosInstance) {
           metadata.method,
           duration,
           status,
-          false
+          false,
         );
 
         // Clean up metadata
@@ -93,7 +86,7 @@ export function setupAPIPerformanceMonitoring(axiosInstance: AxiosInstance) {
       }
 
       return Promise.reject(error);
-    }
+    },
   );
 }
 

@@ -1,10 +1,7 @@
 import { Badge, BadgeProps } from "@mantine/core";
 import { SubscriptionStatus } from "../lib/types";
 
-interface SubscriptionStatusBadgeProps extends Omit<
-  BadgeProps,
-  "color" | "children"
-> {
+interface SubscriptionStatusBadgeProps extends Omit<BadgeProps, "color" | "children"> {
   status: SubscriptionStatus;
 }
 
@@ -23,10 +20,7 @@ const statusConfig: Record<string, { color: string; label: string }> = {
   PAUSED: { color: "gray", label: "Paused" },
 };
 
-export function SubscriptionStatusBadge({
-  status,
-  ...props
-}: SubscriptionStatusBadgeProps) {
+export function SubscriptionStatusBadge({ status, ...props }: SubscriptionStatusBadgeProps) {
   const config = statusConfig[status];
 
   // Handle unknown status values gracefully

@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Container,
-  Stack,
-  Paper,
-  Skeleton,
-  Group,
-  SimpleGrid,
-} from "@mantine/core";
+import { Container, Stack, Paper, Skeleton, Group, SimpleGrid } from "@mantine/core";
 
 /**
  * DashboardSkeleton Component

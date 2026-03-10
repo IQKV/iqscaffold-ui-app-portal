@@ -103,9 +103,7 @@ export const organizationApi = {
    * Get paginated list of organizations
    * SUPER_ADMIN sees all, ADMIN sees only their organization
    */
-  async getAllOrganizations(
-    params?: PageParams
-  ): Promise<OrganizationPageResponse> {
+  async getAllOrganizations(params?: PageParams): Promise<OrganizationPageResponse> {
     return apiRequest<OrganizationPageResponse>({
       url: "/v1/admin/organizations",
       method: "GET",
@@ -129,9 +127,7 @@ export const organizationApi = {
    * Create new organization
    * Requires SUPER_ADMIN role
    */
-  async createOrganization(
-    data: CreateOrganizationRequest
-  ): Promise<OrganizationDto> {
+  async createOrganization(data: CreateOrganizationRequest): Promise<OrganizationDto> {
     return apiRequest<OrganizationDto>({
       url: "/v1/admin/organizations",
       method: "POST",
@@ -144,10 +140,7 @@ export const organizationApi = {
    * Requires ADMIN or SUPER_ADMIN role
    * Tenant-scoped for ADMIN users
    */
-  async updateOrganization(
-    id: number,
-    data: UpdateOrganizationRequest
-  ): Promise<OrganizationDto> {
+  async updateOrganization(id: number, data: UpdateOrganizationRequest): Promise<OrganizationDto> {
     return apiRequest<OrganizationDto>({
       url: `/v1/admin/organizations/${id}`,
       method: "PUT",

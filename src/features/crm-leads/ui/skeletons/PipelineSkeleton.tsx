@@ -33,12 +33,7 @@ export const PipelineSkeleton: React.FC<PipelineSkeletonProps> = ({
 
       {/* Pipeline columns */}
       <ScrollArea>
-        <Group
-          align="flex-start"
-          gap="md"
-          wrap="nowrap"
-          style={{ minWidth: "max-content" }}
-        >
+        <Group align="flex-start" gap="md" wrap="nowrap" style={{ minWidth: "max-content" }}>
           {Array.from({ length: stageCount }).map((_, stageIndex) => (
             <Box key={stageIndex} style={{ width: 300 }}>
               <Paper p="md" withBorder>
@@ -51,20 +46,18 @@ export const PipelineSkeleton: React.FC<PipelineSkeletonProps> = ({
 
                   {/* Lead cards */}
                   <Stack gap="sm">
-                    {Array.from({ length: cardsPerStage }).map(
-                      (_, cardIndex) => (
-                        <Paper key={cardIndex} p="sm" withBorder shadow="xs">
-                          <Stack gap="xs">
-                            <Skeleton height={18} width="80%" />
-                            <Skeleton height={14} width="60%" />
-                            <Group gap="xs">
-                              <Skeleton height={20} width={60} radius="xl" />
-                              <Skeleton height={20} width={70} radius="xl" />
-                            </Group>
-                          </Stack>
-                        </Paper>
-                      )
-                    )}
+                    {Array.from({ length: cardsPerStage }).map((_, cardIndex) => (
+                      <Paper key={cardIndex} p="sm" withBorder shadow="xs">
+                        <Stack gap="xs">
+                          <Skeleton height={18} width="80%" />
+                          <Skeleton height={14} width="60%" />
+                          <Group gap="xs">
+                            <Skeleton height={20} width={60} radius="xl" />
+                            <Skeleton height={20} width={70} radius="xl" />
+                          </Group>
+                        </Stack>
+                      </Paper>
+                    ))}
                   </Stack>
                 </Stack>
               </Paper>

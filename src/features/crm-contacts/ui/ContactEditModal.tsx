@@ -58,8 +58,7 @@ export const ContactEditModal: React.FC<ContactEditModalProps> = ({
   onSuccess,
 }) => {
   const updateContactMutation = useUpdateContactMutation();
-  const { data: companiesData, isLoading: isLoadingCompanies } =
-    useCompaniesQuery();
+  const { data: companiesData, isLoading: isLoadingCompanies } = useCompaniesQuery();
 
   const form = useForm<ContactEditFormData>({
     validate: zodResolver(contactEditSchema),
@@ -130,13 +129,7 @@ export const ContactEditModal: React.FC<ContactEditModalProps> = ({
   };
 
   return (
-    <Modal
-      opened={opened}
-      onClose={handleClose}
-      title={t`Edit Contact`}
-      size="md"
-      centered
-    >
+    <Modal opened={opened} onClose={handleClose} title={t`Edit Contact`} size="md" centered>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack gap="md">
           {/* Name Fields */}
@@ -193,10 +186,7 @@ export const ContactEditModal: React.FC<ContactEditModalProps> = ({
             {...form.getInputProps("companyId")}
             value={form.values.companyId?.toString() || null}
             onChange={(value) =>
-              form.setFieldValue(
-                "companyId",
-                value ? parseInt(value, 10) : undefined
-              )
+              form.setFieldValue("companyId", value ? parseInt(value, 10) : undefined)
             }
           />
 

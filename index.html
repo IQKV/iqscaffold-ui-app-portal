@@ -7,18 +7,13 @@
       // Mantine color scheme script - prevents flash of wrong theme
       (function () {
         try {
-          var colorScheme =
-            window.localStorage.getItem("mantine-color-scheme-value") || "auto";
+          var colorScheme = window.localStorage.getItem("mantine-color-scheme-value") || "auto";
           if (colorScheme === "auto") {
-            colorScheme = window.matchMedia("(prefers-color-scheme: dark)")
-              .matches
+            colorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches
               ? "dark"
               : "light";
           }
-          document.documentElement.setAttribute(
-            "data-mantine-color-scheme",
-            colorScheme
-          );
+          document.documentElement.setAttribute("data-mantine-color-scheme", colorScheme);
         } catch (e) {}
       })();
     </script>

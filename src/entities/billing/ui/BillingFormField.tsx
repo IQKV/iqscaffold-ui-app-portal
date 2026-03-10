@@ -118,14 +118,7 @@ const formatCurrency = (amount: number, currency: string = "USD"): string => {
  */
 export function BillingFormField(props: BillingFormFieldProps) {
   const { _ } = useLingui();
-  const {
-    name,
-    label,
-    form,
-    disabled = false,
-    withAsterisk = false,
-    description,
-  } = props;
+  const { name, label, form, disabled = false, withAsterisk = false, description } = props;
 
   const labelText = typeof label === "string" ? label : _(label);
   const placeholderText = props.placeholder
@@ -197,14 +190,7 @@ export function BillingFormField(props: BillingFormFieldProps) {
     case "select": {
       const { data, searchable = false, clearable = false } = props;
 
-      return (
-        <Select
-          {...fieldProps}
-          data={data}
-          searchable={searchable}
-          clearable={clearable}
-        />
-      );
+      return <Select {...fieldProps} data={data} searchable={searchable} clearable={clearable} />;
     }
 
     case "amount": {

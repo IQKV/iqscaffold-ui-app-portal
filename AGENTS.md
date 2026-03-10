@@ -778,9 +778,7 @@ export const queryClient = new QueryClient({
       retry: (failureCount, error: any) => {
         // Don't retry on 4xx errors except 408, 429
         if (error?.response?.status >= 400 && error?.response?.status < 500) {
-          return (
-            error?.response?.status === 408 || error?.response?.status === 429
-          );
+          return error?.response?.status === 408 || error?.response?.status === 429;
         }
         return failureCount < 3;
       },
@@ -831,7 +829,7 @@ const mutation = useFormMutation<ResponseType, FormValues>(
     onSuccess: (data) => {
       // Custom success logic
     },
-  }
+  },
 );
 
 const handleSubmit = (values: FormValues) => {
@@ -906,7 +904,7 @@ api.interceptors.response.use(
     }
 
     return Promise.reject(normalized);
-  }
+  },
 );
 ```
 
@@ -1007,8 +1005,7 @@ The project defines reusable validation rules in `entities/form`:
 export const minLength = (min: number) => (value: string) =>
   value.length < min ? `Must be at least ${min} characters` : null;
 
-export const email = (value: string) =>
-  /^\S+@\S+$/.test(value) ? null : "Invalid email";
+export const email = (value: string) => (/^\S+@\S+$/.test(value) ? null : "Invalid email");
 ```
 
 #### Complete Form Feature Example
@@ -1051,7 +1048,7 @@ export function UserFormFeature() {
         form.reset();
         close();
       },
-    }
+    },
   );
 
   const handleSubmit = (values: FormValues) => {
@@ -1325,9 +1322,7 @@ export const queryClient = new QueryClient({
       retry: (failureCount, error: any) => {
         // Smart retry logic for 4xx vs 5xx
         if (error?.response?.status >= 400 && error?.response?.status < 500) {
-          return (
-            error?.response?.status === 408 || error?.response?.status === 429
-          );
+          return error?.response?.status === 408 || error?.response?.status === 429;
         }
         return failureCount < 3;
       },
@@ -1707,12 +1702,7 @@ The project includes a user preferences system:
 
 ```tsx
 // Entity-level hooks
-import {
-  useUserPreferences,
-  useUpdateUserPreferences,
-  useTheme,
-  useLocale,
-} from "@/entities/user";
+import { useUserPreferences, useUpdateUserPreferences, useTheme, useLocale } from "@/entities/user";
 
 const { data: preferences } = useUserPreferences();
 const theme = useTheme();
@@ -1833,11 +1823,7 @@ import { CrmFormField, UserFormField, BillingFormField } from "@/entities/crm";
 import { ErrorBoundary, LoadingOverlay } from "@/shared/ui";
 
 // Utilities
-import {
-  useFormMutation,
-  queryClient,
-  notificationService,
-} from "@/shared/lib";
+import { useFormMutation, queryClient, notificationService } from "@/shared/lib";
 import { errorFromAxios, toMantineErrors } from "@/shared/lib";
 
 // API Clients

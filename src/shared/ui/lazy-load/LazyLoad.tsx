@@ -54,10 +54,7 @@ export const LazyLoad: React.FC<LazyLoadProps> = ({
   }, [once, isIntersecting, hasLoaded]);
 
   return (
-    <Box
-      ref={ref}
-      style={{ minHeight: typeof height === "number" ? `${height}px` : height }}
-    >
+    <Box ref={ref} style={{ minHeight: typeof height === "number" ? `${height}px` : height }}>
       {shouldRender ? children : placeholder || <Skeleton height={height} />}
     </Box>
   );

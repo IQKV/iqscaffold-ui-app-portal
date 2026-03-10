@@ -15,15 +15,13 @@ interface CrmPipelineManagerGuardProps {
  * Guard component that restricts access to pipeline management features.
  * Requires: CRM_PIPELINE_MANAGER, CRM_ADMIN, or admin access
  */
-export const CrmPipelineManagerGuard: React.FC<
-  CrmPipelineManagerGuardProps
-> = ({ children, fallback, showUpgrade = true }) => {
-  const {
-    canManagePipeline,
-    getCrmAuthorityLevel,
-    getUserCrmAuthorities,
-    isSuperAdmin,
-  } = useAuth();
+export const CrmPipelineManagerGuard: React.FC<CrmPipelineManagerGuardProps> = ({
+  children,
+  fallback,
+  showUpgrade = true,
+}) => {
+  const { canManagePipeline, getCrmAuthorityLevel, getUserCrmAuthorities, isSuperAdmin } =
+    useAuth();
 
   // SUPER_ADMIN bypass: Always grant access to SUPER_ADMIN users
   if (isSuperAdmin() || canManagePipeline()) {
@@ -41,8 +39,8 @@ export const CrmPipelineManagerGuard: React.FC<
         Pipeline Management Access Required
       </Title>
       <Text ta="center" c="dimmed" maw={400}>
-        You need pipeline management permissions to access this feature. Contact
-        your administrator to request pipeline management access.
+        You need pipeline management permissions to access this feature. Contact your administrator
+        to request pipeline management access.
       </Text>
 
       {showUpgrade && (
@@ -52,12 +50,9 @@ export const CrmPipelineManagerGuard: React.FC<
           color="violet"
           variant="light"
         >
-          <Text size="sm">
-            This feature requires one of the following authorities:
-          </Text>
+          <Text size="sm">This feature requires one of the following authorities:</Text>
           <Text size="sm" mt="xs">
-            • <strong>CRM_PIPELINE_MANAGER</strong> - Pipeline management
-            permissions
+            • <strong>CRM_PIPELINE_MANAGER</strong> - Pipeline management permissions
             <br />• <strong>CRM_ADMIN</strong> - Full CRM administration
             <br />• <strong>ADMIN</strong> - Platform administration
           </Text>

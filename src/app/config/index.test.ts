@@ -35,7 +35,7 @@ describe("Config Utilities", () => {
   describe("getConfigOrThrow", () => {
     it("throws error when config does not exist", () => {
       expect(() => getConfigOrThrow("VITE_NONEXISTENT_KEY")).toThrow(
-        "Missing required config: VITE_NONEXISTENT_KEY"
+        "Missing required config: VITE_NONEXISTENT_KEY",
       );
     });
 

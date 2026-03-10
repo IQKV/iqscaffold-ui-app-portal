@@ -39,9 +39,7 @@ interface LeadNotesSectionProps {
  *
  * Requirements: 4.2, 4.4, 4.5, 4.6, 4.7
  */
-export const LeadNotesSection: React.FC<LeadNotesSectionProps> = ({
-  leadId,
-}) => {
+export const LeadNotesSection: React.FC<LeadNotesSectionProps> = ({ leadId }) => {
   const [newNoteContent, setNewNoteContent] = useState("");
   const [editingNoteId, setEditingNoteId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState("");
@@ -140,8 +138,7 @@ export const LeadNotesSection: React.FC<LeadNotesSectionProps> = ({
       title: "Delete Note",
       children: (
         <Text size="sm">
-          Are you sure you want to delete this note? This action cannot be
-          undone.
+          Are you sure you want to delete this note? This action cannot be undone.
         </Text>
       ),
       labels: { confirm: "Delete", cancel: "Cancel" },
@@ -198,7 +195,7 @@ export const LeadNotesSection: React.FC<LeadNotesSectionProps> = ({
 
   // Sort notes by creation date descending
   const sortedNotes = [...(notes || [])].sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
   );
 
   return (
@@ -280,10 +277,7 @@ export const LeadNotesSection: React.FC<LeadNotesSectionProps> = ({
                     </div>
                     <Group gap="xs">
                       <Tooltip label={t`Edit note`}>
-                        <ActionIcon
-                          variant="subtle"
-                          onClick={() => handleStartEdit(note)}
-                        >
+                        <ActionIcon variant="subtle" onClick={() => handleStartEdit(note)}>
                           <IconEdit size={16} />
                         </ActionIcon>
                       </Tooltip>

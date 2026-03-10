@@ -52,8 +52,8 @@ export function useServiceHealth(config: ServiceHealthConfig) {
             apiRequest({ url: endpoint, method: "GET" }).then(() => ({
               serviceName,
               success: true,
-            }))
-          )
+            })),
+          ),
         );
 
         const services: Record<string, boolean> = {};
@@ -91,7 +91,7 @@ export function useServiceHealth(config: ServiceHealthConfig) {
       }
       return healthStatus.services[feature] ?? false;
     },
-    [healthStatus]
+    [healthStatus],
   );
 
   // Simple circuit breaker based on error state

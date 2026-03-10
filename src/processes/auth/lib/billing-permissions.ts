@@ -180,7 +180,7 @@ export function canManageSubscriptionPlans(user: UserContext | null): boolean {
  * Get user's billing authority level for UI display
  */
 export function getBillingAuthorityLevel(
-  user: UserContext | null
+  user: UserContext | null,
 ): "none" | "access" | "manager" | "admin" {
   if (!user?.authorities) {
     return "none";
@@ -216,9 +216,7 @@ export function getUserBillingAuthorities(user: UserContext | null): string[] {
     AUTHORITY_FINANCE_VIEWER,
   ];
 
-  return user.authorities.filter((auth) =>
-    billingAuthorities.includes(auth as any)
-  );
+  return user.authorities.filter((auth) => billingAuthorities.includes(auth as any));
 }
 
 // Legacy function compatibility (deprecated)
@@ -234,8 +232,6 @@ export function isBillingAdmin(user: UserContext | null): boolean {
  * @deprecated Use hasReadOnlyBillingAccess instead
  */
 export function isFinanceViewer(user: UserContext | null): boolean {
-  console.warn(
-    "isFinanceViewer is deprecated, use hasReadOnlyBillingAccess instead"
-  );
+  console.warn("isFinanceViewer is deprecated, use hasReadOnlyBillingAccess instead");
   return hasReadOnlyBillingAccess(user);
 }

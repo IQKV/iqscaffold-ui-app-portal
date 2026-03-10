@@ -61,13 +61,8 @@ export const useDeleteContactNoteMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({
-      contactId,
-      noteId,
-    }: {
-      contactId: string | number;
-      noteId: string | number;
-    }) => contactApi.deleteContactNote(contactId, noteId),
+    mutationFn: ({ contactId, noteId }: { contactId: string | number; noteId: string | number }) =>
+      contactApi.deleteContactNote(contactId, noteId),
     onSuccess: (_, variables) => {
       // Invalidate notes list
       queryClient.invalidateQueries({

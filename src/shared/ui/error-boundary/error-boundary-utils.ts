@@ -23,7 +23,7 @@ export function useErrorHandler() {
  */
 export function withErrorBoundary<P extends object>(
   Component: React.ComponentType<P>,
-  errorBoundaryProps?: any
+  errorBoundaryProps?: any,
 ) {
   const WrappedComponent = (props: P) => {
     // This would need to import ErrorBoundary to avoid circular dependency

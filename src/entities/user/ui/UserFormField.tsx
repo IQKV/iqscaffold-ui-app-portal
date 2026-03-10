@@ -15,11 +15,7 @@ import {
 import { UseFormReturnType } from "@mantine/form";
 import { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
-import {
-  IconShield,
-  IconShieldCheck,
-  IconAlertTriangle,
-} from "@tabler/icons-react";
+import { IconShield, IconShieldCheck, IconAlertTriangle } from "@tabler/icons-react";
 import { t } from "@lingui/core/macro";
 
 interface BaseUserFormFieldProps {
@@ -165,14 +161,7 @@ const validateUsername = (username: string): boolean => {
  */
 export function UserFormField(props: UserFormFieldProps) {
   const { _ } = useLingui();
-  const {
-    name,
-    label,
-    form,
-    disabled = false,
-    withAsterisk = false,
-    description,
-  } = props;
+  const { name, label, form, disabled = false, withAsterisk = false, description } = props;
 
   const labelText = typeof label === "string" ? label : _(label);
   const placeholderText = props.placeholder
@@ -205,10 +194,7 @@ export function UserFormField(props: UserFormFieldProps) {
         <Stack gap="xs">
           <TextInput {...fieldProps} type={props.type} maxLength={maxLength} />
           {showCharacterCount && maxLength && (
-            <Text
-              size="xs"
-              c={currentLength > maxLength * 0.9 ? "orange" : "dimmed"}
-            >
+            <Text size="xs" c={currentLength > maxLength * 0.9 ? "orange" : "dimmed"}>
               {currentLength}/{maxLength}
             </Text>
           )}
@@ -240,10 +226,7 @@ export function UserFormField(props: UserFormFieldProps) {
             }
           />
           {showCharacterCount && (
-            <Text
-              size="xs"
-              c={currentLength > maxLength * 0.9 ? "orange" : "dimmed"}
-            >
+            <Text size="xs" c={currentLength > maxLength * 0.9 ? "orange" : "dimmed"}>
               {currentLength}/{maxLength}
             </Text>
           )}
@@ -259,16 +242,11 @@ export function UserFormField(props: UserFormFieldProps) {
     case "password": {
       const { showStrengthIndicator = true, requireStrong = false } = props;
       const value = form.values[name] || "";
-      const strength = showStrengthIndicator
-        ? calculatePasswordStrength(value)
-        : null;
+      const strength = showStrengthIndicator ? calculatePasswordStrength(value) : null;
 
       return (
         <Stack gap="xs">
-          <PasswordInput
-            {...fieldProps}
-            rightSection={<IconShield size={16} />}
-          />
+          <PasswordInput {...fieldProps} rightSection={<IconShield size={16} />} />
           {strength && value && (
             <Stack gap="xs">
               <Group gap="xs">
@@ -279,11 +257,7 @@ export function UserFormField(props: UserFormFieldProps) {
                   {strength.label}
                 </Badge>
               </Group>
-              <Progress
-                value={strength.percentage}
-                color={strength.color}
-                size="xs"
-              />
+              <Progress value={strength.percentage} color={strength.color} size="xs" />
               {requireStrong && strength.strength < 80 && (
                 <Alert color="orange" variant="light">
                   {t`Password should be strong for security. Include uppercase, lowercase, numbers, and special characters.`}
@@ -298,14 +272,7 @@ export function UserFormField(props: UserFormFieldProps) {
     case "select": {
       const { data, searchable = false, clearable = false } = props;
 
-      return (
-        <Select
-          {...fieldProps}
-          data={data}
-          searchable={searchable}
-          clearable={clearable}
-        />
-      );
+      return <Select {...fieldProps} data={data} searchable={searchable} clearable={clearable} />;
     }
 
     case "multiselect": {
@@ -322,10 +289,7 @@ export function UserFormField(props: UserFormFieldProps) {
             maxValues={maxValues}
           />
           {maxValues && (
-            <Text
-              size="xs"
-              c={selectedCount >= maxValues ? "orange" : "dimmed"}
-            >
+            <Text size="xs" c={selectedCount >= maxValues ? "orange" : "dimmed"}>
               {selectedCount}/{maxValues} {t`selected`}
             </Text>
           )}

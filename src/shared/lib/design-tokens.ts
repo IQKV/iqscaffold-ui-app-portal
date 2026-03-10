@@ -470,11 +470,7 @@ export function getSpacing(multiplier: number): string {
  * @example
  * getResponsiveSpacing(2, 3, 4) // "clamp(8px, 12px, 16px)"
  */
-export function getResponsiveSpacing(
-  mobile: number,
-  tablet: number,
-  desktop: number
-): string {
+export function getResponsiveSpacing(mobile: number, tablet: number, desktop: number): string {
   return `clamp(${getSpacing(mobile)}, ${getSpacing(tablet)}, ${getSpacing(desktop)})`;
 }
 
@@ -536,7 +532,7 @@ export function getColorWithOpacity(color: string, opacity: number): string {
  */
 export function mediaQuery(
   breakpoint: keyof typeof breakpoints,
-  type: "min" | "max" = "min"
+  type: "min" | "max" = "min",
 ): string {
   return `@media (${type}-width: ${breakpoints[breakpoint]})`;
 }
@@ -553,13 +549,10 @@ export function mediaQuery(
 export function createTransition(
   properties: string[],
   duration: keyof typeof transitions.duration = "base",
-  easing: keyof typeof transitions.easing = "easeInOut"
+  easing: keyof typeof transitions.easing = "easeInOut",
 ): string {
   return properties
-    .map(
-      (prop) =>
-        `${prop} ${transitions.duration[duration]} ${transitions.easing[easing]}`
-    )
+    .map((prop) => `${prop} ${transitions.duration[duration]} ${transitions.easing[easing]}`)
     .join(", ");
 }
 

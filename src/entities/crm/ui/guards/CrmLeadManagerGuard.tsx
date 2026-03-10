@@ -20,12 +20,7 @@ export const CrmLeadManagerGuard: React.FC<CrmLeadManagerGuardProps> = ({
   fallback,
   showUpgrade = true,
 }) => {
-  const {
-    canManageLeads,
-    getCrmAuthorityLevel,
-    getUserCrmAuthorities,
-    isSuperAdmin,
-  } = useAuth();
+  const { canManageLeads, getCrmAuthorityLevel, getUserCrmAuthorities, isSuperAdmin } = useAuth();
 
   // SUPER_ADMIN bypass: Always grant access to SUPER_ADMIN users
   if (isSuperAdmin() || canManageLeads()) {
@@ -43,8 +38,8 @@ export const CrmLeadManagerGuard: React.FC<CrmLeadManagerGuardProps> = ({
         Lead Management Access Required
       </Title>
       <Text ta="center" c="dimmed" maw={400}>
-        You need lead management permissions to access this feature. Contact
-        your administrator to request lead management access.
+        You need lead management permissions to access this feature. Contact your administrator to
+        request lead management access.
       </Text>
 
       {showUpgrade && (
@@ -54,9 +49,7 @@ export const CrmLeadManagerGuard: React.FC<CrmLeadManagerGuardProps> = ({
           color="orange"
           variant="light"
         >
-          <Text size="sm">
-            This feature requires one of the following authorities:
-          </Text>
+          <Text size="sm">This feature requires one of the following authorities:</Text>
           <Text size="sm" mt="xs">
             • <strong>CRM_LEAD_MANAGER</strong> - Lead management permissions
             <br />• <strong>CRM_ADMIN</strong> - Full CRM administration

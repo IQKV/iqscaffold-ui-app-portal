@@ -7,21 +7,11 @@ describe("FSD Architecture", () => {
 
   describe("Layer Structure", () => {
     it("should have all FSD layers", () => {
-      const layers = [
-        "app",
-        "pages",
-        "widgets",
-        "features",
-        "entities",
-        "shared",
-      ];
+      const layers = ["app", "pages", "widgets", "features", "entities", "shared"];
 
       layers.forEach((layer) => {
         const layerPath = join(srcDir, layer);
-        expect(
-          () => statSync(layerPath),
-          `Layer "${layer}" must exist`
-        ).not.toThrow();
+        expect(() => statSync(layerPath), `Layer "${layer}" must exist`).not.toThrow();
       });
     });
 
@@ -35,10 +25,7 @@ describe("FSD Architecture", () => {
 
       segments.forEach((segment) => {
         const segmentPath = join(srcDir, "shared", segment);
-        expect(
-          () => statSync(segmentPath),
-          `Shared segment "${segment}" must exist`
-        ).not.toThrow();
+        expect(() => statSync(segmentPath), `Shared segment "${segment}" must exist`).not.toThrow();
       });
     });
   });
@@ -47,60 +34,48 @@ describe("FSD Architecture", () => {
     it("features should have index.ts", () => {
       const featuresDir = join(srcDir, "features");
       const features = readdirSync(featuresDir).filter((f) =>
-        statSync(join(featuresDir, f)).isDirectory()
+        statSync(join(featuresDir, f)).isDirectory(),
       );
 
       features.forEach((feature) => {
         const indexPath = join(featuresDir, feature, "index.ts");
-        expect(
-          () => statSync(indexPath),
-          `Feature "${feature}" must have index.ts`
-        ).not.toThrow();
+        expect(() => statSync(indexPath), `Feature "${feature}" must have index.ts`).not.toThrow();
       });
     });
 
     it("widgets should have index.ts", () => {
       const widgetsDir = join(srcDir, "widgets");
       const widgets = readdirSync(widgetsDir).filter((f) =>
-        statSync(join(widgetsDir, f)).isDirectory()
+        statSync(join(widgetsDir, f)).isDirectory(),
       );
 
       widgets.forEach((widget) => {
         const indexPath = join(widgetsDir, widget, "index.ts");
-        expect(
-          () => statSync(indexPath),
-          `Widget "${widget}" must have index.ts`
-        ).not.toThrow();
+        expect(() => statSync(indexPath), `Widget "${widget}" must have index.ts`).not.toThrow();
       });
     });
 
     it("entities should have index.ts", () => {
       const entitiesDir = join(srcDir, "entities");
       const entities = readdirSync(entitiesDir).filter((f) =>
-        statSync(join(entitiesDir, f)).isDirectory()
+        statSync(join(entitiesDir, f)).isDirectory(),
       );
 
       entities.forEach((entity) => {
         const indexPath = join(entitiesDir, entity, "index.ts");
-        expect(
-          () => statSync(indexPath),
-          `Entity "${entity}" must have index.ts`
-        ).not.toThrow();
+        expect(() => statSync(indexPath), `Entity "${entity}" must have index.ts`).not.toThrow();
       });
     });
 
     it("processes should have index.ts", () => {
       const processesDir = join(srcDir, "processes");
       const processes = readdirSync(processesDir).filter((f) =>
-        statSync(join(processesDir, f)).isDirectory()
+        statSync(join(processesDir, f)).isDirectory(),
       );
 
       processes.forEach((process) => {
         const indexPath = join(processesDir, process, "index.ts");
-        expect(
-          () => statSync(indexPath),
-          `Process "${process}" must have index.ts`
-        ).not.toThrow();
+        expect(() => statSync(indexPath), `Process "${process}" must have index.ts`).not.toThrow();
       });
     });
 
@@ -109,10 +84,7 @@ describe("FSD Architecture", () => {
 
       segments.forEach((segment) => {
         const indexPath = join(srcDir, "shared", segment, "index.ts");
-        expect(
-          () => statSync(indexPath),
-          `Shared/${segment} must have index.ts`
-        ).not.toThrow();
+        expect(() => statSync(indexPath), `Shared/${segment} must have index.ts`).not.toThrow();
       });
     });
   });
@@ -121,7 +93,7 @@ describe("FSD Architecture", () => {
     it("features should have ui segment or component files", () => {
       const featuresDir = join(srcDir, "features");
       const features = readdirSync(featuresDir).filter((f) =>
-        statSync(join(featuresDir, f)).isDirectory()
+        statSync(join(featuresDir, f)).isDirectory(),
       );
 
       features.forEach((feature) => {
@@ -129,12 +101,12 @@ describe("FSD Architecture", () => {
         const uiPath = join(featurePath, "ui");
         const hasUiFolder = existsSync(uiPath);
         const hasComponentFiles = readdirSync(featurePath).some(
-          (f) => f.endsWith(".tsx") || f.endsWith(".ts")
+          (f) => f.endsWith(".tsx") || f.endsWith(".ts"),
         );
 
         expect(
           hasUiFolder || hasComponentFiles,
-          `Feature "${feature}" must have ui/ segment or component files`
+          `Feature "${feature}" must have ui/ segment or component files`,
         ).toBe(true);
       });
     });
@@ -142,7 +114,7 @@ describe("FSD Architecture", () => {
     it("features should have model segment or be simple features", () => {
       const featuresDir = join(srcDir, "features");
       const features = readdirSync(featuresDir).filter((f) =>
-        statSync(join(featuresDir, f)).isDirectory()
+        statSync(join(featuresDir, f)).isDirectory(),
       );
 
       features.forEach((feature) => {
@@ -167,7 +139,7 @@ describe("FSD Architecture", () => {
     it("widgets should have ui segment or component file", () => {
       const widgetsDir = join(srcDir, "widgets");
       const widgets = readdirSync(widgetsDir).filter((f) =>
-        statSync(join(widgetsDir, f)).isDirectory()
+        statSync(join(widgetsDir, f)).isDirectory(),
       );
 
       widgets.forEach((widget) => {
@@ -194,7 +166,7 @@ describe("FSD Architecture", () => {
 
         expect(
           hasUiFolder || hasComponentFile,
-          `Widget "${widget}" must have ui/ folder or ${widget}.tsx file`
+          `Widget "${widget}" must have ui/ folder or ${widget}.tsx file`,
         ).toBe(true);
       });
     });
@@ -227,16 +199,11 @@ describe("FSD Architecture", () => {
 
     it("shared/ui components should use kebab-case folders", () => {
       const uiDir = join(srcDir, "shared", "ui");
-      const components = readdirSync(uiDir).filter((f) =>
-        statSync(join(uiDir, f)).isDirectory()
-      );
+      const components = readdirSync(uiDir).filter((f) => statSync(join(uiDir, f)).isDirectory());
 
       components.forEach((component) => {
         const isValid = /^[a-z][a-z0-9-]*$/.test(component);
-        expect(
-          isValid,
-          `UI component "${component}" should use kebab-case`
-        ).toBe(true);
+        expect(isValid, `UI component "${component}" should use kebab-case`).toBe(true);
       });
     });
   });

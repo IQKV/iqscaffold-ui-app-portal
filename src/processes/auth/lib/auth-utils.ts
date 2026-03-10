@@ -7,30 +7,21 @@ import type { UserContext } from "@/entities/user";
 /**
  * Check if user has a specific authority
  */
-export function hasAuthority(
-  user: UserContext | null,
-  authority: string
-): boolean {
+export function hasAuthority(user: UserContext | null, authority: string): boolean {
   return user?.authorities?.includes(authority) ?? false;
 }
 
 /**
  * Check if user has any of the specified authorities
  */
-export function hasAnyAuthority(
-  user: UserContext | null,
-  authorities: string[]
-): boolean {
+export function hasAnyAuthority(user: UserContext | null, authorities: string[]): boolean {
   return authorities.some((authority) => hasAuthority(user, authority));
 }
 
 /**
  * Check if user has all of the specified authorities
  */
-export function hasAllAuthorities(
-  user: UserContext | null,
-  authorities: string[]
-): boolean {
+export function hasAllAuthorities(user: UserContext | null, authorities: string[]): boolean {
   return authorities.every((authority) => hasAuthority(user, authority));
 }
 
@@ -42,30 +33,21 @@ export const hasAllRoles = hasAllAuthorities;
 /**
  * Check if user has a specific permission
  */
-export function hasPermission(
-  user: UserContext | null,
-  permission: string
-): boolean {
+export function hasPermission(user: UserContext | null, permission: string): boolean {
   return user?.permissions?.includes(permission) ?? false;
 }
 
 /**
  * Check if user has any of the specified permissions
  */
-export function hasAnyPermission(
-  user: UserContext | null,
-  permissions: string[]
-): boolean {
+export function hasAnyPermission(user: UserContext | null, permissions: string[]): boolean {
   return permissions.some((permission) => hasPermission(user, permission));
 }
 
 /**
  * Check if user has all of the specified permissions
  */
-export function hasAllPermissions(
-  user: UserContext | null,
-  permissions: string[]
-): boolean {
+export function hasAllPermissions(user: UserContext | null, permissions: string[]): boolean {
   return permissions.every((permission) => hasPermission(user, permission));
 }
 
@@ -142,10 +124,7 @@ export function getUserInitials(user: UserContext | null): string {
 /**
  * Check if user belongs to a specific tenant
  */
-export function belongsToTenant(
-  user: UserContext | null,
-  tenantId: string
-): boolean {
+export function belongsToTenant(user: UserContext | null, tenantId: string): boolean {
   return user?.tenantId === tenantId;
 }
 
@@ -195,8 +174,7 @@ export function getUserAuthorityLevel(user: UserContext | null): number {
 
   let maxLevel = 0;
   for (const authority of user.authorities) {
-    const level =
-      AUTHORITY_HIERARCHY[authority as keyof typeof AUTHORITY_HIERARCHY];
+    const level = AUTHORITY_HIERARCHY[authority as keyof typeof AUTHORITY_HIERARCHY];
     if (level && level > maxLevel) {
       maxLevel = level;
     }
@@ -208,10 +186,7 @@ export function getUserAuthorityLevel(user: UserContext | null): number {
 /**
  * Check if user has authority level equal or higher than specified
  */
-export function hasAuthorityLevel(
-  user: UserContext | null,
-  minLevel: number
-): boolean {
+export function hasAuthorityLevel(user: UserContext | null, minLevel: number): boolean {
   return getUserAuthorityLevel(user) >= minLevel;
 }
 

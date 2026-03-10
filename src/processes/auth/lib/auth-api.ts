@@ -52,10 +52,7 @@ export const authApi = {
    */
   async refresh(data: RefreshTokenRequest): Promise<TokenResponse> {
     const config = getAuthConfig();
-    const response = await apiClient.post<TokenResponse>(
-      config.endpoints.refresh,
-      data
-    );
+    const response = await apiClient.post<TokenResponse>(config.endpoints.refresh, data);
     return response.data;
   },
 
@@ -72,20 +69,16 @@ export const authApi = {
    */
   async validateToken(token: string): Promise<ValidateTokenResponse> {
     const config = getAuthConfig();
-    const response = await apiClient.post<ValidateTokenResponse>(
-      config.endpoints.validateToken,
-      { token }
-    );
+    const response = await apiClient.post<ValidateTokenResponse>(config.endpoints.validateToken, {
+      token,
+    });
     return response.data;
   },
 
   /**
    * Change password for authenticated user
    */
-  async changePassword(
-    currentPassword: string,
-    newPassword: string
-  ): Promise<void> {
+  async changePassword(currentPassword: string, newPassword: string): Promise<void> {
     const config = getAuthConfig();
     await apiClient.patch(config.endpoints.changePassword, {
       currentPassword,
@@ -106,12 +99,9 @@ export const authApi = {
    */
   async getEmailStatus(email: string): Promise<EmailStatusResponse> {
     const config = getAuthConfig();
-    const response = await apiClient.get<EmailStatusResponse>(
-      config.endpoints.emailStatus,
-      {
-        params: { email },
-      }
-    );
+    const response = await apiClient.get<EmailStatusResponse>(config.endpoints.emailStatus, {
+      params: { email },
+    });
     return response.data;
   },
 };

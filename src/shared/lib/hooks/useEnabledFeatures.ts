@@ -36,8 +36,7 @@ export const useEnabledFeatures = (): UseEnabledFeaturesReturn => {
       const features = await billingApi.getEnabledFeatures();
       setFeaturesData(features);
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Failed to fetch enabled features";
+      const errorMessage = err instanceof Error ? err.message : "Failed to fetch enabled features";
       setError(errorMessage);
 
       console.error("Failed to fetch enabled features:", err);
@@ -59,7 +58,7 @@ export const useEnabledFeatures = (): UseEnabledFeaturesReturn => {
     (featureCode: string): boolean => {
       return enabledFeatures.includes(featureCode);
     },
-    [enabledFeatures]
+    [enabledFeatures],
   );
 
   const refetch = useCallback(async () => {

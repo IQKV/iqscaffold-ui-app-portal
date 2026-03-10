@@ -17,12 +17,7 @@ export function UsersPage() {
   if (!isAuthenticated) {
     return (
       <Container size="xl" py="md">
-        <Alert
-          variant="light"
-          color="red"
-          title="Access Denied"
-          icon={<IconLock size={16} />}
-        >
+        <Alert variant="light" color="red" title="Access Denied" icon={<IconLock size={16} />}>
           <Text size="sm">You must be logged in to view this page.</Text>
         </Alert>
       </Container>
@@ -48,10 +43,7 @@ export function UsersPage() {
 
   return (
     <Container size="xl" py="md">
-      <UsersDataGrid
-        onCreateUser={handleCreateUser}
-        onEditUser={handleEditUser}
-      />
+      <UsersDataGrid onCreateUser={handleCreateUser} onEditUser={handleEditUser} />
 
       <UserFormModal
         opened={modalOpened}

@@ -5,11 +5,7 @@
  */
 
 // Re-export date utilities for backward compatibility
-export {
-  formatDateSimple as formatDate,
-  formatDateTime,
-  formatRelativeTime,
-} from "../dates";
+export { formatDateSimple as formatDate, formatDateTime, formatRelativeTime } from "../dates";
 
 /**
  * Truncate text to a specified length

@@ -1,9 +1,6 @@
 import React from "react";
 import { Box } from "@mantine/core";
-import {
-  useAccessibilityPreferences,
-  getFocusIndicatorStyle,
-} from "./visualAccessibility";
+import { useAccessibilityPreferences, getFocusIndicatorStyle } from "./visualAccessibility";
 
 /**
  * FocusIndicator Component

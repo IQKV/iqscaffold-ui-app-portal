@@ -77,9 +77,7 @@ export const focusIndicatorStyles = {
  * Get focus indicator style based on user preference
  */
 export function getFocusIndicatorStyle() {
-  return prefersHighContrast()
-    ? focusIndicatorStyles.highContrast
-    : focusIndicatorStyles.standard;
+  return prefersHighContrast() ? focusIndicatorStyles.highContrast : focusIndicatorStyles.standard;
 }
 
 /**
@@ -104,7 +102,7 @@ export function getRelativeLuminance(r: number, g: number, b: number): number {
  */
 export function getContrastRatio(
   rgb1: [number, number, number],
-  rgb2: [number, number, number]
+  rgb2: [number, number, number],
 ): number {
   const l1 = getRelativeLuminance(...rgb1);
   const l2 = getRelativeLuminance(...rgb2);
@@ -118,7 +116,7 @@ export function getContrastRatio(
  */
 export function meetsWCAGAA(
   rgb1: [number, number, number],
-  rgb2: [number, number, number]
+  rgb2: [number, number, number],
 ): boolean {
   return getContrastRatio(rgb1, rgb2) >= 4.5;
 }
@@ -128,7 +126,7 @@ export function meetsWCAGAA(
  */
 export function meetsWCAGAAA(
   rgb1: [number, number, number],
-  rgb2: [number, number, number]
+  rgb2: [number, number, number],
 ): boolean {
   return getContrastRatio(rgb1, rgb2) >= 7;
 }
@@ -262,9 +260,7 @@ export function useAccessibilityPreferences() {
       return;
     }
 
-    const reducedMotionQuery = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    );
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const highContrastQuery = window.matchMedia("(prefers-contrast: high)");
     const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
 

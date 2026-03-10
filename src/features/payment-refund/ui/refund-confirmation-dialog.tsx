@@ -24,11 +24,7 @@ export const RefundConfirmationDialog = ({
   return (
     <Modal opened={opened} onClose={onClose} title={t`Confirm Refund`} centered>
       <Stack gap="md">
-        <Alert
-          icon={<IconAlertTriangle size={16} />}
-          title={t`Warning`}
-          color="yellow"
-        >
+        <Alert icon={<IconAlertTriangle size={16} />} title={t`Warning`} color="yellow">
           {t`This action cannot be undone. The full payment amount will be refunded to the customer.`}
         </Alert>
 

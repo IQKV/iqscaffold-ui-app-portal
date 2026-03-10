@@ -58,21 +58,21 @@ export function useMSWControl() {
     (enabled: boolean) => {
       updateConfig({ enableLogging: enabled });
     },
-    [updateConfig]
+    [updateConfig],
   );
 
   const setDelay = useCallback(
     (delay: typeof config.delay) => {
       updateConfig({ delay });
     },
-    [updateConfig, config]
+    [updateConfig, config],
   );
 
   const setUnhandledRequestBehavior = useCallback(
     (behavior: typeof config.onUnhandledRequest) => {
       updateConfig({ onUnhandledRequest: behavior });
     },
-    [updateConfig, config]
+    [updateConfig, config],
   );
 
   return {

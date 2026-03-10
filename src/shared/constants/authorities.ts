@@ -193,7 +193,7 @@ export function getInheritedAuthorities(authority: string): readonly string[] {
  */
 export function hasAuthorityWithInheritance(
   userAuthorities: string[],
-  requiredAuthority: string
+  requiredAuthority: string,
 ): boolean {
   // Direct authority check
   if (userAuthorities.includes(requiredAuthority)) {
@@ -212,9 +212,7 @@ export function hasAuthorityWithInheritance(
  */
 export function hasAnyAuthorityWithInheritance(
   userAuthorities: string[],
-  requiredAuthorities: string[]
+  requiredAuthorities: string[],
 ): boolean {
-  return requiredAuthorities.some((auth) =>
-    hasAuthorityWithInheritance(userAuthorities, auth)
-  );
+  return requiredAuthorities.some((auth) => hasAuthorityWithInheritance(userAuthorities, auth));
 }

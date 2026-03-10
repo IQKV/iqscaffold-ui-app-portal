@@ -55,12 +55,7 @@ export class FeatureErrorBoundary extends React.Component<Props, State> {
       // Use custom fallback if provided
       if (this.props.fallback) {
         const FallbackComponent = this.props.fallback;
-        return (
-          <FallbackComponent
-            error={this.state.error!}
-            retry={this.handleRetry}
-          />
-        );
+        return <FallbackComponent error={this.state.error!} retry={this.handleRetry} />;
       }
 
       // Default error UI
@@ -73,8 +68,7 @@ export class FeatureErrorBoundary extends React.Component<Props, State> {
         >
           <Stack gap="sm">
             <Text size="sm">
-              Something went wrong while loading features. This might be a
-              temporary issue.
+              Something went wrong while loading features. This might be a temporary issue.
             </Text>
 
             {this.state.error && (

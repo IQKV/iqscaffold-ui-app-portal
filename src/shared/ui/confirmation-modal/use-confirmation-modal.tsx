@@ -11,14 +11,12 @@ interface UseConfirmationModalOptions {
   danger?: boolean;
 }
 
-export function useConfirmationModal(
-  options: UseConfirmationModalOptions = {}
-) {
+export function useConfirmationModal(options: UseConfirmationModalOptions = {}) {
   const [opened, { open, close }] = useDisclosure(false);
   const [loading, setLoading] = useState(false);
-  const [onConfirmCallback, setOnConfirmCallback] = useState<
-    (() => void | Promise<void>) | null
-  >(null);
+  const [onConfirmCallback, setOnConfirmCallback] = useState<(() => void | Promise<void>) | null>(
+    null,
+  );
 
   const confirm = (callback: () => void | Promise<void>) => {
     setOnConfirmCallback(() => callback);

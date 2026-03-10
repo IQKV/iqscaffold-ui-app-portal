@@ -25,8 +25,7 @@ export const useRefundPaymentMutation = () => {
 export const useCreateSubscriptionMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (request: CreateSubscriptionRequest) =>
-      billingApi.createSubscription(request),
+    mutationFn: (request: CreateSubscriptionRequest) => billingApi.createSubscription(request),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: billingKeys.subscriptions() });
       queryClient.invalidateQueries({
@@ -39,13 +38,8 @@ export const useCreateSubscriptionMutation = () => {
 export const useUpdateSubscriptionMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({
-      id,
-      request,
-    }: {
-      id: string;
-      request: UpdateSubscriptionRequest;
-    }) => billingApi.updateSubscription(id, request),
+    mutationFn: ({ id, request }: { id: string; request: UpdateSubscriptionRequest }) =>
+      billingApi.updateSubscription(id, request),
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: billingKeys.subscriptions() });
       queryClient.invalidateQueries({
@@ -135,13 +129,8 @@ export const useCreateSubscriptionPlanMutation = () => {
 export const useUpdateSubscriptionPlanMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({
-      id,
-      request,
-    }: {
-      id: string;
-      request: UpdateSubscriptionPlanRequest;
-    }) => billingApi.updateSubscriptionPlan(id, request),
+    mutationFn: ({ id, request }: { id: string; request: UpdateSubscriptionPlanRequest }) =>
+      billingApi.updateSubscriptionPlan(id, request),
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
         queryKey: billingKeys.subscriptionPlans(),

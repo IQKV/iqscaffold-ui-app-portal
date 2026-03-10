@@ -32,11 +32,7 @@ import { t } from "@lingui/core/macro";
 import { notifications } from "@mantine/notifications";
 import { modals } from "@mantine/modals";
 import { useNavigate, useParams } from "@tanstack/react-router";
-import {
-  useContactQuery,
-  LeadScoreBadge,
-  useDeleteContactMutation,
-} from "@/entities/crm";
+import { useContactQuery, LeadScoreBadge, useDeleteContactMutation } from "@/entities/crm";
 import { ContactDetailSkeleton } from "./skeletons";
 import { ContactEditModal } from "./ContactEditModal";
 import { ContactNotesSection } from "./ContactNotesSection";
@@ -62,12 +58,7 @@ export const ContactDetailPage: React.FC = () => {
   const [editModalOpened, setEditModalOpened] = useState(false);
 
   // Fetch contact data
-  const {
-    data: contact,
-    isLoading,
-    error,
-    refetch,
-  } = useContactQuery(contactId);
+  const { data: contact, isLoading, error, refetch } = useContactQuery(contactId);
 
   // Delete mutation
   const deleteContactMutation = useDeleteContactMutation();
@@ -192,24 +183,14 @@ export const ContactDetailPage: React.FC = () => {
           <Group>
             {contact.email && (
               <Tooltip label={t`Send email`}>
-                <ActionIcon
-                  variant="light"
-                  color="blue"
-                  size="lg"
-                  onClick={handleEmailContact}
-                >
+                <ActionIcon variant="light" color="blue" size="lg" onClick={handleEmailContact}>
                   <IconMail size={18} />
                 </ActionIcon>
               </Tooltip>
             )}
             {contact.phone && (
               <Tooltip label={t`Call contact`}>
-                <ActionIcon
-                  variant="light"
-                  color="green"
-                  size="lg"
-                  onClick={handleCallContact}
-                >
+                <ActionIcon variant="light" color="green" size="lg" onClick={handleCallContact}>
                   <IconPhone size={18} />
                 </ActionIcon>
               </Tooltip>
@@ -327,10 +308,7 @@ export const ContactDetailPage: React.FC = () => {
             <Tabs.Tab value="notes" leftSection={<IconNotes size={16} />}>
               {t`Notes`}
             </Tabs.Tab>
-            <Tabs.Tab
-              value="activities"
-              leftSection={<IconCalendar size={16} />}
-            >
+            <Tabs.Tab value="activities" leftSection={<IconCalendar size={16} />}>
               {t`Activities`}
             </Tabs.Tab>
           </Tabs.List>
@@ -355,12 +333,7 @@ export const ContactDetailPage: React.FC = () => {
                         <Text fw={500} w={120}>
                           Website:
                         </Text>
-                        <Text
-                          component="a"
-                          href={contact.company.website}
-                          target="_blank"
-                          c="blue"
-                        >
+                        <Text component="a" href={contact.company.website} target="_blank" c="blue">
                           {contact.company.website}
                         </Text>
                       </Group>
@@ -391,9 +364,7 @@ export const ContactDetailPage: React.FC = () => {
                   <Text size="lg" fw={600} mb="md">
                     Notes
                   </Text>
-                  <Text style={{ whiteSpace: "pre-wrap" }}>
-                    {contact.notes}
-                  </Text>
+                  <Text style={{ whiteSpace: "pre-wrap" }}>{contact.notes}</Text>
                 </Paper>
               )}
             </Stack>

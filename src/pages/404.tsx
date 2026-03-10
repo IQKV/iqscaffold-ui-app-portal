@@ -1,12 +1,4 @@
-import {
-  Container,
-  Title,
-  Text,
-  Button,
-  Group,
-  Stack,
-  ThemeIcon,
-} from "@mantine/core";
+import { Container, Title, Text, Button, Group, Stack, ThemeIcon } from "@mantine/core";
 import { IconHome, IconArrowLeft, IconError404 } from "@tabler/icons-react";
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { t } from "@lingui/core/macro";

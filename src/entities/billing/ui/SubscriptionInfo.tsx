@@ -1,10 +1,6 @@
 import React from "react";
 import { Card, Text, Badge, Group, Stack, Alert, Button } from "@mantine/core";
-import {
-  IconCrown,
-  IconAlertTriangle,
-  IconCalendar,
-} from "@tabler/icons-react";
+import { IconCrown, IconAlertTriangle, IconCalendar } from "@tabler/icons-react";
 import { useFeatureContext } from "@/shared/lib/contexts/FeatureContext";
 
 interface SubscriptionInfoProps {
@@ -35,8 +31,7 @@ export const SubscriptionInfo: React.FC<SubscriptionInfoProps> = ({
 
   // Mock subscription data for now - this should be replaced with actual subscription context
   const planName = "Basic Plan";
-  const subscriptionStatus: "active" | "past_due" | "canceled" | "trial" =
-    "active";
+  const subscriptionStatus: "active" | "past_due" | "canceled" | "trial" = "active";
   const isTrialPeriod = false;
   const trialExpiresAt = null;
 
@@ -199,8 +194,7 @@ export const SubscriptionInfo: React.FC<SubscriptionInfoProps> = ({
 export const SubscriptionStatusBadgeConnected: React.FC = () => {
   // Mock subscription data for now - this should be replaced with actual subscription context
   const planName = "Basic Plan";
-  const subscriptionStatus: "active" | "past_due" | "canceled" | "trial" =
-    "active";
+  const subscriptionStatus: "active" | "past_due" | "canceled" | "trial" = "active";
   const isTrialPeriod = false;
 
   if (!planName) {

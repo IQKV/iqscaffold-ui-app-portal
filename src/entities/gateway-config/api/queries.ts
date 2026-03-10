@@ -7,8 +7,7 @@ export const gatewayConfigKeys = {
   list: () => [...gatewayConfigKeys.all, "list"] as const,
   active: () => [...gatewayConfigKeys.all, "active"] as const,
   primary: () => [...gatewayConfigKeys.all, "primary"] as const,
-  detail: (provider: PaymentGatewayProvider) =>
-    [...gatewayConfigKeys.all, provider] as const,
+  detail: (provider: PaymentGatewayProvider) => [...gatewayConfigKeys.all, provider] as const,
 };
 
 export const useGatewayConfigsQuery = () => {

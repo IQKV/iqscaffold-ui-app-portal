@@ -12,9 +12,9 @@ interface CrmServiceDegradationBannerProps {
  * Banner component that displays CRM service degradation information
  * Shows which CRM services are unavailable and provides retry options
  */
-export const CrmServiceDegradationBanner: React.FC<
-  CrmServiceDegradationBannerProps
-> = ({ alwaysShow = false }) => {
+export const CrmServiceDegradationBanner: React.FC<CrmServiceDegradationBannerProps> = ({
+  alwaysShow = false,
+}) => {
   const serviceHealth = useCrmServiceHealth();
 
   const serviceDisplayNames = {

@@ -211,10 +211,7 @@ export const billingApi = {
   /**
    * Update subscription plan
    */
-  updateSubscriptionPlan: (
-    id: string,
-    request: Types.UpdateSubscriptionPlanRequest
-  ) =>
+  updateSubscriptionPlan: (id: string, request: Types.UpdateSubscriptionPlanRequest) =>
     apiRequest<Types.SubscriptionPlanResponse>({
       url: `/v1/billing/subscription-plans/${id}`,
       method: "PUT",
@@ -254,10 +251,7 @@ export const billingApi = {
   /**
    * List invoices for subscription
    */
-  listInvoicesBySubscription: (
-    subscriptionId: string,
-    params?: Types.BillingHistoryParams
-  ) =>
+  listInvoicesBySubscription: (subscriptionId: string, params?: Types.BillingHistoryParams) =>
     apiRequest<Types.PaginatedResponse<Types.InvoiceResponse>>({
       url: `/v1/billing/invoices/subscription/${subscriptionId}`,
       method: "GET",
@@ -328,7 +322,7 @@ export const billingApi = {
    */
   updateGatewayConfig: (
     provider: Types.PaymentGatewayProvider,
-    request: Types.UpdateGatewayConfigRequest
+    request: Types.UpdateGatewayConfigRequest,
   ) =>
     apiRequest<Types.GatewayConfigResponse>({
       url: `/v1/admin/billing/gateway-config/${provider}`,

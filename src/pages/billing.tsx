@@ -11,13 +11,7 @@ import {
   Card,
   Text,
 } from "@mantine/core";
-import {
-  IconSettings,
-  IconCreditCard,
-  IconReceipt,
-  IconPlus,
-  IconStar,
-} from "@tabler/icons-react";
+import { IconSettings, IconCreditCard, IconReceipt, IconPlus, IconStar } from "@tabler/icons-react";
 import { AuthGuard, useAuth } from "@/processes/auth";
 import { BillingAccessGuard } from "@/entities/billing/ui/guards/BillingAccessGuard";
 import { BillingServiceDegradationBanner } from "@/entities/billing/ui/BillingServiceDegradationBanner";
@@ -30,11 +24,7 @@ import { canManageGatewayConfig } from "@/processes/auth/lib/billing-permissions
 import { useActiveSubscriptionQuery } from "@/entities/billing";
 import { SubscriptionCard } from "@/features/subscription-management";
 import { InvoicesTable } from "@/features/invoice-management";
-import {
-  SubscriptionInfo,
-  FeatureUsageList,
-  FeatureErrorBoundary,
-} from "@/shared/ui";
+import { SubscriptionInfo, FeatureUsageList, FeatureErrorBoundary } from "@/shared/ui";
 import { useFeatureContext, usePageTitle } from "@/shared/lib";
 
 export const Route = createFileRoute("/billing")({
@@ -42,12 +32,7 @@ export const Route = createFileRoute("/billing")({
 });
 
 function BillingPage() {
-  const {
-    hasBillingAccess,
-    hasReadOnlyBillingAccess,
-    canManageMerchants,
-    user,
-  } = useAuth();
+  const { hasBillingAccess, hasReadOnlyBillingAccess, canManageMerchants, user } = useAuth();
   const pageTitle = usePageTitle(t`Billing`);
 
   const { userFeatures, enabledFeatures } = useFeatureContext();
@@ -60,8 +45,7 @@ function BillingPage() {
 
   const { data: activeSubscription } = useActiveSubscriptionQuery();
 
-  const organizations =
-    orgsData?.content.map((org) => ({ id: org.id, name: org.name })) || [];
+  const organizations = orgsData?.content.map((org) => ({ id: org.id, name: org.name })) || [];
 
   return (
     <AuthGuard>
@@ -98,35 +82,21 @@ function BillingPage() {
               </Group>
 
               {hasReadOnlyBillingAccess() && (
-                <Alert color="blue">
-                  {t`You have read-only access to billing information.`}
-                </Alert>
+                <Alert color="blue">{t`You have read-only access to billing information.`}</Alert>
               )}
 
               <Tabs defaultValue="overview" variant="outline">
                 <Tabs.List>
-                  <Tabs.Tab
-                    value="overview"
-                    leftSection={<IconCreditCard size={16} />}
-                  >
+                  <Tabs.Tab value="overview" leftSection={<IconCreditCard size={16} />}>
                     {t`Overview`}
                   </Tabs.Tab>
-                  <Tabs.Tab
-                    value="features"
-                    leftSection={<IconStar size={16} />}
-                  >
+                  <Tabs.Tab value="features" leftSection={<IconStar size={16} />}>
                     {t`Features & Usage`}
                   </Tabs.Tab>
-                  <Tabs.Tab
-                    value="payments"
-                    leftSection={<IconReceipt size={16} />}
-                  >
+                  <Tabs.Tab value="payments" leftSection={<IconReceipt size={16} />}>
                     {t`Payment History`}
                   </Tabs.Tab>
-                  <Tabs.Tab
-                    value="invoices"
-                    leftSection={<IconReceipt size={16} />}
-                  >
+                  <Tabs.Tab value="invoices" leftSection={<IconReceipt size={16} />}>
                     {t`Invoices`}
                   </Tabs.Tab>
                 </Tabs.List>
@@ -193,10 +163,7 @@ function BillingPage() {
                           {enabledFeatures.length > 0 ? (
                             <Grid>
                               {enabledFeatures.map((feature) => (
-                                <Grid.Col
-                                  key={feature}
-                                  span={{ base: 12, sm: 6, md: 4 }}
-                                >
+                                <Grid.Col key={feature} span={{ base: 12, sm: 6, md: 4 }}>
                                   <Text size="sm">
                                     •{" "}
                                     {feature

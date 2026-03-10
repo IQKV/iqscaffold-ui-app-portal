@@ -27,9 +27,8 @@ export const authHandlers = [
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
-          ? Math.random() * (config.delay.max - config.delay.min) +
-              config.delay.min
-          : config.delay
+          ? Math.random() * (config.delay.max - config.delay.min) + config.delay.min
+          : config.delay,
       );
     }
 
@@ -62,7 +61,7 @@ export const authHandlers = [
         status: 401,
         detail: "The provided email or password is incorrect.",
       },
-      { status: 401 }
+      { status: 401 },
     );
   }),
 
@@ -71,9 +70,8 @@ export const authHandlers = [
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
-          ? Math.random() * (config.delay.max - config.delay.min) +
-              config.delay.min
-          : config.delay
+          ? Math.random() * (config.delay.max - config.delay.min) + config.delay.min
+          : config.delay,
       );
     }
 
@@ -99,7 +97,7 @@ export const authHandlers = [
           status: 409,
           detail: "An account with this email already exists.",
         },
-        { status: 409 }
+        { status: 409 },
       );
     }
 
@@ -119,9 +117,8 @@ export const authHandlers = [
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
-          ? Math.random() * (config.delay.max - config.delay.min) +
-              config.delay.min
-          : config.delay
+          ? Math.random() * (config.delay.max - config.delay.min) + config.delay.min
+          : config.delay,
       );
     }
 
@@ -139,7 +136,7 @@ export const authHandlers = [
           status: 401,
           detail: "The provided refresh token is invalid or expired.",
         },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -154,9 +151,8 @@ export const authHandlers = [
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
-          ? Math.random() * (config.delay.max - config.delay.min) +
-              config.delay.min
-          : config.delay
+          ? Math.random() * (config.delay.max - config.delay.min) + config.delay.min
+          : config.delay,
       );
     }
 
@@ -172,9 +168,8 @@ export const authHandlers = [
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
-          ? Math.random() * (config.delay.max - config.delay.min) +
-              config.delay.min
-          : config.delay
+          ? Math.random() * (config.delay.max - config.delay.min) + config.delay.min
+          : config.delay,
       );
     }
 
@@ -192,7 +187,7 @@ export const authHandlers = [
           status: 401,
           detail: "Authentication required.",
         },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -204,9 +199,8 @@ export const authHandlers = [
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
-          ? Math.random() * (config.delay.max - config.delay.min) +
-              config.delay.min
-          : config.delay
+          ? Math.random() * (config.delay.max - config.delay.min) + config.delay.min
+          : config.delay,
       );
     }
 
@@ -226,9 +220,8 @@ export const authHandlers = [
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
-          ? Math.random() * (config.delay.max - config.delay.min) +
-              config.delay.min
-          : config.delay
+          ? Math.random() * (config.delay.max - config.delay.min) + config.delay.min
+          : config.delay,
       );
     }
 
@@ -246,7 +239,7 @@ export const authHandlers = [
           status: 400,
           detail: "The password reset token is invalid or expired.",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -260,9 +253,8 @@ export const authHandlers = [
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
-          ? Math.random() * (config.delay.max - config.delay.min) +
-              config.delay.min
-          : config.delay
+          ? Math.random() * (config.delay.max - config.delay.min) + config.delay.min
+          : config.delay,
       );
     }
 
@@ -284,7 +276,7 @@ export const authHandlers = [
         status: 404,
         detail: "No avatar found for this user.",
       },
-      { status: 404 }
+      { status: 404 },
     );
   }),
 
@@ -292,9 +284,8 @@ export const authHandlers = [
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
-          ? Math.random() * (config.delay.max - config.delay.min) +
-              config.delay.min
-          : config.delay
+          ? Math.random() * (config.delay.max - config.delay.min) + config.delay.min
+          : config.delay,
       );
     }
 
@@ -313,7 +304,7 @@ export const authHandlers = [
           status: 400,
           detail: "No file provided.",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -329,7 +320,7 @@ export const authHandlers = [
           status: 400,
           detail: "Invalid file type. Please use JPEG, PNG, WebP, or GIF.",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -341,7 +332,7 @@ export const authHandlers = [
           status: 413,
           detail: "File size exceeds 5MB limit.",
         },
-        { status: 413 }
+        { status: 413 },
       );
     }
 
@@ -359,9 +350,8 @@ export const authHandlers = [
     if (config.delay) {
       await delay(
         typeof config.delay === "object"
-          ? Math.random() * (config.delay.max - config.delay.min) +
-              config.delay.min
-          : config.delay
+          ? Math.random() * (config.delay.max - config.delay.min) + config.delay.min
+          : config.delay,
       );
     }
 

@@ -37,11 +37,7 @@ export const prettyDate = (date: string, tz: string): string => {
  * @param tz - Target timezone
  * @returns Formatted date string
  */
-export const formatDate = (
-  date: string,
-  format: string,
-  tz: string
-): string => {
+export const formatDate = (date: string, format: string, tz: string): string => {
   return dayjs.utc(date).tz(tz).format(format);
 };
 
@@ -62,10 +58,7 @@ export const relativeDate = (date: string): string => {
  * @param tz - Target timezone
  * @returns Formatted date string or undefined
  */
-export const utcToTz = (
-  date: undefined | string | Date,
-  tz: string
-): string | undefined => {
+export const utcToTz = (date: undefined | string | Date, tz: string): string | undefined => {
   if (!date) {
     return undefined;
   }

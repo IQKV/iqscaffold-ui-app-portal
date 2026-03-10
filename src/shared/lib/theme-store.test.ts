@@ -110,9 +110,7 @@ describe("Theme Store", () => {
 
       // Create new hook instance
       const { result: result2 } = renderHook(() => useThemeStore());
-      expect((result2.current as { colorScheme: string }).colorScheme).toBe(
-        "dark"
-      );
+      expect((result2.current as { colorScheme: string }).colorScheme).toBe("dark");
     });
   });
 });

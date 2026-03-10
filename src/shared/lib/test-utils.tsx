@@ -14,10 +14,7 @@ interface TestWrapperProps {
   mockUser?: UserContext | null;
 }
 
-export function TestWrapper({
-  children,
-  mockUser = defaultMockUser,
-}: TestWrapperProps) {
+export function TestWrapper({ children, mockUser = defaultMockUser }: TestWrapperProps) {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -34,25 +31,18 @@ export function TestWrapper({
     user: mockUser,
     isAuthenticated: !!mockUser,
     isLoading: false,
-    hasAuthority: (authority: string) =>
-      mockUser?.authorities?.includes(authority) ?? false,
+    hasAuthority: (authority: string) => mockUser?.authorities?.includes(authority) ?? false,
     hasAnyAuthority: (authorities: string[]) =>
-      authorities.some(
-        (authority) => mockUser?.authorities?.includes(authority) ?? false
-      ),
+      authorities.some((authority) => mockUser?.authorities?.includes(authority) ?? false),
     hasAllAuthorities: (authorities: string[]) =>
-      authorities.every(
-        (authority) => mockUser?.authorities?.includes(authority) ?? false
-      ),
-    hasPermission: (permission: string) =>
-      mockUser?.permissions?.includes(permission) ?? false,
+      authorities.every((authority) => mockUser?.authorities?.includes(authority) ?? false),
+    hasPermission: (permission: string) => mockUser?.permissions?.includes(permission) ?? false,
     isAdmin: () =>
       mockUser?.authorities?.includes("ADMIN") ||
       mockUser?.authorities?.includes("SUPER_ADMIN") ||
       false,
     isSuperAdmin: () => mockUser?.authorities?.includes("SUPER_ADMIN") || false,
-    isTenantOwner: () =>
-      mockUser?.authorities?.includes("TENANT_OWNER") || false,
+    isTenantOwner: () => mockUser?.authorities?.includes("TENANT_OWNER") || false,
     canManageUsers: () =>
       mockUser?.authorities?.includes("ADMIN") ||
       mockUser?.authorities?.includes("SUPER_ADMIN") ||
@@ -76,9 +66,7 @@ export function TestWrapper({
       <MantineProvider theme={theme}>
         <ModalsProvider>
           <QueryClientProvider client={queryClient}>
-            <AuthContext.Provider value={mockAuthContext}>
-              {children}
-            </AuthContext.Provider>
+            <AuthContext.Provider value={mockAuthContext}>{children}</AuthContext.Provider>
           </QueryClientProvider>
         </ModalsProvider>
       </MantineProvider>
