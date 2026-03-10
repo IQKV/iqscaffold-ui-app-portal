@@ -53,7 +53,7 @@ export const BillingHistoryTable = () => {
             message: i18n._(NOTIFICATION_MESSAGES.SUCCESS.REFUND_INITIATED),
           });
           queryClient.invalidateQueries({ queryKey: billingKeys.payments() });
-        } catch (error) {
+        } catch {
           notificationService.error({
             title: t`Refund Failed`,
             message: i18n._(NOTIFICATION_MESSAGES.ERROR.REFUND_FAILED),

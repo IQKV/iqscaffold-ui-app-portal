@@ -3,7 +3,6 @@ import {
   AppError,
   AppErrorType,
   ProblemDetail,
-  createProblemDetail,
   validateProblemDetail,
   extractExtensionMembers,
   determineErrorType,

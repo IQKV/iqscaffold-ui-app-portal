@@ -1,5 +1,5 @@
 import { apiClient } from "./base";
-import type { Tenant, TenantSummary } from "@/shared/types/tenant";
+import type { TenantSummary } from "@/shared/types/tenant";
 
 /**
  * Tenant API responses

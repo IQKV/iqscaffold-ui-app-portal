@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 
 /**
  * useAnnouncer Hook
@@ -20,8 +20,6 @@ interface AnnouncerOptions {
  * @returns Object with announce function
  */
 export function useAnnouncer() {
-  const announcerRef = useRef<HTMLDivElement | null>(null);
-
   useEffect(() => {
     // Create announcer elements if they don't exist
     if (!document.getElementById("announcer-polite")) {

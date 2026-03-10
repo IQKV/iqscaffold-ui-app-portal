@@ -15,7 +15,7 @@ import { notifications } from "@mantine/notifications";
 import { t } from "@lingui/core/macro";
 import { z } from "zod";
 import { useUpdateLeadMutation } from "@/entities/crm";
-import type { Lead, LeadSource } from "@/shared/api/crm/types";
+import type { Lead } from "@/shared/api/crm/types";
 
 const leadEditSchema = z.object({
   firstName: z.string().min(1, "First name is required").max(100),

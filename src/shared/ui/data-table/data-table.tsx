@@ -1,4 +1,4 @@
-import { Table, ScrollArea, Text, ActionIcon, Group, Pagination } from "@mantine/core";
+import { Table, ScrollArea, Text, Group, Pagination } from "@mantine/core";
 import { IconChevronUp, IconChevronDown } from "@tabler/icons-react";
 import { useState } from "react";
 

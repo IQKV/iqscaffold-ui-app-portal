@@ -180,7 +180,7 @@ describe("FollowUpForm", () => {
 
   describe("Past Date Warning", () => {
     it("should show warning when past date is selected", async () => {
-      const user = userEvent.setup();
+      const _user = userEvent.setup();
       const pastFollowUp: FollowUp = {
         id: "follow-up-1",
         leadId: "lead-123",

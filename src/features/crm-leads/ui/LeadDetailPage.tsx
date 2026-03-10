@@ -8,11 +8,8 @@ import {
   Paper,
   Badge,
   Tabs,
-  Loader,
-  Center,
   Alert,
   ActionIcon,
-  Tooltip,
   Box,
 } from "@mantine/core";
 import {

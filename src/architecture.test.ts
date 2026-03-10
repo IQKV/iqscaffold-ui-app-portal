@@ -120,7 +120,7 @@ describe("FSD Architecture", () => {
       features.forEach((feature) => {
         const featurePath = join(featuresDir, feature);
         const modelPath = join(featurePath, "model");
-        const hasModelFolder = existsSync(modelPath);
+        const _hasModelFolder = existsSync(modelPath);
         const hasUiFolder = existsSync(join(featurePath, "ui"));
 
         // Simple features (without ui/ folder) don't require model/

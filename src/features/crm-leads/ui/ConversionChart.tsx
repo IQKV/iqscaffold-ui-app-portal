@@ -34,8 +34,8 @@ interface ConversionChartProps {
  */
 export function ConversionChart({
   metrics,
-  stages,
-  dateRange,
+  _stages,
+  _dateRange,
   isMobile = false,
 }: ConversionChartProps) {
   return (

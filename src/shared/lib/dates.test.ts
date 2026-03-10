@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { prettyDate, formatDate, relativeDate, utcToTz, dateToBrowserTz } from "./dates";
 
 // Mock dayjs to control time-based tests
-const mockNow = dayjs("2024-01-15T12:00:00Z");
+const _mockNow = dayjs("2024-01-15T12:00:00Z");
 
 describe("Date Utilities", () => {
   beforeEach(() => {

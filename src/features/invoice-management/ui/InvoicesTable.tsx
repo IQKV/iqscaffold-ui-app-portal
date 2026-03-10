@@ -4,15 +4,12 @@ import {
   Text,
   Group,
   ActionIcon,
-  Button,
   Stack,
   Pagination,
   Loader,
   Alert,
-  Badge,
-  Anchor,
 } from "@mantine/core";
-import { IconExternalLink, IconDownload, IconEye } from "@tabler/icons-react";
+import { IconDownload, IconEye } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
 import { useInvoicesQuery, Invoice, InvoiceStatusBadge } from "@/entities/billing";
 import { formatCurrency } from "@/shared/lib/format";
@@ -21,7 +18,7 @@ interface InvoicesTableProps {
   subscriptionId?: string;
 }
 
-export function InvoicesTable({ subscriptionId }: InvoicesTableProps) {
+export function InvoicesTable({ subscriptionId: _subscriptionId }: InvoicesTableProps) {
   const [page, setPage] = useState(0);
   const pageSize = 10;
 
@@ -30,10 +27,6 @@ export function InvoicesTable({ subscriptionId }: InvoicesTableProps) {
     size: pageSize,
     sort: ["createdAt,desc"],
   });
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString();
-  };
 
   if (isLoading) {
     return (

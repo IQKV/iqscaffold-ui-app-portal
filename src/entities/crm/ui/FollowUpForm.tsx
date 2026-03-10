@@ -1,12 +1,11 @@
 import { useEffect } from "react";
-import { Modal, Button, Group, Stack, Alert } from "@mantine/core";
+import { Modal, Button, Group, Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { t } from "@lingui/core/macro";
 import { CrmFormField, getCrmPriorities, getCrmFollowUpTypes } from "./CrmFormField";
 import type { FollowUp } from "@/shared/api/crm/types";
 import { notifications } from "@mantine/notifications";
-import { IconAlertCircle } from "@tabler/icons-react";
 import {
   createFollowUpFormSchema,
   type FollowUpFormData,
@@ -85,7 +84,7 @@ export function FollowUpForm({
   }, [followUp, opened]);
 
   // Check if the selected date is in the past (Requirement 11.4)
-  const isPastDateSelected = form.values.dueDate && isPastDate(form.values.dueDate);
+  const _isPastDateSelected = form.values.dueDate && isPastDate(form.values.dueDate);
 
   const handleSubmit = async (values: FollowUpFormData) => {
     try {

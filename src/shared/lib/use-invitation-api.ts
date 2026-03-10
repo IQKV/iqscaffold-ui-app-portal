@@ -55,7 +55,7 @@ export function useCreateInvitation() {
 
   return useMutation({
     mutationFn: (data: CreateInvitationRequest) => invitationApi.createInvitation(data),
-    onSuccess: (data: OrganizationInvitationDto) => {
+    onSuccess: (_data: OrganizationInvitationDto) => {
       // Invalidate invitation lists to refetch
       queryClient.invalidateQueries({ queryKey: invitationKeys.lists() });
 

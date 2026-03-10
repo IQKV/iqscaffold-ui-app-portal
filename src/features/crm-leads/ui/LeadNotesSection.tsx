@@ -76,7 +76,7 @@ export const LeadNotesSection: React.FC<LeadNotesSectionProps> = ({ leadId }) =>
       });
 
       setNewNoteContent("");
-    } catch (error) {
+    } catch {
       notifications.show({
         title: "Error",
         message: "Failed to create note",
@@ -123,7 +123,7 @@ export const LeadNotesSection: React.FC<LeadNotesSectionProps> = ({ leadId }) =>
 
       setEditingNoteId(null);
       setEditContent("");
-    } catch (error) {
+    } catch {
       notifications.show({
         title: "Error",
         message: "Failed to update note",
@@ -152,7 +152,7 @@ export const LeadNotesSection: React.FC<LeadNotesSectionProps> = ({ leadId }) =>
             message: "Note deleted successfully",
             color: "green",
           });
-        } catch (error) {
+        } catch {
           notifications.show({
             title: "Error",
             message: "Failed to delete note",

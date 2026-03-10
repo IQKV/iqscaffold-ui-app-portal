@@ -38,7 +38,7 @@ export const StripeConnectButton = ({
       });
 
       window.location.href = response.accountLink;
-    } catch (error) {
+    } catch {
       notificationService.error({
         title: t`Onboarding Failed`,
         message: t`Could not initiate Stripe onboarding. Please try again later.`,

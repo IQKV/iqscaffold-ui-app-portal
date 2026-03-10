@@ -33,7 +33,7 @@ interface PipelineStageColumnProps {
 export const PipelineStageColumn: React.FC<PipelineStageColumnProps> = ({
   stage,
   leads,
-  onLeadMove,
+  onLeadMove: _onLeadMove,
   onLeadClick,
   highlightOverdue = true,
   isMoving = false,

@@ -23,7 +23,7 @@ import {
 } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
 import { useLeadActivitiesQuery } from "@/entities/crm";
-import { ActivityLogEntry, ActivityType } from "@/shared/api/crm/types";
+import { ActivityType } from "@/shared/api/crm/types";
 
 interface ActivityTimelineProps {
   leadId: string;

@@ -1,4 +1,4 @@
-import { Card, Text, Group, Stack, Button, Badge, Divider } from "@mantine/core";
+import { Card, Text, Group, Stack, Button, Divider } from "@mantine/core";
 import { IconExternalLink, IconDownload } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
 import { Invoice, InvoiceStatusBadge } from "@/entities/billing";

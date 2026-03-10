@@ -1,4 +1,4 @@
-import { Container, Title, Stack, Group, Paper, Text, Loader, Alert } from "@mantine/core";
+import { Container, Title, Stack, Group, Paper, Alert } from "@mantine/core";
 import { t } from "@lingui/core/macro";
 import { IconAlertCircle } from "@tabler/icons-react";
 import { useState } from "react";

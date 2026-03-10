@@ -7,7 +7,7 @@ import { TestWrapper } from "@/shared/lib/test-utils";
 import { vi } from "vitest";
 
 // Mock authenticated admin user for tests
-const mockAdminUser = {
+const _mockAdminUser = {
   userId: 1,
   username: "admin",
   email: "admin@example.com",

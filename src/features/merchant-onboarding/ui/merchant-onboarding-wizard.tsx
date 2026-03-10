@@ -49,7 +49,7 @@ export const MerchantOnboardingWizard = ({
       });
 
       window.location.href = response.accountLink;
-    } catch (error) {
+    } catch {
       notificationService.error({
         title: t`Onboarding Failed`,
         message: t`Could not initiate merchant onboarding. Please try again.`,

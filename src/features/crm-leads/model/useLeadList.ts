@@ -3,7 +3,6 @@ import { useDebouncedValue } from "@mantine/hooks";
 import { useLeadsQuery, useBulkQualifyLeadsMutation, useExportLeadsMutation } from "@/entities/crm";
 import { LeadListParams, LeadSource } from "@/shared/api/crm/types";
 import { useAnnouncer } from "@/shared/lib/accessibility";
-import { t } from "@lingui/core/macro";
 
 export function useLeadList() {
   const { announce } = useAnnouncer();

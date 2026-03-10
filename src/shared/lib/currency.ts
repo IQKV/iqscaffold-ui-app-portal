@@ -54,7 +54,7 @@ export const getUserCurrency = (): string => {
     }
 
     return "USD";
-  } catch (error) {
+  } catch {
     return "USD";
   }
 };

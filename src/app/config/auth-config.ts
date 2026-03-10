@@ -75,19 +75,19 @@ export const configureAuth = (
     ...config,
     endpoints: {
       ...authConfig.endpoints,
-      ...(config.endpoints || {}),
+      ...config.endpoints,
     },
     tokenStorage: {
       ...authConfig.tokenStorage,
-      ...(config.tokenStorage || {}),
+      ...config.tokenStorage,
     },
     redirects: {
       ...authConfig.redirects,
-      ...(config.redirects || {}),
+      ...config.redirects,
     },
     domains: {
       ...authConfig.domains,
-      ...(config.domains || {}),
+      ...config.domains,
     },
   };
 };

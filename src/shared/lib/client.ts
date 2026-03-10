@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig } from "axios";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { getConfig } from "@/app/config";
 import { normalizeAxiosError } from "./http-error";
 import { notificationService } from "./notifications";

@@ -19,11 +19,9 @@ import {
   IconAlertCircle,
   IconCopy,
   IconCheck,
-  IconLink,
 } from "@tabler/icons-react";
 import { DataTable, type DataTableColumn } from "@/shared/ui/data-table";
 import { openConfirmModal } from "@mantine/modals";
-import { notifications } from "@mantine/notifications";
 import { t } from "@lingui/core/macro";
 import {
   useInvitations,

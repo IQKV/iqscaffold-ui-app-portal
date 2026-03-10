@@ -63,7 +63,7 @@ function GatewayConfigPage() {
         message: t`Payment gateway configured successfully`,
       });
       setFormOpened(false);
-    } catch (error) {
+    } catch {
       notificationService.error({
         title: t`Error`,
         message: t`Failed to configure payment gateway`,
@@ -78,7 +78,7 @@ function GatewayConfigPage() {
         title: t`Success`,
         message: t`Gateway activated successfully`,
       });
-    } catch (error) {
+    } catch {
       notificationService.error({
         title: t`Error`,
         message: t`Failed to activate gateway`,
@@ -93,7 +93,7 @@ function GatewayConfigPage() {
         title: t`Success`,
         message: t`Gateway deactivated successfully`,
       });
-    } catch (error) {
+    } catch {
       notificationService.error({
         title: t`Error`,
         message: t`Failed to deactivate gateway`,
@@ -108,7 +108,7 @@ function GatewayConfigPage() {
         title: t`Success`,
         message: t`Primary gateway updated successfully`,
       });
-    } catch (error) {
+    } catch {
       notificationService.error({
         title: t`Error`,
         message: t`Failed to set primary gateway`,
@@ -134,7 +134,7 @@ function GatewayConfigPage() {
       });
       setDeleteConfirmOpened(false);
       setProviderToDelete(null);
-    } catch (error) {
+    } catch {
       notificationService.error({
         title: t`Error`,
         message: t`Failed to delete gateway`,

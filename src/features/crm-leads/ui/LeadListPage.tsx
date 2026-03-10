@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import {
   Container,
   Stack,
@@ -11,12 +11,9 @@ import {
   Paper,
   ActionIcon,
   Tooltip,
-  Loader,
   Center,
   Alert,
-  MultiSelect,
   Drawer,
-  Collapse,
   Skeleton,
 } from "@mantine/core";
 import {
@@ -36,7 +33,6 @@ import {
   useCreateFollowUpMutation,
 } from "@/entities/crm";
 import { LeadListSkeleton } from "./skeletons";
-import { LeadSource } from "@/shared/api/crm/types";
 import { useNavigate } from "@tanstack/react-router";
 import { useLeadList } from "../model/useLeadList";
 import { useMediaQuery, useDisclosure } from "@mantine/hooks";
@@ -127,7 +123,7 @@ export const LeadListPage: React.FC = () => {
       try {
         await qualifyLeadMutation.mutateAsync(leadId);
         announce("Lead qualified successfully", { priority: "polite" });
-      } catch (error) {
+      } catch {
         // Error is handled by the mutation
       }
     },

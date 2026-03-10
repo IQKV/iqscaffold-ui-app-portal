@@ -75,7 +75,7 @@ export const getBillingEnvironments = () => [
 ];
 
 // Billing-specific validation
-const validateApiKey = (value: string, gateway: string): boolean => {
+const _validateApiKey = (value: string, gateway: string): boolean => {
   if (!value) {
     return false;
   }

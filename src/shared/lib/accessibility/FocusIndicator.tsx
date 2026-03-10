@@ -31,7 +31,7 @@ export const FocusIndicator: React.FC<FocusIndicatorProps> = ({
       component={Component as any}
       className={className}
       style={style}
-      sx={(theme: any) => ({
+      sx={() => ({
         "&:focus-visible": focusStyle,
         // Ensure focus is visible in high contrast mode
         ...(highContrast && {
