@@ -69,7 +69,7 @@
     "@stripe/stripe-js": "^7.9.0",
     "@tabler/icons-react": "^3.40.0",
     "@tanstack/react-query": "^5.90.21",
-    "@tanstack/react-router": "^1.166.6",
+    "@tanstack/react-router": "^1.166.7",
     "@tanstack/zod-adapter": "^1.166.7",
     "@tiptap/extension-color": "^3.20.1",
     "@tiptap/extension-image": "^3.20.1",
