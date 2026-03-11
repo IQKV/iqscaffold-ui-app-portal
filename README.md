@@ -157,7 +157,7 @@ src/
 
 #### Option 1: Use GitHub Template (Recommended)
 
-1. Click **[Use this template](https://github.com/IQKV/iqscaffold-ui-app-portal/generate)** button
+1. Click **[Use this template](https://github.com/IQKV/iqscaffold-ui-mantine-app-portal/generate)** button
 2. Create your new repository
 3. Clone your new repository
 4. Follow the setup steps below
@@ -166,7 +166,7 @@ src/
 
 ```shell script
 # Clone the repository
-git clone https://github.com/IQKV/iqscaffold-ui-app-portal.git my-app
+git clone https://github.com/IQKV/iqscaffold-ui-mantine-app-portal.git my-app
 
 # Navigate to project directory
 cd my-app
