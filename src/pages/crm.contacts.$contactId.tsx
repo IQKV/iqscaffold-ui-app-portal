@@ -9,11 +9,12 @@ export const Route = createFileRoute("/crm/contacts/$contactId")({
 
 function ContactDetailPageRoute() {
   const pageTitle = usePageTitle(t`Contact Details`);
+  const { contactId } = Route.useParams();
 
   return (
     <>
       {pageTitle}
-      <ContactDetailPage />
+      <ContactDetailPage contactId={contactId} />
     </>
   );
 }

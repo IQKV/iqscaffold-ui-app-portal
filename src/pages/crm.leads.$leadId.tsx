@@ -10,13 +10,14 @@ export const Route = createFileRoute("/crm/leads/$leadId")({
 
 function LeadDetailPageRoute() {
   const pageTitle = usePageTitle(t`Lead Details`);
+  const { leadId } = Route.useParams();
 
   return (
     <AuthGuard>
       {pageTitle}
       <CrmLayout title={t`Lead Details`}>
         <div data-testid="page-crm-lead-detail">
-          <LeadDetailPage />
+          <LeadDetailPage leadId={leadId} />
         </div>
       </CrmLayout>
     </AuthGuard>

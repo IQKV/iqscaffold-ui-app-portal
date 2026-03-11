@@ -31,7 +31,7 @@ import {
 import { t } from "@lingui/core/macro";
 import { notifications } from "@mantine/notifications";
 import { modals } from "@mantine/modals";
-import { useNavigate, useParams } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { useContactQuery, LeadScoreBadge, useDeleteContactMutation } from "@/entities/crm";
 import { ContactDetailSkeleton } from "./skeletons";
 import { ContactEditModal } from "./ContactEditModal";
@@ -51,9 +51,12 @@ import { formatDate } from "@/shared/lib/utils";
  *
  * Requirements: Contact management, CRM integration
  */
-export const ContactDetailPage: React.FC = () => {
+interface ContactDetailPageProps {
+  contactId: string;
+}
+
+export const ContactDetailPage: React.FC<ContactDetailPageProps> = ({ contactId }) => {
   const navigate = useNavigate();
-  const { contactId } = useParams({ strict: false }) as { contactId: string };
   const [activeTab, setActiveTab] = useState<string | null>("overview");
   const [editModalOpened, setEditModalOpened] = useState(false);
 

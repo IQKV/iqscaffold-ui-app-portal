@@ -23,7 +23,7 @@ import {
 } from "@tabler/icons-react";
 import { t } from "@lingui/core/macro";
 import { notifications } from "@mantine/notifications";
-import { useNavigate, useParams } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import {
   useLeadQuery,
   useConvertLeadMutation,
@@ -45,9 +45,12 @@ import { LeadEditModal } from "./LeadEditModal";
  * - Lead header with quick actions (qualify, convert, edit)
  * - Integration with LeadNotesSection and ActivityTimeline
  */
-export const LeadDetailPage: React.FC = () => {
+interface LeadDetailPageProps {
+  leadId: string;
+}
+
+export const LeadDetailPage: React.FC<LeadDetailPageProps> = ({ leadId }) => {
   const navigate = useNavigate();
-  const { leadId } = useParams({ strict: false }) as { leadId: string };
   const [activeTab, setActiveTab] = useState<string | null>("overview");
   const [editModalOpened, setEditModalOpened] = useState(false);
 
