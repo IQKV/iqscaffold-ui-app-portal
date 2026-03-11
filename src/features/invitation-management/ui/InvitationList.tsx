@@ -13,13 +13,7 @@ import {
   Tooltip,
   CopyButton,
 } from "@mantine/core";
-import {
-  IconTrash,
-  IconPlus,
-  IconAlertCircle,
-  IconCopy,
-  IconCheck,
-} from "@tabler/icons-react";
+import { IconTrash, IconPlus, IconAlertCircle, IconCopy, IconCheck } from "@tabler/icons-react";
 import { DataTable, type DataTableColumn } from "@/shared/ui/data-table";
 import { openConfirmModal } from "@mantine/modals";
 import { t } from "@lingui/core/macro";

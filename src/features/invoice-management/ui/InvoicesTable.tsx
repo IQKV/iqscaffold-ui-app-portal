@@ -1,14 +1,5 @@
 import { useState } from "react";
-import {
-  Table,
-  Text,
-  Group,
-  ActionIcon,
-  Stack,
-  Pagination,
-  Loader,
-  Alert,
-} from "@mantine/core";
+import { Table, Text, Group, ActionIcon, Stack, Pagination, Loader, Alert } from "@mantine/core";
 import { IconDownload, IconEye } from "@tabler/icons-react";
 import { t } from "@lingui/macro";
 import { useInvoicesQuery, Invoice, InvoiceStatusBadge } from "@/entities/billing";
