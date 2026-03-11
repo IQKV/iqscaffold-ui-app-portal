@@ -15,8 +15,8 @@ import type { ConversionMetrics, DashboardStatsParams } from "@/shared/api/crm/t
 
 interface ConversionChartProps {
   metrics: ConversionMetrics;
-  stages: Record<string, number>;
-  dateRange?: DashboardStatsParams;
+  _stages: Record<string, number>;
+  _dateRange?: DashboardStatsParams;
   isMobile?: boolean;
 }
 

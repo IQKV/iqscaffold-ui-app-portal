@@ -96,8 +96,8 @@ export function CrmDashboard() {
             {/* Conversion metrics and charts (Requirement 7.2, 7.5, 7.6, 12.5) */}
             <ConversionChart
               metrics={conversionMetrics}
-              stages={dashboardStats.leadsByStage}
-              dateRange={dateRange}
+              _stages={dashboardStats.leadsByStage}
+              _dateRange={dateRange}
               isMobile={isMobile}
             />
           </Stack>

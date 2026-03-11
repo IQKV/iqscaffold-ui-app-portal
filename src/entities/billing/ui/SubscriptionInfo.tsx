@@ -105,8 +105,8 @@ export const SubscriptionInfo: React.FC<SubscriptionInfoProps> = ({
     return (
       <Group gap="xs">
         <Badge
-          color={getStatusColor(subscriptionStatus)}
-          leftSection={getStatusIcon(subscriptionStatus)}
+          color={getStatusColor(_subscriptionStatus)}
+          leftSection={getStatusIcon(_subscriptionStatus)}
           variant="light"
         >
           {planName}
@@ -130,11 +130,11 @@ export const SubscriptionInfo: React.FC<SubscriptionInfoProps> = ({
           </Text>
 
           <Badge
-            color={getStatusColor(subscriptionStatus)}
-            leftSection={getStatusIcon(subscriptionStatus)}
+            color={getStatusColor(_subscriptionStatus)}
+            leftSection={getStatusIcon(_subscriptionStatus)}
             size="lg"
           >
-            {subscriptionStatus}
+            {_subscriptionStatus}
           </Badge>
         </Group>
 
