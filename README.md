@@ -47,7 +47,7 @@ Modern React Application with Feature-Sliced Design Architecture
 ### 🔍 **Code Quality & Development**
 
 - 🔍 **oxlint** - Modern linting with React/TypeScript rules
-- 💅 **Prettier** - Opinionated code formatting with package.json plugin
+- 💅 **oxfmt** - Opinionated code formatting
 - 🎨 **Stylelint** - CSS/SCSS linting for consistent styling
 - 🪝 **Husky** - Git hooks for pre-commit validation
 - 📝 **Commitlint** - Conventional commit message validation
