@@ -150,7 +150,7 @@
     "msw": "^2.12.10",
     "nx": "^22.5.4",
     "oxfmt": "^0.37.0",
-    "oxlint": "^1.54.0",
+    "oxlint": "^1.55.0",
     "oxlint-tsgolint": "^0.16.0",
     "postcss": "^8.5.8",
     "postcss-preset-mantine": "1.18.0",
