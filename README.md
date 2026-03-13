@@ -280,7 +280,7 @@ After creating your project from this template, you'll want to customize it:
 ### 📃 Available Scripts
 
 | Command                   | Description                                                 |
-| ------------------------- |-------------------------------------------------------------|
+| ------------------------- | ----------------------------------------------------------- |
 | `pnpm dev`                | Start development server (http://localhost:5173)            |
 | `pnpm build`              | Build for production (includes i18n extraction/compilation) |
 | `pnpm preview`            | Preview production build                                    |
