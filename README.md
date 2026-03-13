@@ -35,7 +35,7 @@ Modern React Application with Feature-Sliced Design Architecture
 ### 🌐 **Internationalization & Accessibility**
 
 - 🌍 **Lingui** - Modern i18n framework with macro support and pluralization
-- ♿ **A11y Support** - Built-in accessibility features and Storybook a11y addon
+- ♿ **A11y Support** - Built-in accessibility features
 
 ### 🧪 **Testing & Quality**
 
@@ -46,7 +46,7 @@ Modern React Application with Feature-Sliced Design Architecture
 
 ### 🔍 **Code Quality & Development**
 
-- 🔍 **ESLint 9** - Modern linting with flat config and React/TypeScript rules
+- 🔍 **oxlint** - Modern linting with React/TypeScript rules
 - 💅 **Prettier** - Opinionated code formatting with package.json plugin
 - 🎨 **Stylelint** - CSS/SCSS linting for consistent styling
 - 🪝 **Husky** - Git hooks for pre-commit validation
@@ -55,7 +55,6 @@ Modern React Application with Feature-Sliced Design Architecture
 
 ### 🧱 **Development Tools**
 
-- 📚 **Storybook 8** - Component development in isolation with dark mode support
 - 🔧 **SWC** - Fast TypeScript/JavaScript compiler for React
 - 📦 **Bundle Analyzer** - Visualize and optimize bundle size
 - 🖼️ **Image Optimizer** - Automatic image optimization in builds
@@ -271,7 +270,6 @@ After creating your project from this template, you'll want to customize it:
 
 - [ ] Update the home page content in `src/pages/index.tsx`
 - [ ] Customize the about page in `src/pages/about.tsx`
-- [ ] Remove template-specific Storybook stories
 
 #### 5. Set Up CI/CD
 
@@ -282,7 +280,7 @@ After creating your project from this template, you'll want to customize it:
 ### 📃 Available Scripts
 
 | Command                   | Description                                                 |
-| ------------------------- | ----------------------------------------------------------- |
+| ------------------------- |-------------------------------------------------------------|
 | `pnpm dev`                | Start development server (http://localhost:5173)            |
 | `pnpm build`              | Build for production (includes i18n extraction/compilation) |
 | `pnpm preview`            | Preview production build                                    |
@@ -297,9 +295,7 @@ After creating your project from this template, you'll want to customize it:
 | `pnpm e2e:update`         | Update Playwright snapshots                                 |
 | `pnpm e2e:debug`          | Debug e2e tests (PWDEBUG)                                   |
 | `pnpm playwright:install` | Install Playwright browsers                                 |
-| `pnpm storybook`          | Start Storybook development server                          |
-| `pnpm storybook:build`    | Build Storybook for production                              |
-| `pnpm lint`               | Lint code with ESLint                                       |
+| `pnpm lint`               | Lint code with oxlint                                       |
 | `pnpm lint:fix`           | Fix linting issues automatically                            |
 | `pnpm lint:stylelint`     | Lint CSS/SCSS files                                         |
 | `pnpm formatter:check`    | Check code formatting                                       |

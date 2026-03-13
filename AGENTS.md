@@ -11,7 +11,7 @@ This is a modern React application built with Feature-Sliced Design (FSD) archit
 **Key Characteristics:**
 
 - Type-safe development with strict TypeScript configuration
-- Component-driven development with Storybook integration
+- Component-driven development
 - Comprehensive testing strategy (Unit, Integration, E2E)
 - Modern build tooling with Vite 7 and SWC
 - Internationalization with Lingui macros
@@ -53,9 +53,7 @@ This is a modern React application built with Feature-Sliced Design (FSD) archit
 
 - **Vitest** - Fast unit testing with coverage and UI
 - **Playwright** - Reliable end-to-end testing
-- **Storybook 8** - Component development in isolation
-- **ESLint 9** - Modern flat config with Mantine preset
-- **Prettier** - Code formatting with package.json plugin
+- **oxfmt** - Code formatting
 - **Husky** - Git hooks for quality gates
 - **Commitlint** - Conventional commit enforcement
 - **Knip** - Dead code elimination
@@ -63,7 +61,7 @@ This is a modern React application built with Feature-Sliced Design (FSD) archit
 ### Internationalization & Accessibility
 
 - **Lingui** - Modern i18n with macro support (`msg`, `t`, `Trans`)
-- **Built-in A11y** - Accessibility features and Storybook a11y addon
+- **Built-in A11y** - Accessibility features
 
 ### Testing & Mocking
 
@@ -1164,10 +1162,6 @@ pnpm knip                   # Find dead code
 # Internationalization
 pnpm messages:extract       # Extract i18n messages
 pnpm messages:compile       # Compile translations
-
-# Storybook
-pnpm storybook              # Start Storybook
-pnpm storybook:build        # Build Storybook
 
 # Release
 pnpm release                # Automated versioning

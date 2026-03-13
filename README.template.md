@@ -264,7 +264,6 @@ Environment variables for API integration:
 - Playwright for end-to-end testing with UI mode
 - Mock Service Worker for API mocking
 - Testing Library for component testing
-- Storybook for component development and documentation
 - Coverage reporting and CI integration
 
 ### Code Quality
@@ -344,7 +343,6 @@ src/
 - TypeScript strict mode for type safety
 - Comprehensive ESLint rules for code quality
 - Prettier integration for consistent formatting
-- Storybook for component development
 - DevTools for debugging (React Query, Router)
 
 ### Operational Features
