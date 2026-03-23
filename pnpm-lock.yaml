@@ -30,8 +30,8 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3(@lingui/babel-plugin-lingui-macro@5.9.3(babel-plugin-macros@3.1.0)(typescript@5.9.3))(babel-plugin-macros@3.1.0)(react@19.2.4)
       '@lingui/react':
-        specifier: ^5.9.2
-        version: 5.9.2(@lingui/babel-plugin-lingui-macro@5.9.3(babel-plugin-macros@3.1.0)(typescript@5.9.3))(babel-plugin-macros@3.1.0)(react@19.2.4)
+        specifier: ^5.9.3
+        version: 5.9.3(@lingui/babel-plugin-lingui-macro@5.9.3(babel-plugin-macros@3.1.0)(typescript@5.9.3))(babel-plugin-macros@3.1.0)(react@19.2.4)
       '@mantine/carousel':
         specifier: ^8.3.16
         version: 8.3.16(@mantine/core@8.3.16(@mantine/hooks@8.3.16(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@mantine/hooks@8.3.16(react@19.2.4))(embla-carousel-react@8.6.0(react@19.2.4))(embla-carousel@8.6.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1430,18 +1430,6 @@ packages:
     resolution: {integrity: sha512-hVEoYHmO2A3XmFX4A5RuBgcoVBoM7Xgoqejeq25XELvesJj2s2T15F47TA5n3/S7iTqngd6n/8KxBli9TYwgqQ==}
     engines: {node: '>=20.0.0'}
 
-  '@lingui/core@5.9.2':
-    resolution: {integrity: sha512-2K2lIEiUJ9VNTZU0igiRUubIUvcHu8TEuS4uRrrA5f2DGgCtHD5o7rw6OO9cM1RxZFCC5rpRwIMDeXHrc44W3g==}
-    engines: {node: '>=20.0.0'}
-    peerDependencies:
-      '@lingui/babel-plugin-lingui-macro': 5.9.2
-      babel-plugin-macros: 2 || 3
-    peerDependenciesMeta:
-      '@lingui/babel-plugin-lingui-macro':
-        optional: true
-      babel-plugin-macros:
-        optional: true
-
   '@lingui/core@5.9.3':
     resolution: {integrity: sha512-3b8LnDjx8POdQ6q6UKBe2DHynyQFCO66vm8/UPQnvlQowUk4Xdu5bK6oet11D9/vrSznrDDS+Qb5JVcNBUImgg==}
     engines: {node: '>=20.0.0'}
@@ -1470,26 +1458,9 @@ packages:
       babel-plugin-macros:
         optional: true
 
-  '@lingui/message-utils@5.9.2':
-    resolution: {integrity: sha512-PQA+bP4TBX7F5nmrEm9eDk+xddepjO7okI6bsOQ+6LIw1eJMvh9w/Xt3AoKTgzBCwd1ZwyqzBOelrX6sa6y+fg==}
-    engines: {node: '>=20.0.0'}
-
   '@lingui/message-utils@5.9.3':
     resolution: {integrity: sha512-oAK7HA7lcQrzaEaM6G1T5RwwxJxaSKfG/IFIxpZIl49TSFQv+s9YPNgHnVi+d4DmterpXNxy9ZZ+NtckJx6u7g==}
     engines: {node: '>=20.0.0'}
-
-  '@lingui/react@5.9.2':
-    resolution: {integrity: sha512-rvDBlz9s1AftAgkJnH/5u3YKlAouRZUsUpSoIajFqkXNEcnIcljFH2Lp7i4nQ7XQ4vpOjzpSH03cggvoo4fWKg==}
-    engines: {node: '>=20.0.0'}
-    peerDependencies:
-      '@lingui/babel-plugin-lingui-macro': 5.9.2
-      babel-plugin-macros: 2 || 3
-      react: ^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    peerDependenciesMeta:
-      '@lingui/babel-plugin-lingui-macro':
-        optional: true
-      babel-plugin-macros:
-        optional: true
 
   '@lingui/react@5.9.3':
     resolution: {integrity: sha512-aje78l3zGGZ3C75fiGhDVKyVALHfiKlYFjcOlZpgXY/JAVfFuZX+6wUGG9x1A8k7BfxrDy/ofHIBahPvNAqoKw==}
@@ -6614,8 +6585,8 @@ packages:
   yallist@4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
 
-  yaml@1.10.2:
-    resolution: {integrity: sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==}
+  yaml@1.10.3:
+    resolution: {integrity: sha512-vIYeF1u3CjlhAFekPPAk2h/Kv4T3mAkMox5OymRiJQB0spDP10LHvt+K7G9Ny6NuuMAb25/6n1qyUjAcGNf/AA==}
     engines: {node: '>= 6'}
 
   yaml@2.8.2:
@@ -7600,14 +7571,6 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@lingui/core@5.9.2(@lingui/babel-plugin-lingui-macro@5.9.3(babel-plugin-macros@3.1.0)(typescript@5.9.3))(babel-plugin-macros@3.1.0)':
-    dependencies:
-      '@babel/runtime': 7.29.2
-      '@lingui/message-utils': 5.9.2
-    optionalDependencies:
-      '@lingui/babel-plugin-lingui-macro': 5.9.3(babel-plugin-macros@3.1.0)(typescript@5.9.3)
-      babel-plugin-macros: 3.1.0
-
   '@lingui/core@5.9.3(@lingui/babel-plugin-lingui-macro@5.9.3(babel-plugin-macros@3.1.0)(typescript@5.9.3))(babel-plugin-macros@3.1.0)':
     dependencies:
       '@babel/runtime': 7.29.2
@@ -7635,24 +7598,10 @@ snapshots:
     transitivePeerDependencies:
       - react
 
-  '@lingui/message-utils@5.9.2':
-    dependencies:
-      '@messageformat/parser': 5.1.1
-      js-sha256: 0.10.1
-
   '@lingui/message-utils@5.9.3':
     dependencies:
       '@messageformat/parser': 5.1.1
       js-sha256: 0.10.1
-
-  '@lingui/react@5.9.2(@lingui/babel-plugin-lingui-macro@5.9.3(babel-plugin-macros@3.1.0)(typescript@5.9.3))(babel-plugin-macros@3.1.0)(react@19.2.4)':
-    dependencies:
-      '@babel/runtime': 7.28.6
-      '@lingui/core': 5.9.2(@lingui/babel-plugin-lingui-macro@5.9.3(babel-plugin-macros@3.1.0)(typescript@5.9.3))(babel-plugin-macros@3.1.0)
-      react: 19.2.4
-    optionalDependencies:
-      '@lingui/babel-plugin-lingui-macro': 5.9.3(babel-plugin-macros@3.1.0)(typescript@5.9.3)
-      babel-plugin-macros: 3.1.0
 
   '@lingui/react@5.9.3(@lingui/babel-plugin-lingui-macro@5.9.3(babel-plugin-macros@3.1.0)(typescript@5.9.3))(babel-plugin-macros@3.1.0)(react@19.2.4)':
     dependencies:
@@ -9533,7 +9482,7 @@ snapshots:
       import-fresh: 3.3.1
       parse-json: 5.2.0
       path-type: 4.0.0
-      yaml: 1.10.2
+      yaml: 1.10.3
     optional: true
 
   cosmiconfig@8.3.6(typescript@5.9.3):
@@ -12703,7 +12652,7 @@ snapshots:
 
   yallist@4.0.0: {}
 
-  yaml@1.10.2:
+  yaml@1.10.3:
     optional: true
 
   yaml@2.8.2: {}
