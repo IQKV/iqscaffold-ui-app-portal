@@ -107,7 +107,7 @@
     "react-infinite-scroll-component": "^6.1.1",
     "react-lottie": "^1.2.10",
     "recharts": "^3.8.0",
-    "sanitize-html": "^2.17.1",
+    "sanitize-html": "^2.17.2",
     "ts-pattern": "^5.9.0",
     "zod": "^3.25.76",
     "zustand": "^5.0.12"
