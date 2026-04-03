@@ -49,7 +49,7 @@
     "@dr.pogodin/react-helmet": "^3.1.1",
     "@hookform/resolvers": "^5.2.2",
     "@lingui/core": "^5.9.3",
-    "@lingui/macro": "^5.9.3",
+    "@lingui/macro": "^5.9.4",
     "@lingui/react": "^5.9.3",
     "@mantine/carousel": "^8.3.16",
     "@mantine/charts": "^8.3.16",
