@@ -15,7 +15,7 @@ The IQ Scaffold App Portal is deployed using Helm charts and automated CI/CD pip
 
 | Environment | Namespace                   | Purpose                      |
 | ----------- | --------------------------- | ---------------------------- |
-| Dev         | `iqscaffold-dev-env`        | Development and WIP branches |
+| Dev         | `iqkvdev-dev-env`        | Development and WIP branches |
 | Test        | `iqscaffold-test-env`       | Feature branch testing       |
 | Staging     | `iqscaffold-staging-env`    | Pre-production validation    |
 | Production  | `iqscaffold-production-env` | Live production environment  |
@@ -58,7 +58,7 @@ helm upgrade --install --atomic --wait --timeout 5m iqscaffold-ui-mantine-app-po
   --values ./values-dev.yaml \
   --set image.tag=wip \
   --set app.env.apiServerUrl="https://api-dev.iqscaffold.com" \
-  --namespace iqscaffold-dev-env
+  --namespace iqkvdev-dev-env
 
 # Production (Tagged releases)
 helm upgrade --install --atomic --wait --timeout 5m iqscaffold-ui-mantine-app-portal ./ \
@@ -87,7 +87,7 @@ cd charts/IQKV/iqscaffold-ui-mantine-app-portal
 helm upgrade --install app-portal ./ \
   --values values-dev.yaml \
   --set app.env.apiServerUrl="https://api-dev.iqscaffold.com" \
-  --namespace iqscaffold-dev-env \
+  --namespace iqkvdev-dev-env \
   --create-namespace
 ```
 
@@ -101,7 +101,7 @@ helm upgrade --install app-portal ./ \
 ```bash
 helm upgrade --install app-portal ./ \
   --values values-dev.yaml \
-  --namespace iqscaffold-dev-env \
+  --namespace iqkvdev-dev-env \
   --create-namespace
 ```
 
@@ -207,13 +207,13 @@ Production deployments include:
 
 ```bash
 # Check service logs
-kubectl logs deployment/iqscaffold-ui-mantine-app-portal -n iqscaffold-dev-env
+kubectl logs deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-dev-env
 
 # Check pod status
-kubectl get pods -l app.kubernetes.io/name=iqscaffold-ui-mantine-app-portal -n iqscaffold-dev-env
+kubectl get pods -l app.kubernetes.io/name=iqscaffold-ui-mantine-app-portal -n iqkvdev-dev-env
 
 # Check ingress configuration
-kubectl describe ingress iqscaffold-ui-mantine-app-portal -n iqscaffold-dev-env
+kubectl describe ingress iqscaffold-ui-mantine-app-portal -n iqkvdev-dev-env
 ```
 
 </details>
@@ -223,14 +223,14 @@ kubectl describe ingress iqscaffold-ui-mantine-app-portal -n iqscaffold-dev-env
 
 ```bash
 # View ConfigMap
-kubectl describe configmap iqscaffold-ui-mantine-app-portal-config -n iqscaffold-dev-env
+kubectl describe configmap iqscaffold-ui-mantine-app-portal-config -n iqkvdev-dev-env
 
 # Check runtime configuration
-kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqscaffold-dev-env -- \
+kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-dev-env -- \
   cat /usr/share/nginx/html/config.js
 
 # Verify init container logs
-kubectl logs deployment/iqscaffold-ui-mantine-app-portal -c config-init -n iqscaffold-dev-env
+kubectl logs deployment/iqscaffold-ui-mantine-app-portal -c config-init -n iqkvdev-dev-env
 ```
 
 </details>
@@ -240,7 +240,7 @@ kubectl logs deployment/iqscaffold-ui-mantine-app-portal -c config-init -n iqsca
 
 ```bash
 # Port forward to access health endpoints
-kubectl port-forward deployment/iqscaffold-ui-mantine-app-portal 8080:8080 -n iqscaffold-dev-env
+kubectl port-forward deployment/iqscaffold-ui-mantine-app-portal 8080:8080 -n iqkvdev-dev-env
 
 # Test health endpoints
 curl http://localhost:8080/
@@ -257,7 +257,7 @@ curl http://localhost:8080/health
 
 ```bash
 # Check SPA routing configuration
-kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqscaffold-dev-env -- \
+kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-dev-env -- \
   cat /usr/share/nginx/site.conf
 
 # Test SPA routes
@@ -281,11 +281,11 @@ curl -H "Origin: https://auth.iqscaffold.com" \
 curl -v https://auth.iqscaffold.com/.well-known/openid_configuration
 
 # Check redirect configuration
-kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqscaffold-dev-env -- \
+kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-dev-env -- \
   grep -i redirect /usr/share/nginx/html/config.js
 
 # Verify API server connectivity
-kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqscaffold-dev-env -- \
+kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-dev-env -- \
   curl -v https://api.iqscaffold.com/health
 ```
 
