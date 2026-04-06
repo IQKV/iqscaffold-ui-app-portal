@@ -16,9 +16,9 @@ The IQ Scaffold App Portal is deployed using Helm charts and automated CI/CD pip
 | Environment | Namespace                   | Purpose                      |
 | ----------- | --------------------------- | ---------------------------- |
 | Dev         | `iqkvdev-dev-env`        | Development and WIP branches |
-| Test        | `iqscaffold-test-env`       | Feature branch testing       |
-| Staging     | `iqscaffold-staging-env`    | Pre-production validation    |
-| Production  | `iqscaffold-production-env` | Live production environment  |
+| Test        | `iqkvdev-test-env`       | Feature branch testing       |
+| Staging     | `iqkvdev-staging-env`    | Pre-production validation    |
+| Production  | `iqkvdev-production-env` | Live production environment  |
 
 ### Automated Deployment (CI/CD)
 
@@ -66,7 +66,7 @@ helm upgrade --install --atomic --wait --timeout 5m iqscaffold-ui-mantine-app-po
   --values ./values-production.yaml \
   --set image.tag=${DRONE_TAG} \
   --set app.env.apiServerUrl="https://api.iqscaffold.com" \
-  --namespace iqscaffold-production-env
+  --namespace iqkvdev-production-env
 ```
 
 </details>
@@ -116,7 +116,7 @@ helm upgrade --install app-portal ./ \
   --set app.env.apiServerUrl="https://api.iqscaffold.com" \
   --set app.env.authDomainAuth="https://auth.iqscaffold.com" \
   --set app.env.authDomainApp="https://app.iqscaffold.com" \
-  --namespace iqscaffold-production-env \
+  --namespace iqkvdev-production-env \
   --create-namespace
 ```
 
@@ -298,10 +298,10 @@ kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-dev-env 
 
 ```bash
 # Rollback to previous version
-helm rollback iqscaffold-ui-mantine-app-portal -n iqscaffold-production-env
+helm rollback iqscaffold-ui-mantine-app-portal -n iqkvdev-production-env
 
 # Or uninstall completely
-helm uninstall iqscaffold-ui-mantine-app-portal -n iqscaffold-production-env
+helm uninstall iqscaffold-ui-mantine-app-portal -n iqkvdev-production-env
 ```
 
 </details>
