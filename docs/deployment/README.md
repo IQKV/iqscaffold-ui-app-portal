@@ -13,11 +13,11 @@ The IQ Scaffold App Portal is deployed using Helm charts and automated CI/CD pip
 
 ### Environments
 
-| Environment | Namespace                | Purpose                      |
-| ----------- | ------------------------ | ---------------------------- |
-| Test        | `iqkvdev-test-env`       | Feature branch testing       |
-| Staging     | `iqkvdev-staging-env`    | Pre-production validation    |
-| Production  | `iqkvdev-production-env` | Live production environment  |
+| Environment | Namespace                | Purpose                     |
+| ----------- | ------------------------ | --------------------------- |
+| Test        | `iqkvdev-test-env`       | Feature branch testing      |
+| Staging     | `iqkvdev-staging-env`    | Pre-production validation   |
+| Production  | `iqkvdev-production-env` | Live production environment |
 
 ### Automated Deployment (CI/CD)
 
