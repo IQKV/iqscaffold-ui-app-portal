@@ -29,8 +29,8 @@ The service uses Drone CI/CD pipeline with 10 stages:
 1. **VerifyCode** - Code quality, tests, static analysis
 2. **PublishArtifacts** - Build artifacts to registry
 3. **PublishDockerImage** - Container images to registry
-4. **DeployWorkInProgressOnDev** - WIP branch auto-deployment
-5. **RollbackWorkInProgressOnDev** - WIP rollback
+4. **DeployWorkInProgressToTestEnv** - WIP branch auto-deployment
+5. **RollbackWorkInProgressFromTestEnv** - WIP rollback
 6. **PromoteFeatureDeployment** - Feature branch promotion
 7. **RollbackFeatureDeployment** - Feature rollback
 8. **PromoteDeployment** - Release promotion
@@ -55,7 +55,7 @@ The pipeline uses these Helm commands for deployment:
 # Development (WIP branches)
 helm upgrade --install --atomic --wait --timeout 5m iqscaffold-ui-mantine-app-portal ./ \
   --values ./values.yaml \
-  --values ./values-dev.yaml \
+  --values ./values-test.yaml \
   --set image.tag=wip \
   --set app.env.apiServerUrl="https://api-dev.iqscaffold.com" \
   --namespace iqkvdev-dev-env
@@ -207,13 +207,13 @@ Production deployments include:
 
 ```bash
 # Check service logs
-kubectl logs deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-dev-env
+kubectl logs deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-test-env
 
 # Check pod status
-kubectl get pods -l app.kubernetes.io/name=iqscaffold-ui-mantine-app-portal -n iqkvdev-dev-env
+kubectl get pods -l app.kubernetes.io/name=iqscaffold-ui-mantine-app-portal -n iqkvdev-test-env
 
 # Check ingress configuration
-kubectl describe ingress iqscaffold-ui-mantine-app-portal -n iqkvdev-dev-env
+kubectl describe ingress iqscaffold-ui-mantine-app-portal -n iqkvdev-test-env
 ```
 
 </details>
@@ -223,14 +223,14 @@ kubectl describe ingress iqscaffold-ui-mantine-app-portal -n iqkvdev-dev-env
 
 ```bash
 # View ConfigMap
-kubectl describe configmap iqscaffold-ui-mantine-app-portal-config -n iqkvdev-dev-env
+kubectl describe configmap iqscaffold-ui-mantine-app-portal-config -n iqkvdev-test-env
 
 # Check runtime configuration
-kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-dev-env -- \
+kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-test-env -- \
   cat /usr/share/nginx/html/config.js
 
 # Verify init container logs
-kubectl logs deployment/iqscaffold-ui-mantine-app-portal -c config-init -n iqkvdev-dev-env
+kubectl logs deployment/iqscaffold-ui-mantine-app-portal -c config-init -n iqkvdev-test-env
 ```
 
 </details>
@@ -240,7 +240,7 @@ kubectl logs deployment/iqscaffold-ui-mantine-app-portal -c config-init -n iqkvd
 
 ```bash
 # Port forward to access health endpoints
-kubectl port-forward deployment/iqscaffold-ui-mantine-app-portal 8080:8080 -n iqkvdev-dev-env
+kubectl port-forward deployment/iqscaffold-ui-mantine-app-portal 8080:8080 -n iqkvdev-test-env
 
 # Test health endpoints
 curl http://localhost:8080/
@@ -257,7 +257,7 @@ curl http://localhost:8080/health
 
 ```bash
 # Check SPA routing configuration
-kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-dev-env -- \
+kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-test-env -- \
   cat /usr/share/nginx/site.conf
 
 # Test SPA routes
@@ -281,11 +281,11 @@ curl -H "Origin: https://auth.iqscaffold.com" \
 curl -v https://auth.iqscaffold.com/.well-known/openid_configuration
 
 # Check redirect configuration
-kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-dev-env -- \
+kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-test-env -- \
   grep -i redirect /usr/share/nginx/html/config.js
 
 # Verify API server connectivity
-kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-dev-env -- \
+kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-test-env -- \
   curl -v https://api.iqscaffold.com/health
 ```
 
