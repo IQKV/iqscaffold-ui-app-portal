@@ -1094,8 +1094,8 @@ export { UserFormFeature } from "./ui/user-form-feature";
 
 ### Development Requirements
 
-- **Node.js**: >= 22.0.0 (LTS)
-- **Package Manager**: pnpm 10.23.0+ (required)
+- **Node.js**: >= 24.0.0 (LTS)
+- **Package Manager**: pnpm 10.33.0+ (required)
 - **Editor**: VS Code or Cursor IDE
 
 ### Environment Variables
