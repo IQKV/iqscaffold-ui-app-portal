@@ -88,7 +88,7 @@ importers:
         version: 1.166.9(@tanstack/react-router@1.168.10(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(zod@3.25.76)
       '@tiptap/extension-color':
         specifier: ^3.20.1
-        version: 3.20.1(@tiptap/extension-text-style@3.20.1(@tiptap/core@3.22.2(@tiptap/pm@3.22.1)))
+        version: 3.20.1(@tiptap/extension-text-style@3.22.2(@tiptap/core@3.22.2(@tiptap/pm@3.22.1)))
       '@tiptap/extension-image':
         specifier: ^3.20.1
         version: 3.20.1(@tiptap/core@3.22.2(@tiptap/pm@3.22.1))
@@ -99,8 +99,8 @@ importers:
         specifier: ^3.20.5
         version: 3.20.5(@tiptap/core@3.22.2(@tiptap/pm@3.22.1))
       '@tiptap/extension-text-style':
-        specifier: ^3.20.1
-        version: 3.20.1(@tiptap/core@3.22.2(@tiptap/pm@3.22.1))
+        specifier: ^3.22.2
+        version: 3.22.2(@tiptap/core@3.22.2(@tiptap/pm@3.22.1))
       '@tiptap/extension-underline':
         specifier: ^3.20.1
         version: 3.20.1(@tiptap/core@3.22.2(@tiptap/pm@3.22.1))
@@ -2990,10 +2990,10 @@ packages:
     peerDependencies:
       '@tiptap/core': ^3.20.5
 
-  '@tiptap/extension-text-style@3.20.1':
-    resolution: {integrity: sha512-3LQU92zX6tzl47EBskkAKeJXd6EWwYmBDE7jbd7InJqnt9NMAcj4DtXtXpI+e6Un5+8yzNjVA+fI5+5cFS3dSg==}
+  '@tiptap/extension-text-style@3.22.2':
+    resolution: {integrity: sha512-W8K1G6HOiNXdHYZbEyXXP9vD66GoiZRwiGvrSJ/t33MefDwvLka1Tg2QCWejaw2YvV78DdVlLTmFEmSnJi9+5g==}
     peerDependencies:
-      '@tiptap/core': ^3.20.1
+      '@tiptap/core': ^3.22.2
 
   '@tiptap/extension-text@3.22.2':
     resolution: {integrity: sha512-J1w7JwijfSD7ah0WfiwZ/DVWCIGT9x369RM4RJc57i44mIBElj7tl1dh+N5KPGOXKUup4gr7sSJAE38lgeaDMg==}
@@ -9032,9 +9032,9 @@ snapshots:
     dependencies:
       '@tiptap/core': 3.22.2(@tiptap/pm@3.22.1)
 
-  '@tiptap/extension-color@3.20.1(@tiptap/extension-text-style@3.20.1(@tiptap/core@3.22.2(@tiptap/pm@3.22.1)))':
+  '@tiptap/extension-color@3.20.1(@tiptap/extension-text-style@3.22.2(@tiptap/core@3.22.2(@tiptap/pm@3.22.1)))':
     dependencies:
-      '@tiptap/extension-text-style': 3.20.1(@tiptap/core@3.22.2(@tiptap/pm@3.22.1))
+      '@tiptap/extension-text-style': 3.22.2(@tiptap/core@3.22.2(@tiptap/pm@3.22.1))
 
   '@tiptap/extension-document@3.22.2(@tiptap/core@3.22.2(@tiptap/pm@3.22.1))':
     dependencies:
@@ -9117,7 +9117,7 @@ snapshots:
     dependencies:
       '@tiptap/core': 3.22.2(@tiptap/pm@3.22.1)
 
-  '@tiptap/extension-text-style@3.20.1(@tiptap/core@3.22.2(@tiptap/pm@3.22.1))':
+  '@tiptap/extension-text-style@3.22.2(@tiptap/core@3.22.2(@tiptap/pm@3.22.1))':
     dependencies:
       '@tiptap/core': 3.22.2(@tiptap/pm@3.22.1)
 
