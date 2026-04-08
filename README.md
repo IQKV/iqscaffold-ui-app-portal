@@ -11,7 +11,7 @@ Modern React Application with Feature-Sliced Design Architecture
 ### 🚀 **Core Technologies**
 
 - ✨ **React 19** - Latest React with concurrent features and improved performance
-- ⚡ **Vite 7** - Lightning-fast development with instant HMR and optimized builds
+- ⚡ **Vite 8** - Lightning-fast development with instant HMR and optimized builds
 - 🎯 **TypeScript** - Type-safe development with latest language features
 - 📦 **PNPM** - Fast, disk space efficient package manager with workspaces support
 

@@ -185,7 +185,7 @@ Environment variables for API integration:
 - Feature-Sliced Design (FSD) methodology for scalable architecture
 - React 19 with concurrent features and improved performance
 - TypeScript strict mode for enhanced type safety
-- Vite 7 for lightning-fast development and optimized builds
+- Vite 8 for lightning-fast development and optimized builds
 - TanStack Router for type-safe routing with code splitting
 
 ### Authentication & Authorization

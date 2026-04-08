@@ -13,7 +13,7 @@ This is a modern React application built with Feature-Sliced Design (FSD) archit
 - Type-safe development with strict TypeScript configuration
 - Component-driven development
 - Comprehensive testing strategy (Unit, Integration, E2E)
-- Modern build tooling with Vite 7 and SWC
+- Modern build tooling with Vite 8 and SWC
 - Internationalization with Lingui macros
 - Production-ready with Docker and CI/CD workflows
 - RFC 9457 Problem Details compliant error handling
@@ -25,7 +25,7 @@ This is a modern React application built with Feature-Sliced Design (FSD) archit
 
 - **React 19** - Latest React with concurrent features and improved performance
 - **TypeScript** - Strict type safety with ES2020 target
-- **Vite 7** - Lightning-fast development with SWC compiler
+- **Vite 8** - Lightning-fast development with SWC compiler
 - **PNPM** - Fast, disk space efficient package manager
 
 ### UI & Styling
@@ -1362,7 +1362,7 @@ export default defineConfig({
 });
 ```
 
-**Vite 7 Features:**
+**Vite 8 Features:**
 
 - SWC compiler for fast builds
 - Automatic code splitting
