@@ -14,10 +14,10 @@ The IQ Scaffold App Portal is deployed using Helm charts and automated CI/CD pip
 ### Environments
 
 | Environment | Namespace         | Purpose                     |
-|-------------|-------------------| --------------------------- |
+| ----------- | ----------------- | --------------------------- |
 | SIT         | `iqkvdev-sit-env` | Feature branch testing      |
 | UAT         | `iqkvdev-uat-env` | Pre-production validation   |
-| PRD           | `iqkvdev-prd-env` | Live production environment |
+| PRD         | `iqkvdev-prd-env` | Live production environment |
 
 ### Automated Deployment (CI/CD)
 
@@ -39,11 +39,11 @@ The service uses Drone CI/CD pipeline with 10 stages:
 #### Branch Deployment Strategy
 
 | Branch Type | Auto Deploy | Manual Promote | Target Environment |
-| ----------- |-------------|----------------|--------------------|
-| `wip`       | ✅ SIT       | -              | SIT                |
-| `feature/*` | -           | ✅ SIT          | SIT                |
-| `dev`       | -           | ✅ UAT          | UAT                |
-| Tags        | -           | ✅ PRD          | PRD                |
+| ----------- | ----------- | -------------- | ------------------ |
+| `wip`       | ✅ SIT      | -              | SIT                |
+| `feature/*` | -           | ✅ SIT         | SIT                |
+| `dev`       | -           | ✅ UAT         | UAT                |
+| Tags        | -           | ✅ PRD         | PRD                |
 
 <details>
 <summary>Deployment Commands</summary>
