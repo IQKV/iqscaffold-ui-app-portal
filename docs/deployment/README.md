@@ -13,11 +13,11 @@ The IQ Scaffold App Portal is deployed using Helm charts and automated CI/CD pip
 
 ### Environments
 
-| Environment | Namespace                | Purpose                     |
-| ----------- | ------------------------ | --------------------------- |
-| Test        | `iqkvdev-test-env`       | Feature branch testing      |
-| Staging     | `iqkvdev-staging-env`    | Pre-production validation   |
-| Production  | `iqkvdev-production-env` | Live production environment |
+| Environment | Namespace         | Purpose                     |
+|-------------|-------------------| --------------------------- |
+| SIT         | `iqkvdev-sit-env` | Feature branch testing      |
+| UAT         | `iqkvdev-uat-env` | Pre-production validation   |
+| PRD           | `iqkvdev-prd-env` | Live production environment |
 
 ### Automated Deployment (CI/CD)
 
@@ -28,8 +28,8 @@ The service uses Drone CI/CD pipeline with 10 stages:
 1. **VerifyCode** - Code quality, tests, static analysis
 2. **PublishArtifacts** - Build artifacts to registry
 3. **PublishDockerImage** - Container images to registry
-4. **DeployWorkInProgressToTestEnv** - WIP branch auto-deployment
-5. **RollbackWorkInProgressFromTestEnv** - WIP rollback
+4. **DeployWorkInProgress** - WIP branch auto-deployment
+5. **RollbackWorkInProgress** - WIP rollback
 6. **PromoteFeatureDeployment** - Feature branch promotion
 7. **RollbackFeatureDeployment** - Feature rollback
 8. **PromoteDeployment** - Release promotion
@@ -39,11 +39,11 @@ The service uses Drone CI/CD pipeline with 10 stages:
 #### Branch Deployment Strategy
 
 | Branch Type | Auto Deploy | Manual Promote | Target Environment |
-| ----------- | ----------- | -------------- | ------------------ |
-| `wip`       | ✅ Dev      | -              | Dev                |
-| `feature/*` | -           | ✅ Test        | Test               |
-| `dev`       | -           | ✅ Staging     | Staging            |
-| Tags        | -           | ✅ Production  | Production         |
+| ----------- |-------------|----------------|--------------------|
+| `wip`       | ✅ SIT       | -              | SIT                |
+| `feature/*` | -           | ✅ SIT          | SIT                |
+| `dev`       | -           | ✅ UAT          | UAT                |
+| Tags        | -           | ✅ PRD          | PRD                |
 
 <details>
 <summary>Deployment Commands</summary>
@@ -57,15 +57,15 @@ helm upgrade --install --atomic --wait --timeout 5m iqscaffold-ui-mantine-app-po
   --values ./values-test.yaml \
   --set image.tag=wip \
   --set app.env.apiServerUrl="https://api-dev.iqscaffold.com" \
-  --namespace iqkvdev-test-env
+  --namespace iqkvdev-sit-env
 
 # Production (Tagged releases)
 helm upgrade --install --atomic --wait --timeout 5m iqscaffold-ui-mantine-app-portal ./ \
   --values ./values.yaml \
-  --values ./values-production.yaml \
+  --values ./values-prd.yaml \
   --set image.tag=${DRONE_TAG} \
   --set app.env.apiServerUrl="https://api.iqscaffold.com" \
-  --namespace iqkvdev-production-env
+  --namespace iqkvdev-prd-env
 ```
 
 </details>
@@ -84,9 +84,9 @@ cd charts/IQKV/iqscaffold-ui-mantine-app-portal
 
 # Deploy to development
 helm upgrade --install app-portal ./ \
-  --values values-dev.yaml \
+  --values values-sit.yaml \
   --set app.env.apiServerUrl="https://api-dev.iqscaffold.com" \
-  --namespace iqkvdev-test-env \
+  --namespace iqkvdev-sit-env \
   --create-namespace
 ```
 
@@ -99,8 +99,8 @@ helm upgrade --install app-portal ./ \
 
 ```bash
 helm upgrade --install app-portal ./ \
-  --values values-dev.yaml \
-  --namespace iqkvdev-test-env \
+  --values values-sit.yaml \
+  --namespace iqkvdev-sit-env \
   --create-namespace
 ```
 
@@ -111,11 +111,11 @@ helm upgrade --install app-portal ./ \
 
 ```bash
 helm upgrade --install app-portal ./ \
-  --values values-production.yaml \
+  --values values-prd.yaml \
   --set app.env.apiServerUrl="https://api.iqscaffold.com" \
   --set app.env.authDomainAuth="https://auth.iqscaffold.com" \
   --set app.env.authDomainApp="https://app.iqscaffold.com" \
-  --namespace iqkvdev-production-env \
+  --namespace iqkvdev-prd-env \
   --create-namespace
 ```
 
@@ -206,13 +206,13 @@ Production deployments include:
 
 ```bash
 # Check service logs
-kubectl logs deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-test-env
+kubectl logs deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-sit-env
 
 # Check pod status
-kubectl get pods -l app.kubernetes.io/name=iqscaffold-ui-mantine-app-portal -n iqkvdev-test-env
+kubectl get pods -l app.kubernetes.io/name=iqscaffold-ui-mantine-app-portal -n iqkvdev-sit-env
 
 # Check ingress configuration
-kubectl describe ingress iqscaffold-ui-mantine-app-portal -n iqkvdev-test-env
+kubectl describe ingress iqscaffold-ui-mantine-app-portal -n iqkvdev-sit-env
 ```
 
 </details>
@@ -222,14 +222,14 @@ kubectl describe ingress iqscaffold-ui-mantine-app-portal -n iqkvdev-test-env
 
 ```bash
 # View ConfigMap
-kubectl describe configmap iqscaffold-ui-mantine-app-portal-config -n iqkvdev-test-env
+kubectl describe configmap iqscaffold-ui-mantine-app-portal-config -n iqkvdev-sit-env
 
 # Check runtime configuration
-kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-test-env -- \
+kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-sit-env -- \
   cat /usr/share/nginx/html/config.js
 
 # Verify init container logs
-kubectl logs deployment/iqscaffold-ui-mantine-app-portal -c config-init -n iqkvdev-test-env
+kubectl logs deployment/iqscaffold-ui-mantine-app-portal -c config-init -n iqkvdev-sit-env
 ```
 
 </details>
@@ -239,7 +239,7 @@ kubectl logs deployment/iqscaffold-ui-mantine-app-portal -c config-init -n iqkvd
 
 ```bash
 # Port forward to access health endpoints
-kubectl port-forward deployment/iqscaffold-ui-mantine-app-portal 8080:8080 -n iqkvdev-test-env
+kubectl port-forward deployment/iqscaffold-ui-mantine-app-portal 8080:8080 -n iqkvdev-sit-env
 
 # Test health endpoints
 curl http://localhost:8080/
@@ -256,7 +256,7 @@ curl http://localhost:8080/health
 
 ```bash
 # Check SPA routing configuration
-kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-test-env -- \
+kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-sit-env -- \
   cat /usr/share/nginx/site.conf
 
 # Test SPA routes
@@ -280,11 +280,11 @@ curl -H "Origin: https://auth.iqscaffold.com" \
 curl -v https://auth.iqscaffold.com/.well-known/openid_configuration
 
 # Check redirect configuration
-kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-test-env -- \
+kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-sit-env -- \
   grep -i redirect /usr/share/nginx/html/config.js
 
 # Verify API server connectivity
-kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-test-env -- \
+kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-sit-env -- \
   curl -v https://api.iqscaffold.com/health
 ```
 
@@ -297,10 +297,10 @@ kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkvdev-test-env
 
 ```bash
 # Rollback to previous version
-helm rollback iqscaffold-ui-mantine-app-portal -n iqkvdev-production-env
+helm rollback iqscaffold-ui-mantine-app-portal -n iqkvdev-prd-env
 
 # Or uninstall completely
-helm uninstall iqscaffold-ui-mantine-app-portal -n iqkvdev-production-env
+helm uninstall iqscaffold-ui-mantine-app-portal -n iqkvdev-prd-env
 ```
 
 </details>
