@@ -50,3 +50,4 @@ prettier.config.*
 commitlint.config.js
 compose.yaml
 pnpm-lock.yaml
+*.map
