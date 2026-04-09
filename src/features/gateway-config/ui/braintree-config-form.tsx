@@ -45,7 +45,7 @@ export const BraintreeConfigForm = ({ value, onChange, errors = {} }: BraintreeC
         onChange={(val) => onChange({ ...value, environment: val as "sandbox" | "production" })}
         data={[
           { value: "sandbox", label: t`Sandbox (Test)` },
-          { value: "production", label: t`Production (Live)` },
+          { value: "prd", label: t`Production (Live)` },
         ]}
         error={errors.environment}
         description={t`Environment for Braintree API`}
