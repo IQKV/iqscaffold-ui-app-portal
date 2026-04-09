@@ -13,8 +13,8 @@ The IQ Scaffold App Portal is deployed using Helm charts and automated CI/CD pip
 
 ### Environments
 
-| Environment | Namespace         | Purpose                     |
-| ----------- | ----------------- | --------------------------- |
+| Environment | Namespace      | Purpose                     |
+| ----------- | -------------- | --------------------------- |
 | SIT         | `iqkv-sit-env` | Feature branch testing      |
 | UAT         | `iqkv-uat-env` | Pre-production validation   |
 | PRD         | `iqkv-prd-env` | Live production environment |
