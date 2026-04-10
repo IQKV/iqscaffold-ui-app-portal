@@ -169,7 +169,7 @@
     "vite-plugin-image-optimizer": "^2.0.3",
     "vite-plugin-remove-console": "^2.2.0",
     "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "4.0.18"
+    "vitest": "4.1.4"
   },
   "lint-staged": {
     "*": [
