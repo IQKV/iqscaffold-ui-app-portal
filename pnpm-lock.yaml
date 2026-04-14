@@ -192,8 +192,8 @@ importers:
         specifier: ^5.6.0
         version: 5.6.0(react@19.2.5)
       react-infinite-scroll-component:
-        specifier: ^7.0.1
-        version: 7.0.1(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: ^7.1.0
+        version: 7.1.0(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       react-lottie:
         specifier: ^1.2.10
         version: 1.2.10(react@19.2.5)
@@ -5676,9 +5676,9 @@ packages:
     peerDependencies:
       react: '*'
 
-  react-infinite-scroll-component@7.0.1:
-    resolution: {integrity: sha512-MB3JiV+83/VTrojaxcZuO/u9pnxrLO/ZeX4g1zc1kcj9Hdgz43mMCZ9R9QjvSqdhmS9aquABx4PFEhvAVmbVag==}
-    engines: {node: '>=18.18.0'}
+  react-infinite-scroll-component@7.1.0:
+    resolution: {integrity: sha512-EPUMyOnpmJDqI1aoUi9uR/TSUfJCUN77ZkpzYSshGwrC2NTaH6p+rxaP/2DZJWygOZmZcAieZk4VciF8q9H/tw==}
+    engines: {node: '>=20.0.0'}
     peerDependencies:
       react: '>=17.0.0'
       react-dom: '>=17.0.0'
@@ -5844,8 +5844,8 @@ packages:
     resolution: {integrity: sha512-OcXjMsGdhL4XnbShKpAcSqPMzQoYkYyhbEaeSko47MjRP9NfEQMhZkXL1DoFlt9LWQn4YttrdnV6X2OiyzBi+A==}
     engines: {node: '>=10'}
 
-  resolve@1.22.11:
-    resolution: {integrity: sha512-RfqAvLnMl313r7c9oclB1HhUEAezcpLjz95wFH4LVuhk9JF/r22qmVP9AMmOU4vMX7Q8pN8jwNg/CSpdFnMjTQ==}
+  resolve@1.22.12:
+    resolution: {integrity: sha512-TyeJ1zif53BPfHootBGwPRYT1RUt6oGWsaQr8UyZW/eAm9bKoijtvruSDEmZHm92CwS9nj7/fWttqPCgzep8CA==}
     engines: {node: '>= 0.4'}
     hasBin: true
 
@@ -6254,10 +6254,6 @@ packages:
 
   threads@1.7.0:
     resolution: {integrity: sha512-Mx5NBSHX3sQYR6iI9VYbgHKBLisyB+xROCBGjjWm1O9wb9vfLxdaGtmT/KCjUqMsSNW6nERzCW3T6H43LqjDZQ==}
-
-  throttle-debounce@2.3.0:
-    resolution: {integrity: sha512-H7oLPV0P7+jgvrk+6mwwwBDmxTaxnu9HMXmloNLXwnNO0ZxZ31Orah2n8lU1eMPvsaowP2CX+USCgyovXfdOFQ==}
-    engines: {node: '>=8'}
 
   through@2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
@@ -9237,7 +9233,7 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.29.2
       cosmiconfig: 7.1.0
-      resolve: 1.22.11
+      resolve: 1.22.12
     optional: true
 
   babel-runtime@6.26.0:
@@ -11868,11 +11864,10 @@ snapshots:
     dependencies:
       react: 19.2.5
 
-  react-infinite-scroll-component@7.0.1(react-dom@19.2.5(react@19.2.5))(react@19.2.5):
+  react-infinite-scroll-component@7.1.0(react-dom@19.2.5(react@19.2.5))(react@19.2.5):
     dependencies:
       react: 19.2.5
       react-dom: 19.2.5(react@19.2.5)
-      throttle-debounce: 2.3.0
 
   react-is@16.13.1: {}
 
@@ -12066,8 +12061,9 @@ snapshots:
 
   resolve.exports@2.0.3: {}
 
-  resolve@1.22.11:
+  resolve@1.22.12:
     dependencies:
+      es-errors: 1.3.0
       is-core-module: 2.16.1
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
@@ -12545,8 +12541,6 @@ snapshots:
       tiny-worker: 2.3.0
     transitivePeerDependencies:
       - supports-color
-
-  throttle-debounce@2.3.0: {}
 
   through@2.3.8: {}
 
