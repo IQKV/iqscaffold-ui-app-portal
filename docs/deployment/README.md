@@ -2,7 +2,7 @@
 
 ### Overview
 
-The IQ  Key Value App Portal is deployed using Helm charts and automated CI/CD pipelines. The service provides a React-based application portal UI with Nginx serving, runtime configuration via ConfigMap, and SPA routing support for the main application dashboard.
+The IQ Key Value App Portal is deployed using Helm charts and automated CI/CD pipelines. The service provides a React-based application portal UI with Nginx serving, runtime configuration via ConfigMap, and SPA routing support for the main application dashboard.
 
 ### Prerequisites
 

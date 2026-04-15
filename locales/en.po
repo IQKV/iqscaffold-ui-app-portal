@@ -121,8 +121,8 @@ msgstr "{trialDays} day trial"
 #~ msgstr "{userName} deleted successfully"
 
 #: src/pages/__root.tsx:25
-msgid "%s | IQ  Key Value Platform"
-msgstr "%s | IQ  Key Value Platform"
+msgid "%s | IQ Key Value Platform"
+msgstr "%s | IQ Key Value Platform"
 
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:210
 #: src/features/crm-leads/ui/LeadEditModal.tsx:217
@@ -2284,8 +2284,8 @@ msgstr "Invoices"
 
 #: src/pages/__root.tsx:25
 #: src/widgets/header/ui/header.tsx:11
-msgid "IQ  Key Value Platform"
-msgstr "IQ  Key Value Platform"
+msgid "IQ Key Value Platform"
+msgstr "IQ Key Value Platform"
 
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:166
 #: src/features/crm-leads/ui/LeadEditModal.tsx:189
@@ -4479,8 +4479,8 @@ msgstr "Website"
 #~ msgstr "Welcome Message"
 
 #: src/features/locale-demo/locale-demo.tsx:201
-#~ msgid "Welcome to IQ  Key Value! Your language preference is active."
-#~ msgstr "Welcome to IQ  Key Value! Your language preference is active."
+#~ msgid "Welcome to IQ Key Value! Your language preference is active."
+#~ msgstr "Welcome to IQ Key Value! Your language preference is active."
 
 #: src/pages/dashboard.tsx:26
 msgid "Welcome to your dashboard. Here's what you have access to:"

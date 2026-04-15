@@ -8,7 +8,7 @@ interface HeaderProps {
   title?: string;
 }
 
-export function Header({ title = t`IQ  Key Value Platform` }: HeaderProps) {
+export function Header({ title = t`IQ Key Value Platform` }: HeaderProps) {
   return (
     <Group h="100%" px="md" justify="space-between" data-testid="widget-header">
       <Title order={3} data-testid="header-title">

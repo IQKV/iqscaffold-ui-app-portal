@@ -89,7 +89,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/pages/__root.tsx:25
-msgid "%s | IQ  Key Value Platform"
+msgid "%s | IQ Key Value Platform"
 msgstr ""
 
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:210
@@ -2099,7 +2099,7 @@ msgstr ""
 
 #: src/pages/__root.tsx:25
 #: src/widgets/header/ui/header.tsx:11
-msgid "IQ  Key Value Platform"
+msgid "IQ Key Value Platform"
 msgstr ""
 
 #: src/features/crm-contacts/ui/ContactEditModal.tsx:166
@@ -4140,7 +4140,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/features/locale-demo/locale-demo.tsx:201
-#~ msgid "Welcome to IQ  Key Value! Your language preference is active."
+#~ msgid "Welcome to IQ Key Value! Your language preference is active."
 #~ msgstr ""
 
 #: src/pages/dashboard.tsx:26
