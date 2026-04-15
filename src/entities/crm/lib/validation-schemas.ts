@@ -5,7 +5,7 @@ import { t } from "@lingui/core/macro";
  * CRM-specific validation schemas
  *
  * This module provides reusable Zod validation schemas for CRM forms
- * following the existing platform patterns from auth.iqscaffold.com
+ * following the existing platform patterns from auth.iqkv.dev
  *
  * Requirements: 11.1, 11.2, 11.3, 11.4
  */

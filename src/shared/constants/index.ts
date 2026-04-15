@@ -173,8 +173,8 @@ export const ENV_KEYS = {
 // =============================================================================
 
 export const DEFAULTS = {
-  AUTH_DOMAIN: "https://auth.iqscaffold.com",
-  APP_DOMAIN: "https://app.iqscaffold.com",
+  AUTH_DOMAIN: "https://auth.iqkv.dev",
+  APP_DOMAIN: "https://app.iqkv.dev",
   PASSWORD_MIN_LENGTH: 8,
   PAGE_SIZE: 10,
   RETRY_ATTEMPTS: 3,

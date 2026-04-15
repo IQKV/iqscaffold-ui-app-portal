@@ -3,7 +3,7 @@
  * Provides React Query hooks for authenticated user auth endpoints
  *
  * Note: Unauthenticated flows (login, signup, forgot password, etc.)
- * are handled by the auth portal at auth.iqscaffold.com
+ * are handled by the auth portal at auth.iqkv.dev
  */
 
 import { useMutation, useQuery } from "@tanstack/react-query";

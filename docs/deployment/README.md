@@ -56,7 +56,7 @@ helm upgrade --install --atomic --wait --timeout 5m iqscaffold-ui-mantine-app-po
   --values ./values.yaml \
   --values ./values-test.yaml \
   --set image.tag=wip \
-  --set app.env.apiServerUrl="https://api-dev.iqscaffold.com" \
+  --set app.env.apiServerUrl="https://api.iqkv.dev" \
   --namespace iqkv-sit-env
 
 # Production (Tagged releases)
@@ -64,7 +64,7 @@ helm upgrade --install --atomic --wait --timeout 5m iqscaffold-ui-mantine-app-po
   --values ./values.yaml \
   --values ./values-prd.yaml \
   --set image.tag=${DRONE_TAG} \
-  --set app.env.apiServerUrl="https://api.iqscaffold.com" \
+  --set app.env.apiServerUrl="https://api.iqkv.dev" \
   --namespace iqkv-prd-env
 ```
 
@@ -85,7 +85,7 @@ cd charts/IQKV/iqscaffold-ui-mantine-app-portal
 # Deploy to development
 helm upgrade --install app-portal ./ \
   --values values-sit.yaml \
-  --set app.env.apiServerUrl="https://api-dev.iqscaffold.com" \
+  --set app.env.apiServerUrl="https://api.iqkv.dev" \
   --namespace iqkv-sit-env \
   --create-namespace
 ```
@@ -112,9 +112,9 @@ helm upgrade --install app-portal ./ \
 ```bash
 helm upgrade --install app-portal ./ \
   --values values-prd.yaml \
-  --set app.env.apiServerUrl="https://api.iqscaffold.com" \
-  --set app.env.authDomainAuth="https://auth.iqscaffold.com" \
-  --set app.env.authDomainApp="https://app.iqscaffold.com" \
+  --set app.env.apiServerUrl="https://api.iqkv.dev" \
+  --set app.env.authDomainAuth="https://auth.iqkv.dev" \
+  --set app.env.authDomainApp="https://app.iqkv.dev" \
   --namespace iqkv-prd-env \
   --create-namespace
 ```
@@ -264,10 +264,10 @@ curl -H "Accept: text/html" http://localhost:8080/dashboard
 curl -H "Accept: text/html" http://localhost:8080/profile
 
 # Check CORS headers for cross-domain requests
-curl -H "Origin: https://auth.iqscaffold.com" \
+curl -H "Origin: https://auth.iqkv.dev" \
   -H "Access-Control-Request-Method: GET" \
   -H "Access-Control-Request-Headers: Authorization" \
-  -X OPTIONS https://app.iqscaffold.com/
+  -X OPTIONS https://app.iqkv.dev/
 ```
 
 </details>
@@ -277,7 +277,7 @@ curl -H "Origin: https://auth.iqscaffold.com" \
 
 ```bash
 # Test auth domain connectivity
-curl -v https://auth.iqscaffold.com/.well-known/openid_configuration
+curl -v https://auth.iqkv.dev/.well-known/openid_configuration
 
 # Check redirect configuration
 kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkv-sit-env -- \
@@ -285,7 +285,7 @@ kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkv-sit-env -- 
 
 # Verify API server connectivity
 kubectl exec -it deployment/iqscaffold-ui-mantine-app-portal -n iqkv-sit-env -- \
-  curl -v https://api.iqscaffold.com/health
+  curl -v https://api.iqkv.dev/health
 ```
 
 </details>
@@ -310,7 +310,7 @@ helm uninstall iqscaffold-ui-mantine-app-portal -n iqkv-prd-env
 - TLS enabled in production with Let's Encrypt certificates
 - Strict Content Security Policy in production
 - Enhanced security headers (HSTS, X-Frame-Options, etc.)
-- CORS configured for iqscaffold.com subdomains only
+- CORS configured for iqkv.dev subdomains only
 - Rate limiting enabled in production
 - Non-root container execution
 - Read-only root filesystem in production

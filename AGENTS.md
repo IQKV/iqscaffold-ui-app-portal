@@ -1105,8 +1105,8 @@ export { UserFormFeature } from "./ui/user-form-feature";
 VITE_API_SERVER_URL=http://localhost:8080
 
 # Auth Configuration
-VITE_AUTH_DOMAIN_AUTH=https://auth.iqscaffold.com
-VITE_AUTH_DOMAIN_APP=https://app.iqscaffold.com
+VITE_AUTH_DOMAIN_AUTH=https://auth.iqkv.dev
+VITE_AUTH_DOMAIN_APP=https://app.iqkv.dev
 VITE_AUTH_REDIRECT_AFTER_LOGIN=/dashboard
 VITE_AUTH_REDIRECT_AFTER_LOGOUT=/
 VITE_AUTH_REDIRECT_AFTER_SIGNUP=/verify-email
