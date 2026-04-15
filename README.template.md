@@ -1,6 +1,6 @@
-# 🚀 IQ Scaffold Application Portal
+# 🚀 IQ  Key Value Application Portal
 
-> Web application providing authenticated user experience, user management, dashboard analytics, and security settings with integration to the IQ Scaffold Platform. Reference implementation and starting point for developing microservices frontends for SaaS applications.
+> Web application providing authenticated user experience, user management, dashboard analytics, and security settings with integration to the IQ  Key Value Platform. Reference implementation and starting point for developing microservices frontends for SaaS applications.
 
 ## Table of Contents
 
@@ -38,7 +38,7 @@ Reference implementation for building microservices-based SaaS applications, dem
 
 ## Overview
 
-Main application frontend for the IQ Scaffold Platform. Provides user interface for authenticated users, integrating with the User Service and Gateway for identity management, authorization, and business operations.
+Main application frontend for the IQ  Key Value Platform. Provides user interface for authenticated users, integrating with the User Service and Gateway for identity management, authorization, and business operations.
 
 Starting point for microservices frontend development, demonstrating scalable SaaS applications with separation of concerns, reusable patterns, and backend microservices integration.
 

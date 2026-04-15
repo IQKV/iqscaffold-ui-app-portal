@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 /**
- * E2E Smoke Tests for IQ Scaffold Platform
+ * E2E Smoke Tests for IQ  Key Value Platform
  *
  * These tests verify critical application functionality including:
  * - Page loading and rendering

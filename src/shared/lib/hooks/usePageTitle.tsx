@@ -8,7 +8,7 @@ import { Helmet } from "@dr.pogodin/react-helmet";
 export function usePageTitle(title: string) {
   useEffect(() => {
     // The title will be automatically formatted using the titleTemplate
-    // defined in __root.tsx: "%s | IQ Scaffold Platform"
+    // defined in __root.tsx: "%s | IQ  Key Value Platform"
   }, [title]);
 
   return (
