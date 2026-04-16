@@ -156,7 +156,7 @@
     "postcss-preset-mantine": "1.18.0",
     "postcss-simple-vars": "^7.0.1",
     "prop-types": "^15.8.1",
-    "release-it": "^20.0.0",
+    "release-it": "^19.2.4",
     "release-it-pnpm": "^4.6.6",
     "sort-package-json": "^3.6.1",
     "stylelint": "^17.8.0",

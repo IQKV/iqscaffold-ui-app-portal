@@ -15,13 +15,7 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "./src/setupTests.ts",
     testTimeout: 15000, // Increase timeout for slow tests
-    exclude: [
-      "./node_modules/**",
-      "**/storybook/**",
-      "./dist/**",
-      "./e2e/**",
-      "./*.???",
-    ],
+    exclude: ["./node_modules/**", "**/storybook/**", "./dist/**", "./e2e/**", "./*.???"],
     include: ["./src/**/*.{test,spec}.{ts,tsx}"],
     coverage: {
       exclude: [
