@@ -162,7 +162,7 @@
     "stylelint": "^17.8.0",
     "stylelint-config-standard-scss": "^17.0.0",
     "tsdown": "^0.21.9",
-    "typescript": "~5.9.3",
+    "typescript": "~6.0.3",
     "vite": "^8.0.8",
     "vite-bundle-visualizer": "^1.2.1",
     "vite-plugin-copy": "^0.1.6",
