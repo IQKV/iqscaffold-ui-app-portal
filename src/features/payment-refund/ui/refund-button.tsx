@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ActionIcon, Tooltip } from "@mantine/core";
 import { IconCurrencyDollar } from "@tabler/icons-react";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { RefundConfirmationDialog } from "./refund-confirmation-dialog";
 import { useRefundPaymentMutation } from "@/entities/billing";
 import { notificationService } from "@/shared/lib/notifications";

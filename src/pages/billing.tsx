@@ -18,7 +18,7 @@ import { BillingServiceDegradationBanner } from "@/entities/billing/ui/BillingSe
 import { BillingHistoryTable } from "@/widgets/billing-history";
 import { MerchantStatusCard } from "@/widgets/merchant-status-card";
 import { organizationApi } from "@/shared/api/organization-api";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { useQuery } from "@tanstack/react-query";
 import { canManageGatewayConfig } from "@/processes/auth/lib/billing-permissions";
 import { useActiveSubscriptionQuery } from "@/entities/billing";

@@ -3,7 +3,7 @@ import { Card, Text, Title, Stack, Group, Badge, Button, Select } from "@mantine
 import { MerchantOnboardingWizard } from "@/features/merchant-onboarding";
 import { useAuth } from "@/processes/auth";
 import { useMerchantStatusQuery } from "@/entities/billing";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { IconAlertCircle, IconCheck, IconPlus } from "@tabler/icons-react";
 
 interface MerchantStatusCardProps {

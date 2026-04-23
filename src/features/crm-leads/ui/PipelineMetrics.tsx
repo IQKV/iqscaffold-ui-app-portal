@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Group, Stack, Text, Badge, SimpleGrid, Tooltip } from "@mantine/core";
 import { IconTrendingUp, IconClock, IconTarget } from "@tabler/icons-react";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import type { PipelineStage, ConversionMetrics } from "@/shared/api/crm/types";
 
 interface PipelineMetricsProps {

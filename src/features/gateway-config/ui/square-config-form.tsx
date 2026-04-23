@@ -1,5 +1,5 @@
 import { TextInput, PasswordInput, Stack } from "@mantine/core";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { SquareGatewayConfigData } from "@/shared/api/billing/types";
 
 interface SquareConfigFormProps {

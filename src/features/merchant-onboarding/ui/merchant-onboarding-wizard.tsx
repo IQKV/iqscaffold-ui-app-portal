@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Modal, Stepper, Button, Group, Select, Stack, Text, Alert } from "@mantine/core";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { PaymentGatewayProvider } from "@/shared/api/billing/types";
 import { GatewaySelector } from "@/features/gateway-config";
 import { useActiveGatewayConfigsQuery } from "@/entities/gateway-config";

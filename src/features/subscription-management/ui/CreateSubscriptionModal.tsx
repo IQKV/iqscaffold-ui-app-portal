@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal, Stack, Text, Button, Group, NumberInput, Textarea, Alert } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { notifications } from "@mantine/notifications";
 import { SubscriptionPlan, useCreateSubscriptionMutation } from "@/entities/billing";
 import { CreateSubscriptionRequest } from "@/shared/api/billing/types";

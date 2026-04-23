@@ -7,7 +7,7 @@ import {
   IconX,
   IconTrash,
 } from "@tabler/icons-react";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { notifications } from "@mantine/notifications";
 import { modals } from "@mantine/modals";
 import {

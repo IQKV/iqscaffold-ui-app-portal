@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { Button, Alert, Stack, Text } from "@mantine/core";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 
 interface StripeCheckoutFormProps {
   onSuccess?: () => void;

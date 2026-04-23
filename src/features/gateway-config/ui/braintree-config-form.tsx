@@ -1,5 +1,5 @@
 import { TextInput, PasswordInput, Select, Stack } from "@mantine/core";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { BraintreeGatewayConfigData } from "@/shared/api/billing/types";
 
 interface BraintreeConfigFormProps {

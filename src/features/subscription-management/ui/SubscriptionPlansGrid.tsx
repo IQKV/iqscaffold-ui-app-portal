@@ -12,7 +12,7 @@ import {
   Alert,
 } from "@mantine/core";
 import { IconCheck, IconStar } from "@tabler/icons-react";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { useActiveSubscriptionPlansQuery, SubscriptionPlan } from "@/entities/billing";
 import { formatCurrency } from "@/shared/lib/format";
 

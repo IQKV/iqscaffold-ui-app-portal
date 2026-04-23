@@ -1,6 +1,6 @@
 import { Modal, Stack, Text, Group, Button, Alert } from "@mantine/core";
 import { IconAlertTriangle } from "@tabler/icons-react";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 
 interface RefundConfirmationDialogProps {
   opened: boolean;

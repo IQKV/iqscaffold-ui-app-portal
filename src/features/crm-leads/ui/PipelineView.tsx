@@ -25,7 +25,7 @@ import {
   PointerSensor,
 } from "@dnd-kit/core";
 import { IconAlertCircle, IconSettings } from "@tabler/icons-react";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { useNavigate } from "@tanstack/react-router";
 import { notifications } from "@mantine/notifications";
 import { useMediaQuery } from "@mantine/hooks";

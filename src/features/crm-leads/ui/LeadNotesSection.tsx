@@ -16,7 +16,7 @@ import {
 import { IconEdit, IconTrash, IconCheck, IconX } from "@tabler/icons-react";
 import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import {
   useLeadNotesQuery,
   useCreateLeadNoteMutation,

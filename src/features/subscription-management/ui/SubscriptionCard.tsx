@@ -1,6 +1,6 @@
 import { Card, Text, Group, Stack, Badge, Button, ActionIcon, Menu, Alert } from "@mantine/core";
 import { IconDots, IconCalendar, IconCreditCard } from "@tabler/icons-react";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { Subscription, SubscriptionStatusBadge } from "@/entities/billing";
 import { SubscriptionActionsMenu } from "./SubscriptionActionsMenu";
 import { formatCurrency } from "@/shared/lib/format";

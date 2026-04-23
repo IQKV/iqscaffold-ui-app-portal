@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@mantine/core";
 import { IconBrandStripe } from "@tabler/icons-react";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { billingApi } from "@/shared/api/billing";
 import { notificationService } from "@/shared/lib/notifications";
 import { PaymentGatewayProvider } from "@/shared/api/billing/types";

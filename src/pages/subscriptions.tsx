@@ -13,7 +13,7 @@ import {
   Text,
 } from "@mantine/core";
 import { IconPlus, IconCreditCard, IconReceipt } from "@tabler/icons-react";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { AuthGuard, useAuth } from "@/processes/auth";
 import { useActiveSubscriptionQuery, SubscriptionPlan } from "@/entities/billing";
 import {

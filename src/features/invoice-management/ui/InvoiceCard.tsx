@@ -1,6 +1,6 @@
 import { Card, Text, Group, Stack, Button, Divider } from "@mantine/core";
 import { IconExternalLink, IconDownload } from "@tabler/icons-react";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { Invoice, InvoiceStatusBadge } from "@/entities/billing";
 import { formatCurrency } from "@/shared/lib/format";
 

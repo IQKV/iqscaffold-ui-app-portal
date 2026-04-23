@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { avatarApi, type AvatarUploadResponse } from "@/shared/api/avatar-api";
 import { notificationService } from "@/shared/lib/notifications";
 import { useAuthStore } from "@/processes/auth/model/store";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 
 /**
  * Query keys for avatar operations

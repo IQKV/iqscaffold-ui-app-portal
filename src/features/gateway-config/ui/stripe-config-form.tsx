@@ -1,6 +1,6 @@
 import React from "react";
 import { Stack } from "@mantine/core";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { BillingFormField } from "@/entities/billing";
 import { StripeGatewayConfigData } from "@/shared/api/billing/types";
 import { useForm } from "@mantine/form";

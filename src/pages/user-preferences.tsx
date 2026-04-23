@@ -6,7 +6,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Container, Title, Text, Stack } from "@mantine/core";
 import { UserPreferencesForm } from "@/features/user-preferences";
 import { usePageTitle } from "@/shared/lib";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 
 export const Route = createFileRoute("/user-preferences")({
   component: UserPreferencesPage,

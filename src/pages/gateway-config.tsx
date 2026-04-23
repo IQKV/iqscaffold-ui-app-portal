@@ -13,7 +13,7 @@ import {
   Modal,
 } from "@mantine/core";
 import { IconPlus, IconAlertCircle, IconTrash } from "@tabler/icons-react";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { AuthGuard, useAuth } from "@/processes/auth";
 import { BillingAccessGuard } from "@/entities/billing/ui/guards/BillingAccessGuard";
 import { BillingServiceDegradationBanner } from "@/entities/billing/ui/BillingServiceDegradationBanner";

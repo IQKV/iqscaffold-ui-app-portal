@@ -10,7 +10,7 @@ import {
 import { Stack, Text, Title, Group, ActionIcon, Tooltip } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { IconRotate2 } from "@tabler/icons-react";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import dayjs from "dayjs";
 import { formatCurrency } from "@/shared/lib/currency";
 import { useAuth } from "@/processes/auth";

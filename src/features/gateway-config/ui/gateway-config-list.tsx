@@ -10,7 +10,7 @@ import {
   IconBuildingStore,
   IconCreditCard,
 } from "@tabler/icons-react";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { GatewayConfigSummary, PaymentGatewayProvider } from "@/shared/api/billing/types";
 import { GatewayStatusBadge } from "./gateway-status-badge";
 

@@ -1,6 +1,6 @@
 import { Badge } from "@mantine/core";
 import { IconCheck, IconX, IconStar } from "@tabler/icons-react";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 
 interface GatewayStatusBadgeProps {
   isActive: boolean;

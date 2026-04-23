@@ -3,7 +3,7 @@ import { Title, Paper, Text, Grid, Stack } from "@mantine/core";
 import { AuthGuard } from "@/processes/auth";
 import { FeatureGate, SubscriptionInfo, FeatureUsageList, FeatureErrorBoundary } from "@/shared/ui";
 import { useFeatureContext, usePageTitle } from "@/shared/lib";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 
 export const Route = createFileRoute("/dashboard")({
   component: DashboardPage,

@@ -2,7 +2,7 @@ import { createFileRoute, useSearch } from "@tanstack/react-router";
 import { Container, Paper, Stack, Title, Text, Center, Alert } from "@mantine/core";
 import { AuthGuard } from "@/processes/auth";
 import { StripePaymentWidget } from "@/widgets/stripe-payment-widget";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { usePageTitle } from "@/shared/lib";
 
 export const Route = createFileRoute("/checkout")({

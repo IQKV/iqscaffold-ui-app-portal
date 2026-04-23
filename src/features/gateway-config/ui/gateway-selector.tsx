@@ -6,7 +6,7 @@ import {
   IconCreditCard,
 } from "@tabler/icons-react";
 import { PaymentGatewayProvider } from "@/shared/api/billing/types";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { forwardRef } from "react";
 
 const gatewayData = [

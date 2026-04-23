@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Modal, Stack, TextInput, Textarea, Select, Switch, Group, Button } from "@mantine/core";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import {
   PaymentGatewayProvider,
   CreateGatewayConfigRequest,

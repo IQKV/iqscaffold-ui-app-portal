@@ -13,7 +13,7 @@ import {
 import { IconCamera, IconTrash, IconUpload, IconUser } from "@tabler/icons-react";
 import { useAvatarUpload, useAvatarDelete, getAvatarUrlWithCacheBusting } from "../lib/use-avatar";
 import { useAuthStore } from "@/processes/auth/model/store";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 
 interface AvatarUploadProps {
   size?: number;
