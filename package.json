@@ -132,7 +132,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react-swc": "^4.3.0",
-    "@vitest/coverage-v8": "4.1.4",
+    "@vitest/coverage-v8": "4.1.5",
     "@vitest/ui": "4.1.4",
     "autoprefixer": "^10.5.0",
     "cz-conventional-changelog": "^3.3.0",
@@ -144,7 +144,7 @@
     "is-ci": "4.1.0",
     "jiti": "2.6.1",
     "jsdom": "^29.0.2",
-    "knip": "6.6.2",
+    "knip": "6.7.0",
     "lint-staged": "^16.4.0",
     "lru-cache": "^11.3.5",
     "msw": "^2.13.6",
@@ -168,7 +168,7 @@
     "vite-plugin-copy": "^0.1.6",
     "vite-plugin-image-optimizer": "^2.0.3",
     "vite-plugin-remove-console": "^2.2.0",
-    "vitest": "4.1.4"
+    "vitest": "4.1.5"
   },
   "lint-staged": {
     "*": [
