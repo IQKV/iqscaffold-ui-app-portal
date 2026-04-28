@@ -352,11 +352,11 @@ importers:
         specifier: ^3.6.1
         version: 3.6.1
       stylelint:
-        specifier: ^17.9.0
-        version: 17.9.0(typescript@6.0.3)
+        specifier: ^17.9.1
+        version: 17.9.1(typescript@6.0.3)
       stylelint-config-standard-scss:
         specifier: ^17.0.0
-        version: 17.0.0(postcss@8.5.12)(stylelint@17.9.0(typescript@6.0.3))
+        version: 17.0.0(postcss@8.5.12)(stylelint@17.9.1(typescript@6.0.3))
       tsdown:
         specifier: ^0.21.10
         version: 0.21.10(oxc-resolver@11.19.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0))(typescript@6.0.3)
@@ -4135,8 +4135,8 @@ packages:
   hookified@1.15.1:
     resolution: {integrity: sha512-MvG/clsADq1GPM2KGo2nyfaWVyn9naPiXrqIe4jYjXNZQt238kWyOGrsyc/DmRAQ+Re6yeo6yX/yoNCG5KAEVg==}
 
-  hookified@2.1.1:
-    resolution: {integrity: sha512-AHb76R16GB5EsPBE2J7Ko5kiEyXwviB9P5SMrAKcuAu4vJPZttViAbj9+tZeaQE5zjDme+1vcHP78Yj/WoAveA==}
+  hookified@2.2.0:
+    resolution: {integrity: sha512-p/LgFzRN5FeoD3DLS6bkUapeye6E4SI6yJs6KetENd18S+FBthqYq2amJUWpt5z0EQwwHemidjY5OqJGEKm5uA==}
 
   hosted-git-info@8.1.0:
     resolution: {integrity: sha512-Rw/B2DNQaPBICNXEm8balFz9a6WpZrkCGpcWFpy7nCj+NyhSdqXipmfvtmWt9xGfp0wZnBxB+iVpLmQMYt47Tw==}
@@ -5732,8 +5732,8 @@ packages:
     resolution: {integrity: sha512-tsaTIkKW9b4N+AEj+SVA+WhJzV7/zMhcSu78mLKWSk7cXMOSHsBKFWUs0fWwq8QyK3MgJBQRX6Gbi4kYbdvGkQ==}
     engines: {node: '>=18'}
 
-  string-width@8.2.0:
-    resolution: {integrity: sha512-6hJPQ8N0V0P3SNmP6h2J99RLuzrWz2gvT7VnK5tKvrNqJoyS9W4/Fb8mo31UiPvy00z7DQXkP2hnKBVav76thw==}
+  string-width@8.2.1:
+    resolution: {integrity: sha512-IIaP0g3iy9Cyy18w3M9YcaDudujEAVHKt3a3QJg1+sr/oX96TbaGUubG0hJyCjCBThFH+tFpcIyoUHUn1ogaLA==}
     engines: {node: '>=20'}
 
   string_decoder@1.3.0:
@@ -5813,8 +5813,8 @@ packages:
     peerDependencies:
       stylelint: ^16.8.2 || ^17.0.0
 
-  stylelint@17.9.0:
-    resolution: {integrity: sha512-xO0jeY6z1/urFL5L/BZLmB1yYlbRiRMQnYH6ArZIDWJ+SZXGssOY7XoYb1JIv/L220+EBnwwJXJS4Mt/F96SvA==}
+  stylelint@17.9.1:
+    resolution: {integrity: sha512-THTmnAPJTrg/JhkTWZlSyrO+HUYMx6ELthIHeMyD2WOKqXIJUFQv2Yxn91bvUrZdbBJaW2dUuQdPST2wcQ6C3g==}
     engines: {node: '>=20.19.0'}
     hasBin: true
 
@@ -8960,7 +8960,7 @@ snapshots:
   cli-truncate@5.2.0:
     dependencies:
       slice-ansi: 8.0.0
-      string-width: 8.2.0
+      string-width: 8.2.1
 
   cli-width@3.0.0: {}
 
@@ -9899,7 +9899,7 @@ snapshots:
 
   hookified@1.15.1: {}
 
-  hookified@2.1.1: {}
+  hookified@2.2.0: {}
 
   hosted-git-info@8.1.0:
     dependencies:
@@ -10793,7 +10793,7 @@ snapshots:
       is-unicode-supported: 2.1.0
       log-symbols: 7.0.1
       stdin-discarder: 0.2.2
-      string-width: 8.2.0
+      string-width: 8.2.1
       strip-ansi: 7.2.0
 
   ora@9.4.0:
@@ -10805,7 +10805,7 @@ snapshots:
       is-unicode-supported: 2.1.0
       log-symbols: 7.0.1
       stdin-discarder: 0.3.2
-      string-width: 8.2.0
+      string-width: 8.2.1
 
   orderedmap@2.1.1: {}
 
@@ -11197,7 +11197,7 @@ snapshots:
 
   qified@0.9.1:
     dependencies:
-      hookified: 2.1.1
+      hookified: 2.2.0
 
   quansync@1.0.0: {}
 
@@ -11658,7 +11658,7 @@ snapshots:
       get-east-asian-width: 1.5.0
       strip-ansi: 7.2.0
 
-  string-width@8.2.0:
+  string-width@8.2.1:
     dependencies:
       get-east-asian-width: 1.5.0
       strip-ansi: 7.2.0
@@ -11691,33 +11691,33 @@ snapshots:
 
   strip-json-comments@5.0.3: {}
 
-  stylelint-config-recommended-scss@17.0.1(postcss@8.5.12)(stylelint@17.9.0(typescript@6.0.3)):
+  stylelint-config-recommended-scss@17.0.1(postcss@8.5.12)(stylelint@17.9.1(typescript@6.0.3)):
     dependencies:
       postcss-scss: 4.0.9(postcss@8.5.12)
-      stylelint: 17.9.0(typescript@6.0.3)
-      stylelint-config-recommended: 18.0.0(stylelint@17.9.0(typescript@6.0.3))
-      stylelint-scss: 7.0.0(stylelint@17.9.0(typescript@6.0.3))
+      stylelint: 17.9.1(typescript@6.0.3)
+      stylelint-config-recommended: 18.0.0(stylelint@17.9.1(typescript@6.0.3))
+      stylelint-scss: 7.0.0(stylelint@17.9.1(typescript@6.0.3))
     optionalDependencies:
       postcss: 8.5.12
 
-  stylelint-config-recommended@18.0.0(stylelint@17.9.0(typescript@6.0.3)):
+  stylelint-config-recommended@18.0.0(stylelint@17.9.1(typescript@6.0.3)):
     dependencies:
-      stylelint: 17.9.0(typescript@6.0.3)
+      stylelint: 17.9.1(typescript@6.0.3)
 
-  stylelint-config-standard-scss@17.0.0(postcss@8.5.12)(stylelint@17.9.0(typescript@6.0.3)):
+  stylelint-config-standard-scss@17.0.0(postcss@8.5.12)(stylelint@17.9.1(typescript@6.0.3)):
     dependencies:
-      stylelint: 17.9.0(typescript@6.0.3)
-      stylelint-config-recommended-scss: 17.0.1(postcss@8.5.12)(stylelint@17.9.0(typescript@6.0.3))
-      stylelint-config-standard: 40.0.0(stylelint@17.9.0(typescript@6.0.3))
+      stylelint: 17.9.1(typescript@6.0.3)
+      stylelint-config-recommended-scss: 17.0.1(postcss@8.5.12)(stylelint@17.9.1(typescript@6.0.3))
+      stylelint-config-standard: 40.0.0(stylelint@17.9.1(typescript@6.0.3))
     optionalDependencies:
       postcss: 8.5.12
 
-  stylelint-config-standard@40.0.0(stylelint@17.9.0(typescript@6.0.3)):
+  stylelint-config-standard@40.0.0(stylelint@17.9.1(typescript@6.0.3)):
     dependencies:
-      stylelint: 17.9.0(typescript@6.0.3)
-      stylelint-config-recommended: 18.0.0(stylelint@17.9.0(typescript@6.0.3))
+      stylelint: 17.9.1(typescript@6.0.3)
+      stylelint-config-recommended: 18.0.0(stylelint@17.9.1(typescript@6.0.3))
 
-  stylelint-scss@7.0.0(stylelint@17.9.0(typescript@6.0.3)):
+  stylelint-scss@7.0.0(stylelint@17.9.1(typescript@6.0.3)):
     dependencies:
       css-tree: 3.2.1
       is-plain-object: 5.0.0
@@ -11727,9 +11727,9 @@ snapshots:
       postcss-resolve-nested-selector: 0.1.6
       postcss-selector-parser: 7.1.1
       postcss-value-parser: 4.2.0
-      stylelint: 17.9.0(typescript@6.0.3)
+      stylelint: 17.9.1(typescript@6.0.3)
 
-  stylelint@17.9.0(typescript@6.0.3):
+  stylelint@17.9.1(typescript@6.0.3):
     dependencies:
       '@csstools/css-calc': 3.2.0(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.0))(@csstools/css-tokenizer@4.0.0)
       '@csstools/css-parser-algorithms': 4.0.0(@csstools/css-tokenizer@4.0.0)
@@ -11762,7 +11762,7 @@ snapshots:
       postcss-safe-parser: 7.0.1(postcss@8.5.12)
       postcss-selector-parser: 7.1.1
       postcss-value-parser: 4.2.0
-      string-width: 8.2.0
+      string-width: 8.2.1
       supports-hyperlinks: 4.4.0
       svg-tags: 1.0.0
       table: 6.9.0
