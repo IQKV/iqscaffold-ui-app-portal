@@ -113,7 +113,7 @@
     "zustand": "^5.0.12"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.5.2",
+    "@commitlint/cli": "^20.5.3",
     "@commitlint/config-conventional": "^20.5.0",
     "@lingui/cli": "^6.0.0",
     "@lingui/swc-plugin": "^6.0.0",
