@@ -27,8 +27,8 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
       '@lingui/format-po':
-        specifier: ^6.0.0
-        version: 6.0.0
+        specifier: ^6.0.1
+        version: 6.0.1
       '@lingui/react':
         specifier: ^6.0.0
         version: 6.0.0(react@19.2.5)
